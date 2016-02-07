@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">10692007</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">GB</orgName></authority><idno type="docNumber">9106086</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910322</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">GB9106086A</idno></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C03C3/118</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C03C3/115</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">H01L31/048</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C03C3/095</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92301914</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920305</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92301914A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>SHORROCK PETER</persName><residence><address><country type="national">GB</country></address></residence></person><person role="inventor" type="epo"><persName>YALE BRIAN</persName><residence><address><country type="national">GB</country></address></residence></person><person role="inventor" type="intermediate"><persName>SHORROCK, PETER</persName></person><person role="inventor" type="intermediate"><persName>YALE, BRIAN</persName></person><person role="inventor" type="original"><persName>SHORROCK, PETER</persName><residence><address><addrLine>19 Ash Grove, Standish</addrLine><settlement>Wigan, Lancashire WN6 0D2</settlement><country type="national">GB</country></address></residence></person><person role="inventor" type="original"><persName>YALE, BRIAN</persName><residence><address><addrLine>18 Claremont Drive</addrLine><settlement>Ormskirk, Lancashire L39 4SP</settlement><country type="national">GB</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>PILKINGTON PLC</name><address><country type="national">GB</country></address></item><item type="intermediate"><name>PILKINGTON PLC</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>BE</country><country>DE</country><country>ES</country><country>FR</country><country>GB</country><country>IT</country><country>NL</country><country>SE</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">C03C   3/118       20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">H01L  31/048       20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C03C   3/095       20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C03C   3/076       20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">H01L  31/048       20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C03C   3/108       20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">C03C   3/115       20060101A I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Borosilicatglaszusammensetzung</title><title type="invention-title" xml:lang="en">Borosilicate glass composition</title><title type="invention-title" xml:lang="fr">Composition de verre de borosilicate</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505061</idno><imprint><classCode scheme="kindCode">B1</classCode><date>19961106</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505061B1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="1" type="claim"><p xml:id="_23221">Borosilikatglaszusammensetzung, dadurch gekennzeichnet, 
+daß die Glaszusammensetzung im wesentlichen aus den 
+folgenden Komponenten besteht: 
+Si0257 - 77 Mol-%, Al2O30 - 8,5 Mol-%, B2O34,6 - 23,0 Mol-%,   
+wobei die Gesamtmenge an 
+SiO2 + Al2O3 + B2O3 zwischen 
+81 und 91 Mol-% liegt, 
+Li2O0 - 1,5 Mol-%,   Na2O 2 - 7,5 Mol-%,  K2O2 - 7,5 Mol-%,  
+wobei die Gesamtmenge an 
+Li2O + Na2O + K2O zwischen 
+7,6 und 10,6 Mol-% liegt, 
+CeO20,7 - 2,0 Mol-%, Sb2O30 - 0,3 Mol-%, As2O30 - 0,3 Mol-%, TiO20 - 2,0 Mol-%, F20 - 2,0 Mol-%,  
+sowie eine oder mehrere der Verbindungen MgO, CaO, SrO,  
+ 
+BaO, ZnO und PbO in einer Gesamtmenge zwischen 0 und 7 
+Mol-%; 
+und daß die Glaszusammensetzung einen linearen Ausdehnungskoeffizienten 
+im Bereich von 64,0 - 70,0 x 10-7/°C 
+besitzt. </p></div><div n="2" type="claim"><p xml:id="_1eba1">Glaszusammensetzung nach Anspruch 1, bei welcher die 
+Mengen an SiO2, Al2O3 und B2O3 in die folgenden Bereiche 
+fallen: 
+SiO265 - 70 Mol-%, Al2O30 - 2 Mol-%, B2O38 - 22 Mol-%. </p></div><div n="3" type="claim"><p xml:id="_60075">Glaszusammensetzung nach Anspruch 1 oder 2, bei welcher 
+die Menge an MgO zwischen 0 und 5 Mol-% beträgt. </p></div><div n="4" type="claim"><p xml:id="_4120f">Glaszusammensetzung nach Anspruch 1, 2 oder 3, bei 
+welcher die Menge an CaO zwischen 0 und 3,5 Mol-% beträgt. </p></div><div n="5" type="claim"><p xml:id="_a2436">Glaszusammensetzung nach einem der vorangehenden Ansprüche, 
+bei welcher die Menge an SrO zwischen 0 und 2 Mol-% 
+beträgt. </p></div><div n="6" type="claim"><p xml:id="_bfe46">Glaszusammensetzung nach einem der vorangehenden Ansprüche, 
+bei welcher die Menge an BaO zwischen 0 und 2 Mol-% 
+beträgt. </p></div><div n="7" type="claim"><p xml:id="_fd54a">Glaszusammensetzung nach einem der vorangehenden Ansprüche, 
+bei welcher die Menge an ZnO zwischen 0 und 2,5  
+ 
+Mol-% beträgt. </p></div><div n="8" type="claim"><p xml:id="_2aeb8">Glaszusammensetzung nach einem der vorangehenden Ansprüche, 
+bei welcher die Menge an PbO zwischen 0 und 7 Mol-% 
+beträgt. </p></div><div n="9" type="claim"><p xml:id="_33b8c">Glaszusammensetzung nach einem der vorangehenden Ansprüche, 
+bei welcher die Gesamtmenge an MgO + CaO + SrO + 
+BaO + ZnO + PbO zwischen 0 und 3,5 Mol-% beträgt. </p></div><div n="10" type="claim"><p xml:id="_011c8">Schutzabdeckung für eine Galliumarsenid-Solarzelle, 
+wobei die Abdeckung aus einem Borosilikatglas gemäß 
+einem der vorangehenden Ansprüche hergestellt ist. </p></div></div><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_a9348">A borosilicate glass composition characterised in that the 
+glass composition consists essentially of the following 
+components:- 
+Si0257 - 77 mol%, Al2030 - 8.5 mol%, B2034.6 - 23.0 mol%,  
+the total amount of Si02 + Al203 + B203 being from 
+81 to 91 mol%, 
+Li200 - 1.5 mol%, Na202 - 7.5 mol%, K202 - 7.5 mol%,  
+the total amount of Li20 + Na20 + K20 being from 7.6 to 
+10.6 mol%, 
+Ce020.7 - 2.0 mol%, Sb2030 - 0.3 mol%, As2030 - 0.3 mol%, Ti020 - 2.0 mol%, F20 - 2.0 mol%,  
+and one or more of MgO, CaO, SrO, BaO, ZnO and PbO, in a total 
+amount of from 0 to 7 mol%; 
+and in that the glass composition exhibits a coefficient of 
+linear expansion within the range 64.0 - 70.0 x 10-7/deg.C. </p></div><div n="2" type="claim"><p xml:id="_c9aaa">A glass composition according to claim 1, wherein the 
+amounts of Si02, Al203 and B203 fall in the 
+following ranges:- 
+Si0265 - 70 mol%, Al2030 - 2 mol%, B2038 - 22 mol%. </p></div><div n="3" type="claim"><p xml:id="_5ce18">A glass composition according to claim 1 or 2, wherein the 
+amount of MgO is from 0 to 5 mol%. </p></div><div n="4" type="claim"><p xml:id="_6d76a">A glass composition according to claim 1, 2 or 3, wherein 
+the amount of CaO is from 0 to 3.5 mol%. </p></div><div n="5" type="claim"><p xml:id="_9bc93">A glass composition according to any one of the preceding 
+claims, wherein the amount of SrO is from 0 to 2 mol%. </p></div><div n="6" type="claim"><p xml:id="_79aeb">A glass composition according to any one of the preceding 
+claims, wherein the amount of BaO is from 0 to 2 mol%. </p></div><div n="7" type="claim"><p xml:id="_1bd6a">A glass composition according to any one of the preceding 
+claims, wherein the amount of ZnO is from 0 to 2.5 mol%. </p></div><div n="8" type="claim"><p xml:id="_fec19">A glass composition according to any one of the preceding 
+claims, wherein the amount of PbO is from 0 to 7 mol%. </p></div><div n="9" type="claim"><p xml:id="_caf00">A glass composition according to any one of the preceding 
+claims, wherein the sum total of MgO + CaO + SrO + BaO + ZnO + 
+PbO is from 0 to 3.5 mol%. </p></div><div n="10" type="claim"><p xml:id="_9b907">A protective cover for a gallium arsenide solar cell, the 
+said cover being made from a borosilicate glass as claimed in 
+any one of the preceding claims. </p></div></div><div type="claims" xml:lang="fr"><div n="1" type="claim"><p xml:id="_eeaa1">Composition de verre de borosilicate caractérisée en ce que la 
+composition de verre consiste essentiellement en les composants 
+suivants : 
+SiO257 - 77 % en moles Al2O30 - 8,5 % en moles B2O34,6 - 23,0 % en moles  
+la quantité totale de SiO2 + Al2O3 + B2O3 étant de 81 à 91 % en 
+moles, 
+Li2O0 - 1,5 % en moles Na2O2 - 7,5 % en moles K2O2 - 7,5 % en moles  
+la quantité totale de Li2O + Na2O + K2O étant de 7,6 à 10,6 % en 
+moles, 
+CeO20,7 - 2,0 % en moles Sb2O30 - 0,3 % en moles As2O30 - 0,3 % en moles TiO20 - 2,0 % en moles F20 - 2,0 % en moles  
+   et un ou plusieurs composants de MgO, CaO, SrO, BaO, ZnO et 
+PbO, en une quantité totale de 0 à 7 % en moles;  
+ 
+   et en ce que la composition de verre présente un coefficient de 
+dilatation linéaire dans la plage de 64,0 - 70,0 x 10-7/°C. </p></div><div n="2" type="claim"><p xml:id="_41e86">Composition de verre selon la revendication 1, dans laquelle 
+les quantités de SiO2, Al2O3 et B2O3 entrent dans les plages suivantes 
+: 
+SiO265 - 70 % en moles Al2O30 - 2 % en moles B2O38 - 22 % en moles. </p></div><div n="3" type="claim"><p xml:id="_e0c73">Composition de verre selon la revendication 1 ou 2, dans laquelle 
+la quantité de MgO est de 0 à 5 % en moles. </p></div><div n="4" type="claim"><p xml:id="_5643c">Composition de verre selon la revendication 1, 2 ou 3, dans laquelle 
+la quantité de CaO est de 0 à 3,5 % en moles. </p></div><div n="5" type="claim"><p xml:id="_0bfb2">Composition de verre selon l'une quelconque des revendications 
+précédentes, dans laquelle la quantité de SrO est de 0 à 2 % 
+en moles. </p></div><div n="6" type="claim"><p xml:id="_01d09">Composition de verre selon l'une quelconque des revendications 
+précédentes, dans laquelle la quantité de BaO est de 0 à 2 % 
+en moles. </p></div><div n="7" type="claim"><p xml:id="_1e073">Composition de verre selon l'une quelconque des revendications 
+précédentes, dans laquelle la quantité de ZnO est de 0 à 
+2,5 % en moles.  
+ </p></div><div n="8" type="claim"><p xml:id="_f2d0d">Composition de verre selon l'une quelconque des revendications 
+précédentes, dans laquelle la quantité de PbO est de 0 à 7 % 
+en moles. </p></div><div n="9" type="claim"><p xml:id="_97eb9">Composition de verre selon l'une quelconque des revendications 
+précédentes, dans laquelle la quantité totale de MgO + CaO + 
+SrO + BaO + ZnO + PbO est de 0 à 3,5 % en moles. </p></div><div n="10" type="claim"><p xml:id="_763a7">Couvercle de protection pour une photopile d'arséniure de gallium, 
+ledit couvercle étant fait d'un verre de borosilicate selon 
+l'une quelconque des revendications précédentes. </p></div></div><div type="description" xml:lang="en"><p xml:id="_3b5ff">The present invention relates to borosilicate glass 
+compositions. More particularly, the invention relates to 
+borosilicate glass compositions which incorporate cerium oxide 
+and which are suitable for use as protective covers for solar 
+cells, especially solar cells constructed from gallium 
+arsenide for use in satellites. </p><p xml:id="_28d8a">US Patent 4 746 634 describes a range of borosilicate 
+glass compositions for use in the protection of silicon solar 
+cells. They have coefficients of linear expansion in the range 
+73.5 - 76.7 x 10-7/deg.C. In our earlier European Patent 
+0261885 we describe an improved range of borosilicate glass 
+compositions having coefficients of linear expansion which 
+match the coefficient of linear expansion of silicon. </p><p xml:id="_f24d2">The need to match the coefficient of linear expansion of 
+the glass composition to that of a substrate, e.g. a silicon 
+substrate, arises from the need to bond a protective cover 
+made from said glass composition directly to the solar cell. </p><p xml:id="_7ae1b">Furthermore, in order to be suitable for use in making 
+such protective covers for solar cells, the glass compositions 
+must be capable of being produced in the form of thin sheets 
+of glass having a thickness of from 50 to 500 microns. </p><p xml:id="_77bb2">A protective cover made from such glass compositions must 
+also exhibit the following properties: 
+(i) good spectral transmission with at least 80% of 
+incident light being transmitted at 400 nm and 85% of 
+incident light being transmitted at 450 nm (for a sample 
+having a thickness in the range of 50 to 500 microns);  
+ (ii) low ultra-violet light transmission i.e. high UV 
+absorption at wavelengths below 320 nm, with less than 5% 
+incident radiation being transmitted, more preferably 
+less than 2% incident radiation being transmitted (for a 
+sample having a thickness in the range of 50 to 500 
+microns); and (iii) absence of significant discolouration (also known 
+as radiation stability) when exposed to solar radiation 
+of space which comprises, inter alia, ultra-violet light, 
+low energy electrons, protons, X-rays and gamma rays. </p><p xml:id="_d6ada">Solar energy cells constructed from gallium arsenide are 
+being developed for use in space satellites. Such cells can 
+be glazed with protective covers if made from known glass 
+compositions provided that an adhesive layer is used to bond 
+the protective cover to the solar cell. However, if it is 
+desired to bond the protective cover directly to the solar 
+cell, then the glass must have a coefficient of linear 
+expansion which is the same as, or very close to, that of the 
+material from which the solar cell is made. </p><p xml:id="_0507e">Experiments have shown that for direct bonding to gallium 
+arsenide, a coefficient of linear expansion of between 64.0 
+and 70.0 x 10-7/deg.C is required. A match of coefficient 
+of linear expansion is particularly important for gallium 
+arsenide because of its fragility and brittleness. </p><p xml:id="_a2057">It is well known that high stability to space radiation 
+can be achieved by the inclusion of cerium oxide in the glass 
+composition used to form the protective cover. From about 2 
+to 5% by weight cerium oxide, preferably more than 3% by 
+weight cerium oxide, is known to have the desired effect for 
+protective covers for silicon cells. In order to be able to 
+manufacture sheets of glass which are sufficiently thin to be 
+suitable for use as protective covers for solar cells, it is  
+ 
+necessary to keep the liquidus temperature of the glass 
+composition (in relation to the viscosity of the melt) at a 
+low value. The presence of cerium oxide at the preferred 
+concentration range of 2 to 5% by weight generally causes the 
+liquidus temperature of the glass to be increased above the 
+liquidus temperature of the cerium-free base glass 
+composition. This is particularly true when the glass 
+composition contains a high proportion of the more acidic 
+network-forming oxides such as Si02 or B203 or 
+Al203. Unfortunately, to prevent the coefficient of 
+linear expansion from rising above the desired upper limit of 
+70.0 x 10-7/deg.C it is necessary to work with glass 
+compositions which contain relatively high concentrations of 
+these acidic oxides and this can lead to glass compositions 
+which have relatively high, undesirable, liquidus 
+temperatures. </p><p xml:id="_e235b">We have found a narrow range of borosilicate glass 
+compositions which have the desired radiation stability and 
+light transmission, a coefficient of linear expansion within 
+the desired range and which also have liquidus temperatures 
+which are sufficiently low in relation to the viscosity of the 
+melt to make the glass compositions suitable for the 
+manufacture of sheets of glass which are sufficiently thin for 
+use as protective covers for solar cells made of gallium 
+arsenide. </p><p xml:id="_34b48">According to a first aspect of the present invention, 
+there is provided a borosilicate glass composition 
+characterised in that the glass composition consists 
+essentially of the following components:- 
+<figure><table cols="2"><row><cell>Si02</cell><cell>57 - 77 mol%, </cell></row><row><cell>Al203</cell><cell>0 - 8.5 mol%, </cell></row><row><cell>B203</cell><cell>4.6 - 23.0 mol%, </cell></row></table></figure>  
+ 
+the total amount of Si02 + Al203 + B203 being from 
+81 to 91 mol%, 
+<figure><table cols="2"><row><cell>Li20</cell><cell>0 - 1.5 mol%, </cell></row><row><cell>Na20</cell><cell>2 - 7.5 mol%, </cell></row><row><cell>K20</cell><cell>2 - 7.5 mol%, </cell></row></table></figure> 
+the total amount of Li20 + Na20 + K20 being from 7.6 to 
+10.6 mol%, 
+<figure><table cols="2"><row><cell>Ce02</cell><cell>0.7 - 2.0 mol%, </cell></row><row><cell>Sb203</cell><cell>0 - 0.3 mol%, </cell></row><row><cell>As203</cell><cell>0 - 0.3 mol%, </cell></row><row><cell>Ti02</cell><cell>0 - 2.0 mol%, </cell></row><row><cell>F2</cell><cell>0 - 2.0 mol%, </cell></row></table></figure> 
+and one or more of MgO, CaO, SrO, BaO, ZnO and PbO, in a total 
+amount of from 0 to 7 mol%; 
+and in that the glass composition exhibits a coefficient of 
+linear expansion within the range 
+64.0 - 70.0 x 10-7/deg.C. </p><p xml:id="_09a68">In a particularly preferred group of glass compositions 
+in accordance with the invention the amounts of Si02, 
+Al203 and B203 fall in the following ranges:- 
+<figure><table cols="2"><row><cell>Si02</cell><cell>65 - 70 mol%, </cell></row><row><cell>Al203</cell><cell>0 - 2 mol%, </cell></row><row><cell>B203</cell><cell>8 - 22 mol%. </cell></row></table></figure></p><p xml:id="_6dd6b">Cerium may be introduced as either the oxidised ceric 
+form (Ce02 - often referred to as ceric oxide) or as the 
+reduced cerous form (Ce203). In the glass both oxide 
+forms are often present, regardless of how the cerium is 
+added, but the reduced cerous form Ce203 generally 
+predominates.  
+ 
+However, because ceric oxide (Ce02) is the most common 
+source of cerium, it is common practice to express cerium 
+contents as if all the cerium is present as Ce02. </p><p xml:id="_8dc61">Advantageously, the quantities of MgO, CaO, SrO, BaO, 
+ZnO, PbO in the glass compositions of the invention fall 
+within the following ranges:- 
+<figure><table cols="2"><row><cell>Mg0</cell><cell>0-5 mol%, </cell></row><row><cell>Ca0</cell><cell>0-3.5 mol%, </cell></row><row><cell>Sr0</cell><cell>0-2 mol%, </cell></row><row><cell>Ba0</cell><cell>0-2 mol%, </cell></row><row><cell>Zn0</cell><cell>0-2.5 mol%, </cell></row><row><cell>Pb0</cell><cell>0-7 mol%. </cell></row></table></figure></p><p xml:id="_8bf3e">The preferred range of the sum total of MgO + CaO + SrO + 
+BaO + ZnO + PbO is from 0 to 3.5 mol%. </p><p xml:id="_db49f">According to a further aspect of the invention there is 
+provided a protective cover for a gallium arsenide solar cell, 
+the cover being made from a borosilicate glass composition 
+according to the first aspect of the invention. </p><p xml:id="_19dbf">Typically, the thickness of such protective covers will 
+be within the range 50 to 500 microns. The thickness of the 
+glass sheet will partly be governed by the composition of the 
+glass. For example, some compositions have a colouration 
+which is too dark to be suitable for making glass sheet having 
+a thickness at the upper region of the quoted thickness range. </p><p xml:id="_7c248">We have found that for producing glass sheet which is 
+thinner than about 100 microns the total amount of Ce02 + 
+Ti02 (ceria + titania) needs to be high, typically greater 
+than 1.5 mol%, to give the required UV absorption. However, 
+many such compositions with more than 1.5% Ce02 + Ti02 
+will be coloured too darkly to be suitable for the thicker 
+glass sheet (ie. having a thickness above about 150 microns).  
+ 
+These high UV absorbing glasses may be bleached to some extent 
+by increasing the concentration of antimony oxide to value of 
+above 0.3%, but maximum levels of Ce02 + Ti02 are not 
+necessary for the thicker covers (i.e. above about 150 microns 
+in thickness) and it would therefore also be possible to use 
+Ce02 + Ti02 levels below 1.5% in these cases. </p><p xml:id="_a1e11">Bonding techniques that can be used for the glass 
+compositions of the present invention are electrostatic bonding, 
+teflon bonding and rigid adhesive bonding. </p><p xml:id="_89186">The present invention is illustrated by the following 
+Examples. Table 1 shows the compositions in terms of mol 
+percentages, whereas Table 2 shows the same compositions as 
+Table 1, but the components in Table 2 are shown in weight 
+percentages, based on the total weight of the glass composition. </p><p xml:id="_09d7b">The glass compositions in each of the examples exhibited a 
+coefficient of linear expansion within the range 
+64 to 70 x 10-7/deg.C. </p><p xml:id="_315be">In the following Tables:- 
+   CLE represents the coefficient of linear 
+expansion of the glass composition measured 
+at 20 - 550°C (x10-7/deg.C), 
+   Tg represents the glass transition temperature (in°C), and 
+   Tw represents the working point (in°C).  
+ 
+</p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

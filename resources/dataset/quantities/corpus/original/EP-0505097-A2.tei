@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">24697660</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">US</orgName></authority><idno type="docNumber">67222291</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910320</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">US67222291A</idno></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C07F9/568</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302153</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920312</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302153A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="references-cited"><list type="citations"><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0337549</idno><imprint><classCode scheme="kindCode">A1</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0337549A1</idno></monogr></biblStruct><idno type="category">A</idno></item></list></item><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>DURETTE PHILIPPE L</persName><residence><address><country type="national">US</country></address></residence></person><person role="inventor" type="epo"><persName>MACCOSS MALCOLM</persName><residence><address><country type="national">US</country></address></residence></person><person role="inventor" type="intermediate"><persName>DURETTE, PHILIPPE L.</persName></person><person role="inventor" type="intermediate"><persName>MACCOSS, MALCOLM</persName></person><person role="inventor" type="original"><persName>DURETTE, PHILIPPE L.</persName><residence><address><addrLine>187 Pine Way</addrLine><settlement>New Providence, NJ 07974</settlement><country type="national">US</country></address></residence></person><person role="inventor" type="original"><persName>MACCOSS, MALCOLM</persName><residence><address><addrLine>48 Rose Court</addrLine><settlement>Freehold, NJ 07728</settlement><country type="national">US</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>MERCK &amp; CO INC</name><address><country type="national">US</country></address></item><item type="intermediate"><name>MERCK &amp; CO. INC.</name></item><item type="original"><name>Merck &amp;amp; Co., Inc.</name><address><addrLine>126, East Lincoln Avenue P.O. Box 2000</addrLine><settlement>Rahway New Jersey 07065-0900</settlement><country type="national">US</country></address></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>CH</country><country>DE</country><country>FR</country><country>GB</country><country>IT</country><country>LI</country><country>NL</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">A61K  31/675       20060101AFI20051220RMJP        </classCode><classCode scheme="ipcr">A61K  31/675       20060101CFI20051220RMJP        </classCode><classCode scheme="ipcr">A61P  29/00        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">A61P  29/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">C07D 205/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">C07D 205/08        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">C07F   9/00        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C07F   9/568       20060101A I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Neue substituierte Azetidinone als antiinflammatorisches und antidegeneratives Mittel.</title><title type="invention-title" xml:lang="en">New substituted azetidinones as anti-inflammatory and antidegenerative agents.</title><title type="invention-title" xml:lang="fr">Nouvelles azétidinones substituées comme agents antiinflammatoires et antidégénératifs.</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505097</idno><imprint><classCode scheme="kindCode">A2</classCode><date>19920923</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505097A2</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front><div type="abstract" xml:lang="en"><p xml:id="_ec789">New substituted azetidinones of the general 
+formula (A), which have been found to be potent 
+elastase inhibitors and thereby useful as 
+anti-inflammatory and antidegenerative agents, are 
+described. 
+</p></div></front><group><text><body><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_ac763">A compound of Formula (A) 
+ 
+or a pharmaceutically acceptable salt thereof wherein: 
+   R is H, C₁₋₆ alkyl, or C₂₋₆ alkenyl; 
+   R₁ is H, C₁₋₆ alkyl, C₂₋₆ alkenyl or C₁₋₆ 
+alkoxy-C₁₋₆ alkyl; 
+   M is 
+<list type="simple"><item>(1) hydrogen, </item><item>(2) C₁₋₆ alkyl, </item><item>(3) hydroxy C₁₋₆-alkyl, </item><item>(4) halo C₁₋₆-alkyl, </item><item>(5) C₂₋₆ alkenyl, or </item><item>(6) C₁₋₆ alkoxy-C₁₋₆ alkyl; </item></list> 
+   R₂ and R₃ are each independently 
+<list type="simple"><item>(1) hydrogen, </item><item>(2) C₁₋₆ alkyl, </item><item>(3) halo, </item><item>(4) carboxy, </item><item>(5) C₁₋₆ alkoxy, </item><item>(6) phenyl, </item><item>(7) C₁₋₆ alkylcarbonyl, </item><item>(8) C₁₋₆ alkyloxycarbonyl, </item><item>(9) di-(C₁₋₆alkyl)amino, </item><item>(10) phenoxy, or </item></list> 
+   R₂ and R₃ are joined together to form a ring 
+selected from furan, thiophene, and 
+dioxacyclopentane; 
+   R₄ is 
+<list type="simple"><item>(a) hydrogen, </item><item>(b) C₁₋₆ alkyl, </item><item>(c) halo, or </item><item>(d) C₁₋₆ alkoxy. </item></list> 
+   n is 0, 1, 2, 3, or 4; 
+   R₅ and R₆ are each independently 
+<list type="simple"><item>(1) Hydrogen, </item><item>(2) C₁₋₆ alkyl, </item><item>(3) substituted C₁₋₆ alkyl wherein 
+the substituent is halo, 
+hydroxy, C₁₋₆ alkyloxy, C₁₋₆ 
+alkylcarbonyloxy, amino, C₁₋₆ 
+alkylamino, di-(C₁₋₆ alkyl)- 
+amino, or tri-(C₁₋₆ alkyl) 
+ammonium, </item><item>(4) C₆₋₁₀ aryl wherein the aryl 
+group is selected from the group 
+consisting of 
+(a) phenyl, (b) naphthyl, (c) pyridyl, (d) furyl, (e) pyrryl, (f) thienyl, (g) imidazolyl, (h) benzimidazolyl, (i) pyrazinyl, (j) pyrimidyl, (k) quinolyl, (l) isoquinolyl, (m) benzofuryl, and (n) benzothienyl,  
+and mono and di-substituted C₆₋₁₀ aryl as defined 
+above in items (a) to (n) wherein the 
+substituents are independently C₁₋₆ alkyl, halo, 
+hydroxy, C₁₋₆ alkyloxy, C₁₋₆ alkylcarbonyl, or 
+C₁₋₆ alkoxy C₁₋₆ alkyl;or </item><item>(5) C₁₋₆ alkylcarbonyloxy-C₁₋₆ alkyl. </item></list></p></div><div n="2" type="claim"><p xml:id="_73cc4">A compound of Formula A according to 
+Claim 1, wherein 
+   R₅ is 
+<list type="simple"><item>(1) hydrogen, </item><item>(2) C₁₋₆ alkyl, </item><item>(3) C₆₋₁₀ aryl wherein the aryl 
+group is selected from the group 
+consisting of 
+(a) phenyl, (b) pyridyl, (c) furyl, (d) thienyl, (e) imidazolyl, (f) benzimidazolyl, (g) pyrimidyl, (h) benzofuryl, and (i) benzothienyl; or </item><item>(4) C₁₋₆ alkylcarbonyloxy-C₁₋₆ alkyl. </item></list></p></div><div n="3" type="claim"><p xml:id="_218e7">A compound of Formula A according to 
+Claim 2, wherein 
+   R₆ is 
+<list type="simple"><item>(a) hydrogen, </item><item>(b) C₁₋₆ alkyl, </item><item>(c) substituted C₁₋₆ alkyl wherein 
+the substituent is halo, 
+hydroxy, C₁₋₆ alkyloxy, C₁₋₆ 
+alkylcarbonyloxy, amino, C₁₋₆ 
+alkylamino, di-(C₁₋₆ alkyl)amino, 
+or tri-(C₁₋₆ alkyl) 
+ammonium, </item><item>(d) C₆₋₁₀ aryl wherein the aryl 
+group is selected from the group 
+consisting of 
+(1) phenyl, (2) pyridyl, (3) furyl, (4) thienyl, (5) imidazolyl, (6) benzimidazolyl, (7) pyrimidyl, (8) benzofuryl, and (9) benzothienyl. </item></list></p></div><div n="4" type="claim"><p xml:id="_e0fd6">A compound of Formula A according to 
+Claim 3, wherein 
+   R₅ is 
+<list type="simple"><item>(1) Hydrogen, </item><item>(2) C₁₋₆ alkyl, </item><item>(3) C₆₋₁₀ aryl wherein the aryl 
+group is selected from the group 
+consisting of 
+(a) phenyl, (b) thienyl, (c) isothiazolyl, (d) benzofuryl, and (e) benzothienyl, or </item><item>(4) C₁₋₆ alkylcarbonyloxy-C₁₋₆ alkyl. </item></list></p></div><div n="5" type="claim"><p xml:id="_4028f">A compound of Formula A according to 
+Claim 4, wherein 
+   R₆ is 
+<list type="simple"><item>(a) hydrogen, </item><item>(b) C₁₋₆ alkyl, </item><item>(c) substituted C₁₋₆ alkyl wherein 
+the substituent is halo, 
+hydroxy, C₁₋₆ alkyloxy, or 
+amino, </item><item>(d) C₆₋₁₀ aryl wherein the aryl 
+group is selected from the group 
+consisting of 
+(1) phenyl, (2) thienyl, (3) benzofuryl, and (4) benzothienyl. </item></list></p></div><div n="6" type="claim"><p xml:id="_36275">A compound of Formula A according to 
+Claim 5, wherein 
+   M, R, and R₁ are each independently C₁₋₆ 
+alkyl or C₂₋₆ alkenyl;
+ 
+   R₂ and R₃ are each independently hydrogen, 
+C₁₋₆ alkyl, C₁₋₆ alkoxy, or R₂ and R₃ are 
+joined together to form a ring selected from 
+furan, thiophene, or dioxacyclopentane; 
+   R₄ is hydrogen, C₁₋₆ alkyl, fluoro or chloro; 
+n is 0 or 1; 
+   R₅ is hydrogen, C₁₋₆ alkyl, 
+C₁₋₆-alkylcarbonyloxy-C₁₋₆ alkyl; and 
+   R₆ is hydrogen C₁₋₆ alkyl, or 
+C₁₋₆-alkylcarbonyloxy-C₁₋₆ alkyl. </p></div><div n="7" type="claim"><p xml:id="_6e8a2">A compound according to Claim 6 of 
+Formula A wherein 
+   M, R and R₁ are each independently C₁₋₆ 
+alkyl; 
+   R₂ is hydrogen, and 
+   R₃ is C₁₋₆ alkyl, C₁₋₆ alkyloxy, or 
+   R₂ and R₃ are joined together to form a ring 
+selected from furan or dioxacyclopentane; 
+   R₄ is hydrogen, C₁₋₆ alkyl, fluoro, or 
+chloro; 
+   n is 0 or 1; 
+   R₅ is hydrogen or C₁₋₆ alkyl; 
+   R₆ is hydrogen or C₁₋₆ alkyl. </p></div><div n="8" type="claim"><p xml:id="_3c7f1">A compound according to Claim 7 wherein 
+   M is n-propyl; 
+   R and R₁, are ethyl; 
+   n is 0 or 1; 
+   R₂ is hydrogen, and
+ 
+   R₃ is methyl, or methoxy, or R₂ and R₃ are 
+joined together to form a ring selected from 
+furan or dioxacyclopentane; 
+   R₅ is hydrogen or C₁₋₆ alkyl; and 
+   R₆ is hydrogen or C₁₋₆ alkyl. </p></div><div n="9" type="claim"><p xml:id="_c6e89">A compound of Formula A according to 
+Claim 8 selected from the group consisting of 
+<list type="simple"><item>(a) (4S)-3,3-Diethyl-1-[(R)-α-n-propyl-(4-methyl)benzylaminocarbonyl]-4-[4-(diethoxy-phosphinylmethyl-phenoxy]azetidin-2- 
+one; and </item><item>(b) (4S)-3,3-Diethyl-1-[(R)-α-n-propyl-(4-methyl)benzylaminocarbonyl]-4-[4-(dihydroxy-phosphinylmethyl)-phenoxy]azetidin-2-one. </item></list></p></div><div n="10" type="claim"><p xml:id="_16e9f">A pharmaceutical composition for the 
+inhibition of leukocyte elastase which comprises a 
+nontoxic therapeutically effective amount of a 
+compound of Claim 1 and a pharmaceutically acceptable 
+carrier. </p></div><div n="11" type="claim"><p xml:id="_23deb">The use of a compound as claimed in Claim 1 
+for the manufacture of a medicament for the inhibition of 
+human leukocyte elastase. </p></div></div><div type="description" xml:lang="en"><head xml:id="_cb63a">BACKGROUND OF THE INVENTION</head><p xml:id="_5380c">We have found that a group of new 
+substituted azetidinones are potent elastase 
+inhibitors and therefore are useful anti-inflammatory 
+and antidegenerative agents. </p><p xml:id="_a19b5">Proteases from granulocytes and macrophages 
+have been reported to be responsible for the chronic 
+tissue destruction mechanisms associated with 
+inflammation, including rheumatoid arthritis and 
+emphysema. Accordingly, specific and selective 
+inhibitors of these proteases are candidates for 
+potent anti-inflammatory agents useful in the 
+treatment of inflammatory conditions resulting in 
+connective tissue destruction, e.g. rheumatoid 
+arthritis, emphysema, bronchial inflammation, 
+osteoarthritis, spondylitis, lupus, psoriasis,  
+ 
+atherosclerosis, sepsis, septicemia, shock, 
+periodontitis, cystic fibrosis and acute respiratory 
+distress syndrome. </p><p xml:id="_8e661">The role of proteases from granulocytes, 
+leukocytes or macrophages is related to a rapid 
+series of events which occur during the progression 
+of an inflammatory condition: 
+(1) There is a rapid production of 
+prostaglandins (PG's) and related compounds 
+synthesized from arachidonic acid. This PG synthesis 
+has been shown to be inhibited by aspirin-related 
+nonsteroidal anti-inflammatory agents, including 
+indomethacin and phenylbutazone. There is some 
+evidence that protease inhibitors prevent PG 
+production; (2) There is also a change in vascular 
+permeability which causes a leakage of fluid into the 
+inflammed site and the resulting edema is generally 
+used as a marker for measuring the degree of 
+inflammation. This process has been found to be 
+induced by the proteolytic or peptide cleaving 
+activity of proteases, especially those contained in 
+the granulocyte, and thereby can be inhibited by 
+various synthetic protease inhibitors, for example, 
+N-acyl-benzisothiazolones and their respective 
+1,1-dioxides. Morris Zimmerman et al., J. Biol. 
+Chem., 255, 9848 (1980); and (3) There is an appearance and/or presence of 
+lymphoid cells, especially macrophages and 
+polymorphonuclear leukocytes (PMN's). It has been 
+known that a variety of proteases are released from  
+ 
+the macrophages and PMN's, further indicating that 
+the proteases do play an important role in 
+inflammation. </p><p xml:id="_15ec6">In general, proteases are an important 
+family of enzymes within the peptide bond cleaving 
+enzymes whose members are essential to a variety of 
+normal biological activities, such as digestion, 
+formation and dissolution of blood clots, the 
+formation of active forms of hormones, the immune 
+reaction to foreign cells and organisms, etc., and in 
+pathological conditions such as the degradation of 
+structural proteins at the articular cartilage/pannus 
+junction in rheumatoid arthritis, etc. </p><p xml:id="_51255">Elastase is one of these proteases. It is 
+an enzyme capable of hydrolyzing the connective 
+tissue component elastin, a property not contained by 
+the bulk of the proteases present in mammals. It 
+acts on a protein's nonterminal bonds which are 
+adjacent to an aliphatic amino acid. Neutrophil 
+elastase is of particular interest because it has the 
+broadest spectrum of activity against natural 
+connective tissue substrates. In particular, the 
+elastase of the granulocyte is important because, as 
+described above, granulocytes participate in acute 
+inflammation and in acute exacerbation of chronic 
+forms of inflammation which characterize many 
+clinically important inflammatory diseases. </p><p xml:id="_e12e3">Proteases may be inactivated by inhibitors 
+which block the active site of the enzyme by binding 
+tightly thereto. Naturally occurring protease 
+inhibitors form part of the control or defense  
+ 
+mechanisms that are crucial to the well-being of an 
+organism. Without these control mechanisms, the 
+proteases would destroy any protein within reach. 
+The naturally occurring enzyme inhibitors have been 
+shown to have appropriate configurations which allow 
+them to bind tightly to the enzyme. This 
+configuration is part of the reason that inhibitors 
+bind to the enzyme so tightly (see Stroud, "A Family 
+of Protein-Cutting Proteins" Sci.Am. July 1974, pp. 
+74-88). For example, one of the natural inhibitors, 
+α₁-antitrypsin, is a glycoprotein contained in human 
+serum that has a wide inhibitory spectrum covering, 
+among other enzymes, elastase both from the pancreas 
+and the PMN. This inhibitor is hydrolyzed by the 
+proteases to form a stable acyl enzyme in which the 
+active site is no longer available. Marked reduction 
+in serum α₁-antitrypsin, either genetic or due to 
+oxidants, has been associated with pulmonary 
+emphysema which is a disease characterized by a 
+progressive loss of lung elasticity and resulting 
+respiratory difficulty. It has been reported that 
+this loss of lung elasticity is caused by the 
+progressive, uncontrolled proteolysis or destruction 
+of the structure of lung tissue by proteases such as 
+elastase released from leukocytes. J. C. Powers, 
+TIBS, 211 (1976). </p><p xml:id="_e1aad">Rheumatoid arthritis is characterized by a 
+progressive destruction of articular cartilage both 
+on the free surface bordering the joint space and at 
+the erosion front built up by synovial tissue toward 
+the cartilage. This destruction process, in turn, is  
+ 
+attributed to the protein-cutting enzyme elastase 
+which is a neutral protease present in human 
+granulocytes. This conclusion has been supported by 
+the following observations: 
+(1) Recent histochemical investigations showed 
+the accumulation of granulocytes at the cartilage/ 
+pannus junction in rheumatoid arthritis; and (2) a recent investigation of mechanical 
+behavior of cartilage in response to attack by 
+purified elastase demonstrated the direct 
+participation of granulocyte enzymes, especially 
+elastase, in rheumatoid cartilage destruction. H. 
+Menninger et al., in Biological Functions of 
+Proteinases, H. Holzer and H. Tschesche, eds. 
+Springer-Verlag, Berlin, Heidelberg, New York, pp. 
+196-206, 1979. </p><head xml:id="_12ae6">BRIEF DESCRIPTION OF THE INVENTION</head><p xml:id="_65ccc">The instantly claimed invention is directed 
+to specifically substituted azetidinones in which the 
+substituent in the 4-position is a substituted 
+phenoxy moiety wherein the substituent is a 
+phosphoric acid derivative and the N-substiuent is a 
+phenylalkylaminocarbonyl group. This invention is 
+also directed to pharmaceutical compositions and 
+methods of using these specifically substituted 
+azetidinones.  </p><head xml:id="_23ad6">DETAILED DESCRIPTION OF THE INVENTION</head><p xml:id="_8112e">This invention relates to potent elastase 
+inhibitors of Formula A which are useful in the 
+prevention, control and treatment of inflammatory and 
+degenerative conditions especially arthritis and 
+emphysema. </p><p xml:id="_f22b2">In one embodiment the instant invention is 
+directed to the compounds of the Formula (A) 
+</p><p xml:id="_d9822">and pharmaceutically acceptable salts thereof wherein
+ 
+   R is H, C₁₋₆ alkyl, or C₂₋₆ alkenyl;
+ 
+   R₁ is H, C₁₋₆ alkyl, C₂₋₆ alkenyl or C₁₋₆ 
+alkoxy-C₁₋₆ alkyl;
+ 
+   M is 
+(1) hydrogen, (2) C₁₋₆ alkyl, (3) hydroxy C₁₋₆-alkyl, (4) halo C₁₋₆-alkyl, (5) C₂₋₆ alkenyl, or (6) C₁₋₆ alkoxy-C₁₋₆ alkyl; </p><p xml:id="_9c77e">   R₂ and R₃ are each independently 
+(1) hydrogen, (2) C₁₋₆ alkyl, (3) halo, (4) carboxy, (5) C₁₋₆ alkoxy, (6) phenyl, (7) C₁₋₆ alkylcarbonyl, (8) C₁₋₆ alkyloxycarbonyl, (9) di-(C₁₋₆alkyl)amino, (10) phenoxy, or </p><p xml:id="_9277c">   R₂ and R₃ are joined together to form a ring 
+selected from furan, thiophene, and 
+dioxacyclopentane;
+ 
+   R₄ is 
+(a) hydrogen, (b) C₁₋₆ alkyl, (c) halo, or (d) C₁₋₆ alkoxy. </p><p xml:id="_37f07">   n is 0, 1, 2, 3, or 4;
+ 
+   R₅ and R₆ are each independently 
+(1) hydrogen, (2) C₁₋₆ alkyl, (3) substituted C₁₋₆ alkyl wherein 
+the substituent is halo, 
+hydroxy, C₁₋₆ alkyloxy, C₁₋₆ 
+alkylcarbonyloxy, amino, C₁₋₆ 
+alkylamino, di-(C₁₋₆ alkyl)amino, 
+or tri-(C₁₋₆ alkyl) 
+ammonium,  (4) C₆₋₁₀ aryl wherein the aryl 
+group is selected from the group 
+consisting of 
+(a) phenyl, (b) naphthyl, (c) pyridyl, (d) furyl, (e) pyrryl, (f) thienyl, (g) imidazolyl, (h) benzimidazolyl, (i) pyrazinyl, (j) pyrimidyl,  (k) quinolyl, (l) isoquinolyl, (m) benzofuryl, and (n) benzothienyl,  
+and mono and di-substituted C₆₋₁₀ aryl as defined 
+above in items (a) to (n) wherein the 
+substituents are independently C₁₋₆ alkyl, halo, 
+hydroxy, C₁₋₆ alkyloxy, C₁₋₆ alkylcarbonyl, or 
+C₁₋₆ alkoxy-C₁₋₆ alkyl; or  (5) C₁₋₆ alkylcarbonyloxy-C₁₋₆ alkyl.   </p><p xml:id="_e531f">In one class of this embodiment, the instant 
+invention concerns compounds of Formula A 
+</p><p xml:id="_202ad">and pharmaceutically acceptable salts thereof wherein
+ 
+   M, R, and R₁ are each independently C₁₋₆ 
+alkyl or C₂₋₆ alkenyl;
+ 
+   R₂ and R₃ are each independently hydrogen, 
+C₁₋₆ alkyl, C₁₋₆ alkoxy, or R₂ and R₃ are 
+joined together to form a ring selected from 
+furan, thiophene, or dioxacyclopentane;
+ 
+   R₄ is hydrogen, C₁₋₆ alkyl, fluoro or chloro;
+ 
+   n is 0 or 1;
+ 
+   R₅ and R₆ are each independently hydrogen, 
+C₁₋₆ alkyl, C₆₋₁₀aryl, or C₁₋₆-alkyl-carbonyloxy-C₁₋₆ 
+alkyl. </p><p xml:id="_68a7f">One subclass of this embodiment concerns 
+compounds of Formula A wherein:
+ 
+   M, R and R₁ are each independently C₁₋₆ alkyl;
+ 
+   R₂ is hydrogen and
+ 
+   R₃ is C₁₋₆ alkyl, C₁₋₆ alkyloxy, or
+ 
+   R₂ and R₃ are joined together to form a ring 
+selected from furan or dioxacyclopentane;
+ 
+   R₅ and R₆ are each independently hydrogen or 
+C₁₋₆ alkyl;
+ 
+   R₄ is hydrogen, C₁₋₆ alkyl, fluoro, or chloro;
+ 
+   n is 0 or 1. </p><p xml:id="_f14cc">A narrower sub-class of this embodiment 
+concerns compounds of Formula A wherein:
+ 
+   M is n-propyl;
+ 
+   R and R₁, are ethyl;
+ 
+   n is 0 or 1;
+ 
+   R₂ is hydrogen, and
+ 
+   R₃ is methyl, or methoxy, or R₂ and R₃ are 
+joined together to form a ring selected from 
+furan or dioxacyclopentane;
+ 
+ 
+   R₅ and R₆ are each hydrogen. </p><p xml:id="_762f6">Exemplifying this class of the invention are 
+the following: </p><p xml:id="_ccd59">A compound which is (4S)-3,3-Diethyl-1-[(R)-α-n-propyl-(4-methyl)benzylaminocarbonyl]-4-[4-(diethoxy-phosphinylmethyl-phenoxy]azetidin-2-one. </p><p xml:id="_11eab">A compound which is (4S)-3,3-Diethyl-1-[(R)-α-n-propyl-(4-methyl)benzylaminocarbonyl]-4-[4-(dihydroxy-phosphinylmethyl)-phenoxy]azetidin-2-one. </p><p xml:id="_52bd6">The compounds of the invention are prepared 
+by the following representative schemes: 
+</p><p xml:id="_04d43">As shown in Scheme I, the phosphonic acid 
+analogs 4 were synthesized starting from the 
+corresponding carboxylic acid 1 ( preparation of the 
+starting material 1 may be found in EPO 337,549, 
+published October 18, 1989) to give the appropriate 
+benzylic bromide 2. This was then treated with a 
+trialkylphosphite, such as trimethyl or triethyl 
+phosphite, at a temperature of from 75-125°C in a 
+Michaelis-Arbuzov reaction to give the phosphonic 
+acid diester 3. The corresponding free acids 4 were 
+obtained by cleavage of the two alkyl ester groups 
+with a halotrimethylsilane, such as 
+bromotrimethylsilane. 
+</p><p xml:id="_ece3c">The monosodium salts of the phosphonic acid 
+analogs were synthesized as shown in Scheme II via a 
+nucleophilic displacement reaction on the benzylic 
+bromide 1 with the sodium or potassium salt of 
+dibenzyl phosphite in a dipolar aprotic solvent, such 
+as tetrahydrofuran or 1,4-dioxane, which afforded the 
+dibenzyl phosphonate derivatives 6. The benzyl ester 
+groups were removed by catalytic hydrogenolysis in an 
+alcoholic solvent, such as methanol or ethanol, in 
+the presence of a palladium catalyst, such as 10% 
+palladium on-charcoal, and one equivalent of sodium 
+hydrogen carbonate, to afford the desired monosodium 
+phosphonate derivatives 7. </p><p xml:id="_a870f">This invention also relates to a method of 
+treating inflammation in patients using a compound of 
+Formula A. </p><p xml:id="_60ac6">It has been found that the compounds of, 
+Formula A are effective inhibitors of the proteolytic 
+function of human granulocyte elastase as shown below:  </p><head xml:id="_cf8f5">Enzyme Assays for the Inhibition of Human 
+Polymorphonuclear Leukocyte Elastase Via hydrolysis 
+of N-t-Boc-alanyl-alanyl-prolylalanine-p-nitroanilide 
+(Boc-AAPAN) or N-t-Boc-alanyl-prolylvaline-p-nitroanilide 
+(Boc-AAPVN) Reagent:</head><p xml:id="_d8054">0.05M TES (N-tris[hydroxymethyl]methyl-2-amino-ethanesulfonic 
+acid) Buffer, pH 7.5. </p><p xml:id="_725c3">0.2 mM Boc-AAPAN or Boc-AAPVN.  </p><p xml:id="_2dbaa">To prepare substrate, the solid was first 
+dissolved in 10.0 ml DMSO. Buffer at pH 7.5 was then 
+added to a final volume of 100 ml. </p><p xml:id="_0ea4d">Crude extract of human polymorphonuclear 
+leukocytes (PMN) containing elastase activity. </p><p xml:id="_8e0e7">Inhibitors (azetidinones) to be tested 
+dissolved in DMSO just before use. </p><p xml:id="_c02fd">To 1.0 ml of 0.2 mM Boc-AAPAN in a cuvette, 
+0.01-0.1 ml of DMSO with or without inhibitor was 
+added. After mixing, a measurement was taken at 410 
+mµ to detect any spontaneous hydrolysis due to 
+presence of test compound. 0.05 Milliliters of PMN 
+extract was then added and the ΔOD/min at 410 mµ 
+was measured and recorded. Beckman model 35 spectrophotometer 
+was used. </p><p xml:id="_c25a5">Results are also expressed as Ki, the 
+micromolar concentration of the inhibitor (µM) giving 
+50% of the control enzyme activity; or as kobs/I 
+which is the second order rate constant in per mole 
+per second for inactivation of the enzyme. </p><p xml:id="_4f214">The elastase activity in the crude PMN 
+may vary from one preparation to another. A 
+control of each new batch is run, and the volume added 
+in the assay procedure is adjusted according to 
+activity. </p><p xml:id="_6e79c">Accordingly, the compounds of Formula A can 
+be used to reduce inflammation and relieve pain in 
+diseases such as emphysema, rheumatoid arthritis, 
+osteoarthritis, gout, bronchial inflammation, 
+atherosclerosis, sepsis, septicemia, shock, 
+periodontitis, cystic fibrosis, infectious arthritis, 
+rheumatic fever and the like.  </p><p xml:id="_939c2">For treatment of inflammation, fever or 
+pain, the compounds of Formula A may be administered 
+orally, topically, parenterally, by inhalation spray 
+or rectally in dosage unit formulations containing 
+conventional non-toxic pharmaceutically acceptable 
+carriers, adjuvants and vehicles. The term 
+parenteral as used herein includes subcutaneous 
+injections, intravenous, intramuscular, intrasternal 
+injection or infusion techniques. In addition to the 
+treatment of warm-blooded animals such as mice, rats, 
+horses, dogs, cats, etc., the compounds of the 
+invention are effective in the treatment of humans. </p><p xml:id="_c8d67">The pharmaceutical compositions containing 
+the active ingredient may be in a form suitable for 
+oral use, for example, as tablets, troches, lozenges, 
+aqueous or oily suspensions, dispersible powders or 
+granules, emulsions, hard or soft capsules, or syrups 
+or elixirs. Compositions intended for oral use may 
+be prepared according to any method known to the art 
+for the manufacture of pharmaceutical compositions 
+and such compositions may contain one or more agents 
+selected from the group consisting of sweetening 
+agents, flavoring agents, coloring agents and 
+preserving agents in order to provide 
+pharmaceutically elegant and palatable preparation. 
+Tablets contain the active ingredient in admixture 
+with non-toxic pharmaceutically acceptable excipients 
+which are suitable for the manufacture of tablets. 
+These excipients may be for example, inert diluents, 
+such as calcium carbonate, sodium carbonate, lactose, 
+calcium phosphate or sodium phosphate; granulating 
+and disintegrating agents, for example, corn starch,  
+ 
+or alginic acid; binding agents, for example starch, 
+gelatin or acacia, and lubricating agents, for 
+example magnesium stearate, stearic acid or talc. 
+The tablets may be uncoated or they may be coated by 
+known techniques to delay disintegration and 
+absorption in the gastrointestinal tract and thereby 
+provide a sustained action over a longer period. For 
+example, a time delay material such as glyceryl 
+monostearate or glyceryl distearate may be employed. </p><p xml:id="_be1cd">Formulations for oral use may also be 
+presented as hard gelatin capsules wherein the active 
+ingredient is mixed with an inert solid diluent, for 
+example, calcium carbonate, calcium phosphate or 
+kaolin, or as soft gelatin capsules wherein the 
+active ingredient is mixed with water or an oil 
+medium, for example peanut oil, liquid paraffin, or 
+olive oil. </p><p xml:id="_e4670">Aqueous suspensions contain the active 
+materials in admixture with excipients suitable for 
+the manufacture of aqueous suspensions. Such 
+excipients are suspending agents, for example sodium 
+carboxymethylcellulose, methylcellulose, hydroxypropylmethylcellulose, 
+sodium alginate, polyvinylpyrrolidone, 
+gum tragacanth and gum acacia; 
+dispersing or wetting agents may be a naturally-occurring 
+phosphatide, for example lecithin, or 
+condensation products of an alkylene oxide with fatty 
+acids, for example polyoxyethylene stearate, or 
+condensation products of ethylene oxide with long 
+chain aliphatic alcohols, for example 
+heptadeca-ethyleneoxycetanol, or condensation 
+products of ethylene oxide with partial esters  
+ 
+derived from fatty acids and a hexitol such as 
+polyoxyethylene sorbitol monooleate, or condensation 
+products of ethylene oxide with partial esters 
+derived from fatty acids and hexitol anhydrides, for 
+example polyoxyethylene sorbitan monooleate. The 
+said aqueous suspensions may also contain one or more 
+preservatives, for example ethyl, or n-propyl, 
+p-hydroxybenzoate, one or more coloring agents, one 
+or more flavoring agents, and one or more sweetening 
+agents, such as sucrose or saccharin. </p><p xml:id="_59c51">Oily suspension may be formulated by 
+suspending the active ingredient in a vegetable oil, 
+for example arachis oil, olive oil, sesame oil or 
+coconut oil, or in a mineral oil such as liquid 
+paraffin. The oily suspensions may contain a 
+thickening agent, for example beeswax, hard paraffin 
+or cetyl alcohol. Sweetening agents such as those 
+set forth above, and flavoring agents may be added to 
+provide a palatable oral preparation. These 
+compositions may be preserved by the addition of an 
+antioxidant such as ascorbic acid. </p><p xml:id="_2c2b6">Dispersible powders and granules suitable 
+for preparation of an aqueous suspension by the 
+addition of water provide the active ingredient in 
+admixture with a dispersing or wetting agent, 
+suspending agent and one or more preservatives. 
+Suitable dispersing or wetting agents and suspending 
+agents are exemplified by those already mentioned 
+above. Additional excipients, for example 
+sweetening, flavoring and coloring agents, may also 
+be present.  </p><p xml:id="_55eee">The pharmaceutical compositions of the 
+invention may also be in the form of oil-in-water 
+emulsions. The oily phase may be a vegetable oil, 
+for example olive oil or arachis oils, or a mineral 
+oil, for example liquid paraffin or mixtures of 
+these. Suitable emulsifying agents may be 
+naturally-occurring gums, for example gum acacia or 
+gum tragacanth, naturally-occurring phosphatides, for 
+example soy bean, lecithin, and esters or partial 
+esters derived from fatty acids and hexitol 
+anhydrides, for example sorbitan mono-oleate, and 
+condensation products of the said partial esters with 
+ethylene oxide, for example polyoxyethylene sorbitan 
+monooleate. The emulsions may also contain 
+sweetening and flavoring agents. </p><p xml:id="_7b4f5">Syrups and elixirs may be formulated with 
+sweetening agents, for example glycerol, propylene 
+glycol, sorbitol or sucrose. Such formulations may 
+also contain a demulcent, a preservative and 
+flavoring and coloring agents. The pharmaceutical 
+compositions may be in the form of a sterile 
+injectable aqueous or oleagenous suspension. This 
+suspension may be formulated according to the known 
+art using those suitable dispersing or wetting agents 
+and suspending agents which have been mentioned 
+above. The sterile injectable preparation may also 
+be a sterile injectable solution or suspension in a 
+non-toxic parenterally-acceptable diluent or solvent, 
+for example as a solution in 1,3-butane diol. Among 
+the acceptable vehicles and solvents that may be 
+employed are water, Ringer's solution and isotonic 
+sodium chloride solution. In addition, sterile,  
+ 
+fixed oils are conventionally employed as a solvent 
+or suspending medium. For this purpose any bland 
+fixed oil may be employed including synthetic mono- 
+or diglycerides. In addition, fatty acids such as 
+oleic acid find use in the preparation of injectables. </p><p xml:id="_c827b">The compounds of Formula A may also be 
+administered in the form of suppositories for rectal 
+administration of the drug. These compositions can 
+be prepared by mixing the drug with a suitable 
+non-irritating excipient which is solid at ordinary 
+temperatures but liquid at the rectal temperature and 
+will therefore melt in the rectum to release the 
+drug. Such materials are cocoa butter and 
+polyethylene glycols. </p><p xml:id="_ee528">For topical use, creams, ointments, jellies, 
+solutions or suspensions, etc., containing the 
+anti-inflammatory agents are employed. </p><p xml:id="_a4d4e">The amount of active ingredient that may be 
+combined with the carrier materials to produce a 
+single dosage form will vary depending upon the host 
+treated and the particular mode of administration. 
+For example, a formulation intended for the oral 
+administration of humans may contain from 5 mg to 5 
+gm of active agent compounded with an appropriate and 
+convenient amount of carrier material which may vary 
+from about 5 to about 95 percent of the total 
+composition. Dosage unit forms will generally 
+contain between from about 25 mg to about 500 mg of 
+actve ingredient. </p><p xml:id="_8225d">It will be understood, however, that the 
+specific dose level for any particular patient will 
+depend upon a variety of factors including the  
+ 
+activity of the specific compound employed, the age, 
+body weight, general health, sex, diet, time of 
+administration, route of administration, rate of 
+excretion, drug combination and the severity of the 
+particular disease undergoing therapy. </p><p xml:id="_9f413">The following examples illustrate the 
+preparation of the compounds of Formula A and as such 
+are not to be considered as limiting the invention as 
+set forth in the claims appended thereto. 
+Preparation of the starting material 1 may be found 
+in EPO 337,549, published October 18, 1989, which is 
+hereby incorporated by reference. </p><head xml:id="_b81a1">EXAMPLE 1</head><head xml:id="_db0b8">(4S)-3,3-Diethyl-1-[(R)-α-n-propyl(4-methyl)-benzylaminocarbonyl)]-4-[4-(diethoxyphosphinylmethyl)-phenoxy]-azetidin-2-one.</head><head xml:id="_b9369">Step A:Preparation of(4S)-3,3-diethyl-1-[(R)-α-n-propyl-(4-methyl)-benzylaminocarbonyl]-4-[4-(bromomethyl)-phenoxy]-azetidin-2-one</head><p xml:id="_614cc">To a solution of (4S)-3,3-diethyl-1-[(R)-α-n-propyl-(4-methyl)-benzylaminocarbonyl)]-4-(4-carboxyphenoxy)azetidin-2-one 
+(1.04 g, 2.30 mmol) in tetrahydrofuran 
+(20 mL) cooled to 0°C was added dropwise with 
+stirring under a nitrogen atmosphere a 2.0 M solution 
+of borane-methyl sulfide in tetrahydrofuran (3.0 mL, 
+6 mmol). The solution was allowed to attain room 
+temperature and stirred overnight. Excess borane was  
+ 
+decomposed by slow addition of methanol. The 
+solution was evaporated, and the crude product was 
+subjected to flash chromatography on silica gel using 
+30% ethyl acetate in hexane as the mobile phase. 
+(4S)-3,3-Diethyl-1-[(R)-α-n-propyl-(4-methyl)-benzylaminocarbonyl)]-4-[4-(hydroxymethyl)-phenoxy]-azetidin-2-one 
+was obtained as a colorless oil. 
+Triphenylphosphine (637 mg, 2.43 mmol) was dissolved 
+in acetonitrile (11 mL) and bromine (0.12 mL) was 
+added with stirring to give rise to a yellow-orange 
+solution. Additional triphenylphosphine was added 
+until a faintly yellow solution was obtained. A 
+solution of (4S)-3,3-diethyl-1-[(R)-α-n-propyl-(4-methyl)-benzylaminocarbonyl]-4-[4-(hydroxymethyl)phenoxy]-azetidin-2-one 
+(1.0 g, 2.28 mmol) in 
+acetonitrile (10 mL) was added dropwise with 
+stirring. The reaction mixture was stirred ovenight 
+at room temperature, evaporated, and the crude 
+mixture subjected to flash chromatography on silica 
+gel using 5% ethyl acetate in hexane as the mobile 
+phase.
+ 
+(4S)-3,3-Diethyl-1-[(R)-α-n-propyl-(4-methyl)-benzylaminocarbonyl]-4-[4-(bromomethyl)-phenoxy]azetidin-2-one 
+(842 mg, 74% yield) was obtained as a 
+thick oil that solidified upon standing. </p><head xml:id="_3da0e">Step B:(4S)-3,3-Diethyl-1-[(R)-α-n-propyl(4-methyl)-benzylaminocarbonyl)]-4-[4-(diethoxyphosphinylmethyl)-phenoxy]-azetidin-2-one.</head><p xml:id="_18696">A mixture of (4S)-3,3-diethyl-1-[(R)-α-n-propyl-(4-methyl)-benzylaminocarbonyl]-4-[4-(bromomethyl)phenoxy]-azetidin-2-one 
+(362 mg, 0.72 mmol) 
+and triethyl phosphite (1.4 mL, 8.2 mmol) was heated  
+ 
+for 2 hours at 90°C. The crude product mixture was 
+subjected to flash chromatography on silica gel using 
+initially 25% ethyl acetate in hexane and 
+subsequently 33% ethyl acetate in hexane as the 
+mobile phase. (4S)-3,3-Diethyl-1-[(R)-α-n-propyl(4-methyl)-benzylaminocarbonyl)]-4-[4-(diethoxyphosphinylmethyl)-phenoxy]-azetidin-2-one 
+was 
+obtained as colorless oil; yield 371 mg, 92%; Fast 
+atom bombardment mass spectrum (FAB MS) : m/z 559 (M 
++ 1). </p><head xml:id="_0f202">EXAMPLE 2</head><head xml:id="_1fcdd">(4S)-3,3-Diethyl-1-[(R)-α-n-propyl-(4-methyl)-benzylaminocarbonyl)]-4-[4-(dihydroxyphosphinylmethyl)-phenoxy]-azetidin-2-one.</head><p xml:id="_d3ae2">To a solution of (4S)-3,3-diethyl-1-[(R)-α-n-propyl-(4-methyl)-benzylaminocarbonyl]-4-[4-(diethoxyphosphinylmethyl)-phenoxy]-azetidin-2-one 
+(312 mg, 
+0.56 mmol) in methylene chloride (10 mL) was added 
+bromotrimethylsilane (0.06 mL, 4.5 mmol) with 
+stirring under a nitrogen atmosphere. The reaction 
+mixture was stirred overnight at room temperature and 
+then evaporated. Methanol (6 mL) was added, and the 
+solution was stirred for 2 hours at room 
+temperature. After evaporation, the product was 
+purified by flash chromatography on silica gel 
+(packed as a slurry in 9% methanol/methylene 
+chloride). Elution was effected with 100:10:8:0.5 
+chloroform-ethanol-formic acid-water. Fractions 
+containing pure desired product were combined and 
+evaporated; yield 58 mg; FAB MS m/z 503 (M + 1), 541 
+(M + K). </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

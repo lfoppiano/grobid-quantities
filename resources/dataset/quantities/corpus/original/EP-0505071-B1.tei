@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">24697897</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">US</orgName></authority><idno type="docNumber">67227991</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910320</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">US67227991A</idno></monogr></biblStruct><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">US</orgName></authority><idno type="docNumber">672279</idno><imprint><date>19910320</date></imprint></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">G05D1/10C</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302013</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920310</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302013A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>FORSMO DENNES P</persName><residence><address><country type="national">US</country></address></residence></person><person role="inventor" type="intermediate"><persName>FORSMO, DENNES P.</persName></person><person role="inventor" type="original"><persName>FORSMO, DENNES P.</persName><residence><address><addrLine>39 Conant Street</addrLine><settlement>Acton, Massachusetts 01720</settlement><country type="national">US</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>RAYTHEON CO</name><address><country type="national">US</country></address></item><item type="intermediate"><name>RAYTHEON COMPANY</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>BE</country><country>DE</country><country>ES</country><country>FR</country><country>GB</country><country>GR</country><country>IT</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">G05D   1/12        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">F41G   7/00        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">F41G   7/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">F42B  10/64        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">F42B  10/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">G05D   1/08        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">B64C  13/00        20060101CFI20051220RMJP        </classCode><classCode scheme="ipcr">G05D   1/10        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">F42B  15/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">B64C  13/18        20060101AFI20051220RMJP        </classCode><classCode scheme="ipcr">G05D   1/12        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">G05D   1/08        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">F42B  15/01        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">G05D   1/10        20060101C I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Verfahren zur Kombination der Leitflossensteuerung</title><title type="invention-title" xml:lang="en">A fin command mixing method</title><title type="invention-title" xml:lang="fr">Méthode de combinaison de commande d'aileron</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505071</idno><imprint><classCode scheme="kindCode">B1</classCode><date>19971229</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505071B1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="1" type="claim"><p xml:id="_35e51">Verfahren zur Betätigung eines Fahrzeugs mit dem 
+Schritt des Zuordnens eines Rollbefehls (δRc) zu mindestens 
+einer aus einer Mehrzahl von Leitwerksflächen in 
+Abhängigkeit von einem Steigungsbefehl (δPc) und einem 
+Gierbefehl (δYc), dadurch gekennzeichnet, daß der Schritt 
+der Zuordnung folgende Schritte umfaßt: 
+<list type="simple"><item>a) Errechnen eines Steigungs-/Roll-Befehlsverhältnisses 
+gleich einem Absolutwert des Ergebnisses der Division des 
+Steigungsbefehls (δPc) durch den Rollbefehl (δRc), und 
+Errechnen eines Gier-/Roll-Befehlverhältnisses gleich einem 
+Absolutwert des Ergebnisses der Division des Gierbefehls 
+(δYc) durch den Rollbefehl (δRc); </item><item>b) voneinander Abziehen des Gier-/Roll-Befehlsverhältnisses 
+und des Steigungs-/Roll-Befehlverhältnisses 
+zur Bildung eines Differenzwertes; und </item><item>c) Zuordnen des Rollbefehls (δRc) zu mindestens einer der 
+Mehrzahl von Leitwerksflächen in Relation zur Größe des 
+genannten Differenzwertes. </item></list> </p> </div><div n="2" type="claim"><p xml:id="_deaca">Verfahren nach Anspruch 1, dadurch gekennzeichnet, daß 
+der Schritt des Zuordnens des Rollbefehls (δRc) weiter 
+folgende Schritte umfaßt: 
+<list type="simple"><item>a) Zuordnen dann, wenn der Differenzwert des Gier-/Roll-Befehlsverhältnisses, 
+subtrahiert von dem Steigungs-/Roll-Befehlsverhältnis, 
+gleich oder größer als 0,5 ist, den 
+Rollbefehl (δRc) in gleicher Weise zu Gier-Leitwerksflächen;  
+ </item><item>b) Zuordnen dann, wenn der Differenzwert des Steigungs-/Roll-Befehlsverhältnisses, 
+subtrahiert von dem Gier-/Roll-Befehlsverhältnis 
+gleich oder größer als 0,5 ist, den 
+Rollbefehl (δRc) in gleicher Weise zu Steigungs-Leitwerksflächen; 
+und </item><item>c) Zuordnen dann, wenn der Differenzwert des Gier-/Roll-Befehlsverhältnisses, 
+subtrahiert von dem Steigungs-/Roll-Befehlsverhältnis 
+und der Differenzwert des Steigungs-/Roll-Befehlsverhältnisses, 
+subtrahiert von dem Gier-/Roll-Befehlsverhältnis, 
+kleiner als 0,5 sind, einen Teil des 
+Rollbefehls (δRc) zu den Steigungs-Leitwerksflächen und 
+einen Teil des Rollbefehls (δRc) zu den Gier-Leitwerksflächen. </item></list></p></div><div n="3" type="claim"><p xml:id="_e3fe7">Verfahren nach Anspruch 2, dadurch gekennzeichnet, daß 
+der Schritt des Zuordnens eines Teiles des Rollbefehls 
+(δRc) zu den Steigungs- und Gier-Leitwerksflächen folgende 
+Schritte umfaßt: 
+<list type="simple"><item>a) Errechnen eines ersten Wertes gleich dem Steigungs-/Roll-Befehlsverhältnis, 
+subtrahiert von dem Gier-/Roll-Befehlsverhältnis 
+und Hinzuaddieren von 0,5 zu dem Ergebnis 
+hiervon; </item><item>b) Errechnen eines zweiten Wertes gleich einer Differenz 
+zwischen dem ersten Wert und eins; und </item><item>c) Zuordnen (52, 54) eines Teiles des Rollbefehls (δRc) in 
+Entsprechung zu dem ersten Wert zu den Steigungs-Leitwerksflächen 
+und eines Teiles des Rollbefehls in 
+Entsprechung zu dem zweiten Wert zu den Gier-Leitwerksflächen. </item></list></p></div><div n="4" type="claim"><p xml:id="_b1c06">Verfahren nach Anspruch 1, dadurch gekennzeichnet, daß 
+die Schritte des Differensbildens und Zuordnens in Relation 
+zu dem Differenzwert folgendes umfassen: 
+<list type="simple"><item>a) Errechnen eines ersten Differenzwertes gleich dem Gier-/Roll-Befehlsverhältnis 
+subtrahiert von dem Steigungs-/Roll-Befehlsverhältnis; </item><item>b) Zuordnen des gesamten Rollbefehls zu den Gier-Leitwerksflächen 
+dann, wenn der erste Differenzwert gleich 
+oder größer als 0,5 ist; </item><item>c) Errechnen eines zweiten Differenzwertes gleich dem 
+Steigungs-/Roll-Befehlsverhältnis subtrahiert von dem Gier-/Roll-Befehlsverhältnis 
+dann, wenn der erste Differenzwert 
+kleiner als 0,5 ist; </item><item>d) Zuordnen des ganzen Rollbefehls zu den Steigungs-Leitwerksflächen 
+dann, wenn der zweite Differenzwert gleich 
+oder größer als 0,5 ist; und </item><item>e) Zuordnen eines Teiles des Rollbefehls zu den Gier-Leitwerksflächen 
+und eines Teiles des Rollbefehls zu den 
+Steigungs-Leitwerksflächen dann, wenn der erste 
+Differenzwert und der zweite Differenzwert kleiner als 0,5 
+sind. </item></list></p></div><div n="5" type="claim"><p xml:id="_1d9cf">Verfahren nach Anspruch 4, dadurch gekennzeichnet, daß 
+der Schritt des Zuordnens eines Teils des Rollbefehls zu 
+den Gier- und Steigungs-Leitwerksflächen folgende Schritte 
+umfaßt: 
+<list type="simple"><item>a) Errechnen eines dritten Differenzwertes gleich dem 
+Steigungs-/Roll-Befehlsverhältnis, subtrahiert von dem 
+Gier-/Roll-Befehlsverhältnis und Hinzuaddieren von 0,5 zu 
+dem Ergebnis hiervon;  
+ </item><item>b) Errechnen eines vierten Differenzwertes gleich dem 
+dritten Differenzwert, subtrahiert von eins; und </item><item>c) Zuordnen eines Teiles des Rollbefehls in Entsprechung zu 
+dem dritten Differenzwert zu den Steigungs-Leitwerksflächen 
+und Zuordnen eines Teiles des Rollbefehls in Entsprechung 
+zu dem vierten Differenzwert zu den Gier-Leitwerksflächen. </item></list></p></div><div n="6" type="claim"><p xml:id="_639d5">Einrichtung zur Betätigung eines Fahrzeugs, welche 
+Mittel (14) zur Zuordnung eines Rollbefehls (δRc) zu 
+mindestens einer aus einer Mehrzahl von Leitwerksflächen in 
+Abhängigkeit von einem Steigungsbefehl (δPc) und einem 
+Gier-Befehl (δYc) aufweist, dadurch gekennzeichnet, daß die 
+Zuordnungsmittel (14) folgendes umfassen: 
+<list type="simple"><item>a) Einrichtungen (50) zur Bildung eines Steigungs-/Roll-Befehlsverhältnisses 
+und eines Gier-/Roll-Befehlverhältnisses 
+und zur Differenzbildung zwischen dem 
+Gier-/Roll-Befehlsverhältnis und dem Steigungs-/Roll-Befehlsverhältnis 
+zur Bildung eines Differenzwertes, wobei 
+das Steigungs-/Roll-Befehlsverhältnis gleich einem 
+Absolutwert des Ergebnisses des Steigungsbefehls dividiert 
+durch den Rollbefehl ist und das Gier-/Roll-Befehlsverhältnis 
+gleich einem Absolutwert des Ergebnisses 
+des Gierbefehls dividiert durch den Rollbefehl ist; und </item><item>b) Einrichtungen (52, 54) zur Bildung eines zugeordneten 
+Rollbefehls zu mindestens einer aus einer Anzahl von 
+Leitwerksflächen in Abhängigkeit von dem genannten 
+Differenzwert. </item></list></p></div><div n="7" type="claim"><p xml:id="_d6a8b">Einrichtung nach Anspruch 6, gekennzeichnet durch 
+Mittel (12) zur Lieferung des Steigungsbefehls (δPc) , des 
+Gierbefehls (δYc) und des Rollbefehls (δRc).  
+ </p></div><div n="8" type="claim"><p xml:id="_04221">Einrichtung nach Anspruch 7, dadurch gekennzeichnet, 
+daß die Leitwerksflächen Steigungs-Leitflossen und Gier-Leitflossen 
+(1, 2, 3, 4) sind, und daß die Einrichtungen 
+zur Lieferung eines zugeordneten Rollbefehls weiter 
+folgendes enthalten: 
+<list type="simple"><item>a) Mittel (52, 64, 68; 54, 62, 66), welche auf den 
+Differenzwert ansprechen und entweder den gesamten 
+zugeordneten Rollbefehl an die Gier-Leitflossen, oder den 
+gesamten zugeordneten Rollbefehl an die Steigungs-Leitflossen 
+liefern; und </item><item>b) Mittel (52, 54, 62, 64, 66, 68), welche auf den 
+Differenzwert ansprechen und abhängig hiervon einen Teil 
+des zugeordneten Rollbefehls zu den Gier-Leitflossen 
+liefern und einen Teil des zugeordneten Rollbefehls zu den 
+Steigungs-Leitflossen liefern. </item></list></p></div><div n="9" type="claim"><p xml:id="_5cfe5">Einrichtung nach Anspruch 8, dadurch gekennzeichnet, 
+daß die Zuordnungsmittel (14, 50) solcher Art sind, daß 
+<list type="simple"><item>a) der ganze zugeordnete Rollbefehl an die Gier-Leitflossen 
+geliefert wird, wenn der Differenzwert des Gier-/Roll-Befehlsverhältnisses 
+subtrahiert von dem Steigungs-/Roll-Befehlsverhältnis 
+gleich oder größer als 0,5 ist; </item><item>b) der gesamte zugeordnete Rollbefehl an die Steigungs-Leitflossen 
+geliefert wird, wenn der Differenzwert des 
+Steigungs-/Roll-Befehlsverhältnisses, subtrahiert von dem 
+Gier-/Roll-Befehlsverhältnis gleich oder größer gleich 0,5 
+ist; und </item><item>c) dann, wenn die Differenzwerte des Gier-/Roll-Befehlsverhältnisses, 
+subtrahiert von dem Steigungs-/Roll-Befehlsverhältnis, 
+und des Steigungs-Roll-Befehlsverhältnisses, 
+subtrahiert von dem Gier-/Roll-Befehlsverhältnis 
+kleiner als 0,5 sind, der Teil des  
+ 
+zugeordneten Rollbefehls, der an die Steigungs-Leitflossen 
+geliefert wird, zu dem Rollbefehl, multipliziert mit einem 
+ersten Wert, in Beziehung gesetzt ist, wobei der erste Wert 
+gleich dem Steigungs-/Roll-Befehlsverhältnis subtrahiert 
+von dem Gier-/Roll-Befehlsverhältnis und Hinzunahme von 0,5 
+zum Ergebnis hieraus ist, und der Teil des zugeordneten 
+Rollbefehls, der zu den Gier-Leitflossen geliefert ist, in 
+Beziehung gesetzt wird zu dem Rollbefehl, multipliziert mit 
+einem zweiten Wert, wobei ein zweiter Wert gleich einer 
+Differenz zwischen eins und dem ersten Wert ist. </item></list></p></div></div><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_54524">A method of operating a vehicle comprising the step of 
+apportioning, in response to a pitch command (δPc) and a yaw 
+command (δYc), a roll command (δRc) to at least one of a 
+plurality of control surfaces, characterised in that the step of 
+apportioning comprises the steps of: 
+<list type="simple"><item>(a) calculating a pitch-to-roll command ratio equal to 
+an absolute value of the result of the pitch 
+command (δPc) divided by the roll command (δRc), and 
+calculating a yaw-to-roll command ratio equal to an 
+absolute value of the result of the yaw command 
+(δYc) divided by the roll command (δRc); </item><item>(b) differencing the yaw-to-roll command ratio with the 
+pitch-to-roll command ratio to provide a difference 
+value; and </item><item>(c) apportioning the roll command (δRc) to at least one 
+of the plurality of control surfaces in relation to 
+the value of said difference value. </item></list></p></div><div n="2" type="claim"><p xml:id="_d2839">A method according to claim 1, characterised in that 
+the step of apportioning the roll command (δRc) further 
+comprises the steps of: 
+<list type="simple"><item>(a) apportioning, if the difference value of the yaw-to-roll 
+command ratio subtracted from the pitch-to-roll 
+command ratio is equal to or greater than 0.5, 
+the roll command (δRc) equally to yaw control 
+surfaces; </item><item>(b) apportioning, if the difference value of the pitch-to-roll 
+command ratio subtracted from the yaw-to-roll 
+command ratio is equal to or greater than 0.5, 
+the roll command (δRc) equally to pitch control 
+surfaces; and  
+ </item><item>(c) apportioning, if the difference values of the yaw-to-roll 
+command ratio subtracted from the pitch-to-roll 
+command ratio and the pitch-to-roll 
+command ratio subtracted from the yaw-to-roll 
+command ratio are less than 0.5, a portion of the 
+roll command (δRc) to the pitch control surfaces 
+and a portion of the roll command (δRc) to the yaw 
+control surfaces. </item></list></p></div><div n="3" type="claim"><p xml:id="_6591f">A method according to claim 2, characterised in that 
+the step of apportioning a portion of the roll command (δRc) to 
+the pitch and yaw control surfaces comprises the steps of: 
+<list type="simple"><item>(a) calculating a first value equal to the pitch-to-roll 
+command ratio subtracted from the yaw-to-roll 
+command ratio and adding 0.5 to the result thereof; </item><item>(b) calculating a second value equal to a difference 
+between the first value and unity; and </item><item>(c) apportioning (52,54) a portion of the roll command 
+(δRc) related to the first value to the pitch 
+control surfaces and a portion of the roll command 
+(δRc) related to the second value to the yaw 
+control surfaces. </item></list></p></div><div n="4" type="claim"><p xml:id="_fced7">A method according to claim 1, characterised in that 
+the steps of differencing and apportioning in relation to the 
+difference value comprise: 
+<list type="simple"><item>(a) calculating a first difference value equal to the 
+yaw-to-roll command ratio subtracted from the 
+pitch-to-roll command ratio; </item><item>(b) apportioning, if the first difference value is 
+equal to or greater than 0.5, all of the roll 
+command to yaw control surfaces; </item><item>(c) calculating, if the first difference value is less 
+than 0.5, a second difference value equal to the  
+ 
+pitch-to-roll command ratio subtracted from the 
+yaw-to-roll command ratio; </item><item>(d) apportioning, if the second difference value is 
+equal to or greater than 0.5, all of the roll 
+command to pitch control surfaces; and </item><item>(e) apportioning, if the first and the second 
+difference values are less than 0.5, a portion of 
+the roll command to the yaw control surfaces and a 
+portion of the roll command to the pitch control 
+surfaces. </item></list></p></div><div n="5" type="claim"><p xml:id="_c1db1">A method according to claim 4, characterised in that 
+the step of apportioning a portion of the roll command to the 
+yaw and the pitch control surfaces comprises the steps of: 
+<list type="simple"><item>(a) calculating a third difference value equal to the 
+pitch-to-roll command ratio subtracted from the 
+yaw-to-roll command ratio and adding 0.5 to the 
+result thereof; </item><item>(b) calculating a fourth difference value equal to the 
+third difference value subtracted from unity; and </item><item>(c) apportioning a portion of the roll command related 
+to the third difference value to the pitch control 
+surfaces and apportioning a portion of the roll 
+command related to the fourth difference value to 
+the yaw control surfaces. </item></list></p></div><div n="6" type="claim"><p xml:id="_348ba">Apparatus for operating a vehicle, the apparatus 
+comprising means (14) for apportioning, in response to a pitch 
+command (δPc) and a yaw command (δYc), a roll command (δRc) to at 
+least one of a plurality of control surfaces, characterised in 
+that the apportioning means (14) comprises: 
+<list type="simple"><item>(a) means (50) for providing a pitch-to-roll command 
+ratio and a yaw-to-roll command ratio and for 
+differencing the yaw-to-roll command ratio with the  
+ 
+pitch-to-roll command ratio to provide a difference 
+value, the pitch-to-roll command ratio being equal 
+to an absolute value of the result of the pitch 
+command divided by the roll command, and the yaw-to-roll 
+command ratio being equal to an absolute 
+value of the result of the yaw command divided by 
+the roll command; and </item><item>(b) means (52,54) for providing an apportioned roll 
+command to at least one of a plurality of control 
+surfaces in response to said difference value. </item></list></p></div><div n="7" type="claim"><p xml:id="_17ca9">Apparatus according to claim 6, characterised by means 
+(12) for providing the pitch command (δPc), the yaw command 
+(δYc), and the roll command (δRc). </p></div><div n="8" type="claim"><p xml:id="_f4ece">Apparatus according to claim 7, characterised in that 
+the control surfaces are pitch and yaw control fins (1,2,3,4) 
+and the means for providing an apportioned roll command further 
+comprises: 
+<list type="simple"><item>(a) means (52,64,68; 54,62,66), in response to the 
+difference value, for providing all of the 
+apportioned roll command to the yaw fins and, 
+alternatively, for providing all of the apportioned 
+roll command to the pitch fins; and </item><item>(b) means (52,54,62,64,66,68), in response to the 
+difference value, for providing a portion of the 
+apportioned roll command to the yaw fins and for 
+providing a portion of the apportioned roll command 
+to the pitch fins. </item></list></p></div><div n="9" type="claim"><p xml:id="_98a58">Apparatus according to claim 8, characterised in that 
+the apportioning means (14,50) is such that: 
+<list type="simple"><item>(a) if the difference value of the yaw-to-roll command 
+ratio subtracted from the pitch-to-roll command  
+ 
+ratio is equal to or greater than 0.5, then all of 
+the apportioned roll command is provided to the yaw 
+fins; </item><item>(b) if the difference value of the pitch-to-roll 
+command ratio subtracted from the yaw-to-roll 
+command ratio is equal to or greater than 0.5, then 
+all of the apportioned roll command is provided to 
+the pitch fins; and </item><item>(c) if the difference values of the yaw-to-roll command 
+ratio subtracted from the pitch-to-roll command 
+ratio and the pitch-to-roll command ratio 
+subtracted from the yaw-to-roll command ratio are 
+less than 0.5, then the portion of the apportioned 
+roll command that is provided to the pitch fins is 
+related to the roll command multiplied by a first 
+value, the first value equal to the pitch-to-roll 
+command ratio subtracted from the yaw-to-roll 
+command ratio and adding 0.5 to the result thereof, 
+and the portion of the apportioned roll command 
+that is provided to the yaw fins is related to the 
+roll command multiplied by a second value, the 
+second value equal to a difference between unity 
+and the first value. </item></list></p></div></div><div type="claims" xml:lang="fr"><div n="1" type="claim"><p xml:id="_a1dd4">Procédé pour manoeuvrer un véhicule comprenant 
+l'étape consistant à répartir, en réponse à une commande de 
+tangage (δPc) et une commande de lacet (δYc), une commande 
+de roulis (δRc) vers au moins une parmi une pluralité de 
+surfaces de commande, caractérisé en ce que l'étape de répartition 
+comprend les étapes consistant à : 
+<list type="simple"><item>(a) calculer un rapport de commande tangage sur roulis 
+égal à la valeur absolue du résultat de la commande de 
+tangage (δPc) divisée par la commande de roulis (δRc), et 
+calculer un rapport de commande lacet sur roulis égal à la 
+valeur absolue du résultat de la commande de lacet (δYc) 
+divisée par la commande de roulis (δRc) ; </item><item>(b) soustraire le rapport de commande lacet sur roulis 
+du rapport de commande tangage sur roulis pour obtenir 
+une valeur de différence ; et </item><item>(c) répartir la commande de roulis (δRc) à au moins 
+une de la pluralité de surfaces de commande en fonction de 
+la valeur de ladite valeur de différence. </item></list></p></div><div n="2" type="claim"><p xml:id="_dd7bc">Procédé selon la revendication 1, caractérisé en 
+ce que l'étape consistant à répartir la commande de roulis 
+(δRc) comprend en outre les étapes consistant à : 
+<list type="simple"><item>(a) répartir, si la valeur de différence du rapport 
+de commande lacet sur roulis soustrait du rapport de commande 
+tangage sur roulis est égale ou supérieure à 0,5, la 
+commande de roulis (δRc) également entre les surfaces de 
+commande de lacet ; </item><item>(b) répartir, si la valeur de différence du rapport 
+de commande tangage sur roulis soustrait du rapport de commande 
+lacet sur roulis est égale ou supérieure à 0,5, la 
+commande de roulis (δRc) également entre les surfaces de 
+commande de tangage ; et </item><item>(c) répartir, si les valeurs de différence du rapport 
+de commande lacet sur roulis soustrait du rapport de 
+commande tangage sur roulis et du rapport de commande tangage 
+sur roulis soustrait du rapport de commande lacet sur 
+roulis sont inférieures à 0,5, une portion de la commande de  
+ 
+roulis (δRc) vers les surfaces de commande de tangage et une 
+portion de la commande de roulis (δRc) vers les surfaces de 
+commande de lacet. </item></list></p></div><div n="3" type="claim"><p xml:id="_ee1ff">Procédé selon la revendication 2, caractérisé en 
+ce que l'étape consistant à répartir une portion de la 
+commande de roulis (δRc) vers les surfaces de commande de 
+tangage et de lacet comprend les étapes consistant à : 
+<list type="simple"><item>(a) calculer une première valeur égale au rapport de 
+commande tangage sur roulis soustrait du rapport de commande 
+lacet sur roulis et ajouter 0,5 au résultat obtenu ; </item><item>(b) calculer une deuxième valeur égale à une différence 
+entre la première valeur et l'unité ; et </item><item>(c) répartir (52, 54) une portion de la commande de 
+roulis (δRc) associée à la première valeur vers les surfaces 
+de commande de tangage et une portion de la commande de roulis 
+(δRc) associée à la deuxième valeur vers les surfaces de 
+commande de lacet. </item></list></p></div><div n="4" type="claim"><p xml:id="_61116">Procédé selon la revendication 1, caractérisé en 
+ce que les étapes consistant à soustraire et répartir en 
+fonction de la valeur de différence consistent à : 
+<list type="simple"><item>(a) calculer une première valeur de différence égale 
+au rapport de commande lacet sur roulis soustrait du rapport 
+de commande tangage sur roulis ; </item><item>(b) répartir, si la première valeur de différence 
+est égale ou supérieure à 0,5, la totalité de la commande de 
+roulis vers les surfaces de commande de lacet ; </item><item>(c) calculer, si la première valeur de différence 
+est inférieure à 0,5, une deuxième valeur de différence égale 
+au rapport de commande tangage sur roulis soustrait du 
+rapport de commande lacet sur roulis ; </item><item>(d) répartir, si la deuxième valeur de différence 
+est égale ou supérieure à 0,5, la totalité de la commande de 
+roulis vers les surfaces de commande de tangage ; et </item><item>(e) répartir, si les première et deuxième valeurs de 
+différence sont inférieures à 0,5, une portion de la commande 
+de roulis vers les surfaces de commande de lacet et une  
+ 
+portion de la commande de roulis vers les surfaces de commande 
+de tangage. </item></list></p></div><div n="5" type="claim"><p xml:id="_d034a">Procédé selon la revendication 4, caractérisé en 
+ce que l'étape consistant à répartir une portion de la commande 
+de roulis vers les surfaces de commande de lacet de 
+tangage comprend les étapes consistant à : 
+<list type="simple"><item>(a) calculer une troisième valeur de différence égale 
+au rapport de commande tangage sur roulis soustrait du 
+rapport de commande lacet sur roulis et ajouter 0,5 au résultat 
+obtenu ; </item><item>(b) calculer une quatrième valeur de différence égale 
+à la troisième valeur de différence soustraite de l'unité 
+; et </item><item>(c) répartir une portion de la commande de roulis 
+associée à la troisième valeur de différence vers les surfaces 
+de commande de tangage et répartir une portion de la 
+commande de roulis associée à la quatrième valeur de différence 
+vers les surfaces de commande de lacet. </item></list></p></div><div n="6" type="claim"><p xml:id="_c96fd">Appareil pour manoeuvrer un véhicule, l'appareil 
+comprenant des moyens (14) pour répartir, en réponse à une 
+commande de tangage (δPc) et une commande de lacet (δYc), 
+une commande de roulis (δRc) vers au moins une parmi une 
+pluralité de surfaces de commande, caractérisé en ce que les 
+moyens de répartition (14) comprennent : 
+<list type="simple"><item>(a) des moyens (50) pour fournir un rapport de commande 
+tangage sur roulis et un rapport de commande lacet sur 
+roulis et pour soustraire le rapport de commande lacet sur 
+roulis du rapport de commande tangage sur roulis afin d'obtenir 
+une valeur de différence, le rapport de commande tangage 
+sur roulis étant égal à la valeur absolue du résultat 
+de la commande de tangage divisée par la commande de roulis, 
+et le rapport de commande lacet sur roulis étant égal à la 
+valeur absolue du résultat de la commande de lacet divisée 
+par la commande de roulis ; et </item><item>(b) des moyens (52, 54) pour fournir une commande 
+répartie de roulis à au moins une d'une pluralité de surfaces 
+de commande en réponse à ladite valeur de différence. </item></list></p></div><div n="7" type="claim"><p xml:id="_69263">Appareil selon la revendication 6, caractérisé 
+par des moyens (12) pour fournir la commande de tangage 
+(δPc), la commande de lacet (δYc), et la commande de roulis 
+(δRc). </p></div><div n="8" type="claim"><p xml:id="_19748">Appareil selon la revendication 7, caractérisé en 
+ce que les surfaces de commande sont des ailerons de tangage 
+et de lacet (1, 2, 3, 4) et les moyens pour fournir une commande 
+répartie de roulis comprennent en outre : 
+<list type="simple"><item>(a) des moyens (52, 64, 68 ; 54, 62, 66), en réponse 
+à la valeur de différence, pour fournir la totalité de la 
+commande répartie de roulis aux ailerons de lacet et, autrement, 
+pour fournir la totalité de la commande répartie de 
+roulis aux ailerons de tangage ; et </item><item>(b) des moyens (52, 54, 62, 64, 66, 68), en réponse 
+à la valeur de différence, pour fournir une portion de la 
+commande répartie de roulis aux ailerons de lacet et pour 
+fournir une portion de la commande répartie de roulis aux 
+ailerons de tangage. </item></list></p></div><div n="9" type="claim"><p xml:id="_487e9">Appareil selon la revendication 8, caractérisé en 
+ce que les moyens de répartition (14, 50) sont tels que : 
+<list type="simple"><item>(a) si la valeur de différence du rapport de commande 
+lacet sur roulis soustrait du rapport de commande tangage 
+sur roulis est égale ou supérieure à 0,5, alors la totalité 
+de la commande répartie de roulis est fournie aux ailerons 
+de lacet ; </item><item>(b) si la valeur de différence du rapport de commande 
+tangage sur roulis soustrait du rapport de commande lacet 
+sur roulis est égale ou supérieure à 0,5, alors la totalité 
+de la commande répartie de roulis est fournie aux ailerons 
+de tangage ; et </item><item>(c) si les valeurs de différence du rapport de commande 
+lacet sur roulis soustrait du rapport de commande tangage 
+sur roulis et du rapport de commande tangage sur roulis 
+soustrait du rapport de commande lacet sur roulis sont inférieures 
+à 0,5, alors la portion de la commande répartie de 
+roulis qui est fournie aux ailerons de tangage est associée 
+à la valeur de commande de roulis multipliée par une  
+ 
+première valeur, la première valeur étant égale au rapport 
+de commande tangage sur roulis soustrait du rapport de commande 
+lacet sur roulis en ajoutant 0,5 au résultat obtenu, 
+et la portion de la commande répartie de roulis qui est 
+fournie aux ailerons de lacet est associée à la valeur de 
+commande de roulis multipliée par une deuxième valeur, la 
+deuxième valeur étant égale à la différence entre l'unité et 
+la première valeur. </item></list></p></div></div><div type="description" xml:lang="en"><p xml:id="_205ee">This invention relates to a method of operating a 
+vehicle comprising the step of apportioning, in response to a 
+pitch command and a yaw command, a roll command to at least one 
+of a plurality of control surfaces. </p><p xml:id="_a95f9">The method can be applied generally to flight vehicles 
+and particularly to airborne flight vehicles wherein four 
+independent control surfaces are used to control flight of the 
+airborne flight vehicle. </p><p xml:id="_194db">In a flight vehicle, control surfaces are used to 
+provide pitch, yaw and roll control of the flight vehicle. For 
+example, control surfaces such as control fins are used to 
+control flight of a missile and a torpedo. Additionally, 
+control surfaces such as jet exhaust ports are used to control 
+flight of a torpedo in water and a vehicle in space. </p><p xml:id="_92a1f">As it is known, in various controlled flight vehicles, 
+including a controlled missile, commands to control the control 
+surfaces are produced by a guidance system in the missile and 
+provided to an autopilot to control the flight of the missile. 
+In one conventional missile guidance technique, a pitch command, 
+a yaw command and a roll command are provided by the guidance 
+system to the autopilot so that the autopilot may provide 
+control signals to fin control circuitry to command the control 
+fins for control of the missile.  
+ </p><p xml:id="_aeafe">Typically, in a missile, two control fins are used for 
+pitch control, two orthogonally positioned control fins are used 
+for yaw control and all four control fins are used for roll 
+control. In an environment wherein the missile must manoeuvre, 
+one of the control fins is deflected to a larger angle than the 
+other control fins. Typically, the autopilot, when providing 
+the control signals to the fin control circuitry, will apportion 
+the roll requirement to each of the control fins and then 
+apportion the pitch and yaw requirement. In an environment 
+wherein a manoeuvre requires a control fin deflection greater 
+than that capable by the control fin, then typically the roll 
+apportionment is given priority by the autopilot and the pitch 
+and yaw requirement is reduced to a degree that is allowed by 
+maximum deflection of the control fin. In such a condition, the 
+control fins cannot respond as necessary and the missile cannot 
+manoeuvre as required. </p><p xml:id="_cd3b1">DE-A-22 39 398 describes a method of the kind defined 
+hereinbefore at the beginning in which control signals δ1, δ2, δ3 
+and δ4 for four control surfaces are derived from a pitch 
+command ηc, a yaw command ζc, and a roll command ξc by 
+calculation in accordance with the relationships: 
+δ1 = ξc + ηc - Δ δ2 = ξc + ζc + Δ δ3 = ξc - ηc - Δ δ4 = ξc - ζc + Δ Δ = Δδ1 - Δδc - Δδ2 + Δδ3 - Δδ4  
+ 
+and 
+Δδ1 = δi* - δiL, or δi*,  
+where δiL is the limiting value of δi*, 
+and 
+δi* = ξc + ηcδ2* = ξc + ζcδ3* = ξc - ηcδ4* = ξc - ζc</p><p xml:id="_a5419">With the foregoing background of this invention in 
+mind, it is a primary object of this invention to provide a 
+method of operating a vehicle having greater lateral 
+manoeuvrability than known vehicles. </p><p xml:id="_e22b2">Another object of this invention is to provide a flight 
+vehicle wherein control fin deflection is minimized when the 
+flight vehicle is manoeuvring. </p><p xml:id="_cc5d8">In accordance with the present invention, a method of 
+the kind defined hereinbefore at the beginning is characterised 
+in that the step of apportioning the roll command includes the 
+steps of calculating a pitch-to-roll command ratio equal to an 
+absolute value of the result of the pitch command divided by the 
+roll command, and calculating a yaw-to-roll command ratio equal 
+to an absolute value of the result of the yaw command divided by 
+the roll command; differencing the yaw-to-roll command ratio 
+with the pitch-to-roll command ratio to provide a difference 
+value; and apportioning the roll command to at least one of the 
+plurality of control surfaces in relation to the value of said 
+difference value.  
+ </p><p xml:id="_d08d3">The invention also provides apparatus as defined 
+hereinafter by claim 6. </p><p xml:id="_083c5">With this arrangement, lateral manoeuvrability of the 
+vehicle is increased by apportioning more roll to the axis 
+having a smaller manoeuvre. The method of apportioning the roll 
+command to the plurality of control surfaces is in accordance 
+with the relationship among the pitch, yaw and roll commands so 
+that the maximum deflection required by the control surfaces is 
+minimized by apportioning more roll to either the pitch axis or 
+the yaw axis. </p><p xml:id="_f9c7a">In accordance with a preferred embodiment of the 
+present invention, the step of apportioning the roll command 
+further comprises the steps of apportioning, if the difference 
+value of the yaw-to-roll command ratio subtracted from the 
+pitch-to-roll command ratio is equal to or greater than 0.5, the 
+roll command equally to the yaw command surfaces, apportioning, 
+if the difference value of the pitch-to-roll command ratio 
+subtracted from the yaw-to-roll command ratio is equal to or 
+greater than 0.5, the roll command equally to the pitch control 
+surfaces and apportioning, if the difference values of the yaw-to-roll 
+command ratio subtracted from the pitch-to-roll command 
+ratio and the pitch-to-roll command ratio subtracted from the 
+yaw-to-roll command ratio are less than one-half, a portion of 
+the roll command to the pitch control surfaces and a portion of 
+the roll command to the yaw control surfaces. </p><p xml:id="_a85a7">With this arrangement, the manoeuvrability of a vehicle  
+ 
+including an airborne vehicle with control fins manoeuvring 
+about a pitch plane and a yaw plane is increased, such that as a 
+combined pitch and roll command or a combined yaw and roll 
+command exceed a maximum control fin angular deflection or rate 
+limit of the airborne vehicle in one of the planes, the roll 
+command is apportioned to the alternative plane to reduce the 
+maximum control fin angular deflection and fin rate. </p><p xml:id="_5f480">A vehicle having a preferred embodiment of the present 
+invention includes an autopilot for providing a pitch-to-roll 
+command ratio and a yaw-to-roll command ratio and for 
+differencing the yaw-to-roll command ratio with the pitch-to-roll 
+command ratio to provide a difference value, and for 
+providing a roll command to at least one of a plurality of 
+control surfaces in response to said difference value. The 
+autopilot can apportion the roll command among the control 
+surfaces of the vehicle so that maximum angular deflection among 
+the control surfaces is minimized. </p><p xml:id="_b8f16">The autopilot includes means, in response to the 
+difference value, for providing, alternatively, all of the roll 
+command to the yaw control surfaces, all of the roll command to 
+the pitch control surfaces, or a portion of  
+ 
+the roll command to the yaw control surfaces and a portion 
+of the roll command to the pitch control surfaces. </p><p xml:id="_cc518">With such an arrangement, an airborne vehicle with 
+control fins can maneuver with a greater turn rate since the 
+deflection of the control fins are apportioned among the 
+control fins so that maximum control fin deflection is 
+minimized.  
+ </p><head xml:id="_55dd3">Brief Description of the Drawings</head><p xml:id="_3c912">For a more complete understanding of this invention, 
+reference is now made to the following description of the 
+accompanying drawings, wherein: 
+FIG. 1 is a sketch showing an exemplary airborne 
+vehicle according to the invention to illustrate in the 
+simplest and clearest manner the way in which fin deflection 
+may be reduced; and FIG. 2 is a flow chart of a method implemented by the 
+autopilot of FIG. 1 to provide the requisite commands 
+contemplated by the invention. </p><head xml:id="_1885c">Description of the Preferred Embodiments</head><p xml:id="_b3ace">Before departing on a detailed explanation of the 
+contemplated invention, it should be appreciated that, 
+although the vehicle is described as a missile having 
+control fins, the vehicle could include any vehicle 
+controlled by control surfaces such as a rocket ship in 
+space having jet exhaust ports as control surfaces, a 
+torpedo in water having either control fins or exhaust ports 
+as control surfaces and a missile having jet exhaust ports. </p><p xml:id="_075dd">Referring now to FIG. 1, it may be seen that a vehicle, 
+such as an airborne vehicle and here missile 10, is shown to 
+include a plurality of control surfaces, here control fins 
+including control fin 1, control fin 2, control fin 3 and 
+control fin 4. Each of the plurality of control fins is 
+able to provide angular deflection such that the amount of 
+angular deflection provided by each one of the plurality of 
+control fins controls the course of flight of the missile 
+10. The control fins 1, 2, 3 and 4 are constructed and 
+attached to the missile 10 in a known manner. The amount of 
+angular deflection provided by each of the control fins 1, 
+2, 3 and 4 is controlled by, respectively, fin controller 
+16, fin controller 18, fin controller 20 and fin controller 
+22. Each of the fin controllers 16, 18, 20 and 22 is fed a 
+control signal from an autopilot 14. The control signal fed 
+from the autopilot 14 controls the amount of angular  
+ 
+deflection provided by control fins 1, 2, 3 and 4 as 
+controlled by each corresponding fin controller 16, 18, 20 
+and 22. The autopilot 14 is fed command signals including a 
+pitch command, δPc, a yaw command, δYc, and a roll command, 
+δRc, from a guidance system 12. Thus, as shown, control fin 
+2 and control fin 4 provide control in pitch, P, (also 
+referred to as elevation) of the missile 10 and control fin 
+1 and control fin 3 provide control in yaw, Y, (also 
+referred to as azimuth) of the missile 10. The control fins 
+1, 2, 3 and 4 also provide control of roll, R, of the 
+missile as described further hereinafter. </p><p xml:id="_42b21">As shown in FIG. 1, it should be apparent the missile 
+10 includes a boresight line which is coaxial with a 
+centerline of an antenna which is part of the guidance 
+system 12. A target T is located some distance from the 
+missile 10 and using the boresight line as a reference, the 
+guidance system 12 develops a boresight error in pitch and a 
+boresight error in yaw. Using proportional navigation in a 
+known manner, the guidance system 12 provides the pitch 
+command, the yaw command and the roll command to the 
+autopilot 14 to steer the missile 10 along a trajectory to 
+intercept the target T. </p><p xml:id="_8d9b6">It should be appreciated that many factors are 
+entertained by the guidance system 12 to provide the pitch, 
+yaw and roll commands to the autopilot 14. For example, it  
+ 
+is known that, depending on the maneuver, a deflection by 
+the control fins 1 and 3 to provide a control in yaw may 
+induce a roll by the missile 10 due to the aerodynamic 
+environment of the missile 10. Known techniques are used to 
+correct such factors and to have an understanding of the 
+operation of the present invention discussion of such 
+techniques are not necessary. </p><p xml:id="_89e75">Defining a Cartesian coordinate system with an X axis, 
+a Y axis and a Z axis, viewing the missile 10 from the rear, 
+the X axis extends along the center of the missile 10, the Y 
+axis extends along a line provided by control fins 4 and 2 
+and the Z axis extends along a line provided by control fins 
+1 and 3. It should be appreciated a pitch plane is defined 
+by the XZ axis and a yaw plane is defined by the XY axis. 
+Angular fin deflection is defined by the right hand rule. 
+Defining angular deflection by the right hand rule, a 
+positive roll command would cause the missile 10 to roll in 
+a clockwise direction. Completing our definition of terms, 
+if a term δFc defines the angular deflection of each fin 
+wherein F is one of the control fins, then δ1c defines the 
+angular deflection of control fin 1, δ2c defines the angular 
+deflection of control fin 2, δ3c defines the angular 
+deflection of control fin 3 and δ4c defines the angular 
+deflection of control fin 4. With such an arrangement, a 
+pitch fin command δPc would equal (δ2c + δ4c)÷2, a yaw fin  
+ 
+command δYc would equal (δ1c + δ3c)÷2 and a roll fin command 
+δRc would equal (δ4c - δ2c) + (δ1c - δ3c). In such a 
+coordinate system, control fins 4 and 2 provide control of 
+pitch, P, control fins 1 and 3 provide control of yaw, Y, 
+and control fins 1, 2, 3 and 4 provide control of roll, R. </p><p xml:id="_fc38a">In a vehicle, including missile 10, the guidance system 
+12 provides the pitch command δPc, the yaw command δYc and 
+the roll command δc to the autopilot 14 wherein, using the 
+coordinate system defined hereinbefore, the autopilot 14 
+provides fin control signals to the respective fin 
+controllers 16, 18, 20 and 22 causing control fins 2 and 4 
+to provide control of pitch, P, control fins 1 and 3 to 
+provide control of yaw, Y, and control fins 1, 2, 3 and 4 to 
+provide, equally, control of roll R. Thus, for example, if 
+a pitch command of twenty-five degrees, a yaw command of ten 
+degrees and a roll command of ten degrees is fed to the 
+autopilot 14 from the guidance system 12, then the autopilot 
+14 will provide appropriate control signals to each one of 
+the fin controllers 16, 18, 20 and 22. For this example, to 
+accommodate the pitch command of twenty-five degrees, the 
+autopilot 14 would provide a control signal to the fin 
+controller 18 to deflect the control fin 2 an amount of 
+twenty-five degrees, and provide a control signal to the fin 
+controller 22 to deflect the control fin 4 an amount of 
+twenty-five degree. To accommodate the yaw fin command of  
+ 
+ten degrees, the autopilot 14 would provide a control signal 
+to fin controller 16 to deflect the control fin 1 an amount 
+of ten degrees and provide a control signal to fin 
+controller 20 to deflect the control fin 3 an amount of ten 
+degrees. To accommodate the roll command of plus ten 
+degrees, the autopilot 14 would modify the control signal to 
+fin controller 16 to deflect the control fin 1 an amount of 
+12.5 degrees instead of ten degrees, modify the control 
+signal to fin controller 18 to deflect the control fin 2 an 
+amount of 22.5 degrees instead of 25 degrees, modify the 
+control signal to fin controller 20 to deflect control fin 3 
+an amount of 7.5 degrees instead of ten degrees and modify 
+the control signal to fin controller 22 to deflect control 
+fin 4 an amount of 27.5 degrees instead of 25 degrees. 
+Recapitulating, a pitch fin command of twenty-five degrees, 
+a yaw fin command of ten degrees and a roll fin command of 
+ten degrees fed to the autopilot 14 will cause the autopilot 
+14 to provide appropriate control signals to the respective 
+fin controllers 16, 18, 20 and 22 so that control fin 1 is 
+deflected 12.5 degrees, control fin 2 is deflected 22.5 
+degrees, control fin 3 is deflected 7.5 degrees and control 
+fin 4 is deflected 27.5 degrees. Although satisfactory for 
+some instances, such a configuration can be a problem. For 
+example, if the missile 10 is configured such that control 
+fins 1, 2, 3 and 4 can provide a maximum angular deflection  
+ 
+of plus or minus twenty-five degrees, then in the present 
+example, control fin 4 cannot deflect the necessary amount. 
+In such an environment, typically the autopilot 14 gives 
+precedence to the roll command, so that, in the present 
+example, control fin 4 is deflected 25 degrees, control fin 
+2 is deflected 20 degrees, and control fins 1 and 3 are 
+deflected 12.5 degrees and 7.5 degrees, respectively. With 
+such an arrangement, invoking roll command preference the 
+pitch command is reduced to an equivalent value of 22.5° 
+ 
+rather than the desired 25° which thus can reduce available 
+pitch plane maneuver. To solve such a dilemma, the present 
+invention of a fin command mixing method as to be described 
+can be used. </p><p xml:id="_5573a">Referring now to FIGS. 1 and 2, a method of operating a 
+vehicle, here missile 10, is shown to include apportioning 
+the roll command such that control fin deflection is 
+minimized. As described hereinbefore, the pitch command, 
+δPc, the yaw command, δYc, and the roll command δRc is 
+provided to the autopilot 14 from the guidance system 12. A 
+pitch-to-roll command ratio is calculated equal to an 
+absolute value of the pitch command divided by the roll 
+command and a yaw-to-roll command ratio is calculated equal 
+to an absolute value of the yaw command divided by the roll  
+ 
+command. The yaw-to-roll command ratio is differenced with 
+the pitch-to-roll command ratio and if the result thereof is 
+equal to or greater than a value 0.5, then all of the roll 
+command is apportioned to the yaw fins 1 and 3, 
+ 
+and none of the roll command is apportioned to the pitch 
+fins 2 and 4, 
+ 
+If the result of the yaw-to-roll command ratio differenced 
+with the pitch-to-roll command ratio is less than the value 
+0.5, then the pitch-to-roll command ratio is differenced 
+with the yaw-to-roll command ratio. If the result of the 
+latter is equal to or greater than the value 0.5, then all 
+of the roll command is apportioned to the pitch fins 2 and 
+4, 
+ 
+and none of the roll command is apportioned to the yaw fins 
+1, and 3, 
+  
+ 
+If the result of the pitch-to-roll command ratio differenced 
+with the yaw-to-roll command ratio is less than the value 
+0.5, then the roll command is apportioned between the yaw 
+fins 1 and 3 and the pitch fins 2 and 4 in a manner as to be 
+described. </p><p xml:id="_d0c83">If the value of the yaw-to-roll command ratio 
+differenced with the pitch-to-yaw command is less than 0.5 
+and the value of the pitch-to-roll command ratio differenced 
+with the yaw-to-roll value is less than 0.5, then a first 
+portion of the roll command is apportioned to the pitch fins 
+2 and 4, the first portion of the roll command 
+ 
+being the percentage of the roll command equal to the pitch-to-roll 
+command ratio differenced with the yaw-to-roll 
+command ratio added to 0.5. A second portion of the roll 
+command 
+ 
+being the percentage of the roll command equal to the first 
+portion of the roll command differenced with unity is 
+apportioned to the yaw fins 1 and 3. With such an 
+arrangement, if the autopilot 14 of the missile 10 provides 
+fin commands having a roll portion, a yaw portion and a  
+ 
+pitch portion, then the required roll command can be 
+apportioned entirely to the pitch fins 2 and 4, if the yaw 
+fins 1 and 3 are commanded to large deflection angles or, 
+alternatively, the required roll command can be apportioned 
+entirely to the yaw fins 1 and 3, if the pitch fins 2 and 4 
+are commanded to large deflections. If the yaw fins 1 and 3 
+the pitch fins 2 and 4 are sufficiently close in value (as 
+determined by the pitch-to-roll command ratio and yaw-to-roll 
+command ratio), then the roll command is apportioned 
+between the pitch fins 2 and 4 and the yaw fins 1 and 3 as 
+described hereinabove. </p><p xml:id="_916ed">Now, for example, if we have an environment wherein the 
+autopilot 14 is fed a pitch command of twenty-five degrees, 
+a yaw command of ten degrees and a roll command of ten 
+degrees from the guidance system 12, then the autopilot 14 
+will provide control signals to the fin controller 16, 18, 
+20 and 22 as follows. Calculating the pitch-to-roll command 
+ratio which equals the absolute value of the pitch command, 
+δPc, divided by the roll command, δRc, here twenty-five 
+degrees divided by ten degrees, provides the value 2.5. 
+Calculating the yaw-to-roll command ratio which equals the 
+absolute value of the yaw command, δYc, divided by the roll 
+command, δRc, here ten degrees divided by ten degrees, 
+provides the value 1. Differencing the yaw-to-roll command 
+ratio with the pitch-to-roll command ratio, here  
+ 
+2.5 - 1.0, provides the value 1.5. Since the value 1.5 is 
+greater than the value 0.5, the portion of the roll command 
+apportioned to the pitch fins 2 and 4 is zero, 
+ 
+and all of the roll command is apportioned to the yaw fins 1 
+and 3, 
+ 
+Thus, for the present example, the autopilot 14 would 
+provide a control signal to the fin controller 16 to deflect 
+the control fin 1 an amount of 15 degrees, provide a control 
+signal to the fin controller 18 to deflect the control fin 2 
+an amount of 25 degrees, provide a control signal to the fin 
+controller 20 to deflect the control fin 3 an amount of five 
+degrees and provide a control signal to the fin controller 
+22 to deflect the control fin 4 an amount of 25 degrees. </p><p xml:id="_975ad">It should now be apparent, by apportioning all of the 
+roll command, δRc, to the yaw fins 1 and 3 and apportioning 
+none of the roll command to the pitch fins 2 and 4, the 
+angular deflection of control fin 4 is reduced below the 
+angular deflection limit of 25 degrees as described in the 
+example.  
+ </p><p xml:id="_c1917">As a first alternative, if we have an environment 
+wherein the autopilot 14 is fed a pitch command of ten 
+degrees, a yaw command of twenty-five degrees and a roll 
+command of ten degrees from the guidance system 12, then the 
+autopilot 14 will provide control signals to the fin 
+controllers 16, 18, 20 and 22 as follows. Calculating the 
+pitch-to-roll command ratio, ten degrees divided by ten 
+degrees, provides the value 1.0. Calculating the yaw-to-roll 
+command ratio, twenty-five degrees divided by ten 
+degrees, provides the value 2.5. Differencing the yaw-to-roll 
+command ratio with the pitch-to-roll command ratio, 
+here 1.0 - 2.5, provides the value -1.5. Since the value 
+-1.5 is less than the value 0.5, the pitch-to-roll command 
+ratio is differenced with the yaw-to-roll command ratio, 
+here 2.5 - 1.0, providing the value 1.5. Since the value 
+1.5 is greater than the value 0.5, all of the roll command 
+is apportioned to the pitch fins 2 and 4, 
+ 
+and none of the roll command is apportioned to the yaw fins 
+1 and 3, 
+  
+ 
+For this example, the autopilot 14 would provide a control 
+signal to the fin controller 16 to deflect the control fin 1 
+an amount of 25 degrees, provide a control signal to the fin 
+controller 18 to deflect the control fin 2 an amount of five 
+degrees, provide a control signal to the fin controller 20 
+to deflect the control fin 3 an amount of 25 degrees and 
+provide a control signal to the fin controller 22 to deflect 
+the control fin 4 an amount of 15 degrees. </p><p xml:id="_72284">It should be apparent, by apportioning all of the roll 
+command, δRc, to the pitch fins 2 and 4 and apportioning 
+none of the roll command to the yaw fins 1 and 3, the 
+angular deflection of the control fin 1 is reduced below the 
+angular deflection limit of 25 degrees. </p><p xml:id="_710ab">As a second alternative, if we have an environment 
+wherein the autopilot 14 is fed a pitch command of twenty 
+degrees, a yaw command of fifteen degrees and a roll command 
+of fifteen degrees from the guidance system 12, then the 
+autopilot 14 will provide control signals to the fin 
+controllers 16, 18, 20 and 22 as follows. Calculating the 
+pitch-to-roll command ratio, twenty degrees divided by 
+fifteen degrees, provides the value 1.333. Calculating the 
+yaw-to-roll command ratio, fifteen degrees divided by 
+fifteen degrees, provides the value 1.0. Differencing the 
+yaw-to-roll command ratio with the pitch-to-roll command 
+ratio, here 1.333 - 1.0, provides the value 0.333. Since  
+ 
+the value 0.333 is less than the value 0.5, the pitch-to-roll 
+command ratio is differenced with the yaw-to-roll 
+command ratio, here 1.0 - 1.333, providing the value -0.333. 
+Since the value -0.333 is less than the value 0.5, then the 
+roll command δRc is apportioned between the pitch fins 2 and 
+4 and the yaw fins 1 and 3 in the following manner. </p><p xml:id="_eb894">Since the value of the yaw-to-roll command ratio 
+differenced with the pitch-to-yaw command ratio is less than 
+0.5 and the value of the pitch-to-roll command ratio 
+differenced with the yaw-to-roll command ratio is less than 
+0.5, then a first portion of the roll command is apportioned 
+to the pitch fins 2 and 4, the first portion of the roll 
+command being the percentage of the roll command equal to 
+the pitch-to-roll command ratio differenced with the yaw-to-roll 
+command ratio added to 0.5. </p><p xml:id="_7b032">For the present example, the first portion of the roll 
+command would equal 1.0 - 1.333 which equals -0.333 which is 
+added to 0.5 providing the value 0.167. Thus, approximately 
+16.7 percent of the total roll command is apportioned to the 
+pitch fins 2 and 4, 
+</p><p xml:id="_770c2">For the present example, the second portion of the roll 
+command would equal 1.0 - 0.167 providing the value 0.833.  
+ 
+Thus, approximately 83.3 percent of the total roll command 
+is apportioned to the yaw fins 1 and 3, 
+</p><p xml:id="_cae85">With the foregoing in mind, in the present example of 
+the autopilot 14 being fed a pitch command of twenty 
+degrees, a yaw command of fifteen degrees and a roll command 
+of fifteen degrees, the autopilot 14 provides a control 
+signal to the fin controller 16 to deflect the control fin 1 
+an amount of 21.25 degrees, a control signal to the fin 
+controller 18 to deflect the control fin 2 an amount of 
+18.75 degrees, a control signal to the fin controller 20 to 
+deflect the control fin 3 an amount of 8.75 degrees and a 
+control signal to the fin controller 22 to deflect the 
+control fin 4 an amount of 21.25 degrees. It should be 
+appreciated that when the roll command is apportioned 
+between the pitch fins 2 and 4 and the yaw fins 1 and 3, 
+then the pitch control fin with the maximum deflection and 
+the yaw control fin with the maximum deflection are 
+deflected an equal amount. With such an arrangement, the 
+maximum fin deflection required of the control fins 1, 2, 3 
+and 4 is minimized. </p><p xml:id="_f2d71">Referring now to FIG. 2, the method as described 
+hereinbefore is shown implemented by the autopilot 14 having 
+a digital computer 50 and adders 62 and 68 and subtractors  
+ 
+64 and 66. The pitch command δPc, the yaw command δYc and 
+the roll command δRc are fed into computer 50. The pitch 
+command δPc is also fed into adder 68 and subtractor 64 and 
+the yaw command δYc is also fed into adder 62 and subtractor 
+66. Using the technique as described hereinbefore, the 
+computer calculates the value of the portion of the roll 
+command that is apportioned to the pitch fins 2 and 4 
+(Fig. 1), 
+ 
+which is fed to a multiplier 52 and calculates the value of 
+the portion of the roll command that is apportioned to the 
+yaw fins 1 and 3 (FIG. 1), 
+ 
+which is fed to a multiplier 54. The roll command δRc is 
+also divided by two and fed to a second input of multipliers 
+52 and 54, respectfully. </p><p xml:id="_51d58">The output of the multiplier 52 is fed to a second 
+input of adder 68 and added to the pitch command δPc to 
+provide the control signal  
+ 
+ 
+to fin controller 22 to deflect the control fin 4 
+accordingly. The output of the multiplier 52 is also fed to 
+the subtractor 64 and subtracted from the pitch command δPc 
+to provide the control signal 
+ 
+to fin controller 18 to deflect the control fin 4 
+accordingly. </p><p xml:id="_ecfe2">The output of the multiplier 54 is fed to a second 
+input of adder 62 and added to the yaw command δYc to 
+provide the control signal 
+ 
+to fin controller 16 to defect the control fin 1 
+accordingly. The output of the multiplier 54 is also fed to 
+a second input of subtractor 66 and subtracted from the yaw 
+command δYc to provide the control signal 
+ 
+to fin controller 20 to deflect the control fin 3 
+accordingly.  
+ </p> <p xml:id="_3656f">Having described this invention, it will now be 
+apparent to one of skill in the art that the disposition of 
+the control fins may be changed without affecting this 
+invention. Further, the coordinate system used to describe 
+the invention could be changed from the one discussed. </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

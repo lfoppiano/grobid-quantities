@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">12748425</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">JP</orgName></authority><idno type="docNumber">4648291</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910312</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">JP4648291A</idno></monogr></biblStruct><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">JP</orgName></authority><idno type="docNumber">46482/91</idno><imprint><date>19910312</date></imprint></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">B01J31/02E2</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">B01J31/02B2B</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C07C255/36</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C07C253/08</term></classCode><classCode scheme="ICO"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">L01J231/34B2B</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302120</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920312</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302120A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>INOUE SHOHEI</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>MORI ATSUNORI</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="intermediate"><persName>INOUE, SHOHEI</persName></person><person role="inventor" type="intermediate"><persName>MORI, ATSUNORI</persName></person><person role="inventor" type="original"><persName>INOUE, SHOHEI</persName><residence><address><addrLine>18-5, Chihayacho 4-chome</addrLine><settlement>Toshima-ku, Tokyo 171</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>MORI, ATSUNORI</persName><residence><address><addrLine>3-20, Sendagi 2-chome</addrLine><settlement>Bunkyo-ku, Tokyo 113</settlement><country type="national">JP</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>SUMITOMO CHEMICAL CO</name><address><country type="national">JP</country></address></item><item type="intermediate"><name>SUMITOMO CHEMICAL COMPANY, LIMITED</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>BE</country><country>CH</country><country>DE</country><country>ES</country><country>FR</country><country>GB</country><country>IT</country><country>LI</country><country>NL</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">C07C 255/36        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">B01J  31/02        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C07C 253/00        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">B01J  31/02        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C07C 253/08        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C07C 255/00        20060101C I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Katalysator zur asymmetrischen Induktion</title><title type="invention-title" xml:lang="en">A catalyst for asymmetric induction</title><title type="invention-title" xml:lang="fr">Catalyseur pour l'induction asymétrique</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505089</idno><imprint><classCode scheme="kindCode">B1</classCode><date>19941214</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505089B1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="1" type="claim"><p xml:id="_d0197">Katalysator zur asymmetrischen Induktion, umfassend ein Titan(IV)-alkoxid und ein 
+Dipeptid-Derivat der Formel [I] 
+ 
+worin R¹ für Isopropyl, Isobutyl, sec-Butyl, tert-Butyl, Methyl, Benzyl oder Phenyl steht, 
+R³ für Niederalkoxy, Hydroxy oder Mono- oder Di-niederalkylamino steht, R⁴ für 
+Wasserstoff steht, R² für Benzyl, Indol-3-ylmethyl, Isopropyl, Isobutyl oder Phenyl steht, 
+R⁵, R⁶, R⁷ und R⁸ gleich oder verschieden sind und jeweils für Wasserstoff, Halogen, 
+Niederalkyl oder Niederalkoxy stehen oder R⁵ und R⁶ oder R⁶ und R⁷ oder R⁷ und R⁸ 
+zusammen die Gruppe -CH=CH-CH=CH- oder -OCH₂O- bilden und "*" ein asymmetrisches 
+Kohlenstoffatom mit einer absoluten (S)- oder (R)-Konfiguration anzeigt. </p></div><div n="2" type="claim"><p xml:id="_93951">Katalysator nach Anspruch 1, worin R⁵ und R⁶ zusammen den Rest 
+-CH=CH-CH=CH- bilden und R⁷ und R⁸ beide Wasserstoff sind. </p></div><div n="3" type="claim"><p xml:id="_78686">Katalysator nach Anspruch 2, worin R² für Benzyl, Indol-3-ylmethyl oder Phenyl steht. </p></div><div n="4" type="claim"><p xml:id="_b1b59">Katalysator nach Anspruch 2, worin R¹ für Isopropyl, Isobutyl, sec-Butyl, tert-Butyl, 
+Methyl oder Benzyl steht und R² für Benzyl oder Indol-3-ylmethyl steht.  
+ </p></div><div n="5" type="claim"><p xml:id="_5db08">Katalysator nach einem der vorangehenden Ansprüche, worin beide asymmetrischen 
+Kohlenstoffatome die absolute (S)-Konfiguration aufweisen. </p></div><div n="6" type="claim"><p xml:id="_a1587">Katalysator nach einem der Ansprüche 1 bis 4, worin beide asymmetrische Kohlenstoffatome 
+die absolute (R)-Konfiguration aufweisen. </p></div><div n="7" type="claim"><p xml:id="_bab3d">Katalysator zur asymmetrischen Induktion, umfassend ein Titan(IV)-alkoxid und ein 
+Dipeptid-Derivat der Formel [Ia] 
+ 
+worin R¹ für Isopropyl steht, R² und R⁴ zusammen den Rest -CH₂CH₂CH₂- bilden, R³ für 
+eine Ethoxygruppe steht, R⁵ und R⁶ zusammen den Rest -CH=CH-CH=CH- bilden, R⁷ 
+und R⁸ beide Wasserstoff sind und "*" ein asymmetrisches Kohlenstoffatom mit einer 
+absoluten (S)-Konfiguration anzeigt. </p></div><div n="8" type="claim"><p xml:id="_f2e0b">Katalysator nach einem der vorangehenden Ansprüche, worin das Titan(IV)-alkoxid in 
+einem Molverhältnis von 0,5 bis 2 verwendet wird, bezogen auf das Dipeptid-Derivat. </p></div><div n="9" type="claim"><p xml:id="_46e9c">Verwendung eines Katalysators nach einem der Ansprüche 1 bis 8 zur Herstellung 
+eines optisch aktiven Cyanohydrins. </p></div><div n="10" type="claim"><p xml:id="_1f8ec">Verwendung nach Anspruch 9 bei der Herstellung eines optisch aktiven Cyanohydrins 
+durch Addition von Cyanwasserstoff an einen Aldehyd. </p></div><div n="11" type="claim"><p xml:id="_5f116">Verwendung nach Anspruch 10, worin der Aldehyd ein aromatischer Aldehyd ist.  
+ </p></div><div n="12" type="claim"><p xml:id="_4771f">Verwendung nach Anspruch 11, worin der Aldehyd Benzaldehyd ist. </p></div><div n="13" type="claim"><p xml:id="_b1184">Verwendung nach Anspruch 11, worin der Aldehyd m-Phenoxybenzaldehyd oder m-Phenoxybenzaldehyd, 
+der durch ein oder zwei Halogenatom(e) substituiert ist, ist. </p></div><div n="14" type="claim"><p xml:id="_5dd3f">Verfahren zur Herstellung eines Cyanohydrins, welches die Addition von Cyanwasserstoff 
+an einen Aldehyd in Gegenwart eines Katalysators nach einem der Ansprüche 1 bis 
+8 umfaßt. </p></div></div><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_d9801">A catalyst for asymmetric induction comprising a 
+titanium (IV) alkoxide and a dipeptide derivative of formula 
+(I) 
+ 
+wherein R¹ is isopropyl, isobutyl, sec-butyl, tert-butyl, 
+methyl, benzyl or phenyl, R³ is lower alkoxy, hydroxyl or mono- or 
+di-lower alkylamino, R⁴ is hydrogen, R² is benzyl, indol-3-ylmethyl, 
+isopropyl, isobutyl, or phenyl, R⁵, R⁶, R⁷, and R⁸ are 
+the same or different and each is hydrogen, halogen, lower 
+alkyl or lower alkoxy, or R⁵ and R⁶ or R⁶ and R⁷ or R⁷ and R⁸ 
+together form -CH=CH-CH=CH- or -OCH₂O-, and * denotes an 
+asymmetric carbon atom having an absolute configuration of S or 
+R. </p></div><div n="2" type="claim"><p xml:id="_8396a">A catalyst according to claim 1 wherein R⁵ and R⁶ 
+together form -CH=CH-CH=CH-, and R⁷ and R⁸ are both hydrogen. </p></div><div n="3" type="claim"><p xml:id="_448b9">A catalyst according to claim 2 wherein R² is 
+benzyl, indol-3-ylmethyl or phenyl. </p></div><div n="4" type="claim"><p xml:id="_c7ea5">A catalyst according to claim 2 wherein R¹ is 
+isopropyl, isobutyl, sec-butyl, tert-butyl, methyl or benzyl, 
+and R² is benzyl or indol-3-ylmethyl. </p></div><div n="5" type="claim"><p xml:id="_29725">A catalyst according to any one of the preceding 
+claims wherein both asymmetric carbon atoms have the S absolute 
+configuration. </p></div><div n="6" type="claim"><p xml:id="_7e361">A catalyst according to any one of claims 1 to 4 
+wherein both asymmetric carbon atoms have the R absolute 
+configuration.  
+ </p></div><div n="7" type="claim"><p xml:id="_a0531">A catalyst for asymmetric induction comprising a 
+titanium (IV) alkoxide and a dipeptide derivative of formula 
+(Ia) 
+ 
+wherein R¹ is isopropyl, R² and R⁴ together form -CH₂CH₂CH₂-, R³ 
+is an ethoxy group, R⁵ and R⁶ together form -CH=CH-CH=CH-, R⁷ 
+and R⁸ are both hydrogen, and * denotes an asymmetric carbon 
+atom having an absolute configuration of S. </p></div><div n="8" type="claim"><p xml:id="_81fd3">A catalyst according to any one of the preceding 
+claims wherein the titanium (IV) alkoxide is used in a molar 
+ratio of 0.5 to 2 to the dipeptide derivative. </p></div><div n="9" type="claim"><p xml:id="_17442">Use of a catalyst according to any one of claims 1 
+to 8 in the preparation of an optically active cyanohydrin. </p></div><div n="10" type="claim"><p xml:id="_9d3da">Use according to claim 9 in the preparation of an 
+optically active cyanohydrin by an addition of hydrogen cyanide 
+to an aldehyde. </p></div><div n="11" type="claim"><p xml:id="_0c343">Use according to claim 10 wherein the aldehyde is 
+an aromatic aldehyde. </p></div><div n="12" type="claim"><p xml:id="_09f4b">Use according to claim 11 wherein the aldehyde is 
+benzaldehyde. </p></div><div n="13" type="claim"><p xml:id="_b4864">Use according to claim 11 wherein the aldehyde is 
+m-phenoxybenzaldehyde or m-phenoxybenzaldehyde substituted by 
+one to two halogen atoms. </p></div><div n="14" type="claim"><p xml:id="_9d0d8">A process of producing a cyanohydrin comprising 
+adding hydrogen cyanide to an aldehyde in the presence of a 
+catalyst according to any one of claims 1 to 8. </p></div></div><div type="claims" xml:lang="fr"><div n="1" type="claim"><p xml:id="_d54d0">Catalyseur d'induction asymétrique comprenant un alcoxyde de 
+titane (IV) et un dérivé de dipeptide de formule (I): 
+ 
+dans laquelle R¹ est un isopropyle, isobutyle, sec-butyle, tert-butyle, méthyle, 
+benzyle ou phényle, R³ est un alcoxy inférieur, hydroxyle ou mono- ou dialkyl-amino 
+inférieur, R⁴ est un hydrogène, R² est un benzyle, indol-3-ylméthyle, isopropyle, 
+isobutyle, ou phényle, R⁵, R⁶, R⁷ et R⁸ sont identiques ou différents et 
+chacun est un hydrogène, halogène, alkyle inférieur ou alcoxy inférieur, ou R⁵ et 
+R⁶ ou R⁶ et R⁷ ou R⁷ et R⁸ ensemble forment -CH=CH-CH=CH- ou 
+-OCH₂O-, et l'* indique un atome de carbone asymétrique ayant une configuration 
+absolue S ou R. </p></div><div n="2" type="claim"><p xml:id="_24581">Catalyseur selon la revendication 1, dans lequel R⁵ et R⁶ forment 
+ensemble -CH=CH-CH=CH-, et R⁷ et R⁸ sont tous les deux l'hydrogène. </p></div><div n="3" type="claim"><p xml:id="_af8ed">Catalyseur selon la revendication 2, dans lequel R² est le benzyle, 
+l'indol-3-ylméthyle ou le phényle. </p></div><div n="4" type="claim"><p xml:id="_a6b51">Catalyseur selon la revendication 2, dans lequel R¹ est un isopropyle, 
+isobutyle, sec-butyle, tert-butyle, méthyle ou benzyle, et R² est un benzyle 
+ou indol-3-ylméthyle. </p></div><div n="5" type="claim"><p xml:id="_147cc">Catalyseur selon l'une quelconque des revendications précédentes, 
+dans lequel les deux atomes de carbone asymétriques ont la configuration absolue 
+S. </p></div><div n="6" type="claim"><p xml:id="_a49e1">Catalyseur selon l'une quelconque des revendications 1 à 4, dans 
+lequel les deux atomes de carbone asymétriques ont la configuration absolue R. </p></div><div n="7" type="claim"><p xml:id="_c67b3">Catalyseur d'induction asymétrique comprenant un alcoxyde de 
+titane (IV) et un dérivé de dipeptide de formule (Ia):  
+ 
+ 
+dans laquelle R¹ est un isopropyle, R² et R⁴ forment ensemble -CH₂CH₂CH₂-, 
+R³ est un groupe éthoxy, R⁵ et R⁶ forment ensembles -CH=CH-CH=CH-, R⁷ et 
+R⁸ sont tous les deux l'hydrogène, et l'* indique un atome de carbone asymétrique 
+ayant une configuration absolue S. </p></div><div n="8" type="claim"><p xml:id="_7a48c">Catalyseur selon l'une quelconque des revendications précédentes, 
+dans lequel on utilise l'alcoxyde de titane (IV) en une proportion molaire de 0,5 à 2 
+par rapport au dérivé dipeptide. </p></div><div n="9" type="claim"><p xml:id="_c47e8">Utilisation d'un catalyseur selon l'une quelconque des revendications 
+1 à 8 pour préparer une cyanohydrine optiquement active. </p></div><div n="10" type="claim"><p xml:id="_18725">Utilisation selon la revendication 9 dans la préparation d'une 
+cyanohydrine optiquement active par addition de cyanure d'hydrogène sur un 
+aldéhyde. </p></div><div n="11" type="claim"><p xml:id="_bc727">Utilisation selon la revendication 10, dans laquelle l'aldéhyde est 
+un aldéhyde aromatique. </p></div><div n="12" type="claim"><p xml:id="_5ed20">Utilisation selon la revendication 11, dans laquelle l'aldéhyde est le 
+benzaldéhyde. </p></div><div n="13" type="claim"><p xml:id="_12567">Utilisation selon la revendication 11, dans laquelle l'aldéhyde est le 
+m-phénoxybenzaldéhyde ou le m-phénoxybenzaldéhyde substitué par un ou deux 
+atomes d'halogène. </p></div><div n="14" type="claim"><p xml:id="_76d3a">Procédé de production d'une cyanohydrine comprenant d'ajouter du 
+cyanure d'hydrogène à un aldéhyde en présence d'un catalyseur selon l'une quelconque 
+des revendications 1 à 8. </p></div></div><div type="description" xml:lang="en"><p xml:id="_def12">The present invention relates to 
+a catalyst for asymmetric induction. More 
+particularly, it relates to a catalyst useful for 
+preparation of optically active cyanohydrins by 
+addition of hydrogen cyanide to aldehydes. </p><p xml:id="_5267b">The present inventors have previously 
+reported that (R)-cyanohydrin isomers are obtained 
+by asymmetric addition reaction of hydrogen 
+cyanide to aldehydes with cyclo-[(S)-phenylalanyl-(S)-histidyl] 
+[Inoue et al., J. Chem. Soc., 
+Chem. Comm., 229 (1981): Bull, Chem. Soc. Jpn., 
+59, 893 (1986)]. For example, (R)-mandelonitrile 
+is obtained at a relatively high purity and in a 
+high yield by allowing benzaldehyde to react with 
+hydrogen cyanide in the presence of cyclo-[(S)-phenylalanyl-(S)-histidyl)]. </p><p xml:id="_f76a7">The present inventors have found a 
+further excellent catalyst for asymmetric 
+induction in the course of research on 
+asymmetric induction catalyzed by dipeptide 
+derivatives. </p><p xml:id="_362c2">The present invention 
+provides a catalyst for asymmetric induction 
+comprising a titanium (IV) alkoxide and a dipeptide derivative of 
+formula (I) 
+</p><p xml:id="_7417e">wherein R¹ represents isopropyl, isobutyl, sec-butyl, tert-butyl, 
+methyl, benzyl or phenyl, R² represents benzyl, indol-3-ylmethyl, 
+isopropyl, isobutyl or phenyl, R³ represents lower 
+alkoxy (e.g. C₁₋₄ alkoxy such as methoxy or ethoxy), hydroxyl, 
+or mono- or di-lower alkylamino (e.g. C₁₋₄ alkylamino such as 
+methylamino or ethylamino), R⁴ represents hydrogen, R⁵, R⁶, R⁷ 
+and R⁸ are the same or different and each represents hydrogen, 
+halogen (e.g. fluorine, chlorine or bromine), lower alkyl (e.g. 
+C₁₋₄ alkyl such as methyl, ethyl, propyl, isopropyl, butyl, 
+isobutyl, sec-butyl or tert-butyl) or lower alkoxy (e.g. C₁₋₄ 
+alkoxy such as methoxy or ethoxy), or R⁵ and R⁶, R⁶ and R⁷ or R⁷ 
+and R⁸ are bonded together at their terminals to form 
+-CH=CH-CH=CH- or OCH₂O, and * denotes an absolute configuration 
+of S or R. </p><p xml:id="_a100c">The invention further provides the use of the above 
+catalyst in the preparation of an optically active cyanohydrin, 
+and a process for preparing an optically active cyanohydrin by 
+addition of hydrogen cyanide to an aldehyde in the presence of 
+the above catalyst. </p><p xml:id="_84ae8">Several embodiments of the dipeptide derivatives 
+represented by the formula [I] are given below: 
+</p><p xml:id="_e7a10">wherein R¹, R², R³, R⁴ and * are as defined above. </p><p xml:id="_89d65">In the dipeptide derivative represented by the 
+formula [I] used for the catalyst of the present invention, as 
+the R¹ substituent, isopropyl, isobutyl, sec-butyl, tert-butyl, 
+methyl and benzyl are preferred. As the R² substituent, benzyl 
+and indol-3-ylmethyl are preferred. As the R³ substituent, 
+lower alkoxy is preferred. Not less than 2 substituents out of 
+R⁵, R⁶, R⁷ and R⁸ are preferably hydrogen. </p><p xml:id="_906fd">The dipeptide derivative of formula [I] can be 
+prepared, for example, by condensation of a salicyl aldehyde 
+derivative such as 2-hydroxy-1-naphthaldehyde and dipeptides as 
+shown in the following scheme: 
+</p><p xml:id="_869e0">wherein R¹, R², R³, R⁴, R⁵, R⁶, R⁷, R⁸ and * are 
+the same as those defined above. </p><p xml:id="_b20e0">The dipeptides used for the condensation 
+with the salicyl aldehyde derivative such as 2-hydroxy-1-naphthaldehyde 
+can be prepared according 
+to any of the conventional methods for synthesizing 
+peptides. For example, by the condensation of N-benzyloxycarbonyl-(S)-valine, 
+N-benzyloxycarbonyl-(S)-leucine, 
+N-benzyloxycarbonyl-(S)-isoleucine, 
+N-benzyloxycarbonyl-(S)-tert-leucine, N-benzyloxycarbonyl-(S)-alanine, 
+N-benzyloxycarbonyl-(S)-phenylalanine 
+or the corresponding R-isomers 
+thereof with (S)-phenylalanine alkyl esters or 
+amides such as lower alkyl esters having 1 - 4 carbon 
+atoms (e.g. a methyl ester or an ethyl ester 
+or mono- or di-lower alkylamides (e.g. 
+butylamide or diethylamide), or (S)-tryptophan 
+alkyl esters or amides or R-isomers 
+thereof, in the presence of isobutyl chloroformate 
+by the mixed acid anhydride method, the corresponding 
+dipeptide derivatives such as N-benzyloxycarbonyl-(S)-valyl-(S)-phenylalanine 
+methyl 
+ester can be obtained. The dipeptide derivatives 
+are then subjected to hydrogenolysis in the 
+presence of palladium/carbon and condensation with 
+the salicyl aldehyde derivative such as 2-hydroxy-1-naphthaldehyde. </p><p xml:id="_e3cc0">The titanium (IV) alkoxides used as a 
+component of the catalyst are suitably lower alkoxides (e.g.  
+ 
+C₁₋₄ alkoxides such as ethoxide, isopropoxide, propoxide and 
+butoxide) of titanium (IV). Examples of the titanium (IV) 
+alkoxide are titanium (IV) tetraethoxide, titanium (IV) 
+tetraisopropoxide, titanium (IV) tetrapropoxide and titanium 
+(IV) tetrabutoxide. The titanium alkoxides are usually used in 
+a molar ratio of 0.5 - 2, preferably 1 - 2 to the compound 
+represented by the formula [I]. </p><p xml:id="_8094b">It is presumed that the catalyst of the present 
+invention is a complex consisting of the dipeptide derivative 
+and the titanium (IV) alkoxide, although the stereochemistry of 
+the catalyst has not yet been established. </p><p xml:id="_de8c8">The catalyst is very useful as a catalyst for preparing 
+optically active cyanohydrins by addition of hydrogen cyanide 
+to an aldehyde. For example, when the dipeptide derivative 
+Nap-S-Val-S-Phe-OMe, which is the compound represented by 
+formula [II] wherein R¹ is isopropyl, R² is benzyl, R³ is 
+methoxy, R⁴ is hydrogen and all of the absolute configurations 
+are S, and titanium (IV) tetraethoxide are used as the catalyst 
+of the present invention, (R)-mandelonitrile is produced by 
+reaction of benzaldehyde and hydrogen cyanide in the presence 
+of the catalyst. On the other hand, when the dipeptide 
+derivative Nap-R-Val-R-Phe-OMe, which is the compound 
+represented by formula [II] wherein R¹ is isopropyl, R² is 
+benzyl, R₃ is methoxy, R⁴ is hydrogen and all of the absolute 
+configurations are R, and titanium (IV) tetraethoxide are used, 
+(S)-mandelonitrile is produced. Thus, the catalyst of the 
+present invention can be used as a catalyst for preparing a  
+ 
+variety of optically active cyanohydrins which are 
+useful as intermediates in the preparation of pharmaceuticals, 
+agrochemicals such as pyrethroid insecticides, 
+perfumes or the like. </p><p xml:id="_23c72">In the catalyst of the present invention, 
+each amino acid component of the dipeptide 
+derivative represented by the formula [I] 
+preferably has the same configuration; in other 
+words, both absolute configurations relating to 
+the carbon atoms represented by * are S- or R-isomers 
+from the viewpoint of optical yield of 
+the reaction. </p><p xml:id="_db3ad">Substrate compounds on which the catalyst 
+of the present invention works are, in addition to 
+the aforementioned benzaldehyde, aromatic aldehydes 
+such as p-methylbenzaldehyde, m-methoxybenzaldehyde, 
+naphthaldehyde, m-phenoxybenzaldehyde optionally 
+substituted by one to two halogen atoms (e.g., a 
+fluorine atom, a chlorine atom, a bromine atom) and 
+furfural, aliphatic aldehydes such as 
+heptanal, and alicyclic aldehydes such as 
+cyclohexanecarboaldehyde. </p><p xml:id="_ae093">When the catalyst of the present 
+invention is used for the asymmetric synthesis of 
+optically active cyanohydrins, an amount of 1 - 
+15% by mole to the aldehyde is enough. The 
+synthesis is usually conducted by allowing an 
+aldehyde to react with hydrogen cyanide whose 
+amount is 1 - 5 moles to the aldehyde, in an inert 
+solvent such as toluene, methylene chloride, ethyl 
+ether or isopropyl ether, at a temperature 
+from -80°C to room temperature, 
+preferably from -50°C to room temperature. After  
+ 
+termination of the reaction, the reaction mixture 
+is poured into a dilute hydrochloric acid-methanol 
+solution. After excess hydrogen cyanide is removed 
+under reduced pressure, the solution is subjected 
+to the usual after-treatments to give a desired 
+optically active cyanohydrin. </p><head xml:id="_86b75">[ Examples ]</head><p xml:id="_5a16a">The present invention is further 
+explained with reference to Examples. </p><head xml:id="_cf94a">Example 1</head><p xml:id="_dda5f">Nap-S-Val-S-Trp-OMe, which is the 
+compound represented by the formula [II]; R¹, an 
+isopropyl group; R², an indol-3-ylmethyl group; R³, 
+a methoxy group; R⁴, a hydrogen atom; all of the 
+absolute configurations thereof being S-isomers 
+(0.05 mmole) was suspended in 3 ml of toluene at 
+room temperature under an argon atmosphere, and 
+titanium (IV) tetraethoxide (0.05 mmole) was added 
+to the suspension under the same atmosphere as 
+above. After being stirred for 30 minutes, the 
+reaction mixture was cooled to -78°C, and 
+benzaldehyde (0.5 mmole) and hydrogen cyanide 
+(0.75 mmole) were added. The mixture was further 
+stirred at -40°C for 3 hours, and the reaction 
+mixture was poured into a dilute hydrochloric acid-methanol 
+solution. The excessive amount of 
+hydrogen cyanide was removed under reduced pressure, 
+and the mandelonitrile was recovered from the 
+organic layer in 85% yield. The product contained 
+the R- and S-isomers at a ratio of 94 : 6. The 
+yield was calculated from integrating intensities 
+of the ¹H-NMR spectrum, and the ratio of the R-and 
+S-isomers was determined by the integrating 
+intensities of the signals corresponding to the  
+ 
+methyne protons on the ¹H-NMR spectrum after the 
+product was converted to the corresponding menthyl 
+carbonate according to the usual method. [Tanaka 
+et al., J. Org. Chem., 55, 181 (1990); Mori et al., 
+Chem. Lett., 1989, 2119]. </p><head xml:id="_d0be6">Example 2</head><p xml:id="_0e53b">The procedure was conducted in the same 
+manner as in Example 1 except that titanium (IV) 
+tetraisopropoxide (0.05 mmole) was used in place of 
+the titanium (IV) tetraethoxide (0.05 mmole) and 
+that the stirring was continued at -20°C for 
+2.5 hours in place of -40°C for 3 hours, to give 
+mandelonitrile. Yield: 96%. The product 
+contained the R- and S-isomers at a ratio of 89 : 11. </p><head xml:id="_7d1f5">Example 3</head><p xml:id="_ada6f">The procedure was conducted in the same 
+manner as in Example 1 except that Nap-S-Val-S-Phe-OMe 
+was used in place of the Nap-S-Val-S-Trp-OMe 
+and that the stirring was continued at -40°C for 4 
+hours in place of -40°C for 3 hours, to give 
+mandelonitrile. Yield: 85%. The product contained 
+the R- and S-isomers at a ratio of 93 : 7. </p><head xml:id="_b6551">Example 4</head><p xml:id="_4259c">The procedure was conducted in the same 
+manner as in Example 3 except that Nap-R-Val-R-Phe-OMe 
+was used in place of the Nap-S-Val-S-Phe-OMe, 
+to give mandelonitrile. Yield: 85%. The product 
+contained the R- and S-isomers at a ratio of 9 : 
+91. </p><head xml:id="_0df6b">Example 5</head><p xml:id="_5e0c3">The procedure was conducted in the same  
+ 
+manner as in Example 2 except that Nap-R-Val-S-Phe-OMe 
+was used in place of the Nap-S-Val-S-Trp-OMe 
+and that the stirring was continued at -20°C for 4 
+hours in place of -20°C for 2.5 hours, to give 
+mandelonitrile. Yield: 84%. The product contained 
+the R- and S-isomers at a ratio of 31 : 69. </p><head xml:id="_7e8e1">Example 6</head><p xml:id="_b5439">The procedure was conducted in the same 
+manner as in Example 1 except that 2-naphthaldehyde 
+was used in place of the benzaldenyde, 
+and that the stirring was continued at -40°C for 
+7.5 hours in place of -40°C for 3 hours, to give 
+α-hydroxy-(2-naphthyl)-acetonitrile. Yield: 88%. 
+The product contained the R- and S-isomers at a 
+ratio of 95 : 5. </p><head xml:id="_d4eb2">Example 7 </head><p xml:id="_311cc">The procedure was conducted in the same 
+manner as in Example 6 except that furfural was 
+used in place of the 2-naphthaldehyde, to give α-hydroxy-furfurylnitrile. 
+Yield: 74%. The product 
+contained the R- and S-isomers at a ratio of 7 : 93. </p><head xml:id="_2a69f">Example 8</head><p xml:id="_d38d1">The procedure was conducted in the same 
+manner as in Example 1 except that Nap-S-Leu-S-Phe-OMe, 
+i.e., a compound represented by the formula 
+[II]; R¹, an isobutyl group; R², a benzyl group; 
+R³, a methoxy group; R⁴, a hydrogen atom; all of 
+the absolute configurations thereof being S-isomers 
+was used in place of the Nap-S-Val-S-Trp-OMe and 
+that the stirring was continued at -20°C for 4 hours 
+in place of -40°C for 3 hours, to give 
+mandelonitrile. Yield: 93%. The product contained 
+the R- and S-isomers at a ratio of 87.5 : 12.5.  
+ </p> <head xml:id="_59631">Example 9 </head> <p xml:id="_065dc">The procedure was conducted in the same 
+manner as in Example 1 except that the stirring was 
+continued at -20°C for 2.5 hours in place of -40°C 
+for 3 hours, to give mandelmitrile. Yield: 97%. 
+The product contained the R- and S-isomers at a 
+ratio of 91 : 9. </p> <head xml:id="_dea19">Example 10</head><p xml:id="_486f6">The procedure was conducted in the same 
+manner as in Example 3 except that the stirring was 
+continued at -20°C for 4 hours in place of -40°C 
+for 4 hours, to give mandelonitrile. Yield: 91%. 
+The product contained the R- and S-isomers at a 
+ratio of 91 : 9. </p><head xml:id="_16d9d">Example 11</head><p xml:id="_cba3d">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-Ile-S-Phe-OMe, 
+i.e., a compound represented by the formula 
+[II]; R¹: a sec. butyl group; R² a benzyl group; 
+R³, a methoxy group; R⁴, a hydrogen atom; all of 
+the absolute configurations thereof being S-isomers 
+was used in place of the Nap-S-Val-S-Trp-OMe, to 
+give mandelonitrile. Yield: 94%. The product 
+contained the R- and S-isomers at a ratio of 86.5 
+: 13.5. </p><head xml:id="_f644b">Example 12</head><p xml:id="_c0f5d">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-t-Leu-S-Phe-OMe, 
+i.e., a compound represented by the 
+formula [II]; R¹, a tert-butyl group; R², a benzyl 
+group; R³, a methoxy group; R⁴, a hydrogen atom; 
+all of the absolute configurations thereof being 
+S-isomers was used in place of the Nap-S-Val-S-Trp-OMe,  
+ 
+that methylene chloride was used in place of 
+the toluene, and that the stirring was continued at 
+-20°C for 4.5 hours in place of -20°C for 2.5 hours, 
+to give mandelonitrile. Yield: 74%. The product 
+contained the R- and S-isomers at a ratio of 90 : 10. </p><head xml:id="_40578">Example 13</head><p xml:id="_9d81c">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-Ala-S-Phe-OMe, 
+i.e., a compound represented by the formula 
+[II]; R¹, a methyl group; R², a benzyl group; R³, a 
+methoxy group; R⁴, a hydrogen atom; all of the 
+absolute configurations thereof being S-isomers was 
+used in place of the Nap-S-Val-S-Trp-OMe and that 
+the stirring was continued at -20°C for 4 hours in 
+place of -20°C for 2.5 hours, to give mandelonitrile. 
+Yield: 80%. The product contained the R- and S-isomers 
+at a ratio of 79.5 : 20.5. </p><head xml:id="_063ba">Example 14</head><p xml:id="_5375d">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-Phe-S-Phe-OMe, 
+i.e., a compound represented by the formula 
+[II]; R¹, a benzyl group; R², a benzyl group; R³, a 
+methoxy group; R⁴, a hydrogen atom; all of the 
+absolute configurations thereof being S-isomers was 
+used in place of the Nap-S-Val-S-Trp-OMe and that 
+the stirring was continued at -20°C for 7.5 hours 
+in place of -20°C for 2.5 hours, to give mandelonitrile. 
+Yield: 94%. The product contained the 
+R- and S-isomers at a ratio of 83.5 : 16.5. </p><head xml:id="_0ba4e">Example 15</head><p xml:id="_4a362">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-Val-S-Phe-NEt2, 
+i.e., a compound represented by the formula  
+ 
+[II]; R¹, an isopropyl group; R², a benzyl group; 
+R³, a diethylamino group; R⁴, a hydrogen atom; all 
+of the absolute configurations thereof being 
+S-isomers was used in place of the Nap-S-Val-S-Trp-OMe 
+and that the stirring was continued at -40°C 
+for 3 hours and further at -20°C for 15 hours in 
+place of -20°C for 2.5 hours, to give mandelonitrile. 
+Yield: 88%. The product contained the 
+R- and S-isomers at a ratio of 90 : 10. </p><head xml:id="_8125c">Example 16</head><p xml:id="_ea9b8">The procedure was conducted in the same 
+manner as in Example 4 except that m-phenoxybenzaldehyde 
+was used in place of the 
+benzaldehyde, and that the stirring was continued 
+at -40°C for 11 hours and further at -20°C for 12 
+hours in place of -40°C for 4 hours, to give α-hydroxy-m-phenylacetonitrile. 
+Yield: 85%. The 
+product contained the R- and S-isomers at a ratio 
+of 7 : 93. </p><head xml:id="_ff147">Example 17</head><p xml:id="_eeae1">The procedure was conducted in the same 
+manner as in Example 3 except that cyclohexanecarboaldehyde 
+was used in place of the benzaldehyde, 
+and that the stirring was continued at -40°C for 
+1.5 hours in place of -40°C for 4 hours, to give 
+α-hydroxy-cyclohexylacetonitrile. Yield: 99%. 
+The product contained the R- and S-isomers at a 
+ratio of 77 : 23. </p><p xml:id="_9e51a">In this connection, the ratio of the R-and 
+S-isomers was determined by gas chromatography 
+of the corresponding diastereomers, (+)-1-methoxy-1-phenyl-2,2,2-trifluoro-propionic 
+acid 
+ester derived from the product.  
+ </p><head xml:id="_12ac6">Example 18</head><p xml:id="_caa8f">The procedure was conducted in the same 
+manner as in Example 2 except that heptanal was 
+used in place of the benzaldehyde, and that the 
+stirring was continued at -40°C for 1 hour in place 
+of -20°C for 2.5 hours, to give 2-hydroxyoctanenitrile. 
+Yield: 99%. The product contained the 
+R- and S-isomers at a ratio of 67 : 33. </p><p xml:id="_8681f">In this connection, the ratio of the R-and 
+S-isomers was determined by gas chromatography 
+of the corresponding diastereomers, (+)-1-methoxy-1-phenyl-2,2,2-trifluoro-propionic 
+acid 
+ester derived from the product. </p><head xml:id="_a0930">Example 19</head><p xml:id="_585c8">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-Val-S-Phe-OH, 
+i.e., a compound represented by the formula 
+[II]; R¹, an isopropyl group; R², a benzyl group; 
+R³, a hydroxy group; R⁴, a hydrogen atom; all of 
+the absolute configurations thereof being S-isomers, 
+was used in place of the Nap-S-Val-S-Trp-OMe, and 
+that the stirring was continued at -20°C for 3 hours 
+and further at 0°C for 16 hours in place of -20°C 
+for 2.5 hours, to give mandelonitrile. Yield: 
+93%. The product contained the R- and S-isomers at 
+a ratio of 71 : 29. </p><head xml:id="_e4116">Example 20</head><p xml:id="_4f2b3">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-PhGly-S-Phe-OMe, 
+i.e., a compound represented by the formula 
+[II]; R¹, a phenyl group; R², a benzyl group; R³, a 
+methoxy group; R⁴, a hydrogen atom; all of the 
+absolute configurations thereof being S-isomers was  
+ 
+used in place of Nap-S-Val-S-Trp-OMe, and that the 
+stirring was continued at -20°C for 20 hours in 
+place of -20°C for 2.5 hours, to give mandelonitrile. 
+Yield: 62%. The product contained the 
+R- and S-isomers at a ratio of 62.5 : 37.5. </p><head xml:id="_ac29d">Example 21</head><p xml:id="_a7b21">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-Val-S-PhGly-OMe, 
+i.e., a compound represented by the 
+formula [II]; R¹, an isopropyl group; R², a phenyl 
+group; R³, a methoxy group; R⁴, a hydrogen atom; 
+all of the absolute configurations thereof being 
+S-isomers was used in place of the Nap-S-Val-S-Trp-OMe, 
+and that the stirring was continued at -20°C 
+for 4 hours in place of -20°C for 2.5 hours, 
+to give mandelonitrile. Yield: 86%. The product 
+contained the R- and S-isomers at a ratio of 62 : 
+38. </p><head xml:id="_d3951">Example 22</head><p xml:id="_e9767">The procedure was conducted in the same 
+manner as in Example 2 except that Nap-S-Val-S-Pro-OEt, 
+i.e., the compound represented by the formula [Ia], 
+was 
+used in place of the Nap-S-Val-S-Trp-OMe and that 
+the stirring was continued at -20°C for 20 hours 
+in place of -20°C for 2.5 hours, to give mandelonitrile. 
+Yield: 74%. The product contained the 
+R- and S-isomers at a ratio of 66.5 : 33.5. </p><head xml:id="_c40da">Example 23</head><p xml:id="_95ea5">The procedure was conducted in the same 
+manner as in Example 1 except that the stirring was  
+ 
+continued at -60°C for 16 hours in place of -40°C 
+for 3 hours, to give mandelonitrile. Yield: 83%. 
+The product contained the R- and S-isomers at a 
+ratio of 95 : 5. </p><head xml:id="_aa69a">Example 24</head><p xml:id="_ca8f2">The procedure was conducted in the same 
+manner as in Example 3 except that titanium (IV) 
+tetrabutoxide (0.05 mole) was used in place of the 
+titanium (IV) tetraethoxide (0.05 mole) and that 
+the stirring was continued at -20°C for 4 hours in 
+place of -40°C for 4 hours, to give mandelonitrile. 
+Yield: 84%. The product contained the R- and S-isomers 
+at a ratio of 89 : 11. </p><head xml:id="_c4848">Example 25</head><p xml:id="_912f2">The procedure was conducted in the same 
+manner as in Example 1 except that Nap-S-Ile-S-Phe-OMe 
+was used in place of the Nap-S-Val-S-Trp-OMe 
+and that the stirring was continued at -40°C for 4 
+hours in place of -40°C for 3 hours, to give 
+mandelonitrile. Yield: 85%. The product 
+contained the R- and S-isomers at a ratio of 87.5 : 
+12.5. </p><head xml:id="_16d36">Example 26</head><p xml:id="_77f4d">The procedure was conducted in the same 
+manner as in Example 1 except that Nap-S-Val-S-Val-OMe, 
+i.e., a compound represented by the formula 
+[II]; R¹, an isopropyl group; R², an isopropyl 
+group; R³, a methoxy group; R⁴, a hydrogen atom; 
+all of the absolute configurations thereof being S-isomers 
+was used in place of the Nap-S-Val-S-Trp-OMe 
+and that the stirring was continued at -40°C 
+for 4 hours in place of -40°C for 3 hours, to give 
+mandelonitrile. Yield: 64%. The product  
+ 
+contained the R- and S-isomers at a ratio of 93.5 : 
+6.5. </p><head xml:id="_e3032">Example 27</head><p xml:id="_27ae5">The procedure was conducted in the same 
+manner as in Example 1 except that Nap-S-Val-S-Leu-OMe, 
+i.e., a compound represented by the formula 
+[II]; R¹, an isopropyl group; R², an isobutyl group; 
+R³, a methoxy group; R⁴, a hydrogen atom; all of 
+the absolute configurations thereof being S-isomers 
+was used in place of the Nap-S-Val-S-Trp-OMe and 
+that the stirring was continued at -40°C for 4 
+hours in place of -40°C for 3 hours, to give 
+mandelonitrile. Yield: 72%. The product 
+contained the R- and S-isomers at a ratio of 79.5 : 
+20.5. </p><head xml:id="_8cd0a">Example 28</head><p xml:id="_342db">The procedure was conducted in the same 
+manner as in Example 1 except that m-methoxybenzaldehyde 
+was used in place of the 
+benzyldehyde, and that the stirring was continued 
+at -40°C for 4 hours in place of -40°C for 3 hours, 
+to give α-hydroxy-(m-methoxyphenyl)-acetonitrile. 
+Yield: 80%. The product contained the R- and S-isomers 
+at a ratio of 92.5 : 7.5. </p><head xml:id="_73c1d">Example 29</head><p xml:id="_88365">The procedure was conducted in the same 
+manner as in Example 1 except that Sal-S-Val-S-Trp-OMe, 
+i.e., a compound represented by the formula 
+[I]; R¹, an isopropyl group; R², an indol-3-ylmethyl 
+group; R³, a methoxy group; R⁴, a hydrogen 
+atom; each of R⁵, R⁶, R⁷ and R⁸ is a hydrogen atom; 
+all of the absolute configurations thereof being S-isomers 
+was used in place of the Nap-S-Val-S-Trp-OMe,  
+ 
+and that the stirring was continued at -40°C 
+for 4 hours in place of -40°C for 3 hours to give 
+mandelonitrile. Yield 83%. The product contained the 
+R- and S-isomers at a ratio of 89.5 : 10.5. </p><head xml:id="_80e5b">Example 30</head><p xml:id="_66756">The procedure was conducted in the same 
+manner as in Example 1 except that Nap'-S-Val-S-Trp-OMe, 
+i.e., a compound represented by the formula 
+[I]; R¹, an isopropyl group; R², an indol-3-ylmethyl 
+group; R³, a methoxy group; R⁴, a hydrogen 
+atom; each of R⁵ and R⁶ is a hydrogen atom; R⁷ and 
+R⁸ are bonded together at their terminals to form 
+CH=CH-CH=CH; all of the absolute configurations 
+thereof being S-isomers was used in place of the 
+Nap-S-Val-S-Trp-OMe, and that the stirring was 
+continued at -40°C for 2 hours in place of -40°C for 3 
+hours to give mandelonitrile. Yield 57%. The product 
+contained the R- and S-isomers at a ratio of 87.5 : 12.5. </p><head xml:id="_cf1ba">Example 31</head><p xml:id="_fb79b">The procedure was conducted in the same 
+manner as in Example 1 except that Sal'-S-Val-S-Phe-OMe, 
+i.e., a compound represented by the 
+formula [I]; R¹, an isopropyl group; R², a benzyl 
+group; R³, a methoxy group; R⁴, a hydrogen atom; 
+each of R⁵, R⁶ and R⁷ is a hydrogen atom; R⁸ is a 
+methoxy group; all of the absolute configurations 
+thereof being S-isomers was used in place of the 
+Nap-S-Val-S-Trp-OMe, and that the stirring was 
+continued at -20°C for 4 hours in place of -40°C for 
+3 hours to give mandelonitrile. Yield 68%. The product 
+contained the R- and S-isomers at a ratio of 74 : 26. </p><head xml:id="_8f758">Example 32</head><p xml:id="_9c748">The procedure was conducted in the same  
+ 
+manner as in Example 1 except that Sal''-S-Val-S-Trp-OMe, 
+i.e., a compound represented by the 
+formula [I]; R¹, an isopropyl group; R², an indol-3-ylmethyl 
+group; R³, a methoxy group; R⁴, a 
+hydrogen atom; each of R⁵ and R⁷ is a hydrogen 
+atom; each of R⁶ and R⁸ is a tert-butyl group; all 
+of the absolute configurations thereof being S-isomers 
+was used in place of the Nap-S-Val-S-Trp-OMe, 
+and that the stirring was continued at -20°C 
+for 2.5 hours in place of -40°C for 3 hours to give 
+mandelonitrile. Yield 70%. The product contained 
+the R- and S-isomers at a ratio of 70 : 30. </p><p xml:id="_8d005">The catalyst of the present invention is 
+useful for preparation of optically active 
+cyanohydrins with a high yield and a high optical 
+purity by an addition of hydrogen chanide to 
+aldehydes. </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

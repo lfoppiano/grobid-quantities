@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">12981249</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">JP</orgName></authority><idno type="docNumber">5481791</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910319</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">JP5481791A</idno></monogr></biblStruct><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">JP</orgName></authority><idno type="docNumber">54817/91</idno><imprint><date>19910319</date></imprint></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">H01L21/8234B</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">H01L27/105C</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302072</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920311</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302072A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>TAGUCHI MINORU</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="intermediate"><persName>TAGUCHI, MINORU</persName></person><person role="inventor" type="original"><persName>TAGUCHI, MINORU, C/O INTELLECTUAL PROPERTY DIV.</persName><residence><address><addrLine>Toshiba Corporation, 1-1-1, Shibaura</addrLine><settlement>Minato-ku, Tokyo</settlement><country type="national">JP</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>TOSHIBA KK</name><address><country type="national">JP</country></address></item><item type="intermediate"><name>KABUSHIKI KAISHA TOSHIBA</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>DE</country><country>FR</country><country>GB</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">H01L  27/085       20060101CFI20051220RMJP        </classCode><classCode scheme="ipcr">H01L  27/092       20060101AFI20051220RMJP        </classCode><classCode scheme="ipcr">H01L  27/105       20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">H01L  21/70        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">H01L  21/02        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">H01L  21/8234      20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">H01L  27/105       20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">H01L  21/339       20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">H01L  21/8238      20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">H01L  29/762       20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">H01L  29/66        20060101CLI20051220RMJP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Herstellungsverfahren einer integrierten Schaltung mit einer Ladungsverschiebeanordnung</title><title type="invention-title" xml:lang="en">Method of manufacturing an integrated circuit having a charge coupled device</title><title type="invention-title" xml:lang="fr">Procédé de fabrication d'un circuit intégré comportant un dispositif à transfert de charges</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505081</idno><imprint><classCode scheme="kindCode">B1</classCode><date>19980715</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505081B1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="1" type="claim"><p xml:id="_1b08d">Verfahren zum Herstellen einer integrierten Schaltung mit einer
+ladungsgekoppelten Vorrichtung und einem ersten MOS-Transistor, welches
+folgende Schritte aufweist:
+<list type="simple"><item>Bereitstellen eines Halbleitersubstrats (10) mit einer
+Hauptoberfläche einschließlich eines ersten und eines zweiten Bereichs;</item><item>Bilden eines Antioxidations-Isolierfilms (18) auf der Oberfläche des
+ersten Bereichs;</item><item>Selektives Bilden einer ersten Siliziumschicht auf dem
+Antioxidations-Isolierfilm (18) zum Bilden einer unteren Gateelektrode (20)
+der ladungsgekoppelten Vorrichtung;</item><item>thermisches Oxidieren der ersten Siliziumschicht zum Bilden einer
+ersten Oxidfilms (22) mit einer ersten vorbestimmten Dicke;</item><item>Bilden einer leitenden Schicht als eine obere Gateelektrode (30) der
+ladungsgekoppelten Vorrichtung in kontinuierlicher Art und Weise über dem
+Antioxidations-Isolierfilm (18) und dem ersten Oxidfilm (22); und</item><item>Bilden eines Gateisolierfilms (54) des ersten MOS-Transistors einer
+zweiten vorbestimmten Dicke auf der Oberfläche des zweiten Bereichs,
+dadurch gekennzeichnet, daß der erste Oxidfilm (22) und der Gateisolierfilm
+(24) in unabhängiger Art und Weise gebildet werden.</item></list></p></div><div n="2" type="claim"><p xml:id="_394c2">Verfahren nach Anspruch 1, wobei die Siliziumschicht ebenfalls auf
+der Oberfläche des zweiten Bereichs als eine Gateelektrode des MOS-Transistors
+gebildet wird.</p></div><div n="3" type="claim"><p xml:id="_87737">Verfahren nach Anspruch 1, wobei das Verfahren weiterhin folgende
+Schritte aufweist:
+<list type="simple"><item>Bereitstellen eines dritten Bereichs auf der Hauptoberfläche des
+Halbleitersubstrats (10);</item><item>Bilden des Antioxidations-Isolierfilms (18) auf der Oberfläche des
+dritten Bereichs; und</item><item>Selektives Bilden einer zweiten Siliziumschicht auf dem
+Antioxidations-Isolierfilm (18) des dritten Bereichs als eine Gateelektrode
+(52) eines zweiten MOS-Transistors.</item></list></p></div><div n="4" type="claim"><p xml:id="_422e2">Verfahren nach Anspruch 1 oder 3, wobei die leitende Schicht
+ebenfalls auf der Oberfläche des zweiten Bereichs als eine Gateelektrode
+(28) des ersten MOS-Transistors gebildet wird.</p></div><div n="5" type="claim"><p xml:id="_64206">Verfahren nach Anspruch 1 oder 3, weiterhin mit dem Schritt des
+Bildens eines zweiten Oxidfilms (16) zwischen dem Halbleitersubstrat (10)
+und dem Antioxidations-Isolierfilm (18).</p></div><div n="6" type="claim"><p xml:id="_38ac9">Verfahren nach Anspruch 1 oder 3, wobei der Gateisolierfilm (24)
+dünner als der erste Oxidfilm (22) ist.</p></div><div n="7" type="claim"><p xml:id="_4f16e">Verfahren nach Anspruch 1 oder 3, wobei die Antioxidations-Isolierfilm
+(18) Siliziumnitrid aufweist, und der erste Oxidfilm (22)
+Siliziumoxid aufweist.</p></div></div><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_409aa">A method of manufacturing an integrated circuit having a charge coupled
+device and a first MOS transistor, comprising the steps of:
+<list type="simple"><item>preparing a semiconductor substrate (10) having a main surface including a
+first and a second area;</item><item>forming an anti-oxidation insulating film (18) on the surface of the first area;</item><item>selectively forming a first silicon layer on the anti-oxidation insulating film (18) to
+form a lower gate electrode (20) of the charge coupled device;</item><item>thermal oxidising the first silicon layer to form a first oxide film (22) having a first
+predetermined thickness;</item><item>forming a conductive layer as an upper gate electrode (30) of the charge
+coupled device continuously over the anti-oxidation insulating film (18) and the first oxide
+film (22); and</item><item>forming a gate insulating film (24) of the first MOS transistor of a second
+predetermined thickness on the surface of the second area, characterised in that the first
+oxide film (22) and the gate insulating film (24) are formed independently.</item></list></p></div><div n="2" type="claim"><p xml:id="_6989a">A method according to claim 1, wherein the silicon layer is also formed on the
+surface of the second area as a gate electrode of the MOS transistor.</p></div><div n="3" type="claim"><p xml:id="_227af">A method according to claim 1, wherein the method further comprises the
+steps of:
+<list type="simple"><item>preparing a third area on the main surface of the semiconductor substrate (10);</item><item>forming the anti-oxidation insulating film (18) on the surface of the third area;
+and</item><item>selectively forming a second silicon layer on the anti-oxidation insulating film
+(18) of the third area as a gate electrode (52) of a second MOS transistor.</item></list></p></div><div n="4" type="claim"><p xml:id="_1bb36">A method according to claim 1 or 3, wherein the conductive layer is also
+formed on the surface of the second area as a gate electrode (28) of the first MOS
+transistor.</p></div><div n="5" type="claim"><p xml:id="_efb47">A method according to claim 1 or 3, further comprising a step of forming a
+second oxide film (16) between the semiconductor substrate (10) and the anti-oxidation
+insulating film (18).</p></div><div n="6" type="claim"><p xml:id="_08b29">A method according to claim 1 or 3, wherein the gate insulating film (24) is
+thinner than the first oxide film (22).</p></div><div n="7" type="claim"><p xml:id="_c8d91">A method according to claim 1 or 3, wherein the anti-oxidation insulating film
+(18) comprises silicon nitride and the first oxide film (22) comprises silicon oxide.</p></div></div><div type="claims" xml:lang="fr"><div n="1" type="claim"><p xml:id="_e381b">Procédé de fabrication d'un circuit intégré comportant un dispositif
+à couplage de charge et un premier transistor MOS, comprenant les étapes
+de:
+<list type="simple"><item>préparation d'un substrat semiconducteur (10) comportant une surface
+principale incluant des première et seconde zones;</item><item>formation d'un film isolant anti-oxydation (18) sur la surface de la
+première zone;</item><item>formation sélective d'une première couche de silicium sur le film
+isolant anti-oxydation (18) afin de former une électrode de grille
+inférieure (20) du dispositif à couplage de charge;</item><item>oxydation thermique de la première couche de silicium afin de former
+un premier film d'oxyde (22) présentant une première épaisseur
+prédéterminée;</item><item>formation d'une couche conductrice en tant qu'électrode de grille
+supérieure (30) du dispositif à couplage de charge en continu au-dessus du
+film isolant anti-oxydation (18) et du premier film d'oxyde (22); et</item><item>formation d'un film d'isolation de grille (24) du premier transistor
+MOS d'une seconde épaisseur prédéterminée sur la surface de la seconde
+zone, caractérisé en ce que le premier film d'oxyde (22) et le film
+d'isolation de grille (24) sont formés indépendamment.</item></list></p></div><div n="2" type="claim"><p xml:id="_28f6f">Procédé selon la revendication 1, dans lequel la couche de silicium
+est également formée sur la surface de la seconde zone en tant qu'électrode
+de grille du transistor MOS.</p></div><div n="3" type="claim"><p xml:id="_c99ef">Procédé selon la revendication 1, dans lequel le procédé comprend en
+outre les étapes de:
+<list type="simple"><item>préparation d'une troisième zone sur la surface principale du
+substrat semiconducteur (10);</item><item>formation du film isolant anti-oxydation (18) sur la surface de la
+troisième zone; et</item><item>formation sélective d'une seconde couche de silicium sur le film
+isolant anti-oxydation (18) de la troisième zone en tant qu'électrode de
+grille (52) d'un second transistor MOS.</item></list></p></div><div n="4" type="claim"><p xml:id="_8458b">Procédé selon la revendication 1 ou 3, dans lequel la couche
+conductrice est également formée sur la surface de la seconde zone en tant
+qu'électrode de grille (28) du premier transistor MOS.</p></div><div n="5" type="claim"><p xml:id="_cbd3e">Procédé selon la revendication 1 ou 3, comprenant en outre une étape
+de formation d'un second film d'oxyde (16) entre le substrat semiconducteur
+(10) et le film isolant anti-oxydation (18).</p></div><div n="6" type="claim"><p xml:id="_0619d">Procédé selon la revendication 1 ou 3, dans lequel le film
+d'isolation de grille (24) est plus mince que le premier film d'oxyde (22).</p></div><div n="7" type="claim"><p xml:id="_af017">Procédé selon la revendication 1 ou 3, dans lequel le film isolant
+anti-oxydation (18) comprend du nitrure de silicium et le premier film
+d'oxyde (22) comprend de l'oxyde de silicium.</p></div></div><div type="description" xml:lang="en"><head xml:id="_c0eee">BACKGROUND OF THE INVENTION</head><head xml:id="_e0563">Field of the invention</head><p xml:id="_6a1dd">The present invention relates, in general, to integrated
+circuits and methods for manufacturing thereof. More
+specifically, the invention relates to a charge coupled
+device (CCD) which has a lower gate electrode and an upper
+gate electrode and a method for manufacturing thereof.</p><head xml:id="_07a7c">Description of the prior art</head><p xml:id="_55769">In general, a CCD device has a plurality of lower gate
+electrodes and a plurality of upper gate electrodes. The
+lower gate electrodes are formed on a semiconductor
+substrate via a gate insulating film. The upper gate
+electrodes are also formed on the semiconductor substrate
+via a gate insulating film and are located between the lower
+gate electrodes. The upper gate electrodes and the upper
+gate insulating film are partly overhanging and adjacent to
+lower gate electrodes. During the operation of the CCD, 
+relatively high voltage (ex. 9 or 12 volts) is applied across each of the lower gate
+insulating film and the upper gate insulating film.</p><p xml:id="_f2f0a">On the other hand, the CCD is usually formed with MOS transistors, each
+having a gate insulating film, in the semiconductor substrate as an integrated circuit. In
+this case, the gate insulating film of the MOS transistor is formed by the same process
+as for either the lower gate insulating film or the upper gate insulating film. For
+example, GB 1 418 231 discloses formation of a continuous non-oxidizable layer
+forming the gate insulating film of the MOS transistor and the lower gate insulating
+film and JP61-158170 discloses formation of the gate insulating film of the MOS
+transistor simultaneously with formation of the upper gate insulating film. During the
+operation of the MOS transistors, relatively low voltage (ex. 5 volts) is applied across
+the MOS gate insulating film.</p><p xml:id="_de12d">In the prior art integrated circuit which has CCD and MOS transistors, if the
+MOS gate insulating film is made thinner with the aim of increasing the integration of
+MOS transistor portion according to the scaling rule, the lower gate insulating film or
+the upper gate insulating film also becomes thinner due to the aforementioned
+manufacturing process. In this type of CCD, it causes insulation breakdown in the
+lower gate insulating film or the upper gate insulating film. Thus, increasing the
+integration without causing insulation breakdown is difficult.</p><p xml:id="_c327f">In addition, because the lower gate insulating film and the upper gate insulating
+film of the prior art CCD are formed in different manufacturing steps, it is difficult to
+equalise the characteristics of the two insulating films of the CCD and to improve the
+data transfer performance of the CCD.</p><p xml:id="_5a334">In addition, because the upper gate electrode is overlapped with the lower gate
+electrode via the upper gate insulating film, insulation breakdown between lower and
+upper gate electrodes of the prior art CCD may occur. </p><p xml:id="_bf361">Formation of a CCD and MOS transistor on a substrate, the CCD being
+formed on a multilayer structure of a SiO2, SiN, SiO2 layers on a first area and the
+MOS transistor being formed on a SiO2 layer on a second area of the substrate is
+known from EP-A-0384692.</p><p xml:id="_ae6ad">It is an object of the present invention to provide a CCD which has high
+breakdown voltage gate insulating film.</p><p xml:id="_0e4d1">It is another object of the present invention to provide a CCD which has
+equalised characteristics of lower and upper gate insulating films.</p><p xml:id="_041f5">It is a further object of the present invention to provide an improved method
+for manufacturing a CCD.</p><p xml:id="_f8df5">To accomplish the objects described above, the present invention provides a
+method of manufacturing an integrated circuit having a charge coupled device and a
+MOS transistor, comprising the steps of:
+preparing a semiconductor substrate having a main surface including a first
+and a second area;forming an anti-oxidation insulating film on the surface of the first area;selectively forming a silicon layer on the anti-oxidation insulating film to form
+a lower gate electrode of the charge coupled device;thermal oxidising the silicon layer to form an oxide film having a first
+predetermined thickness; forming a conductive layer as an upper gate electrode of the charge coupled
+device continuously over the anti-oxidation insulating film and the oxide film; andforming a gate insulating film of the MOS transistor of a second
+predetermined thickness on the surface of the second area, wherein the oxide film and
+the gate insulating film are formed independently.</p><p xml:id="_5d239">The accompanying drawings, which are incorporated in and constitute a part
+of the specification, illustrate embodiments of the invention, and, together with the
+description, serve to explain the principles of the invention. Referring now to the
+drawings, like reference characters designate like or corresponding parts throughout
+the several views.</p> <p xml:id="_d6078">Of the drawings:
+Fig. 1 to 8 are cross section views showing the steps for manufacturing the
+first embodiment of this invention; and Fig. 9 to 16 are cross section views showing the steps for manufacturing the
+second embodiment of this invention.  </p><head xml:id="_c0091">DETAILED DESCRIPTION OF THE PREFERRED EMBODIMENTS</head><head xml:id="_57437">First Embodiment</head><p xml:id="_d4055">Figures 1 to 8 are respectively cross section drawings showing the
+manufacturing process sequence for the integrated circuit concerned in a first
+embodiment of this invention. </p><p xml:id="_bc92e">First, as shown in Figure 1, n type impurity ions are
+implanted into the intended sites of formation of P-channel
+MOS transistors in p type silicon substrate 10 of
+resistivity approximately 20 [Ω·cm].</p><p xml:id="_de0b4">Next, n type well 12 is formed by thermal diffusion of
+the implanted ions. Then, channel stopper 13 and field
+oxide films 14 are formed on the surface of substrate 10 by
+the local oxidation of silicon (LOCOS) method, which is one
+of the most common isolation methods. Next, the surface of
+silicon substrate 10 to be exposed is oxidized in a mixed
+oxidation atmosphere of hydrochloric acid and oxygen, and
+first silicon oxide film 16 is formed with a thickness of
+approximately 70 [nm]. Then, silicon nitride film 18 with a
+thickness of approximately 70[nm] is formed over first
+silicon oxide film 16 by vapor phase reaction using a method
+such as low-pressure chemical vapor deposition (LPCVD).
+The formed insulating film composed by oxide film 16 and
+nitride film 18 later becomes the gate insulating film of
+the CCD.</p><p xml:id="_ea2e9">Next, as shown in Figure 2, phosphorus, which is an n
+type impurity, is implanted into the intended site for the
+formation of the CCD on substrate 10 so that the CCD will
+become a buried channel type CCD, using a photo-resist (not
+shown) as a mask.</p><p xml:id="_9b6ad">Then, an undoped first layer of polysilicon of thickness
+approximately 400 [nm] is formed by the CVD method above 
+substrate 10. Next, the first layer poly-silicon is made
+n+ type, (conductive) by diffusing phosphorus, which is an n
+type impurity, at a temperature of approximately 950°C.
+Then, the first layer poly-silicon, which has been made n+
+type, is patterned using photo-etching and reactive ion
+etching (RIE) techniquies, and lower gate electrodes 20 of
+the CCD are formed.</p><p xml:id="_90721">Next, as shown in Figure 3, the surfaces of the lower
+gate electrodes 20 made of n+ type first layer polysilicon
+are selectively oxidized in a mixed oxidation atmosphere of
+hydrochloric acid and oxygen at a temperature of
+approximately 950°C, using silicon nitride film 18 as an anti-oxidation
+insulating film. By this means, second silicon
+oxide films 22 with a thickness of approximately 300 [nm]
+are formed around the surfaces of lower gates 20. These
+oxide films 22 later become the insulating films which
+isolate the lower gates and the upper gates of the CCD.</p><p xml:id="_c5baa">Next, as shown in Figure 4, silicon nitride film 18 on
+the intended sites for the formation of the P-channel MOS
+transistors and the N-channel MOS transitors is removed,
+using a photo-resist (not shown) as a mask. Furthermore,
+first silicon oxide 16 is also removed.</p><p xml:id="_ee096">Then, as shown in Figure 5, the exposed surfaces of
+silicon substrate 10 are oxidized in a mixed oxidation
+atmosphere of hydrochloric acid and oxygen at a temperature
+of approximately 950°C, and third silicon oxide films 24 with 
+thicknesses of approximately 45 [nm] are formed. These
+oxide films 24 become the gate insulating films of the P-channel
+and the N-channel MOS transistors. Next, ion
+implantation for controlling the threshold voltages of the P-channel
+and the N-channel MOS transistors and ion
+implantation for making potential barriers for the CCD
+(formed beneath the upper gates and not shown) are
+respectively carried out by restricting the implantation
+areas with photo-resists. The ion type used for both these
+ion implantation is boron. Then, undoped second layer
+polysilicon is formed above substrate 10 with a thickness of
+approximately 400 [nm] by the CVD method. Next, this is
+made n+ type by diffusing phosphorus, which is an n type
+impurity, in the second layer polysilicon at a temperature
+of approximately 950°C. Then, the second layer polysilicon
+which has been made n+ type, is patterned by the RIE
+technique using photo-resists 26 as masks, and gate
+electrodes 28 of the P-channel and the N-channel MOS
+transistors and upper gate electrodes 30 of the CCD are
+formed.</p><p xml:id="_76bbe">Next, as shown in Figure 6, using an etchant which has a
+high selectivity between silicon nitride film and silicon
+oxide film, silicon nitride film 18 is selectively removed
+from above the intended sites for the formation of the
+source and the drain diffusion regions of the CCD, using
+photo-resists 26 and the silicon oxide films as masks. </p><p xml:id="_3f710">Then, as shown in Figure 7, silicon oxide films 16 and
+24, which are on the intended sites for the formation of the
+source and the drain diffusion regions of the MOS
+transistors and of the CCD, are selectively removed. After
+this, photo-resist 26 is removed. Next, arsenic is
+selectively ion-implanted, using a photo-resist (not shown)
+as a mask, in order to form the source and the drain
+diffusion regions of the N-channel MOS transistors and of
+the CCD. Then, after the photo-resist has been removed, a
+thin oxide film is formed at a temperature of approximately
+900°C. Next, in order to form the source and the drain
+diffusion region of the P-channel MOS transistor, boron is
+selectively ion-implanted, using a photo-resist (not shown)
+as a mask. N type diffusion regions 34 which become the
+source and the drain diffusion regions of the N-channel MOS
+transistor, n type diffusion regions 36 which become the
+source and of the drain diffusion regions of the CCD, and p
+type diffusion regions 32 which become the source and the
+drain regions of the P-channel MOS transistor are
+respectively obtained by these ion implantations.</p><p xml:id="_ccd80">Then, as shown in Figure 8, a CVD silicon oxide film is
+formed over the whole surface of the substrate by the CVD
+method. Next, a BPSG film is formed over this CVD silicon
+oxide film by changing the gas. By this means, an inter-layer
+insulating film 38 composed of the CVD silicon oxide
+film and the BPSG film is formed. Then, this is heat-treated 
+at a temperature of approximately 950°C. By this
+heat-treatment, the smoothing of the inter-layer insulating
+film 38 and phosphorus-gettering by the BPSG film are
+performed while, at the same time, p type diffusion region
+32 and n type diffusion regions 34 and 36 are activated.
+Next, using photo-etching and RIE techniques, contact holes
+passing through the inter-layer insulating film 38 on p type
+diffusion region 32 and n type diffusion regions 34 and 36
+are selectively opened. Then, an alloy made of aluminum
+and silicon is deposited on the inter-layer insulating film
+38, using the spattering technique. Next, this alloy film
+is patterned using photo-etching and RIE techniques, and the
+desired metal wiring 40 is formed. After this, the alloy
+which forms metal wiring 40 is sintered in a mixed gas
+atmosphere of nitrogen and hydrogen (forming gas) at a
+temperature of approximately 450°C for about 15 minutes.</p><p xml:id="_3bf45">The integrated circuit concerned in the first embodiment
+is formed by the above method.</p><p xml:id="_31b09">Using a device with the above construction, the gate
+insulating films of the CCD can be made thick and can also
+be made with silicon nitride film and silicon oxide film,
+regardless of the film thickness of the gate insulating
+films of the MOS transistors. By this means, the breakdown
+voltage between lower and upper gates 20 arid 30 of the CCD
+and substrate 10 is increased. Furthermore, the breakdown
+voltage between lower gates 20 and upper gates 30 also are 
+increased by second silicon oxide films 22 which have been
+thickly formed using a silicon nitride film as the anti-oxidation
+insulating film. From these results, the
+breakdown voltage of the CCD is improved as a whole.</p><p xml:id="_4a265">Also, the gate insulating films of lower gates 20 and the
+gate insulating films of upper gates 30 are composed of the
+same material and are formed in the same process.
+Therefore, there is no difference in the film qualities and
+film thicknesses of the gate insulating films of the lower
+and upper gates, and a CCD with high reliability and high
+performance can be obtained. The yield is also increased.</p><p xml:id="_6c19d">In addition, in the CMOS circuit section composed of the
+MOS transistors, a gate insulating film made from a third
+silicon oxide film which is different from the gate
+insulating films of the CCD can be obtained. For this
+reason, its film thickness can be freely determined without
+any interference with the formation of the CCD gate
+insulating films and the film thickness can be made thinner.
+By this means, the miniaturization of the MOS transistors
+can be designed. Also, addition or expansion of functions
+and speeding-up of operation in the integrated circuit can
+be easily achieved.</p><head xml:id="_2bd8d">Second Embodiment</head><p xml:id="_020b8">The second embodiment is an example in which this
+invention is applied to a integrated circuit provided with 
+high breakdown voltage type MOS transistors for analog
+circuits such as an output circuits of operational
+amplifiers.</p><p xml:id="_a8e17">Figures 9 to 16 are respectively cross section drawings
+showing the manufacturing process sequence for the
+integrated circuit concerned in the second embodiment of
+this invention. In Figures 9 to 16, the same reference
+numbers are given to the same components as in Figure 1 to
+8.</p><p xml:id="_c2286">First, as shown in Figure 9, n type wells 12 and 50 are
+respectively formed in p type silicon substrate 10 by the
+same method as that described in Figure 1. Next, after
+field oxide films 14 have been formed, first silicon oxide
+films 16 are formed on the surface of substrate 10 to be
+exposed, and silicon nitride film 18 is continuously formed
+on these.</p><p xml:id="_b3650">Then, as shown in Figure 10, an undoped first layer of
+polysilicon of thickness approximately 400 [nm] is formed by
+the CVD method above substrate 10, using the same method as
+that described in Figure 2, and after this it is made n+
+type (conductive). Next, the first layer polysilicon,
+which has been made n+ type, is patterned using photo-etching
+and RIE techniques, and lower gates 20 of the CCD
+and gates 52 of high breakdown voltage type P-channel and N-channel
+MOS transistors are respectively formed.</p><p xml:id="_e8a25">Then, as shown in Figure 11, the surfaces of lower gates 
+20 and gates 52 only are selectively and comparatively
+thickly oxidised, using silicon nitride film 18 as an anti-oxidation
+insulating film, by the same method as that in
+Figure 3, and second silicon oxide films 22 with a thickness
+of approximately 300 [nm] are formed around the gates 20 and
+52.</p><p xml:id="_f7439">Next, as shown in Figure 12, silicon nitride film 18 and
+first silicon oxide film 16 on the intended sites for the
+formation of the P-channel MOS transistor and the N-channel
+MOS transistor other than the high breakdown voltage types
+(hereafter called the common types) are removed, by the same
+method as that described in Figure 4.</p><p xml:id="_40077">Then, as shown in Figure 13, third silicon oxide films 24
+are formed on the intended sites for the formation of the
+common type MOS transistors by the same method as that
+described in Figure 5. Next, undoped second layer
+polysilicon is formed above the substrate with a thickness
+of approximately 400 [nm] by the CVD method. After this,
+it is made n+ type. Then, second layer polysilicon which
+has been made n+ type, is patterned by the RIE technique
+using photoresists 26 as masks, and gates 28 of the common
+type P-channel and N-channel MOS transistors and upper gates
+30 of the CCD are formed.</p><p xml:id="_b2977">Next, as shown in Figure 14, silicon nitride film 18 is
+selectively removed from above the intended sites for the
+formation of the source and the drain diffusion regions of 
+the high breakdown voltage type MOS transistors and the
+source and the drain diffusion regions of the CCD, using an
+etchant with high selectivity between silicon nitride film
+and silicon oxide film and using photo-resists 26 and the
+silicon oxide films as masks, by the same method as that
+described in Figure 6.</p><p xml:id="_0de00">Then, as shown in Figure 15, silicon oxide films 16 and
+24, which are on the intended sites for the formation of the
+source and the drain diffusion regions of the MOS
+transistors and of the CCD, are selectively removed by the
+same method as that described in Figure 7. After this,
+arsenic is selectively ion-implanted, using a photo-resist
+(not shown) as a mask, in order to form the source and the
+drain diffusion regions of the N-channel MOS transistors and
+of the CCD. Then, after the photo-resist has been removed,
+a thin oxide film is formed at a temperature of
+approximately 900°C. Next, in order to form the source and
+the drain diffusion regions of the P-channel MOS
+transistors, boron is selectively ion-implanted, using a
+photo-resist (not shown) as a mask. N type diffusion
+regions 34 and 56 which become the source and the drain
+diffusion regions of the N-channel MOS transistors, n-type
+diffusion regions 36 which become the source and the drain
+diffusion regions of the CCD, and p type diffusion regions
+32 and 54 which become the source and the drain regions of
+the P-channel MOS transistors are respectively obtained by 
+these ion implantations.</p><p xml:id="_e4473">Then, as shown in Figure 16, inter-layer insulating film
+38 composed of a CVD silicon oxide film and a BPSG film is
+formed by the CVD method over the whole surface of the
+substrate. Next, this is heat-treated and the smoothing of
+the inter-layer insulating film 38 and phosphorus-gettering
+by the BPSG film are performed while, at the same time, p
+type diffusion regions 32 and 54 and n type diffusion
+regions 34, 36 and 56 are activated. Next, contact holes
+passing through the inter-layer insulating film 38 on the p
+type diffusion regions 32 and 54 and n type diffusion
+regions 34, 36 and 56 are selectively opened. After this,
+an alloy made of aluminum and silicon is deposited on inter-layer
+insulating film 38. Next, this alloy film is
+patterned and the desired metal wiring 40 is formed. After
+this, the alloy which forms metal wiring 40 is sintered.</p><p xml:id="_53c8d">The integrated circuit concerned in the second embodiment
+is formed by the above method.</p><p xml:id="_c8cce">Using a device with the above construction, in the same
+way as in the first embodiment, comparatively thick
+insulating films can be formed for the gate insulating films
+of the CCD, and thinner insulating films than these can be
+formed for the gate insulating films of the common type MOS
+transistors, respectively. Thus, improvement of the
+breakdown voltage of the CCD and miniaturization of the CMOS
+circuit section can be achieved. Furthermore, by using the 
+silicon nitride film and the silicon oxide film which forms
+the gate insulating films of the CCD as the gate insulating
+film of the high breakdown voltage type MOS transistors,
+there is no increase in processes, and the high breakdown
+voltage type MOS transistors can be formed on the same chip.
+These high breakdown voltage type MOS transistors can be
+used in any desired CMOS analog circuit which uses high
+breakdown voltage, such as output circuits of operational
+amplifiers. Also, the above common type MOS transistors
+can be used in CMOS digital circuits. By this means, CMOS
+analog circuits can be formed with high breakdown voltage
+MOS transistors and also CMOS digital circuits can be formed
+with highly integrated, high operating speed MOS
+transistors. Thus, an integrated circuit system with even
+higher performance can be achieved.</p><p xml:id="_35061">The present invention has been described with respect to
+specific embodiments. However, other embodiments based on
+the principles of the present invention should be obvious to
+those of ordinary skill in the art.</p><p xml:id="_4966b">For instance, n+ type polysilicon was used in the
+conductive layer which forms the gates. However, it is
+also possible to use such other materials as high melting
+point metal silicides and laminated films of high melting
+point metal silicides and polysilicon (polycides). Also, a
+silicon nitride film was used as the anti-oxidation 
+insulating film for selectively oxidizing only the surfaces
+of the gates which were formed with these types of
+conductive layer. However, it is also possible to use
+other types of anti-oxidation insulating films. At this
+time, it is desirable from the viewpoint of simplified
+production processing and improved breakdown voltage that
+the anti-oxidation insulating films have, as far as
+possible, the same insulation as the silicon nitride film
+and can be applied as the CCD and high breakdown voltage
+type MOS transistor gate insulating films.</p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

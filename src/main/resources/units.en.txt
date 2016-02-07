@@ -1,0 +1,66 @@
+m	LENGTH	SI_BASE	metre,meter
+th	LENGTH	IMPERIAL	thou
+in	LENGTH	IMPERIAL	inch
+ft	LENGTH	IMPERIAL	foot
+yd	LENGTH	IMPERIAL	yard
+ch	LENGTH	IMPERIAL	chain
+fur	LENGTH	IMPERIAL	furlong
+mi	LENGTH	IMPERIAL	mile
+lea	LENGTH	IMPERIAL	league
+ftm	LENGTH	IMPERIAL	fathom
+kg	MASS	SI_BASE	kilogram
+t	MASS	NON_SI	ton,tonne
+gr	MASS	IMPERIAL	grain
+drc	MASS	IMPERIAL	dram
+oz	MASS	IMPERIAL	ounce
+lb	MASS	IMPERIAL	pound
+st	MASS	IMPERIAL	stone
+qtr	MASS	IMPERIAL	quarter
+cwt	MASS	IMPERIAL	hundredweight
+A	ELECTRIC_CURRENT	SI_BASE	ampere
+s	TIME	SI_BASE	second
+min	TIME	NON_SI	minute
+h	TIME	NON_SI	hour
+d	TIME	NON_SI	day
+	TIME	NON_SI	week
+	TIME	NON_SI	month
+	TIME	NON_SI	year
+	TIME	NON_SI	fortnight
+K	TEMPERATURE	SI_BASE	kelvin
+°C	TEMPERATURE	SI_DERIVED	celsius
+°F	TEMPERATURE	US	fahrenheit
+cd	LUMINOUS_INTENSITY	SI_BASE	candela
+mol	AMOUNT_OF_SUBSTANCE	SI_BASE	mole
+M	CONCENTRATION	NON_SI	molarity
+m	CONCENTRATION	NON_SI	molality
+mol/L	CONCENTRATION	NON_SI	molarity
+mol/m^3	CONCENTRATION	SI	molarity
+w/w%	CONCENTRATION	NON_SI	weigh/weight percent
+ppm	CONCENTRATION	NON_SI	parts per million
+ppb	CONCENTRATION	NON_SI	parts per billion
+m^3	VOLUME	SI	cubic meter,cubic metre
+l	VOLUME	NON_SI	litre,liter
+oz,fl oz,fl. oz.,oz. fl.	VOLUME	US,IMPERIAL	fluid ounce
+gi	VOLUME	US	gill
+c	VOLUME	US	cup
+pt	VOLUME	US	pint
+qt	VOLUME	US	quart
+gal	VOLUME	US	gallon
+cu in	VOLUME	US	cubic inch
+V	VOLTAGE	SI_DERIVED	volt
+F	ELECTRIC_CAPACITANCE	SI_DERIVED	farad
+Ω	ELECTRIC_RESISTANCE	SI_DERIVED	ohm
+S	ELECTRIC_CONDUCTANCE	SI_DERIVED	siemens
+J	ENERGY	SI_DERIVED	joule
+C	ELECTRIC_CHARGE	SI_DERIVED	coulomb
+H	INDUCTANCE	SI_DERIVED	henri
+W	POWER	SI_DERIVED	watt
+T	MAGNETIC_INDUCTION	SI_DERIVED	tesla
+Wb	MAGNETIC_FLUX	SI_DERIVED	weber
+dB	ATTENUATION	SI_DERIVED	decibel
+V/m	ELECTRIC_FIELD	SI_DERIVED	volt per metre, volt per meter
+A/m	MAGNETIC_FIELD_STRENGTH	SI_DERIVED	ampere per metre,ampere per meter
+rpm,round/min	FREQUENCY	NON_SI	round per minute
+rps,round/s	FREQUENCY	NON_SI	round per second
+Hz	FREQUENCY	SI	hertz
+cm^-1	ENERGY	SI_DERIVED	wavenumber, reciprocal centimeter

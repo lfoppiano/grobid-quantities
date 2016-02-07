@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">24698835</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">US</orgName></authority><idno type="docNumber">67250591</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910320</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">US67250591A</idno></monogr></biblStruct><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">US</orgName></authority><idno type="docNumber">672505</idno><imprint><date>19910320</date></imprint></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C04B24/38</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C12P19/04</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302148</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920312</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302148A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>RAKITSKY WALTER G</persName><residence><address><country type="national">US</country></address></residence></person><person role="inventor" type="epo"><persName>RICHEY DANNY D</persName><residence><address><country type="national">US</country></address></residence></person><person role="inventor" type="intermediate"><persName>RAKITSKY, WALTER G.</persName></person><person role="inventor" type="intermediate"><persName>RICHEY, DANNY D.</persName></person><person role="inventor" type="original"><persName>RAKITSKY, WALTER G.</persName><residence><address><addrLine>7271 Enders Avenue</addrLine><settlement>San Diego, CA 92122</settlement><country type="national">US</country></address></residence></person><person role="inventor" type="original"><persName>RICHEY, DANNY D.</persName><residence><address><addrLine>3763 Cascade Court</addrLine><settlement>San Diego, CA 92122</settlement><country type="national">US</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>MONSANTO CO</name><address><country type="national">US</country></address></item><item type="intermediate"><name>MONSANTO COMPANY</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>AT</country><country>BE</country><country>DE</country><country>DK</country><country>ES</country><country>FR</country><country>GB</country><country>GR</country><country>IT</country><country>NL</country><country>PT</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">C04B  24/00        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C04B  37/00        20060101CLI19981010BMRU        </classCode><classCode scheme="ipcr">C04B  28/02        20060101ALI19981010BMRU        </classCode><classCode scheme="ipcr">C08B  37/00        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">C08L   5/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">C04B  26/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">C04B  24/38        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C04B  26/28        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">C08L   5/00        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">C12P  19/04        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C12R   1/05        20060101ALN20051220RMJP        </classCode><classCode scheme="ipcr">C04B  28/00        20060101CLI19981010BMRU        </classCode><classCode scheme="ipcr">C12P  19/00        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C04B  37/00        20060101ALI19981010BMRU        </classCode><classCode scheme="ipcr">C08B  37/00        20060101CLI20051220RMJP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Welangummi mit hoher Hydratationsgeschwindigkeit</title><title type="invention-title" xml:lang="en">Rapidly hydrating welan gum</title><title type="invention-title" xml:lang="fr">Gomme welan à vitesse d'hydratation élevée</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505096</idno><imprint><classCode scheme="kindCode">B1</classCode><date>19960626</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505096B1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="1" type="claim"><p xml:id="_66913">Verfahren zur Herstellung eines rasch hydratisierenden 
+Welangummis, welches umfaßt: 
+<list type="simple"><item>a) Beimpfen geeigneter wässeriger Nährstoffmedien mit gramnegativen, 
+stäbchenförmigen Bakterien vom Stamm S-130; </item><item>b) aerobes Fermentieren der Bakterien bei einem pH zwischen 
+6,5 und 7,5; </item><item>c) Zusetzen von Calciumpropionat zur Brühe, Einstellen des 
+pH auf 10,5 bis 12,5 und Erhitzen der Fermentationsbrühe auf 
+eine Temperatur von 76,6°C bis 109,9°C (170°F bis 230°F) während 
+3 bis 20 Minuten; </item><item>d) Ausfällen des Heteropolysaccharids aus dem Fermentationsmedium; </item><item>e) Trocknen des Niederschlags; und </item><item>f) Mahlen des getrockneten Niederschlags. </item></list></p></div><div n="2" type="claim"><p xml:id="_664d2">Verfahren nach Anspruch 1, bei welchem Schritt (c) das Einstellen 
+des pH zwischen etwa 11 und 11,5 und Erhitzen der Brühe 
+auf eine Temperatur von etwa 98,8°C (210°F) während etwa 5 Minuten 
+umfaßt. </p></div><div n="3" type="claim"><p xml:id="_b5cd8">Verfahren nach Anspruch 2, bei welchem die Einstellung des 
+pH durch den Zusatz von KOH induziert wird. </p></div><div n="4" type="claim"><p xml:id="_a46bd">Verfahren nach Anspruch 3, bei welchem die Einstellung des 
+pH durch den Zusatz von 45 % KOH induziert wird. </p></div><div n="5" type="claim"><p xml:id="_63de7">Rasch hydratisierender Welangummi, welcher gemäß dem Verfahren 
+nach Anspruch 1 hergestellt wird. </p></div><div n="6" type="claim"><p xml:id="_0435d">Zementzusammensetzung, welche Wasser, Zement, Sand und 
+rasch hydratisierenden Welangummi nach Anspruch 5 umfaßt. </p></div><div n="7" type="claim"><p xml:id="_84cb3">Zusammensetzung nach Anspruch 6, welche Aggregat umfaßt. </p></div><div n="8" type="claim"><p xml:id="_42b67">Zusammensetzung nach Anspruch 6, welche eine Mineralmischung 
+umfaßt. </p></div><div n="9" type="claim"><p xml:id="_30654">Zusammensetzung nach Anspruch 6, welche Fasern umfaßt. </p></div><div n="10" type="claim"><p xml:id="_60dd6">Zusammensetzung nach Anspruch 6, welche Latex umfaßt. </p></div><div n="11" type="claim"><p xml:id="_9ea79">Zusammensetzung nach Anspruch 6, welche Dispergiermittel 
+umfaßt. </p></div><div n="12" type="claim"><p xml:id="_5d0a1">Zusammensetzung nach Anspruch 6, welche eine Luft einschließende 
+Mischung umfaßt.  
+ </p></div><div n="13" type="claim"><p xml:id="_850e1">Zusammensetzung nach Anspruch 6, welche einen Verzögerer 
+umfaßt. </p></div><div n="14" type="claim"><p xml:id="_193ec">Zusammensetzung nach Anspruch 6, welche einen Beschleuniger 
+umfaßt. </p></div><div n="15" type="claim"><p xml:id="_7dc1e">Zusammensetzung nach Anspruch 6, welche eine Flüssigkeitsverlustsmischung 
+umfaßt. </p></div></div><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_2e005">A process for preparing a rapidly 
+hydrating welan gum comprising: 
+<list type="simple"><item>a) inoculating a suitable aqueous 
+nutrient media with Strain S-130 gram-negative 
+rod-shaped bacteria; </item><item>b) aerobically fermenting the bacteria 
+at a pH of between 6.5 and 7.5; </item><item>c) adding calcium propionate to the 
+broth, adjusting the pH to 10.5-12.5 and 
+heating the fermentation broth at a temperature of 
+76.6°C-109.9°C (170°F-230°F) for 3-20 minutes; </item><item>d) precipitating the heteropolysaccharide 
+from the fermentation media; </item><item>e) drying the precipitate; and </item><item>f) milling the dried precipitate. </item></list></p></div><div n="2" type="claim"><p xml:id="_942e0">A process of Claim 1 wherein step (c) 
+comprises adjusting the pH to between about 11 and 
+11.5 and heating the broth at a temperature of about 98.8°C 
+(210°F) for about 5 minutes. </p></div><div n="3" type="claim"><p xml:id="_4228d">A process of Claim 2 wherein adjustment 
+of pH is induced by adding KOH. </p></div><div n="4" type="claim"><p xml:id="_c5efc">A process of Claim 3 wherein adjustment 
+of pH is induced by adding 45% KOH. </p></div><div n="5" type="claim"><p xml:id="_3700c">Rapidly hydrating welan gum prepared 
+according to the process of Claim 1. </p></div><div n="6" type="claim"><p xml:id="_3e115">A cement composition comprising water, 
+cement, sand and rapidly hydrating welan gum of 
+Claim 5.  
+ </p></div><div n="7" type="claim"><p xml:id="_299df">A composition of claim 6 comprising 
+aggregate. </p></div><div n="8" type="claim"><p xml:id="_6f44d">A composition of claim 6 comprising 
+mineral admixture. </p></div><div n="9" type="claim"><p xml:id="_a0759">A composition of claim 6 comprising 
+fiber. </p></div><div n="10" type="claim"><p xml:id="_ad00e">A composition of claim 6 comprising 
+latex. </p></div><div n="11" type="claim"><p xml:id="_0d856">A composition of claim 6 comprising 
+dispersant. </p></div><div n="12" type="claim"><p xml:id="_6d24e">A composition of claim 6 comprising an 
+air entraining admixture. </p></div><div n="13" type="claim"><p xml:id="_848fd">A composition of claim 6 comprising a 
+retarder. </p></div><div n="14" type="claim"><p xml:id="_da6c2">A composition of claim 6 comprising an 
+accelerator. </p></div><div n="15" type="claim"><p xml:id="_0e1a6">A composition of claim 6 comprising a 
+fluid loss admixture. </p></div></div><div type="claims" xml:lang="fr"><div n="1" type="claim"><p xml:id="_0f1b6">Procédé de préparation d'une gomme welan à 
+hydratation rapide comprenant : 
+<list type="simple"><item>a) l'inoculation d'une bactérie gram-négative 
+Souche S-130, en forme de bâtonnets, dans un milieu aqueux nutritif 
+convenable ; </item><item>b) la fermentation aérobie de la bactérie à un pH 
+compris entre 6,5 et 7,5 ; </item><item>c) l'addition de propionate de calcium au 
+bouillon de culture, l'ajustement du pH entre 10,5 et 12,5 puis le 
+chauffage du bouillon de fermentation à une température de 76,6 °C 
+à 109,9 °C (170 °F à 230 °F) pendant 3 à 20 minutes ; </item><item>d) la précipitation de l'hétéro-polysaccharide à 
+partir du milieu de fermentation ; </item><item>e) le séchage du précipité ; et </item><item>f) le broyage du précipité séché. </item></list></p></div><div n="2" type="claim"><p xml:id="_e3d4d">Procédé selon la revendication 1 dans lequel l'étape 
+(c) comprend l'ajustement du pH à une valeur comprise entre environ 
+11 et 11,5 puis le chauffage du bouillon à une température d'environ 
+98,8 °C (210 °F) pendant environ 5 minutes. </p></div><div n="3" type="claim"><p xml:id="_6f780">Procédé selon la revendication 2 dans lequel 
+l'ajustement du pH est provoqué par l'addition de KOH.  
+ </p></div><div n="4" type="claim"><p xml:id="_7ea25">Procédé selon la revendication 3 dans lequel 
+l'ajustement du pH est provoqué par l'addition de KOH à 45 % . </p></div><div n="5" type="claim"><p xml:id="_3867f">Gomme welan à hydratation rapide préparée 
+conformément au procédé de la revendication 1. </p></div><div n="6" type="claim"><p xml:id="_7b75e">Composition de ciment comprenant de l'eau, du 
+ciment, du sable et de la gomme welan à hydratation rapide selon la 
+revendication 5. </p></div><div n="7" type="claim"><p xml:id="_7a56b">Composition selon la revendication 6 comprenant 
+des agrégats. </p></div><div n="8" type="claim"><p xml:id="_a4bb5">Composition selon la revendication 6 comprenant 
+un adjuvant minéral. </p></div><div n="9" type="claim"><p xml:id="_534ba">Composition selon la revendication 6 comprenant 
+des fibres. </p></div><div n="10" type="claim"><p xml:id="_0948b">Composition selon la revendication 6 comprenant 
+du latex. </p></div><div n="11" type="claim"><p xml:id="_b074c">Composition selon la revendication 6 comprenant 
+un dispersant. </p></div><div n="12" type="claim"><p xml:id="_68bbf">Composition selon la revendication 6 comprenant 
+un adjuvant d' entraínement d'air. </p></div><div n="13" type="claim"><p xml:id="_f7a47">Composition selon la revendication 6 comprenant 
+un retardateur.  
+ </p></div><div n="14" type="claim"><p xml:id="_9c519">Composition selon la revendication 6 comprenant 
+un accélérateur. </p></div><div n="15" type="claim"><p xml:id="_91c62">Composition selon la revendication 6 comprenant 
+un adjuvant pour perte de fluide. </p></div></div><div type="description" xml:lang="en"><head xml:id="_6ab0d">BACKGROUND OF THE INVENTION</head><p xml:id="_fb597">Concrete compositions contain aggregate 
+(e.g., sand and rock), cement and water. When water 
+is added to the cement, a paste forms which hardens 
+over time to a solid structure. Various additives 
+have been used in cement compositions to modify their 
+properties. Long fibers such as asbestos reduce the 
+sagging of these pastes and thus is beneficial when 
+applying tiles to a vertical surface. Freezing point 
+depressants are used when cements are to be poured in 
+subfreezing temperatures.  
+ </p><p xml:id="_6f9d4">Bentonite clay has been used for this 
+purpose. Other polymers, such as the polyvinyl 
+alcohols and methyl methacrylates, have been used to 
+reduce friction when pumping these pastes and to 
+otherwise modify their workability. Fumed silica is 
+used as an additive to make stronger concrete with 
+reduced permeability. </p><p xml:id="_450ba">United States patent 4,963,668 describes 
+cement compositions comprising 0.01 to 0.9% welan gum 
+by weight of dry cement to improve workability, 
+suspension of aggregates, air entrainment, sag 
+resistance, flow characteristics and resistance to 
+water loss. </p><p xml:id="_7b93f">Incorporation of fluid-enhancing polymeric 
+material into cement-containing mixtures is difficult 
+when the fluid-enhancing material requires hydration. 
+Such hydration must be achieved by lowering the 
+initial amount of water used to mix the cement and 
+sand, hydrating the polymer with water, and then 
+adding the polymer/water dispersion to the initial 
+cement/sand/water mix to obtain a 
+cement/sand/water/polymer mixture having the desired 
+final weight ratio. </p><p xml:id="_abc6a">When water is held out of the concrete to 
+hydrate the polymer, the amount of water which can be 
+used to initially disperse cement and sand is 
+insufficient to form a uniform mix. Large golf and 
+bowling ball-size agglomerates form which do not 
+disperse even when the balance of the mixing water is 
+added. Furthermore, pre-hydration of the polymer 
+does not occur quickly enough to stay in 
+synchronization with the typical 60-90 second batch 
+plant mixing cycle. It is also impractical to have a  
+ 
+large quantity of hydrated polymer solution available 
+for inclusion into the concrete without significant 
+additional costs for preservation, mixing, and 
+storage. </p><p xml:id="_ad603">Addition of water containing hydrated 
+polymer to a dry cement/sand mixture such that the 
+desired cement/sand/water/polymer weight ratio is 
+achieved immediately is undesirable because the 
+polymer can interfere with early stages of cement 
+hydration and may impair mechanical properties of the 
+mixture. Such addition also makes dispersion of the 
+cement particles more difficult. </p><p xml:id="_b4798">The present invention is a rapidly hydrating 
+welan gum useful for improving cement workability. 
+The gum is an improvement over the prior art because 
+predispersion/prehydration of the gum prior to mixing 
+with concrete is not required in order to obtain a 
+uniform, workable mix. </p><head xml:id="_5f58f">SUMMARY OF THE INVENTION</head><p xml:id="_cf956">The invention is a rapidly hydrating welan 
+gum which is useful for situations where welan gum 
+addition in a pre-hydrated dipersion form is not 
+practical. </p><p xml:id="_20ef6">The gum has hydration characteristics 
+sufficient for it to be dry blended with cement and 
+other chemical additives or admixture such as an air 
+entraining agent, corrosion inhibitor, accelerator or 
+retarder, or as a dispersion in a carrier which is 
+typically a superplasticizer (dispersant), and then 
+added to a preformed cement/water pre-mix. The 
+preformed cement/water pre-mix may also contain 
+aggregate (e.g. sand and rock) sufficient for 
+concrete composition formation.  
+ </p><p xml:id="_2c1fe">The polymer does not swell and generate viscosity in 
+the carrier which makes it a convenient way to add 
+welan gum to cementitious products. Because of its 
+enhanced hydration properties, the polymer is able to 
+achieve full functionality under field make-up 
+conditions. Typical batch plant mixing cycles are 
+from 60-120 seconds at relatively low shear rates. </p><head xml:id="_3c75d">DETAILED DESCRIPTION OF THE INVENTION</head><p xml:id="_fb63a">Welan gum describes an industrial grade of a 
+microbial polysaccharide produced by the growth of 
+the Alcaligenes strain ATCC 31555 in a pure culture 
+fermentation using carbohydrates as a carbon source. 
+The product is recovered from the fermentation broth 
+by precipitation with alcohol. Welan gum is a 
+polysaccharide gum which comprises principally a 
+heteropolysaccharide containing the neutral sugars 
+D-glucose, D-glucuronic acid, L-rhamnose and 
+L-mannose and glycosidically linked acetyl ester 
+groups. The structure of this polysaccharide is 
+described in Jansson PE, Lindberg B, and Widmalm G 
+(1985) Carbohydrate Research 139, 217-223. </p><p xml:id="_0cbdd">The rapidly hydrating welan gum used in the 
+present invention is a novel form of welan gum. Kang 
+et al., United States Patent No. 4,342,866, describes 
+a procedure for making welan gum that does not have 
+hydration characteristics such as those of the 
+rapidly hydrating welan gum of the present invention. </p><head xml:id="_d934d">Preparation of rapidly hydrating welan gum</head><p xml:id="_0fb00">This gum is prepared by a procedure which 
+includes many of the steps used to prepare welan gum  
+ 
+described in US 4,342,866 (the welan gum hereinafter 
+referred to as "welan gum S-130′′), i.e., S-130 
+fermentation followed by precipitation, drying and 
+milling. However, the welan gum useful in the 
+present invention is obtained by modification of the 
+S-130 process. The modification involves adjustment 
+of the fermentation broth, prior to precipitation, to 
+a pH of between 10.5 and 12.5, preferably with 
+KOH or soda ash, more preferably 45% KOH, followed by 
+heating between 76.6°C (170°F) and 109.9°C (230°F) for approximately 
+3-20 minutes. Precipitation followed by 
+drying and milling occur in the normal manner. 
+Preferably, the pH is adjusted to between about 11 
+and 11.5, and the broth is heated for about 5 minutes 
+at 98.8°C (210°F). It is also preferable to add calcium 
+propionate, more preferably 0.2%, to the broth before 
+pH adjustment. </p><head xml:id="_8762f">Description of the Strains used for producing rapidly 
+hydrating welam gum</head><head xml:id="_2aa7e">A. Characteristics of Colonial Morpholopy</head><p xml:id="_291dd">On nutrient agar, small yellow colonies appear in 
+one day at at 30°C with the diameter reaching about 
+1.5 mm after 5 days' incubation. The colonies are 
+round, smooth, convex, mucoid, and opaque. The 
+yellow color becomes more deep and the texture of 
+colonies becomes hard after prolonged incubation. </p><p xml:id="_e281e">On YM agar, small mucoid yellow colonies appear 
+in one day and the diameter reaches about 3 mm after 
+5 days' incubation. The colonies are round, smooth, 
+convex, and opaque, but the top of the colonies are 
+flat. No membraneous hard texture is observed.  
+ </p><head xml:id="_12be7">B. Characteristics of Cell Morphology</head><p xml:id="_4440e">Strain S-130 is a gram-negative rod-shaped 
+bacterium. On nutrient agar the average size of the 
+cell is about 0.5-0.6 by 1.2-1.6 µm; ends of the 
+cells are tapered and curvature was often seen. The 
+size and shape of the cells do not change 
+significantly after prolonged incubation. </p><p xml:id="_f6952">On YM agar the average cell size is 0.6-0.8 by 
+1.6-2.0 µm, but the cell becomes longer (3-4 µm); 
+accumulation of PHB is significant. Motility is 
+positive. Flagella stains (modifed silver nitrate 
+method) show that the strain has mixed flagellation, 
+i.e., polar and lateral flagella, as well as 
+peritrichous flagella. </p><head xml:id="_a4345">C. Physiolopical and Biochemical Characteristics</head><p xml:id="_3dcd6">The following are results of tests employed: </p><p xml:id="_a17f2">Cytochrome oxidase is weak or negative; catalase 
+positive. </p><p xml:id="_c7523">Organism is capable of growth at 37° and 41°C, 
+but not at 43°C. </p><p xml:id="_01ced">Tolerance to 3.0% NaCl, but not to 6.5% NaCl. </p><p xml:id="_f3d70">Growth at pH between 5 and 12. </p><p xml:id="_2aac4">Aerobic acid but not gas was produced from 
+various carbohydrates, such as: 
+<figure><table cols="2"><row><cell>D-xylose</cell><cell>lactose </cell></row><row><cell>L-arabinose</cell><cell>maltose </cell></row><row><cell>D-glucose</cell><cell>melibiose </cell></row><row><cell>fructose</cell><cell>sucrose </cell></row><row><cell>galactose</cell><cell>trehalose </cell></row><row><cell>mannose</cell><cell>raffinose </cell></row></table></figure>  
+ 
+Litmus milk was reduced, but not peptonized. </p><p xml:id="_bdffe">ADH was positive, but not LDC, ODC, and PDA. </p><p xml:id="_1bf52">MR positive, but negative for VP, indole, 
+and urease. </p><p xml:id="_10eca">Esculin gelatin (weak) and Tween™ 80 (weak) 
+were hydrolyzed, but not casein, starch, cellulose, 
+pectin. </p><p xml:id="_c9634">No phosphatase, and haemolysis negative. </p><p xml:id="_cf4bf">0.1% triphenyltetrazolium chloride was not 
+inhibitory. </p><p xml:id="_42c55">Survival at 60°C for 30 minutes. </p><p xml:id="_1e3b8">Organisms grow on EMB agar and Tellurite 
+Blood, but not on SS and MacConkey agar. </p><head xml:id="_4d448">D. Antibiotic Susceptibility Test</head><p xml:id="_e3454">The strain S-130 is susceptible to the 
+following antibiotics. 
+<figure><table cols="2"><row><cell>Kanamycin</cell><cell>30 µg </cell></row><row><cell>Neomycin</cell><cell>30 µg </cell></row><row><cell>Chlortetracycline</cell><cell>5 µg </cell></row><row><cell>Novobiocin</cell><cell>30 µg </cell></row><row><cell>Erythromycin</cell><cell>15 µg </cell></row><row><cell>Tetracycline</cell><cell>30 µg </cell></row><row><cell>Gentamicin</cell><cell>10 µg </cell></row><row><cell>Carbenicillin</cell><cell>50 µg </cell></row></table></figure> 
+and not susceptible to: 
+<figure><table cols="2"><row><cell>Penicillin</cell><cell>10 units </cell></row><row><cell>Streptomycin</cell><cell>10 µg </cell></row><row><cell>Colistin</cell><cell>10 µg </cell></row><row><cell>Polymyxin B</cell><cell>300 units </cell></row></table></figure></p><head xml:id="_cebdb">E. Nutritional Characteristics</head><p xml:id="_e8846">Organic growth factors are not required and 
+ammonium salts serve as the sole nitrogen source. A 
+total of 30 organic compounds are utilized as sole 
+source of carbon and energy. Most carbohydrates are 
+utilized. </p><head xml:id="_60734">F. G + C Content of the DNA</head><p xml:id="_3c1d0">No DNA analysis was performed. </p><head xml:id="_a62ad">G. Identification by API System</head><p xml:id="_03e67">The strain could not be identified by this 
+system. </p><head xml:id="_b2154">H. Identification</head><p xml:id="_52e14">The strain S-130 is a gram-negative aerobic 
+rod-shaped organism. The mode of flagellation of the 
+organism is mixed; polar and peritrichous flagella 
+(possibly degenerate flagella) are seen. According 
+to Bergey's Manual (8th Edition), such organisms 
+belong as a member of the genus Alcaligenes.  
+ 
+<figure><table cols="4"><row><cell>Biochemical and Other Miscellaneous Tests Employed for the Strain S-130 </cell></row><row><cell>Oxidase: Kovac's</cell><cell>+(weak)</cell><cell>Hydrolysis of: </cell></row><row><cell>Pathotech</cell><cell>+(weak)</cell><cell>Gelatin</cell><cell>+(weak) </cell></row><row><cell/><cell/><cell>Casein</cell><cell>- </cell></row><row><cell>Catalase</cell><cell>+</cell><cell>Starch</cell><cell>- </cell></row><row><cell>OF medium: </cell></row><row><cell>Oxidative</cell><cell>+</cell><cell>Tween 80</cell><cell>+(weak) </cell></row><row><cell>Fermentative</cell><cell>-</cell><cell>Pectin</cell><cell>- </cell></row><row><cell>Gas from glucose</cell><cell>-</cell><cell>Alginate</cell><cell>NT </cell></row><row><cell>H2S production</cell><cell>-</cell><cell>Cellulose</cell><cell>- </cell></row><row><cell>TS1 from cystine</cell><cell>±</cell><cell>Chitin</cell><cell>- </cell></row><row><cell>Ammonium from</cell><cell>NT</cell><cell>DNA</cell><cell>NT </cell></row><row><cell>peptone </cell></row><row><cell>β-Galactosidase (ONPG)</cell><cell>+</cell><cell>Esculin</cell><cell>+ </cell></row><row><cell>Argnine dihydrolase</cell><cell>+ </cell></row><row><cell>Lysine</cell><cell>-</cell><cell>Growth on </cell></row><row><cell>decarboxylase</cell><cell/><cell>various media: </cell></row><row><cell>Ornithine decarboxylase</cell><cell>-</cell><cell>EMB agar</cell><cell>+ </cell></row><row><cell>Tryptophan deaminase</cell><cell>NT</cell><cell>MacConkey agar</cell><cell>- </cell></row><row><cell>Phenylalaline deaminase</cell><cell>-</cell><cell>SS agar</cell><cell>- </cell></row><row><cell>Urease</cell><cell>-</cell><cell>Mannitol salt agar</cell><cell>- </cell></row><row><cell>Indole</cell><cell>-</cell><cell>TCBS agar</cell><cell>- </cell></row><row><cell>MR test</cell><cell>+</cell><cell>Tinsdale tellurite </cell></row><row><cell>VP test</cell><cell>-</cell><cell>blood agar</cell><cell>+ </cell></row><row><cell>Nitrate reduction</cell><cell>-</cell><cell>Pseudosel agar</cell><cell>NT </cell></row><row><cell>Nitrite reduction</cell><cell>- </cell></row><row><cell>Denitrification</cell><cell>NT</cell><cell>Pigment production: </cell></row><row><cell>N2-fixation:</cell><cell/><cell>King A medium</cell><cell>- </cell></row><row><cell>Growth in Burk's medium</cell><cell>+</cell><cell>King B medium</cell><cell>- </cell></row><row><cell>Nitrogenase activity</cell><cell>NT </cell></row><row><cell>Malonate (oxidation)</cell><cell>-</cell><cell>Dry reaction: </cell></row><row><cell>Phosphatase</cell><cell>-</cell><cell>Congo red</cell><cell>- </cell></row><row><cell>Haemolysis (sheep blood)</cell><cell>- </cell></row><row><cell>Litmus milk: acid, </cell></row><row><cell>reduction only </cell></row><row><cell>3-ketolactose </cell></row><row><cell>production</cell><cell>- </cell></row><row><cell>Survival at 60°C </cell></row><row><cell>for 30 min.</cell><cell>+ </cell></row><row><cell>TSI: Slant</cell><cell>Acid </cell></row><row><cell>Butt</cell><cell>No growth </cell></row><row><cell>Gas</cell><cell>- </cell></row><row><cell>Egg Yolk Reaction</cell><cell>- </cell></row><row><cell>+ = positive </cell></row><row><cell>- = negative </cell></row><row><cell>NT = not tested </cell></row></table></figure></p><head xml:id="_4995c">Fermentation conditions</head><p xml:id="_9aebc">Heteropolysaccharide is produced during the 
+aerobic fermentation of suitable aqueous nutrient 
+media under controlled conditions via inoculation 
+with the organism of the unnamed Alcaligenes 
+species. The media contain sources of carbon, 
+nitrogen and inorganic salts. </p><p xml:id="_d5ead">In general, carbohydrates (for example, 
+glucose, fructose, maltose, sucrose, xylose, mannitol 
+and the like) can be used either alone or in 
+combination as sources of assimilable carbon in the 
+nutrient medium. The exact quantity of the 
+carbohydrate source or sources utilized in the medium 
+depends in part upon the other ingredients of the 
+medium but, in general, the amount of carbohydrate 
+usually varies between about 2% and 5% by weight of 
+the medium. Preferably 3% glucose is used. These 
+carbon sources can be used individually, or several 
+such carbon sources may be combined in the medium. 
+In general, many proteinaceous materials may be used 
+as nitrogen sources in the fermentation process. 
+Suitable nitrogen sources include, for example, yeast 
+hydrolysates, primary yeast, soybean meal, cottonseed 
+flour, hydrolysates of casein, corn steep liquor, 
+distiller's solubles and the like. The sources of 
+nitrogen, either alone or in combination, are used in 
+amounts ranging from about 0.05% to 0.5% by weight of 
+the aqueous medium. </p><p xml:id="_5a19e">Among the nutrient inorganic salts which can 
+be incorporated in the culture media are the  
+ 
+customary salts capable of yielding sodium, 
+potassium, ammonium, calcium, phosphate, sulfate, 
+chloride, carbonate, and the like ions. Also 
+included are trace metals such as cobalt, manganese, 
+iron and magnesium. </p><p xml:id="_1bdcc">It should be noted that the media described 
+in the examples are merely illustrative of the wide 
+variety of media which may be employed, and are not 
+intended to be limitative. </p><p xml:id="_c5c32">As an alternative medium, S-130 may be grown 
+under low Ca++ conditions, i.e., in deionized water, 
+or some other aqueous system substantially free of 
+Ca++ ions (i.e., less than about 4ppm Ca++ per 1% gum 
+in the final fermentor broth). </p><p xml:id="_00c6c">The fermentation is carried out at 
+temperatures ranging from about 25°C to 35°C; 
+however, for optimum results it is preferable to 
+conduct the fermentation at temperatures of from 
+about 28°C to 35°C. The pH of the nutrient media for 
+growing the Alcaligenese culture and producing the 
+polysaccharide S-130 can vary from about 6.5 to 7.5. </p><p xml:id="_98828">A small scale fermentation is conveniently 
+carried out by inoculating a suitable nutrient medium 
+with the culture, and after transfer to a production 
+medium permitting the fermentation to proceed at a 
+constant temperature of about 30°C on a shaker for 
+several days. </p><p xml:id="_1024a">The fermentation is initiated in a 
+sterilized flask of medium via one or more stages of 
+seed development. The nutrient medium for the seed 
+stage may be any suitable combination of carbon and  
+ 
+nitrogen sources. The seed flask is shaken in a 
+constant temperature chamber at about 30°C for 1-2 
+days, or until growth is satisfactory, and some of 
+the resulting growth is used to inoculate either a 
+second stage seed or the production medium. 
+Intermediate stage seed flasks, when used, are 
+developed in essentially the same manner; that is, 
+part of the contents of the flask from the last seed 
+stage are used to inoculate the production medium. 
+The inoculated flasks are shaken at a constant 
+temperature for several days, and at the end of the 
+incubation period the contents of the flasks are 
+recovered by precipitation with a suitable alcohol 
+such as isopropanol. </p><p xml:id="_a0a9c">For large scale work, it is preferable to 
+conduct the fermentation in suitable tanks provided 
+with an agitator and a means of aerating the 
+fermentation medium. According to this method, the 
+nutrient medium is made upin the tank and sterilized 
+by heating at temperatures of up to about 121°C. 
+Upon cooling, the sterilized medium is inoculated 
+with a previously grown seed of the producing 
+culture, and the fermentation is permitted to proceed 
+for a period of time as, for example, from 2 to 4 
+days while agitating and/or aerating the nutrient 
+medium and maintaining the temperature at about 
+30°C. This method of producing the 
+heteropolysaccharide is particularly suited for the 
+preparation of large quantities.  
+ </p><head xml:id="_ea1c1">Post-fermentation</head><p xml:id="_e061f">After fermentation, calcium propionate is 
+preferably added to the fermentation broth, and the 
+fermentation broth is adjusted to a pH of between 
+10.5 and 12.5 with KOH or soda ash, preferably 
+45% KOH. pH adjustment is followed by heating between 
+76.6°C (170°F) and 109.9°C (230°F) for 3-20 minutes. 
+Preferably, the pH is adjusted to between about 11 and 
+11.5, and the broth is heated for about 5 minutes at 98.8°C 
+(210°F), and amount of calcium propionate added is about 
+0.2%. </p><p xml:id="_212f2">After the adjustment period, the gum is 
+precipitated using a suitable alcohol such as 
+isopropanol. The precipitate is dried in typical 
+fashion. </p><p xml:id="_24235">After drying, the product is milled according 
+to standard milling procedures. Target mesh size 
+varies according to desired product characteristics. 
+For example, larger mesh size material, e.g. 80 mesh, 
+is preferred for transport of the material using 
+conventional dry material handling systems. Smaller 
+mesh size material, e.g. 140 mesh, is preferred for 
+enhanced rapid hydration performance. In all cases, 
+however, the gum produced according to the described 
+procedure, using described fermentation broth pH 
+adjustment and subsequent heating steps, possesses 
+rapid hydration characteristics as compared to 
+conventionally prepared welan gum produced according 
+to the procedure described in U.S. 4,342,866. </p><head xml:id="_9dc8e">Analysis</head><p xml:id="_de7c8">Glucuronic acid was identified by using the 
+method of Bhatti et al., Biochim. Biophys. Acta 22 
+(1970) 339-347. Absolute configurations of the sugars 
+were determined by the methods devised by Gerwig et 
+al., Carbohydrate Research 77 (1979) 1-7, and by  
+ 
+Leontein et al., Carbohydrate Research 62 (1978) 
+359-362. </p><p xml:id="_db4c4">Methylation analyses were performed essentially 
+as described in Jansson et al., Chem. Common. 
+Univ. Stockholm, 8 (1976) 1-75. Methylated polymers 
+were recovered by dialysis against water, followed by 
+freeze-drying. Low-molecular-weight products were 
+recovered by reversed phase chromatography on Sep-Pak™ 
+C18 cartridges, Waeghe et al., Carbohydrate Research 
+123 (1983) 281-304. The sample was diluted with an 
+equal volume of water and applied to the column. This 
+was washed with water and acetonitrile-water (15:85), 
+and the sample was eluted with acetonitrile. </p> <head xml:id="_d8aba">Carboxyl-reduction of methylated polysaccharide</head><p xml:id="_5f8bc">The methylated polysaccharide (1.5 mg) was 
+dissolved in freshly distilled tetrahydrofuran (2 
+mL). Lithium borohydride (10 mg) was added and the 
+solution boiled under reflux for 2 hours. Excess of 
+lithium borohydride was decomposed with M acetic acid, 
+chloroform (5 mL) was added, and the solution was 
+washed several times with water, dried, and concentrated. </p><head xml:id="_66dce">Uronic acid-degradation</head> <p xml:id="_27886">To a solution of the methylated polysaccharide 
+(1.5 mg) in dimethyl sulfoxide (1.5 mL) were added 
+a trace of toluene-p-sulfonic acid and 2,2-dimethoxypropane 
+(0.1 mL) in order to eliminate any 
+water present. Sodium methylsulfinylmethanide in 
+dimethyl sulfoxide (2M, 1 mL) was added, and the  
+ 
+mixture was agitated in an ultrasonic bath for 30 
+minutes and kept at room temperature for 15 hours. 
+Trideuteriomethyl iodide (0.5 mL) was added with 
+external cooling and the mixture agitated in the 
+ultrasonic bath for 30 minutes. The excess of methyl 
+iodide was removed by flushing with nitrogen, and the 
+solution was diluted with water and added to a Sep-Pak™ 
+C18 cartridge. The material was recovered as 
+described above. The product was hydrolyzed with 2M 
+trifluoroacetic acid for 15 hours at 100°C and the 
+mixture of methylated products was analyzed (Table II, 
+column C). </p> <p xml:id="_03a28">Approximately 50% of the rapidly hydrating 
+welan gum polysaccharide units contain an O-acetyl 
+group. An acid hydrolysate of the fermented polysaccharide 
+contained glucose, rhamnose and mannose in the 
+relative proportions 43:46:11. It further contained 
+glucuronic acid, identified by g.l.c. of a sample that 
+had been methanolyzed and trimethylsilylated 
+using the procedure described by Bhatti et al. </p> <p xml:id="_cf537">Absolute configurations of component sugars 
+were determined by g.l.c. of the glycosides obtained 
+on solvolysis with chiral 2-butanol followed by 
+trimethylation, as devised by Gerwig et al. The 
+glucose and glucuronic acid have the D configuration 
+and the rhamnose has the L configuration. The mannose 
+has the L configuration. This was confirmed by g.l.c. 
+of the glycosides obtained on solvolysis with chiral 
+2-octanol followed by acetylation, as devised by 
+Leontein et al.  
+ </p> <p xml:id="_806b7">Methylation analysis without and with 
+carboxyl-reduction of the methylated polysaccharide, 
+gave the products listed below, columns A and B 
+respectively. 
+<figure><table cols="7"><row><cell>METHYLATION ANALYSIS OF THE POLYSACCHARIDE AND SOME DEGRADATION PRODUCTS </cell></row><row><cell>Sugar</cell><cell>T</cell><cell>Mole % </cell></row><row><cell/><cell/><cell>A </cell><cell>B </cell><cell>C </cell><cell>D </cell><cell>E </cell></row><row><cell>1,2,3,5-Rhamnitol</cell><cell>0.38</cell><cell/><cell/><cell/><cell>13</cell><cell>22 </cell></row><row><cell>2,3,4-Rha</cell><cell>0.59</cell><cell>12</cell><cell>7</cell><cell>16 </cell></row><row><cell>2,3-Rha</cell><cell>0.94</cell><cell>26</cell><cell>21</cell><cell>18 </cell></row><row><cell>2,3,4,6-Glc</cell><cell>1.00</cell><cell/><cell/><cell/><cell>54</cell><cell>36 </cell></row><row><cell>2,3,4,6-Man</cell><cell>1.00</cell><cell>10</cell><cell>7</cell><cell>19</cell><cell/><cell>5 </cell></row><row><cell>2,4,6-Glc</cell><cell>1.67</cell><cell>26</cell><cell>23</cell><cell>43 </cell></row><row><cell>2,3,6-Glc</cell><cell>1.92</cell><cell/><cell/><cell/><cell>33</cell><cell>34 </cell></row><row><cell>2,6-Glc</cell><cell>2.79</cell><cell>26</cell><cell>23</cell><cell>4</cell><cell/><cell>3 </cell></row><row><cell>2,3-Glc</cell><cell>3.56</cell><cell/><cell>19 </cell></row></table></figure></p><p xml:id="_d65eb">In order to determine the sequence of the 
+sugar residues, the rapidly hydrating welan gum polysaccharide 
+was subjected to a uronic acid-degradation 
+(Lindberg et al. Carbohydrate Research 28 (1973) 
+351-357 and Aspinall et al. Carbohydrate Research 57 
+(1977) c23-c26). The fully methylated polysaccharide 
+was treated with sodium methylsulfinylmethanide in 
+dimethyl sulfoxide, methylated (using trideuteriomethyl 
+iodide), and hydrolyzed, and the mixture of 
+methylated sugars was analyzed (Table II, column C). 
+2,6-di-O-methyl-4-O-trideuteriomethyl-D-glucose was 
+derived from the branching D-glucopyranosyl residue, 
+the 4-position of which was liberated on degradation 
+of the uronic acid. The 3-substituted D-glucopyranosyl 
+residue linked to 0-4 of the uronic acid was 
+released by β-elimination and further degraded by 
+β-elimination, with release of the 4-substituted 
+L-rhamnopyranosyl residue. A considerable part of 
+this residue was also degraded. </p><p xml:id="_57484">The polysaccharide imparts viscosity to an 
+aqueous medium when dissolved in water in low 
+concentrations. Because of this, its sensitivity to 
+shear and overall rheology, it is useful as a 
+thickening, suspending, emulsifying, stabilizing, 
+lubricating, film-forming, or binding agent, 
+especially in aqueous systems. In particular, it has 
+uses in the following applications or products: 
+adhesives, wall-joint cements, grouts and mortars, 
+spackling compounds, can sealing, boiler compounds, 
+latex creaming, welding-rod fluxes, brazing pastes, 
+ceramic glazes and extrusions, cleaners and polishes,  
+ 
+toys, emulsions (latex, asphalt, silicone), silver 
+recovery, seed coatings, spray control for pesticides 
+or herbicides, emulsifiable concentrated and flowable 
+pesticides and herbicides, tobacco binders, 
+water-based inks, lithographic fountain solutions, 
+leather finishes, hydro-mulching and hydro-seeding, 
+textile printing and finishing, wet-end paper 
+additives, wet-end paper retention and formation aid, 
+anti-stick compounds, mold-release agents, liquid 
+resins, slurry and packaged explosives, petroleum and 
+water-well drilling muds, petroleum workover and 
+completion fluids, petroleum stimulating fluids, 
+fracturing, spacer fluids, gravel packing cosmetics, 
+pharmaceutical suspensions and emulsions. </p><head xml:id="_f54fd">EXAMPLE 1</head><head xml:id="_3ac67">Fermentation and Recovery Procedure for Producing 
+Rapidly Hydrating Welan Gum</head><head xml:id="_6a2d3">A. Culture Maintenance</head><p xml:id="_e1186">The unnamed Alcaligenes organism, ATCC 
+31555, grows quite well on NA agar, with good 
+colonial morphology. The incubation temperature is 
+30°C. The organism produces a yellow pigment.  
+ </p><head xml:id="_5e252">B. Seed Preparation</head><p xml:id="_5b5e0">Flask seeds are prepared in YM broth 
+incubated at 30°C for 24 hours, then used to 
+inoculate seed medium which is the same as final 
+fermentor medium. A 5% inoculum is used for a 14L 
+fermentor. </p><head xml:id="_0f351">C. Final Fermentor Medium</head><p xml:id="_386a2">The following medium gives acceptable 
+results in the 14L fermentor and can be used for 
+larger scale 20L and 70L fermentors: 
+<figure><table cols="2"><row><cell>Glucose</cell><cell>3.0% </cell></row><row><cell>K2HPO4</cell><cell>0.05% </cell></row><row><cell>Promosoy</cell><cell>0.05% </cell></row><row><cell>NH4NO3</cell><cell>0.09% </cell></row><row><cell>MgSO47H2O</cell><cell>0.01% </cell></row><row><cell>Fe++</cell><cell>1 ppm </cell></row><row><cell>HoLe salts</cell><cell>1 ml/L </cell></row></table></figure></p><p xml:id="_cb3d9">The pH is controlled between 6.5 and 7.5. 
+At 0 hours, pH is 7.3 and residual carbon source was 
+measured to be 3.07%. After 25.5 hours, pH was 7.0 
+and beer viscosity measured 2350. After 63.5 hours, 
+pH was 6.3 and beer viscosity 3950, and the reaction 
+is terminated by adding 4% isopropanol. </p><p xml:id="_3cc42">HoLe salts are a trace element solution 
+containing tartrate, magnesium molybdate, CoCl3, 
+ZnCl2, CuCl2, boric acid, manganese chloride and 
+ferrous sulfate.  
+ </p><p xml:id="_c714b">The initial agitation and aeration rates 
+were 400rpm and 3L/M, respectively. The aeration 
+remained constant throughout the fermentation. The 
+agitation was increased as necessary during the 
+fermentation to ensure good mixing. Maximum 
+agitation was 1600 rpm. </p><p xml:id="_57d01">When a low calcium product is desired, the 
+medium above is used with deionized water. </p><head xml:id="_df3fe">D. Broth Adjustment</head><p xml:id="_a179b">During this stage, 0.2% calcium propionate 
+is added to the broth. The fermentation broth is 
+adjusted to a pH of 11-11.5 with 45% KOH, followed by 
+heating at 98.8°C (210°F) for 5 minutes. </p><head xml:id="_0d92a">E. Recovery</head><p xml:id="_f3cdd">Good fibers are produced under precipitation 
+conditions giving 58-62% spent IPA. </p><head xml:id="_bc567">F. Drying</head><p xml:id="_aa236">Product is recovered after drying with 
+rotary air dryers. </p><p xml:id="_a42cb">After drying, the product is milled 
+according to standard milling procedures. Target 
+mesh size varies according to desired product 
+characteristics. For example, larger mesh size 
+material, e.g. 80 mesh, is preferred for transport of 
+the material using conventional dry material handling 
+systems. Smaller mesh size material, e.g. 140 mesh, 
+is preferred for enhanced rapid hydration 
+performance. In all cases, however, the gum produced 
+according to the described procedure, using described 
+fermentation broth pH adjustment and subsequent  
+ 
+heating steps, possesses rapid hydration 
+characteristics as compared to conventionally 
+prepared welan gum produced according to the 
+procedure described in U.S. 4,342,866. </p><p xml:id="_4d8d4">Measurements of the gum of the present 
+invention in 2% KCl show excellent viscosity 
+development, with excellent NaCl stability and 
+maintenance of viscosity up to at least 148.7°C (300°F); slight 
+gelation of gum is observed in 2% KCl. </p><p xml:id="_f1259">Cement compositions which can be made with 
+the subject rapidly hydrating welan gum comprise 
+cement, fine and/or coarse aggregate, and other 
+optional additives used for various purposes by those 
+skilled in the art. Various types of cements, as 
+well as additives, are described below. </p><p xml:id="_ea663">A typical composition for forming a cubic 
+yard (0.76 m3) of concrete includes about 181-363 kg (400-800 lbs.) cement; 
+about 54-218 kg (120-480 lbs.) of water, preferably 0.3-0.6 
+weight fraction based on weight of cement used; about 
+544-1814 kg (1200-4000 lbs.) of fine and/or coarse aggregate, 
+preferably 1:3-5 weight ratio of cement: fine and/or 
+coarse aggregate; 0.045-0.91 kg (0.1-2 lbs.) rapidly hydrating welan 
+gum of the present invention, and other optional 
+desirable additives. </p><p xml:id="_94910">Cement compositions of the present invention 
+are prepared using a procedure whereby a portion of 
+the cement powder, optionally with other dry 
+ingredients, is dry-blended with rapidly hydrating 
+welan gum prior to addition to a mixture of cement, 
+water, and fine and/or coarse aggregate. The 
+dry-blend comprises the total amount of rapidly 
+hydrating welan gum to be added and an amount of 
+cement approximately equal to 5 to 20 times by weight 
+the amount of rapidly hydrating welan gum to be added.  
+ </p><p xml:id="_f6522">In one example, 0.45 kg (1 lb.) of rapidly hydrating 
+welan gum is combined with 4.5 kg (10 lbs.) of cement to form 
+a dry-blend. 254 kg (560 lbs.) of dry cement is mixed 
+together with 125 kg (275 lbs.) of water, 894 kg (1970 lbs.) coarse 
+aggregate and 519 kg (1145 lbs.) of fine aggregate, for a 
+period of time, to distribute the cement and 
+aggregate and begin hydration. Thereafter, the gum 
+and cement dry blend is added. </p><p xml:id="_1311d">Cement compositions include hydraulic 
+cements, i.e., finely ground and calcined calcium 
+silicates and calcium aluminates which when mixed 
+with water react to form a hard, rock-like mass. 
+Cement is e.g. portland cement, portland pozzolan 
+cement (containing about 15-40% pozzolan) blast 
+furnace slag cement, slag cement (containing blast 
+furnace slag and hydrated lime), masonry cement 
+(e.g., adhesive mortars), construction concrete 
+(containing sand and aggregate), oilfield cement 
+(i.e., cements with retarders to prevent rapid 
+setting so that they may be used at high temperatures 
+and pressure environments of deep wells), aluminous 
+cement (containing high amounts of calcium 
+aluminates), expansive cements (containing high 
+sulfate and alumina concentrations and which expand 
+on hardening), air entrained cement (containing 
+compounds which retain air bubbles and thus yield 
+frost- and chemical-resistant concretes), lightweight 
+concrete (containing low density materials such as 
+furnace clinker, pumice, foamed slag, fly ash, gas, 
+wood, etc.) heavy concrete (containing dense material  
+ 
+such as barite, iron ore (i.e., illmenite or 
+hematite), steel, etc.), and low heat concrete (with 
+modified compositions that minimize heat generation 
+during the setting process). </p><p xml:id="_16a9a">Oilfield cements are basically the same as 
+those used in construction (i.e., portland cement). 
+The American Petroleum Institute has set specifications 
+for oilfield cements. These as classified as 
+"A" through "H", and "N", all of which are useful in 
+compositions of this invention. </p><p xml:id="_3d10f">Cement additives in oilfield cements are 
+materials mixed in the slurry for reducing or 
+increasing density, increasing volume at reduced unit 
+cost, accelerating or retarding slurry thickening 
+time, increasing strength, preventing loss of whole 
+cement slurry, increasing or improving the durability, 
+decreasing water loss from the slurry, and increasing 
+or decreasing the viscosity of the cement slurry. </p><p xml:id="_65d0a">It is a purpose of the invention to use 
+rapidly hydrating welan gum for controlling water 
+loss from cement slurries and as a suspending agent. 
+The gum increases workability of cement compositions. 
+The increased workability is conveniently achieved by 
+dry blending rapidly hydrating welan gum with a 
+portion of cement and then adding the gum/cement 
+blend to a cement/water pre-mix. Incorporation of 
+rapidly hydrating welan gum in this fashion 
+eliminates the need for prehydrating the gum prior to 
+a cement/sand/water mix and avoids interference with 
+the hydration reaction of cement and water.  
+ </p><p xml:id="_468e1">It improves the ability of cement slurries 
+to be easily placed in crowded area such as around 
+re-inforcing bars without aggregate settling. </p><p xml:id="_396ca">Cement slurries containing rapidly hydrating 
+welan gum show more uniform density as the curing 
+process proceeds. The suspension properties of the 
+gum keep the slurry more uniform, yielding less 
+aggregate settling and less free water on the surface 
+of the slurry. </p><p xml:id="_22794">Cement additives which are useful in 
+compositions of this invention include mineral 
+admixtures, accelerators, retarders, fluid loss 
+reducers, dispersants, extenders and loss circulation 
+materials, antifoam agents, and weighting materials. </p><p xml:id="_90bd9">Mineral admixtures include silica fume, fly 
+ash, blast furnace slag or fibers. </p><p xml:id="_4dae3">Accelerators include calcium chloride, 
+sodium silicate (Diacel™ A), sodium chloride (salt), 
+ammonium chloride (NH4Cl), or combinations or 
+solutions of these salts. </p><p xml:id="_e3e4d">Retarders include calcium or sodium 
+lignosulfonates or other lignin derivatives, borax 
+compounds, CM HEC (carboxymethylhydroxethylcellulose), 
+sodium or calcium gluconates, and sugars. </p><p xml:id="_94b04">Fluid loss reducers include bentonite, high, 
+medium and low viscosity HEC, polyethylene imines and 
+amines, long chain alcohols, CM HEC, polyvinyl 
+pyrrolidones, and fine inorganic solids (such as 
+talc).  
+ </p><p xml:id="_a4a63">Dispersants include sodium citrates, sodium 
+napthalene sulfonates, lignin and lignin derivatives 
+to reduce viscosities of cement slurries and to aid 
+in fluid loss control by dispersing the particles in 
+the slurry. </p><p xml:id="_532af">Extenders and loss circulation materials 
+include pozzalons, asphalts, gilsonites, bentonite, 
+diatomaecous earth, and various materials to plug 
+passages where loss of whole cement occurs. </p><p xml:id="_2c412">Antifoam agents include long chain alcohols 
+such as octanols, stearates and their salts. </p><p xml:id="_d1125">Weighting materials include barite, 
+hematite, and illmenite to increase the density of 
+cement slurries. </p><p xml:id="_674ce">The cement compositions of this invention 
+can be conveniently prepared by adding rapidly 
+hydrating welan gum in dry form to the rest of the 
+compositions. The invention is further defined by 
+reference to the following preparations and examples, 
+which are intended to be illustrative and not 
+limiting. </p><head xml:id="_8ca65">EXAMPLE 2</head><p xml:id="_13f4b">A cubic yard (0.76 m3) of concrete was prepared 
+according to the procedure of the present invention. 
+To prepare a suitable cement slurry, 2.7 kg (6 lbs.) of API 
+type G cement was dry blended with 0.14 kg (0.3 lbs.) 140 mesh 
+rapidly hydrating welan gum prepared according to the 
+procedure described in Example 1. The dry blend was 
+added to a cement/water aggregate pre-mix, containing 254 kg 
+(560 lbs.) cement, 816 kg (1800 lbs.) aggregate, and 128 kg (283 lbs.) 
+water, to produce a homogeneous, smooth soft cement 
+slurry, the viscosity of which increased with 
+increasing gum concentration and with time.  
+ </p><head xml:id="_cf10f">EXAMPLE 3</head><p xml:id="_3c382">A cement slurry was prepared according to 
+the procedure of Example 2, except that Portland type 
+A cement was used instead of API type G cement, and 
+0.5 to 0.8% Lomar PW dispersant was added to the 
+gum/cement dry blend. The resulting slurry produced 
+a homogeneous, smooth soft cement slurry. </p><head xml:id="_672bb">EXAMPLE 4 (Control)</head><p xml:id="_bde78">Following the procedure of Example 3, but 
+substituting welan gum prepared according to the 
+procedure described in U.S. 4,342,866 for rapidly 
+hydrating welan gum, cement, water, dispersant and 
+gum were mixed. Because the gum did not hydrate 
+properly, a low-viscosity, non-homogeneous material 
+containing visually distinguishable gel balls was 
+obtained. </p><head xml:id="_6ddb9">EXAMPLE 5</head><p xml:id="_dc078">A slurry containing H cement, 0.7% 
+dispersant, 46% water and 0.3% rapidly hydrating 
+welan gum (all based on dry weight), according to the 
+procedure described in Example 2, was prepared. A 
+smooth, soft, homogeneous cement slurry was obtained. </p><head xml:id="_eb96f">EXAMPLE 6</head><head xml:id="_9c065">Another Fermentation and Recovery Procedure for 
+Producing Rapidly Hydrating Welan Gum</head><head xml:id="_bc5cc">A. Culture Maintenance</head><p xml:id="_fd189">The unnamed Alcaligenes organism, ATCC 31555 
+grows quite well on nutrient agar. The incubation 
+temperature is 30°C. The organism produces a yellow 
+pigment.  
+ </p><head xml:id="_48293">B. Seed Preparation</head><p xml:id="_27bfc">Flask seeds are prepared in YM broth 
+incubated at 30°C for 24 hours with shaking. Fresh 
+YM broth seeds are then started using a 1% inoculum. 
+After 24 hours incubation at 30°C with shaking these 
+YM seeds are used to inoculate a one-gallon (3.84) fermentor 
+containing a seed medium which is the same as the 
+final fermentor medium except that it contains 0.5% 
+K2HPO4. The inoculum size is 6.7% and the 
+fermentation temperature is 30°C. The air flow rate 
+is one L/M and the agitation is set at 400 RPM. At 
+25 hours this seed was used to start a 30 L fermentor 
+with an inoculum size of 5%. </p><head xml:id="_b88da">C. Final Fermentor Medium</head><p xml:id="_80371">The following medium gives acceptable 
+results in the 30 L fermentor and can be used for 
+larger scale fermentors such as 70 L. 
+<figure><table cols="2"><row><cell>Glucose</cell><cell>3.0% </cell></row><row><cell>K2HPO4</cell><cell>0.13% </cell></row><row><cell>Promosoy</cell><cell>0.25% </cell></row><row><cell>NH4NO3</cell><cell>0.03% </cell></row><row><cell>MgSO4•7H20</cell><cell>0.05% </cell></row><row><cell>Fe4•7H2O</cell><cell>10 ppm </cell></row><row><cell>Antifoam (Hodag™ K-21) </cell></row><row><cell>Tap water </cell></row></table></figure></p><p xml:id="_732fa">The pH is controlled between 6.5 and 7.5. At 
+0 hours, the residual carbon source was measured to be 
+3.08%. At 69 hours, the pH was 6.55 and the beer 
+viscosity was 42,500 kg/cm/sec (cP.)  
+ </p><p xml:id="_31e69">The initial agitation and aeration rates were 
+300rpm and 5L/M, respectively. The aeration rate was 
+increased to 10 L/M at 20 hours and then remained 
+constant through the fermentation. The agitation was 
+increased to 700 RPM (maximum) at 20 hours. </p><p xml:id="_f5608">When a low calcium product is desired, the 
+medium above is used with deionized water. </p><head xml:id="_272ac">D. Broth Adjustment</head><p xml:id="_f797f">During this stage, 0.2% calcium propionate is 
+added to the broth. The fermentation broth is 
+adjusted to a pH of 11-11.5 with 45% KOH, followed by 
+heating at 98.8°C (210°F) for 5 minutes. </p><head xml:id="_2ad87">E. Recovery</head><p xml:id="_2351e">Good fibers are produced under precipitation 
+conditions giving 58-62% spent IPA. </p><head xml:id="_f2a50">F. Drying</head><p xml:id="_f7596">Product is recovered after drying with rotary 
+air dryers. </p><p xml:id="_9f769">After drying, the product is milled according 
+to standard milling procedures. Target mesh size 
+varies according to desired product characteristics. 
+For example, larger mesh size material, e.g. 80 mesh, 
+is preferred for transport of the material using 
+conventional dry material handling systems. Smaller 
+mesh size material, e.g. 140 mesh, is preferred for 
+enhanced rapid hydration performance. In all cases, 
+however, the gum produced according to the described  
+ 
+procedure, using described fermentation broth pH 
+adjustment and subsequent heating steps, possesses 
+rapid hydration characteristics as compared to 
+conventionally prepared welan gum produced according 
+to the procedure described in U.S. 4,342,866. </p><p xml:id="_33cbd">This product was demonstrated to have 
+hydration and solution properties similar to the 
+sample described in the Example 1. </p><head xml:id="_738f4">EXAMPLE 7</head><p xml:id="_59d4d">A rapidly hydrating welan gum is prepared 
+according to the procedure of Example 1 wherein during 
+recovery the pH is controlled at 11 and the 
+temperature is maintained at 76.6°C (170°F) for 5 minutes. The 
+dried gum is milled to 140 mesh size. </p><head xml:id="_521c0">EXAMPLE 8</head><p xml:id="_75ad3">A rapidly hydrating welan gum is prepared 
+according to the procedure of Example 1 wherein during 
+recovery the pH is controlled at 11 and the 
+temperature is maintained at 98.8°C (210°F) for 5 minutes. The 
+dried gum is milled to 80 mesh size. </p><head xml:id="_5536b">EXAMPLE 9</head><p xml:id="_a04cb">A rapidly hydrating welan gum is prepared 
+according to the procedure of Example 1 wherein during 
+recovery the pH is controlled at 11, the temperature 
+is maintained at 98.8°C (210°F) for 5 minutes, and the broth is 
+sheared through a high shear mixer. The dried gum is 
+milled to 80 mesh size.  
+ </p><head xml:id="_0e4b7">EXAMPLE 10</head><p xml:id="_19260">A rapidly hydrating welan gum is prepared 
+according to the procedure of Example 1 wherein during 
+recovery the pH is controlled at 11.5 and the 
+temperature is maintained at 76.6°c (170°F). The dried gum is 
+milled to 80 mesh size. </p><head xml:id="_43de6">EXAMPLE 11</head><p xml:id="_7f0b3">A rapidly hydrating welan gum is prepared 
+according to the procedure of Example 1 wherein during 
+recovery the pH is controlled at pH 11.5, the 
+temperature is maintained at 76.6°C (170°F) and the broth is 
+sheared through a high shear mixer. The dried gum is 
+milled to 80 mesh size. </p><head xml:id="_1dc14">EXAMPLE 12</head><p xml:id="_4a338">A rapidly hydrating welan gum is prepared 
+according to the procedure of Example 1 wherein during 
+recovery the pH is controlled at 11 and the 
+temperature is maintained at 99.3-101.6°C (211-215°F). The dried gum 
+is milled to 80 mesh size. </p><head xml:id="_00774">EXAMPLE 13</head><p xml:id="_5db8c">Control welan gum is prepared according to 
+the procedure described in Example 1 with the 
+exception that Step D ("Adjustment") is not performed 
+The procedure includes step C, followed by heating of 
+the broth to 76.6°C (170°F) for 5 minutes, followed by Step E. 
+Three different batches were prepared (13a, 13b and 
+13c) and each was milled to 40 mesh size and 150 mesh 
+size.  
+ </p><head xml:id="_07228">EXAMPLE 14</head><head xml:id="_0cd6f">Hydratation Test</head><p xml:id="_8a64c">In order to determine hydration characteristics 
+for rapidly hydrating welan gums produced in 
+accordance with the procedure of the invention, the 
+gums were combined with polyethylene glycol and 
+viscosity measurements were made using a Solution Rate 
+Tester. </p><p xml:id="_5e726">The tester can measure the hydration rate of 
+polymer solutions by monitoring the torque on a beaker 
+as it is being stirred at a constant speed. As the 
+gum dissolves and the viscosity increases, beaker 
+torque increases. While factors such as turbulence, 
+non-laminar flow, pseudoplasticity, etc. prevent a 
+direct correlation of torque reading and viscosity, 
+plotting torque against time provides a good 
+indication of viscosity development. </p><p xml:id="_9841f">Material is tested at 0.5 wt. % in synthetic 
+tap water for 15 minutes at 600 rpm in a Solution Rate 
+Tester. Samples are added in a polyethylene glycol 
+slurry at a ratio of 3 parts glycol to 1 part gum. </p><p xml:id="_6492f">Viscosities are measured after 15 minutes of 
+mixing plus 1 hour rest and after shearing for 1 
+minute in a blender and 18 hours rest. Ideally, the 
+blended solution should be de-aerated before the 
+viscosity is measured, or a defoamer added to the gum 
+solution before blending. 3 grams of glycol and 1 
+gram of dry gum are weighed into a 10 ml beaker. The 
+slurry is mixed with a small spatula by hand for about 
+30 seconds. 2.6 grams of the slurry are then placed 
+into a 5 cm3 syringe, and the syringe tip cut off to  
+ 
+prevent shearing. 127.4 grams of synthetic tap water 
+is weighed into the stainless steel beaker used with 
+the Solution Rate Tester. 
+<figure><table cols="5"><row><cell>Sample </cell><cell>Brookfield LVT, kg/cm/sec (cP), 3 rpm </cell><cell>% Final </cell><cell>Minutes to react </cell></row><row><cell>(Example #) </cell><cell>1 hour </cell><cell>blended </cell><cell>Viscosity </cell><cell>90% torque </cell></row><row><cell>7</cell><cell>14,600</cell><cell>15,800</cell><cell>92.4</cell><cell>1.83 </cell></row><row><cell>8</cell><cell>6,900</cell><cell>6,650</cell><cell>100</cell><cell>2.16 </cell></row><row><cell>9</cell><cell>7,200</cell><cell>6,900</cell><cell>100</cell><cell>2.30 </cell></row><row><cell>10</cell><cell>7,800</cell><cell>8,000</cell><cell>97.5</cell><cell>9.05 </cell></row><row><cell>11</cell><cell>9,300</cell><cell>9,700</cell><cell>95.9</cell><cell>7.83 </cell></row><row><cell>12</cell><cell>7,250</cell><cell>6,100</cell><cell>100</cell><cell>2.33 </cell></row><row><cell>13a (40 mesh)</cell><cell>10,000</cell><cell>12,000</cell><cell>83.3</cell><cell>33.28 </cell></row><row><cell>   (150 mesh)</cell><cell>9,200</cell><cell>9,600</cell><cell>95.8</cell><cell>11.79 </cell></row><row><cell>13b (40 mesh)</cell><cell>10,000</cell><cell>13,400</cell><cell>74.6</cell><cell>18.64 </cell></row><row><cell>   (150 mesh)</cell><cell>8,400</cell><cell/><cell>100</cell><cell>10.58 </cell></row><row><cell>13c (40 mesh)</cell><cell>8,550</cell><cell>14,000</cell><cell>62.9</cell><cell>23.48 </cell></row><row><cell>   (150 mesh)</cell><cell>8,400</cell><cell>13,000</cell><cell>64.6</cell><cell>10.76 </cell></row></table></figure></p><head xml:id="_9c3b0">Utility</head><p xml:id="_3aa85">In addition to the uses described above, 
+uses for the rapidly hydrating gum of the present 
+invention include use as an antiwashout admixture for 
+the construction and repair of structures underwater, 
+production of a fluid, non-bleeding grout for 
+post-tensioned structures, improvement of bond 
+between reinforcing steel and concrete, shotcrete, 
+lightweight concrete, air entranced concrete, 
+oilfield cements, fiber containing concrete, extruded 
+concrete  
+ 
+products, precast products as well as general use in 
+grouts. Concentrations of the gum required for 
+adequate functionality vary with the application. </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

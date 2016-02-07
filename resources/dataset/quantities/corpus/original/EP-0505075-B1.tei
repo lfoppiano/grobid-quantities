@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">24709054</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">US</orgName></authority><idno type="docNumber">67509991</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910319</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">US67509991A</idno></monogr></biblStruct><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">US</orgName></authority><idno type="docNumber">675099</idno><imprint><date>19910319</date></imprint></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">G01B7/08</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">G01B7/28</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">G01B7/287</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302026</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920310</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302026A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>BAKER RUSS J</persName><residence><address><country type="national">US</country></address></residence></person><person role="inventor" type="intermediate"><persName>BAKER, RUSS J.</persName></person><person role="inventor" type="original"><persName>BAKER, RUSS J.</persName><residence><address><addrLine>132 Overlook Drive</addrLine><settlement>Horseheads, New York 14845</settlement><country type="national">US</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>EMHART GLASS MACH INVEST</name><address><country type="national">US</country></address></item><item type="intermediate"><name>EMHART GLASS MACHINERY INVESTMENTS INC.</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>DE</country><country>FR</country><country>GB</country><country>IT</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">G01B   7/06        20060101AFI20060310RMJP        </classCode><classCode scheme="ipcr">G01B   7/287       20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">G01B   7/28        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">G01B   7/02        20060101CFI20060310RMJP        </classCode><classCode scheme="ipcr">G01B   7/02        20060101A I20070602RMEP        </classCode><classCode scheme="ipcr">G01B   7/28        20060101C I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Kalibrierungsverfahren zur Prüfung der Wanddicke von Behältern</title><title type="invention-title" xml:lang="en">Calibration method for inspecting the wall thickness of containers</title><title type="invention-title" xml:lang="fr">Méthode de calibrage pour contrÔler l'épaisseur des parois de conteneur</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505075</idno><imprint><classCode scheme="kindCode">B1</classCode><date>19960313</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505075B1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="1" type="claim"><p xml:id="_e7c8c">Verfahren zum Kalibrieren einer Wanddicke-Prüfvorrichtung 
+mit einem Sensor zur Abgabe einer Spannung, die der 
+Dicke der gemessenen Wandung eines Glasbehälters entspricht, 
+indem man 
+<list type="simple"><item>(a) in die Vorrichtung einen Normalbehälter mit bekannter 
+Kalibriernormaldicke einsetzt, </item><item>(b) die die bekannte Dicke darstellende Spannung 
+mißt, </item><item>(c) die äquivalente Dicke eines nicht normgerechten 
+Behälters nach der Formel 
+äquivalente Dicke = ([Durchmesser des Kalibriernormals 
+in mm - Behälterdurchmesser in mm] x 
+0,0079 + 1) X Kalibriernormaldicke  
+berechnet, </item><item>(d) die äquivalente Dicke und die repräsentierende 
+Spannung in die Steuerung der Vorrichtung eingibt, um einen 
+Bezugspunkt zu erzeugen, und 
+   unter Verwendung der eingegebenen Bezugspunkte die 
+Schritte (a), (b), (c) und (d) mindestens einmal wiederholt, 
+um für den nicht normgerechten Behälter eine Kurve 
+der Dicke als Funktion der erfaßten Spannung zu erzeugen. </item></list></p></div><div n="2" type="claim"><p xml:id="_de41a">Verfahren nach Anspruch 1, bei dem man für jede Fühleranordnung 
+mindestens vier Bezugspunkte in die Steuerung 
+eingibt. </p></div></div><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_a825a">A method of calibrating a wall thickness 
+inspection apparatus having a sensor for producing a voltage 
+representative of the thickness of a sensed wall of a glass 
+container 
+   comprising the steps of 
+<list type="simple"><item>(a) presenting a standard 
+container having a known calibration standard thickness to 
+the apparatus </item><item>(b) measuring the voltage representative of the known 
+thickness </item><item>(c) calculating the equivalent thickness of a non-standard 
+container by the formula 
+Equivalent thickness = ([Calibration Standard Diameter 
+in mm - Container Diameter in mm] x 0.0079 + 1) x 
+Calibration Standard thickness </item><item>(d) entering the equivalent thickness and the 
+representative voltage in control means of the apparatus to 
+provide a reference point 
+   repeating steps a, b, c and d at least once using the 
+inputted reference points to provide a curve of thickness 
+against sensed voltage for the non standard container. </item></list></p></div><div n="2" type="claim"><p xml:id="_c82f5">A method according to claim 1 wherein at least four 
+reference points are inputted to the control system for each 
+sensor apparatus. </p></div></div><div type="claims" xml:lang="fr"><div n="1" type="claim"><p xml:id="_c23aa">Procédé de calibrage d'un appareil d'inspection 
+d'épaisseur de paroi ayant un capteur pour produire une 
+tension représentative de l'épaisseur d'une paroi mesurée 
+d'un récipient en verre 
+comprenant les étapes de 
+<list type="simple"><item>(a) présentation à l'appareil d'un récipient standard 
+ayant une épaisseur standard de calibrage connue </item><item>(b) mesure de la tension représentative de l'épaisseur 
+connue </item><item>(c) calcul de l'épaisseur équivalente d'un récipient non 
+standard, par la formule 
+Epaisseur équivalente = ([diamètre standard de calibrage 
+en mm - diamètre de récipient en mm)] x 0,0079 + 1) x 
+épaisseur standard de calibrage </item><item>(d) entrée de l'épaisseur équivalente et de tension 
+représentative dans un moyen de commande de 
+l'appareil pour fournir un point de référence, </item></list> 
+répétition des étapes 
+   répétition des étapes a, b, c et d au moins une fois 
+à l'aide des points de référence entrée, pour fournir 
+une courbe de l'épaisseur par rapport à la tension 
+mesurée pour le récipient non standard. </p></div><div n="2" type="claim"><p xml:id="_29114">Procédé selon la revendication 1, dans lequel au 
+moins quatre points de référence sont entrés dans le 
+système de commande pour chaque appareil capteur. </p></div></div><div type="description" xml:lang="en"><p xml:id="_68085">The present invention relates to systems for inspecting 
+the wall thickness of formed glass containers. </p><p xml:id="_30c28">State of the art systems, 
+for example, that disclosed in US-A-4 996 658, 
+sense the wall thickness of 
+formed glass containers and issue a voltage signal 
+representative of that sensed thickness. Calibration 
+standards are available in a limited number of diameters and 
+each set of calibration standards provides four different 
+reference voltage locations. Where the bottle to be formed 
+is 3 1/2'' [8.89 cm] in diameter, for example, an operator 
+can gauge from two to four of these reference locations on 
+the 3 1/2"" [8.89 cm] standard and equate these to voltages. 
+The control, based on this information, can define an 
+equation for converting voltage to wall thickness. </p><p xml:id="_04d94">Where, however, the formed bottle has a diameter 
+different than a calibration standard diameter the operator 
+has to guess what the thickness will be for a given voltage 
+reading and this guessing process has been very difficult in 
+practice. </p><p xml:id="_72aa1">It is accordingly an object of the present invention to 
+provide a straight forward approach to calibrate a 
+conventional wall thickness inspection system. </p><p xml:id="_af7b2">The present invention provides a method of calibrating 
+a wall thickness inspection apparatus having a sensor for 
+producing a voltage representative of the thickness of a 
+sensed wall of a glass container 
+comprising the steps of 
+(a) presenting a standard 
+container having a known calibration standard thickness to 
+the apparatus (b) measuring the voltage representative of the known 
+thickness (c) calculating the equivalent thickness of a non-standard 
+container by the formula  
+ 
+Equivalent thickness = ([Calibration Standard Diameter 
+in mm - Container Diameter in mm] x 0.0079 + 1) X 
+Calibration Standard thickness (d) entering the equivalent thickness and the 
+representative voltage in control means of the apparatus to 
+provide a reference point 
+   repeating steps a, b, c and d at least once using the 
+inputted reference points to provide a curve of thickness 
+against sensed voltage for the non standard container. </p><p xml:id="_c96b4">There now follows a description, to be read with 
+reference to the accompanying drawings, of a preferred 
+method of calibrating a wall thickness inspection apparatus. </p><p xml:id="_3db81">In the accompanying drawings 
+Figure 1 is an oblique view of the inspection station 
+of a glass container inspection machine; Figure 2 is a front view of the CRT screen of the 
+computer which controls the inspection station shown in 
+Figure 1; and Figure 3 is a logic diagram illustrating the invention. </p><p xml:id="_74dde">The glass container inspection machine has a station 
+for testing a formed container or bottle (not shown - for 
+calibration purposes a glass standard 10 will be tested) 
+which is supported by a support plate 12 and which is 
+advanced along the support plate 12 by a bottle carrier 14. 
+During its displacement past the test station, the carrier 
+14 forces the bottle against a number (three as illustrated 
+in Figure 1 for purpose of clarity, but four can be used) of 
+sensors in the form of parallel horizontally extending, 
+vertically spaced capacitance sensing strips 16 which are 
+secured to resilient foam strips 18 mounted on suitable 
+brackets 20. The brackets are connected by posts 22 to 
+corresponding head oscillator assembly housings 24. Each 
+oscillator receives a capacitance signal from its associated 
+capacitance sensing strip via a calibrated cable 26 and 
+generates a continuous voltage signal which is supplied to a 
+computer.  
+ </p><p xml:id="_304dd">It has been discovered that an equation can be defined 
+that will define the thickness of a non-standard bottle 
+which when sensed by a sensor will result in the generation 
+of a voltage signal equal to the voltage signal generated as 
+a result of sensing the standard by the same sensor. This 
+defined thickness is referred to as the "calibration 
+thickness" or "equivalent thickness". This "calibration thickness" is a function of 
+the container diameter (which is different than the diameter 
+of one of the standards) and the thickness of the 
+calibration standard. An algorithm which accurately 
+represents this relationship for U.S. standard measures 
+(inches) is: 
+Calibration Thickness = [((Calibration Standard 
+Diameter in inches - Container Diameter in inches) 
+X 0.2) + 1] X Calibration Standard Thickness in 
+mils, For the Metric System this equation is : Calibration Thickness = [((Calibration Standard 
+Diameter in millimeters - Container Diameter in 
+millimeters) X 0.0079) + 1] X Calibration Standard 
+Thickness in millimeters. </p><p xml:id="_3c985">The following example shows how to use the calibration 
+formula to compute a calibration thickness. The calculation 
+here is for the first line under Channel 1 on the Calibrate 
+Head Screen 30 of the controller. </p><p xml:id="_3360c">Calibration standards are glass tubes of standard 
+diameter and known thickness. In this example the 
+calibration standards are 2 1/2 inches [6.35 cm] in 
+diameter. A first calibration standard has indicated 
+portions of thickness .037" [.094 cm] and .062" [.157 cm], a 
+second calibration standard has indicated portions of 
+thickness .047'' [.119 cm] and .072'' [.183 cm].  
+ </p><head xml:id="_cc129">STEP 1</head><p xml:id="_27f4a">Compute the difference between the container diameter 
+and the Calibration Standard diameter. 
+a. Calibration Standard Diameter in inches 
+(millimeters)    2.5 (63.5 mm) b. Container Diameter in inches    2.75 (69.85mm) 
+-(mm) c. Subtract Line b. from Line a. 
+   (The result may be a negative 
+number)    -0.25 (-6.35mm) </p><head xml:id="_4907e">STEP 2</head><p xml:id="_09cc6">Compute the thickness to be 
+entered on the Calibrate Head 
+Screen. 
+a. Multiply by 0.2 (.0079) and 
+add 1    .950 (.9498) b. Calibration Standard Thickness 
+in mils (mm)    .037 (.940) c. Multiply Line a. by Line b. 
+   Round to the nearest thousandth. 
+   This is the calibration thickness 
+to be entered on the Calibrate 
+Head Screen    .035 (.893) </p><p xml:id="_e1aa7">The operator enters the calculated calibration 
+thickness, i.e. .035in or .893 mm against channel 1, and 
+then places the calibration standard against the sensor with 
+the equivalent standard thickness (i.e. .037in, .940 mm) 
+against the sensor and measures the output signal, which is 
+2.56v. Consequently, for this sensor on the non-standard 
+container a thickness of .035in (.893mm) is calculated to 
+give an output signal of 2.56v. </p><p xml:id="_a5622">This process will be repeated at least one more time 
+and preferably three more times to define four different 
+calibration thicknesses for the first channel. This will 
+then be repeated for each channel properly to calibrate the  
+ 
+sensor. The computer can then, based on this data, define a 
+curve used to convert voltage to wall thickness. </p><p xml:id="_2bd9a">Ideally, the actual bottle should be the size of the 
+standard +/- one inch (2.54 cm). Figure 3 illustrates this 
+sequence. </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

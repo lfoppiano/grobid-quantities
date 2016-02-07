@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">10691786</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">GB</orgName></authority><idno type="docNumber">9105750</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910319</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">GB9105750A</idno></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">G03F7/004D</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">G03F7/022M</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302146</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920312</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302146A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="references-cited"><list type="citations"><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0146411</idno><imprint><classCode scheme="kindCode">A2</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0146411A2</idno></monogr></biblStruct><idno type="category">A</idno></item><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0330239</idno><imprint><classCode scheme="kindCode">A2</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0330239A2</idno></monogr></biblStruct><idno type="category">A</idno></item><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0424124</idno><imprint><classCode scheme="kindCode">A2</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0424124A2</idno></monogr></biblStruct><idno type="category">AP</idno></item><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="national">FR</orgName></authority><idno type="docNumber">2325076</idno><imprint><classCode scheme="kindCode">A1</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">FR2325076A1</idno></monogr></biblStruct><idno type="category">XD</idno></item></list></item><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>HAURI ROBERT J</persName><residence><address><country type="national">US</country></address></residence></person><person role="inventor" type="epo"><persName>NEWMAN STEPHEN</persName><residence><address><country type="national">GB</country></address></residence></person><person role="inventor" type="intermediate"><persName>HAURI, ROBERT J.</persName></person><person role="inventor" type="intermediate"><persName>NEWMAN, STEPHEN</persName></person><person role="inventor" type="original"><persName>Hauri, Robert J., c/o 3M Centre</persName><residence><address><addrLine>Building 235-1B-24</addrLine><settlement>St. Paul, Minnesota 55144</settlement><country type="national">US</country></address></residence></person><person role="inventor" type="original"><persName>NEWMAN, STEPHEN</persName><residence><address><addrLine>33 Manston Drive</addrLine><settlement>Bishops Stortford,Herts. CM23 5EJ</settlement><country type="national">GB</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>MINNESOTA MINING &amp; MFG</name><address><country type="national">US</country></address></item><item type="intermediate"><name>MINNESOTA MINING AND MANUFACTURING COMPANY</name></item><item type="original"><name>MINNESOTA MINING AND MANUFACTURING COMPANY</name><address><addrLine>3M Center, P.O. Box 33427</addrLine><settlement>St. Paul, Minnesota 55133-3427</settlement><country type="national">US</country></address></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>DE</country><country>FR</country><country>GB</country><country>IT</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">G03F   7/00        20060101AFI20051220RMJP        </classCode><classCode scheme="ipcr">G03F   7/00        20060101CFI20051220RMJP        </classCode><classCode scheme="ipcr">G03F   7/004       20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">G03F   7/004       20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">G03F   7/022       20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">G03F   7/022       20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">G03F   7/029       20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">G03F   7/029       20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">G03F   7/039       20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">G03F   7/039       20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">H01L  21/02        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">H01L  21/027       20060101ALI20051220RMJP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Positivarbeitende Fotoresistzusammensetzungen mit stabilisierter Geschwindigkeit.</title><title type="invention-title" xml:lang="en">Speed stabilised positive-acting photoresist compositions.</title><title type="invention-title" xml:lang="fr">Compositions comportant photoréserves ayant des réponses stabilisées.</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505094</idno><imprint><classCode scheme="kindCode">A1</classCode><date>19920923</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505094A1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front><div type="abstract" xml:lang="en"><p xml:id="_b1191">A positive-acting photoresist comprising in one 
+or more layers 
+(i) a resin binder, (ii) a photo-acid generator, and (iii) an acid-cleavable compound, </p><p xml:id="_3f93a">characterised in that the photoresist medium further 
+comprises as a speed stabilising agent one or more 
+compounds having a nucleus of general formula (I): 
+</p><p xml:id="_edd90">in which;
+ 
+   R represents a hydrogen atom or an optionally 
+substituted alkyl group comprising up to 10 carbon atoms. </p></div></front><group><text><body><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_a0f1d">A positive-acting photoresist comprising in one or 
+more layers 
+<list type="simple"><item>(i) a resin binder, </item><item>(ii) a photo-acid generator, and </item><item>(iii) an acid-cleavable compound, </item></list> 
+characterised in that the photoresist medium further 
+comprises as a speed stabilising agent one or more 
+compounds having a nucleus of general formula (I): 
+ 
+in which; 
+   R represents a hydrogen atom or an optionally 
+substituted alkyl group comprising up to 10 carbon atoms. </p></div><div n="2" type="claim"><p xml:id="_93166">A positive-acting photoresist as claimed in Claim 1 
+in which R represents a substituted alkyl group 
+possessing one or more substituents selected from 
+hydroxy, nitro groups, halogen atoms, alkoxy groups 
+comprising up to 5 carbon atoms and ester groups 
+comprising up to 5 carbon atoms and the phenyl ring of 
+the speed stabilising agent possesses one or more 
+substituents selected from nitro groups, halogen atoms 
+and alkyl groups comprising up to 10 carbon atoms. </p></div><div n="3" type="claim"><p xml:id="_2f86b">A positive-acting photoresist as claimed in Claims 1 
+or 2 in which the speed stabilising agent is selected 
+from benzene sulphonamide, N-ethyl-p-toluene 
+sulphonamide, N-ethyl-o-toluene sulphonamide, N-butyl-p-toluene 
+sulphonamide, o-tolune sulphonamide , p-toluene 
+sulphonamide and mixtures thereof. </p></div><div n="4" type="claim"><p xml:id="_ece26">A positive-acting photoresist as claimed in any 
+preceding Claim in which the compound(s) of general 
+formula (I) comprise up to 25% by weight of the total 
+solids content of the photosensitive medium. </p></div><div n="5" type="claim"><p xml:id="_72572">A positive-acting photoresist as claimed in any 
+preceding Claim in which the resin binder is selected 
+from resoles, novolacs and mixture thereof, a hydroxystyrene 
+copolymer or a derivative thereof. </p></div><div n="6" type="claim"><p xml:id="_dd131">A positive-acting photoresist as claimed in any 
+preceding Claim in which the photo-acid generator 
+comprises from 0.1 to 20.0 % by weight of the 
+photosensitive medium and is selected from sulphonium 
+salts, iodonium salts, phosphonium salts, diazonium 
+salts, quinone diazide sulfochlorides, bis(trichloromethyl)-s-triazines, 
+trichloromethylpyrones, mixtures of 
+organometals and organohalogen compounds and combinations 
+thereof. </p></div><div n="7" type="claim"><p xml:id="_c9ac6">A positive-acting photoresist as claimed in Claim 6 
+in which the photo-acid generator is an iodonium salt of 
+general formula (II): 
+ 
+in which; 
+   Ar¹ and Ar² independently represent aromatic or 
+hetero-aromatic groups comprising up to 10 ring atoms 
+which may be linked together to include the iodine atom 
+within a ring structure, and 
+   X⊖ is an anion such that HX is an acid 
+of ka 
+not greater than 3. </p></div><div n="8" type="claim"><p xml:id="_a4752">A positive-acting photoresist as claimed in any 
+preceding Claim in which the acid-cleavable compound 
+comprises from 5 to 30% by weight and is selected from 
+adducts of vinyl ethers with phenols or sulphonamides, 
+polyacetals, polyketals, enol ethers, N-acyliminocarbonates, 
+polymeric orthoesters, t-alkyl 
+esters and carbonates, cyclic acetals and ketals of beta-ketocarbonyl 
+compounds, silyl ether compounds, silyl 
+ureido compounds and pyranyl or furanyl ethers of a 
+bisphenol. </p></div><div n="9" type="claim"><p xml:id="_9430b">A positive-acting photoresist as claimed in Claim 8 
+in which the acid-cleavable compound has a nucleus of 
+general formula (III): 
+ 
+in which; 
+   n is 0, 1, 2 or 3, 
+   each R¹, R² and R³ independently represents a 
+hydrogen atom or an alkyl group comprising up to 4 carbon 
+atoms, 
+   R⁴ and R⁵ independently represent a hydrogen atom or 
+one or more ring substituents selected from halogen 
+atoms, alkyl groups comprising up to 4 carbon atoms, 
+alkoxy groups comprising up to 4 carbon atoms and 
+combinations thereof, and 
+   A represents a bond or a divalent linking group 
+comprising up to 10 atoms other than hydrogen. </p></div><div n="10" type="claim"><p xml:id="_1f4a9">A positive-acting photoresist as claimed in Claim 9 
+in which the compound of general formula (III) has a 
+nucleus of one of the following structures: 
+ 
+and, 
+</p></div><div n="11" type="claim"><p xml:id="_35e1c">A photoresist as claimed in any preceding Claim 
+further comprising up to 15% by weight of a sensitiser. </p></div></div><div type="description" xml:lang="en"><p xml:id="_1ed3b">This invention relates to positive-acting 
+photoresists and in particular to positive-acting 
+photoresists having a photosensitive media comprising a 
+resin binder, photo-acid generator, an acid cleavable 
+compound and as a speed stabilising agent one or more 
+arylsulphonamide derivatives of defined structure. </p><p xml:id="_83654">Positive-acting photoresists find widespread use in 
+fields such as lithographic printing, proofing and 
+microlithography and are characterised by their ability 
+to become more soluble in an appropriate developer when 
+irradiated with light of a suitable wavelength. The vast 
+majority of positive resists available on the market 
+comprise an alkali-soluble resin, normally a phenol-formaldehyde 
+resin, and a light-sensitive solubility 
+inhibitor. Photolysis of the latter results in an 
+increase in solubility. Most commonly, the solubility 
+inhibitor is a diazonaphthoquinone derivative (also known 
+as a quinone diazide, or a diazo-oxide). U.S. Patent No. 
+4,708,925 discloses the use of onium salts as solubility 
+inhibitors. In recent years, there has been considerable 
+emphasis on increasing the photosensitivity of positive 
+resists by providing chemical amplification of the 
+initial photochemical process. </p> <p xml:id="_693ac">This is most often achieved by formulating a 
+suitable binder, typically, a phenolic resin, with a 
+photo-acid generator and an acid-cleavable compound. 
+Examples of such systems are disclosed in U.S. Patent 
+Specification Nos. 3,779,778, 4,247,611, 4,248,957, 
+4,250,247, 4,311,782, European Patent Publication Nos. 
+202196 and 249139, German Patent No. 3601264 and Japanese 
+Patent Application No. 62-059949. The acid cleavable 
+compound is a compound which converts catalytically in 
+the presence of acid from an insoluble (or insolubilising)  
+ 
+form to a soluble (or non-insolubilising) form. The 
+mechanism may involve, for example, cleavage of a polymer 
+to low molecular weight fragments, or conversion of non-polar 
+groups into polar derivatives, but the end result 
+is that the initial photochemical event (photogeneration 
+of acid) is amplified into the cleavage of large numbers 
+of bonds. </p><p xml:id="_49ebd">A problem that has arisen with compositions of the 
+above type is that of shelf-stability. Although high 
+imaging speeds are obtained for freshly-coated materials, 
+storage over a period of weeks can result in serious 
+losses in speed. The problem also manifests itself as a 
+variation in speed with the time interval between 
+exposure and development. Thus, an aged coating 
+developed immediately after exposure will exhibit a 
+slower speed than one whose development is delayed for 
+some time, e.g., one hour. Another manifestation of the 
+problem is variation of the "soak time", that is, the 
+time taken by the exposed coating to dissolve completely 
+in the developer. Ideally, this should be constant, but 
+has been found to increase as the coating ages, and to 
+vary with the time interval between exposure and 
+development. Although all these effects may be 
+eliminated to a large extent by briefly heating the 
+coating, either immediately before or immediately after 
+the exposure, obviously it is preferable that the 
+coatings should exhibit a stable photoresponse over a 
+period of months or years without recourse to special 
+treatments or techniques. </p><p xml:id="_1a587">European Patent Publication No. 290916 discloses one 
+solution to the problem in the form of a barrier layer of 
+poly(vinyl alcohol) or similar materials coated on top 
+of the photosensitive layer of the photoresist. The 
+present invention provides an alternative solution by the 
+addition of aryl sulphonamides of defined formula to the 
+photosensitive layer, thereby obviating the need for two 
+coating trips.  </p><p xml:id="_40079">French Patent Specification No. 2325076 discloses a 
+range of compounds as additives to a conventional 
+positive resist formulation comprising a phenol-formaldehyde 
+resin and a diazonaphthoquinone. The 
+compounds are said to provide an improved photo-speed 
+and contrast. Sulphonamides are included in the range of 
+compounds. There is no mention of positive resists of 
+the chemically amplified type, comprising a photo-acid 
+generator and acid-cleavable compound. </p><p xml:id="_5ef3a">The present invention seeks to provide speed-stabilised 
+positive-acting photoresist compositions, 
+particularly for use in the manufacture of printing 
+plates, having a more stable response over a given period 
+when compared with conventional amplified photo-resist 
+systems. </p> <p xml:id="_9a391">According to the present invention there is provided 
+a positive-acting photoresist comprising in one or more 
+layers: 
+(i) a resin binder,  (ii) a photo-acid generator, and  (iii) an acid-cleavable compound, </p><p xml:id="_55758">characterised in that the photoresist medium further 
+comprises as a speed stabilising agent one or more 
+compounds having a nucleus of general formula (I): 
+</p><p xml:id="_ae6d4">in which;
+ 
+   R represents a hydrogen atom or an alkyl group 
+comprising up to 10 carbon atoms, preferably up to 6 
+carbon atoms, which may optionally possess one or more 
+substituents selected from hydroxy, nitro, halogen atoms, 
+alkoxy groups comprising up to 5 carbon atoms and ester  
+ 
+groups comprising up to 5 carbon atoms. R preferably 
+represents a hydrogen atom or an alkyl moiety selected 
+from methyl, ethyl, propyl and butyl. </p><p xml:id="_0ee85">In addition to the speed stabilising agent of 
+Formula I, the positive-acting photoresists of the 
+invention comprise:
+ 
+   a resin binder, which is readily soluble in a 
+developer solution, e.g., aqueous alkali;
+ 
+   an acid-cleavable compound having the property of 
+retarding/suppressing the dissolution of the resin binder 
+and
+ 
+   a photo-acid generator which upon exposure to light 
+of the appropriate wavelength and intensity, releases 
+acid to convert/destroy the acid-labile compound, thereby 
+restoring the original solubility of the resin. This 
+process is referred to as photosolubilisation. </p><p xml:id="_571e9">Photoresist coatings manufactured in accordance with 
+the present invention have a good sensitivity and a 
+stable response following storage at ambient temperature 
+for several months or more. Corresponding coatings 
+without the sulphonamide show losses in speed after as 
+little as three weeks storage. In a preferred embodiment 
+the photoresists show particular utility in printing 
+plates. </p><p xml:id="_5ab8f">The speed stabilising agents of general formula (I) 
+may optionally possess one or more substituents on the 
+phenyl ring. Preferably, such substituents are of 
+relatively low molecular weight and neutral polarity. 
+These compounds must not significantly affect the 
+photosolubilisation chemistry such that amino and other 
+strongly basic groups that would scavenge the acid are 
+unsuitable substituents. Furthermore, the compounds of 
+formula (I) desirably have a minimal effect on the 
+overall solubility of the photoresist medium in the 
+developer solution, typically an alkali solution, so that 
+both strongly hydrophobic and strongly hydrophilic groups  
+ 
+are generally unsuitable substituents. Examples of the 
+former include long chain alkyl groups (C &gt; 10) and 
+highly fluorinated groups, and examples of the latter 
+include: -CO₂H, -SO₃H, and phenol (-C₆H₄OH) moieties. 
+Suitable ring substituents include halogen atoms, alkyl 
+groups comprising up to 10 carbon atoms, preferably up to 
+5 carbon atoms and nitro groups. </p><p xml:id="_29599">Examples of compounds of general formula (I) 
+suitable for use as speed stabilising agents in the 
+photoresists of the present invention include benzene 
+sulphonamide, N-ethyl-p-toluene sulphonamide, N-ethyl-o-toluene 
+sulphonamide, N-butyl-p-toluene sulphonamide, o-toluene 
+sulphonamide and p-toluene sulphonamide. A 
+mixture of such compounds is also permissable. A 
+preferred speed stabilising agent comprises a mixture of 
+45 weight % N-butyl-p-toluene sulphonamide, 45 weight % 
+of N-ethyl-p-toluene sulphonamide, 5 weight % of o-toluene 
+sulphonamide and 5 weight % of p-toluene 
+sulphonamide, commercially available from Akzo Chemie 
+under the trade name Ketjenflex 8. Another useful 
+mixture comprises 50 weight % of N-ethyl-p-toluene 
+sulphonamide and 50 weight % of N-ethyl-o-toluene 
+sulphonamide. </p><p xml:id="_86ce3">Generally, the compounds of formula (I) comprise up 
+to 25% by weight, preferably 5 to 20% by weight and more 
+preferably 10 to 15% by weight of the total solids 
+content of the photosensitive medium. </p><p xml:id="_665b7">The resin may be chosen from a wide range of soluble 
+resins known in the art but resins capable of forming 
+tack-free coatings which are soluble in alkali developer 
+are preferred, including both resoles and novolacs. Such 
+resins typically comprise an alkali-soluble binder having 
+a plurality of phenol groups, e.g., phenol formaldehydes 
+etc. The novolac and resole resins, as is known in the 
+art, are produced by condensing the phenol with an 
+aldehyde in the presence, respectively of an acid or  
+ 
+basic catalyst. Although resins obtained from 
+condensation with formaldehyde are generally employed, 
+resins derived from other aldehydes such as, for example, 
+acetaldehyde, chloral, butyraldehyde, furfural and the 
+like, may also be used. Mixtures of two or more types of 
+resin may also be used, including those resins possessing 
+additional alkyl substituents on the aromatic ring. The 
+preferred phenolic resin is m-cresol novolac resin. 
+Other suitable resins include hydroxy-styrene copolymers 
+and derivatives thereof. </p><p xml:id="_23eb0">As a vast number of known compounds and mixtures, 
+such as diazonium salts, phosphonium salts, sulphonium 
+salts, e.g., triphenyl sulphonium salts and iodonium 
+salts or halogen compounds, quinone diazide 
+sulfochlorides, trichloromethylpyrones, bis(trichloromethyl)-s-triazines, 
+e.g., 2-(p-methoxystyryl-4,6-bis(trichloromethyl)-s-triazine, 
+and organometal/organohalogen 
+combinations may be used as radiation-sensitive 
+constituents forming or splitting-off acids 
+during irradiation. </p><p xml:id="_423f6">Suitable diazonium salts are compounds having an 
+absorption range between 300 and 600 nm, which are known 
+to be suitable for diazotype purposes. Compounds 
+containing no basic substituents are preferred. </p><p xml:id="_57acc">As a rule, the above mentioned diazonium, 
+phosphonium, sulfonium and iodonium compounds are used in 
+the form of salts soluble in organic solvents, normally 
+as the separation products with complex acids, such as 
+tetrafluoroboric acid, hexafluorophosphoric acid, 
+hexafluoroantimonic acid and hexafluoroarsenic acid. </p><p xml:id="_fd1df">Alternatively, derivatives of positive working o-quinone 
+diazides may be used. In most cases, the acidity 
+of the indene carboxylic acids produced by exposing the 
+o-naphthoquinone diazides is barely sufficient for a 
+satisfactory imagewise differentiation but from this  
+ 
+group of compounds, naphthoquinone-1,2-diazide-4-sulfochloride 
+is preferred, because, during its exposure, 
+three acid functions are formed which give rise to a 
+relatively high degree of intensification during cleavage 
+of the acid-labile compound. </p><p xml:id="_a7511">In principle, all organic halogen compounds known as 
+free radical forming photoinitiators, for example, those 
+containing more than one halogen atom attached to a 
+carbon atom or an aromatic ring, may be used as halogen 
+containing radiation-sensitive compounds capable of 
+forming a hydrohalic acid. Examples of such compounds 
+are disclosed in U.S. Patent Nos. 3,515,552, 3,536,489 
+and 3,779,778 and in German Offenlegungsschrift No. 
+2243621. The effect of these halogen containing 
+compounds in the photoresists of the invention may be 
+spectrally influenced and increased by the addition of 
+known sensitisers. </p><p xml:id="_2f3bb">Furthermore, certain substituted trichloromethylpyrones, 
+such as those described in German 
+Offenlegungsschrift No. 2610842 may also be used, as well 
+as 2-aryl-4,6-bis-trichloromethyl-s-triazines. </p><p xml:id="_b0d54">Examples of suitable photo-acid generators are:
+ 
+   4-(di-n-propyl-amino)-benzene-diazonium-tetrafluoroborate,
+ 
+   4-p-tolylmercapto-2,5-diethoxy-benzene-diazonium 
+hexafluorophosphate,
+ 
+   4-p-tolymercapto-2,5-diethoxy-benzene-diazonium 
+tetrafluoroborate.
+ 
+   diphenylamine-4-diazonium sulfate,
+ 
+   4-methyl-6-trichloromethyl-2-pyrone,
+ 
+   4-(3,4,5-trimethoxy-styryl)-6-trichloromethyl-2-pyrone,
+ 
+   4-(4-methoxy-styryl)-6-(3,3,3-trichloro-propenyl)-2-pyrone,
+ 
+   2-trichloromethyl-benzimidazole,
+ 
+   2-tribromomethyl-quinoline,
+ 
+ 
+   2,4-dimethyl-1-tribromoacetyl-benzene,
+ 
+   3-nitro-1-tribromo-acetyl-benzene,
+ 
+   4-dibromoacetyl-benzoic acid,
+ 
+   1,4-bis-dibromomethyl-benzene,
+ 
+   tris-dibromomethyl-s-triazine,
+ 
+   2-(6-methoxy-naphth-2-yl)-4,6-bis-trichloromethyl-s-triazine,
+ 
+   2-(naphth-1-yl)-4,6-bis-trichloromethyl-s-triazine,
+ 
+   2-(naphth-2-yl)-4,6-bis-trichloromethyl-s-triazine,
+ 
+   2-(4-ethoxyethyl-naphth-1-yl)-4,6-bis-trichloromethyl-s-triazine,
+ 
+   2-(benzopyran-3-yl)-4,6-bis-trichloromethyl-s-triazine,
+ 
+   2-(4-methoxy-anthracene-1-yl)-4,6-bis-trichloromethyl-s-triazine, 
+and
+ 
+   2-(phenanthr-9-yl)-4,6-bis-trichloromethyl-s-triazine. </p><p xml:id="_f2652">The quantity of the photo-acid generator may vary 
+widely depending on its chemical nature and the exact 
+composition of the photosensitive medium and is generally 
+in the range from 0.1 to 20% by weight, based on the 
+total weight of the solids. Good results are obtained 
+with quantities ranging from about 0.1 to about 10% by 
+weight, based on the total weight of the solids, with 
+quantities in the range from 2 to 10% by weight being 
+preferred. </p><p xml:id="_e18e0">The preferred photo-acid generators for use in the 
+present invention are iodonium salts having a nucleus of 
+general formula (II): 
+</p><p xml:id="_c614b">in which;
+ 
+ 
+   Ar¹ and Ar² independently represent aromatic or 
+hetero-aromatic groups comprising up to 10 ring atoms 
+which may be linked together to include the iodine atom 
+within a ring structure, and
+ 
+   X⊖ is an anion such that HX is an acid 
+of ka 
+greater than 3. </p><p xml:id="_4f396">In the iodonium compound Ar¹ and Ar² are aromatic 
+groups generally comprising from 4 to 10 carbon atoms, 
+and may be selected from aromatic hydrocarbon rings, 
+e.g., phenyl or naphthyl, and hetero-aromatic groups 
+including thienyl, furanyl and pyrazolyl, which may be 
+substituted with alkyl groups comprising up to 5 carbon 
+atoms, e.g., methyl, alkoxy groups comprising up to 4 
+carbon atoms, e.g., methoxy, halogen atoms, e.g., 
+chlorine, bromine, iodine and fluorine, carboxy, cyano or 
+nitro groups, or any combinations thereof. Condensed 
+aromatic-heteroaromatic groups, e.g., 3-indolinyl, may 
+also be present. </p><p xml:id="_fefdb">Preferably Ar¹ and Ar² do not have more than two 
+substituents at the α positions of the aryl groups. Most 
+preferably Ar¹ and Ar² are both phenyl groups containing 
+no a substituents. </p><p xml:id="_4c306">Preferred groups for Ar¹ and Ar² include: 
+</p><p xml:id="_053d6">The α positions of the aryl groups may be linked 
+together to include the iodine atom within a ring 
+structure to give a formula such as: 
+</p><p xml:id="_435a1">in which Z is an oxygen or sulphur atom and X is as 
+defined above. </p><p xml:id="_c028d">Many anions are useful as the counter-ion in the 
+onium salt, provided the acid from which the anion is 
+derived has a pKa of less than 3, preferably less than 1. 
+Suitable inorganic anions include halide anions, HSO₄⊖, 
+and halogen-containing complex anions, e.g., 
+tetrafluoroborate, hexafluorophosphate, 
+hexafluoroarsenate and hexafluoroantimonate. Suitable 
+organic anions include, for example: 
+CF₃CO₂⊖, CCl₃CO₂⊖, 
+CH₃SO₃⊖, CF₃SO₃⊖, 
+CH₃C₆H₄SO₃⊖</p><p xml:id="_0484f">The iodonium salt generally comprises from 0.5 to 
+20%, preferably 1 to 10% and, most preferably 2 to 5% by 
+weight of the photoresist medium. </p><p xml:id="_8b22c">A wide variety of acid-cleavable compounds may be 
+used in the present invention. Such compounds generally 
+comprise an acid cleavable C-O-C or C-O-Si linkage in 
+their structure. Examples of such compounds include: 
+adducts of vinyl ethers with phenols or sulphonamides 
+(disclosed in U.S. Patent No. 3,779,778), polyacetals and 
+polyketals (disclosed in U.S. Patent No. 4,247,611), enol 
+ethers (disclosed in U.S. Patent No. 4,248,957), 
+N-acyliminocarbonates (as disclosed in U.S. Patent No. 
+4,250,247), polymeric ortho-esters (as disclosed in U.S. 
+Patent No. 4,311,782), t-alkyl esters and carbonates (as 
+disclosed in European Published Patent Application No. 
+249139), cyclic acetals and ketals of β-ketocarbonyl 
+compounds (as disclosed in European Published Patent 
+Application No. 202196) and various silyl compounds 
+including silyl ether and silyl ureido compounds (as 
+disclosed in German Patent No. 3601264 and Japanese 
+Patent Application No. 62-059949). </p><p xml:id="_0c22f">However, preferred acid cleavable compounds comprise 
+tetrahydro-pyranyl and -furanyl ethers of a bisphenol as 
+disclosed in our co-pending European Patent Application 
+No. 90311399.1 filed 17th October, 1990. Such compounds 
+have a nucleus of general formula (III):  </p><p xml:id="_0566b">in which;
+ 
+   n is 0, 1, 2 or 3,
+ 
+   each R¹, R² and R³ independently represents hydrogen 
+or an alkyl group comprising up to 4 carbon atoms,
+ 
+   R⁴ and R⁵ independently represent hydrogen or one or 
+more ring substituents selected from C1, Br, F, alkyl 
+groups comprising up to 4 carbon atoms, alkoxy groups 
+comprising up to 4 carbon atoms and combinations thereof, 
+and
+ 
+   A represents a bond or a divalent linking group 
+containing up to 10 atoms other than hydrogen. Compounds 
+of general formula (III) are particularly useful when the 
+photo-acid generator is an iodonium salt. </p><p xml:id="_61382">In the compound of Formula (III), n is preferably 1 
+or 2 and each of R¹ to R⁵ is hydrogen. A may represent a 
+wide range of divalent groups including cyclic and linear 
+groups generally composed of atoms selected from C, 
+N,S,O and H. Preferred groups include: 
+</p><p xml:id="_b28f2">and other hydrocarbon bridge groups, preferably of up to 
+8 carbon atoms. </p><p xml:id="_f27d4">The compound(s) of Formula (III) generally comprises 
+from 5 to 30%, preferably from 7.5 to 20% and most 
+preferably from 10 to 15% by weight of the photoresist 
+medium.  </p><p xml:id="_54443">Examples of suitable acid cleavable compounds 
+represented by Formula (III) include: 
+</p><p xml:id="_3b38c">The photoresists of the invention are preferably 
+sensitive to light in the visible or near U.V. regions. 
+Some photo-acid generators, such as diazonium salts, 
+diazo-oxides and certain triazine and pyrone derivatives 
+are intrinsically sensitive to these wavelengths, but 
+others, notably iodonium salts and sulphonium salts, 
+benefit from the addition of a sensitiser for the photo-acid 
+generator in order to increase the sensitivity of 
+the system towards radiation of a wavelength longer than 
+that of the intrinsic sensitivity of the photo-acid 
+generator itself. Many such compounds are known 
+including those in the following classes: 
+diphenylmethane including substituted diphenylmethane, 
+such as amino substituted diphenylmethane, xanthene, 
+acridine, methine and polymethine (including oxonol, 
+cyanine and merocyanine), thiazole, thiazine, azine, 
+aminoketone, porphyrin, aromatic polycyclic hydrocarbon, 
+p-substituted aminostyryl compound, aminotriazylmethane, 
+polyarylene, polyarylpolyene, 2,5-diphenylisobenzofuran,  
+ 
+2-5-diarylcyclopentadiene, diarylfuran, diarylthiofuran, 
+diarylpyrrole, polyarylphenylene, coumarin and polyaryl-2-pyrazoline. 
+The addition of a sensitiser to the 
+system renders it sensitive to any radiation falling 
+within the absorption spectrum of the sensitiser. The 
+efficiency of the irradiation will increase the nearer it 
+coincides with λ max of the sensitiser. </p><p xml:id="_ae3f3">However, preferred sensitisers for use with the 
+present invention do not scavenge the photo-generated 
+acid necessary for the solubilising process and so dyes 
+possessing easily protonated groups are unlikely to be 
+suitable. A preferred class of sensitisers for use with 
+iodonium and sulphonium salts includes polycyclic 
+aromatic hydrocarbons and their derivatives, e.g., 
+anthracene, 2-ethylanthracene, 9,10-diethoxyanthracene, 
+2-ethyl-9,10-diethoxyanthracene etc. </p><p xml:id="_69900">The sensitiser is preferably present in an amount 
+that makes maximum use of the incident light. This will 
+vary according to the layer thickness, the extinction 
+coefficient of the dye, and the extent to which its 
+absorption spectrum matches the output of the exposing 
+source, as is well understood by those skilled in the 
+art. Generally the sensitiser will be present in amounts 
+up to 15% by weight of the total solids composition. 
+Where the output of the exposing source does not match 
+the maximum absorption of the dye an amount in excess of 
+this may be employed. </p><p xml:id="_f4f88">In most applications, the sensitiser is chosen so as 
+to match as closely as possible the output of the 
+intended exposure device, but in one embodiment, the 
+sensitiser is chosen so that sensitivity is confined to 
+the near UV region, with essentially no response to light 
+of wavelengths greater than 400nm. This provides a 
+photoresist that is handleable under white-light 
+conditions, rather than requiring the yellow lighting 
+normally used in the press-room, but can be imaged by  
+ 
+conventional exposing devices with a realistic exposure 
+time. Many commercially available exposing devices for 
+printing plates and other photoresist materials emit 
+predominantly in the blue region (above 400nm), with a 
+relatively weak UV component, but such is the sensitivity 
+shown by preferred formulations in accordance with the 
+present invention that inefficient exposures of this 
+sort can be tolerated without unduly lengthening the 
+exposure time. Sensitisers suitable for this application 
+include anthracene and its 2-ethyl derivative. </p><p xml:id="_22b97">The photoresist composition may additionally contain 
+small amounts of other ingredients commonly incorporated 
+in photoresist formulations, e.g., dyes or pigments that 
+enhance the visibility of the post-exposure or post-development 
+image, surfactants to improve the 
+coatability, and oils or resins to improve the ink 
+receptivity when used as a printing plate. </p><p xml:id="_73663">The photoresist composition may be coated on a 
+hydrophilic substrate for use as a lithographic printing 
+plate. A wide variety of coating solvents may be used, 
+including lower alcohols, ketones, ethers and esters. 
+Particularly suitable solvents are methyl ethyl ketone 
+and methyl isobutyl ketone. Mixtures of solvents may 
+also be used. Any of the well known coating techniques 
+may be used, e.g., coating with wire-wound bars, spin-coating, 
+knife-coating, dip-coating, roller-coating, etc. </p><p xml:id="_651d1">Typical lithographic support materials which are 
+useful in the invention include supports such as zinc, 
+anodized aluminium, grained aluminium, copper and 
+specially prepared metal and paper supports; 
+superficially hydrolysed cellulose ester films; polymeric 
+supports such as polyolefins, polyesters, polyamide and 
+the like. </p><p xml:id="_f8392">The supports can be sub-coated with known subbing 
+materials such as copolymers and terpolymers of 
+vinylidene chloride with acrylic monomers (such as  
+ 
+acrylonitrile ant methyl acrylate) and unsaturated 
+dicarboxylic acids (such as itaconic acid or acrylic 
+acid); carboxymethyl cellulose, polyacrylamide; and 
+similar polymeric materials. </p><p xml:id="_8bab5">The support can also carry a filter or antihalation 
+layer, such as one comprising a dyed polymer layer which 
+absorbs the exposing radiation after it passes through 
+the radiation-sensitive layer and eliminates unwanted 
+reflection from the support. A yellow dye in a polymeric 
+binder, such as one of the polymers referred to above as 
+suitable sub-coatings, is an especially effective 
+antihalation layer when ultraviolet radiation is employed 
+as the exposing radiation. </p><p xml:id="_64032">In the manufacture of a printing plate, after 
+coating, the composition is dried briefly at an elevated 
+temperature, e.g., 3 minutes at 85°C. </p><p xml:id="_65abb">After exposure, the plate is developed in aqueous 
+alkaline developer and the exposed areas of the coating 
+removed. A wide range of alkaline solutions may be used 
+to develop the plate, e.g., sodium hydroxide or trisodium 
+phosphate solution, but the preferred developer is 
+aqueous sodium metasilicate in the concentration range of 
+2 to 10 weight %, optionally containing small amounts of 
+surfactants and/or organic solvents. After development, 
+the plate is mounted on press and used to print copies in 
+the normal manner. </p><p xml:id="_37a28">The photoresist compositions may also be used as 
+positive photoresists for the preparation of metal-clad 
+printed circuit boards, e.g., copper sheet laminated to 
+an epoxy resin board. In this instance, the copper would 
+be coated with the photosensitive composition. After 
+exposure the solubilised material would be removed 
+leaving an integral mask. Unprotected areas of copper 
+would then be removed by etching such as with aqueous 
+ferric chloride solution.  </p><p xml:id="_fb4ff">The photoresist compositions may also be used to 
+protect other materials such as amorphous SiO₂. Silica 
+is often used in the fabrication of electronic devices 
+and integrated circuitry and the contact patterns for 
+these devices are often defined through photomasks. </p><p xml:id="_b3776">The photoresist compositions may also be used in 
+other applications, e.g., proofing constructions in which 
+the compositions contain a high loading of a colour-proofing 
+pigment. </p><p xml:id="_d8ddc">The photoresists of the invention exhibit an 
+improved and most importantly consistent speed on 
+prolonged storage, which speed is often superior to that 
+of similar coatings lacking a compound of general formula 
+(I). </p><p xml:id="_49b04">The invention will now be illustrated by the 
+following Examples in which the acid-cleavable compound 
+was: </p><head xml:id="_78a99">Compound I</head><p xml:id="_6c823"/><p xml:id="_e6337">and, the iodonium salt </p><head xml:id="_5f08d">Iodonium Salt I</head><p xml:id="_01dd5"/><head xml:id="_1a76f">Preparation of Compound I</head><p xml:id="_d0f7a">A mixture of dihydropyran (85g), p-toluenesulphonic 
+acid (0.1g) and concentrated hydrochloric acid (2 drops) 
+was stirred vigorously with ice-bath cooling as 
+4,4-sulphonyldiphenol (31.3g) was added in small 
+portions. The resulting thick slurry was stirred for 3  
+ 
+hours at room temperature, diluted with ethyl acetate 
+(300ml), and filtered to remove a small amount of 
+insoluble material. The filtrate was extracted with 2N 
+NaOH (3 x 50ml extractions) and water (a further 3 x 50ml 
+extractions), before drying over MgSO₄. The solvent was 
+removed under reduced pressure until a solid began to 
+separate, whereupon a large volume of ether was added and 
+the mixture stored in the refrigerator until no more 
+solid precipitated. The product was collected, washed 
+with ether and dried in a vacuum oven. Yield 21.4g; 
+melting point = 163 - 164°C. </p><head xml:id="_db14c">Coating Procedures</head><p xml:id="_d6ffa">All coatings were made with m-cresol novolak resin, 
+(commercially available from Borden Chemicals) as binder, 
+using a 20% w/w solution in 2-butanone unless otherwise 
+stated. Coatings were made on grained, anodised 
+aluminium base (commercially available from Cookson 
+Graphics Inc, under the trade designation 1-A-1) using a 
+wire-wound bar to give a wet coating thickness of 12 µm, 
+and dried at 85°C for 3 minutes. </p><head xml:id="_18aee">Development</head><p xml:id="_2ac16">This was carried out in sodium metasilicate 
+solutions of a given strength (e.g., 6% w/v) in a 
+temperature controlled bath (22°C). The standard routine 
+was a 1 minute immersion with intermittent rubbing with a 
+lambswool pad, followed by rinsing in tap water. </p><head xml:id="_19609">Coating Weight Loss (CWL)</head><p xml:id="_4bf98">This was measured as the percentage (by weight) of 
+coating that was lost when an unexposed sample was 
+subjected to the standard development routine. </p><head xml:id="_dc2b9">Speed</head><p xml:id="_506f6">Unless otherwise indicated, exposures were carried 
+out using a Nu-Arc model 40-6K contact frame, fitted with 
+a 6kW metal halide lamp ("KT Ultra-plus instant start") 
+at a distance of 102 centimeters from the easel. Under  
+ 
+these conditions, one unit of exposure corresponds to an 
+energy density of 2.8 x 10⁵ ergs/cm² integrated over the 
+entire output wavelength range, or an exposure time of 
+approximately 1.5 seconds. The bulk of the output of 
+this lamp is above 400nm. </p><p xml:id="_f8b55">Samples were exposed through a step wedge to a given 
+number of units, developed as described above and then 
+inked by hand. This procedure comprises wiping the image 
+with phosphoric acid (1% solution) and then printing ink, 
+the latter adhering preferentially to the undissolved 
+resin image. The optical density (of the wedge) at which 
+photosolubilisation ceased was thus revealed and by 
+converting it to percentage transmission, it was possible 
+to calculate the minimum exposure required to achieve 
+photosolubilisation at 100% transmission, assuming no 
+reciprocity failure. </p><head xml:id="_52fd1">Example 1</head><p xml:id="_82e2a">The following coating formulations were coated onto 
+grained and anodised aluminium base at 12µm wet thickness 
+and dried for 3 minutes at 85°C. </p><head xml:id="_d8174">Control Formulation 1</head><p xml:id="_89716">m-cresol novolak resin2.5g Iodonium salt I0.05g 9,10-diethoxyanthracene0.05g Compound I0.1g </p><head xml:id="_ce7f0">Coating Formulation A</head><p xml:id="_c2aec">As per the Control Formulation plus N-ethyl-p-toluene 
+sulphonamide (0.10g). </p><p xml:id="_dd35f">The coatings were stored in the dark at 40°C, and 
+samples tested for speed at various intervals over a 
+period of 49 days. This involved exposing samples 
+through a step wedge to a 6kW metal halide source at a 
+distance of 102cm. Following development in 9% w/v 
+sodium metasilicate solution, the images were inked by 
+hand, and the optical density at which photosolubilisation 
+ceased was noted. By converting this to % transmission,  
+ 
+it was possible to calculate the minimum exposure 
+required to achieve photosolubilisation. The results for 
+each coating are shown in Table 1 below. 
+</p><p xml:id="_3c2ca">Thus, the control coating having no speed 
+stabilising agent suffered a 4 to 5 fold loss of speed, 
+whereas coating A in accordance with the invention 
+remained essentially stable. </p><head xml:id="_7f820">Example 2</head><p xml:id="_9cff9">m-Cresol novolac resin (commercially available from 
+Borden Chemicals under the trade designation LP6-GO9) 
+Irgalite Blue GLV, copper phthalocyanine pigment 
+commercially available from Ciba-Geigy, and methyl 
+isobutyl ketone (MIBK) were milled together to produce a 
+31.3% by weight solids dispersion with a resin: pigment 
+ratio of 18.8 : 1 by weight. This dispersion was 
+formulated with other ingredients as follows (all parts 
+by weight) :  </p><p xml:id="_beb6e">to give a 24.6% by weight solids coating solution. This 
+solution was then coated on Advance 1-A-1 aluminium base 
+and dried at 88°C to give a dry coating weight of 
+2.05g/m² (Coating B). </p><p xml:id="_fbca0">The dried coating was stored in the dark at ambient 
+temperature and samples evaluated at intervals by 
+exposure on a Berkey-Ascor printing frame followed by 
+subsequent development for 2 minutes in a 5.6% w/v sodium 
+metasilicate solution at a fixed temperature. The speed 
+of each sample was determined as described in Example 1 
+and the soak time also recorded. The % coating weight 
+loss (CWL) of unexposed samples subjected to the same 
+development routine was also measured. The results are 
+presented in Table 2 below. 
+</p><p xml:id="_76e68">The above results show that the important parameters 
+of speed, soak time and CWL remained reasonably constant 
+over the test period of 50 days.  </p><head xml:id="_519e3">Example 3</head><p xml:id="_52e77">Control Formulation 2 and Coating Formulation C were 
+prepared in the same manner as Coating Formulation B of 
+Example 2, except that in Coating Formulation C the 
+Ketjenflex-8 was replaced by an equal weight of N-ethyltoluene-sulphonamide 
+(1 : 1 mixture of ortho and 
+para isomers), while Control Formulation 2 contained no 
+stabilising additive. Both coatings were dried at 80°C. 
+After aging 42 days in the dark at ambient temperature, 
+samples of both coatings were given equal exposures on a 
+Berkey-Ascor unit before immersion in a 5.6% w/v sodium 
+metasilicate at a fixed temperature with varying time 
+intervals between the end of exposure and start of 
+development. The time for the exposed areas to dissolve 
+fully (the soak time) was noted, and the results 
+presented in Table 3 below. 
+</p><p xml:id="_4d69e">Thus, the Control Formulation gave a significantly 
+longer soak time, which varied considerably with the time 
+interval between exposure and development when compared 
+with Coating Formulation C of the invention. </p><p xml:id="_c5a15">"Ketjenflex 8", "Berkey-Ascor", "Nu-arc" and "KT 
+Ultra-plus" are all trade names. </p><head xml:id="_2f765">Example 4</head><p xml:id="_98fc2">This Example tests the effect of a sulphonamide 
+compound of the invention on a positive resist that does 
+not contain an acid-cleavable compound. </p><p xml:id="_b5f67">Control Formulations 3 and 4 were prepared as for 
+Control Formulation 1 described in Example 1, except that 
+Compound 1 was omitted and Control Formulation 4 
+additionally contained 0.075g N-ethyl p-toluenesulphonamide. 
+Each formulation was coated on 
+aluminium base as described in Example 1, stored in the 
+dark at 40°C, then tested for speed as described in 
+Example 1, except that Control Formulation 3 was 
+developed in 7% w/v sodium metasilicate and Control 
+Formulation 4 in 4% w/v sodium metasilcate. This 
+arrangement enabled both coatings to show comparable 
+developer resistance (prior to exposure), which is 
+necessary for meaningful speed comparisons. Their 
+respective speeds after various periods of aging are 
+shown in Table 4:- 
+</p><p xml:id="_41366">Both coatings showed wide variations in speed, with 
+a marked speed loss after approximately three weeks 
+storage. No advantage was apparent for the coating 
+containing the sulphonamide, in the absence of an acid-cleavable 
+compound. </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

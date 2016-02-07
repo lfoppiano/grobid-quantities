@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">10691794</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">GB</orgName></authority><idno type="docNumber">9105762</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910319</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">GB9105762A</idno></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C09C1/00F</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C09C1/24P</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C09C3/06</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C09D5/08B2</term></classCode><classCode scheme="ICO"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">M01P4/20</term></classCode><classCode scheme="ICO"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">M01P4/61</term></classCode><classCode scheme="ICO"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">M01P4/84</term></classCode><classCode scheme="ICO"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">M01P6/90</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302109</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920312</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302109A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="references-cited"><list type="citations"><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="national">DE</orgName></authority><idno type="docNumber">2245959</idno><imprint><classCode scheme="kindCode">A1</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">DE2245959A1</idno></monogr></biblStruct><idno type="category">A</idno></item><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0097116</idno><imprint><classCode scheme="kindCode">A1</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0097116A1</idno></monogr></biblStruct><idno type="category">A</idno></item><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0450805</idno><imprint><classCode scheme="kindCode">A2</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0450805A2</idno></monogr></biblStruct><idno type="category">AP</idno></item><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="national">JP</orgName></authority><idno type="docNumber">63070503</idno><imprint><classCode scheme="kindCode">A</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">JP63070503A</idno></monogr></biblStruct><idno type="category">A</idno></item><item type="citation"><idno type="srep-phase">SEA</idno><biblStruct subtype="docdb" type="patent"><monogr><authority><orgName type="national">SU</orgName></authority><idno type="docNumber">1084281</idno><imprint><classCode scheme="kindCode">A1</classCode></imprint></monogr></biblStruct><biblStruct subtype="epodoc" type="patent"><monogr><idno type="docNumber">SU1084281A1</idno></monogr></biblStruct><idno type="category">A</idno></item><item type="citation"><idno type="npl-citation">DATABASE WPIL Section Ch, Week 8447, Derwent Publications Ltd., London, GB; Class E37, AN 84-293763 &amp; SU-A-1 084 281 (TRETYAK) 7 April 1984</idno></item><item type="citation"><idno type="npl-citation">DATABASE WPIL Section Ch, Week 8819, Derwent Publications Ltd., London, GB; Class L03, AN 88-128680 &amp; JP-A-63 070 503 (TDK CORP.) 30 March 1988</idno></item></list></item><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>CARTHEY NICHOLAS ANDREW</persName><residence><address><country type="national">GB</country></address></residence></person><person role="inventor" type="epo"><persName>WHITE KEITH WILLIAM PETER</persName><residence><address><country type="national">GB</country></address></residence></person><person role="inventor" type="intermediate"><persName>CARTHEY, NICHOLAS ANDREW</persName></person><person role="inventor" type="intermediate"><persName>WHITE, KEITH WILLIAM PETER</persName></person><person role="inventor" type="original"><persName>CARTHEY, NICHOLAS ANDREW</persName><residence><address><addrLine>2 Honor Close</addrLine><settlement>Kidlington, Oxon OX5 2XL</settlement><country type="national">GB</country></address></residence></person><person role="inventor" type="original"><persName>WHITE, KEITH WILLIAM PETER</persName><residence><address><addrLine>2 Honor Close</addrLine><settlement>Kidlington, Oxon OX5 2XL</settlement><country type="national">GB</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>COOKSON LAMINOX LTD</name><address><country type="national">GB</country></address></item><item type="intermediate"><name>COOKSON LAMINOX LIMITED</name></item><item type="original"><name>Cookson Laminox Limited</name><address><addrLine>Millhill, North West Industrial Estate</addrLine><settlement>Peterlee, County Durham SR8 2HR</settlement><country type="national">GB</country></address></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>AT</country><country>BE</country><country>CH</country><country>DE</country><country>DK</country><country>FR</country><country>GB</country><country>IT</country><country>LI</country><country>NL</country><country>SE</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">C09C   1/00        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C09C   1/00        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C09C   1/22        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C09C   1/24        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C09C   3/06        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C09C   3/06        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C09D   5/08        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C09D   5/08        20060101C I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Verfahren zur Behandlung von lamellaren oder plättchenförmigen Materialien.</title><title type="invention-title" xml:lang="en">Method for the treatment of lamellar or plate-like materials.</title><title type="invention-title" xml:lang="fr">Procédé de traitement de matériaux lamellaires ou en plaquettes.</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505086</idno><imprint><classCode scheme="kindCode">A2</classCode><date>19920923</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505086A2</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front><div type="abstract" xml:lang="en"><p xml:id="_b3594">A method for the treatment of a lamellar or flaky 
+pigment or extender which comprises forming a zinc 
+phosphate coating on the surface of the particles of 
+the material by the steps of 
+a) coating the particles of the material with 
+zinc oxide or zinc hydroxide by contacting 
+the material with a solution of a zinc salt 
+in sodium or potassium hydroxide, the 
+solution having a pH of 11 or above, at a 
+temperature in the range of from 50° to 
+100°C, whereby a deposit of zinc oxide or 
+zinc hydroxide is formed on the surface of 
+the particles; and b) converting the zinc oxide or zinc hydroxide 
+to zinc phosphate by treatment of the zinc 
+oxide or zinc hydroxide coated material with 
+an acidic phosphate solution, or phosphoric 
+acid. </p></div></front><group><text><body><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_21fe5">A method for the treatment of a lamellar or 
+flaky pigment or extender which comprises forming a 
+zinc phosphate coating on the surface of the 
+particles of the material by the steps of coating the 
+particles of the material with zinc oxide or zinc 
+hydroxide and converting the zinc oxide or zinc 
+hydroxide to zinc phosphate by treatment of the zinc 
+oxide or zinc hydroxide coated material with an 
+acidic phosphate solution, or phosphoric acid, 
+characterised in that the zinc oxide or zinc 
+hydroxide is formed by contacting the material with a 
+solution of a zinc salt in sodium or potassium 
+hydroxide, the solution having a pH of 11 or above, 
+at a temperature in the range of from 50° to 
+100°C, whereby a deposit of zinc oxide or zinc 
+hydroxide is formed on the surface of the particles. </p></div><div n="2" type="claim"><p xml:id="_170c6">A method as claimed in claim 1 wherein the 
+zinc salt is zinc phosphate, zinc carbonate or zinc 
+sulphate. </p></div><div n="3" type="claim"><p xml:id="_7a1a3">A method as claimed in claim 1 or claim 2 
+wherein the alkaline solution of the zinc salt is 
+contacted at ambient temperature with the particles 
+of the material and the temperature raised to 50° 
+to 100°C. </p></div><div n="4" type="claim"><p xml:id="_b2d6d">A method as claimed in any one of the 
+preceding claims wherein the zinc oxide or zinc 
+hydroxide is converted to zinc phosphate by treatment 
+of the zinc oxide or zinc hydroxide coated material 
+with an alkali metal dihydrogen phosphate solution 
+having a pH of above 3. </p></div><div n="5" type="claim"><p xml:id="_3eaf6">A method as claimed in any one of the 
+preceding claims wherein the reaction in step (b) is 
+effected by stirring the zinc oxide or zinc hydroxide 
+coated material with the acidic phosphate solution. </p></div><div n="6" type="claim"><p xml:id="_4028c">A method as claimed in any one of claims 1 to 
+4 wherein the reaction in step (b) is effected by 
+slurrying the zinc oxide or zinc hydroxide coated 
+material in water and adding the acidic phosphate 
+solution dropwise thereto until the pH reaches 7. </p></div><div n="7" type="claim"><p xml:id="_8fbf6">A method as claimed in any one of the 
+preceding claims wherein the surface of the particles 
+of the material are pretreated prior to step (a) to 
+form iron phosphate on the surface thereof. </p></div><div n="8" type="claim"><p xml:id="_4a30d">A method as claimed in claim 7 wherein the 
+pretreatment is carried out by heating a slurry of 
+the material in 0.5 to 2% phosphoric acid. </p></div><div n="9" type="claim"><p xml:id="_6d45f">A method as claimed in any one of the 
+preceding claims wherein the material which is 
+treated is natural or synthetic micaceous iron oxide. </p></div><div n="10" type="claim"><p xml:id="_a9948">A corrosion inhibiting paint composition 
+which comprises at least one flaky or lamellar 
+pigment or extender the corrosion inhibiting 
+properties of which have been improved by the 
+formation of an zinc phosphate coating on the surface 
+of the particles thereof by a method as claimed in 
+claim 1. </p></div><div n="11" type="claim"><p xml:id="_94fdc">A corrosion inhibiting paint composition as 
+claimed in claim 10 wherein the material has been 
+treated by a method as claimed in any one of claims 2 
+to 9. </p></div></div><div type="description" xml:lang="en"><p xml:id="_d8aa9">The present invention relates to a method for the 
+treatment of lamellar or flaky materials and, in 
+particular, to a method for the preparation of a 
+synthetic micaceous iron oxide product which has an 
+improved performance in relation to its corrosion 
+inhibition properties. </p><p xml:id="_3e873">Micaceous iron oxide (MI0) consists of Fe₂O₃ 
+with a flake-like particle structure. It is employed 
+as a pigment for protective paints in a range of 
+binders e.g. alkyds, vinyls, epoxies and urethanes. 
+Micaceous iron oxide paints are used to protect many 
+types of steel structures including bridges, storage 
+tanks, electricity-pylons and railway gantries. </p><p xml:id="_f7bbe">The protective action (known as the barrier 
+effect) is due to the alignment of pigment platelets 
+within the paint film, forming tightly packed layers 
+lying roughly parallel to the substrate. The 
+overlapping particles, encapsulated in binder solids, 
+act as a barrier against permeation of corrosive ions 
+and shield the binder from UV degradation. </p><p xml:id="_58f81">Since the early 1900s, micaceous iron oxide 
+pigment has been obtained from iron ore deposits 
+located in various parts of the world. The chemical 
+and physical characteristics, as with other natural 
+mineral oxides, depend very much on the constitution 
+of the source material and from where it is 
+obtained. Variations in the morphology of natural 
+micaceous iron oxide pigments, (ranging from lamellar 
+to granular) affect the protective properties 
+considerably. Therefore great care is needed in 
+selecting pigments of suitable quality for long-term 
+durability. </p><p xml:id="_a44f9">Synthetic micaceous iron oxide may be made by,  
+ 
+for example, a series of chemical reactions which 
+involve a first stage chlorination of metallic iron 
+to produce ferric chloride, a second stage 
+complexation of the ferric chloride with sodium 
+chloride to form NaFeCl₄, and a third stage 
+oxidation of this complex to form lamellar iron oxide. </p><p xml:id="_711d7">A synthetic micaceous iron oxide having a 
+particle size in the range of from 5 to 75 
+micrometres, with a 3 to 4% retention on a 63 
+micrometre sieve is known as LAMINOX-S. A synthetic 
+micaceous iron oxide having a particle size range 
+below 20 micrometres, and a lamellar thickness of 2 
+to 4 micrometres is known as LAMINOX-F. (LAMINOX is 
+a Registered Trade). </p><p xml:id="_090ed">DE-A-1288714 discloses zinc phosphate coated 
+chrome yellow prepared by a method in which a 
+suspension of zinc oxide at ambient temperature is 
+gradually transformed into zinc phosphate by the 
+addition of phosphoric acid to pH7. </p><p xml:id="_30c5d">GB-A-1578357 discloses zinc phosphate coated 
+chromium dioxide particles which are prepared by 
+precipitating zinc hydroxide onto dispersed chromium 
+dioxide particles by adding to the dispersion a 
+water-soluble zinc salt and an alkaline hydroxide or 
+ammonia in an amount such that the pH is from 5 to 7, 
+treating the coated particles with phosphoric acid, 
+and thereafter thermally treating the product at a 
+temperature of from 100° to 350°C. </p><p xml:id="_b6f1f">We have now developed a method for the treatment 
+of lamellar or flaky pigments or extenders which 
+serves to enhance their anti-corrosive action by 
+providing a thin layer of zinc phosphate on the 
+surface of the particles of the material, thus 
+combining both barrier and chemically inhibitive 
+properties. </p><p xml:id="_b0daf">Accordingly the present invention provides a  
+ 
+method for the treatment of a lamellar or flaky 
+pigment or extender which comprises forming a zinc 
+phosphate coating on the surface of the particles of 
+the material by the steps of 
+a) coating the particles of the material with 
+zinc oxide or zinc hydroxide by contacting 
+the material with a solution of a zinc salt 
+in sodium or potassium hydroxide, the 
+solution having a pH of 11 or above, at a 
+temperature in the range of from 50° to 
+100°C, whereby a deposit of zinc oxide or 
+zinc hydroxide is formed on the surface of 
+the particles; and b) converting the zinc oxide or zinc hydroxide 
+to zinc phosphate by treatment of the zinc 
+oxide or zinc hydroxide coated material with 
+an acidic phosphate solution, or phosphoric 
+acid. </p><p xml:id="_4af7f">Examples of materials which may be treated in 
+accordance with the invention are natural or 
+synthetic micaceous iron oxide, or the lamellar forms 
+of alumina, alumina hydrate, zinc oxide, aluminium 
+silicate (mica), magnesium silicate (talc), sodium 
+silicate, magnesium alumina silicate, huntite 
+(Mg₃Ca(C0₃)₄), hydromagnesite 
+(Mg₄(C0₃)(OH)₂.3H₂0), or the flaky forms of 
+alumina, zinc and glass. Natural or synthetic 
+micaceous iron oxide are the preferred materials for 
+treatment in accordance with the invention. </p><p xml:id="_9cb3e">In carrying out the method of the invention the 
+treatment in step (a) is effected by contacting the 
+material with an alkaline solution of zinc carbonate, 
+zinc sulphate or zinc phosphate, with zinc phosphate 
+being particularly preferred. The pH of the solution 
+is 11 or above, more preferably 13 or above. The 
+morphology of the zinc oxide or zinc hydroxide  
+ 
+deposit is influenced by the particular salt which is 
+used. The alkaline solution comprises a solution of 
+the chosen zinc salt in sodium or potassium 
+hydroxide. The concentration of the sodium or 
+potassium hydroxide will preferably be about 1M, but 
+any concentration capable of dissolving a significant 
+amount of the zinc salt may be used. The maximum 
+zinc concentration corresponds to a saturated 
+solution of the zinc salt. </p><p xml:id="_7eef0">The alkaline solution of the zinc salt is 
+preferably contacted at ambient temperature with the 
+lamellar or flaky pigment or extender and the 
+temperature of the solution raised to a temperature 
+in the range of 50° to 100°C, preferably to a 
+temperature of about 75°C. Alternatively, the 
+lamellar or flaky pigment or extender may be added to 
+an alkaline solution of the zinc salt which is 
+maintained at a temperature in the range of 50° to 
+100°C. A deposit of zinc oxide or zinc hydroxide 
+is gradually formed on the surface of the material. 
+Treatment is generally complete after about 30 
+minutes. The product from this stage is 
+filtered and may, if desired, be washed and dried 
+prior to further treatment in step (b). The filtered 
+product is, however, preferably kept moist as the 
+particles may adhere and form a hard mass on drying. </p><p xml:id="_1390f">The temperatures specified are necessary in order 
+to decompose the hydroxy-zincate complex which is 
+formed at ambient temperature in solution and 
+precipitate zinc (hydr)oxide, for example: 
+Zn₃(PO₄)₂ + 12NaOH → 3Zn(OH)₄2⁻ + 2PO₄³⁻ + 12Na⁺</p><p xml:id="_f36a1">In step (b) of the present invention the zinc  
+ 
+oxide or zinc hydroxide layer is transformed into 
+zinc phosphate tetrahydrate either partially or 
+completely, as desired. In carrying out stage (b) 
+the material coated with zinc oxide or zinc hydroxide 
+is contacted with an acidic phosphate solution at 
+ambient temperature. The pH of the solution is 
+generally maintained above pH 3. The phosphate 
+solution may be a solution of sodium dihydrogen 
+phosphate, or another alkali metal hydrogen 
+phosphate, or a mixture of the salt with phosphoric 
+acid, or phosphoric acid, or a solution of zinc 
+phosphate in phosphoric acid. The reaction in this 
+stage is complete after about 30 minutes and the 
+product coated with zinc phosphate tetrahydrate is 
+filtered, washed and dried to provide the desired 
+material with a coating of zinc phosphate dihydrate. </p><p xml:id="_f5b0b">Alternatively, the product from step (a) may be 
+slurried with water and the acidic phosphate solution 
+added dropwise thereto so that the zinc oxide or zinc 
+hydroxide is neutralised, the reaction being complete 
+when the pH of the solution reaches pH 7. </p><p xml:id="_a468f">A pretreatment step prior to step (a) of the 
+process may be desirable in order to provide sites on 
+the particles of the lamellar or flaky material for 
+the zinc phosphate to bind to, or to key, or roughen 
+the surface of the particles. The pretreatment step 
+will depend upon the material which is to be 
+treated. Micaceous iron oxide may be treated with 
+phosphoric acid in order to form an iron phosphate 
+layer on the surface, whilst glass would generally 
+require a pretreatment with sodium hydroxide or 
+hydrofluoric acid. Alternatively, micaceous iron 
+oxide may be treated in accordance with the method as 
+described in our co-pending Application No. (BWT 
+Reference 36303/100) to form an iron phosphate layer 
+on the surface of the particles.  </p><p xml:id="_b28ae">The process of the present invention may be used 
+for the treatment of natural or synthetic micaceous 
+iron oxide, as well as for the treatment of other 
+lamellar or flaky pigments or extenders. </p><p xml:id="_e7c50">The present invention also includes within its 
+scope a corrosion inhibiting paint composition which 
+comprises at least one flaky or lamellar pigment or 
+extender the corrosion inhibiting properties of which 
+have been improved by the formation of a zinc 
+phosphate coating on the surface of the particles 
+thereof by the steps of 
+a) coating the particles of the material with 
+zinc oxide or zinc hydroxide by contacting 
+the material with a solution of a zinc salt 
+in sodium or potassium hydroxide, the 
+solution having a pH of 11 or above, at a 
+temperature in the range of from 50° to 
+100°C, whereby a deposit of zinc oxide or 
+zinc hydroxide is formed on the surface of 
+the particles; and b) converting the zinc oxide or zinc hydroxide 
+to zinc phosphate by treatment of the zinc 
+oxide or zinc hydroxide coated material with 
+an acidic phosphate solution. </p><p xml:id="_8c7de">The present invention will be further described 
+with reference to the following non-limiting Example: </p><head xml:id="_574d8">Example 1</head><p xml:id="_6a8d1">6g of LAMINOX-F were stirred with 150ml of a 
+solution of 1M sodium hydroxide containing 2g of zinc 
+phosphate tetrahydrate (pH about 13) for 30 minutes 
+at 75°C, after which time a zinc oxide coating was 
+formed on the particles. The product was filtered, 
+washed and dried at 100°C, and stirred for 10 
+minutes with a solution containing 2.5g of sodium  
+ 
+dihydrogen phosphate in 100ml of water at ambient 
+temperature, after which time the zinc oxide layer 
+was converted at least partially to zinc phosphate 
+tetrahydrate. The product was washed, and dried at 
+150°C, converting the zinc phosphate tetrahydrate 
+into zinc phosphate dihydrate. </p><head xml:id="_2b506">Example 2</head><p xml:id="_1d399">36g of LAMINOX-F coated with iron phosphate (10% 
+by weight) was heated for 1 hour at 75°C in 
+900 cm³ of 1 M sodium hydroxide containing 12g of 
+dissolved zinc phosphate tetrahydrate and then washed 
+by decantation with water. The wet material was 
+suspended in 300 ml of water and the pH (initially 
+11) was adjusted to 9 with 100ml sodium dihydrogen 
+phosphate solution (1.6g of the dihydrate per 
+100ml). The mixture was washed by decantation and 
+dried at 120°C to yield 35.6g of LAMINOX-F coated 
+with a mixture of zinc oxide and zinc phosphate 
+tetrahydrate. (The apparent weight loss of the final 
+product is due to dissolution of iron phosphate from 
+the starting material). </p><head xml:id="_ffb9f">Example 3</head><p xml:id="_c063a">504.0g of sodium hydroxide were dissolved in 
+12.6dm³ of water and 168.0g of zinc phosphate 
+tetrahydrate were added with stirring. After 30 
+minutes, the zinc phosphate had dissolved and 2kg of 
+pre-phosphated Laminox F (10% iron phosphate) were 
+added and the suspension was heated to 75°C and 
+maintained at that temperature for 2 hours. The 
+suspension was allowed to settle. The settled 
+product was washed by decantation and then by vacuum 
+filtration. It was found that a brownish-red, very  
+ 
+fine precipitate was produced on diluting the coating 
+solution, due to re-precipitation of dissolved iron 
+phosphate. This was largely removed in the washing 
+process. </p><p xml:id="_d37c0">The product from the first stage was micaceous 
+iron oxide coated (after drying at 120°C) with 
+zinc oxide (3.4%). In a separate experiment, the 
+undried product was treated with an acidic zinc 
+phosphate solution (at room temperature) in the 
+following way. </p><p xml:id="_6a35b">115g of basic zinc carbonate (equivalent 68% ZnO) 
+were dissolved in 4.6dm³ of water containing 
+161cm³ H₃PO₄ and the coated micaceous iron 
+oxide from the first stage was added with sitrring. 
+After 1/2 hour, the mixture was vacuum-filtered, 
+washed and dried at 120°C overnight, to give 
+micaceous iron oxide coated with 8% zinc 
+orthophosphate dihydrate. </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">10691916</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">GB</orgName></authority><idno type="docNumber">9105937</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910320</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">GB9105937A</idno></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">B29C65/34+B4</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">F16L47/03</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302101</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920311</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302101A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>BEECHEY ROBERT EDWARD</persName><residence><address><country type="national">GB</country></address></residence></person><person role="inventor" type="epo"><persName>WALL DAVID JOHN</persName><residence><address><country type="national">GB</country></address></residence></person><person role="inventor" type="intermediate"><persName>BEECHEY, ROBERT EDWARD</persName></person><person role="inventor" type="intermediate"><persName>WALL, DAVID JOHN</persName></person><person role="inventor" type="original"><persName>BEECHEY, ROBERT EDWARD</persName><residence><address><addrLine>52 Redland Road</addrLine><settlement>Oakham, Leicestershire LE15 6PJ</settlement><country type="national">GB</country></address></residence></person><person role="inventor" type="original"><persName>WALL, DAVID JOHN</persName><residence><address><addrLine>Rounfields, 15 Church Lane, Caldecott, Nr. Market</addrLine><settlement>Harborough, Leicestershire LE16 8RW</settlement><country type="national">GB</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>RUTLAND PLASTICS</name><address><country type="national">GB</country></address></item><item type="epo"><name>VICTAULIC PLC</name><address><country type="national">GB</country></address></item><item type="intermediate"><name>RUTLAND PLASTICS LIMITED</name></item><item type="intermediate"><name>VICTAULIC PLC</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>AT</country><country>BE</country><country>CH</country><country>DE</country><country>DK</country><country>ES</country><country>FR</country><country>GB</country><country>GR</country><country>IT</country><country>LI</country><country>LU</country><country>MC</country><country>NL</country><country>PT</country><country>SE</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">F16L  47/02        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">B29C  65/36        20060101AFI20051220RMJP        </classCode><classCode scheme="ipcr">B29L  31/24        20060101ALN20051220RMJP        </classCode><classCode scheme="ipcr">B29C  65/34        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">F16L  47/03        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">F16L  47/02        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">B29C  65/34        20060101C I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Schweissbare Rohranschlussstücke und damit hergestellte Rohrverbindungen</title><title type="invention-title" xml:lang="en">Weldable pipe fittings and pipe joints formed therewith</title><title type="invention-title" xml:lang="fr">Garnitures soudables pour tuyaux et raccords de tuyaux fabriqués avec les mêmes</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505083</idno><imprint><classCode scheme="kindCode">B1</classCode><date>19951115</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505083B1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="1" type="claim"><p xml:id="_34e2f">Eine schweißbare Rohrarmatur (1) mit einer Muffe (2) aus 
+thermoplastischem Werkstoff, wobei die Muffe (2) einen 
+beanspruchungsfesten Teil (10) mit einer größeren 
+Wandstärke, einem Endstück (11,12) mit einer größeren 
+Wandstärke und einen Schmelzbereich (8,9) mit geringerer 
+Wandstärke zwischen dem beanspruchungsfesten Teil (10) und 
+dem Endteil aufweist, wobei der beanspruchungsfeste Teil 
+(10) durch einen konischen Teil zum Schmelzbereich (8, 9) 
+hin abfällt und wobei der beanspruchungsfeste Teil (10) bei 
+dessen Einsatz überlagernd über einem amn der Rohrarmatur 
+(1) anzuschließenden Rohr (17, 18) angeordnet ist; wobei der 
+beanspruchungsfeste Teil (10) der Buchse ein 
+Standardmaßverhältnis von Außendurchmesser zur Wandstärke in 
+einem Bereich von nicht unter 8:1 und nicht über 12:1 
+aufweist, wobei das Endstück (11, 12) der Buchse (2) ein 
+Standardmaßverhältnis in einem Bereich von nicht unter 8:1 
+und nicht über 12:1 aufweist und der Schmelzbereich (8, 9) 
+ein Standardmaßverhältnis in einem Bereich von nicht unter 
+14:1 und nicht über 19:1 aufweist und die Innenwand der 
+Buchse (2) einen elektrischen Heizdraht oder Heizdrähte (3, 
+4) längs und innerhalb der Wand und um den Umfang herum 
+neben der radialen Innenfläche (5) der Wand aufweist, 
+genannte(r) Heizdrähte (Heizdraht) (3,4) über die gesamte 
+Länge der Buchse (2) angeordnet sind, wobei sich mindestens 
+der größte Teil davon im Schmelzbereich (8,9) befindet.  
+ </p></div><div n="2" type="claim"><p xml:id="_683da">Eine schweißbare Rohrarmatur (1) gemäß Anspruch 1, 
+dadurch gekennzeichnet, daß der Schmelzbereich (8,9) der 
+Buchse (2) ein Standardmaßverhältnis im Bereich von nicht 
+unter 15:1 und nicht über 17:1 aufweist. </p></div><div n="3" type="claim"><p xml:id="_7a367">Eine schweißbare Rohrarmatur (1) gemäß Anspruch 1 oder 2, 
+dadurch gekennzeichnet, daß der Endteil (11,12) der Buchse 
+(2) ein Standardmaßverhältnis im Bereich von nicht unter 9:1 
+und nicht über 11:1 aufweist. </p></div><div n="4" type="claim"><p xml:id="_7d16f">Eine schweißbare Rohrarmatur (1) gemäß jedem/einem der 
+Ansprüche 1 bis 3, dadurch gekennzeichnet, daß der 
+beanspruchungsfeste Teil (10) der Buchse (2) ein 
+Standardmaßverhältnis im Bereich von nicht unter 9:1 und 
+nicht über 11:1 aufweist. </p></div><div n="5" type="claim"><p xml:id="_cd530">Eine schweißbare Rohrarmatur (1) gemäß jedem der 
+vorstehenden Ansprüche, dadurch gekennzeichnet, daß der 
+(die) Heizdraht (Heizdrähte) (3,4) axial um die Buchse (2) 
+verläuft, so daß der kleinste Teil davon im 
+beanspruchungsfesten Teil (10) der Buchse (2) liegt. </p></div><div n="6" type="claim"><p xml:id="_a3057">Eine schweißbare Rohrarmatur (1) gemäß Anspruch 5, 
+dadurch gekennzeichnet, daß der genannte kleinste Teil des 
+Heizdrahtes oder der Heizdrähte (3,4) im  
+ 
+beanspruchungsfesten Teil (10) der Buchse (2) bis zu 40% des 
+(der) Heizdrahtes (Heizdrähte) (3,4) inkorporiert. </p></div><div n="7" type="claim"><p xml:id="_6d5ce">Eine schweißbare Rohrarmatur (1) gemäß jedem der 
+vorstehenden Ansprüche, dadurch gekennzeichnet, daß der 
+beanspruchungsfeste Teil (10) der Buchse durch den konischen 
+Teil zum Schmelzbereich (8,9) hin abfällt. </p></div><div n="8" type="claim"><p xml:id="_a6389">Eine schweißbare Rohrarmatur (1) gemäß jedem der 
+vorstehenden Ansprüche, dadurch gekennzeichnet, daß der 
+Anschluß zwei Enden aufweist und zwei Endteile (11,12), zwei 
+Schmelzbereiche (8,9) und zwei damit verbundene Sätze 
+elektrischen Heizdrahtes (Heizdrähte) (3, 4) sowie einen 
+einzigen, normalerweise axilalförmigen mittleren 
+beanspruchungsfesten Teil (10), der die zwei an der Armatur 
+anzuschließenden Rohre, (17, 18) bei dessen Einsatz 
+überlagert. </p></div><div n="9" type="claim"><p xml:id="_04b4c">Eine schweißbare Rohrarmatur (1) gemäß Anspruch 8, 
+dadurch gekennzeichnet, daß die Sätze Heizdraht (Heizdrähte) 
+(3,4) in Reihe geschaltet sind durch Wendeldrahtvorsätze, 
+die im breiten Anstand um den Innenumfang der Buchse (2) 
+über dem beanspruchungsfesten Teil (10) verlaufen. </p></div><div n="10" type="claim"><p xml:id="_4a4eb">Eine schweißbare Rohrarmatur (1) gemäß jedem der 
+vorstehenden Ansprüche, dadurch gekennzeichnet, daß der  
+ 
+konisch verlaufende Teil mit 30° von der Armatur abgewinkelt 
+ist. </p></div><div n="11" type="claim"><p xml:id="_86f5a">Eine Rohrverbindung dadurch gekennzeichnet, daß sie 
+einen schweißbarer Rohranschluß (1) gemäß jedem der 
+vorstehenden Ansprüche aufweist. </p></div></div><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_f1d30">A weldable pipe fitting (1) including a sleeve member 
+(2) of thermoplastic material, the sleeve member (2) 
+having a stress resistant portion (10) of greater wall 
+thickness, a terminal portion (11, 12) of greater wall 
+thickness, and a fusion accommodating portion (8, 9) of 
+lesser wall thickness between the stress resistant portion 
+(10) and the terminal portion, wherein the 
+stress resistant portion (10) inclines to the fusion 
+accommodating portion(8, 9) by means of a tapered portion, 
+and wherein the stress resistant portion (10) is arranged 
+in use to overlie an end of a pipe (17, 18) to be 
+connected to the pipe fitting (1); the stress resistant 
+portion (10) of the sleeve (2) has a standard dimensional 
+ratio of outside diameter to wall thickness within the 
+range of no less than 8:1 and no more than 12:1, the 
+terminal portion (11, 12) of the sleeve (2) has a standard 
+dimensional ratio within the range of no less than 8:1 and 
+no more than 12:1, and the fusion accommodating portion 
+(8, 9) has a standard dimensional ratio within the range 
+of no less than 14:1 and no more than 19:1; and the 
+internal wall of the sleeve (2) is provided with an 
+electric heating wire or wires (3, 4) along and within the 
+wall and disposed circumferentially thereof adjacent the 
+radially inner surface (5) of the wall, said heating wire 
+or wires (3, 4) being disposed over a length of the sleeve 
+(2) at least the majority of which is within the fusion  
+ 
+accommodating portion (8, 9) thereof. </p></div><div n="2" type="claim"><p xml:id="_296f5">A weldable pipe fitting (1) as claimed in Claim 1 
+characterised in that the fusion accommodating portion (8, 
+9) of the sleeve (2) has a standard dimensional ratio in 
+the range of no less than 
+15:1 and no more than 17:1. </p></div><div n="3" type="claim"><p xml:id="_c97f6">A weldable pipe fitting (1) as claimed in Claim 1 or 
+2 characterised in that the terminal portion (11, 12) of 
+the sleeve (1) has a standard dimensional ratio in the 
+range of no less than 9:1 and no more than 11:1. </p></div><div n="4" type="claim"><p xml:id="_81b05">A weldable pipe fitting (1) as claimed in any one of 
+Claim 1 - 3 characterised in that the stress resistant 
+portion (10) of the sleeve (2) has a standard dimensional 
+ratio in the range of no less than 9:1 and no more than 
+11:1. </p></div><div n="5" type="claim"><p xml:id="_5a8e2">A weldable pipe fitting (1) as claimed in any one of 
+the preceding claims characterised in that the heating 
+wire or wires (3, 4) extend axially of the sleeve (2) such 
+that a minority thereof lie within the stress resistant 
+portion (10) of the sleeve (2). </p></div><div n="6" type="claim"><p xml:id="_c6ba7">A weldable pipe fitting (1) as claimed in Claim 5 
+characterised in that said minority of the heating wire or 
+wires (3, 4) within the stress resistant portion (10) of 
+the sleeve (2) incorporates up to 40% of the heating wire 
+or wires (3, 4).  
+ </p></div><div n="7" type="claim"><p xml:id="_84e9d">A weldable pipe fitting (1) as claimed in any one of 
+the preceding claims characterised in that the stress 
+resistant portion (10) of the sleeve reduces by a conical 
+incline to the fusion accommodating portion (8, 9). </p></div><div n="8" type="claim"><p xml:id="_56e8c">A weldable pipe fitting (1) as claimed in any one of 
+the preceding claims characterised by being double ended 
+and provided with two terminal portions (11, 12), two 
+fusion accommodating portions (8, 9) and two sets of 
+electric heating wire or wires (3, 4) associated 
+therewith, and a single generally axially central stress 
+resistant portion (10) arranged in use to override two 
+pipes (17, 18) to be connected to the fitting. </p></div><div n="9" type="claim"><p xml:id="_59644">A weldable pipe fitting (1) as claimed in Claim 8 
+characterised in that the sets of heating wire or wires 
+(3, 4) are connected in series by means of helical wire 
+continuations running, wide pitch, around the inner 
+periphery of the sleeve (2) across the stress resistant 
+portion (10). </p></div><div n="10" type="claim"><p xml:id="_0b836">A weldable pipe fitting (1) as claimed in any one of 
+the preceding claims characterised in that the tapered 
+portion is at an angle of 30° to the axis of the fitting. </p></div><div n="11" type="claim"><p xml:id="_253dd">A pipe joint characterised by incorporating a 
+weldable pipe fitting (1) as claimed in any one of the 
+preceding claims. </p></div></div><div type="claims" xml:lang="fr"><div n="1" type="claim"><p xml:id="_e2bba">Un raccord de tuyau soudable (1) comportant un élément 
+manchon (2) de matériau thermoplastique, l'élément manchon (2) 
+ayant une partie résistant aux contraintes (10) d'épaisseur de 
+paroi plus importante, une partie d'extrémité (11, 12) 
+d'épaisseur de paroi plus importante, et une partie accommodant 
+la fusion (8, 9) d'épaisseur de paroi moins importante entre la 
+partie résistant aux contraintes (10) et la partie d'extrémité, 
+dans quoi la partie résistant aux contraintes (10) penche par 
+rapport à la partie accommodant la fusion (8, 9) au moyen d'une 
+partie conique, et dans quoi la partie résistant aux contraintes 
+(10) est arrangée lors de l'utilisation pour recouvrir une 
+extrémité d'un tuyau (17, 18) à connecter au raccord de tuyau 
+(1); la partie résistant aux contraintes (10) du manchon (2) a 
+un rapport dimensionnel standard diamètre extérieur/épaisseur de 
+paroi dans la gamme égal ou supérieur à 8:1 et égal ou inférieur 
+à 12:1, la partie d'extrémité (11, 12) du manchon (2) a un 
+rapport dimensionnel standard dans la gamme égal ou supérieur à 
+8:1 et égal ou inférieur à 12:1, et la partie accommodant la 
+fusion (8, 9) a un rapport dimensionnel standard dans la gamme 
+égal ou supérieur à 14:1 et égal ou inférieur à 19:1; et la paroi 
+interne du manchon (2) est dotée d'un fil chauffant ou de fils 
+chauffants électriques (3, 4) le long de la paroi et dans cette 
+dernière et disposés circonférentiellement par rapport à cette 
+dernière au droit de la surface radialement intérieure (5) de 
+la paroi, ledit fil chauffant ou lesdits fils chauffants (3, 4) 
+étant disposés sur une longueur du manchon (2) dont au moins la 
+majorité est dans la partie accommodant la fusion (8, 9) de ce 
+dernier.  
+ </p></div><div n="2" type="claim"><p xml:id="_eb4ef">Un raccord de tuyau soudable (1) comme revendiqué dans la 
+revendication 1 caractérisé en ce que la partie accommodant la 
+fusion (8, 9) du manchon (2) a un rapport dimensionnel standard 
+dans la gamme égal ou supérieur à 15:1 et égal ou inférieur à 
+17:1. </p></div><div n="3" type="claim"><p xml:id="_64f0b">Un raccord de tuyau soudable (1) comme revendiqué dans la 
+revendication 1 ou 2 caractérisé en ce que la partie d'extrémité 
+(11, 12) du manchon (2) a un rapport dimensionnel standard dans 
+la gamme égal ou supérieur à 9:1 et égal ou inférieur à 11:1. </p></div><div n="4" type="claim"><p xml:id="_25225">Un raccord de tuyau soudable (1) comme revendiqué dans l'une 
+quelconque des revendications 1 à 3 caractérisé en ce que la 
+partie résistant aux contraintes (10) du manchon (2) a un rapport 
+dimensionnel standard dans la gamme égal ou supérieur à 9:1 et 
+égal ou inférieur à 11:1. </p></div><div n="5" type="claim"><p xml:id="_faf48">Un raccord de tuyau soudable (1) comme revendiqué dans l'une 
+quelconque des revendications précédentes caractérisé en ce que 
+le ou les fils chauffants (3, 4) s'étendent axialement par 
+rapport au manchon (2) de façon à ce qu'une minorité de ces 
+derniers se trouvent dans la partie résistant aux contraintes 
+(10) du manchon (2). </p></div><div n="6" type="claim"><p xml:id="_bc2ae">Un raccord de tuyau soudable (1) comme revendiqué dans la 
+revendication 5 caractérisé en ce que ladite minorité du ou des 
+fils chauffants (3, 4) dans la partie résistant aux contraintes 
+(10) du manchon (2) incorpore jusqu'à 40% du ou des fils 
+chauffants (3, 4). </p></div><div n="7" type="claim"><p xml:id="_e2c84">Un raccord de tuyau soudable (1) comme revendiqué dans l'une 
+quelconque des revendications précédentes caractérisé en ce que 
+la partie résistant aux contraintes (10) du manchon se réduit par 
+une inclinaison conique par rapport à la partie accommodant la  
+ 
+fusion (8, 9). </p></div><div n="8" type="claim"><p xml:id="_4c394">Un raccord de tuyau soudable (1) comme revendiqué dans l'une 
+quelconque des revendications précédentes caractérisé par le fait 
+qu'il est à deux bouts et est pourvu de deux parties d'extrémité 
+(11, 12), de deux parties accommodant la fusion (8, 9) et de deux 
+jeux de fil ou fils chauffants (3, 4) associés à ces derniers, 
+et d'une seule partie résistant aux contraintes généralement 
+axialement centrale (10) arrangée lors de l'utilisation pour 
+chevaucher deux tuyaux (17, 18) à connecter au raccord. </p></div><div n="9" type="claim"><p xml:id="_2ef4b">Un raccord de tuyau soudable (1) comme revendiqué dans la 
+revendication 8 caractérisé en ce que les jeux de fil ou fils 
+chauffants (3, 4) sont connectés en série au moyen de 
+prolongements de fils hélicoïdaux passant, à pas large, autour 
+de la périphérie du manchon (2) à travers la partie résistant aux 
+contraintes (10). </p></div><div n="10" type="claim"><p xml:id="_931fc">Un raccord de tuyau soudable (1) comme revendiqué dans l'une 
+quelconque des revendications précédentes caractérisé en ce que 
+la partie conique est à un angle de 30º par rapport à l'axe du 
+raccord. </p></div><div n="11" type="claim"><p xml:id="_687c1">Un assemblage de tuyau caractérisé par l'incorporation d'un 
+raccord de tuyau soudable (1) comme revendiqué dans l'une 
+quelconque des revendications précédentes. </p></div></div><div type="description" xml:lang="en"><p xml:id="_ff631">This invention relates to weldable pipe fittings, by 
+which is meant hollow thermoplastic fittings connectable 
+to thermoplastic pipes in which a part of an inner 
+peripheral wall of the fitting is arranged to be joined by 
+fusion or "welding" to a part of an outside peripheral 
+wall of a plastics pipe. The invention relates more 
+particularly to the production of such weldable fittings 
+adapted to be fused to the outside periphery of a pipe by 
+means of an electric heating wire embedded within the 
+fitting.  
+ </p><p xml:id="_504e1">It is to be understood that the expression "pipe" as 
+used herein includes pipes and tubes as such and also 
+pipe-like members and fittings for use in pipework such as 
+bends, elbows, "T" connectors, flange adaptors and parts 
+and devices adapted to be fitted by pipe-like parts to the 
+pipework such as valves and pumps. </p><p xml:id="_7d10e">It has already been proposed to provide a hollow 
+plastics fitting of the kind referred to in which a 
+helical groove is formed around a part of the inner wall 
+of a sleeve-like part of a fitting within which is located 
+an electrically conducting wire, so that when in use the 
+fitting is placed in close proximity about a thermoplastic 
+pipe or pipe-like member and an electric current passed 
+through the electic wiring, melting of the adjacent 
+plastics surfaces of the fitting and the pipe occurs and 
+fusion or "welding" between the two bodies takes place. </p><p xml:id="_ea712">Such arrangements are disclosed in our United Kingdom 
+Patents 2135746B and 2135747B.  
+ </p><p xml:id="_a8b2f">Another such arrangement is disclosed in EP-A-183189. 
+EP-A-183189 is concerned only with shrinkage problems (or volume 
+contractions) during the cooling phase of the production of 
+electrofusion joints utilizing an electrofusion plastics sleeve. 
+The particular problem addressed by 
+EP-A-183189 is that of cavities, from the shrinkage factor during 
+cooling of electrofusion sleeve joints, which can impair the 
+strength of the sleeve and which occurs at the centre of the 
+melting zone or zones. EP-A-183189 solves this problem by 
+providing one or more recesses in the "edge" areas of the sleeve, 
+such as slot 14 of Figure 3 of EP-A-183189 in the outer 
+circumference of the sleeve member 1. This reduces the sleeve 
+stiffness in the edge zones of the sleeve in that the bottoms of 
+the recesses can collapse radially inwardly which thereby 
+compensates for the volume contraction during solidification of 
+the melting zone so as to avoid the occurrence of cavities.  
+ </p><p xml:id="_c5067">One of the critical factors in design of such 
+fittings is ensuring the provision of consistently 
+successful welds meeting professionally specified 
+performance requirements. A most important aspect in this 
+is achieving the correct conditions at the welding 
+interface between the fitting and the pipe. Two such 
+conditions comprise obtaining a suitable heating profile 
+for satisfactory welding, and, perhaps more difficult to 
+achieve, correct pressure within the molten plastics  
+ 
+material during the welding process. </p><p xml:id="_15761">With the development of large diameter fittings for 
+large diameter pipes, of 180mm above, for example, the 
+performance pressure requirements necessitate the use of 
+thicker walled fittings and from this the achievement of 
+the correct amount of heat and pressure during welding 
+presents increasingly difficult problems with increase in 
+size. </p><p xml:id="_29048">Thus, for example, the thickened walls of such large 
+fittings can cause excessive melt pressure during the 
+welding process resulting in molten polymer, and sometimes 
+part of the heating wires, being extruded from between the 
+pipe and the pipe fitting. Such movement of heating 
+wires can cause, in extreme cases, overheating by 
+contacting and short circuiting with each other, whilst at 
+the other extreme, premature joint failure can be caused 
+due to the chilling effect the large cold pipe has on the 
+melt, resulting in crack propagation and joint failure. </p><p xml:id="_d2841">Although theoretically a reduction in pressure at the 
+weld melt could be achieved by reducing the wall thickness 
+of the fitting, this can seriously compromise the stress 
+performance under pressure in use of the fitting, whilst, 
+in some situations still leading to exudation of molten 
+polymer, and even at times voids along the weld interface 
+due to the melt pressure producing a radially outward 
+bending along the length of the reduced thickness and  
+ 
+weakened fitting. </p><p xml:id="_08c9d">It is an object of the present invention to overcome 
+or at least substantially reduce the above mentioned 
+difficulties and problems. </p><p xml:id="_4eca9">In accordance with the present invention there is 
+provided a weldable pipe fitting including a sleeve member 
+of thermoplastic material, the sleeve member having a 
+stress resistant portion of greater wall thickness, a 
+terminal portion of greater wall thickness, and a fusion 
+accommodating portion of lesser wall thickness between the 
+stress resistant portion and the terminal portion, 
+wherein 
+the stress resistant portion 
+inclines to the fusion accommodating portion by means of a 
+tapered portion and wherein the stress resistant portion 
+is arranged in use to overlie an end of a pipe to be 
+connected to the pipe fitting; the stress resistant 
+portion of the sleeve has a standard dimensional ratio 
+of outside diameter to wall thickness within the range of 
+no less than 8:1 and no more than 12:1, the terminal 
+portion of the sleeve has a standard dimensional ratio 
+within the range of of no less than 8:1 and no more than 
+12:1, and the fusion accommodating portion has a standard 
+dimensional ratio within the range of no less than 14:1 
+and no more than 19:1; and the internal wall of the sleeve 
+is provided with an electric heating wire or wires along 
+and within the wall and disposed circumferentially thereof 
+adjacent the radially inner surface of the wall, said 
+heating wire or wires being disposed over a length of the  
+ 
+sleeve at least the majority of which is within the fusion 
+accommodating portion thereof. </p><p xml:id="_7c165">The standard dimensional ratio is the ratio of the 
+outside diameter to the wall thickness of the fitting 
+sleeve member. </p><p xml:id="_2b8a8">Preferably, the fusion accommodating portion of the 
+sleeve has a standard dimensional ratio in the range of no 
+less than 15:1 and no more than 17:1. Again, the terminal 
+portion of the sleeve preferably has standard dimensional 
+ratio in the range of no less than 9:1 and no more than 
+11:1. Yet again, preferably, the stress resistant portion 
+of the fitting preferably has a standard dimensional ratio 
+in the range of no legs than 9:1 and no more than 11:1. </p><p xml:id="_f90ba">In one embodiment of the invention the heating wire 
+or wires extend axially of the sleeve such that a minority 
+thereof lie within the stress resistant portion of the 
+sleeve, and this portion in its axial dimension may 
+incorporate up to 40% of the heating wire or wires. </p><p xml:id="_62805">In another embodiment of the invention, the fitting 
+sleeve is double-ended, and is, therefore, provided with 
+two terminal portions two fusion accommodating portions, 
+and two sets of electric heating wire or wires associated 
+therewith, a single generally axially central stress 
+resistant portion arranged in use to overlie two pipes to 
+be connected to the fitting. The sets of heating wire or 
+wires may be seperate from each other or may be connected 
+in series, for example by helical wire continuations 
+running, at wide pitch, around the inner perifery of the  
+ 
+sleeve across the stress resistant portion. </p><p xml:id="_c2caa">The stress resistant portion of the sleeve may reduce 
+by a conical incline to the or each fusion accommodating 
+portion so that the change in stress performance axially 
+along the fitting is not abruptly changed. </p><p xml:id="_8af0b">The invention includes within its scope a pipe joint 
+incorporating a fitting as hereinabove defined. </p><p xml:id="_c4b9c">In order that the invention may be more readily 
+understood, one embodiment thereof will now be described 
+by way example with reference to the accompanying drawings 
+in which:- 
+Figure 1 illustrates a fitting in accordance with the 
+invention loosely placed about two pipes to be connected 
+thereby, prior to electrofusion welding; and Figure 2 shows the pipes and fitting of Figure 1 
+during welding. </p><p xml:id="_006d6">As can be seen in Figure 1, the pipe coupling 1 
+comprises a sleeve member 2 having helically wound heating 
+elements or wires 3,4 at each end embedded just below the 
+internal surface 5 of the sleeve, the helical heating 
+elements being set in from the axial end walls 6,7 of the 
+sleeves and ending, axially inwardly of the sleeves well 
+short of the centre of the sleeve 2. </p><p xml:id="_e615e">The sleeve is provided around its outer periphery 
+with two substantial fusion accommodating portions 8,9 of 
+reduced diameter radially overlying the majority of the 
+heating elements 3,4 at each end of the sleeve 2, and  
+ 
+thereby defining a central thicker stress resistant 
+portion 10 overlying the ends of the two pipes 17,18 to be 
+joined and two thicker terminal portions 11,12. </p><p xml:id="_6d281">The standard dimensional ratio of the stress 
+resistant portion 10 is typically 10:1, that of the fusion 
+accommodating portions 8,9 is typically 18:1, and that of 
+the terminal portions 11,12 is 11:1. </p><p xml:id="_a6cd2">As can be seen from Figure 2, during the passage of 
+electric current through the heating elements 3,4 at each 
+end of the sleeve during the welding cycle for welding the 
+pipes 17,18 to the sleeve 2, the heating and consequent 
+pressure adjacent the heating elements 3,4 causes the 
+fusion accommodating portions 8,9 (and the pipes 17,18 
+thereadjacent) to bulge radially outwardly thereby 
+reducing excessive pressure along the line of weld between 
+the pipes and the sleeve. Additionally, this bulging 
+expansion reacts in a lever-like manner on terminal 
+portions 11,12, causing them to diverge at the radially 
+outer extremities 13,14 of the sleeve end walls 6,7 from 
+each other so that their radially inner edges 15,16 move 
+inwardly reducing the clearance between the pipe and the 
+radially inner extremities of the sleeve, thus reducing 
+risk of exudation of melt therefrom. During this time the 
+central stress resistant portion 10 of the fitting 
+extending over the ends of the two pipe: being connected 
+is not significantly affected by the heating and bulging 
+of the fusion accommodating portions 8,9 on either side.  
+ </p><p xml:id="_3ce90">After completion of the welding process, and upon 
+cooling of the now welded pipes and sleeve, the bulged 
+fusion accommodating portions 8,9 contract once more, 
+causing the terminal portions 11,12 of the sleeve 2 to 
+regain their original alignment. </p><p xml:id="_f99e7">It has been found that by means of the arrangement 
+illustrated, satisfactory welds can be produced in which, 
+because excessive melt pressure is limited by the radial 
+movement of the fitting sleeve, axial movement of molten 
+polymer and exudation thereof is severely limited reducing 
+to a very large extent the risk of unsatisfactory welding. </p><p xml:id="_c0256">The invention as illustrated thereby provides a 
+significantly improved electrofusion welding fitting for 
+large diameter pipes. </p><p xml:id="_e75bd">In a typical fitting of the kind illustrated in 
+Figures 1 and 2 for use on 250mm outside diameter pipe, 
+the sleeve is formed of medium density polyethylene and 
+has an overall axial length of 240mm of which 25mm 
+comprises at each end the terminal portions of the 
+fitting, 84mm comprising the central stress resistant 
+portion, tapering at each side at an angle of 30° for 
+approximately 20mm to reduced diameter fusion 
+accommodating portions approximately 32mm long. The 
+central stress resistant portion and the tapered sides 
+thereof extend over some 40% of the heating elements at 
+each end, the remainder of which are disposed beneath the 
+fusion accommodating portions. A taper may additionally  
+ 
+be provided between the fusion accommodating portions and 
+the terminal portions of the fitting. The wall thickness 
+of the fitting at the terminal portions and at the central 
+stress resistant portion is 30mm and at the fusion 
+accommodating portion approximately 17mm. </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

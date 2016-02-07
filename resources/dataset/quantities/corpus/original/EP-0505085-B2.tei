@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">13045714</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">JP</orgName></authority><idno type="docNumber">5708791</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910320</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">JP5708791A</idno></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C22C38/44</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C22C38/46</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92302106</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920312</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92302106A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>FUKUI YUTAKA</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>ISHIZUKA TATSURO</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>KURIYAMA MITSO</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>MORI TAKANOBU</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>SHIGA MASAO</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="intermediate"><persName>FUKUI, YUTAKA</persName></person><person role="inventor" type="intermediate"><persName>ISHIZUKA, TATSURO</persName></person><person role="inventor" type="intermediate"><persName>KURIYAMA, MITSO</persName></person><person role="inventor" type="intermediate"><persName>MORI, TAKANOBU</persName></person><person role="inventor" type="intermediate"><persName>SHIGA, MASAO</persName></person><person role="inventor" type="original"><persName>FUKUI, YUTAKA</persName><residence><address><addrLine>13-27, Moriyama-cho 4-chome</addrLine><settlement>Hitachi-shi, Ibaraki 316</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>ISHIZUKA, TATSURO</persName><residence><address><addrLine>16-25, Suwa-cho 4-chome</addrLine><settlement>Hitachi-shi, Ibaraki 316</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>KURIYAMA, MITSO</persName><residence><address><addrLine>174-11, Suwama, Tokai-mura</addrLine><settlement>Ibaraki 319-11</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>MORI, TAKANOBU</persName><residence><address><addrLine>25-14, Kawajiri-cho 6-chome</addrLine><settlement>Hitachi-shi, Ibaraki 319-14</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>SHIGA, MASAO</persName><residence><address><addrLine>22-3, Ishinazaka-cho 1-chome</addrLine><settlement>Hitachi-shi, Ibaraki 319-12</settlement><country type="national">JP</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>HITACHI LTD</name><address><country type="national">JP</country></address></item><item type="intermediate"><name>HITACHI, LTD.</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>CH</country><country>DE</country><country>FR</country><country>GB</country><country>IT</country><country>LI</country><country>SE</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">C22C  38/44        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C22C  38/44        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">C22C  38/46        20060101A I20051008RMEP        </classCode><classCode scheme="ipcr">C22C  38/46        20060101C I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Stahl für Ankerwellen von Elektromaschinen</title><title type="invention-title" xml:lang="en">Steel for rotor shafts of electric machines</title><title type="invention-title" xml:lang="fr">Acier pour arbre d'induit de machines électriques</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505085</idno><imprint><classCode scheme="kindCode">B2</classCode><date>20030709</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505085B2</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="1" type="claim"><p xml:id="_1cb63">Rotorwelle einer elektrischer Maschine, aus Stahl folgender Gewichtszusammensetzung:
+C0,15 bis 0,3 %Siweniger als 0,05 %Mnweniger als 0,5 %, mindestens 0,1 %Ni3,5 bis 5 %Crmindestens 2,05 %, weniger als 3,5 %(Mo + W)0,1 bis 1,0 %, wobei gegebenenfalls W vorhanden istV0,03 bis 0,35 %Al0.0005 % bis 0.006 %
+gegebenenfalls von 0,001 bis 0,05 % eines Elements der Gruppe IIa oder IIIa,
+gegebenenfalls bis zu 0,2% Ti, Zr, Hf, Nd und/oder Ta,
+Rest Fe, abgesehen von Verunreinigungen.</p></div><div n="2" type="claim"><p xml:id="_3530f">Welle nach Anspruch 1, wobei der Stahl 0,001 bis 0,05 Gew-% des Elements
+der Gruppe IIa oder IIIa enthält.</p></div><div n="3" type="claim"><p xml:id="_caed5">Welle nach Anspruch 1 oder 2, wobei das Verhältnis Ni : Cr in dem Stahl
+kleiner als 2,1 ist.</p></div><div n="4" type="claim"><p xml:id="_4e9af">Welle nach einem der Ansprüche 1 bis 3, wobei Cr in dem Stahl im Bereich
+von 2,05 bis 2,6 Gew-% liegt.</p></div><div n="5" type="claim"><p xml:id="_a347c">Welle nach einem der vorhergehenden Ansprüche, wobei der Stahl eine
+gleichförmige Bainit-Struktur aufweist.</p></div><div n="6" type="claim"><p xml:id="_e8beb">Welle nach einem der vorhergehenden Ansprüche, wobei der Stahl eine
+Zugfestigkeit bei Raumtemperatur von mindestens 93 kg/mm2, eine Übergangstemperatur
+bei 50 % Bruchaussehen (FATT) unter 0° C, eine 0,02%-Dehngrenze
+von mindestens 74 kg/mm2 und eine magnetische Feldstärke bei 21 kG von weniger
+als 990 AT/cm aufweist </p></div><div n="7" type="claim"><p xml:id="_b0371">Rotorwelle einer elektrische Maschinen, aus Stahl folgender Zusammensetzung
+C0,15 bis 0,3 %,Siweniger als 0,05 %Mnweniger als 0,5 %, mindestens 0,1 %Ni3,5 bis 5 %Crmindestens 2,05 %, bis zu 3,5 %(Mo + W)0,1 bis 1 % (wobei W wahlweise vorhanden ist)V0,03 bis 0,35 %Alweniger als 0,006 %
+(P + S + Sn + Sb + As) weniger als 0,03 %
+Rest Fe, abgesehen von Verunreinigungen.</p></div><div n="8" type="claim"><p xml:id="_377ae">Welle nach Anspruch 7, wobei der Gehalt an (P + S + Sn + Sb + As) in
+dem Stahl nicht mehr als 0,025 Gew-% beträgt.</p></div><div n="9" type="claim"><p xml:id="_ad0be">Welle nach Anspruch 7 oder 8, wobei das Produkt der Gewichtsprozentanteile
+von (a) Si und (b) (P + S + Sn + Sb + As) in dem Stahl nicht mehr als 0,003
+beträgt.</p></div><div n="10" type="claim"><p xml:id="_d135f">Welle nach einem der Ansprüche 7 bis 9 mit einer Zugfestigkeit bei Raumtemperatur
+von mindestens 93 kg/mm2, einer Übergangstemperatur bei 50%
+Bruchaussehen (FATT) unter 0 °C, einer 0,02%-Dehngrenze von mindestens 74
+kg/mm2 und einer magnetischen Feldstärke bei 21 kG von weniger als 990
+AT/cm.</p></div><div n="11" type="claim"><p xml:id="_8f83c">Rotorwelle nach einem der vorhergehenden Ansprüche mit einem Durchmesser
+von mindestens 1 m und einer Länge, die das 5,5- bis 6,5-Fache dieses
+Durchmessers beträgt.</p></div></div><div type="claims" xml:lang="en"><div n="1" type="claim"><p xml:id="_a8604">An electric machine rotor shaft of steel having the
+composition (by weight) :
+C0.15 to 0.3%Siless than 0.05%Mnless than 0.5%, at least 0.1%Ni3.5 to 5%Crat least 2.05%, less than 3.5%(Mo + W)0.1 to 1.0%, W being optionalV0.03 to 0.35%Al0.0005% to 0.006%
+optionally, from 0.001 to 0.05% of Group IIa or Group
+IIIa element,
+optionally, up to 0.2% of any of Ti, Zr, Hf, Nd, Ta;
+and the remainder Fe apart from impurities.</p></div><div n="2" type="claim"><p xml:id="_4736c">A shaft according to claim 1, said steel comprising
+from 0.001 to 0.05% by weight of the Group IIa or Group
+IIIa element.</p></div><div n="3" type="claim"><p xml:id="_18548">A shaft according to claim 1 or 2 in which in said
+steel the ratio Ni:Cr is less than 2.1.</p></div><div n="4" type="claim"><p xml:id="_e9830">A shaft according to any one of claims 1 to 3 in
+which Cr is in the range 2.05 to 2.6% by weight in said
+steel. </p></div><div n="5" type="claim"><p xml:id="_cb1ef">A shaft according to any one of the preceding
+claims, said steel having uniform bainite structure.</p></div><div n="6" type="claim"><p xml:id="_65bc8">A shaft according to any one of the preceding
+claims, said steel having a tensile strength at room
+temperature of at least 93kg/mm2, a 50% fracture
+appearance transition temperature (FATT) below 0°C, 0.02%
+yield strength of at least 74kg/mm2, and magnetic field
+strength at 21kG less than 990AT/cm.</p></div><div n="7" type="claim"><p xml:id="_1054d">An electric machine rotor shaft of steel having the
+composition:
+C0.15 to 0.3%Siless than 0.05%Mnless than 0.5%, at least 0.1%Ni3.5 to 5%Crat least 2.05%, up to 3.5%(Mo + W)0.1 to 1%, (W being optional)V0.03 to 0.35%Alless than 0.006%
+(P + S + Sn + Sb + As) less than 0.03%
+and the remainder Fe apart from impurities.</p></div><div n="8" type="claim"><p xml:id="_5f732">A shaft according to claim 7 in which the content of
+(P + S + Sn + Sb + As) in said steel is not more than
+0.025% by weight.</p></div><div n="9" type="claim"><p xml:id="_c94bc">A shaft according to any one of claims 7 and 8 in
+which in said steel the product of the weight percentage 
+proportions of (a) Si and (b) (P + S + Sn + Sb + As) is
+not more than 0.003.</p></div><div n="10" type="claim"><p xml:id="_c3cce">A shaft according to any one of claims 7 to 9 having
+a tensile strength at room temperature of at least
+93kg/mm2, a 50% fracture appearance transition temperature
+(FATT) below 0°C, 0.02% yield strength of at least
+74kg/mm2 and magnetic field strength at 21kG less than
+990AT/cm.</p></div><div n="11" type="claim"><p xml:id="_e2add">A rotor shaft according to any one of the preceding
+claims having a diameter of at least 1m and a length 5.5
+to 6.5 times said diameter.</p></div></div><div type="claims" xml:lang="fr"><div n="1" type="claim"><p xml:id="_394c7">Arbre de rotor de machine électrique en acier ayant
+la composition suivante (en poids) :
+Cde 0,15 à 0,3%Simoins de 0,05%Mnmoins de 0,5%, au moins 0,1%Nide 3,5 à 5%Crau moins 2,05%, moins de 3,5%(Mo + W)de 0,1 à 1,0%, le W étant facultatifVde 0,03 à 0,35%Alde 0,0005% à 0,006%
+   facultativement, de 0,001 à 0,05% d'un élément du
+groupe IIa ou du groupe IIIa,
+   facultativement, jusqu'à 0,2% de l'un quelconque parmi
+Ti, Zr, Hf, Nd, Ta ; et le reste étant du Fe, en dehors
+des impuretés.</p></div><div n="2" type="claim"><p xml:id="_e3a2a">Arbre selon la revendication 1, ledit acier
+comprenant entre 0,001 et 0,05% en poids d'un élément du
+groupe IIa ou du groupe IIIa.</p></div><div n="3" type="claim"><p xml:id="_0c278">Arbre selon la revendication 1 ou 2, dans lequel,
+dans ledit acier, le rapport Ni:Cr est inférieur à 2,1.</p></div><div n="4" type="claim"><p xml:id="_f3d5e">Arbre selon l'une quelconque des revendications 1 à
+3, dans lequel le Cr est situé dans la plage comprise
+entre 2,05 et 2,6% en poids dans ledit acier.</p></div><div n="5" type="claim"><p xml:id="_2899d">Arbre selon l'une quelconque des revendications
+précédentes, ledit acier ayant une structure de bainite
+uniforme.</p></div><div n="6" type="claim"><p xml:id="_faf25">Arbre selon l'une quelconque des revendications
+précédentes, ledit acier ayant une résistance à la
+traction à la température ambiante d'au moins 93 kg/mm2,
+une température de transition d'apparition de fracture
+(FATT) à 50% inférieure à 0°C, une limite apparente
+d'élasticité à 0,02% d'au moins 74 kg/mm2, et une
+intensité de champ magnétique à 21 kG inférieure à 990
+AT/cm. </p></div><div n="7" type="claim"><p xml:id="_38c4c">Arbre de rotor de machine électrique en acier ayant
+la composition suivante :
+Cde 0,15 à 0,3%Simoins de 0,05%Mnmoins de 0,5%, au moins 0,1%Nide 3,5 à 5%Crau moins 2,05%, jusqu'à 3,5%(Mo + W)de 0,1 à 1% (le W étant facultatif)Vde 0,03 à 0,35%Almoins de 0,006%
+   (P + S + Sn + Sb + As) moins de 0,03%
+   et le reste étant du Fe, en dehors des impuretés.</p></div><div n="8" type="claim"><p xml:id="_d10c8">Arbre selon la revendication 7, dans lequel la
+proportion de (P + S + Sn + Sb + As) dans ledit acier
+n'est pas supérieure à 0,025% en poids.</p></div><div n="9" type="claim"><p xml:id="_85371">Arbre selon l'une quelconque des revendications 7
+et 8, dans lequel, dans ledit acier, le produit des
+proportions de pourcentage en poids de (a) Si et de (b)
+(P + S + Sn + Sb + As) n'est pas supérieur à 0,003.</p></div><div n="10" type="claim"><p xml:id="_535d1">Arbre selon l'une quelconque des revendications 7
+et 9, ayant une résistance à la traction à la température
+ambiante d'au moins 93 kg/mm2, une température de
+transition d'apparition de fracture (FATT) à 50%
+inférieure à 0°C, une limite apparente d'élasticité à
+0,02% d'au moins 74 kg/mm2, et une intensité de champ
+magnétique à 21 kG inférieure à 990 AT/cm.</p></div><div n="11" type="claim"><p xml:id="_ffd30">Arbre selon l'une quelconque des revendications
+précédentes, ayant un diamètre d'au moins 1 m et une
+longueur comprise entre 5,5 et 6,5 fois celle dudit
+diamètre.</p></div></div><div type="description" xml:lang="en"><p n="0001" xml:id="_ab1d3">This invention relates to steel rotor shafts for electric machines.</p><head xml:id="_68efb">BACKGROUND</head><p n="0002" xml:id="_d8520">In recent years, energy production has experienced a shift from petroleum towards coal as a source of thermal
+power. As a result, one technical problem which has arisen is the need to make turbine generators of increasing effectiveness.
+Because space is usually limited, the capacity of each individual generator tends to increase.</p><p n="0003" xml:id="_0ec7f">The rotor shafts of large electric generators are made of steel. Such shafts are very special objects. The shafts
+for the new generation of large thermal power plants, some of which are envisaged to output as much as 1,000MW or
+more, may weigh of the order of 80 tonnes. They must withstand fast rotation, and yet remain operational for a period
+measured in decades.</p><p n="0004" xml:id="_8aec0">Therefore, very high strength and very high toughness are needed. It is well known that high strength tends to
+cause low toughness, and vice versa. That is one problem. Furthermore, because of the use of the material, it needs
+to have suitable magnetic properties.</p><p n="0005" xml:id="_313f0">ASTM Standard Specification A469-88 describes types of special steel which are presently used for generator
+rotor shafts. Classes 6, 7 and 8 are the strongest. These specify contents as follows:
+Cless than 0.28%Mnless than 0.60%Pless than 0.015%Si0.15 to 0.30%Ni3.25 to 4.00%Cr1.25 to 2.00%Mo0.30 to 0.60%V0.05 to 0.15%
+and the remainder substantially Fe.</p><p n="0006" xml:id="_b048c">The Class 8 steel is the strongest of all, having tensile strength of 84kg/mm2, 0.02% yield strength of 70.4kg/mm2,
+elongation of more than 16%, reduction of area of more than 45% and 50% fracture appearance transition temperature
+(FATT) below 4°C.</p><p n="0007" xml:id="_e8cd1">In the patent literature, JP-B-47/25248 describes a low alloy steel for generator rotor shafts having the composition
+C0.14 to 0.20%Si0.05 to 0.4%Mn0.1 to 0.6%Ni1.5 to 2.8%Cr0.75 to 1.8%Mo0.1 to 0.5%V0.01 to 0.12%
+and the remainder is Fe.</p><p n="0008" xml:id="_07841">JP-A-60/230965 describes low alloy steels for turbine generator shafts, having a composition
+C0.13 to 0.30%Si&lt;0.10%Mn0.06 to 2.00%P&lt; 0.010%Cr0.40 to 2.00%Ni0.20 to 2.50%Mo0.10 to 0.50%V0.05 to 0.15%Al0.005 to 0.040%N0.0050 to 0.0150% 
+the remainder being Fe.</p><p n="0009" xml:id="_1c8f3">EP-A-225425 describes low alloy steels having good stress corrosion cracking resistance, for steam turbine shafts.
+Examples are disclosed in the following ranges:
+C0.2 - 0.23Si0.03 - 0.16Mn0.01 - 0.5Ni3.42 - 3.68Cr1.57 - 1.72Mo0.3 - 0.39V0.09 - 0.16P+S0.003 - 0.016Febalance apart from impurities.</p><p n="0010" xml:id="_967ba">US-A-4985201 relates to low-alloy steels for electric generator rotors, including a high chromium steel "A90" of the
+composition:
+Cmax. 0.28Sinot statedMnmax. 0.4Ni3.25 - 3.75Cr1.5 - 2.0Mo0.25 - 0.45V0.09 - 0.15Febalance apart from impurities.</p><p n="0011" xml:id="_d080e">Our EP-A-384181 discloses as comparative examples (Specimens 6, 22) steels with the composition:
+C0.23Si0.05Mn0.30Ni3.56Cr1.66Mo0.40V0.12P0.009S0.012Febalance apart from impurities,
+   both having a 50 %FATT at -20°C, vgl: see Tables 2 and 6.</p><p n="0012" xml:id="_1b103">The existing steels are good, but they are not good enough for the new large generators which are envisaged. For
+example, we have calculated that, for a 900MVA class generator the rotor shaft material will require a tensile strength
+of at least 93kg/mm2, 0.02% yield strength of at least 74kg/mm2, FATT of below 0°C, and a magnetic characteristic
+such that magnetic field strength at 21 kG is less than 990AT/cm. For a 1200MVA generator rotor shaft, the calculated
+tensile strength is at least 100kg/mm2, and for a 1300MVA generator rotor shaft, at least 104kg/mm2.</p><p n="0013" xml:id="_46079">It will be appreciated that, for example, the ASTM Class 8 material mentioned above is quite inadequate for making
+a rotor shaft material for such generators. Firstly, it is not strong enough. Furthermore, as strength is intensified, toughness
+(which can be gauged by FATT) tends to decrease. Hence none of the known recipes leads the way to satisfying
+these new requirements.</p><p n="0014" xml:id="_1d586">The general problem addressed herein is to provide new rotor shafts made from steel
+compositions, and preferably steel compositions of improved strength and toughness with good magnetic properties,
+more preferably meeting the new criteria mentioned above.</p><p n="0015" xml:id="_531db">As a result of studies, the inventors have discovered certain ways in which high strength and toughness can be
+achieved, without compromising the magnetic properties. They have been able to prepare steels which satisfy even
+the preferred criteria set out above. </p><p n="0016" xml:id="_bef11">The invention provides a low alloy steel, and also a rotor shaft made from said steel, having the composition:
+C0.15 to 0.3%Siless than 0.05%Mnless than 0.5%, at least 0.1%Ni3.5 to 5%Crat least 2.05%, less than 3.5%(Mo + W)0.1 to 1.0%, W being optionalV0.03 to 0.35%Al0.0005% to 0.006%
+   optionally, from 0.001 to 0.05% of Group IIa or Group IIIa element,
+   optionally, up to 0.2% of any of Ti, Zr, Hf, Nd, Ta; and the remainder Fe apart from impurities.</p><p n="0017" xml:id="_68bcb">In particular, this composition has higher chromium than has been used in this field in the prior art. It has previously
+been believed that steel containing more than 2% chromium will have inadequate magnetic properties. The present
+inventors have found that if one or more other components are kept below specified limits, the chromium content can
+be increased (thereby improving hardness and toughness) without spoiling the magnetic properties. In particular, this
+aspect specifies less than 0.05% of silicon in the composition.</p><p n="0018" xml:id="_23aee">The manganese content is also quite low: less than 0.05% 0.5%.</p><p n="0019" xml:id="_a140f">Reduction in certain other constituents has also been found to have useful significance. In a further aspect, the
+invention provides a steel, or a rotor shaft made from such steel, having a composition
+C0.15 to 0.3%Siless than 0.05%Mnless than 0.5%, at least 0.1%Ni3.5 to 5%Crat least 2.05%, up to 3.5%(Mo + W)0.1 to 1% (W being optional)V0.03 to 0.35%Alless than 0.006%,
+(P+S+Sn+Sb+As) &lt; 0.03%
+and the remainder Fe apart from impurities.</p><p n="0020" xml:id="_242e8">The inventors have found that pronouncedly low levels of aluminium, and of the sum total of the impurities phosphorus,
+sulphur, tin, antimony and arsenic, are also conducive to good properties.</p><p n="0021" xml:id="_eb34d">The total content of the five impurity elements mentioned is most preferably not more than 0.01%, and the product
+of the silicon concentration and that of said five impurities is preferably not more than 0.003.</p><p n="0022" xml:id="_8276f">The ratio between nickel and chromium also has significance for the strength and toughness of the material. The
+ratio Ni:Cr is preferably less than 2.3, more preferably less than 2.1, more preferably less than 2.05.</p><p n="0023" xml:id="_c918c">The preferred structure for the steel is a uniform bainite structure, containing little or no ferrite.</p><p n="0024" xml:id="_11129">The steel or rotor shaft made thereof has a tensile strength at room temperature of at least 93kg/mm2,
+a 50% fracture appearance transition temperature (FATT) below 0°C, 0.02% yield strength of at least 74kg/mm2, and
+magnetic field strength at 21kG less than 990AT/cm.</p><p n="0025" xml:id="_4b575">A method of making one of the steel compositions as described, comprises
+   melting in air;
+   vacuum ladle refining or electroslag remelting:
+   casting and hot forging;
+   quenching at 800°C to 900°C, and
+   tempering at 525°C to 650°C for at least 10 hours.</p><p n="0026" xml:id="_bb0a2">Preferred features, technical concepts relating to the invention, and applications thereof are now described in some 
+detail with reference to the accompanying drawings in which:
+Figure 1 is a graph showing a relationship between chromium content and tensile strengthFigure 2 is a graph showing a relationship between tensile strength and ratio of nickel to chromium;Figure 3 is a graph showing a relationship between tensile strength and silicon content;Figure 4 is a graph showing a relation between FATT, nickel content and chromium content;Figure 5 is a graph showing a relationship between FATT and silicon content;Figure 6 is a graph showing a relation between FATT and aluminium content;Figure 7 is graph showing a relation between magnetic properties and silicon content;Figure 8 is a graph showing a relation between magnetic properties and the total content of certain, generally non-metallic,
+impurities;Figure 9 is a graph showing a relation between magnetic properties and aluminium content;Figure 10 is a graph showing a relationship between magnetic properties and a parameter which is a product of
+various impurity contents;Figure 11 is a sectional view of a turbine generator;Figure 12 is a perspective view of a rotor shaft of the generator, andFigure 13 is a perspective view of the assembled rotor.</p><p n="0027" xml:id="_fae7a">Firstly, the steel composition is discussed with reference to the various individual components thereof.</p><head xml:id="_7b9a7">CARBON</head><p n="0028" xml:id="_9523c">Carbon is an element necessary for improving hardenability, necessary for strength. If less than 0.15% is present,
+insufficient hardenability is achieved and soft ferrite structure tends to form around the steel article so that insufficient
+tensile strength and yield strength are achieved. With more than 0.3%, toughness is reduced. Hence the carbon content
+is 0.15 to 0.3%, or preferably 0.20 to 0.28%.</p> <head xml:id="_d0246">SILICON AND MANGANESE</head><p n="0029" xml:id="_e01ed">Conventionally, these elements have been added as deoxidizers. However, new steel-making technology such as
+the carbon deoxidising process using vacuum ladle refining, and the electroslag re-melting process, have obviated the
+need for such elements in making a sound article. To prevent brittleness due to tempering, the quantities of silicon and
+manganese should be kept low. The silicon content
+is less than 0.05%, and that of manganese less than 0.5%, more preferably less than 0.25%, and most preferably less
+than 0.2%. Silicon is generally contained as an impurity from 0.01 to 0.1%, without the need to add it specially. However
+it is usually desirable to add some manganese; the quantity should be at least 0.05%(not claimed) or preferably at least 0.1% (according to the invention).</p><head xml:id="_16927">NICKEL</head> <p n="0030" xml:id="_2dee7">Nickel is essential for improving hardenability and toughness. With less than 3.0%, there is insufficient toughness.
+If a large amount is used, over 5%, harmful residual austenite structure appears so that the desired uniform tempered
+bainite is not achieved. Therefore at least 3.5% is used.
+Conversely, the amount should be less than 5% and preferably less than 4.5%.</p> <head xml:id="_ac3d3">CHROMIUM </head> <p n="0031" xml:id="_55a56">Chromium has a remarkable effect in improving hardenability and toughness. It also improves the resistance to
+corrosion. More than 3.5% tends to cause residual
+austenite structure. At least 2.05% is used, but preferably less than 3% and more preferably
+less than 2.6%.</p><head xml:id="_df149">MOLYBDENUM</head><p n="0032" xml:id="_12a90">Molybdenum precipitates fine carbide in the crystal grain during tempering, intensifying tensile strength and yield
+strength by a carbide dispersion strengthening action. It also acts to restrict the segregation of impurities at the crystal
+grain boundary. It can prevent brittleness due to tempering. At least 0.1% is required to secure these effects. Over
+1.0%, however, the effects tend to be saturated. The preferred range is 0.25 to 0.6%, more preferably 0.35 to 0.45%. 
+However, Mo may to some extent be substituted by W: see below.</p><head xml:id="_6675d">VANADIUM</head><p n="0033" xml:id="_85095">Like Mo, V precipitates fine carbide with the same desirable effects. To achieve the effects, at least 0.03% should
+be used, preferably at least 0.05% and more preferably at least 0.1%. Over 0.35%, the effects tend to be saturated.
+Not more than 0.2% is preferred, more preferably not more than 0.15%.</p><head xml:id="_c52c7">ALUMINIUM</head><p n="0034" xml:id="_f0d0c">We have found that excessive quantities of aluminium reduce toughness and desirable magnetic properties. A
+complete absence of Al completely reduces strength, so at least 0.0005% should be used in making the steel. However,
+the quantity should be kept low so that toughness and magnetic characteristics are good.
+Not more than 0.006% and more preferably not more than 0.005%, should be used.</p><p n="0035" xml:id="_63c3d">The relation between Si and Al is not entirely clear as regards embrittlement.</p><head xml:id="_f85f9">OTHER IMPURITIES: P, S, Sn, Sb and As</head><p n="0036" xml:id="_689e6">It is usual for most or all of these to be present as impurities. However they reduce toughness and magnetic
+characteristics. The total quantity is desirably less than 0.03%, more preferably less than 0.025%. It is difficult to eliminate
+the elements entirely, but it is particularly desirable to get the total down to less than 0.01%.</p><p n="0037" xml:id="_a6209">We have also found a correlation between the total amount of these impurities, and the amount of Si, as regards
+the magnetic properties of the steel. A product of the proportion of Si and a value X (the sum of the concentrations of
+the five above-identified impurities) is preferably less than 0.003, more preferably less than 0.0015.</p><head xml:id="_1fcf5">Ni/Cr</head><p n="0038" xml:id="_db99c">The ratio of these components is related to tensile strength. The ratio should usually be less than 2.3, preferably
+less than 2.1 and more preferably less than 2.05. The preferred range is 1.2 to 2.05, the more preferred range is 1.4
+to 2.05. The Ni content is more than 3%.</p><head xml:id="_42e71">GROUP IIa, GROUP IIIa</head><p n="0039" xml:id="_1c081">One or more Group IIa elements (Be, Mg, Ca) and/or one or more Group IIIa elements (Sc, Y, Lanthanides) may
+be incorporated, in an amount up to 0.1%. These elements have a strong deoxidising effect and can improve toughness
+and magnetic characteristics. A preferred quantity is 0.001 to 0.05%. The non-radioactive elements are preferable from
+the point of view of handling.</p><head xml:id="_f6752">OTHER ELEMENTS</head><p n="0040" xml:id="_8a6cd">One or more of Ti, Zr, Hf, Nd, Ta and W may be incorporated, in amounts less than 0.2% by weight, consistent
+with increasing strength without reducing toughness. A preferred quantity is 0.02 to 0.1%. W acts in the same way as
+Mo, mentioned above, so W can be substituted for part of Mo.</p><p n="0041" xml:id="_f049d">Thus, the quantity of Mo + W may be 0.1 to 1.0%. The quantity of W is preferably not more than half the total
+quantity. Mo must be present, but W is optional.</p><p n="0042" xml:id="_f6e8d">The steel should have tempered bainite structure, and should contain less than 5% ferrite. A uniform, overall
+structure of bainite is preferred for strength and toughness.</p><p n="0043" xml:id="_24b9d">The achieving of good magnetic characteristics relies on reducing one or more of certain impurities.</p><p n="0044" xml:id="_09d83">To reduce silicon considerably, molten metal is obtained by vacuum ladle refining or electroslag re-melting after
+melting in air. The molten metal is cast in a mould, and hot forged to the desired shape. Subsequently, it is quenched
+at from 800 to 900°C and then tempered at 525 to 650°C for at least 10 hours. The quenching temperature is desirably
+30 to 70°C higher than the point Ac3, most preferably about 50°C higher. Tempering increases toughness. The preferred
+temperature is 540 to 625°C, preferably for 10 to 80 hours. After tempering, the final shape is formed by cutting. Cutting
+generates internal stresses, so stress relief annealing is performed at a temperature below the tempering temperature.
+Furthermore, homogenising annealing is done at a temperature about 50°C higher than the quenching temperature,
+followed by slow cooling.</p><p n="0045" xml:id="_ae814">At the time of quenching, the cooling speed is preferably 50 to 300°C per hour at the centre of a rotor shaft. This 
+enables formation of bainite structure overall.</p><p n="0046" xml:id="_5f188">As mentioned, the silicon quantity can be set in the range 0.1 to 0.3%, provided that the aluminium quantity is kept
+below 0.01%. With higher silicon, good characteristics can also be achieved provided that the total quantity of P, S,
+Sn, Sb and As is kept low, desirably less than 0.025%. The skilled man knows how to reduce the quantities of the latter,
+although the present importance of this has not previously been disclosed.</p><head xml:id="_e0ab5">ELECTRIC MACHINE FEATURES</head><p n="0047" xml:id="_99ab2">Using the previously mentioned alloy steel enables the rotor shaft for electric machines to be made compact by
+setting the diameter of the body in which a coil is embedded more than 1m and the length of the body 5.5 to 6.5 times
+the diameter. The ratio of less than 5.5 or over 6.5 is not desirable from the viewpoint of vibration. Particularly 5.6 to
+6.0 is desirable.</p><p n="0048" xml:id="_b2e4d">Although the diameter of the body needs to be enlarged together with the capacity of the generator, it should be
+less than 0.2mm per 1MVA of the capacity plus 1000mm and over 0.2mm per 1MVA plus 900mm.</p><p n="0049" xml:id="_c6964">Further, the diameter of the body D (m) should be set according to rotation speed (rpm), so that the value of (D2
+x R2) is more than 1.0 x 107. Particularly, the upper limit is desired to be 3.0 x 107 or more preferably 1.5 to 2.2 x 107
+and most preferably 1.8 to 2.0 x 107.</p><p n="0050" xml:id="_71f2f">Although a larger capacity/output generator or motor tends to be larger, using high strength alloy steel as mentioned
+above enables a compact apparatus, particularly so that the capacity per floor area is 0.08 to 0.12m2 per 1 MVA of the
+capacity. Consequently, energy loss decreases and efficiency rises. Further, the stator current can be reduced relative
+to capacity, particularly so that the current is 19.0 to 24 A per 1 MVA of generator or motor capacity. Against the capacity
+of 2,000MVA, it is possible to reduce the current to 19.0 to 20.0 A. At that time, the rotor is cooled by hydrogen.
+Depending on the output of the generator, hydrogen pressure must be raised, however, that pressure can be set to
+0.003 to 0.006kg/cm2 per 1MVA. Particularly, 0.004 to 0.005kg/cm2.g is desired.</p><p n="0051" xml:id="_92ed1">Such shafts may be for generators or motors. For motors, a synchronous motor, synchronous generator motor
+and induced synchronous motor are available. The structures of motors and generators are almost the same. Preferably,
+we use a high speed motor providing a rotation speed of more than 5,000rpm.</p><p n="0052" xml:id="_e96f1">The tensile strength of the rotor shaft is desired to be more than 93kg/mm2 or more preferably more than 100kg/mm2
+and particularly it is desirable to adjust the composition so as to obtain more than 104kg/mm2. At the same time,
+50% fracture appearance transition temperature is desired to be less than 0°C and more preferably, less than -20°C.
+The crystal grain size number is desired to be more than 4 (ASTM crystal grain size). Additionally, as magnetic characteristic,
+magnetic field strength is desired to be less than 990AT/cm at 21 kG in magnetic flux density, and less than
+400AT/cm at 20kG. More preferably it is desired to be less than 500AT/cm in the former condition.</p><p n="0053" xml:id="_4dc9d">Embodiments are now described specifically, by way of example.</p><head xml:id="_0fcee">Embodiment 1</head><p n="0054" xml:id="_bfda8">Table 1 shows the chemical composition of various specimen steels. A 20kg ingot is made in a high frequency
+induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C. Specimens No.2 to
+4, 6 and 15 are materials embodying the invention. Others are for comparison. No.1 is a material equivalent to ASTM
+standard A469-88 class 8 for generator rotor shaft material. No. 5 is a material containing relatively high Al content.
+These specimens underwent heat treatment by simulating the conditions for the large size rotor shaft centre of a large
+capacity generator. First, it was heated to 840°C to form austenite structure and cooled at the speed of 100°C/hour to
+harden. Then, the specimen was heated and held at 575 to 590°C for 32 hours and cooled at a speed of 15°C/hour.
+Tempering was done at such a temperature to secure tensile strength in the range of 100 to 105kg/mm2 for each
+specimen.</p><p n="0055" xml:id="_49e7a">No.7 to 12 are also steels for comparison. They were heated and held at 820°C for 16 to 34 hours, quenched at
+a speed of 100°C/hour, then heated and held at 625 to 635°C for 40 to 50 hours for tempering, and cooled in the
+furnace at a speed of 15°C/h.</p><p n="0056" xml:id="_dca77">No.13 and 14 are further steels for comparison. After homogenizing annealing at 900°C for 2 hours, they were
+austenitized at 850°C for 2 hours, hardened by cooling at the speed of 120°C/hour, further tempered at 575°C for 60
+hours, and cooled at a speed of 40°C/hour. 
+</p><p n="0057" xml:id="_de76c">None of No.2 to 6 and 15 of the Ni-Cr-Mo-V steel contains proeutectoid ferrite. They possess uniform tempered
+bainite structure. Every crystal grain size No. of original austenite grains is 7. No.1, 5 and 14 of other alloy also have
+uniform tempered bainite structure. In No.13, about 5% proeutectoid ferrite is found.</p><p n="0058" xml:id="_66d96">Table 2 shows the results of tensile tests, impact tests, magnetic characteristic and electric characteristic tests.
+The magnetic field strengths in the Table were obtained under 20kG and 21 kG. The data shown in the Table are those
+under 21 kG. 
+</p><p n="0059" xml:id="_376f3">As shown in Table, the low alloy steels No.2 to 4, 6 and 15 have a high strength and toughness while the tensile
+strength is more than 100kg/mm2, 0.02% yield strength is more than 78kg/mm2 and 50% fracture appearance transition
+temperature is far below 0°C or below -50°C. Further, the magnetic field strength satisfies the requirement of less than
+990AT/cm as the magnetic field strength at 21 kG requested for generator rotor shaft over 900MVA, and the electric
+resistance is over 30µ-Ωcm because of high Cr content, so that this material is very useful as the rotor shaft material
+of a large capacity generator over 900MVA.</p><p n="0060" xml:id="_867e7">The effects of various constituents are now considered in relation to the specific examples and comparison examples.
+Fig. 1 is a diagram showing the influence on the tensile strength of Cr content. The tensile strength increases as
+the Cr quantity increases, when the Ni quantity is 2.60 to 4.15%. Particularly, when Cr quantity exceeds 1.4%, the
+tensile strength increases rapidly so that the effect of Cr is large. If the quantity exceeds 2.0%, a high tensile strength
+over 100kg/mm2 can be obtained.Fig. 2 is a diagram showing the relationship with Ni/Cr ratio. The tensile strength decreases as Ni/Cr ratio increases.
+Particularly, a higher strength is obtained by setting the Ni/Cr ratio lower than 2.1. While related to Ni quantity, a far
+higher strength over 100kg/mm2 is obtained by securing a high Ni quantity over 3.50%. This is obtained by setting Ni/Cr
+ratio below 2.3 and Ni below 3.5% against the objective tensile strength of 93kg/mm2. In this case, if Ni is less than
+3%, that tensile strength is difficult to obtain.Fig. 3 shows the relationship with Si quantity, indicating that the strength increases as the Si quantity increases.
+When Si quantity is more than 0.17%, 93kg/mm2 is obtained by adjusting Cr and Ni to 1.3 to 1.8% and 2.6 to 3.5%
+respectively, while if Cr exceeds 2%, when Si is as low as or less than 0.1%, more than 93kg/mm2 or particularly more
+than 100kg/mm2 is obtained.Fig. 4 is a diagram showing the influence on 50% fracture appearance transition temperature of Ni or Cr contents.
+As the content of Ni or Cr increases, FATT lowers, and particularly, when Si is less than 0.1%, FATT below 0°C is
+obtained by making more than 0.5% Cr contained.Fig. 5 is a diagram showing the influence on FATT of Si quantity. As Si quantity decreases, FATT decreases so as
+to secure a high toughness. Particularly, when Ni is 2.5 to 3.0% and Cr is 1.3 to 1.8%, FATT can be lowered below
+0°C by adjusting Si quantity to below 0.08%, and when Ni is 3.5 to 4.0% and Cr is 1.5 to 2.2%, the value can be lowered
+below 0°C by adjusting Si quantity to below 0.13%. When Cr is over 2.2% and Ni is over 3.5%, FATT can be lowered
+below 0°C by adjusting Si quantity less than 0.20%.Fig. 6 is a diagram showing the relationship between FATT and Al content. The Al content increases FATT. When
+Cr is 2.05 to 2.2% and Ni is 3 to 4%, FATT can be lowered below 0°C by adjusting Al quantity to below 0.014%. When
+Cr is 2.2 to 2.5% and Ni is 3.5 to 4.5%, the value can be lowered below 0°C by adjusting Al quantity to below 0.018%.
+When Cr is near 1.65%, even if Ni quantity is as high as 3.5%, FATT is difficult to lower below0°C if Al quantity is reduced.Fig. 7 shows the relationship between magnetic field strength and Si quantity. Because the increase of Si quantity
+intensifies magnetic field strength as shown in the figure, the Si quantity should be as small as possible for present
+purposes. Particularly, when Cr is 1.5 to 2.5% and Ni is 2.5 to 4.5%, magnetic field strength at 21 kG can be suppressed
+below 990AT/cm by adjusting Si quantity to less than 0.18%. Particularly, when Si quantity is less than 0.1%, a magnetic
+strength of less than 700AT/cm is obtained.Fig. 8 is a diagram showing the relationship between magnetizing force and the total amount of P, S, Sn, Sb and
+As. These impurities are undesirable because they increase magnetic field strength and their concentration should be
+less than 0.040% to adjust magnetic field strength below 990AT/cm. Particularly, it should be less than 0.03% to lower
+it below 700AT/cm.Fig. 9 shows the relationship between magnetic field strength and Al content. As shown in the figure, Al is undesirable
+because it intensifies magnetic field strength. When Cr is 1.5 to 2.5% and Ni is 2.5 to 4.5% and even when Si
+quantities are less than 0.1%, Al quantity should be below 0.025% to obtain a magnetic field strength of less than
+990AT/cm. Particularly, to obtain a magnetic field strength of less than 700AT/cm, Al quantity should be lowered below
+0.015%. If Si quantity exceeds 0.1%, Al quantity should be less than 0.01%.Fig. 10 shows the influence on magnetic field strength of the quantity of Si multiplied by the total amount of P, S,
+Sn, Sb and Ab and the higher this quantity is, the more inappropriate it is because magnetic field strength is increased.
+Magnetic field strength can be lowered below 990AT/cm by adjusting the quantity to less than 70 x 10-4.</p><head xml:id="_32d48">Embodiment 2</head><p n="0061" xml:id="_6d953">Table 3 shows the results of the tensile test, impact test and magnetic characteristic test for the specimen provided
+by intensifying the strength of this invention steel No. 2 to 4 and 6. In this embodiment, the tempering temperature was
+set 5°C lower than in Embodiment 1.</p><p n="0062" xml:id="_f3885">As evident from the table, the materials embodying the invention satisfied the mechanical performance and magnetic
+characteristic required even for 1,200MVA class and 1,300MVA class generator rotor shaft, giving tensile strength 
+more than 105kg/mm2, 0.02% yield strength more than 82kg/mm2, FATT below -44°C and magnetic field strength less
+than 400AT/cm. Thus these materials can be said to be very useful, e.g. for a &gt; 1,200MVA class large capacity generator
+rotor shaft.
+<figure><table cols="7"><row><cell>Specimen steel No.</cell><cell>Tensile strength (kg/ mm2)</cell><cell>0.02% yield strength (kg/ mm2)</cell><cell>Elongation (%)</cell><cell>Reduction of area (%)</cell><cell>FATT (°C)</cell><cell>Magneticfield strength (AT/ cm)</cell></row><row><cell>2</cell><cell>108</cell><cell>84</cell><cell>22.5</cell><cell>64.0</cell><cell>-44</cell><cell>270</cell></row><row><cell>3</cell><cell>107</cell><cell>83</cell><cell>21.4</cell><cell>67.1</cell><cell>-60</cell><cell>355</cell></row><row><cell>4</cell><cell>105</cell><cell>82</cell><cell>22.0</cell><cell>77.3</cell><cell>-68</cell><cell>-</cell></row><row><cell>6</cell><cell>106</cell><cell>83</cell><cell>21.5</cell><cell>65.2</cell><cell>-58</cell><cell>265</cell></row></table></figure></p><head xml:id="_70950">Embodiment 3</head><p n="0063" xml:id="_58553">Thermal power and nuclear power AC turbine generators are usually 2-pole or 4-pole cylindrical rotating field
+synchronous generators.</p><p n="0064" xml:id="_9e140">Most thermal power turbine generators are 2-pole high-speed generators. The rotation speed is 3,000rpm at 50Hz
+and 3,600rpm at 60Hz. This is because the higher the rotation speed, the better the efficiency becomes and the size
+becomes smaller. In most cases, a tandem compound type generator generating output with a single axis is utilized.
+Most large capacity machines are of cross compound type, generating output with two axes, which is capable of generating
+more than the tandem compound type.</p><p n="0065" xml:id="_be218">The nuclear power turbine generator is usually 4-pole type and used at 1,500rpm or 1,800rpm. This is because a
+larger amount of vapor is generated from the nuclear reactor with a lower temperature and pressure, and the turbine
+has long blades and rotates at a low speed.</p><p n="0066" xml:id="_f4b00">As the cooling method for a turbine generator, indirect cooling method and direct cooling method are available,
+and air, hydrogen and water are used as cooling medium.</p><p n="0067" xml:id="_b9fa9">Hydrogen cooling method is used for a large capacity machine and divided into indirect and direct methods. In
+both cases, an explosion proof sealed structure incorporating a gas cooler in its generator main body is utilized. In
+case of water cooling type, direct cooling method is used and for a large capacity machine, water cooling method is
+sometimes used for both the stator and rotor.</p><p n="0068" xml:id="_92103">Fig. 11 shows an example of a stator coil direct water cooling turbine generator, which is an embodiment of an
+aspect herein.</p><p n="0069" xml:id="_70cec">The stator cage, which is made of welded steel plates, forms an air path, supports the iron core and prevents
+vibration. The iron core is deformed to an oval shape due to magnetic attraction force, so that double frequency vibration
+is generated with the rotation of the rotor. Because this vibration increases as with machine size, elastic support structure
+is adopted by installing the iron core and stator cage through a spring.</p><p n="0070" xml:id="_16d1e">0.35 or 0.5mm thick silicon steel plate is used for the stator iron core 2 and this plate has a directivity. The iron
+core is formed by laminating by 50 to 60mm in axial direction and an I-shaped gap steel is inserted to form an air duct.</p><p n="0071" xml:id="_5c004">A two-layer coil is usually used for the stator coil 7, and in case of a 2-pole type, it needs to be held firmly because
+the coil end is extended. In this case, because the floating load loss increases, a non-magnetic material is used for
+the structure at the end.</p><p n="0072" xml:id="_2f6f7">The notable characteristic of the turbine generator is that it rotates at a high speed, and the rotor diameter is
+restricted due to a large centrifugal force. The rotor is forged as one body to secure mechanical strength preventing
+dangerous speeds and vibrations, and processed to have a slot, in which a field winding coil is incorporated. Figs. 12
+and 13 show the shape of the rotor 1.</p><p n="0073" xml:id="_c6f26">The main shaft is made of Ni-Cr-Mo-V steel, preferably of a type as described above. Although not illustrated, the
+fixing ring 17 for the fan 20 is provided between the flange 15 and centering ring 18.</p><p n="0074" xml:id="_7d390">The field winding coil 3 is distributed and wound in the slots of a rotor iron core between the teeth 12 formed by
+winding copper belt flat, and a layer insulator is inserted by a single turn of the conductor. The end of the winding coil
+is held by a retaining ring 9. Usually, a silver contained copper having an excellent creep characteristic is used for the
+coil instead of copper.</p><p n="0075" xml:id="_ba243">For the retaining ring 9, non-magnetic stainless steel with less than 0.1%C, more than 0.4%N 10-25%Mn and
+15-20%Cr is applied. After the winding wire 3 is buried, it is fastened with a wedge 13 made of ultra duralmin alloy For
+the end damper ring 14, an end or overall length damper is used, and Al alloy and silver contained copper are used 
+for the end and body respectively. 8 is a shaft, 11 is a magnetic pole and 15 is a coupling.</p><p n="0076" xml:id="_d9d74">A large capacity machine over 1,000MVA is difficult to cool evenly because the iron core is long, so a duplex
+ventilation method is applied.</p><p n="0077" xml:id="_cb69f">According to this method, air supply chambers and exhaust chambers in several sections are arranged alternately
+within the stator cage in the rear of the iron core, cooling air is collected into each air supply chamber from both ends
+of the generator through an air duct in the stator cage to cool the stator iron core. Then, this air flows to the outside
+surface together with the air cooling the inside of the rotor and reaches the suction side through the cooler, circulating
+inside.</p><p n="0078" xml:id="_6b8f2">The gas pressure for cooling with hydrogen is 2atg for indirect hydrogen cooler, and 2 to 5atg for direct hydrogen
+cooler. Because when hydrogen gas pressure is increased, the calorific capacity of gas increases in proportion to
+density as heat transfer rate rises, thus the temperature rise of gas itself decreases in inverse proportion to the absolute
+pressure of gas so that the effect of cooling increases. Assuming that the output is 100 when 0.05atg is provided with
+indirect cooling type, the output from the same dimension machine is 115 under 1 atg, and 125 under 2atg.</p><p n="0079" xml:id="_c5ee1">Hydrogen cooling method has a danger of explosion in such a range that hydrogen volume is 10 to 70% when
+mixed with air. To prevent this accident, hydrogen purity is automatically maintained over 90% and a sealing device to
+prevent hydrogen gas from leaking outside along the axis by means of oil film is provided inside of the bearing. Gas
+leakage is prevented by flowing oil having a higher pressure than hydrogen gas inside into the gap on the shaft.</p><p n="0080" xml:id="_23453">Even when the stator is cooled indirectly in a hydrogen cooling turbine generator, the rotor is often cooled directly.</p><p n="0081" xml:id="_0605e">When the maximum temperature of a generator coil conductor limits the output, the conductor is cooled directly
+with cooling medium to eliminate the difference of temperature from an insulator occupying a large portion, during a
+temperature rise.</p><p n="0082" xml:id="_2033b">As cooling media, hydrogen gas, oil and water are available. Water has a heat transfer capacity about 50 times
+air and excels as a cooling medium.
+(1) An example of a hydrogen gas direct cooling stator coil is shown here, and gas is fed inside a square bent tube
+put between strands to cool the conductor directly. Although part of heat generated in the conductor is transferred to
+an iron core through a main insulator with a large heat resistance, most is carried away by hydrogen gas via small
+cooling pipes, with a small heat resistance.
+As cooling liquid, pure water having a large specific heat and heat transfer coefficient by convection is utilized.Stainless steel is applied to pipes serving as a liquid path, and oxygen free copper or deoxidixed copper is used
+for a coil and clip at the coil end. A PTFE (teflon) tube having a high mechanical strength and flexibility, and an excellent
+insulation is used for an insulated connecting pipe. The stator coil is hollow in its cross section, where liquid flows.(2) As the cooling medium for the rotor, hydrogen gas or water is used and the following method is available.
+According to the end feed method, hydrogen gas, after being forced into the rotor coil from the rotor end, is discharged
+into the air gap through a hole provided at the center of the rotor. Additionally, the method to introduce hydrogen gas
+into the coil copper belt from an end of the rotor and discharge it from the other end is also desirable.</p><p n="0083" xml:id="_bdd44">As the sectional shape of the rotor coil, either by-pass type or hollow copper type is available. When either type
+is used, gas direct cooling method is applied for the stator coil also and a high pressure blower is installed on an end
+of the rotor.</p><p n="0084" xml:id="_e3f6c">According to the air gap pickup method, a suction hole and discharge hole are provided alternately on the surface
+of the rotor, and using wind speed by rotation, hydrogen gas at the air gap is sucked from the coil wedge surface, made
+to flow within the coil copper belt at a specified distance to deprive of generated heat and then discharged to the air
+gap through the vent hole. Or water is made to flow within a rotating object.</p><p n="0085" xml:id="_6e9d3">Water cooling method makes the structure more complicated as compared with the hydrogen gas cooling method
+and thus is disadvantageous in reliability. However, the weight of the generator is 15 to 25% lighter so that the efficiency
+with partial load can be improved.</p><p n="0086" xml:id="_0d4b9">In the figure, 15 is a flange connected to the turbine, 20 is a fan, 21 is a stator coil, 22 is a brush and 23 is a spring.</p><p n="0087" xml:id="_455c7">Fig. 12 is a perspective view of a large capacity turbine generator rotor shaft having more than 1,000MW in turbine
+output (1,120MVA in generator capacity) embodying this invention. The rotor shaft embodying this invention was produced
+as explained below.</p><p n="0088" xml:id="_c40d7">To aim at almost the same composition as specimen No. 2 described in embodiment 1, molten metal of about
+150ton, prepared by vacuum ladle refining after melting in the air, was poured into a mold. On the next step, the casting
+was hot forged by press, upset (forging ratio: 1/2U) and then lengthened (forging ratio: 3S). Further, after unifying
+annealing was performed at 900°C, the material was cut to a specified shape, then heated and held at 840°C in a
+vertical furnace for 20 hours, and hardened by cooling at the speed of 100°C/hour at the centre hole by water spray.
+Then, after heating and being held at 580°C for 60 hours, the material was tempered by cooling at the speed of 15°C/hour.
+After that, it was cut to the final shape as shown in Fig. 12. This embodiment is for 2-pole type, and 11 is a
+magnetic pole, 12 is teeth, 17 is fan mounting ring, 18 is retaining ring fitting centering ring, and 19 is center hole. A
+test piece was collected from this material to inspect its mechanical, electric and magnetic characteristics. The centering 
+ring 18 is integrated on forming the shaft and a retaining ring is shrinkage fit after cutting to ring like shape.</p><p n="0089" xml:id="_3a151">In this embodiment, the overall length is about 15m, the diameter of the body on which teeth are provided is 1.2m,
+and the length of the body is about 7m, about 5.7 times the diameter of the body. The machine size of this embodiment
+is about 10m3, thus the rotor's sensitivity to vibration is reduced, so that the sensitivity to imbalance in the same phase
+can be suppressed and at the same time, a high axis stability is obtained because the flexibility of the shaft drops.</p><p n="0090" xml:id="_8aeaf">The machine size is expressed by (outside diameter of the rotor body)2 x (length of the rotor)</p><p n="0091" xml:id="_f45bc">The relationship between the machine size of rotor shaft and generator capacity (MVA) is preferably between the
+ranges expressed by the expressions 1 and 2.</p><head xml:id="_c3882">Expression 1</head><p n="0092" xml:id="_f47c0">Machine size (m3) = 4.7 + 3.2 x 10-3 x generator capacity (MVA)</p><head xml:id="_905f0">Expression 2</head><p n="0093" xml:id="_dcbc0">Machine size (m3) = 4.5 + 5.7 x 10-3 x generator capacity (MVA)</p><p n="0094" xml:id="_45873">The mechanical, magnetic and electric characteristics of this embodiment are the same as the values of the alloy
+No.2 of the embodiment 1.</p><p n="0095" xml:id="_b7ba7">The specifications of this embodiment are as follows.</p><p n="0096" xml:id="_752f7">Generator capacity: 1.100MVA, stator current: 22 A per 1MVA of generator capacity, power factor: 0.9, rotation
+speed: 3,600rpm, frequency: 60Hz, stator: direct water cooling, rotor direct hydrogen cooling (0.0047kg/cm2.g per
+1MVA of generator capacity), casing material: SM41 steel, iron core material: directional silicon steel, coil: electrolytic
+copper, insulation material: epoxy resin and mica, length and diameter of the part in which a coil is embedded = 5.83,
+retaining material: 18%Mn-18%Cr steel containing C 0.1% or less, more than 0.4% N, Si less than 1%, overall length
+damper, rotor coil: silver contained copper, bearing: cast carbon steel, overall length: 16m in length, 6m in width, floor
+area: 96m2</p><p n="0097" xml:id="_827a2">The above mentioned structure ensures 1,120MVA of generator capacity against the turbine output of 1,000MW
+class and the unit floor area for this generator per 1 MVA is 0.086m2 or about 13% smaller than the floor area per
+1 MVA of the conventional 800MVA class turbine generator, 0.098m2. The floor area can be reduced to 0.08 to 0.09m2
+per 1MVA of generator output.</p><p n="0098" xml:id="_b1859">Concerning the low alloy steel embodying this invention, the upper and lower limit of the body diameter must be
+a value which can be obtained from the previously mentioned machine size, while the upper limit and lower limit of the
+diameter D(mm) are desired to be a value which can be obtained from the expressions 3 and 4, respectively. The
+length of the body is desired to be 5.5 to 6.5 times the diameter.</p><head xml:id="_1a9d5">Expression 3</head><p n="0099" xml:id="_bd7d6">Diameter of the body D (mm) = 0.2 x generator capacity (MVA) + 1000</p><head xml:id="_7c1ec">Expression 4</head><p n="0100" xml:id="_e7f96">Diameter of the body D (mm) = 0.2 x generator capacity (MVA) + 900</p><p n="0101" xml:id="_1e8b5">The structure as described makes it possible to reduce the rotor's sensitivity to vibration and make a compact
+generator unit.
+Because tensile strength is more than 93kg/mm2, 50% fracture transition temperature is below 0°C and the magnetizing
+force at 21 kG is less than 900AT/cm, a compact large capacity generator of more than 900MVA in capacity or synchronous
+motor having a rotation speed of more than 5000rpm can be produced. Hence, effective use of the installation
+area is enabled, so that this contributes to diversification of energy including petroleum, coal and nuclear power for
+power generation.</p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>

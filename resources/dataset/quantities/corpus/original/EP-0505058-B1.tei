@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><teiCorpus xmlns="http://www.tei-c.org/ns/1.0" xmlns:ext="http://exslt.org/common" xmlns:ng="http://relaxng.org/ns/structure/1.0" xmlns:uuid="xalan://java.util.UUID" xml:space="preserve"><teiHeader type="family"><fileDesc><titleStmt><title>Patent family information</title><funder/><sponsor/></titleStmt><publicationStmt><authority/><availability status="restricted"/></publicationStmt><sourceDesc><bibl type="patent-family"><idno type="family-id">12742447</idno></bibl><listBibl type="priority-claims"><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">JP</orgName></authority><idno type="docNumber">4626791</idno><imprint><classCode scheme="kindCode">A</classCode><date>19910312</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="docNumber">JP4626791A</idno></monogr></biblStruct><biblStruct status="application" subtype="docdb" type="patent"><monogr><authority><orgName type="national">JP</orgName></authority><idno type="docNumber">46267/91</idno><imprint><date>19910312</date></imprint></monogr></biblStruct></listBibl></sourceDesc></fileDesc><profileDesc><textClass type="patent-classifications"><classCode scheme="ICO"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">M07D495/04</term></classCode><classCode scheme="EC"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">C07D495/04</term></classCode><classCode scheme="ICO"><orgName type="classification-scheme-office">EPO</orgName><term type="classification-symbol">M07D495/04+333B+221B</term></classCode></textClass></profileDesc></teiHeader><teiCorpus><teiHeader type="application"><fileDesc><titleStmt><title>Patent application information</title></titleStmt><publicationStmt><authority/></publicationStmt><sourceDesc><biblStruct status="application" subtype="docdb" type="patent"><idno type="is-representative">NO</idno><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">92301900</idno><imprint><classCode scheme="kindCode">A</classCode><date>19920305</date></imprint></monogr></biblStruct><biblStruct status="application" subtype="epodoc" type="patent"><monogr><idno type="is-representative">NO</idno><idno type="docNumber">EP92301900A</idno></monogr></biblStruct><list type="additional-bibliographic-information"><item type="parties"><listPerson type="inventors"><person role="inventor" type="epo"><persName>HAYASHI HIROAKI</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>KURODA TAKESHI</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>MIWA YOSHIKAZU</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>NAKAJIMA HIROSHI</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>OHMORI KENJI</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="epo"><persName>SUZUKI FUMIO</persName><residence><address><country type="national">JP</country></address></residence></person><person role="inventor" type="intermediate"><persName>HAYASHI, HIROAKI</persName></person><person role="inventor" type="intermediate"><persName>KURODA, TAKESHI</persName></person><person role="inventor" type="intermediate"><persName>MIWA, YOSHIKAZU</persName></person><person role="inventor" type="intermediate"><persName>NAKAJIMA, HIROSHI</persName></person><person role="inventor" type="intermediate"><persName>OHMORI, KENJI</persName></person><person role="inventor" type="intermediate"><persName>SUZUKI, FUMIO</persName></person><person role="inventor" type="original"><persName>HAYASHI, HIROAKI</persName><residence><address><addrLine>151-12, Shimotogari, Nagaizumi-cho</addrLine><settlement>Sunto-gun, Shizuoka-ken</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>KURODA, TAKESHI</persName><residence><address><addrLine>1407, Shimotogari, Nagaizumi-cho</addrLine><settlement>Sunto-gun, Shizuoka-ken</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>MIWA, YOSHIKAZU</persName><residence><address><addrLine>1188, Shimotogari, Nagaizumi-cho</addrLine><settlement>Sunto-gun, Shizuoka-ken</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>NAKAJIMA, HIROSHI</persName><residence><address><addrLine>410-1, Nameri, Nagaizumi-cho</addrLine><settlement>Sunto-gun, Shizuoka-ken</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>OHMORI, KENJI</persName><residence><address><addrLine>2-14-3, Fuyodai</addrLine><settlement>Mishima-shi, Shizuoka-ken</settlement><country type="national">JP</country></address></residence></person><person role="inventor" type="original"><persName>SUZUKI, FUMIO</persName><residence><address><addrLine>18-4, Fujimidai</addrLine><settlement>Mishima-shi, Shizuoka-ken</settlement><country type="national">JP</country></address></residence></person></listPerson><list type="applicants"><item type="epo"><name>KYOWA HAKKO KOGYO KK</name><address><country type="national">JP</country></address></item><item type="intermediate"><name>KYOWA HAKKO KOGYO CO., LTD.</name></item></list></item><item type="designation-of-states"><list type="designation-epc"><item type="regional"><country>AT</country><country>BE</country><country>CH</country><country>DE</country><country>DK</country><country>ES</country><country>FR</country><country>GB</country><country>GR</country><country>IT</country><country>LI</country><country>LU</country><country>MC</country><country>NL</country><country>PT</country><country>SE</country></item></list></item></list></sourceDesc></fileDesc><profileDesc><langUsage><language ident="en">en</language></langUsage><textClass type="classifications-ipcr"><classCode scheme="ipcr">A61P   3/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">A61K  31/44        20060101AFI20051220RMJP        </classCode><classCode scheme="ipcr">A61K  31/4353      20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">A61P  37/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">A61K  31/4365      20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">C07D 495/00        20060101C I20051008RMEP        </classCode><classCode scheme="ipcr">A61P  37/06        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">A61K  31/44        20060101CFI20051220RMJP        </classCode><classCode scheme="ipcr">A61P   3/00        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">A61P  19/10        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">A61P  37/02        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">A61P  19/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">A61P  43/00        20060101ALI20051220RMJP        </classCode><classCode scheme="ipcr">A61P  43/00        20060101CLI20051220RMJP        </classCode><classCode scheme="ipcr">C07D 495/04        20060101A I20051008RMEP        </classCode></textClass></profileDesc></teiHeader><TEI><teiHeader type="publication"><fileDesc><titleStmt><title type="invention-title" xml:lang="de">Thienopyridinderivate und diese enthaltende pharmazeutische Zubereitungen</title><title type="invention-title" xml:lang="en">Thienopyridine derivatives and pharmaceutical compositions containing them</title><title type="invention-title" xml:lang="fr">Dérivés de la thiénopyridine et compositions pharmaceutiques les contenant</title></titleStmt><publicationStmt><authority/></publicationStmt><notesStmt/><sourceDesc><biblStruct status="publication" subtype="docdb" type="patent"><monogr><authority><orgName type="regional">EP</orgName></authority><idno type="docNumber">0505058</idno><imprint><classCode scheme="kindCode">B1</classCode><date>19970521</date></imprint></monogr></biblStruct><biblStruct status="publication" subtype="epodoc" type="patent"><monogr><idno type="docNumber">EP0505058B1</idno></monogr></biblStruct></sourceDesc></fileDesc></teiHeader><facsimile/><text><front/><group><text><body><div type="claims" xml:lang="de"><div n="0" type="claim"><p xml:id="_f0590">Patentansprüche für folgende Vertragsstaaten : AT, BE, CH, DE, DK, FR, GB, IT, LI, LU, MC, NL, PT, SE</p></div><div n="1" type="claim"><p xml:id="_5abd0">Thienopyridinderivat der Formel (I): 
+ 
+in der: 
+<list type="simple"><item>einer der Reste A und B eine Gruppe der Formel -S- darstellt, und der andere eine Gruppe 
+der Formel -CH= bedeutet; </item><item>R ein Wasserstoffatom oder einen C1-C6-Alkylrest darstellt, und </item><item>Z eine Pyridylgruppe bedeutet; oder </item></list> 
+ein pharmazeutisch verträgliches Säureadditions- oder Metallsalz davon. </p></div><div n="2" type="claim"><p xml:id="_28ca2">Verbindung nach Anspruch 1, wobei in der Formel A eine Gruppe der Formel -S- 
+ist, und B eine Gruppe der Formel -CH= ist. </p></div><div n="3" type="claim"><p xml:id="_c2188">4-(n-Butyl)-4,5-dihydro-7-hydroxy-5-oxo-N-(4-pyridyl)thieno-[3,2-b]-pyridin-6-carbonsäureamid 
+und seine pharmazeutisch verträglichen Säureadditions- und Metallsalze. </p></div><div n="4" type="claim"><p xml:id="_44c27">Arzneimittel, umfassend eine Verbindung oder ein Salz nach einem der Ansprüche 
+1-3 im Gemisch mit einem pharmazeutisch verträglichen Träger oder Verdünnungsmittel. </p></div><div n="5" type="claim"><p xml:id="_1c0cd">Immunregulierende pharmazeutische Zubereitung, umfassend eine Verbindung 
+oder ein Salz nach einem der Ansprüche 1-3 als Immunregulator. </p></div><div n="6" type="claim"><p xml:id="_857b2">Pharmazeutische Zubereitung gegen Osteoporose, umfassend eine Verbindung oder 
+ein Salz nach einem der Ansprüche 1-3 als Mittel gegen Osteoporose.  
+ </p></div><div n="7" type="claim"><p xml:id="_013ee">Zur Verwendung als Immunregulator: Verbindung oder Salz nach einem der Ansprüche 
+1-3 . </p></div><div n="8" type="claim"><p xml:id="_70f66">Zur Verwendung als Mittel gegen Osteoporose: Verbindung oder Salz nach einem 
+der Ansprüche 1-3 . </p></div><div n="9" type="claim"><p xml:id="_96384">Verbindung oder Salz nach einem der Ansprüche 1 bis 3 zur Verwendung als Arzneimittel. </p></div><div n="10" type="claim"><p xml:id="_8af07">Verwendung einer Verbindung oder eines Salzes nach einem der Ansprüche 1 bis 3 
+zur Herstellung eines Immunregulators oder eines Mittels gegen Osteoporose. </p></div><div n="11" type="claim"><p xml:id="_486c4">Verwendung einer Verbindung oder eines Salzes nach einem der Ansprüche 1 bis 3 
+zur Herstellung eines Arzneimittels zur Unterdrückung des Immunsystems durch Inhibierung 
+der Antikörperbildung. </p></div><div n="0" type="claim"><p xml:id="_2916d">Patentansprüche für folgende Vertragsstaaten : ES, GR</p></div><div n="1" type="claim"><p xml:id="_ca8a9">Verfahren zur Herstellung eines Thienopyridinderivats der Formel (I): 
+ 
+in der: 
+<list type="simple"><item>einer der Reste A und B eine Gruppe der Formel -S- darstellt, und der andere eine Gruppe 
+der Formel -CH= bedeutet; </item><item>R ein Wasserstoffatom oder einen C1-C6-Alkylrest darstellt, und </item><item>Z eine Pyridylgruppe bedeutet; das die Umsetzung einer Verbindung der Formel (II): 
+ 
+mit einem Amin der Formel (III) 
+H2N-Z 
+umfaßt, wobei in den Formeln (II) und (III) A, B, R und Z wie vorstehend definiert sind, und 
+L ein Halogenatom, ein Alkoxy-, Aryloxy-, Alkanoyloxy- oder ein Aroyloxyrest ist. </item></list></p></div><div n="2" type="claim"><p xml:id="_ac4bb">Verfahren nach Anspruch 1, wobei die Umsetzung in Gegenwart einer Base durchgeführt 
+wird. </p></div><div n="3" type="claim"><p xml:id="_e32e2">Verfahren nach Anspruch 1 oder 2, wobei die Umsetzung bei einer Temperatur im 
+Bereich von -30 bis 200°C, bevorzugt -10 bis 100°C, durchgeführt wird. </p></div><div n="4" type="claim"><p xml:id="_2c42f">Verfahren nach einem der Ansprüche 1-3, wobei die Verbindung der Formel (I) als 
+pharmazeutisch verträgliches Säureadditions- oder Metallsalz gewonnen wird oder anschließend 
+darin umgewandelt wird.  
+ </p></div><div n="5" type="claim"><p xml:id="_ca0f6">Verfahren nach einem der Ansprüche 1-4, wobei in den Formeln A eine Gruppe der 
+Formel -S- ist, und B eine Gruppe der Formel -CH= ist. </p></div><div n="6" type="claim"><p xml:id="_fdbf0">Verfahren nach einem der Ansprüche 1-4, wie es auf die Herstellung der Verbindung 
+4-(n-Butyl)-4,5-dihydro-7-hydroxy-5-oxo-N-(4-pyridyl)thieno-[3,2-b]-pyridin-6-carbonsäureamid 
+oder seiner pharmazeutisch verträglichen Säureadditions- oder Metallsalze angewendet 
+wird. </p></div><div n="7" type="claim"><p xml:id="_001a9">Verfahren nach einem der Ansprüche 1-6, das den weiteren Schritt des Mischens 
+der Verbindung der Formel (I), gegebenenfalls nach deren Umwandlung in ein pharmazeutisch 
+verträgliches Säureadditions- oder Metallsalz, mit einem pharmazeutisch verträglichen 
+Träger oder Verdünnungsmittel umfaßt. </p></div></div><div type="claims" xml:lang="en"><div n="0" type="claim"><p xml:id="_12d98">Claims for the following Contracting States : AT, BE, CH, DE, DK, FR, GB, IT, LI, LU, MC, NL, PT, SE</p></div><div n="1" type="claim"><p xml:id="_5993c">A thienopyridine derivative of the formula (I): 
+ 
+wherein: 
+<list type="simple"><item>one of A and B represents -S- and the other represents -CH=; </item><item>R represents hydrogen or C1 - C6 alkyl; and </item><item>Z represents pyridyl; or </item></list> 
+   a pharmaceutically acceptable acid addition or metal 
+salt thereof. </p></div><div n="2" type="claim"><p xml:id="_0adfa">A Compound according to claim 1, wherein, in said formula, A is - 
+S-, and B is -CH=. </p></div><div n="3" type="claim"><p xml:id="_5d855">4-(n-Butyl)-4,5-dihydro-7-hydroxy-5-oxo-N-(4-pyridyl)thieno[3,2-b]pyridine-6-carboxamide, 
+and its pharmaceutically acceptable acid 
+addition and metal salts. </p></div><div n="4" type="claim"><p xml:id="_b77c6">A pharmaceutical composition comprising a compound or salt as 
+defined by any one of claims 1-3 in a admixture with a pharmaceutically 
+acceptable carrier or diluent. </p></div><div n="5" type="claim"><p xml:id="_b5558">An immunoregulatory pharmaceutical preparation comprising as the 
+immunoregulator a compound or salt according to any one of claims 1-3. </p></div><div n="6" type="claim"><p xml:id="_0c719">An antiosteoporosis pharmaceutical preparation comprising as the 
+antiosteoporosis agent a compound or salt according to any one of 
+claims 1-3.  
+ </p></div><div n="7" type="claim"><p xml:id="_a7182">For use as an immunoregulator: a compound or salt as claimed in 
+any one of claims 1-3. </p></div><div n="8" type="claim"><p xml:id="_59739">For use as an antiosteoporosis agent: a compound or salt as 
+claimed in any one of claims 1-3. </p></div><div n="9" type="claim"><p xml:id="_d904e">A compound or salt according to any one of claims 1 to 3 for use 
+as a pharmaceutical. </p></div><div n="10" type="claim"><p xml:id="_345bd">Use of a compound or salt according to any one of claims 1 to 3 
+in the manufacture of an immunoregulator or an antiosteoporosis agent. </p></div><div n="11" type="claim"><p xml:id="_e174f">Use of a compound or salt according to any one of claims 1 to 3 
+in the manufacture of a medicament to suppress the immune system by 
+inhibiting antibody production. </p></div><div n="0" type="claim"><p xml:id="_c9b01">Claims for the following Contracting States : ES, GR</p></div><div n="1" type="claim"><p xml:id="_05b08">A method for the preparation of a thiefiopyridine derivative of the 
+formula (I): 
+ 
+wherein: 
+<list type="simple"><item>one of A and B represents -S- and the other represents -CH=; </item><item>R represents hydrogen or C1 - C6 alkyl; and </item><item>Z represents pyridyl, which comprises reacting a compound of the 
+formula II: 
+ 
+with an amine of the formula [I] 
+H2N - Z 
+   where in said formula II and III A, B, R and Z are as defined 
+above, and L is halogen, alkoxy, aryloxy, alkanoyloxy or aroyloxy. </item></list></p></div><div n="2" type="claim"><p xml:id="_d8fb9">A method according to claim 1, wherein the reaction is carried 
+out in the presence of a base. </p></div><div n="3" type="claim"><p xml:id="_9c42c">A method according to claim 1 or 2, wherein the reaction is 
+performed at a temperature in the range -30 to 200°C, preferably -10 to  
+ 
+100°C. </p></div><div n="4" type="claim"><p xml:id="_f5b79">A method according to any one of claims 1-3, wherein the compound 
+of formula I is recovered as or is subsequently converted into a 
+pharmaceutically acceptable acid addition or metal salt. </p></div><div n="5" type="claim"><p xml:id="_a9001">A method according to any one of claims 1-4, wherein in said 
+formulae A is -S-, and B is -CH=. </p></div><div n="6" type="claim"><p xml:id="_4e48b">A method according to any one of claims 1-4 as applied to the 
+preparation of the compound 4-(n-butyl)-4,5-dihydro-7-hydroxy-5-oxo-N-(4-pyridyl)thieno[3,2-b]pyridine-6-carboxamide,or 
+its pharmaceutically 
+acceptable acid addition or metal salts. </p></div><div n="7" type="claim"><p xml:id="_2c10a">A method according to any one of claims 1-6, which comprises the 
+further step of mixing the compound of formula I, optionally after 
+conversion thereof into a pharmaceutically acceptable acid addition or 
+metal salt, with a pharmaceutically acceptable carrier or diluent. </p></div></div><div type="claims" xml:lang="fr"><div n="0" type="claim"><p xml:id="_8ee4d">Revendications pour les Etats contractants suivants : AT, BE, CH, DE, DK, FR, GB, IT, LI, LU, MC, NL, PT, SE</p></div><div n="1" type="claim"><p xml:id="_58c24">Dérivé de thiénopyridine, de formule (I) : 
+ 
+dans laquelle l'un des symboles A et B représente un 
+chaínon -S- et l'autre représente un chaínon -CH=, R représente 
+un atome d'hydrogène ou un groupe alkyle en C1-C6, 
+et Z représente un groupe pyridyle, 
+ou sel de métal ou d'addition d'acide d'un tel dérivé, 
+admissible en pharmacie. </p></div><div n="2" type="claim"><p xml:id="_c0bf8">Composé conforme à la revendication 1, dans lequel, 
+dans ladite formule, A représente un chaínon -S- et 
+B représente un chaínon -CH=. </p></div><div n="3" type="claim"><p xml:id="_39e22">4-(n-butyl)-4,5-dihydro-7-hydroxy-5-oxo-N-(4-pyridyl)thiéno[3,2-b]pyridine-6-carboxamide, 
+et ses sels 
+de métal ou d'addition d'acide, admissibles en pharmacie. </p></div><div n="4" type="claim"><p xml:id="_aa1bf">Composition pharmaceutique comprenant un composé 
+ou un sel conforme à l'une des revendications 1 à 3, mélangé 
+avec un véhicule ou un diluant admissible en pharmacie. </p></div><div n="5" type="claim"><p xml:id="_d610a">Préparation pharmaceutique immunorégulatrice, qui 
+contient, comme agent immunorégulateur, un composé ou un 
+sel conforme à l'une des revendications 1 à 3. </p></div><div n="6" type="claim"><p xml:id="_d01bb">Préparation pharmaceutiques anti-ostéoporose, qui 
+contient, comme agent anti-ostéoporose, un composé ou un 
+sel conforme à l'une des revendications 1 à 3. </p></div><div n="7" type="claim"><p xml:id="_6a6a6">Composé ou sel conforme à l'une des revendications 
+1 à 3, destiné à être utilisé comme agent immunorégulateur.  
+ </p></div><div n="8" type="claim"><p xml:id="_7a259">Composé ou sel conforme à l'une des revendications 
+1 à 3, destiné à être utilisé comme agent anti-ostéoporose. </p></div><div n="9" type="claim"><p xml:id="_50a91">Composé ou sel conforme à l'une des revendications 
+1 à 3, destiné à être utilisé comme agent pharmaceutique. </p></div><div n="10" type="claim"><p xml:id="_c3dbb">Utilisation d'un composé ou d'un sel conforme à 
+l'une des revendications 1 à 3, pour la fabrication d'un 
+agent anti-ostéoporose ou d'un agent immunorégulateur. </p></div><div n="11" type="claim"><p xml:id="_ba27f">Utilisation d'un composé ou d'un sel conforme à 
+l'une des revendications 1 à 3, pour la fabrication d'un 
+médicament immunodépresseur qui agit en inhibant la production 
+d'anticorps. </p></div><div n="0" type="claim"><p xml:id="_7a840">Revendications pour les Etats contractants suivants : ES, GR</p></div><div n="1" type="claim"><p xml:id="_d1524">Procédé de préparation d'un dérivé de thiénopyridine, 
+de formule (I) : 
+ 
+dans laquelle l'un des symboles A et B représente un 
+chaínon -S- et l'autre représente un chaínon -CH=, R représente 
+un atome d'hydrogène ou un groupe alkyle en C1-C6, 
+et Z représente un groupe pyridyle, 
+qui comporte le fait de faire réagir un composé de formule 
+(II) : 
+ 
+avec une amine de formule (III) : 
+H2N - Z 
+dans lesquelles formules (II) et (III) A, B, R et Z ont 
+les définitions indiquées ci-dessus et L représente un 
+atome d'halogène ou un groupe alcoxy, aryloxy, alcanoyloxy 
+ou aroyloxy. </p></div><div n="2" type="claim"><p xml:id="_e09cf">Procédé conforme à la revendication 1, dans lequel 
+on effectue la réaction en présence d'une base. </p></div><div n="3" type="claim"><p xml:id="_65176">Procédé conforme à la revendication 1 ou 2, dans 
+lequel on effectue la réaction à une température située 
+dans l'intervalle allant de -30°C à 200°C, de préférence 
+de -10°C à 100°C. </p></div><div n="4" type="claim"><p xml:id="_720b8">Procédé conforme à l'une des revendications 1 à  
+ 
+3, dans lequel on récupère le composé de formule (I) sous 
+la forme d'un sel de métal ou d'addition d'acide, admissible 
+en pharmacie, ou l'on transforme ultérieurement ce 
+composé en un tel sel. </p></div><div n="5" type="claim"><p xml:id="_ba52c">Procédé conforme à l'une des revendications 1 à 
+4, dans lequel, dans lesdites formules, A représente un 
+chaínon -S- et B représente un chaínon -CH=. </p></div><div n="6" type="claim"><p xml:id="_325be">Procédé conforme à l'une des revendications 1 à 
+4, mis en oeuvre pour préparer du 4-(n-butyl)-4,5-dihydro-7-hydroxy-5-oxo-N-(4-pyridyl)thiéno[3,2-b]pyridine6-carboxamide, 
+ou un sel de métal ou d'addition d'acide, 
+admissible en pharmacie, de ce composé. </p></div><div n="7" type="claim"><p xml:id="_8bc3e">Procédé conforme à l'une des revendications 1 à 
+6, qui comporte l'étape supplémentaire consistant à mélanger 
+le composé de formule (I), après l'avoir éventuellement 
+converti en un sel de métal ou d'addition d'acide, 
+admissible en pharmacie, avec un véhicule ou un diluant 
+admissible en pharmacie. </p></div></div><div type="description" xml:lang="en"><p xml:id="_26616">This invention relates to thienopyridine derivatives which 
+are useful as immunoregulators and for the prevention and treatment 
+of osteoporosis and pharmaceutical preparations containing them. </p><p xml:id="_d8e32">EP-A-0 059 698 discloses carboxamide compounds that 
+apparently enhance cell-mediated immunity. These compounds are 
+cyclic and include a benzene ring. </p><p xml:id="_f9798">Thienopyridine derivatives represented by Formula 
+(A), possess the 4-hydroxythieno[2,3-b]pyridin-6-one 
+skeleton and are described in J. Chem. Res. (S), 214 (1985) 
+and J. Chem. Res. (S),122 (1986): 
+ 
+wherein Ro represents hydrogen or methyl and Y represents 
+hydrogen or ethoxycarbonyl. </p><p xml:id="_1a211">Furthermore, thienopyridine derivatives represented 
+by Formula (B), possess the 7-hydroxythieno[3,2-b]-pyridin-5-one 
+skeleton, and are described in J. Chem. Res. 
+(S), 6 (1980) and J. Chem. Res. (S), 84 (1984): 
+ 
+wherein Ro represents hydrogen or methyl and Y represents  
+ 
+hydrogen, ethoxycarbonyl, nitrile, acetyl or the like. </p><p xml:id="_86caa">In compounds (A) and (B), their pharmacological 
+activities are unknown. </p><p xml:id="_a109d">The present invention relates to thienopyridine 
+derivatives [hereinafter referred to as Compound (I)] 
+represented by formula (I): 
+ 
+wherein one of A and B represents -S-, and the other represents 
+-CH=; R represents hydrogen or lower alkyl, and Z 
+represents pyridyl; or a pharmaceutically acceptable salt 
+thereof. </p><p xml:id="_7c3b0">In the definition of each group in formula (I), 
+the lower alkyl means a straight or branched alkyl having 
+1 to 6 carbon atoms, such as methyl, ethyl, propyl, isopropyl, 
+butyl, isobutyl, sec-butyl, tert-butyl, pentyl, 
+neopentyl, hexyl, etc. </p><p xml:id="_b5202">The pharmaceutically acceptable salt of Compound 
+(I) includes acid addition salts, metal salts, etc. The 
+acid addition salt includes, for example, an inorganic acid 
+salt such as hydrochloride, sulfate, phosphate, etc.; an 
+organic acid salt such as acetate, maleate, fumarate, 
+tartarate, citrate, etc. The metal salt includes for  
+ 
+example, salts of alkali metal such as sodium, potassium, 
+etc., salts of alkaline earth metal such as magnesium, 
+calcium, etc.; aluminum salts, zinc salts and the like. </p><p xml:id="_eae01">Next, a process for preparing Compound (I) is 
+described. </p><p xml:id="_fa5de">In the process shown below, in cases where the 
+defined group(s) change under the conditions or are inappropriate 
+for the practice of the process, the process can be 
+easily operated by applying thereto means conventionally 
+used in organic synthetic chemistry, for example, protection 
+of functional groups, removal of protective groups, etc. </p><p xml:id="_8050c">Compound (I) may be obtained by reacting Compound 
+(II) represented by formula (II): 
+ 
+wherein L represents a leaving group; and A, B and R have 
+the same significance as described above, with Compound 
+(III) represented by formula (III): 
+H2N - Z 
+wherein Z has the same significance as described above, 
+preferably in the presence of a base. </p><p xml:id="_4983d">Herein as the leaving group denoted by L, halogen 
+such as chlorine, bromine, iodine, etc.; alkoxy such as 
+methoxy, ethoxy, etc.; aryloxy such as phenoxy, etc.; 
+alkanoyloxy such as propionyloxy, etc.; aroyloxy such as 
+benzoyloxy, etc. are used.  
+ </p><p xml:id="_c1ac2">As the base, alkali metal bicarbonates such as 
+sodium bicarbonate, potassium bicarbonate, etc.; alkali 
+metal carbonates such as sodium carbonate, potassium carbonate, 
+etc.; alkali metal hydrides such as sodium hydride, 
+etc.; alkali metal alkoxides such as sodium methoxide, 
+sodium ethoxide, etc.; alkali metal salts such as butyl 
+lithium, etc. are used. </p><p xml:id="_90807">As the solvent used in the reaction, any solvent 
+may be usable, as long as it is inert to the reaction. 
+For example, ethers such as tetrahydrofuran, dioxane, etc.; 
+amides such as dimethylformamide, dimethylacetamide, etc.; 
+ketones such as acetone, methyl ethyl ketone, etc.; alcohols 
+such as methanol, ethanol, isopropyl alcohol, etc.; halogenated 
+hydrocarbons such as methylene chloride, chloroform, 
+dichloroethane, etc.; esters such as ethyl acetate, etc.; 
+aromatic hydrocarbons such as benzene, toluene, xylene, 
+etc.; dimethylsulfoxide and the like may be used singly or 
+in combination. </p><p xml:id="_722d2">The reaction is carried out at -30 to 200°C, 
+preferably -10 to 100°C and generally completed in 30 
+minutes to 20 hours. </p><p xml:id="_be8ea">The starting compound (II) can be synthesized by 
+known methods [J. Chem. Res. (S), 6 (1980); ibid., 84 
+(1984); ibid., 214 (1985); J. Chem. Res. (M), 113 (1980); 
+ibid., 771 (1984); ibid., 2501 (1985)] or by a modified 
+method of these methods. </p><p xml:id="_f7c8a">The desired product in the process described above 
+can be isolated and purified by means of purification conventionally 
+used in organic synthetic chemistry, for example, 
+by filtration, extraction, washing, drying, concentration, 
+recrystallization, various chromatographies, etc. </p><p xml:id="_8dcbd">Where it is desired to obtain the salts of Compound 
+(I), Compound (I) may be purified as it is in case 
+that Compound (I) is obtained in the form of its salt. In 
+case that Compound (I) is obtained in its free form,  
+ 
+Compound (I) is dissolved or suspended in an appropriate 
+solvent and an appropriate acid or base is added to the 
+solution or suspension to form its salts. </p><p xml:id="_fd512">Compound (I) and a pharmaceutically acceptable 
+salt thereof may also be present in the form of addition 
+products with water or various solvents. These addition 
+products are also included in the present invention. </p><p xml:id="_291e9">Furthermore Compound (I) includes all possible 
+steric isomers and mixtures thereof. </p><p xml:id="_c6e41">Specific examples of Compound (I) obtained by the 
+process described above are shown in Tables 1 and 2. 
+</p><p xml:id="_6a299">Next, the immunoregulating activity, activity of 
+inhibiting bone absorption and acute toxicity of Compound 
+(I) are described by referring to test examples. </p><head xml:id="_69385">Test Example 1 Plaque Forming Cell Assay</head><p xml:id="_dad17">The methods developed by Jerne [Science, 140, 405 
+(1963)] and Yamamoto, et al[Drugs. Exptl. Clin. Res., 8, 
+5 (1982)] were modified for plaque forming cell assay. </p><p xml:id="_d6730">That is, Balb/c strain male mice (age of 7 weeks, 
+Charles River Japan Inc.) were sensitized with 1 x 108 
+sheep red blood cells (Bio Test Research Institute) and  
+ 
+the spleen was extirpated on the sixth or seventh day. The 
+cells obtained from the spleen were treated with ACT solution 
+(Tris-ammonium chloride isotonic buffer) to remove red 
+blood cells. The cells were washed three times with RPMI1640 
+medium (Nissui Pharmaceutical Co.). The cells (1 x107) 
+were incubated in RPMI-1640 medium containing 10% calf 
+fetal serum (Gibco Co.), 50 µg/ml streptomycin, 50 IU/ml of 
+penicillin, 2-mercaptoethanol (5 x 10-5 M), sheep red blood 
+cells (5 x 106 cells) and a test compound dissolved in 
+dimethyl sulfoxide supplied on a microculture plate (NUNC 
+Co., 24 wells) in a carbon dioxide gas incubator (TABAI 
+ESPEC CORP) at 37°C for 5 days. </p><p xml:id="_a8041">After completion of the incubation, the cells were 
+transferred to a plastic test tube and centrifuged at 2000 
+rpm. After the supernatant was removed, the cells were 
+resuspended in 1 ml of RPMI-1640 medium. The cell suspension 
+was sealed in a Cunnigham chamber (Takahashi Giken 
+Co.) together with sheep red blood cells and guinea pig 
+complement (Cedarlane Research Institute) according to the 
+method of Cunnigham [Immunology, 14, 599 (1968)] and 
+incubated at 37°C for 1 to 2 hours. Direct plaque forming 
+cell (PFC) count was counted. </p><p xml:id="_d1901">A rate of inhibiting antibody production by the 
+test compound was determined by the following equation. 
+Inhibition rate (%) = A - BA x 100 A :PFC count in the absence of test compound 
+(dimethylsulfoxide alone) B :PFC count in the presence of test compound </p><p xml:id="_daaa2">The results are shown in Table 3.  
+ 
+<figure><table cols="4"><row><cell>Compound No. </cell><cell>Concentration (M) </cell><cell>Direct PFC Count (mean ± S.E.M.) </cell><cell>Inhibition Rate (%) </cell></row><row><cell>Control</cell><cell/><cell>5023 ± 38 </cell></row><row><cell>3</cell><cell>10-4</cell><cell>101 ± 76</cell><cell>98.0 </cell></row><row><cell/><cell>10-5</cell><cell>59 ± 38</cell><cell>98.8 </cell></row><row><cell>4</cell><cell>10-4</cell><cell>336 ± 124</cell><cell>93.3 </cell></row><row><cell/><cell>10-5</cell><cell>395 ± 52</cell><cell>92.1 </cell></row><row><cell>5</cell><cell>10-4</cell><cell>109 ± 77</cell><cell>97.8 </cell></row><row><cell/><cell>10-5</cell><cell>227 ± 131</cell><cell>95.5 </cell></row><row><cell>6</cell><cell>10-4</cell><cell>42 ± 29</cell><cell>99.2 </cell></row><row><cell/><cell>10-5</cell><cell>59 ± 29</cell><cell>98.8 </cell></row></table></figure></p><p xml:id="_edb87">Autoimmune diseases such as chronic articular 
+rheumatism or the like are considered to result from tissue 
+injury due to accentuation of B cells as the result of 
+hypofunction of T cells. It is thus expected that Compound 
+(I) would be effective against autoimmune disease by inhibiting 
+antibody production. </p><head xml:id="_a7e8b">Test Example 2 Activity of inhibiting bone absorption</head><p xml:id="_c9836">A calvaria of a 5 to 6 day-old dd mouse was aseptically 
+cut off, washed with Dulbecco's modified phosphate 
+buffered saline not containing calcium and magnesium (manufactured 
+by Gibco Oriental Co.) and separated along the 
+sutura of its center. One half of the calvaria so separated 
+was cultured in 1.5 ml of Dulbecco's modified Eagle medium 
+(manufactured by Gibco Oriental Co.) containing 15% of 
+thermally inactivated (at 56°C for 20 minutes) horse serum  
+ 
+and 2.5% of fetal calf serum. The test compound was dissolved 
+in dimethyl sulfoxide, and 10 µl (final concentration: 
+1 x 10-4 M or 1 x 10-5 M) of the solution so prepared 
+was added to the culture. Parathyroid hormone (human PTH 
+1-34, manufactured by Sigma Co.) was dissolved in 0.15 M 
+sodium chloride solution (pH 3), and 3 µl (final concentration: 
+1 x 10-8 M) of the solution so prepared was added to 
+the culture. The cultivation was carried out for 96 hours 
+at 37°C in an atmosphere consisting of 95% of air and 5% 
+of carbon dioxide. The culture medium was once replaced with 
+a fresh one after 48 hours from the beginning of the cultivation. 
+The concentration of dissolved calcium (i.e., 
+absorption of bone) from the PTH-intensified bone was 
+determined by measuring the quantity of calcium accumulated 
+in the culture collected in 96 hours of cultivation, whereby 
+the concentration of total calcium contained in the culture 
+was measured with Calcium C-Test Wako (manufactured by Wako 
+Pure Chemicals Co., Ltd.), and the inhibition rate was 
+calculated therefrom in accordance with the equation set 
+forth below. The results are shown in Table 4. 
+Inhibition rate (%) = Cp - CdCp - Co x 100 Cd :Total calcium concentration in the culture 
+treated with both test compound and PTH Cp :Total calcium concentration in the culture 
+treated with PTH alone Co :Total calcium concentration in the culture 
+treated with neither test compound nor PTH <figure><table cols="3"><row><cell>Compound No. </cell><cell>Concentration (µM) </cell><cell>Inhibition Rate (%) </cell></row><row><cell>1</cell><cell>100</cell><cell>-1 </cell></row><row><cell>2</cell><cell>100</cell><cell>51 </cell></row><row><cell>3</cell><cell>10</cell><cell>141 </cell></row><row><cell>4</cell><cell>10</cell><cell>58 </cell></row><row><cell>5</cell><cell>10</cell><cell>53 </cell></row><row><cell>6</cell><cell>10</cell><cell>38 </cell></row><row><cell>7</cell><cell>10</cell><cell>32 </cell></row><row><cell>8</cell><cell>10</cell><cell>18 </cell></row></table></figure></p><head xml:id="_b1c62">Test Example 3 Acute toxicity test</head><p xml:id="_b7e8b">A test compound was orally administered to three 
+dd-strain male mice weighing 20 ± 1 g. The minimum lethal 
+dose (MLD) was determined by observing the mortality for 
+7 days after the administration. </p><p xml:id="_d10b5">The results are shown in Table 5. 
+<figure><table cols="2"><row><cell>Compound No. </cell><cell>MLD (mg/kg) </cell></row><row><cell>4</cell><cell>&gt; 300 </cell></row><row><cell>7</cell><cell>&gt; 300 </cell></row></table></figure></p><p xml:id="_37c9c">Compound (I) or a pharmaceutically acceptable 
+salt thereof may be used as it is, or in various pharmaceutical 
+forms. The pharmaceutical composition of the 
+present invention can be prepared by uniformly mixing an 
+effective amount of Compound (I) or a pharmaceutically 
+acceptable salt thereof as the active ingredient with pharmaceutically 
+acceptable carriers. The pharmaceutical 
+compositions are desirably in a single dose unit suited for 
+oral or parenteral administration. </p><p xml:id="_17b5c">In preparing the composition suited for oral 
+administration, any pharmaceutically acceptable carrier 
+may be used. Liquid preparations suited for oral administration, 
+for example, a suspension and a syrup can be 
+prepared using water; sugars such as sucrose, sorbitol, 
+fructose, etc.; glycols such as polyethylene glycol, propylene 
+glycol, etc.; oils such as sesame oil, olive oil, 
+soybean oil, etc.; antiseptics such as p-hydroxybenzoic 
+acid ester, etc.; flavors such as strawberry flavor, pepper 
+mint, etc. Further a capsule, a tablet, a powder and a 
+granule can be prepared using an excipient such as lactose, 
+glucose, sucrose, mannitol, etc.; a disintegrator such as 
+starch, sodium alginate, etc.; a lubricant such as magnesium 
+stearate, talc, etc.; a binder such as polyvinyl alcohol, 
+hydroxypropyl cellulose, gelatin, etc.; a surfactant such 
+as a fatty acid ester, etc.; a plasticizer such as 
+glycerine, etc. A tablet and a capsule are most useful 
+single dose unit for oral administration because their 
+administration is easy. </p> <p xml:id="_764ac">Effective dose and number of administration of 
+Compound (I) or a pharmaceutically acceptable salt thereof 
+may vary depending upon modes of administration, age and 
+body weight, conditions, etc. of a patient but it is 
+generally preferred to administer Compound (I) in a dose 
+of 1 to 1,000 mg/60 kg by dividing into one to four times.  
+ </p> <p xml:id="_25607">The present invention is described by referring 
+to Examples and Reference Examples below. </p> <head xml:id="_8b59b">Example 1 </head><head xml:id="_d3407">4,5-Dihydro-7-hydroxy-5-oxo-N-(3-pyridyl)thieno[3,2-b]pyridine-6-carboxamide 
+(Compound 1)</head><p xml:id="_72938">A mixture of 2.43 g (10.2 mmols) of ethyl 4,5-dihydro-7-hydroxy-5-oxothieno[3,2-b]pyridine-6-carboxylate 
+[J. Chem. Res. (S), 6 (1980); J. Chem. Res. (M), 113 
+(1980)], 1.00 g (10.6 mmols) of 3-aminopyridine, 50 ml of 
+xylene and 10 ml of dimethylformamide was heated at 140°C 
+for an hour. After completion of the reaction, insoluble 
+matters were filtered and recrystallized from dimethylformamide 
+to give 1.56 g (yield: 54%) of Compound 1. 
+<figure><table cols="4"><row><cell>Elemental analysis: C13H9N3O3S </cell></row><row><cell>Calcd. (%) :</cell><cell>C 54.35,</cell><cell>H 3.16,</cell><cell>N 14.63 </cell></row><row><cell>Found (%) :</cell><cell>C 54.11,</cell><cell>H 2.85,</cell><cell>N 14.48 </cell></row></table></figure>IR (KBr) cm-1:3450(br), 1638, 1594, 1547, 1480, 
+1408, 1364, 1264, 1228, 799, 761 NMR (CF3 CO2 D) δ (ppm):9.79(1H, s), 8.81(1H, d, J= 
+8.8Hz), 8.63(1H, d, J=5.1Hz), 8.15(1H, m), 8.10 
+(1H, d, J=5.4Hz), 7.28(1H, d, J=5.4Hz) </p><head xml:id="_9a299">Example 2</head><head xml:id="_e2133">4,5-Dihydro-7-hydroxy-5-oxo-N-(4-pyridyl)thieno[3,2-b]pyridine-6-carboxamide 
+(Compound 2)</head><p xml:id="_2196c">A mixture of 2.48 g (10.4 mmols) of ethyl 4,5-dihydro-7-hydroxy-5-oxothieno[3,2-b]pyridine-6-carboxylate 
+[J. Chem. Res. (S), 6 (1980); J. Chem. Res. (M), 113 
+(1980)], 1.01 g (10.7 mmols) of 4-aminopyridine, 50 ml of 
+xylene and 10 ml of dimethylformamide was heated at 140°C 
+for an hour. After completion of the reaction, insoluble 
+matters were filtered and tritylated with dimethylformamide 
+with heating to give 1.99 g (yield: 67%) of Compound 2.  
+ 
+<figure><table cols="4"><row><cell>Elemental analysis: C13H9N3O3S </cell></row><row><cell>Calcd. (%):</cell><cell>C 54.35,</cell><cell>H 3.16,</cell><cell>N 14.63 </cell></row><row><cell>Found (%):</cell><cell>C 54.31,</cell><cell>H 2.96,</cell><cell>N 14.45 </cell></row></table></figure>IR (KBr) cm-1:3440(br), 1662, 1632, 1575, 1536, 1498, 
+1411, 1370, 1212, 1006, 826, 751 NMR (CF3 CO2 D) δ (ppm):8.64(2H, d, J=7.0Hz), 8.46 
+(2H, d, J=7.0Hz), 8.11(1H, d, J=5.4Hz), 7.27(1H, 
+d, J=5.4Hz) </p><head xml:id="_0839f">Example 3</head><head xml:id="_8aa82">4-(n-butyl)-4,5-dihydro-7-hydroxy-5-oxo-N-(4-pyridyl)thieno[3,2-b]pyridine-6-carboxamide 
+(Compound 3)</head><p xml:id="_a13c5">A solution of 1.18 g (4.00 mmols) of the Compound 
+a obtained in Reference Example 1, 0.39 g (4.13 mmols) of 
+4-aminopyridine and 20 ml of toluene was heated to reflux 
+for 2 hours. After cooling, the reaction mixture was poured 
+into 1 N sodium hydroxide aqueous solution, and washed 
+twice with chloroform. 2 N Hydrochloric acid aqueous solution 
+was added to the aqueous layer and the precipitated 
+white crystals were filtered and dried to give 0.73 g 
+(yield: 53%) of Compound 3. 
+Melting point:211.9 -216.5°C MS (EI) m/e:343 (M+) IR (KBr) cm-1:3420(br), 1661, 1617, 1591, 1546, 
+1509, 1393, 1196, 796, 758 NMR (DMSO-d6) δ (ppm):13.59(1H, s), 8.79(2H, d, J= 
+6.6Hz), 8.38(1H, d, J=5.1Hz), 8.21(2H, d, J= 
+6.6Hz), 7.57(1H, d, J=5.1Hz), 4.24(2H, t, J= 
+7.6Hz), 1.66(2H, m), 1.40(2H, m), 0.93(3H, t, J= 
+7.1Hz) </p><head xml:id="_1b240">Example 4</head><head xml:id="_40a1d">4-(n-butyl)-4,5-dihydro-7-hydroxy-5-oxo-N-(3-pyridyl)thieno[3,2-b]pyridine-6-carboxamide 
+(Compound 4)</head><p xml:id="_16455">Compound 4 was obtained (yield: 72%) in a manner 
+similar to Example 3 except for using 3-aminopyridine in 
+place of 4-aminopyridine. 
+Melting point:179.7 -182.6°C MS (EI) m/e:343 (M+) IR (KBr) cm-1:3388, 1627, 1540, 1390, 798, 770, 668 NMR (DMSO-d6) δ (ppm):13.03(1H, s), 9.20(,1H, d, J= 
+2.2Hz), 8.62(1H, d, J=4.4Hz), 8.57(1H, dd, J= 
+2.2Hz, 8.5Hz), 8.34(1H, d, J=5.4Hz), 7.90(,1H, dd, 
+J=4.4Hz, 8.5Hz), 7.55(1H, d, J=5.4Hz), 4.24(2H, 
+t, J=7.5Hz), 1.65(2H, m), 1.40(2H, m), 0.93(3H, 
+t, J=7.3Hz) </p><head xml:id="_7f252">Example 5</head><head xml:id="_ff3a3">7-(n-butyl)-6,7-dihydro-4-hydroxy-6-oxo-N-(4-pyridyl)thieno[2,3-b]pyridine-5-carboxamide 
+(Compound 5)</head><p xml:id="_3477c">Compound 5 was obtained (yield: 78%) in a manner 
+similar to Example 3 except for using Compound b obtained 
+in Reference Example 2 in place of Compound a. 
+Melting point:131.6 -139.4°C MS (EI) m/e:343 (M+) IR (KBr) cm-1 :2952, 1614, 1507, 1380, 1289, 1229, 
+1197, 834, 663 NMR (DMSO-d6) δ(ppm):13.34(1H, s), 8.78(2H, d, J= 
+6.4Hz), 8.20(2H, d, J=6.4Hz), 7.48(1H, d, J= 
+5.6Hz), 7.39(1H, d, J=5.6Hz), 4.13(2H, t, J= 
+7.4Hz), 1.75(2H, m), 1.41(2H, m), 0.95(3H, t, 
+J=7.3Hz) </p><head xml:id="_34752">Example 6</head><head xml:id="_afee5">7-(n-butyl)-6,7-dihydro-4-hydroxy-6-oxo-N-(3-pyridyl)thieno[2,3-b]pyridine-5-carboxamide 
+(Compound 6)</head><p xml:id="_ec4cc">Compound 6 was obtained (yield: 76%) in a manner 
+similar to Example 3 except for using Compound b obtained 
+in Reference Example 2 in place of Compound a and using  
+ 
+3-aminopyridine in place of 4-aminoyyridine. 
+Melting point:158.0 -158.4°C MS (EI) m/e:343 (M+) IR (KBr) cm-1:1616, 1585, 1561, 1542, 1535, 1482, 752 NMR (DMSO-d6) δ (ppm):15.87(1H, s), 12.49(1H, s), 
+8.80(1H, d, J=2.1Hz), 8.37(1H, d, J=3.7Hz), 8.11 
+(1H, d, J=8.2Hz), 7.39-7.44(1H, m), 7.42(1H, d, 
+J=5.5Hz), 7.35(1H, d, J=5.5Hz), 4.10(2H, t, J= 
+7.5Hz), 1.74(2H, m), 1.40(2H, m), 0.95(3H, t, J= 
+7.3Hz) </p><head xml:id="_a0416">Example 7</head><head xml:id="_06c8a">6,7-Dihydro-4-hydroxy-6-oxo-N-(4-pyridyl)thieno[2,3-b]pyridine-5-carboxamide 
+(Compound 7)</head><p xml:id="_d0354">Compound 7 was obtained (yield: 58%) in a manner 
+similar to Example 3 except for using ethyl 6,7-dihydro-4-hydroxy-6-oxothieno[2,3-b]pyridine-5-carboxylate 
+[J. Chem. 
+Res. (S), 214 (1985)] in place of Compound a. 
+Melting point:&gt;300°C MS (EI) m/e:287 (M+) IR (KBr) cm-1:1660, 1633, 1573, 1544, 1487, 1426, 
+1356, 1009, 799, 560, 465 NMR (DMSO-d6) δ (ppm):15. 58 (1H, bs), 12. 80-12. 98 (2H, 
+m), 8.51(2H, d, J=6.4Hz), 7.64(2H, d, J=6.4Hz), 
+7.29(2H, s) </p><head xml:id="_dc8eb">Example 8</head><head xml:id="_dd0fa">6,7-Dihydro-4-hydroxy-6-oxo-N-(3-pyridyl)thieno[2,3-b]pyridine-5-carboxamide 
+(Compound 8)</head><p xml:id="_7bb65">Compound 8 was obtained (yield: 75%) in a manner 
+similar to Example 3 except for using ethyl 6,7-dihydro-4-hydroxy-6-oxothieno[2,3-b]pyridine-5-carboxylate 
+[J. Chem. 
+Res. (S), 214 (1985)] in place of Compound a, and using 3-aminopyridine 
+in place of 4-aminopyridine.  
+ 
+Melting point:294.8 8 - 295.9°C MS (EI) m/e:287 (M+) IR (KBr) cm-1:1648, 1601, 1562, 1482, 1427, 1356, 
+1263, 801, 554, 472 NMR (DMSO-d6) δ (ppm):15.85(1H, s), 12.97(1H, s), 
+12.61(1H, s), 8.80(1H, d, J=2.5Hz), 8.37(1H, dd, 
+J=1.1Hz, 4.7Hz), 8.04-8.13(1H, m), 7.42(1H, dd, 
+J=8.2Hz, 4.5Hz), 7.29(1H, d, J=4.5Hz), 7.29(1H, 
+dd, J=9.9Hz, 5.4Hz) </p><head xml:id="_848db">Example 9 Tablet</head><p xml:id="_b8b53">A tablet having the following ingredients is 
+prepared in a conventional manner. 
+<figure><table cols="2"><row><cell>Compound 1</cell><cell>50 mg </cell></row><row><cell>Lactose</cell><cell>60 mg </cell></row><row><cell>Potato starch</cell><cell>30 mg </cell></row><row><cell>Polyvinyl alcohol</cell><cell>2 mg </cell></row><row><cell>Magnesium stearate</cell><cell>1 mg </cell></row><row><cell>Tar pigment</cell><cell>trace </cell></row></table></figure></p><head xml:id="_9428c">Example 10 Syrup</head><p xml:id="_9f9fe">A syrup preparation having the following ingredients 
+is prepared in a conventional manner. 
+<figure><table cols="2"><row><cell>Compound 2</cell><cell>50 mg </cell></row><row><cell>Refined sugar</cell><cell>30 mg </cell></row><row><cell>Ethyl p-hydroxybenzoate</cell><cell>40 mg </cell></row><row><cell>Propyl p-hydroxybenzoate</cell><cell>10 mg </cell></row><row><cell>Strawberry flavor</cell><cell>0.1 cc </cell></row><row><cell>Water is added until the total volume is 100 cc. </cell></row></table></figure></p><head xml:id="_fe4c6">Reference Example 1</head><head xml:id="_6eaa8">Ethyl 4-(n-butyl)-4,5-dihydro-7-hydroxy-5-oxothieno[3,2-b]pyridine-6-carboxylate 
+(Compound a)</head><p xml:id="_a1d3d">A) To a solution of 15.7 g (0.100 mol) of methyl 
+3-aminothiophene-2-carboxylate and 15.2 g (0.110 mol) of 
+potassium carbonate in 200 ml of dimethylformamide was added 
+34.1 ml (0.300 mol) of n-butyl iodide at 25°C. The mixture 
+was stirred at 120°C for 10 hours. After cooling, the 
+solvent was evaporated under reduced pressure and 200 ml of 
+ethyl acetate was added to the residue. An inorganic salt 
+was removed by filtration. The filtrate was again concentrated 
+under reduced pressure. The residue was purified 
+by silica gel column chromatography (eluting solvent: ethyl 
+acetate/n-hexane = 1/9 v/v) to give 10.2 g (yield: 48%) of 
+methyl 3-(n-butylaminothiophene-2-carboxylate (Compound a-1). 
+NMR (CDCl3) δ (ppm):7.35(1H, d, J=5.3Hz), 7.01-7.30 
+(1H, br), 6.98(1H, d, J=5.3Hz), 3.83(3H, s), 3.28 
+(2H, m), 1.21-1.88(4H, m), 0.95(3H, t, J=7.5Hz) B) 10.0 g (46.9 mmols) of Compound a-1 was dissolved 
+in a solvent mixture of 90 ml of 1,2-dichloroethane and 9 ml 
+of 1,4-dioxane. 16.9 ml (0.141 mol) of trichloromethyl 
+chloroformate was dropwise added to the solution at 25°C. 
+The mixture was stirred at 75°C for 7 hours. After cooling, 
+0.50 g of activated carbon was added to the reaction mixture 
+followed by reflux for an hour in a nitrogen flow. After 
+cooling, activated carbon was removed by filtration. The 
+filtrate was concentrated under reduced pressure and 15 ml 
+of ethyl acetate and 50 ml of n-hexane were added to the 
+residue. The mixture was then stirred. The precipitated 
+white crystals were filtered and dried to give 6.96 g (yield: 
+66%) of 4-(n-butyl)-5H-thieno[3,2-d]oxazine-5,7(4H)-dione 
+(Compound a-2). 
+NMR (CDCl3) δ (ppm):7.95(1H, d, J=5.0Hz), 6.97(1H, d, 
+J=5.0Hz), 4.01(2H, t, J=7.2Hz), 1.17-1.98(4H, m), 
+0.98(3H, t, J=7.4Hz) C) Under ice cooling, 552 mg (24.0 mmols) of sodium 
+hydride was added to 67.4 ml (0.444 mol) of ethyl malonate. 
+The mixture was stirred at 25°C for 30 minutes. To the 
+solution mixture was added 5.00 g (22.2 mmols) of Compound 
+a-2 and the mixture was stirred at 150°C for an hour. 
+After cooling, 300 ml of water was added to the reaction 
+mixture. The mixture was washed twice with chloroform and 
+6 N hydrochloric acid aqueous solution was added to the 
+aqueous layer. The precipitated crystals were filtered and 
+dried to give 3.33 g (yield: 51%) of Compound a. 
+NMR (CDCl3) δ (ppm):7.69(1H, d, J=5.0Hz), 7.02(1H, d, 
+J=5.0Hz), 4.18(2H, q, J=7.0Hz), 3.64(2H, t, J= 
+7.5Hz), 1.08-1.76(4H, m), 1.22(3H, t, J=7.0Hz), 
+0.91(3H, t, J=6.1Hz) </p><head xml:id="_b1a16">Reference Example 2</head><head xml:id="_3cdbd">Ethyl 7-butyl(n-)-6,7-dihydro-4-hydroxy-6-oxothieno[2,3-b]pyridine-5-carboxylate 
+(Compound b)</head><p xml:id="_b5615">A) Methyl 2-butyl(n-)aminothiophene-3-carboxylate 
+(Compound b-1) was obtained (yield: 23%) in a manner similar 
+to Reference Example 1,A) step except for using methyl 2-amino-3-thiopenecarboxylate 
+[Chem. Ber., 98, 3571 (1965)] in place 
+of methyl 3-aminothiophene-2-carboxylate. 
+NMR (CDCl3) δ (ppm):7.08-7,38(1H, br), 7.03(1H, d, 
+J=5.5Hz), 6.14(1H, d, J=5.5Hz), 3.83(3H, s), 3.23 
+(2H, q, J=6.2Hz), 1.22-1.90(4H, m), 0.96(3H, t, 
+J=7.4Hz) B) 7-(N-butyl)-6H-thieno[2,3-d]oxazine-4,6(7H)-dione 
+(Compound b-2) was obtained (yield: 80%) in a manner similar 
+to Reference Example 1,B) step except for using Compound b-1 in 
+place of Compound a-1. 
+NMR (CDCl3) δ(ppm):7.59(1H, d, J=5.2Hz), 6.30(1H, d, 
+J=5.2Hz), 3.97(2H, t, J=7.0Hz), 1.15-1.93(4H, m), 
+0.96(3H, t, J=7.4Hz) C) Compound b was obtained (yield: 92%) in a manner 
+similar to Reference Example 1,C) step except for using 
+Compound b-2 in place of Compound a-2. 
+NMR (DMSO-d6) δ (ppm):7.34(1H, d, J=5.7Hz), 7.29(1H, 
+d, J=5.7Hz), 4.32(2H, q, J=7.0Hz), 3.97(2H, t, 
+J=7.3Hz), 1.60-1.71L2H, m), 1.30(3H, t, J=7.1Hz), 
+1.26-1.40(2H, m), 0.92(3H, t, J=7.3Hz) </p></div></body></text></group></text></TEI></teiCorpus></teiCorpus>
