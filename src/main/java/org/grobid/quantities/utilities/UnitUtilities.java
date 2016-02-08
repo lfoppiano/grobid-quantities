@@ -30,64 +30,66 @@ public class UnitUtilities {
 	// measurement types
 	public enum Unit_Type {
 		UNKNOWN				("unknown"),
-		LENGTH 				("Length"), 
-		TIME 				("Time"), 
-		TEMPERATURE			("Temperature"), 
-		MASS				("Mass"), 
-		LUMINOUS_INTENSITY 	("Luminous Intensity"), 
-		AMOUNT_OF_SUBSTANCE	("Amount of Substance"), 
-		ELECTRIC_CURRENT	("Electric Current"),
-		ANGLE 				("Angle"), 
-		SOLID_ANGLE			("Solid Angle"), 
-		FREQUENCY			("Frequency"), 
-		FORCE				("Force"), 
-		PRESSURE			("Pressure"), 
-		ENERGY				("Energy"), 
-		POWER 				("Power"),
-		ELECTRIC_CHARGE		("Electric Charge"), 
-		VOLTAGE				("Voltage"), 
-		ELECTRIC_CAPACITANCE 	("Electric Capacitance"), 
-		ELECTRIC_RESISTANCE		("Electric Resistance"), 
-		ELECTRIC_CONDUCTANCE	("Electric Conductance"), 
-		ELECTRIC_FIELD			("Electric Field"),
-		MAGNETIC_FLUX			("Magnetic Flux"),
-		MAGNETIC_INDUCTION		("Magnetic Induction"), 
-		MAGNETIC_FIELD_STRENGTH	("Magnetic Field Strength"), 
-		INDUCTANCE				("Inductance"), 
-		LUMINOUS_FLUX			("Luminous Flux"), 
-		ILLUMINANCE				("Illuminance"), 
-		LUMINANCE				("Luminance"), 
-		RADIOACTIVITY			("Radioactivity"),
-	 	ABSORBED_DOSE			("Absorbed Dose"), 
-		EQUIVALENT_DOSE			("Equivalent Dose"), 
-		ATTENUATION				("Attenuation"), 
-		TORQUE					("Torque"),
-		DYNAMIC_VISCOSITY 		("Dynamic Viscosity"),
-		KINEMATIC_VISCOSITY		("Knematic Viscosity"),
-		ACOUSTIC_PRESSURE		("Acoustic Pressure"), 
-		MASS_FLOW_RATE			("Mass Flow-rate"), 
-		VOLUME_FLOW_RATE		("Volume Flow-rate"), 
-		AIR_FLOW_RATE			("Air Flow-rate"), 
-		SPECTRAL_RESPONSITIVY	("Spectral Responsivity"),
-		SPECTRAL_TRANSMITTANCE	("Regular Spectral Transmittance"),
-		SPECTRAL_REFLECTANCE	("Diffuse Spectral Reflectance"),
-		REFLECTANCE				("Reflectance"),
-		DETECTOR_PASSBAND		("Detector Passband"),
-		THERMAL_CONDUCTIVITY	("Thermal Conductivity"),
-		THERMAL_DIFFUSIVITY		("Thermal Diffusivity"),
-		HEAT_CAPACITY			("Specific Heat Capacity"),
-		EMISSION_RATE 			("Emission Rate"),
-		CATALYTIC_ACTIVITY		("Catalytic Activity"),
-		RADIANCE			("Radiance"), 
-		IRRADIANCE			("Irradiance"), 
-		EMISSIVITY			("Emissivity"), 
-		HUMIDITY			("Humidity"),
-		VOLUME				("Volume"), 
-		VELOCITY			("Velocity"), 
-		AREA				("Area"), 
-		CONCENTRATION		("Concentration"),
-		PROPORTION			("proportion"),	
-		FRACTION			("Fraction");
+		LENGTH 				("length"), 
+		TIME 				("time"), 
+		TEMPERATURE			("temperature"), 
+		MASS				("mass"), 
+		LUMINOUS_INTENSITY 	("luminous intensity"), 
+		AMOUNT_OF_SUBSTANCE	("amount of substance"), 
+		ELECTRIC_CURRENT	("electric current"),
+		ANGLE 				("angle"), 
+		SOLID_ANGLE			("solid angle"), 
+		FREQUENCY			("frequency"), 
+		FORCE				("force"), 
+		PRESSURE			("pressure"), 
+		ENERGY				("energy"), 
+		POWER 				("power"),
+		ELECTRIC_CHARGE		("electric charge"), 
+		VOLTAGE				("voltage"), 
+		ELECTRIC_CAPACITANCE 	("electric capacitance"), 
+		ELECTRIC_RESISTANCE		("electric resistance"), 
+		ELECTRIC_CONDUCTANCE	("electric conductance"), 
+		ELECTRIC_FIELD			("electric field"),
+		MAGNETIC_FLUX			("magnetic flux"),
+		MAGNETIC_INDUCTION		("magnetic induction"), 
+		MAGNETIC_FIELD_STRENGTH	("magnetic field strength"), 
+		INDUCTANCE				("inductance"), 
+		LUMINOUS_FLUX			("luminous flux"), 
+		ILLUMINANCE				("illuminance"), 
+		LUMINANCE				("luminance"), 
+		RADIOACTIVITY			("radioactivity"),
+	 	ABSORBED_DOSE			("absorbed dose"), 
+		EQUIVALENT_DOSE			("equivalent dose"), 
+		ATTENUATION				("attenuation"), 
+		TORQUE					("torque"),
+		DYNAMIC_VISCOSITY 		("dynamic viscosity"),
+		KINEMATIC_VISCOSITY		("kinematic viscosity"),
+		ACOUSTIC_PRESSURE		("acoustic pressure"), 
+		MASS_FLOW_RATE			("mass flow-rate"), 
+		VOLUME_FLOW_RATE		("volume flow-rate"), 
+		AIR_FLOW_RATE			("air flow-rate"), 
+		SPECTRAL_RESPONSITIVY	("spectral responsivity"),
+		SPECTRAL_TRANSMITTANCE	("regular spectral transmittance"),
+		SPECTRAL_REFLECTANCE	("diffuse spectral reflectance"),
+		REFLECTANCE				("reflectance"),
+		DETECTOR_PASSBAND		("detector passband"),
+		THERMAL_CONDUCTIVITY	("thermal conductivity"),
+		THERMAL_DIFFUSIVITY		("thermal diffusivity"),
+		HEAT_CAPACITY			("specific heat capacity"),
+		EMISSION_RATE 			("emission rate"),
+		CATALYTIC_ACTIVITY		("catalytic activity"),
+		RADIANCE			("radiance"), 
+		IRRADIANCE			("irradiance"), 
+		EMISSIVITY			("emissivity"), 
+		HUMIDITY			("humidity"),
+		VOLUME				("volume"), 
+		VELOCITY			("velocity"), 
+		AREA				("area"), 
+		CONCENTRATION		("concentration"),
+		DENSITY				("density"),
+		ACIDITY				("acidity"),	
+		FRACTION			("fraction");
+//		PROPORTION			("proportion"),	// -> this is fraction
 		
 		private String name;
 
@@ -178,7 +180,8 @@ public class UnitUtilities {
             	if (l.length() == 0) continue;
                 StringTokenizer st = new StringTokenizer(l, "\t");
                 if (st.hasMoreTokens()) {
-                 	String notation = st.nextToken().trim(); 
+                 	String notations = st.nextToken().trim(); 
+                 	String[] notationList = notations.split(",");
                     if (st.hasMoreTokens()) { 
 						String type = st.nextToken().trim();
 	                    if (type.length() == 0) {
@@ -203,7 +206,10 @@ public class UnitUtilities {
 						}
 						
 						Unit unit = new Unit();
-						unit.setNotation(notation);
+						if ( (notationList != null) && (notationList.length > 0) ) {
+							for(int j=0; j<notationList.length;j++)
+								unit.addNotation(notationList[j].trim());
+						}
 						unit.setSystem(system);
 						// here "deserialize" the enum type
 						Unit_Type savedType = Unit_Type.valueOf(type); 
@@ -211,8 +217,11 @@ public class UnitUtilities {
 						unit.setNames(names);
 						
 						// add unit in the first map
-						if ( (notation != null) && (notation.length() > 0) )
-							name2unit.put(notation, unit);
+						if ( (notationList != null) && (notationList.length > 0) ) {
+							for(int j=0; j<notationList.length;j++) {
+								name2unit.put(notationList[j].trim(), unit);
+							}
+						}
 						else
 							name2unit.put("no_notation", unit);
 						

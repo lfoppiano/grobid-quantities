@@ -101,20 +101,27 @@ public class QuantityLexicon {
             		if (piece.length() == 0)
             			continue;
             		if (i == 0) {
-            			try {
-	            			unitPattern.loadTerm(piece);
-	            		}
-	            		catch(Exception e) {
-	            			logger.error("invalid unit term: " + piece);
-	            		}
-            			unit.setNotation(piece);
-            			unit.addName(piece);
-		                StringTokenizer st = new StringTokenizer(piece, TextUtilities.fullPunctuations);
-		                while (st.hasMoreTokens()) {
-		                 	String word = st.nextToken().trim().toLowerCase();
-		                    if ((word.length() > 0) && !unitTokens.contains(word))
-		                      	unitTokens.add(word);
-		                }
+            			String[] subpieces = piece.split(",");
+		            	for(int j=0; j<subpieces.length; j++) {
+		            		String subpiece = subpieces[j].trim();
+	            			try {
+		            			unitPattern.loadTerm(subpiece);
+		            		}
+		            		catch(Exception e) {
+		            			logger.error("invalid unit term: " + subpiece);
+		            		}
+	            			unit.addNotation(subpiece);
+	            			unit.addName(subpiece); // maybe not...
+			                StringTokenizer st = new StringTokenizer(subpiece, TextUtilities.fullPunctuations);
+			                while (st.hasMoreTokens()) {
+			                 	String word = st.nextToken().trim().toLowerCase();
+			                    if ((word.length() > 0) && !unitTokens.contains(word)) {
+			                    	// we don't add pure digit sub-token
+			                    	if (TextUtilities.countDigit(word) != word.length())
+				                      	unitTokens.add(word);
+			                    }
+			                }
+			            }
 		            }
 		            else if (i == 1) {
 		            	UnitUtilities.System_Type system = null;
@@ -149,8 +156,11 @@ public class QuantityLexicon {
 			            	StringTokenizer st = new StringTokenizer(subpieces[j].trim(), TextUtilities.fullPunctuations);
 			                while (st.hasMoreTokens()) {
 			                 	String word = st.nextToken().trim().toLowerCase();
-			                    if ((word.length() > 0) && !unitTokens.contains(word))
-			                      	unitTokens.add(word);
+			                    if ((word.length() > 0) && !unitTokens.contains(word)) {
+			                    	// we don't add pure digit sub-token
+			                    	if (TextUtilities.countDigit(word) != word.length())
+				                      	unitTokens.add(word);
+			                    }
 			                }
 			            }
 		            }

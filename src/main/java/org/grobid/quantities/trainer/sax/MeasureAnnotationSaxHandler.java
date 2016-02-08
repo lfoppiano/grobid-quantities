@@ -8,6 +8,7 @@ import java.util.*;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.utilities.UnitUtilities;
 
 import org.grobid.core.exceptions.GrobidException;
 
@@ -129,11 +130,15 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
 									// we have a measurement type and the element is identifying a unit
 									String measureType = value;
 									// we check if we know this measure type or not
-									// ..
-
-									System.out.println("Warning: unknown measure type, " + value);
-
+									UnitUtilities.Unit_Type unitType = null;
+									try {
+										unitType = UnitUtilities.Unit_Type.valueOf(measureType);
+									}
+									catch(Exception e) {
+										System.out.println("Warning: unknown measure type, " + value);
+									}
 									// if we know the measurement type, we check if we know the unit expression
+									
 									// if not we add it to the lexicon
 
 
@@ -144,13 +149,12 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
 									numEncountered = false;
 								}
 		                   	}
-		                   	/*else if (name.equals("unit")) {
-								if (numEncountered)
-									currentTag = "<unitLeft>";
-								else
-									currentTag = "<unitRight>";
-								numEncountered = false;
-		                   	}*/
+		                   	else if (name.equals("unit")) {
+								// nothing to do in principle for the moment...
+		                   	}
+		                   	else if (name.equals("scale")) {
+								// nothing to do in principle for the moment...
+		                   	}
 							else {
 								System.out.println("Warning: unknown measure attribute name, " + name);
 							}

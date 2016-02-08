@@ -64,3 +64,8 @@ rpm,round/min	FREQUENCY	NON_SI	round per minute
 rps,round/s	FREQUENCY	NON_SI	round per second
 Hz	FREQUENCY	SI	hertz
 cm^-1	ENERGY	SI_DERIVED	wavenumber, reciprocal centimeter
+m/s	VELOCITY	SI_DERIVED	meter per second
+mi/h,mph	VELOCITY	US	mile per hour
+knot	VELOCITY	US	knot, nautical mile per hour
+ips	VELOCITY	US	inch per second
+Mach	VELOCITY	NON_SI	mach, speed of sound

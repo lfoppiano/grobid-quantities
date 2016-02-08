@@ -12,8 +12,11 @@ import java.util.ArrayList;
  */
 public class Unit {
 	
-	private List<String> names = null; // usual names for the unit, e.g. metre, meter
-	private String notation = null; // standard notation, e.g. g for gram
+	private List<String> names = null; // usual full names for the unit, e.g. metre, meter
+
+	private List<String> notations = null; 
+	// standard notation, e.g. g for gram - there might be several notations for an unit
+	
 	private UnitUtilities.Unit_Type type; // type of measurement
 	
 	// boolean indicating  if the unit is a standard SI unit
@@ -33,12 +36,18 @@ public class Unit {
 		names.add(name);	
 	}
 	
-	public String getNotation() {
-		return notation;
+	public List<String> getNotations() {
+		return notations;
 	}
 
-	public void setNotation(String not) {
-		this.notation = not;
+	public void setNotations(List<String> not) {
+		this.notations = not;
+	}
+
+	public void addNotation(String not) {
+		if (notations == null)
+			notations = new ArrayList<String>();
+		notations.add(not);
 	}
 
 	public UnitUtilities.System_Type getSystem() {
@@ -59,7 +68,7 @@ public class Unit {
 
 	public String toString() {
         StringBuffer buffer = new StringBuffer();
-        buffer.append(notation + "\t" + type + "\t");
+        buffer.append(notations.toString() + "\t" + type + "\t");
 		buffer.append(type + "\t" + system + "\t" + names.toString());
         return buffer.toString();
     }

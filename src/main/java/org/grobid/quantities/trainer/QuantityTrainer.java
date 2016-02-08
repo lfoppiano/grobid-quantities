@@ -34,6 +34,10 @@ public class QuantityTrainer extends AbstractTrainer {
 
 	private QuantityLexicon quantityLexicon = null;
 
+	// adjusting CRF training parameters for this model (only with Wapiti)
+	private double epsilon = 0.00001;
+	private int window = 20;
+
     public QuantityTrainer() {
         super(GrobidModels.QUANTITIES);
         quantityLexicon = QuantityLexicon.getInstance();
@@ -196,7 +200,7 @@ public class QuantityTrainer extends AbstractTrainer {
 
 	        Trainer trainer = new QuantityTrainer();
 	        AbstractTrainer.runTraining(trainer);
-	        //AbstractTrainer.runEvaluation(trainer);
+	        AbstractTrainer.runEvaluation(trainer);
 		}
 		catch (Exception e) {
 		    e.printStackTrace();
