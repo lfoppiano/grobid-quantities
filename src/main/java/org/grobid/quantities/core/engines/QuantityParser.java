@@ -14,7 +14,7 @@ import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.core.analyzers.GrobidAnalyzer;
+import org.grobid.core.analyzers.QuantityAnalyzer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +45,7 @@ public class QuantityParser extends AbstractParser {
         List<Quantity> quantities = null;
         try {
             text = text.replace("\n", " ");
-            GrobidAnalyzer analyzer = GrobidAnalyzer.getInstance();
-            List<String> tokenizations = analyzer.tokenize(text);
+            List<String> tokenizations = QuantityAnalyzer.tokenize(text);
 
             if (tokenizations.size() == 0)
                 return null;

@@ -7,6 +7,7 @@ import org.xml.sax.helpers.*;
 import java.util.*;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.utilities.Pair;
+import org.grobid.core.analyzers.QuantityAnalyzer;
 
 import org.grobid.core.exceptions.GrobidException;
 
@@ -134,7 +135,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
 
 									// if we know the measurement type, we check if we know the unit expression
 									// if not we add it to the lexicon
-									
+
 
 									if (numEncountered)
 										currentTag = "<unitLeft>";
@@ -247,10 +248,11 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
 
             String text = getText();
             // we segment the text
-            StringTokenizer st = new StringTokenizer(text, " \n\t" + TextUtilities.fullPunctuations, true);
+            //StringTokenizer st = new StringTokenizer(text, " \n\t" + TextUtilities.fullPunctuations, true);
+            List<String> tokenizations = QuantityAnalyzer.tokenize(text);
             boolean begin = true;
-            while (st.hasMoreTokens()) {
-                String tok = st.nextToken().trim();
+            for (String tok : tokenizations) {
+                tok = tok.trim();
                 if (tok.length() == 0) 
 					continue;
 

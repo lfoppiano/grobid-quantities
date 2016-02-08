@@ -23,5 +23,6 @@ The model will be saved under grobid-home/models/quantities (the directory must 
 
 Run some test: 
 > cd PATH-TO-GROBID/grobid/grobid-quantities
+
 > mvn compile test
 
