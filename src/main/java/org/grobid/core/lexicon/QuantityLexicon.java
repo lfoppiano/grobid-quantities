@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.grobid.core.lexicon.FastMatcher;
 import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.core.data.Unit;
+import org.grobid.core.analyzers.QuantityAnalyzer;
 
 /**
  * Class for managing the measurement lexical resources
@@ -59,7 +60,7 @@ public class QuantityLexicon {
 
 	private FastMatcher unitPattern = null;
 	private Set<String> unitTokens = null;
-	private Map<String,List<String>> prefix = null; // map prefix symbol to prefix strings
+	private Map<String,String> prefix = null; // map prefix symbol to prefix string
 
 	private QuantityLexicon() {
 		init();
@@ -73,7 +74,7 @@ public class QuantityLexicon {
         BufferedReader dis = null;
         try {			
 			unitTokens = new HashSet<String>();
-			String path = "src/main/resources/units.en.txt";
+			String path = "src/main/resources/en/units.txt";
 			file = new File(path);
 	        if (!file.exists()) {
 	            throw new GrobidResourceException("Cannot add entries to unit dictionary, because file '" 
@@ -104,23 +105,35 @@ public class QuantityLexicon {
             			String[] subpieces = piece.split(",");
 		            	for(int j=0; j<subpieces.length; j++) {
 		            		String subpiece = subpieces[j].trim();
-	            			try {
+	            			/*try {
 		            			unitPattern.loadTerm(subpiece);
 		            		}
 		            		catch(Exception e) {
 		            			logger.error("invalid unit term: " + subpiece);
-		            		}
-	            			unit.addNotation(subpiece);
-	            			unit.addName(subpiece); // maybe not...
-			                StringTokenizer st = new StringTokenizer(subpiece, TextUtilities.fullPunctuations);
-			                while (st.hasMoreTokens()) {
-			                 	String word = st.nextToken().trim().toLowerCase();
-			                    if ((word.length() > 0) && !unitTokens.contains(word)) {
-			                    	// we don't add pure digit sub-token
-			                    	if (TextUtilities.countDigit(word) != word.length())
-				                      	unitTokens.add(word);
-			                    }
-			                }
+		            		}*/
+	            			//unit.addNotation(subpiece);
+	            			//unit.addName(subpiece); // maybe not...
+	            			//expansion
+	            			List<String> derivations = derivationalMorphologyExpansion(subpiece, true);
+	            			for(String derivation : derivations) {
+	            				try {
+		            				unitPattern.loadTerm(derivation);
+		            			}
+		            			catch(Exception e) {
+		            				logger.error("invalid unit term: " + derivation);
+		            			}
+	            				unit.addNotation(derivation);
+	            				
+		            			List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
+				                for(String word : subsubpieces) {
+				                 	word = word.trim().toLowerCase();
+				                    if ((word.length() > 0) && !unitTokens.contains(word)) {
+				                    	// we don't add pure digit sub-token and token delimiters
+				                    	if ( (TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.delimiters.indexOf(word) == -1) )
+					                      	unitTokens.add(word);
+				                    }
+				                }
+				            }
 			            }
 		            }
 		            else if (i == 1) {
@@ -146,28 +159,32 @@ public class QuantityLexicon {
 		            else if (i ==3) {
 		            	String[] subpieces = piece.split(",");
 		            	for(int j=0; j<subpieces.length; j++) {
-			            	unit.addName(subpieces[j].trim());
-			            	try {
-		            			unitPattern.loadTerm(subpieces[j].trim());
-		            		}
-		            		catch(Exception e) {
-		            			logger.error("invalid unit term: " + subpieces[j].trim());
-		            		}
-			            	StringTokenizer st = new StringTokenizer(subpieces[j].trim(), TextUtilities.fullPunctuations);
-			                while (st.hasMoreTokens()) {
-			                 	String word = st.nextToken().trim().toLowerCase();
-			                    if ((word.length() > 0) && !unitTokens.contains(word)) {
-			                    	// we don't add pure digit sub-token
-			                    	if (TextUtilities.countDigit(word) != word.length())
-				                      	unitTokens.add(word);
-			                    }
-			                }
+		            		String subpiece = subpieces[j].trim();
+		            		List<String> derivations = derivationalMorphologyExpansion(subpiece, false);
+	            			for(String derivation : derivations) {
+				            	unit.addName(derivation);
+				            	try {
+			            			unitPattern.loadTerm(derivation);
+			            		}
+			            		catch(Exception e) {
+			            			logger.error("invalid unit term: " + derivation);
+			            		}
+			            		List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
+				                for(String word : subsubpieces) {
+				                 	word = word.trim().toLowerCase();
+				                    if ((word.length() > 0) && !unitTokens.contains(word)) {
+				                    	// we don't add pure digit sub-token and token delimiters
+				                    	if ( (TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.delimiters.indexOf(word) == -1) )
+					                      	unitTokens.add(word);
+				                    }
+				                }
+				            }
 			            }
 		            }
 	            }
 	        } 
-System.out.println(unitTokens.toString());
-		}	
+//System.out.println(unitTokens.toString());
+		}
 		catch (PatternSyntaxException e) {
             throw new 
 			GrobidResourceException("Error when compiling lexicon matcher for unit vocabulary.", e);
@@ -201,7 +218,7 @@ System.out.println(unitTokens.toString());
         BufferedReader dis = null;
         try {			
 			unitTokens = new HashSet<String>();
-			String path = "src/main/resources/prefix.txt";
+			String path = "src/main/resources/en/prefix.txt";
 			file = new File(path);
 	        if (!file.exists()) {
 	            throw new GrobidResourceException("Cannot add entries to unit dictionary, because file '" 
@@ -226,15 +243,10 @@ System.out.println(unitTokens.toString());
             	if (pieces.length != 3) 
             		continue;
             	String symbol = pieces[1].trim();
-            	String names = pieces[2].trim();
-            	String[] theNames = names.split(",");
-            	List<String> nameList = new ArrayList<String>();
-            	for(int i=0; i<theNames.length; i++) {
-            		nameList.add(theNames[i].trim());
-            	}
+            	String name = pieces[2].trim();
             	if (prefix == null)
-            		prefix = new HashMap<String,List<String>>();
-            	prefix.put(symbol, nameList);
+            		prefix = new HashMap<String,String>();
+            	prefix.put(symbol, name);
             }
 
 System.out.println(prefix.toString());
@@ -287,10 +299,21 @@ System.out.println(prefix.toString());
 	private List<String> derivationalMorphologyExpansion(String unitTerm, boolean isNotation) {
 		List<String> results = new ArrayList<String>();
 		results.add(unitTerm);
-
-		// if we have a notation, we use notation prefix (e.g. g -> kg)
-		// if we have a full form, we use the derivational prefix (e.g. gram -> kilogram)
-
+		
+		// we expand based on the prefix list
+		for(Map.Entry<String,String> prefix : prefix.entrySet()) {
+			String prefixString = "";
+			if (isNotation) {
+				// if we have a notation, we use notation prefix (e.g. g -> kg)
+				prefixString = prefix.getKey();
+			}
+			else {
+				// otherwise we have a full form and we use the derivational prefix (e.g. gram -> kilogram)
+				prefixString = prefix.getValue();
+			}
+			results.add(prefixString+unitTerm);
+		}
+		
 		return results;
 	}
 

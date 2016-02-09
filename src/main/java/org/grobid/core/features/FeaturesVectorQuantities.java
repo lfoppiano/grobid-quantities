@@ -141,8 +141,8 @@ public class FeaturesVectorQuantities {
         // label - for training data (1)
         if (label != null)
             res.append(" " + label + "");
-        else
-            res.append(" 0");
+        /*else
+            res.append(" 0");*/
 
         return res.toString();
     }

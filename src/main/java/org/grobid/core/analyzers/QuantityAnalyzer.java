@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 
 public class QuantityAnalyzer {
 
-    public static final String delimiters = " \n\r\t([^°,:;?.!/)-–\"“”‘’'`$]*\u2666\u2665\u2663\u2660\u00A0";
+    public static final String delimiters = " \n\r\t([^%‰°,:;?.!/)-–\"“”‘’'`$]*\u2666\u2665\u2663\u2660\u00A0";
 
 	public static List<String> tokenize(String text) {
 		List<String> result = new ArrayList<String>();
