@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * Representing labels that can be tagged.
- *
+ * <p>
  * To be review with actual TaggingLabel class, as an enum class cannot be extended in Java.
  */
 public enum TaggingLabel {
@@ -22,8 +22,7 @@ public enum TaggingLabel {
     UNIT_LEFT(GrobidModels.QUANTITIES, "<unitLeft>"),
     UNIT_RIGHT(GrobidModels.QUANTITIES, "<unitRight>"),
     SUBSTANCE(GrobidModels.QUANTITIES, "<substance>"),
-    OTHER(GrobidModels.QUANTITIES, "<other>")
-    ;
+    OTHER(GrobidModels.QUANTITIES, "<other>");
 
     private final GrobidModels grobidModel;
     private final String label;

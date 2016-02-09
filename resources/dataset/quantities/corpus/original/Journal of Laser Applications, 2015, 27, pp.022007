@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="file:///home/lopez/grobid-grobid-parent-0.3.9/grobid-home/schemas/rng/Grobid.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI
+    xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader xml:lang="en">
+        <fileDesc>
+            <titleStmt>
+                <title level="a" type="main">Explanation of penetration depth variation during laser welding under variable ambient pressure</title>
+            </titleStmt>
+            <publicationStmt>
+                <publisher/>
+                <availability status="unknown">
+                    <licence/>
+                </availability>
+                <date type="published" when="2015">2015</date>
+            </publicationStmt>
+            <sourceDesc>
+                <biblStruct>
+                    <analytic>
+                        <author>
+                            <persName>
+                                <forename type="first">Shengyong</forename>
+                                <surname>Pang</surname>
+                            </persName>
+                            <affiliation>
+                                <orgName type="laboratory">State Key Laboratory of Material Processing and Die and Mould Technology</orgName>
+                                <orgName type="institution">Huazhong University of Science and Technology (HUST)</orgName>
+                                <address>
+                                    <addrLine>Wuhan 430074</addrLine>
+                                    <country key="CN">China</country>
+                                </address>
+                            </affiliation>
+                        </author>
+                        <author>
+                            <persName>
+                                <forename type="first">Koji</forename>
+                                <surname>Hirano</surname>
+                            </persName>
+                            <affiliation>
+                                <orgName type="institution">NipponSteel&amp;SumitomoMetalCorporation</orgName>
+                                <address>
+                                    <addrLine>20-1Shintomi</addrLine>
+                                    <postCode>293-8511</postCode>
+                                    <settlement>Futtsu</settlement>
+                                    <region>Chiba</region>
+                                    <country key="JP">Japan</country>
+                                </address>
+                            </affiliation>
+                        </author>
+                        <author>
+                            <persName>
+                                <forename type="first">Rémy</forename>
+                                <surname>Fabbro</surname>
+                            </persName>
+                            <affiliation>
+                                <orgName type="department">StateKeyLaboratoryofMaterialProcessingandDieandMouldTechnology</orgName>
+                                <orgName type="institution">PIMMLaboratory(ENSAM-CNRS-CNAM)</orgName>
+                                <address>
+                                    <addrLine>151Boulevarddel&apos;H^opital</addrLine>
+                                    <postCode>75013</postCode>
+                                    <settlement>Paris</settlement>
+                                    <country key="FR">France</country>
+                                </address>
+                            </affiliation>
+                        </author>
+                        <author>
+                            <persName>
+                                <forename type="first">Tao</forename>
+                                <surname>Jiang</surname>
+                            </persName>
+                            <affiliation>
+                                <orgName type="institution">HuazhongUniversityofScienceandTechnology(HUST)</orgName>
+                                <address>
+                                    <addrLine>Wuhan430074</addrLine>
+                                    <country key="CN">China</country>
+                                </address>
+                            </affiliation>
+                        </author>
+                        <title level="a" type="main">Explanation of penetration depth variation during laser welding under variable ambient pressure</title>
+                    </analytic>
+                    <monogr>
+                        <title level="j" type="main">Journal of Laser Applications</title>
+                        <imprint>
+                            <biblScope unit="volume">27</biblScope>
+                            <biblScope unit="page" from="22007"/>
+                            <date type="published" when="2015">2015</date>
+                        </imprint>
+                    </monogr>
+                    <idno type="DOI">10.2351/1.4913455></idno>
+                    <note type="submission">Submitted on 22 Sep 2015</note>
+                    <note>To cite this version: Shengyong Pang, Koji Hirano, Rémy Fabbro, Tao Jiang. Explanation of penetration depth variation during laser welding under variable ambient pressure HAL Id: hal-01203337 https://hal.archives-ouvertes.fr/hal-01203337</note>
+                </biblStruct>
+            </sourceDesc>
+        </fileDesc>
+        <profileDesc>
+            <abstract/>
+        </profileDesc>
+    </teiHeader>
+    <text xml:lang="en">
+        <body>
+            <div>
+                <head>I. INTRODUCTION</head>
+                <p>Deep penetration laser welding (LW) is a very important joining process in industries, such as aeronautical, shipbuilding, and nuclear industries. 1 As compared to electron beam welding (EBW), the penetration depth of LW is usually small under the same heat input condition . 2 Recently, owning to the development of high power and high brightness lasers, such as fiber or disk lasers, it has been demonstrated that when putting the LW machine under a lower or vacuum ambient pressure environment, the penetration depth of LW could be significantly increased to a level comparable to that of EBW in low welding speed conditions. 3–5 Besides, in reduced pressure LW process, no strict shielding apparatus is needed to protect the harmful X-ray radiations featured by EBW. 3–5 Consequently, LW under reduced pressure is considered to be a promising joining method for welding heavy thick materials in industrial applications. Physical explanation of penetration depth improvement in laser welding under reduced pressure can date back to 20 years ago. It was first explained by the inverse bremsstrahlung (IB) effect of plasma plume induced by CO 2 laser welding process that could be significantly decreased, when the welding environment is changed from atmospheric pressure to high vacuum. 6 However, this explanation cannot be applied to short wavelength fiber or disk LW processes, in which the ionization of high temperature vapor plume is small (typically &lt; 5%) and, as the laser wavelength is ten times shorter, the IB effect can be reasonably neglected. 7</p>
+                <p>Recently, it was proposed that the penetration depth variation is caused by the difference in the magnitude of friction force on melt induced from uprising metallic vapor jet. 8 However, either this or IB effect explanation has difficulties in answering why this penetration depth improvement gradually disappears, as the welding speed, one of the most important process factors, increases.</p>
+            </div>
+            <div>
+                <head>a)</head>
+                <p>Electronic mail: spang@hust.edu.cn</p>
+                <p>In this paper, we propose that penetration depth variation in laser welding under variable ambient pressure can be explained by the temperature evolution of keyhole wall. This new explanation is simple but rather general. It well supports both long and short wavelength LW literature reports, including CO 2 , Nd:YAG, and fiber welding experiments. Besides, it can well explain the observed penetration depth variation versus welding speed during LW process under variable ambient pressure.</p>
+            </div>
+            <div>
+                <head>II. THEORY</head>
+                <p>Before starting to theoretically analyze the LW process, we first formulate an improved theoretical model for recoil pressure, the driving force for gaining the penetration depth, for LW under variable ambient pressure based on recent experimental observations. The concept of recoil pressure, first proposed by Anisimov 50 years ago, 9 has been widely used for mechanism explanation and theoretical modeling of laser material processing. 10–19 However, this widely applied model has been rested on an assumption that the ambient gas does not influence the evaporation process in laser material interaction . With this model, the recoil pressure is expressed as</p>
+                <p>
+                    <formula>p r T s ð Þ ¼ 1 þ b R 2 p 0 exp DH v k B T v 1 À T v T s ; (1)</formula>
+                </p>
+                <p>where T v is the boiling temperature under the atmospheric pressure p 0 , the coefficient b R represents the fraction of recondensation particles to evaporations ones, and DH v ¼ mL v ; (2) is the enthalpy of phase transition during vaporization (m is the mass per atom and L v is the latent heat of vaporization). This assumption is only applicable in a context, where the ambient environment is vacuum, or the recoil pressure is high enough to expel out all the surrounding gas atoms from the evaporation interface. However, this is not always true in LW process, since LW is usually performed under atmospheric pressure. Therefore, Knight 20 modeled the evaporation process and the resulting flow under an ambient pressure, but only when the resulting recoil pressure is greater than the ambient one.</p>
+                <p>Recent experiments have shown that the ambient pressure can confine metallic vapor, when the temperature of evaporation surface is lower than or around the boiling point, resulting in an increase of the recombination rate b R in Eq. (1). 21 Moreover, it was also demonstrated that strong evaporation occurs in laser welding, only when the temperature of irradiated surface exceeds the boiling point of material . 21 Bearing these facts in mind, an improved model of recoil pressure for LW process under any ambient pressure p amb can be proposed, as shown in 
+                    <ref type="figure">Fig. 1</ref>. For a given ambient pressure p amb , we will consider that the surface pressure p s ðT s Þ will be controlled and equal to p amb if the surface temperature is lower than the evaporation temperature T vb corresponding to p amb . For higher surface temperatures, the surface pressure will be given by the modified Clausius–Clapeyron equation defined by Eq. (1). That is
+                </p>
+                <figure>
+                    <trash>p s T s ð Þ ¼ p amb 0 T s &lt; T vb ; 1 þ b R 2 p 0 exp DH v k B T v 1 À T v T s þ1 &gt; T s ! T vb ; 8 &gt; &lt; &gt; : (3)</trash>
+                </figure>
+                <p>where p s ðT s Þ is called surface pressure which is applied to the metal surface in the improved model of recoil pressure, T vb is the intersection point of the two curves p s ðT s Þ ¼ p amb and p s ðT s Þ ¼ ½ð1 þ b R Þ=2p 0 exp fðDH v =k B T v Þ½1 À ðT v =T s Þg, i.e., T vb is the solution of the equation ½ð1 þ b R Þ=2p 0 exp fðDH v =k B T v Þ½1 À ðT v =T vb Þg ¼ p amb . In order to avoid the discontinuity of slopes at T vb , we introduce a smooth curve P c ðT s Þ on the range of temperature (T L , T R ) around T vb . The smooth curve P c ðT s Þ (for T L T s &lt; T R ) is described by a cubic polynomial, as follows:</p>
+                <figure>
+                    <trash>p c ðT s Þ ¼ aT 3 s þ bT 2 s þ cT s þ d; (4)</trash>
+                </figure>
+                <p>where the coefficients a, b, c, d and the temperature of intersection point T L , T R are all shown in Table I for 304 stainless steel under 0.5, 1.0, and 2.0 bars ambient pressure. It is remarked that the above smoothing ensures the continuity of slopes of the curve at T L and T R , and only affects a range of temperature ðT R À T L Þ that represents about 10% of T vb . 
+                    <ref type="figure">FIG. 1</ref>. The schematic of the surface pressure model dependence with surface temperature.
+                </p>
+                <p>From the numerical experiences, it is also found that the simulations results are not so sensitive to the extension of this range when it is limited to about 10% of T vb .</p>
+                <p>According to aforementioned discussions, the new surface pressure model with smooth transitions can be expressed as</p>
+                <figure>
+                    <trash>p s T s ð Þ¼ p amb 0 T s &lt; T L 1 þ b R 2 p 0 exp DH v k B T v 1 À T v T s þ1 &gt; T s ! T R p c T s ð Þ T L T s &lt; T R : 8 &gt; &gt; &gt; &gt; &lt; &gt; &gt; &gt; &gt; : (5)</trash>
+                </figure>
+                <p>It is well-known that the recombination rate b R is a function of the Mach number at the exit of the Knudsen layer, which itself depends on the flow of the vapor plume inside the ambient atmosphere. Its value varies from b R ¼ 0.18 for high evaporation rates (under vacuum conditions, or high laser intensity ), to b R ¼ 1 for low evaporation rates (high ambient pressure, or low laser intensity). 9,20,22 As the vapor flow is not computed here in our simulations, the recombination rate b R in Eq. (5) was set to be a constant around 0.2. 21 One must add that the qualitative results and global conclusions, that follow, would not have been changed by using a recombination rate of 1. The calculated surface pressure law curves of 304 stainless steel by using the new recoil pressure model are shown in 
+                    <ref type="figure">Fig. 2.</ref> LW process involve complex self-consistent keyhole and weld pool dynamics, which are solved by a three dimensional computational fluid dynamics (CFD) model. Here, we mainly consider the process of laser welding realized with a fiber laser (1.07 l m wavelength). The welded material is 304 stainless steel. Without loss of generality, two different pressures, vacuum (0 bar) and atmospheric pressure (1 bars) are used as the ambient pressure in LW process, respectively. Both the IB effect 23 and frictions effect of vapor plume 24,25 are neglected in numerical modeling, since we intend to give an explanation of penetration depth variation that well supports most of LW processes. The process parameters used in the simulations of LW under atmospheric pressure and vacuum are the same. The laser power is 2 kW and the welding speeds are 3, 4, 5, 6 m/min, respectively. A Gaussian beam intensity distribution with a beam radius, 0.25 mm, is used in the simulations. The heat transfer and fluid flow for the molten liquid inside weld pool are calculated by solving the following equations: 19
+                </p>
+                <figure>
+                    <trash>r Á ~ U ¼ 0; (6) q @ ~ U @t þ ~ U Á r ð Þ~ U ¼ r Á l l r ~ U À Á À rp À l l K ~ U À Cq ffiffiffi ffi K p j ~ Uj ~ U þ q~ gb T À T ref ð Þ ; (7) qC p @T @t þ ~ U Á r ð Þ T ¼ r Á krT ð Þ; (8) where ~ U, q</trash>
+                </figure>
+                <p>, p, l l , ~ g, T, T ref , b, C p , and k represent the velocity , density, pressure, viscous, gravitational vector, temperature , reference temperature, thermal expansion coefficient, heat capacity, and heat conductivity, respectively. C is an inertial parameter related to the liquid fraction f l , C ¼ 0:13f</p>
+                <figure>
+                    <trash>À3=2 l</trash>
+                    <figDesc>. 19 K is the Carman–Kozeny coefficient of the mixture model. The keyhole free surface evolutions are tracked with Level Set method and the time dependent keyhole profiles can be described as 26</figDesc>
+                    <trash>@/ @t þ ~ U Á r/ ð Þ ¼ 0: (9)</trash>
+                </figure>
+                <p>In the normal direction of keyhole wall, a pressure boundary condition, induced by surface pressure, surface tension as well as the hydrodynamic pressure, exists 19 p ¼ p 0 s þ rj þ 2l l ~ n Á r ~ U Á ~ n; (10) where r and j are the surface tension coefficient and curvature, respectively, and p 0 s is a pressure variable relating to the ambient pressure and the surface pressure previously defined. Since the density variation of molten liquid is small, the fluid flow of weld pool can be assumed to be incompressible. To make the calculation more convenient, the ambient pressure is taken as the zero level of pressure. Hence p 0 s can be simplified as p 0 s ¼ p s À p amb ; (11) TABLE I. The parameters of surface pressure model for laser welding of stainless steel under variable ambient pressure.</p>
+                <figure>
+                    <trash>Pressure 0.5 bars 1.0 bars 2.0 bars T L 2900.00 K 2950.00 K 3050.00 K T R 3400.00 K 3600.00 K 3900.00 K T vb 3059.90 K 3218.16 K 3393.95 K a 5.87 Â 10 À4 9.88</trash>
+                </figure>
+                <p>
+                    <formula>Â 10 À4 1.36 Â 10 À3 b À4.78 À8.63 À12.47 c 1.29 Â 10 4 2.51 Â 10 4 3.80 Â 10 4 d À 1.15 Â 10 7 À2.43 Â 10 7 À3.83 Â 10 7 
+                        <ref type="figure">FIG. 2</ref>
+                    </formula>
+                </p>
+                <p>. Pressure dependent surface pressure of 304 stainless steel as a function of temperature, for different ambient pressures. where p s is determined by Eq. (5). On the tangential direction, a viscous stress boundary condition due to Marangoni effect and the viscous shear stress of fluid flow exists 19 ðl l r ~ UÞ f ¼ l l ð ~ n ~ t 1 ~ t 2 Þð ~ n ~ 0 ~ 0 Þ T ðr ~ UÞð ~ n ~ 0 ~ 0 Þð ~ n ~ t 1 ~ t 2 Þ T þ l l ð ~ n ~ t 1 ~ t 2 Þð ~ 0 ~ t 1 ~ t 2 Þ T ðr ~ UÞ À l l ð ~ n ~ t 1 ~</p>
+                <figure>
+                    <trash>t 2 Þð ~ n ~ 0 ~ 0 Þ T ðr ~ UÞ T ð ~ 0 ~ t 1 ~ t 2 Þð ~ n ~ t 1 ~ t 2 Þ T þ ð ~ n ~ t 1 ~ t 2 Þ 0 r s r@BULLET ~ t 1 r s r@BULLET ~ t 2 0 0 0 0 0 0 0 B @ 1 C Að ~ n ~ t 1 ~ t 2 Þ T ; (12)</trash>
+                </figure>
+                <p>where ~ n is the normal of keyhole surface, ~ t 1 and ~ t 2 are two perpendicular tangential vectors of keyhole interface which are perpendicular to the normal ~ n. On the keyhole wall, by considering the Fresnel absorption, heat convection and evaporation, the energy boundary condition can be</p>
+                <p>
+                    <formula>mined as 19 k @T @~ n ¼ q À h T À T 1 ð ÞÀe r r s T 4 À T 4 1 À Á À qV evp L v : (13)</formula>
+                </p>
+                <p>On other surfaces, the energy boundary condition is expressed as 19</p>
+                <p>
+                    <formula>k @T @~ n ¼ Àh T À T 1 ð ÞÀ e r r s T 4 À T 4 1 À Á : (14)</formula>
+                </p>
+                <p>In Eqs. (11) and (12), q is the energy absorbed by Fresnel absorption, h is the heat convection coefficient, e r is black body radiation coefficient, r s is Stefan–Boltzmann coefficient , L v is the evaporation latent heat, and V evp is keyhole interface recession speed due to evaporation, as described in Ref. 12. The energy q is the absorbed laser energy of keyhole wall due to multiple reflections Fresnel absorptions, as described in Ref. 19.</p>
+                <p>The present CFD model is solved with an in-house parallelized simulation code. 19 For Eqs. (6)–(9), an explicit fifth order WENO scheme was used to discretize the convective term, an explicit third order TVD Runge–Kutta scheme was used to discretize the transient term and an implicit second order central difference scheme was used to discrete the diffusion term. 27 A well-known Projection method was used to solve the Navier–Stokes equations. 28 Moreover, a semi-implicit method, i.e., explicit scheme for transient term and implicit scheme for diffusion term, was used to solve the energy conservation equation. 28 The pressure, viscous, and energy boundary conditions were accurately treated using a sharp interface method. 19 A preconditioned conjugate gradient method was used to solve the resulted linear system of equations. 28 The overall solution procedure for Eqs. (6)–(14) is very similar to our previous study, as shown in Ref. 19.</p>
+            </div>
+            <div>
+                <head>III. RESULTS AND DISCUSSION</head>
+                <p>Figures 3 and 4 show the longitudinal views of transient temperature evolutions of keyhole during LW with 2 kW laser power and 3 m/min welding speed under vacuum and atmospheric pressure, respectively. Under vacuum environment, most of the temperature of keyhole wall is between 2200 and 2500 K. The distribution of keyhole temperature is not uniform. Several hump surfaces on the keyhole wall irradiated directly by the laser beam have the highest temperature, which is usually close to 2900 K. This temperature is much lower than the boiling point of the material (3100 K) at the atmospheric pressure. To sum up, the average keyhole temperature during LW under vacuum is noticeably lower than the boiling point of the material at the atmospheric pressure. However, under atmospheric pressure, most of the temperature of the keyhole wall is around the 2900 K or even higher. The keyhole temperature is also not uniform. The highest temperature, around 3400 K, occurs on the top part of the humped keyhole wall, which is directly illuminated by laser beam. In short, the average keyhole temperature is around the boiling point of the material or even higher during LW under atmospheric pressure. It was widely assumed that during LW under atmospheric pressure, the keyhole wall temperature is around the boiling point. Despite this assumption was proposed nearly 40 years ago and widely adopted in modeling studies, 24,29–32 it was only recently experimentally validated by some of the authors of this paper. 21 Their experimental demonstration challenges the well-known assumption of Semak and Matsunawa 33,34 that the keyhole temperature does not need to exceed the boiling point to support the opening of the keyhole during LW under atmospheric pressure. With the proposed ambient pressure dependent surface pressure model shown in Eq. (3), our modeling results of keyhole wall temperature correspond well to the widely adopted assumptions and the very recent experimental results. We note that most of previous theoretical modeling studies of LW process 10–19 were based on the recoil pressure model independent on ambient pressure shown in Eq. (1) (similarly to the vacuum case of our modified recoil pressure model). However, the predicated temperature with these models was significantly lower than the boiling point at the atmospheric pressure, which seems not to agree with the experimental results. The temperature difference can lead to the weld bead dimension difference shown in later sections (
+                    <ref type="figure">Fig. 6</ref>). Following our above explanations, the simulated keyhole wall temperature of these models is only a good approximation for vacuum LW. It is noted that experimental measurement of keyhole wall temperature in LW is very difficult and has not yet been studied. However, the keyhole wall temperature during vacuum EBW was experimentally 
+                    <ref type="figure">FIG. 4</ref>. Longitudinal views of transient temperature evolution during LW under atmospheric pressure. (a) 8.27 ms, (b) 16.00 ms, (c) 23.61 ms, and (d) 31.50 ms. 
+                    <ref type="figure">FIG. 3</ref>. Longitudinal views of transient temperature evolution during vacuum LW. (a) 8.27 ms, (b) 16.00 ms, (c) 23.61 ms, and (d) 31.50 ms. measured by Schauer et al. 35 Their results suggested that for steel alloy the maximum temperature is around 2200 K, which is significantly lower than the boiling point of the corresponding material. Considering the similarity between vacuum LW and EBW, the present modeling results of keyhole temperature during vacuum LW agree well with their experimental results. 
+                    <ref type="figure">Figure 5</ref> shows the penetration depth comparisons between LW under vacuum and under atmospheric pressure for simulations realized with a fiber laser. The calculated penetration depth under vacuum is 2.5 mm, and the depth under atmospheric pressure is only around 1.5 mm. It can be noted that there is a striking difference between the two depths, and a smaller ambient pressure creates a deeper laser weld. This result can be easily understood if one considers the balance equation for the absorbed power that states the absorbed power per unit depth of the keyhole, which is known to be a decreasing function of keyhole wall temperatures: the same absorbed power can then be distributed along a deeper keyhole if its wall temperature is lower. 
+                    <ref type="figure">Figure 6</ref> shows a comparison of weld pool profiles, which is similar to the cross-section profile, projected along welding direction with 2 kW laser power and 3 m/min welding speed, under atmospheric pressure and vacuum. The width of weld in vacuum welding is around 0.6 mm while the width during laser welding under atmospheric pressure is around 0.9 mm, which is larger than the width under vacuum. This indicates that more heat is transferred to the lateral positions of work piece during LW under atmospheric pressure than under vacuum environment.
+                </p>
+                <p>When the ambient pressure changes from atmospheric pressure to vacuum, this result predicates well the increase of depth and decrease of the width, which were observed in the past experiments. 3–5 In present study, the aspect ratio (depth/width) changes during laser welding under vacuum and under atmospheric pressure from 4.6 to 1.6. It is shown in Ref. 29 that the aspect ratio of the bead dimensions changes more than twice. This also qualitatively agrees with the present results of numerical calculations. Previous experiments by several groups showed drastic change of the bead shape when the ambient pressure is lowered from 1 to 0 bars. 23–25 It is interesting to note that our simulations show a similar behavior even if the influence of IB, as pointed out in Ref. 6, or the difference in the magnitude of friction force on melt induced from uprising metallic vapor jet, as pointed out in Ref. 8, were not taken into account here. Our results indicate that the difference of the bead shape can be explained by the strong difference in the keyhole depth that results from the difference in the keyhole surface temperature, which is a consequence of the surface pressure law dependence on temperature. One can easily understand that for a large keyhole depth (obtained at low ambient pressures), the melt flow around the keyhole is mainly horizontal and at the keyhole top, the perturbation induced by the upper surface is negligible. On the other hand, for smaller keyhole depths, obtained at higher ambient pressures, so with larger keyhole surface temperatures, heat diffusion enlarges melt pool and allows a more complex 3D melt flow around the keyhole. In that case the aspect ratio is of course lower. Anyway, the important characteristic is the difference of the keyhole surface temperature, as was demonstrated by our calculations. It can be added that the interest of this investigation is related also to a better understanding of LW under the atmospheric pressure; for example, winecup shape generation at a low welding velocity. The result of our calculations also suggests that a correct formulation of the surface pressure based on experimental data is indispensable to investigate these fundamental aspects of LW process. 
+                    <ref type="figure">Figure 7</ref> shows the simulated average temperature of front keyhole wall at 3, 4, 5, and 6 m/min welding speed under vacuum and atmospheric pressure. It is shown that as the welding speed increases, the average temperature of front keyhole wall increases under both vacuum and atmospheric pressure. One can easily understand that as the welding speed increases, the tilting angle of the front keyhole wall will increases and as a consequence the front keyhole wall will absorb more laser energy due to the reduction of the mean incidence angle, as shown in Ref. 36. Therefore, the temperature of keyhole wall increases. Moreover, it can be seen that the temperature rises faster under vacuum than 
+                    <ref type="figure">FIG. 5</ref>. Predicted weld depths during laser welding under variable ambient pressure. (2 kW, 3 m/min). 
+                    <ref type="figure">FIG. 6</ref>. Calculated weld pool profiles at 31 ms welding time during laser welding under variable ambient pressure (2 kW, 3 m/min). (a) Vacuum and (b) atmospheric pressure. atmospheric pressure. This originates from the exponential dependence of the recoil pressure on temperature, as shown in 
+                    <ref type="figure">Fig.1</ref>. The same amount of pressure increase on the keyhole front wall, which is necessary to weld faster, can be obtained by a smaller increase of temperature under an ambient pressure of 1 bar than 0 bar, because the temperature is already higher. Therefore, the penetration depth variations will gradually diminish as the welding speed increases (as shown in 
+                    <ref type="figure">Fig. 8</ref>) and as a result, it explains why the penetration depth becomes independent of ambient pressure for rather high welding speeds, in agreement with recent experiments . 3,37 Indeed, even with different operating parameters (incident laser powers or focal spot diameters) from those used in our simulations, these experiments show a very similar behavior of the penetration depth improvement under vacuum conditions compared to atmospheric one, when the welding speed varies. For a welding speed of 6 m/min, Katayama et al. 37 already observed this increase of about 40% (compared to 50% in our simulations). In agreement with the previous discussion, this increase was of course improved by reducing the welding speed, reaching 110% for a very low welding speed of 0.3 m/min. With different operating parameters, B€ oerner et al. 3 observed the beginning of the penetration depth increase at about 5 m/min, reaching 60% for a welding speed of 0.5 m/min. These results confirm that at high welding speeds, the keyhole front temperature is high enough so that the resulting surface pressure becomes much greater than the ambient pressure, making the penetration depths independent of this ambient pressure.
+                </p>
+            </div>
+            <div>
+                <head>IV. CONCLUSIONS</head>
+                <p>A correct description of the surface pressure for modeling of LW that involves the process of evaporation under any ambient pressure is proposed. This better description allows us to explain and reproduce the main experimental results observed under reduced pressure: deeper penetration depths, reduced keyhole surface temperatures, and smaller weld seam widths. It is also demonstrated that these modifications of the keyhole geometry are due to the reduced temperature of keyhole wall in LW process resulting from the reduced ambient pressures. Moreover, we also observed that the front keyhole wall temperature rises with increasing welding speed, and the amplitude of the temperature increase under reduced pressure is larger than under atmospheric pressure. It explains why the penetration depth improvement for LW under different ambient pressure gradually decreases to zero with the gradual increase of the welding speed and then becomes independent of the ambient pressure.</p>
+            </div>
+            <div>
+                <head>ACKNOWLEDGMENTS</head>
+                <p>The research of first author was financially supported by the National Natural Science Foundation of China (
+                    <ref type="bibr">Nos. 51105153 and 51323009)</ref>
+                </p>
+            </div>
+            <div>
+                <head>and the National Basic Research</head>
+                <p>Program of China (973 Program,</p>
+                <note>No. 2014CB046703). FIG. 
+                    <ref type="figure">8</ref>
+                </note>
+                <p>. Predicted weld depth during laser welding at different welding speeds under vacuum and atmospheric pressure. 
+                    <ref type="figure">FIG. 7</ref>. Average temperature of front keyhole wall at different welding speeds under vacuum and atmospheric pressure.
+                </p>
+            </div>
+            <note place="foot" n="1"> W. W. Duley, Laser Welding (Wiley-Interscience, New York, 1999). 2 H. Schultz, Electron Beam Welding (Woodhead Publishing/The Welding Institute, Cambridge, 1994).</note>
+        </body>
+        <back>
+            <div type="references">
+                <listBibl>
+                    <biblStruct xml:id="b0">
+                        <analytic>
+                            <title level="a" type="main">Influence of ambient pressure on spattering and weld seam quality in laser beam welding with the solid-state laser</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">C</forename>
+                                    <surname>B€ Oerner</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">K</forename>
+                                    <surname>Dilger</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">V</forename>
+                                    <surname>Rominger</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">T</forename>
+                                    <surname>Harrer</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">T</forename>
+                                    <surname>Krussel</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">T</forename>
+                                    <surname>Lower</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="m">30th International Congress on Applications of Lasers and Electro-Optics, ICALEO 2011</title>
+                            <meeting>
+                                <address>
+                                    <addrLine>Orlando, FL</addrLine>
+                                </address>
+                            </meeting>
+                            <imprint>
+                                <publisher>Laser Institute of America</publisher>
+                                <date type="published" when="2011-10" />
+                                <biblScope unit="page" from="23" to="27" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b1">
+                        <analytic>
+                            <title level="a" type="main">Deep penetration welding with high power laser under vacuum</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">M</forename>
+                                    <surname>Abe</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">Y</forename>
+                                    <surname>Mizutani</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <surname>Kawahito</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Katayama</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="m">29th International Congress on Applications of Lasers and Electro-Optics</title>
+                            <meeting>
+                                <address>
+                                    <addrLine>Anaheim, CA</addrLine>
+                                </address>
+                            </meeting>
+                            <imprint>
+                                <publisher>Laser Institute of America</publisher>
+                                <date type="published" when="2010-09-30" />
+                                <biblScope unit="page" from="648" to="653" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b2">
+                        <analytic>
+                            <title level="a" type="main">Effect of vacuum on penetration and defects in laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">Y</forename>
+                                    <surname>Katayama</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">M</forename>
+                                    <surname>Kobayashi</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">A</forename>
+                                    <surname>Mizutani</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Matsunawa</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Laser Appl</title>
+                            <imprint>
+                                <biblScope unit="volume">13</biblScope>
+                                <biblScope unit="page" from="187" to="192" />
+                                <date type="published" when="2001" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b3">
+                        <analytic>
+                            <title level="a" type="main">Experimental study of continuous CO 2 laser welding at subatmospheric pressures</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">R</forename>
+                                    <surname>Verwaerde</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">G</forename>
+                                    <surname>Fabbro</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Deshors</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">78</biblScope>
+                                <biblScope unit="page" from="2981" to="2984" />
+                                <date type="published" when="1995" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b4">
+                        <analytic>
+                            <title level="a" type="main">Elucidation of high-power fiber laser welding phenomena of stainless steel and effect of factors on weld geometry</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">M</forename>
+                                    <surname>Kawahito</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <surname>Mizutani</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Katayama</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">40</biblScope>
+                                <biblScope unit="page" from="5854" to="5859" />
+                                <date type="published" when="2007" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b5">
+                        <analytic>
+                            <title level="a" type="main">Experimental investigation of the laser-plume interaction during high power fiber laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">A</forename>
+                                    <surname>Shcheglov</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">I</forename>
+                                    <surname>Gumenyuk</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">M</forename>
+                                    <surname>Gornushkin</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Rethmeier</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="m">30th International Congress on Applications of Lasers and Electro-Optics</title>
+                            <meeting>
+                                <address>
+                                    <addrLine>Orlando, FL</addrLine>
+                                </address>
+                            </meeting>
+                            <imprint>
+                                <publisher>Laser Institute of America</publisher>
+                                <date type="published" when="2011-10-27" />
+                                <biblScope unit="page" from="637" to="645" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b6">
+                        <analytic>
+                            <title level="a" type="main">Vaporization of metal absorbing laser radiation</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">I</forename>
+                                    <surname>Anisimov</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">Sov. Phys. JETP</title>
+                            <imprint>
+                                <biblScope unit="volume">27</biblScope>
+                                <biblScope unit="page" from="182" to="183" />
+                                <date type="published" when="1968" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b7">
+                        <analytic>
+                            <title level="a" type="main">Keyhole modeling during laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">K</forename>
+                                    <surname>Fabbro</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Chouf</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">87</biblScope>
+                                <biblScope unit="page" from="4075" to="4083" />
+                                <date type="published" when="2000" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b8">
+                        <analytic>
+                            <title level="a" type="main">Mechanism of keyhole formation and stability in stationary laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <forename type="middle">Y</forename>
+                                    <surname>Lee</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <forename type="middle">H</forename>
+                                    <surname>Ko</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">D</forename>
+                                    <forename type="middle">F</forename>
+                                    <surname>Farson</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">C</forename>
+                                    <forename type="middle">D</forename>
+                                    <surname>Yoo</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">35</biblScope>
+                                <biblScope unit="page" from="1570" to="1576" />
+                                <date type="published" when="2002" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b9">
+                        <analytic>
+                            <title level="a" type="main">Modeling of laser keyhole welding: Part I. mathematical modeling, numerical methodology, role of recoil pressure , multiple reflections, and free surface evolution</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <surname>Ki</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">P</forename>
+                                    <surname>Mazumder</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Mohanty</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">Metall. Mater. Trans. A</title>
+                            <imprint>
+                                <biblScope unit="volume">33</biblScope>
+                                <biblScope unit="page" from="1817" to="1830" />
+                                <date type="published" when="2002" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b10">
+                        <analytic>
+                            <title level="a" type="main">Modeling of laser keyhole welding: Part II. Simulation of keyhole evolution, velocity, temperature profile, and experimental verification</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <surname>Ki</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">P</forename>
+                                    <surname>Mazumder</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Mohanty</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">Metall. Mater. Trans. A</title>
+                            <imprint>
+                                <biblScope unit="volume">33</biblScope>
+                                <biblScope unit="page" from="1831" to="1842" />
+                                <date type="published" when="2002" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b11">
+                        <analytic>
+                            <title level="a" type="main">Transport phenomena and keyhole dynamics during pulsed laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <surname>Zhou</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">H.-L</forename>
+                                    <surname>Tsai</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">P.-C</forename>
+                                    <surname>Wang</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Heat Transfer</title>
+                            <imprint>
+                                <biblScope unit="volume">128</biblScope>
+                                <biblScope unit="page" from="680" to="690" />
+                                <date type="published" when="2005" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b12">
+                        <analytic>
+                            <title level="a" type="main">Implementation of real-time multiple reflection and Fresnel absorption of laser beam in keyhole</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">H</forename>
+                                    <surname>Cho</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <forename type="middle">J</forename>
+                                    <surname>Na</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">39</biblScope>
+                                <biblScope unit="page" from="5372" to="5378" />
+                                <date type="published" when="2006" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b13">
+                        <analytic>
+                            <title level="a" type="main">Numerical simulation of molten pool dynamics in high power disk laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">I</forename>
+                                    <surname>Cho</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <forename type="middle">J</forename>
+                                    <surname>Na</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">C</forename>
+                                    <surname>Thomy</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">F</forename>
+                                    <surname>Vollertsen</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Mater. Process. Technol</title>
+                            <imprint>
+                                <biblScope unit="volume">212</biblScope>
+                                <biblScope unit="page" from="262" to="275" />
+                                <date type="published" when="2012" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b14">
+                        <analytic>
+                            <title level="a" type="main">Investigation of keyhole plume and molten pool based on a three-dimensional dynamic model with sharp interface formulation</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">W</forename>
+                                    <surname>Tan</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">N</forename>
+                                    <forename type="middle">S</forename>
+                                    <surname>Bailey</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">Y</forename>
+                                    <forename type="middle">C</forename>
+                                    <surname>Shin</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">46</biblScope>
+                                <biblScope unit="page">055501</biblScope>
+                                <date type="published" when="2013" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b15">
+                        <analytic>
+                            <title level="a" type="main">Numerical simulation of molten pool dynamics in high power disk laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <surname>Zhang</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <forename type="middle">X</forename>
+                                    <surname>Zhang</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">A</forename>
+                                    <surname>Gumenyuk</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">M</forename>
+                                    <surname>Rethmeier</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <forename type="middle">J</forename>
+                                    <surname>Na</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Mater. Process. Technol</title>
+                            <imprint>
+                                <biblScope unit="volume">214</biblScope>
+                                <biblScope unit="page" from="1710" to="1720" />
+                                <date type="published" when="2014" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b16">
+                        <analytic>
+                            <title level="a" type="main">A three-dimensional sharp interface model for self-consistent keyhole and weld pool dynamics in deep penetration laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <surname>Pang</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">L</forename>
+                                    <surname>Chen</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <surname>Zhou</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">Y</forename>
+                                    <surname>Yin</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">T</forename>
+                                    <surname>Chen</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">44</biblScope>
+                                <biblScope unit="page">025301</biblScope>
+                                <date type="published" when="2011" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b17">
+                        <analytic>
+                            <title level="a" type="main">Theoretical modeling of rapid surface vaporization with back pressure</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <surname>Knight</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">AIAA J</title>
+                            <imprint>
+                                <biblScope unit="volume">17</biblScope>
+                                <biblScope unit="page" from="519" to="523" />
+                                <date type="published" when="1979" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b18">
+                        <analytic>
+                            <title level="a" type="main">Experimental determination of temperature threshold for melt surface deformation during laser interaction on iron at atmospheric pressure</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">K</forename>
+                                    <surname>Hirano</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">R</forename>
+                                    <surname>Fabbro</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">M</forename>
+                                    <surname>Muller</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">44</biblScope>
+                                <biblScope unit="page">435402</biblScope>
+                                <date type="published" when="2011" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b19">
+                        <analytic>
+                            <title level="a" type="main">First-order phase transitions induced by laser radiation in absorbing condensed matter</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">A</forename>
+                                    <surname>Samokhin</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="m">Proceedings of the Institute of General Physics</title>
+                            <editor>A. M. Prokhorov</editor>
+                            <meeting>the Institute of General Physics
+                                <address>
+                                    <addrLine>Commack</addrLine>
+                                </address>
+                            </meeting>
+                            <imprint>
+                                <publisher>Nova Science Publishers</publisher>
+                                <date type="published" when="1990" />
+                                <biblScope unit="page" from="1" to="161" />
+                            </imprint>
+                        </monogr>
+                        <note>Effect. of Laser Radiation on Absorbing Condensed Matter</note>
+                    </biblStruct>
+                    <biblStruct xml:id="b20">
+                        <analytic>
+                            <title level="a" type="main">High-speed simultaneous observation of plasma and keyhole behavior during high power CO 2 laser welding: Effect of shielding gas on porosity formation</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <surname>Seto</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">A</forename>
+                                    <surname>Katayama</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Matsunawa</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Laser Appl</title>
+                            <imprint>
+                                <biblScope unit="volume">12</biblScope>
+                                <biblScope unit="page" from="245" to="250" />
+                                <date type="published" when="2000" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b21">
+                        <analytic>
+                            <title level="a" type="main">Metallic vapor ejection effect on melt pool dynamics in deep penetration laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">M</forename>
+                                    <surname>Fabbro</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">F</forename>
+                                    <surname>Hamadou</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Coste</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Laser Appl</title>
+                            <imprint>
+                                <biblScope unit="volume">16</biblScope>
+                                <biblScope unit="page" from="16" to="19" />
+                                <date type="published" when="2004" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b22">
+                        <analytic>
+                            <title level="a" type="main">Modelling of gas jet effect on the melt pool movements during deep penetration laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">H</forename>
+                                    <surname>Amara</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">R</forename>
+                                    <surname>Fabbro</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">41</biblScope>
+                                <biblScope unit="page">55503</biblScope>
+                                <date type="published" when="2008" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b23">
+                        <monogr>
+                            <title level="m" type="main">Level Set Methods and Dynamic Implicit Surfaces</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">R</forename>
+                                    <surname>Osher</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Fedkiw</surname>
+                                </persName>
+                            </author>
+                            <imprint>
+                                <date type="published" when="2003" />
+                                <publisher>Springer Verlag</publisher>
+                                <pubPlace>New York</pubPlace>
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b24">
+                        <analytic>
+                            <title level="a" type="main">Efficient implementation of weighted ENO schemes</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">C</forename>
+                                    <forename type="middle">W</forename>
+                                    <surname>Jiang</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Shu</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Comput. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">126</biblScope>
+                                <biblScope unit="page" from="202" to="228" />
+                                <date type="published" when="1996" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b25">
+                        <monogr>
+                            <title level="m" type="main">Principles of Computational Fluid Dynamics</title>
+                            <author>
+                                <persName>
+                                    <surname>Wesseling</surname>
+                                </persName>
+                            </author>
+                            <imprint>
+                                <date type="published" when="2001" />
+                                <publisher>Springer- Verlag</publisher>
+                                <pubPlace>New York, NJ</pubPlace>
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b26">
+                        <monogr>
+                            <title level="m" type="main">Laser welding and numerical simulation of the flow field for titanium alloy People&apos;s Republic of China</title>
+                            <author>
+                                <persName>
+                                    <surname>Du</surname>
+                                </persName>
+                            </author>
+                            <imprint>
+                                <date type="published" when="2004" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b27">
+                        <analytic>
+                            <title level="a" type="main">Heat transfer and fluid flow during keyhole mode laser welding of tantalum, Ti-6Al-4V, 304L stainless steel and vanadium</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">J</forename>
+                                    <forename type="middle">W</forename>
+                                    <surname>Rai</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">T</forename>
+                                    <forename type="middle">A</forename>
+                                    <surname>Elmer</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">T</forename>
+                                    <surname>Palmer</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Debroy</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">40</biblScope>
+                                <biblScope unit="page" from="5753" to="5766" />
+                                <date type="published" when="2007" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b28">
+                        <analytic>
+                            <title level="a" type="main">A convective heat-transfer model for partial and full penetration keyhole mode laser welding of a structural steel</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <forename type="middle">M</forename>
+                                    <surname>Rai</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">R</forename>
+                                    <forename type="middle">P</forename>
+                                    <surname>Kelly</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">T</forename>
+                                    <surname>Martukanitz</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Debroy</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">Metall. Mater. Trans. A</title>
+                            <imprint>
+                                <biblScope unit="volume">39</biblScope>
+                                <biblScope unit="page" from="98" to="112" />
+                                <date type="published" when="2008" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b29">
+                        <analytic>
+                            <title level="a" type="main">Heat balance and flow conditions for electron beam and laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">G</forename>
+                                    <surname>Klemens</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">47</biblScope>
+                                <biblScope unit="page" from="2165" to="2174" />
+                                <date type="published" when="1976" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b30">
+                        <analytic>
+                            <title level="a" type="main">The simulation of front keyhole wall dynamics during laser welding</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">V</forename>
+                                    <surname>Matsunawa</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Semak</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">30</biblScope>
+                                <biblScope unit="page" from="798" to="809" />
+                                <date type="published" when="1997" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b31">
+                        <analytic>
+                            <title level="a" type="main">The role of recoil pressure in energy balance during laser materials processing</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">A</forename>
+                                    <surname>Semak</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Matsunawa</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">30</biblScope>
+                                <biblScope unit="page" from="2541" to="2552" />
+                                <date type="published" when="1997" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b32">
+                        <analytic>
+                            <title level="a" type="main">Electron beam welding cavity temperature distributions in pure metals and alloys</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">A</forename>
+                                    <surname>Schauer</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">W</forename>
+                                    <forename type="middle">H</forename>
+                                    <surname>Giedt</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">S</forename>
+                                    <forename type="middle">M</forename>
+                                    <surname>Shintaku</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">Weld. J</title>
+                            <imprint>
+                                <biblScope unit="volume">57</biblScope>
+                                <biblScope unit="page" from="127" to="133" />
+                                <date type="published" when="1978" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b33">
+                        <analytic>
+                            <title level="a" type="main">Melt pool and keyhole behavior analysis for deep penetration laser welding</title>
+                            <author>
+                                <persName>
+                                    <surname>Fabbro</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="j">J. Phys. D: Appl. Phys</title>
+                            <imprint>
+                                <biblScope unit="volume">43</biblScope>
+                                <biblScope unit="page">445501</biblScope>
+                                <date type="published" when="2010" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                    <biblStruct xml:id="b34">
+                        <analytic>
+                            <title level="a" type="main">Development of deep penetration welding technology with high brightness laser under vacuum</title>
+                            <author>
+                                <persName>
+                                    <forename type="first">Y</forename>
+                                    <surname>Katayama</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">R</forename>
+                                    <surname>Abe</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">M</forename>
+                                    <surname>Ido</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <forename type="first">Y</forename>
+                                    <surname>Mizutani</surname>
+                                </persName>
+                            </author>
+                            <author>
+                                <persName>
+                                    <surname>Kawahito</surname>
+                                </persName>
+                            </author>
+                        </analytic>
+                        <monogr>
+                            <title level="m">Phys. Procedia</title>
+                            <imprint>
+                                <date type="published" when="2011" />
+                                <biblScope unit="page" from="75" to="80" />
+                            </imprint>
+                        </monogr>
+                    </biblStruct>
+                </listBibl>
+            </div>
+        </back>
+    </text>
+</TEI>

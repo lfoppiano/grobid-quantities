@@ -1,206 +1,187 @@
 package org.grobid.trainer.sax;
 
-import java.io.*;
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
 
-import java.util.*;
-import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.utilities.Pair;
 import org.grobid.core.analyzers.QuantityAnalyzer;
-import org.grobid.core.utilities.UnitUtilities;
-
 import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.UnitUtilities;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *  SAX handler for TEI-style annotations. should work for patent PDM and our usual scientific paper encoding. 
- *  Measures are inline quantities annotations. 
- *  The training data for the CRF models are generated during the XML parsing. 
- * 
- *  @author Patrice Lopez
+ * SAX handler for TEI-style annotations. should work for patent PDM and our usual scientific paper encoding.
+ * Measures are inline quantities annotations.
+ * The training data for the CRF models are generated during the XML parsing.
+ *
+ * @author Patrice Lopez
  */
 public class MeasureAnnotationSaxHandler extends DefaultHandler {
 
-	StringBuffer accumulator = new StringBuffer(); // Accumulate parsed text
+    StringBuffer accumulator = new StringBuffer(); // Accumulate parsed text
 
-	private boolean ignore = false;
-	private boolean openList = false;
-	private boolean openInterval = false;
-	private boolean numEncountered = false;
+    private boolean ignore = false;
+    private boolean openList = false;
+    private boolean openInterval = false;
+    private boolean numEncountered = false;
 
-	private String currentTag = null;
+    private String currentTag = null;
 
-    private List<Pair<String,String>> labeled = null; // store line by line the labeled data
+    private List<Pair<String, String>> labeled = null; // store line by line the labeled data
 
     public MeasureAnnotationSaxHandler() {
     }
 
-	public void characters(char[] buffer, int start, int length) {
-		accumulator.append(buffer, start, length);
-  	}
-  	
+    public void characters(char[] buffer, int start, int length) {
+        accumulator.append(buffer, start, length);
+    }
+
     public String getText() {
-		if (accumulator != null) {
+        if (accumulator != null) {
             return accumulator.toString().trim();
         } else {
             return null;
         }
     }
 
-    public List<Pair<String,String>> getLabeledResult() {
-    	return labeled;
+    public List<Pair<String, String>> getLabeledResult() {
+        return labeled;
     }
 
-    public void endElement(java.lang.String uri, 
-    					   java.lang.String localName, 
-    					   java.lang.String qName) throws SAXException {
-		try {
-			if ( (!qName.equals("lb")) && (!qName.equals("pb")) ) {
-				/*if (!qName.equals("num")) && (!qName.equals("measure"))
-					currentTag = "<other>";*/
-            	writeData(qName);
-				currentTag = null;
-        	}
-			if (qName.equals("measure")) {
-				openList = false;
-				openInterval = false;
-			}
-			else if (qName.equals("figure")) {
-				// figures (which include tables) were ignored !
-				ignore = false;
-			}
-			if (qName.equals("num")) {
-				numEncountered = true;
-			}
-            else if (qName.equals("div")) {
+    public void endElement(java.lang.String uri,
+                           java.lang.String localName,
+                           java.lang.String qName) throws SAXException {
+        try {
+            if ((!qName.equals("lb")) && (!qName.equals("pb"))) {
+                /*if (!qName.equals("num")) && (!qName.equals("measure"))
+                    currentTag = "<other>";*/
+                writeData(qName);
+                currentTag = null;
+            }
+            if (qName.equals("measure")) {
+                openList = false;
+                openInterval = false;
+            } else if (qName.equals("figure")) {
+                // figures (which include tables) were ignored !
+                ignore = false;
+            }
+            if (qName.equals("num")) {
+                numEncountered = true;
+            } else if (qName.equals("div")) {
                 // let's consider a new CRF input per section
                 labeled.add(new Pair("\n", null));
-            }
-            else if (qName.equals("p") || qName.equals("paragraph")) {
+            } else if (qName.equals("p") || qName.equals("paragraph")) {
                 // let's consider a new CRF input per paragraph too
                 labeled.add(new Pair("\n", null));
             }
-		}
-		catch (Exception e) {
+        } catch (Exception e) {
 //		    e.printStackTrace();
-			throw new GrobidException("An exception occured while running Grobid.",e);
-		}
- 	}
-	
-	public void startElement(String namespaceURI, 
-			     			 String localName,
-			     			 String qName, 
-			     			 Attributes atts) throws SAXException {
-		try {
-			if (qName.equals("lb")) {
-	            accumulator.append(" +L+ ");
-	        } 
-			else if (qName.equals("pb")) {
-	            accumulator.append(" +PAGE+ ");
-	        } 
-			else if (qName.equals("space")) {
-	            accumulator.append(" ");
-	        } 
-			else {
-	            // we have to write first what has been accumulated yet with the upper-level tag
-				String text = getText();
-	            if (text != null) {
-	                if (text.length() > 0) {
-	                	currentTag = "<other>";
-	                    writeData(qName);
-	                }
-	            }
-	            accumulator.setLength(0);
+            throw new GrobidException("An exception occured while running Grobid.", e);
+        }
+    }
 
-				// we output the remaining text
-				if (qName.equals("measure") && !ignore) {
-				
-					int length = atts.getLength();
+    public void startElement(String namespaceURI,
+                             String localName,
+                             String qName,
+                             Attributes atts) throws SAXException {
+        try {
+            if (qName.equals("lb")) {
+                accumulator.append(" +L+ ");
+            } else if (qName.equals("pb")) {
+                accumulator.append(" +PAGE+ ");
+            } else if (qName.equals("space")) {
+                accumulator.append(" ");
+            } else {
+                // we have to write first what has been accumulated yet with the upper-level tag
+                String text = getText();
+                if (text != null) {
+                    if (text.length() > 0) {
+                        currentTag = "<other>";
+                        writeData(qName);
+                    }
+                }
+                accumulator.setLength(0);
 
-		            // Process each attribute
-		            for (int i=0; i<length; i++) {
-		                // Get names and values for each attribute
-		                String name = atts.getQName(i);
-		                String value = atts.getValue(i);
+                // we output the remaining text
+                if (qName.equals("measure") && !ignore) {
 
-		                if ( (name != null) && (value != null) ) {
-		                   	if (name.equals("type")) {
-		                   		if (value.equals("value")) {
-		                   			// i.e. atomic value, default case
-								}
-								else if (value.equals("interval")) {
-									openInterval = true;
-								}
-								else if (value.equals("list")) {
-									openList = true;
-								}
-								else {
-									// we have a measurement type and the element is identifying a unit
-									String measureType = value;
-									// we check if we know this measure type or not
-									UnitUtilities.Unit_Type unitType = null;
-									try {
-										unitType = UnitUtilities.Unit_Type.valueOf(measureType);
-									}
-									catch(Exception e) {
-										System.out.println("Warning: unknown measure type, " + value);
-									}
-									// if we know the measurement type, we check if we know the unit expression
-									
-									// if not we add it to the lexicon
+                    int length = atts.getLength();
+
+                    // Process each attribute
+                    for (int i = 0; i < length; i++) {
+                        // Get names and values for each attribute
+                        String name = atts.getQName(i);
+                        String value = atts.getValue(i);
+
+                        if ((name != null) && (value != null)) {
+                            if (name.equals("type")) {
+                                if (value.equals("value")) {
+                                    // i.e. atomic value, default case
+                                } else if (value.equals("interval")) {
+                                    openInterval = true;
+                                } else if (value.equals("list")) {
+                                    openList = true;
+                                } else {
+                                    // we have a measurement type and the element is identifying a unit
+                                    String measureType = value;
+                                    // we check if we know this measure type or not
+                                    UnitUtilities.Unit_Type unitType = null;
+                                    try {
+                                        unitType = UnitUtilities.Unit_Type.valueOf(measureType);
+                                    } catch (Exception e) {
+                                        System.out.println("Warning: unknown measure type, " + value);
+                                    }
+                                    // if we know the measurement type, we check if we know the unit expression
+                                    // if not we add it to the lexicon
 
 
-									if (numEncountered)
-										currentTag = "<unitLeft>";
-									else
-										currentTag = "<unitRight>";
-									numEncountered = false;
-								}
-		                   	}
-		                   	else if (name.equals("unit")) {
-								// nothing to do in principle for the moment...
-		                   	}
-		                   	else if (name.equals("scale")) {
-								// nothing to do in principle for the moment...
-		                   	}
-							else {
-								System.out.println("Warning: unknown measure attribute name, " + name);
-							}
-		                }
-		            }
-				}
-				else if (qName.equals("num")  && !ignore) {
-					int length = atts.getLength();
-					if (length == 0) {
-						// not interval value
-						if (openList) {
-							currentTag = "<valueList>";
-						}
-						else {
-							currentTag = "<valueAtomic>";
-						}
-					}
-					else {
-			            // Process each attribute
-			            for (int i=0; i<length; i++) {
-			                // Get names and values for each attribute
-			                String name = atts.getQName(i);
-			                String value = atts.getValue(i);
+                                    if (numEncountered)
+                                        currentTag = "<unitLeft>";
+                                    else
+                                        currentTag = "<unitRight>";
+                                    numEncountered = false;
+                                }
+                            } else if (name.equals("unit")) {
+                                // nothing to do in principle for the moment...
+                            } else if (name.equals("scale")) {
+                                // nothing to do in principle for the moment...
+                            } else {
+                                System.out.println("Warning: unknown measure attribute name, " + name);
+                            }
+                        }
+                    }
+                } else if (qName.equals("num") && !ignore) {
+                    int length = atts.getLength();
+                    if (length == 0) {
+                        // not interval value
+                        if (openList) {
+                            currentTag = "<valueList>";
+                        } else {
+                            currentTag = "<valueAtomic>";
+                        }
+                    } else {
+                        // Process each attribute
+                        for (int i = 0; i < length; i++) {
+                            // Get names and values for each attribute
+                            String name = atts.getQName(i);
+                            String value = atts.getValue(i);
 
-			                if ( (name != null) && (value != null) ) {
-			                   	if (name.equals("atLeast")) {
-									currentTag = "<valueLeast>";
-			                   	}
-			                   	else if (name.equals("atMost")) {
-									currentTag = "<valueMost>";
-			                   	}
-			                }
-			            }
-			        }
-			        numEncountered = true;
-				}
-				/*else if (qName.equals("div")) {
-					int length = atts.getLength();
+                            if ((name != null) && (value != null)) {
+                                if (name.equals("atLeast")) {
+                                    currentTag = "<valueLeast>";
+                                } else if (name.equals("atMost")) {
+                                    currentTag = "<valueMost>";
+                                }
+                            }
+                        }
+                    }
+                    numEncountered = true;
+                }
+                /*else if (qName.equals("div")) {
+                    int length = atts.getLength();
 
 		            // Process each attribute
 		            for (int i=0; i<length; i++) {
@@ -220,40 +201,38 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
 		                }
 		            }
 				}*/
-				else if (qName.equals("figure")) {
-					// figures are ignored ! this includes tables
-					ignore = true;
-				}
-				else if (qName.equals("TEI") || qName.equals("tei")) {
-					//measureBuffer = new StringBuilder();
-					//quantityBuffer = new StringBuilder();
-					labeled = new ArrayList<Pair<String,String>>();
-	        		//currentTags = new Stack<String>();
-	        		accumulator = new StringBuffer();
-	        		currentTag = null;
-				}
-			}
-		}
-		catch (Exception e) {
+                else if (qName.equals("figure")) {
+                    // figures are ignored ! this includes tables
+                    ignore = true;
+                } else if (qName.equals("TEI") || qName.equals("tei")) {
+                    //measureBuffer = new StringBuilder();
+                    //quantityBuffer = new StringBuilder();
+                    labeled = new ArrayList<>();
+                    //currentTags = new Stack<String>();
+                    accumulator = new StringBuffer();
+                    currentTag = null;
+                }
+            }
+        } catch (Exception e) {
 //		    e.printStackTrace();
-			throw new GrobidException("An exception occured while running Grobid.",e);
-		}
-	}
+            throw new GrobidException("An exception occured while running Grobid.", e);
+        }
+    }
 
-	private void writeData(String qName) {
-		if (currentTag == null)
-			currentTag = "<other>";
-        if ( (qName.equals("other")) || 
+    private void writeData(String qName) {
+        if (currentTag == null)
+            currentTag = "<other>";
+        if ((qName.equals("other")) ||
                 (qName.equals("measure")) || (qName.equals("num")) ||
                 (qName.equals("paragraph")) || (qName.equals("p")) ||
-                (qName.equals("div")) 
+                (qName.equals("div"))
                 ) {
-			if (currentTag == null) {
-				return;
-			}
-	
+            if (currentTag == null) {
+                return;
+            }
+
             /*if (pop) {
-				if (!currentTags.empty()) {
+                if (!currentTags.empty()) {
 					currentTags.pop();
 				}
             }*/
@@ -265,22 +244,20 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
             boolean begin = true;
             for (String tok : tokenizations) {
                 tok = tok.trim();
-                if (tok.length() == 0) 
-					continue;
+                if (tok.length() == 0)
+                    continue;
 
                 if (tok.equals("+L+")) {
                     labeled.add(new Pair("@newline", null));
-                } 
-				else if (tok.equals("+PAGE+")) {
+                } else if (tok.equals("+PAGE+")) {
                     // page break should be a distinct feature
                     labeled.add(new Pair("@newpage", null));
-                }
-				else {
+                } else {
                     String content = tok;
                     int i = 0;
                     if (content.length() > 0) {
                         if (begin && (!currentTag.equals("<other>"))) {
-                        //if (begin) {    
+                            //if (begin) {
                             labeled.add(new Pair(content, "I-" + currentTag));
                             begin = false;
                         } else {

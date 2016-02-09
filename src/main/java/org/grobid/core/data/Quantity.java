@@ -4,53 +4,53 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 
 /**
- * Class for managing a quantity representation. A quantity is a basically a value associated to a type 
- * (type of the measurement) and a unit. Quantities are combined to form a measurement.  
+ * Class for managing a quantity representation. A quantity is a basically a value associated to a type
+ * (type of the measurement) and a unit. Quantities are combined to form a measurement.
  *
  * @author Patrice Lopez
  */
 public class Quantity {
-	
-	private String rawString = null;
-	
-	private UnitUtilities.Unit_Type type; // type of measurement
-	private Unit rawUnit = null;
-	private Unit normalizedUnit = null; // which gives also the system of the unit (SI, imperial, etc.)
-	private String rawValue = null;
-	private double normalizedValue = 0.0;
-	
-	// as a condition, when the normalized unit is instanciated, its type must be the same as the type
-	// of the quantity 
-	
-	// in case of ranged values, this is the second (highest) value 
-	// if rawValueHigh is null, we don't have a range
-	private String rawValueHigh = null;
-	private double normalizedValueHigh = 0.0;
-	
+
+    private String rawString = null;
+
+    private UnitUtilities.Unit_Type type; // type of measurement
+    private Unit rawUnit = null;
+    private Unit normalizedUnit = null; // which gives also the system of the unit (SI, imperial, etc.)
+    private String rawValue = null;
+    private double normalizedValue = 0.0;
+
+    // as a condition, when the normalized unit is instanciated, its type must be the same as the type
+    // of the quantity
+
+    // in case of ranged values, this is the second (highest) value
+    // if rawValueHigh is null, we don't have a range
+    private String rawValueHigh = null;
+    private double normalizedValueHigh = 0.0;
+
     private OffsetPosition offsets = null;
 
     public Quantity() {
         offsets = new OffsetPosition();
     }
 
-	public Quantity(String rawString) {
+    public Quantity(String rawString) {
         offsets = new OffsetPosition();
-		this.rawString = rawString;
+        this.rawString = rawString;
     }
 
-	public String getRawString() {
-		return rawString;
-	}
+    public String getRawString() {
+        return rawString;
+    }
 
-	public void setRawString(String raw) {
-		this.rawString = raw;
-	}
+    public void setRawString(String raw) {
+        this.rawString = raw;
+    }
 
-	public UnitUtilities.Unit_Type getType() {
+    public UnitUtilities.Unit_Type getType() {
         return type;
     }
 
-	public void setType(UnitUtilities.Unit_Type type) {
+    public void setType(UnitUtilities.Unit_Type type) {
         this.type = type;
     }
 
@@ -58,51 +58,51 @@ public class Quantity {
         return rawUnit;
     }
 
-	public void setRawUnit(Unit raw) {
+    public void setRawUnit(Unit raw) {
         this.rawUnit = raw;
     }
-	
-	public Unit getNormalizedUnit() {
+
+    public Unit getNormalizedUnit() {
         return normalizedUnit;
     }
 
-	public void setNormalizedUnit(Unit normalized) {
+    public void setNormalizedUnit(Unit normalized) {
         this.normalizedUnit = normalized;
     }
-	
-	public String getRawValue() {
+
+    public String getRawValue() {
         return rawValue;
     }
 
-	public void setRawValue(String raw) {
+    public void setRawValue(String raw) {
         this.rawValue = raw;
     }
-	
-	public double getNormalizedValue() {
+
+    public double getNormalizedValue() {
         return normalizedValue;
     }
 
-	public void setNormalizedValue(double normalized) {
+    public void setNormalizedValue(double normalized) {
         this.normalizedValue = normalized;
     }
 
-	public String getRawValueHigh() {
+    public String getRawValueHigh() {
         return rawValueHigh;
     }
 
-	public void setRawValueHigh(String raw) {
+    public void setRawValueHigh(String raw) {
         this.rawValueHigh = raw;
     }
-	
-	public double getNormalizedValueHigh() {
+
+    public double getNormalizedValueHigh() {
         return normalizedValueHigh;
     }
 
-	public void setNormalizedValueHigh(double normalized) {
+    public void setNormalizedValueHigh(double normalized) {
         this.normalizedValueHigh = normalized;
     }
-	
-	public void setOffsetStart(int start) {
+
+    public void setOffsetStart(int start) {
         offsets.start = start;
     }
 
@@ -118,7 +118,7 @@ public class Quantity {
         return offsets.end;
     }
 
-	public String toString() {
+    public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[ ");
         if (type != null)

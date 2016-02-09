@@ -1,42 +1,32 @@
 package org.grobid.trainer;
 
 import org.grobid.core.GrobidModels;
-import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.mock.MockContext;
-import org.grobid.core.features.FeaturesVectorQuantities;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.Pair;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.trainer.sax.*;
-import org.grobid.core.mock.MockContext;
-import org.grobid.trainer.evaluation.EvaluationUtilities;
-import org.grobid.core.engines.QuantityParser;
-import org.grobid.core.utilities.UnitUtilities;
-import org.grobid.core.data.Quantity;
-import org.grobid.core.data.Unit;
+import org.grobid.core.features.FeaturesVectorQuantities;
 import org.grobid.core.lexicon.QuantityLexicon;
+import org.grobid.core.mock.MockContext;
+import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.Pair;
+import org.grobid.trainer.evaluation.EvaluationUtilities;
+import org.grobid.trainer.sax.MeasureAnnotationSaxHandler;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
-
-import org.apache.commons.io.FileUtils;
 
 /**
  * @author Patrice Lopez
  */
 public class QuantityTrainer extends AbstractTrainer {
 
-	private QuantityLexicon quantityLexicon = null;
+    private QuantityLexicon quantityLexicon = null;
 
-	// adjusting CRF training parameters for this model (only with Wapiti)
-	private double epsilon = 0.00001;
-	private int window = 20;
+    // adjusting CRF training parameters for this model (only with Wapiti)
+    private double epsilon = 0.00001;
+    private int window = 20;
 
     public QuantityTrainer() {
         super(GrobidModels.QUANTITIES);
@@ -46,13 +36,13 @@ public class QuantityTrainer extends AbstractTrainer {
     /**
      * Add the selected features to the model training for bio entities
      */
-    public int createCRFPPData(final File corpusDir, 
-							final File trainingOutputPath, 
-							final File evalOutputPath, 
-							double splitRatio) {
-		//
-        return 0;						   
-	}
+    public int createCRFPPData(final File corpusDir,
+                               final File trainingOutputPath,
+                               final File evalOutputPath,
+                               double splitRatio) {
+        //
+        return 0;
+    }
 
     /**
      * Add the selected features to the model training for bio entities
@@ -86,26 +76,26 @@ public class QuantityTrainer extends AbstractTrainer {
 
             String name;
             for (int n = 0; n < refFiles.length; n++) {
-                File thefile = refFiles[n];	
+                File thefile = refFiles[n];
                 name = thefile.getName();
                 System.out.println(name);
 
                 MeasureAnnotationSaxHandler handler = new MeasureAnnotationSaxHandler();
-				
+
                 //get a new instance of parser
                 SAXParser p = spf.newSAXParser();
                 p.parse(thefile, handler);
 
-                List<Pair<String,String>> labeled = handler.getLabeledResult();
+                List<Pair<String, String>> labeled = handler.getLabeledResult();
 
                 // we need to add now the features to the labeled tokens
-                List<Pair<String,String>> bufferLabeled = null;
+                List<Pair<String, String>> bufferLabeled = null;
                 int pos = 0;
 
                 // let's iterate by defined CRF input (separated by new line)
-                while(pos < labeled.size()) {
-                    bufferLabeled = new ArrayList<Pair<String,String>>();
-                    while(pos < labeled.size()) {
+                while (pos < labeled.size()) {
+                    bufferLabeled = new ArrayList<Pair<String, String>>();
+                    while (pos < labeled.size()) {
                         if (labeled.get(pos).getA().equals("\n")) {
                             pos++;
                             break;
@@ -117,13 +107,19 @@ public class QuantityTrainer extends AbstractTrainer {
                     if (bufferLabeled.size() == 0)
                         continue;
 
-    				// to store unit term positions
-                    List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();                				
-    				unitTokenPositions = quantityLexicon.inUnitNamesPairs(bufferLabeled);
-    				
+                    // to store unit term positions
+                    List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
+                    unitTokenPositions = quantityLexicon.inUnitNamesPairs(bufferLabeled);
+
                     addFeatures(bufferLabeled, writer, unitTokenPositions);
                     writer.write("\n");
                 }
+                // to store unit term positions
+                List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
+
+                unitTokenPositions = quantityLexicon.inUnitNamesPairs(labeled);
+
+                addFeatures(labeled, writer, unitTokenPositions);
                 writer.write("\n");
             }
 
@@ -133,47 +129,45 @@ public class QuantityTrainer extends AbstractTrainer {
         }
         return totalExamples;
     }
- 
- 	@SuppressWarnings({"UnusedParameters"})
-    private void addFeatures(List<Pair<String,String>> texts,
-                            Writer writer,
-                            List<OffsetPosition> unitTokenPositions) {
+
+    @SuppressWarnings({"UnusedParameters"})
+    private void addFeatures(List<Pair<String, String>> texts,
+                             Writer writer,
+                             List<OffsetPosition> unitTokenPositions) {
         int totalLine = texts.size();
         int posit = 0;
-		int currentQuantityIndex = 0;
-		List<OffsetPosition> localPositions = unitTokenPositions;
+        int currentQuantityIndex = 0;
+        List<OffsetPosition> localPositions = unitTokenPositions;
         boolean isUnitPattern = false;
         try {
-            for (Pair<String,String> lineP : texts) {
-            	String token = lineP.getA();
-				if (token.trim().equals("@newline")) {
-					writer.write("\n");
-	                writer.flush();	
-				}
-	
-				String label = lineP.getB();
-				if (label != null) {
-					isUnitPattern = true;				
-				}
-				
-				// do we have a unit at position posit?
-				if ((localPositions != null) && (localPositions.size()>0)) {	
-					for(int mm = currentQuantityIndex; mm < localPositions.size(); mm++) {
-						if ( (posit >= localPositions.get(mm).start) && (posit <= localPositions.get(mm).end) ) {
-							isUnitPattern = true;
-							currentQuantityIndex = mm;
-							break;
-						}
-						else if (posit < localPositions.get(mm).start) {
-							isUnitPattern = false;
-							break;
-						}
-						else if (posit > localPositions.get(mm).end) {
-							continue;
-						}
-					}
-				}
-				
+            for (Pair<String, String> lineP : texts) {
+                String token = lineP.getA();
+                if (token.trim().equals("@newline")) {
+                    writer.write("\n");
+                    writer.flush();
+                }
+
+                String label = lineP.getB();
+                if (label != null) {
+                    isUnitPattern = true;
+                }
+
+                // do we have a unit at position posit?
+                if ((localPositions != null) && (localPositions.size() > 0)) {
+                    for (int mm = currentQuantityIndex; mm < localPositions.size(); mm++) {
+                        if ((posit >= localPositions.get(mm).start) && (posit <= localPositions.get(mm).end)) {
+                            isUnitPattern = true;
+                            currentQuantityIndex = mm;
+                            break;
+                        } else if (posit < localPositions.get(mm).start) {
+                            isUnitPattern = false;
+                            break;
+                        } else if (posit > localPositions.get(mm).end) {
+                            continue;
+                        }
+                    }
+                }
+
                 FeaturesVectorQuantities featuresVector =
                         FeaturesVectorQuantities.addFeaturesQuantities(token, label,
                                 quantityLexicon.inUnitDictionary(token), isUnitPattern);
@@ -183,25 +177,25 @@ public class QuantityTrainer extends AbstractTrainer {
                 writer.write("\n");
                 writer.flush();
                 posit++;
-				isUnitPattern = false;
+                isUnitPattern = false;
             }
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
     }
 
-	/**
-	 *  Standard evaluation via the the usual Grobid evaluation framework.
-	 */
-	public String evaluate() {
-		File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
-			new File(new File("resources").getAbsolutePath()), model);
-		
-		File tmpEvalPath = getTempEvaluationDataPath();		
-		createCRFPPData(evalDataF, tmpEvalPath);
-			
+    /**
+     * Standard evaluation via the the usual Grobid evaluation framework.
+     */
+    public String evaluate() {
+        File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
+                new File(new File("resources").getAbsolutePath()), model);
+
+        File tmpEvalPath = getTempEvaluationDataPath();
+        createCRFPPData(evalDataF, tmpEvalPath);
+
         return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), getTagger());
-	}
+    }
 
     /**
      * Command line execution.
@@ -209,27 +203,24 @@ public class QuantityTrainer extends AbstractTrainer {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-		try {
-			String pGrobidHome = "../grobid-home";
-			String pGrobidProperties = "../grobid-home/config/grobid.properties";
-		
-			MockContext.setInitialContext(pGrobidHome, pGrobidProperties);
-		    GrobidProperties.getInstance();
+        try {
+            String pGrobidHome = "../grobid-home";
+            String pGrobidProperties = "../grobid-home/config/grobid.properties";
 
-	        Trainer trainer = new QuantityTrainer();
-	        AbstractTrainer.runTraining(trainer);
-	        AbstractTrainer.runEvaluation(trainer);
-		}
-		catch (Exception e) {
-		    e.printStackTrace();
-		}
-		finally {
-			try {
-				MockContext.destroyInitialContext();
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
+            MockContext.setInitialContext(pGrobidHome, pGrobidProperties);
+            GrobidProperties.getInstance();
+
+            Trainer trainer = new QuantityTrainer();
+            AbstractTrainer.runTraining(trainer);
+            AbstractTrainer.runEvaluation(trainer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                MockContext.destroyInitialContext();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

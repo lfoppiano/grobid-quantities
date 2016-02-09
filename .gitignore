@@ -1,0 +1,5 @@
+target
+*.class
+.idea
+*.log
+grobid.log*

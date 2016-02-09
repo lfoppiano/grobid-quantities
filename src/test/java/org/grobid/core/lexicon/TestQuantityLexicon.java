@@ -1,15 +1,8 @@
 package org.grobid.core.lexicon;
 
-import java.io.File;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.grobid.core.data.Quantity;
-import org.grobid.core.data.Unit;
-import org.grobid.core.engines.QuantityParser;
-import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.OffsetPosition;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.Before;
 

@@ -1,9 +1,10 @@
 package org.grobid.core.features;
 
-import java.util.StringTokenizer;
+import org.grobid.core.utilities.TextUtilities;
+
 import java.util.regex.Matcher;
 
-import org.grobid.core.utilities.TextUtilities;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Class for features used for quantity identification in raw texts such as scientific articles
@@ -28,20 +29,22 @@ public class FeaturesVectorQuantities {
 
     public boolean isPartOfUnitPattern = false;
 
-	public String shadowNumber = null; // Convert digits to “0” 
-	
-	public String wordShape = null; 
-	// Convert upper-case letters to "X", lower- case letters to "x", digits to "d" and other to "c"  
-	// there is also a trimmed variant where sequence of similar character shapes are reduced to one
-	// converted character shape
-	public String wordShapeTrimmed = null;
+    public String shadowNumber = null; // Convert digits to “0”
+
+    public String wordShape = null;
+    // Convert upper-case letters to "X", lowercase letters to "x", digits to "d" and other to "c"
+    // there is also a trimmed variant where sequence of similar character shapes are reduced to one
+    // converted character shape
+
+    public String wordShapeTrimmed = null;
 
     public FeaturesVectorQuantities() {
     }
 
     public String printVector() {
-        if (string == null) return null;
-        if (string.length() == 0) return null;
+        if (isBlank(string)) {
+            return null;
+        }
         StringBuffer res = new StringBuffer();
 
         // token string (1)
@@ -119,14 +122,14 @@ public class FeaturesVectorQuantities {
         // token length
         res.append(" " + string.length());
 
-		// shadow number
-		res.append(" " + shadowNumber);
-		
-		// word shape
-		res.append(" " + wordShape);
-		
-		// word shape trimmed
-		res.append(" " + wordShapeTrimmed);
+        // shadow number
+        res.append(" " + shadowNumber);
+
+        // word shape
+        res.append(" " + wordShape);
+
+        // word shape trimmed
+        res.append(" " + wordShapeTrimmed);
 
         if (isKnownUnitToken)
             res.append(" 1");
@@ -182,9 +185,9 @@ public class FeaturesVectorQuantities {
         if (m0.find()) {
             featuresVector.punctType = "PUNCT";
         }
-        if ((word.equals("(")) | (word.equals("["))) {
+        if ((word.equals("(")) || (word.equals("["))) {
             featuresVector.punctType = "OPENBRACKET";
-        } else if ((word.equals(")")) | (word.equals("]"))) {
+        } else if ((word.equals(")")) || (word.equals("]"))) {
             featuresVector.punctType = "ENDBRACKET";
         } else if (word.equals(".")) {
             featuresVector.punctType = "DOT";
@@ -192,7 +195,7 @@ public class FeaturesVectorQuantities {
             featuresVector.punctType = "COMMA";
         } else if (word.equals("-")) {
             featuresVector.punctType = "HYPHEN";
-        } else if (word.equals("\"") | word.equals("\'") | word.equals("`")) {
+        } else if (word.equals("\"") || word.equals("\'") || word.equals("`")) {
             featuresVector.punctType = "QUOTE";
         }
 
@@ -207,17 +210,17 @@ public class FeaturesVectorQuantities {
 
         featuresVector.isKnownUnitToken = isUnitToken;
 
-		featuresVector.isPartOfUnitPattern = isUnitPattern;
-        
-		featuresVector.shadowNumber = TextUtilities.shadowNumbers(word);
-		
-		featuresVector.wordShape = TextUtilities.wordShape(word);
-		
-		featuresVector.wordShapeTrimmed = TextUtilities.wordShapeTrimmed(word);
-    
+        featuresVector.isPartOfUnitPattern = isUnitPattern;
+
+        featuresVector.shadowNumber = TextUtilities.shadowNumbers(word);
+
+        featuresVector.wordShape = TextUtilities.wordShape(word);
+
+        featuresVector.wordShapeTrimmed = TextUtilities.wordShapeTrimmed(word);
+
         return featuresVector;
     }
 
 }
-	
+
 	
