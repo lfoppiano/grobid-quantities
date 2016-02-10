@@ -54,26 +54,26 @@ public class TestQuantityLexicon {
 
 		input = "10 meters";
 		unitPositions = lexicon.inUnitNames(input);
-		/*assertNotNull(unitPositions);
+		assertNotNull(unitPositions);
 		if (unitPositions != null) {
 			assertEquals("Problem with unit matcher", unitPositions.size(), 1);
 			if (unitPositions.size() > 0) {
 				assertEquals("Problem with unit matching position", unitPositions.get(0).start, 1);
 			}
-		}*/
+		}
 	}
 
 	@Test
 	public void testinUnitNamesComplex() throws Exception {
 		String input = "kilometer";
 		List<OffsetPosition> unitPositions = lexicon.inUnitNames(input);
-		/*assertNotNull(unitPositions);
+		assertNotNull(unitPositions);
 		if (unitPositions != null) {
 			assertEquals("Problem with unit matcher", unitPositions.size(), 1);
 			if (unitPositions.size() > 0) {
 				assertEquals("Problem with unit matching position", unitPositions.get(0).start, 0);
 			}
-		}*/
+		}
 
 		input = "kilometer per second";
 

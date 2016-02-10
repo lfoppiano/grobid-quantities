@@ -72,6 +72,14 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
 			if (qName.equals("num")) {
 				numEncountered = true;
 			}
+            else if (qName.equals("div")) {
+                // let's consider a new CRF input per section
+                labeled.add(new Pair("\n", null));
+            }
+            else if (qName.equals("p") || qName.equals("paragraph")) {
+                // let's consider a new CRF input per paragraph too
+                labeled.add(new Pair("\n", null));
+            }
 		}
 		catch (Exception e) {
 //		    e.printStackTrace();
@@ -191,7 +199,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
 			        }
 			        numEncountered = true;
 				}
-				/*else if (qName.equals("div")  && !ignore) {
+				/*else if (qName.equals("div")) {
 					int length = atts.getLength();
 
 		            // Process each attribute
@@ -271,7 +279,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     String content = tok;
                     int i = 0;
                     if (content.length() > 0) {
-                        if (begin) {
+                        if (begin && (!currentTag.equals("<other>"))) {
                             labeled.add(new Pair(content, "I-" + currentTag));
                             begin = false;
                         } else {

@@ -1,5 +1,7 @@
 package org.grobid.core.analyzers;
 
+import org.grobid.core.layout.LayoutToken;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -25,6 +27,22 @@ public class QuantityAnalyzer {
 				result.add(subtokens[i]);
 		}
 
+		return result;
+	}
+
+	public static List<LayoutToken> tokenizeWithLayoutToken(String text) {
+		List<LayoutToken> result = new ArrayList<LayoutToken>();
+		StringTokenizer st = new StringTokenizer(text, delimiters, true);
+		while(st.hasMoreTokens()) {
+			String token = st.nextToken();
+			// in addition we split "letter" characters and digits
+			String[] subtokens = token.split("(?<=[a-zA-Z])(?=\\d)|(?<=\\d)(?=\\D)");
+			for(int i=0; i<subtokens.length; i++) {
+				LayoutToken layoutToken = new LayoutToken();
+				layoutToken.setText(subtokens[i]);
+				result.add(layoutToken);
+			}
+		}
 
 		return result;
 	}

@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * To be review with actual TaggingLabel class, as an enum class cannot be extended in Java.
  */
-public enum QuantityTaggingLabel {
+public enum TaggingLabel {
 
     // labels for quantities/measurements
     VALUE_ATOMIC(GrobidModels.QUANTITIES, "<valueAtomic>"),
@@ -21,21 +21,22 @@ public enum QuantityTaggingLabel {
     VALUE_LIST(GrobidModels.QUANTITIES, "<valueList>"),
     UNIT_LEFT(GrobidModels.QUANTITIES, "<unitLeft>"),
     UNIT_RIGHT(GrobidModels.QUANTITIES, "<unitRight>"),
-    SUBSTANCE(GrobidModels.QUANTITIES, "<substance>")
+    SUBSTANCE(GrobidModels.QUANTITIES, "<substance>"),
+    OTHER(GrobidModels.QUANTITIES, "<other>"),
     ;
 
     private final GrobidModels grobidModel;
     private final String label;
 
-    private static Map<Pair<GrobidModels, String>, QuantityTaggingLabel> cache = new HashMap<>();
+    private static Map<Pair<GrobidModels, String>, TaggingLabel> cache = new HashMap<>();
 
     static {
-        for (QuantityTaggingLabel l : values()) {
+        for (TaggingLabel l : values()) {
             cache.put(new Pair<>(l.grobidModel, l.label), l);
         }
     }
 
-    QuantityTaggingLabel(GrobidModels grobidModel, String label) {
+    TaggingLabel(GrobidModels grobidModel, String label) {
         this.grobidModel = grobidModel;
         this.label = label;
     }
@@ -48,9 +49,9 @@ public enum QuantityTaggingLabel {
         return label;
     }
 
-    public static QuantityTaggingLabel getLabel(GrobidModels model, String tag) {
+    public static TaggingLabel getLabel(GrobidModels model, String tag) {
         String plainLabel = GenericTaggerUtils.getPlainLabel(tag);
-        QuantityTaggingLabel l = cache.get(new Pair<>(model, plainLabel));
+        TaggingLabel l = cache.get(new Pair<>(model, plainLabel));
         if (l == null) {
             throw new IllegalArgumentException("Label " + plainLabel + " not found for model " + model);
         }

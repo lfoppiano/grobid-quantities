@@ -61,6 +61,7 @@ public class QuantityLexicon {
 	private FastMatcher unitPattern = null;
 	private Set<String> unitTokens = null;
 	private Map<String,String> prefix = null; // map prefix symbol to prefix string
+	private Map<String,List<String>> inflection = null; // map a unit string to its morphological inflections
 
 	private QuantityLexicon() {
 		init();
@@ -68,6 +69,7 @@ public class QuantityLexicon {
 
 	private void init() {
 		initPrefix();
+		initInflection();
 		File file = null;
 		InputStream ist = null;
         InputStreamReader isr = null;
@@ -105,14 +107,7 @@ public class QuantityLexicon {
             			String[] subpieces = piece.split(",");
 		            	for(int j=0; j<subpieces.length; j++) {
 		            		String subpiece = subpieces[j].trim();
-	            			/*try {
-		            			unitPattern.loadTerm(subpiece);
-		            		}
-		            		catch(Exception e) {
-		            			logger.error("invalid unit term: " + subpiece);
-		            		}*/
-	            			//unit.addNotation(subpiece);
-	            			//unit.addName(subpiece); // maybe not...
+
 	            			//expansion
 	            			List<String> derivations = derivationalMorphologyExpansion(subpiece, true);
 	            			for(String derivation : derivations) {
@@ -160,25 +155,32 @@ public class QuantityLexicon {
 		            	String[] subpieces = piece.split(",");
 		            	for(int j=0; j<subpieces.length; j++) {
 		            		String subpiece = subpieces[j].trim();
-		            		List<String> derivations = derivationalMorphologyExpansion(subpiece, false);
-	            			for(String derivation : derivations) {
-				            	unit.addName(derivation);
-				            	try {
-			            			unitPattern.loadTerm(derivation);
-			            		}
-			            		catch(Exception e) {
-			            			logger.error("invalid unit term: " + derivation);
-			            		}
-			            		List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
-				                for(String word : subsubpieces) {
-				                 	word = word.trim().toLowerCase();
-				                    if ((word.length() > 0) && !unitTokens.contains(word)) {
-				                    	// we don't add pure digit sub-token and token delimiters
-				                    	if ( (TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.delimiters.indexOf(word) == -1) )
-					                      	unitTokens.add(word);
-				                    }
-				                }
-				            }
+
+                            // expansion with inflections
+                            List<String> inflections = inflectionalMorphologyExpansion(subpiece);
+
+                            for(String inflectedForm : inflections) {
+                                // expansion with derivational morphology, but only for SI units!
+    		            		List<String> derivations = derivationalMorphologyExpansion(inflectedForm, false);
+    	            			for(String derivation : derivations) {
+    				            	unit.addName(derivation);
+    				            	try {
+    			            			unitPattern.loadTerm(derivation);
+    			            		}
+    			            		catch(Exception e) {
+    			            			logger.error("invalid unit term: " + derivation);
+    			            		}
+    			            		List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
+    				                for(String word : subsubpieces) {
+    				                 	word = word.trim().toLowerCase();
+    				                    if ((word.length() > 0) && !unitTokens.contains(word)) {
+    				                    	// we don't add pure digit sub-token and token delimiters
+    				                    	if ( (TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.delimiters.indexOf(word) == -1) )
+    					                      	unitTokens.add(word);
+    				                    }
+    				                }
+    				            }
+                            }
 			            }
 		            }
 	            }
@@ -221,11 +223,11 @@ public class QuantityLexicon {
 			String path = "src/main/resources/en/prefix.txt";
 			file = new File(path);
 	        if (!file.exists()) {
-	            throw new GrobidResourceException("Cannot add entries to unit dictionary, because file '" 
+	            throw new GrobidResourceException("Cannot add entries to unit prefix dictionary, because file '" 
 					+ file.getAbsolutePath() + "' does not exists.");
 	        }
 	        if (!file.canRead()) {
-	            throw new GrobidResourceException("Cannot add entries to unit dictionary, because cannot read file '" 
+	            throw new GrobidResourceException("Cannot add entries to unit prefix dictionary, because cannot read file '" 
 					+ file.getAbsolutePath() + "'.");
 	        }
 
@@ -249,11 +251,82 @@ public class QuantityLexicon {
             	prefix.put(symbol, name);
             }
 
-System.out.println(prefix.toString());
+//System.out.println(prefix.toString());
 		}	
 		catch (PatternSyntaxException e) {
             throw new 
 			GrobidResourceException("Error when compiling prefix map for unit vocabulary.", e);
+        }
+		catch (FileNotFoundException e) {
+//	    	e.printStackTrace();
+            throw new GrobidException("An exception occured while running Grobid.", e);
+        } 
+		catch (IOException e) {
+//	    	e.printStackTrace();
+            throw new GrobidException("An exception occured while running Grobid.", e);
+        } 
+		finally {
+            try {
+                if (ist != null)
+                    ist.close();
+                if (isr != null)
+                    isr.close();
+                if (dis != null)
+                    dis.close();
+            } catch (Exception e) {
+                throw new GrobidResourceException("Cannot close all streams.", e);
+            }
+        }
+    }
+
+    private void initInflection() {
+    	File file = null;
+		InputStream ist = null;
+        InputStreamReader isr = null;
+        BufferedReader dis = null;
+        try {			
+			unitTokens = new HashSet<String>();
+			String path = "src/main/resources/en/inflection.txt";
+			file = new File(path);
+	        if (!file.exists()) {
+	            throw new GrobidResourceException("Cannot add entries to inflection dictionary, because file '" 
+					+ file.getAbsolutePath() + "' does not exists.");
+	        }
+	        if (!file.canRead()) {
+	            throw new GrobidResourceException("Cannot add entries to inflection dictionary, because cannot read file '" 
+					+ file.getAbsolutePath() + "'.");
+	        }
+
+			unitPattern = new FastMatcher();
+            ist = getClass().getResourceAsStream(path);
+			if (ist == null) 
+				ist = new FileInputStream(file);
+            isr = new InputStreamReader(ist, "UTF8");
+            dis = new BufferedReader(isr);
+			
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+            	if (l.length() == 0) continue;
+            	String pieces[] = l.split("\t");
+            	if (pieces.length != 2) 
+            	   continue;
+            	String name = pieces[0].trim();
+            	String inflections = pieces[1].trim();
+            	List<String> inflectionList = new ArrayList<String>();
+            	String[] subinflections = inflections.split(",");
+            	for(int i=0; i<subinflections.length;i++) {
+            	   inflectionList.add(subinflections[i].trim());
+            	}
+            	if (inflection == null)
+            	   inflection = new HashMap<String,List<String>>();
+                if (inflectionList.size() > 0)
+                   inflection.put(name, inflectionList);
+            }
+//System.out.println(inflection.toString());
+		}	
+		catch (PatternSyntaxException e) {
+            throw new 
+			GrobidResourceException("Error when compiling inflection unit vocabulary.", e);
         }
 		catch (FileNotFoundException e) {
 //	    	e.printStackTrace();
@@ -285,7 +358,11 @@ System.out.println(prefix.toString());
 		List<String> results = new ArrayList<String>();
 		results.add(unitTerm);
 
-		// ...
+		List<String> inflections = inflection.get(unitTerm);
+        if ( (inflections != null) && (inflections.size() > 0) ) {
+            for(String inflect : inflections)
+                results.add(inflect);
+        }
 
 		return results;
 	}

@@ -99,13 +99,31 @@ public class QuantityTrainer extends AbstractTrainer {
                 List<Pair<String,String>> labeled = handler.getLabeledResult();
 
                 // we need to add now the features to the labeled tokens
+                List<Pair<String,String>> bufferLabeled = null;
+                int pos = 0;
 
-				// to store unit term positions
-                List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
-			  				                 				
-				unitTokenPositions = quantityLexicon.inUnitNamesPairs(labeled);
-				
-                addFeatures(labeled, writer, unitTokenPositions);
+                // let's iterate by defined CRF input (separated by new line)
+                while(pos < labeled.size()) {
+                    bufferLabeled = new ArrayList<Pair<String,String>>();
+                    while(pos < labeled.size()) {
+                        if (labeled.get(pos).getA().equals("\n")) {
+                            pos++;
+                            break;
+                        }
+                        bufferLabeled.add(labeled.get(pos));
+                        pos++;
+                    }
+
+                    if (bufferLabeled.size() == 0)
+                        continue;
+
+    				// to store unit term positions
+                    List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();                				
+    				unitTokenPositions = quantityLexicon.inUnitNamesPairs(bufferLabeled);
+    				
+                    addFeatures(bufferLabeled, writer, unitTokenPositions);
+                    writer.write("\n");
+                }
                 writer.write("\n");
             }
 

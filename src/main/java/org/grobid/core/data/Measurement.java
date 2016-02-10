@@ -19,12 +19,20 @@ public class Measurement {
 	private UnitUtilities.Measurement_Type type = null;
 	private List<Quantity> quantities = null;
 
+	public Measurement() {
+    }
+
+
     public Measurement(UnitUtilities.Measurement_Type type) {
         this.type = type;
     }
 
 	public UnitUtilities.Measurement_Type getType() {
 		return type;
+	}
+
+	public void setType(UnitUtilities.Measurement_Type type) {
+		this.type = type;
 	}
 	
 	public void addQuantity(Quantity quantity) {

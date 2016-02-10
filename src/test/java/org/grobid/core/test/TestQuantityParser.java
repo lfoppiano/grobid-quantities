@@ -35,15 +35,14 @@ public class TestQuantityParser {
 	
 	@Test
 	public void testQuantityParser() throws Exception {
+		QuantityParser parser = new QuantityParser();
 		File textFile = 
-			new File(this.getResourceDir("./src/test/resources/").getAbsoluteFile()+"/test.txt");
+			new File(this.getResourceDir("./src/test/resources/").getAbsoluteFile()+"/test1.txt");
 		if (!textFile.exists()) {
 			throw new GrobidException("Cannot start test, because test resource folder is not correctly set.");
 		}
 		String text = FileUtils.readFileToString(textFile);	
-		
-		QuantityParser parser = new QuantityParser();
-		
+		System.out.println("\ntest1.txt");
 		List<Quantity> quantities = parser.extractQuantities(text); 
 		if (quantities != null) {
 			for(Quantity quantity : quantities) {
@@ -53,6 +52,23 @@ public class TestQuantityParser {
 		else {
 			System.out.println("No quantity found.");
 		}
+
+		textFile = 
+			new File(this.getResourceDir("./src/test/resources/").getAbsoluteFile()+"/test2.txt");
+		if (!textFile.exists()) {
+			throw new GrobidException("Cannot start test, because test resource folder is not correctly set.");
+		}
+		text = FileUtils.readFileToString(textFile);
+		System.out.println("\ntest2.txt");
+		quantities = parser.extractQuantities(text); 
+		if (quantities != null) {
+			for(Quantity quantity : quantities) {
+				System.out.println(quantity.toString());
+			}
+		}
+		else {
+			System.out.println("No quantity found.");
+		}	
 	}
 	
 }

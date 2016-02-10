@@ -3,6 +3,7 @@ package org.grobid.core.engines;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.data.Measurement;
 import org.grobid.core.engines.AbstractParser;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorQuantities;
@@ -15,6 +16,7 @@ import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.utilities.LayoutTokensUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,29 +47,26 @@ public class QuantityParser extends AbstractParser {
         List<Quantity> quantities = null;
         try {
             text = text.replace("\n", " ");
-            List<String> tokenizations = QuantityAnalyzer.tokenize(text);
+            List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
 
             if (tokenizations.size() == 0)
                 return null;
 
             String ress = null;
             List<String> texts = new ArrayList<String>();
-            for (String token : tokenizations) {
-            	if (!token.equals(" ")) {
-	                texts.add(token);
+            for (LayoutToken token : tokenizations) {
+            	if (!token.getText().equals(" ")) {
+	                texts.add(token.getText());
 	            }
             }
 			
             // to store unit term positions
             List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
 			unitTokenPositions = quantityLexicon.inUnitNames(texts);
-System.out.println(texts.toString());			
             ress = addFeatures(texts, unitTokenPositions);
-System.out.println(ress);	
 			String res = null;
 			try {
 				res = label(ress);
-System.out.println(res);		
 			}
 			catch(Exception e) {
 				throw new GrobidException("CRF labeling for quantity parseing failed.", e);
@@ -84,106 +83,45 @@ System.out.println(res);
      */
     public List<Quantity> resultExtraction(String text, 
 										   String result,
-                                           List<String> tokenizations) {
+                                           List<LayoutToken> tokenizations) {
 
 		List<Quantity> quantities = new ArrayList<Quantity>();
-        StringTokenizer stt = new StringTokenizer(result, "\n");
-		String label = null; // label
-        String actual = null; // token
-		int offset = 0;
-		int addedOffset = 0;
-		int p = 0; // iterator for the tokenizations for restauring the original tokenization with
-        // respect to spaces
-		Quantity currentQuantity = null;
-		while (stt.hasMoreTokens()) {
-            String line = stt.nextToken();
-            if (line.trim().length() == 0) {
+
+        TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.QUANTITIES, result, tokenizations);
+
+        String tokenLabel = null;
+        List<TaggingTokenCluster> clusters = clusteror.cluster();
+
+        Unit currentUnit = new Unit();
+        Quantity currentQuantity = new Quantity();
+        Measurement currentMeasurement = new Measurement();
+
+        for (TaggingTokenCluster cluster : clusters) {
+            if (cluster == null) {
                 continue;
             }
 
-			StringTokenizer st2 = new StringTokenizer(line, "\t");
-            boolean start = true;
-			//String separator = "";
-            label = null;
-            actual = null;
-            while (st2.hasMoreTokens()) {
-                if (start) {
-                    actual = st2.nextToken().trim();
-                    start = false;
-
-                    boolean strop = false;
-                    while ((!strop) && (p < tokenizations.size())) {
-                        String tokOriginal = tokenizations.get(p);
-						addedOffset += tokOriginal.length();
-						if (tokOriginal.equals(actual)) {
-                            strop = true;
-                        }
-                        p++;
-                    }
-                } else {
-                    label = st2.nextToken().trim();
-                }
+            TaggingLabel clusterLabel = cluster.getTaggingLabel();
+            String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
+            if (clusterLabel  == TaggingLabel.VALUE_ATOMIC) {
+                System.out.println("atomic value: " + clusterContent);
             }
-
-            if (label == null) {
-				offset += addedOffset;
-				addedOffset = 0;
-                continue;
+            else if (clusterLabel  == TaggingLabel.VALUE_LEAST) {
+                System.out.println("value least: " + clusterContent);
             }
-
-            if (actual != null) {
-				if (label.startsWith("B-")) {      
-					if (currentQuantity != null) {
-						int localPos = currentQuantity.getOffsetEnd();
-						if (label.length() > 1) {  
-							String subtag = label.substring(2,label.length()).toLowerCase();
-							if (currentQuantity.getRawString().equals(subtag) && 
-							   ( (localPos == offset) ) ) {
-								currentQuantity.setOffsetEnd(offset+addedOffset);
-								offset += addedOffset;
-								addedOffset = 0;	
-								continue;
-							}														
-							quantities.add(currentQuantity);
-						}
-					}
-					if (label.length() > 1) {  
-						String subtag = label.substring(2,label.length()).toLowerCase();
-						currentQuantity = new Quantity(subtag);   
-						if ( text.charAt(offset) == ' ') {	
-							currentQuantity.setOffsetStart(offset+1);
-						}
-						else
-							currentQuantity.setOffsetStart(offset);
-						currentQuantity.setOffsetEnd(offset+addedOffset);
-					}  
-				}
-				else if (label.startsWith("I-")) {  
-					if (label.length() > 1) {  
-						String subtag = label.substring(2,label.length()).toLowerCase();
-
-					    if ( (currentQuantity != null) && (currentQuantity.getRawString().equals(subtag)) ) {
-							currentQuantity.setOffsetEnd(offset+addedOffset);		
-						}
-						else {
-							// should not be the case, but we add the new entity, for robustness      
-							if (currentQuantity != null) 
-								quantities.add(currentQuantity);
-							currentQuantity = new Quantity(subtag);   
-							currentQuantity.setOffsetStart(offset);
-							currentQuantity.setOffsetEnd(offset+addedOffset);
-						}
-				   	}
-				}
-				
-				offset += addedOffset;
-				addedOffset = 0;
-			}			
-		}
-		
-		if (currentQuantity != null) {
-			quantities.add(currentQuantity);
-		}
+            else if (clusterLabel  == TaggingLabel.VALUE_MOST) {
+                System.out.println("value most: " + clusterContent);
+            }
+            else if (clusterLabel  == TaggingLabel.VALUE_LIST) {
+                System.out.println("value in list: " + clusterContent);
+            }
+            else if (clusterLabel  == TaggingLabel.UNIT_LEFT) {
+                System.out.println("unit (left attachment): " + clusterContent);
+            }
+            else if (clusterLabel  == TaggingLabel.UNIT_RIGHT) {
+                System.out.println("unit (right attachment): " + clusterContent);
+            }
+        }
 		
 		return quantities;
 	}
