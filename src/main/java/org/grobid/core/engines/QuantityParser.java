@@ -18,10 +18,17 @@ import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.utilities.LayoutTokensUtil;
+import org.grobid.core.utilities.GrobidProperties;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -85,7 +92,6 @@ public class QuantityParser extends AbstractParser {
      */
     public List<Measurement> resultExtraction(String result,
                                               List<LayoutToken> tokenizations) {
-
         List<Measurement> measurements = new ArrayList<>();
 
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.QUANTITIES, result, tokenizations);
@@ -232,8 +238,68 @@ public class QuantityParser extends AbstractParser {
      */
     public void createTraining(String inputFile,
                                String pathTEI,
-                               int id) {
+                               int id) throws IOException {
+        File file = new File(inputFile);
+        if (!file.exists()) {
+            throw new GrobidException("Cannot create training data because input file can not be accessed: " + inputFile);
+        }
 
+        if (inputFile.endsWith(".txt") || inputFile.endsWith(".TXT")) {
+            String text = FileUtils.readFileToString(file); 
+
+            StringBuilder tei = new StringBuilder();
+            tei.append(getTEIHeader(id));
+
+            tei.append("<TEI>");
+            // for the moment we suppose we have english only...
+            tei.append("\t<text xml:lang=\"en\">\n");
+
+            // we process the text paragraph by paragraph
+            String lines[] = text.split("\n");
+            StringBuilder paragraph = new StringBuilder();
+            for(int i=0; i<lines.length; i++) {
+                String line = lines[i].trim();
+                if (line.length() != 0) {
+                    paragraph.append(line).append("\n");
+                }
+                else if (paragraph.length() > 0) {
+                    // we have a new paragraph
+                    text = paragraph.toString().replace("\n", " ");
+                    List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
+
+                    if (tokenizations.size() == 0)
+                        continue;
+
+                    String ress = null;
+                    List<String> texts = new ArrayList<String>();
+                    for (LayoutToken token : tokenizations) {
+                        if (!token.getText().equals(" ")) {
+                            texts.add(token.getText());
+                        }
+                    }
+                    
+                    // to store unit term positions
+                    List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
+                    unitTokenPositions = quantityLexicon.inUnitNames(texts);
+                    ress = addFeatures(texts, unitTokenPositions);
+                    String res = null;
+                    try {
+                        res = label(ress);
+                    }
+                    catch(Exception e) {
+                        throw new GrobidException("CRF labeling for quantity parsing failed.", e);
+                    }
+                    List<Measurement> measurements = resultExtraction(res, tokenizations);
+
+
+                }
+                else
+                    continue;
+            }
+
+            tei.append("\t</text>");
+            tei.append("</TEI>");
+        }
     }
 
     @SuppressWarnings({"UnusedParameters"})
@@ -287,5 +353,34 @@ public class QuantityParser extends AbstractParser {
     private boolean isMeasurementValid(Measurement currentMeasurement) {
         return currentMeasurement.getType() != null &&
                 currentMeasurement.getQuantities() != null && currentMeasurement.getQuantities().size() > 0;
+	}
+
+    private String getTEIHeader(int id) {
+        StringBuilder header = new StringBuilder();
+
+        header.append("<?xml version=\"1.0\" ?>").append("\n").append("<tei>").append("\n\t").append("<teiHeader>");
+        if (id != -1) {
+            header.append("\n\t\t").append("<fileDesc xml:id=\"_" + id + "\"/>");
+        }
+
+        header.append("\n\t\t<encodingDesc>\n");
+        header.append("\t\t\t<appInfo>\n");
+
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+        df.setTimeZone(tz);
+        String dateISOString = df.format(new java.util.Date());
+
+        header.append("\t\t\t\t<application version=\"").append(GrobidProperties.getVersion())
+            .append("\" ident=\"GROBID\" when=\"" + dateISOString + "\">\n");
+        header.append("\t\t\t\t\t<ref target=\"https://github.com/kermitt2/grobid\">GROBID - ")
+            .append("A machine learning software for extracting information from scholarly documents</ref>\n");
+        header.append("\t\t\t\t</application>\n");
+        header.append("\t\t\t</appInfo>\n");
+        header.append("\t\t</encodingDesc>\n");
+
+        header.append("\t").append("</teiHeader>");
+
+        return header.toString();
     }
 }
