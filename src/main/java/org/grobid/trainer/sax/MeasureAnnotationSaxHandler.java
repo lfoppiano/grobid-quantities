@@ -280,6 +280,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     int i = 0;
                     if (content.length() > 0) {
                         if (begin && (!currentTag.equals("<other>"))) {
+                        //if (begin) {    
                             labeled.add(new Pair(content, "I-" + currentTag));
                             begin = false;
                         } else {

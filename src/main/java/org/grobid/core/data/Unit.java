@@ -22,6 +22,9 @@ public class Unit {
 	// boolean indicating  if the unit is a standard SI unit
 	private UnitUtilities.System_Type system; 
 
+	// to be used only when building a unit during parsing
+	private String rawName = null;
+
 	public List<String> getNames() {
 		return names;
 	}
@@ -50,6 +53,14 @@ public class Unit {
 		notations.add(not);
 	}
 
+	public String getRawName() {
+		return rawName;
+	}
+
+	public void setRawName(String name) {
+		rawName = name;
+	}
+
 	public UnitUtilities.System_Type getSystem() {
 		return system;
 	}
@@ -67,10 +78,18 @@ public class Unit {
 	}
 
 	public String toString() {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(notations.toString() + "\t" + type + "\t");
-		buffer.append(type + "\t" + system + "\t" + names.toString());
-        return buffer.toString();
+        StringBuilder builder = new StringBuilder();
+        if (notations != null)
+	        builder.append(notations.toString()).append("\t");
+        if (type != null)
+ 	       builder.append(type.getName()).append("\t");
+ 	   	if (system != null)
+			builder.append(system.getName()).append("\t");
+		if (names != null)
+			builder.append(names.toString()).append("\t");
+		if (rawName != null)
+			builder.append(rawName.toString());
+        return builder.toString();
     }
 
 }

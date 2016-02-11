@@ -14,7 +14,7 @@ public class Quantity {
 	private String rawString = null;
 	
 	private UnitUtilities.Unit_Type type; // type of measurement
-	private String rawUnit = null;
+	private Unit rawUnit = null;
 	private Unit normalizedUnit = null; // which gives also the system of the unit (SI, imperial, etc.)
 	private String rawValue = null;
 	private double normalizedValue = 0.0;
@@ -54,11 +54,11 @@ public class Quantity {
         this.type = type;
     }
 
-    public String getRawUnit() {
+    public Unit getRawUnit() {
         return rawUnit;
     }
 
-	public void setRawUnit(String raw) {
+	public void setRawUnit(Unit raw) {
         this.rawUnit = raw;
     }
 	
@@ -119,10 +119,18 @@ public class Quantity {
     }
 
 	public String toString() {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(type + "\t" + offsets.toString());
-
-        return buffer.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("[ ");
+        if (type != null)
+            builder.append(type.getName()).append("\t");
+        if (rawValue != null)
+            builder.append(rawValue).append("\t");
+        if (rawUnit != null)
+            builder.append(rawUnit.toString()).append("\t");
+        if (offsets != null)
+            builder.append(offsets.toString());
+        builder.append(" ]");
+        return builder.toString();
     }
 
 }

@@ -19,12 +19,22 @@ public class UnitUtilities {
 	
 	// measurement systems
 	public enum System_Type {
-		UNKNOWN,
-		SI_BASE,
-		SI_DERIVED,
-		IMPERIAL,
-		US,
-		NON_SI
+		UNKNOWN		("unknown"),
+		SI_BASE		("SI base"),
+		SI_DERIVED	("SI derived"),
+		IMPERIAL	("imperial"),
+		US			("us"),
+		NON_SI		("non SI");
+
+		private String name;
+
+		private System_Type(String name) {
+          	this.name = name;
+		}
+		
+		public String getName() {
+			return name;
+		}
 	}
 
 	// measurement types

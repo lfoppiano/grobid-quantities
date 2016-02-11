@@ -22,7 +22,7 @@ public enum TaggingLabel {
     UNIT_LEFT(GrobidModels.QUANTITIES, "<unitLeft>"),
     UNIT_RIGHT(GrobidModels.QUANTITIES, "<unitRight>"),
     SUBSTANCE(GrobidModels.QUANTITIES, "<substance>"),
-    OTHER(GrobidModels.QUANTITIES, "<other>"),
+    OTHER(GrobidModels.QUANTITIES, "<other>")
     ;
 
     private final GrobidModels grobidModel;

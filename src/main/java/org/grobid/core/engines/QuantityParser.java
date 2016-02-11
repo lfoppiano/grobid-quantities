@@ -10,6 +10,7 @@ import org.grobid.core.features.FeaturesVectorQuantities;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
@@ -39,12 +40,12 @@ public class QuantityParser extends AbstractParser {
     /**
      * Extract all occurences of measurement/quantities from a simple piece of text.
      */
-    public List<Quantity> extractQuantities(String text) throws Exception {
+    public List<Measurement> extractQuantities(String text) throws Exception {
         if (text == null)
             return null;
         if (text.length() == 0)
             return null;
-        List<Quantity> quantities = null;
+        List<Measurement> measurements = null;
         try {
             text = text.replace("\n", " ");
             List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
@@ -71,21 +72,21 @@ public class QuantityParser extends AbstractParser {
 			catch(Exception e) {
 				throw new GrobidException("CRF labeling for quantity parseing failed.", e);
 			}
-            quantities = resultExtraction(text, res, tokenizations);
+            measurements = resultExtraction(text, res, tokenizations);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
-        return quantities;
+        return measurements;
     }
 
     /**
      * Extract identified quantities from a labelled text.
      */
-    public List<Quantity> resultExtraction(String text, 
+    public List<Measurement> resultExtraction(String text, 
 										   String result,
                                            List<LayoutToken> tokenizations) {
 
-		List<Quantity> quantities = new ArrayList<Quantity>();
+		List<Measurement> measurements = new ArrayList<Measurement>();
 
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.QUANTITIES, result, tokenizations);
 
@@ -95,6 +96,9 @@ public class QuantityParser extends AbstractParser {
         Unit currentUnit = new Unit();
         Quantity currentQuantity = new Quantity();
         Measurement currentMeasurement = new Measurement();
+        UnitUtilities.Measurement_Type openMeasurement = null;
+
+        int pos = 0; // position in term of characters for creating the offsets
 
         for (TaggingTokenCluster cluster : clusters) {
             if (cluster == null) {
@@ -102,32 +106,140 @@ public class QuantityParser extends AbstractParser {
             }
 
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
+            List<LayoutToken> theTokens = cluster.concatTokens();
             String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
+
+            int endPos = pos;
+            for(LayoutToken token : theTokens) {
+                if (token.getText() != null)
+                   endPos += token.getText().length();
+            }
+
             if (clusterLabel  == TaggingLabel.VALUE_ATOMIC) {
                 System.out.println("atomic value: " + clusterContent);
-            }
+                if ( (currentMeasurement.getType() != null) && 
+                     (currentMeasurement.getQuantities() != null) && 
+                     (currentMeasurement.getQuantities().size() >0) ) {
+                    measurements.add(currentMeasurement);
+                    currentMeasurement = new Measurement();
+                    currentUnit = new Unit();
+                }
+                currentQuantity = new Quantity();
+                currentQuantity.setRawValue(clusterContent);
+                currentQuantity.setOffsetStart(pos);
+                currentQuantity.setOffsetEnd(endPos);
+                if (currentUnit.getRawName() != null) {
+                    currentQuantity.setRawUnit(currentUnit);
+                    currentMeasurement.setAtomicQuantity(currentQuantity);
+                    measurements.add(currentMeasurement);
+                    currentMeasurement = new Measurement();
+                    currentQuantity = new Quantity();
+                }
+                else {
+                    // unit will be attached later
+                    currentMeasurement.setType(UnitUtilities.Measurement_Type.VALUE);
+                    currentMeasurement.setAtomicQuantity(currentQuantity);
+                    openMeasurement = UnitUtilities.Measurement_Type.VALUE;
+                }
+            }   
             else if (clusterLabel  == TaggingLabel.VALUE_LEAST) {
                 System.out.println("value least: " + clusterContent);
+                if (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL) {
+                    if ( (currentMeasurement.getType() != null) && 
+                         (currentMeasurement.getQuantities() != null) && 
+                         (currentMeasurement.getQuantities().size() >0) ) {
+                        measurements.add(currentMeasurement);
+                        currentMeasurement = new Measurement();
+                        currentUnit = new Unit();
+                    }
+                }
+                currentQuantity = new Quantity();
+                currentQuantity.setRawValue(clusterContent);
+                currentQuantity.setOffsetStart(pos);
+                currentQuantity.setOffsetEnd(endPos);
+                if (currentUnit.getRawName() != null)
+                    currentQuantity.setRawUnit(currentUnit);
+                currentMeasurement.setQuantityLeast(currentQuantity);
+                currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL);
+                openMeasurement = UnitUtilities.Measurement_Type.INTERVAL;
             }
             else if (clusterLabel  == TaggingLabel.VALUE_MOST) {
                 System.out.println("value most: " + clusterContent);
+                if (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL) {
+                    if ( (currentMeasurement.getType() != null) && 
+                         (currentMeasurement.getQuantities() != null) && 
+                         (currentMeasurement.getQuantities().size() >0) ) {
+                        measurements.add(currentMeasurement);
+                        currentMeasurement = new Measurement();
+                        currentUnit = new Unit();
+                    }
+                }
+                currentQuantity = new Quantity();
+                currentQuantity.setRawValue(clusterContent);
+                currentQuantity.setOffsetStart(pos);
+                currentQuantity.setOffsetEnd(endPos);
+                if (currentUnit.getRawName() != null)
+                    currentQuantity.setRawUnit(currentUnit);
+                currentMeasurement.setQuantityMost(currentQuantity);
+                currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL);
+                openMeasurement = UnitUtilities.Measurement_Type.INTERVAL;
             }
             else if (clusterLabel  == TaggingLabel.VALUE_LIST) {
                 System.out.println("value in list: " + clusterContent);
+                if (openMeasurement != UnitUtilities.Measurement_Type.CONJUNCTION) {
+                    if ( (currentMeasurement.getType() != null) && 
+                         (currentMeasurement.getQuantities() != null) && 
+                         (currentMeasurement.getQuantities().size() >0) ) {
+                        measurements.add(currentMeasurement);
+                        currentMeasurement = new Measurement();
+                        currentQuantity = new Quantity();
+                        currentUnit = new Unit();
+                    }
+                }
+                currentQuantity.setRawValue(clusterContent);
+                currentQuantity.setOffsetStart(pos);
+                currentQuantity.setOffsetEnd(endPos);
+                if (currentUnit.getRawName() != null)
+                    currentQuantity.setRawUnit(currentUnit);
+                currentMeasurement.addQuantity(currentQuantity);
+                openMeasurement = UnitUtilities.Measurement_Type.CONJUNCTION;
             }
             else if (clusterLabel  == TaggingLabel.UNIT_LEFT) {
                 System.out.println("unit (left attachment): " + clusterContent);
+                currentUnit.setRawName(clusterContent);
+                currentQuantity.setRawUnit(currentUnit);
+                if ((currentMeasurement.getQuantities() != null) && (currentMeasurement.getQuantities().size() > 0) ) {
+                    for(Quantity quantity : currentMeasurement.getQuantities()) {
+                        if (quantity.getRawUnit() == null)
+                            quantity.setRawUnit(currentUnit);
+                        else
+                            break;
+                    }
+                }
+                currentUnit = new Unit();
             }
             else if (clusterLabel  == TaggingLabel.UNIT_RIGHT) {
                 System.out.println("unit (right attachment): " + clusterContent);
+                currentUnit.setRawName(clusterContent);
             }
+            pos = endPos+1;
+        }
+
+        if ( (currentMeasurement.getType() != null) && 
+             (currentMeasurement.getQuantities() != null) && 
+             (currentMeasurement.getQuantities().size() > 0) ) {
+            measurements.add(currentMeasurement);
         }
 		
-		return quantities;
+		return measurements;
 	}
 
 	/**
      * Process the content of the specified input file and format the result as training data.
+     *
+     * Input file can be (i) xml (.xml or .tei extennsion) and it is assumed that we have a patent 
+     * document, (ii) PDF (.pdf) and it is assumed that we have a scientific article which will 
+     * be processed by GROBID full text first, (iii) some text (.txt extension).  
      *
      * @param inputFile    input file
      * @param pathTEI      path to TEI with annotated training data
@@ -136,7 +248,7 @@ public class QuantityParser extends AbstractParser {
     public void createTraining(String inputFile,
                                String pathTEI,
                                int id) {
-
+        
     }
 
     @SuppressWarnings({"UnusedParameters"})
