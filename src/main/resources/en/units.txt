@@ -58,14 +58,14 @@ W	POWER	SI_DERIVED	watt
 T	MAGNETIC_INDUCTION	SI_DERIVED	tesla
 Wb	MAGNETIC_FLUX	SI_DERIVED	weber
 dB	ATTENUATION	SI_DERIVED	decibel
-V/m	ELECTRIC_FIELD	SI_DERIVED	volt per metre, volt per meter
+V/m	ELECTRIC_FIELD	SI_DERIVED	volt per metre,volt per meter
 A/m	MAGNETIC_FIELD_STRENGTH	SI_DERIVED	ampere per metre,ampere per meter
 rpm,round/min	FREQUENCY	NON_SI	round per minute
 rps,round/s	FREQUENCY	NON_SI	round per second
 Hz	FREQUENCY	SI	hertz
-cm^-1,cm⁻¹	ENERGY	SI_DERIVED	wavenumber, reciprocal centimeter
+cm^-1,cm⁻¹	ENERGY	SI_DERIVED	wavenumber,reciprocal centimeter
 m/s	VELOCITY	SI_DERIVED	meter per second,metre per second
 mi/h,mph	VELOCITY	US	mile per hour
-knot	VELOCITY	US	knot, nautical mile per hour
+knot	VELOCITY	US	knot,nautical mile per hour
 ips	VELOCITY	US	inch per second
-Mach	VELOCITY	NON_SI	mach, speed of sound
+Mach	VELOCITY	NON_SI	mach,speed of sound

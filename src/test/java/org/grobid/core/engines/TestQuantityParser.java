@@ -27,6 +27,7 @@ public class TestQuantityParser {
 
         String text = IOUtils.toString(
                 this.getClass().getResourceAsStream("/test1.txt"));
+        System.out.println("\ntest1.txt\n" + text + "\n");
 
         QuantityParser parser = new QuantityParser();
 
@@ -46,6 +47,7 @@ public class TestQuantityParser {
 
         String text = IOUtils.toString(
                 this.getClass().getResourceAsStream("/test2.txt"));
+        System.out.println("\ntest2.txt\n" + text + "\n");
 
         QuantityParser parser = new QuantityParser();
 
@@ -60,7 +62,7 @@ public class TestQuantityParser {
         }
     }
 
-    @Test
+    /*@Test
     public void testQuantityParser3() throws Exception {
 
         String text = IOUtils.toString(
@@ -77,5 +79,5 @@ public class TestQuantityParser {
         } else {
             System.out.println("No measurement found.");
         }
-    }
+    }*/
 }

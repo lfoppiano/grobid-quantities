@@ -22,11 +22,6 @@ public class Quantity {
     // as a condition, when the normalized unit is instanciated, its type must be the same as the type
     // of the quantity
 
-    // in case of ranged values, this is the second (highest) value
-    // if rawValueHigh is null, we don't have a range
-    private String rawValueHigh = null;
-    private double normalizedValueHigh = 0.0;
-
     private OffsetPosition offsets = null;
 
     public Quantity() {
@@ -84,22 +79,6 @@ public class Quantity {
 
     public void setNormalizedValue(double normalized) {
         this.normalizedValue = normalized;
-    }
-
-    public String getRawValueHigh() {
-        return rawValueHigh;
-    }
-
-    public void setRawValueHigh(String raw) {
-        this.rawValueHigh = raw;
-    }
-
-    public double getNormalizedValueHigh() {
-        return normalizedValueHigh;
-    }
-
-    public void setNormalizedValueHigh(double normalized) {
-        this.normalizedValueHigh = normalized;
     }
 
     public void setOffsetStart(int start) {
