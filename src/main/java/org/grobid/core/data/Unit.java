@@ -1,5 +1,6 @@
 package org.grobid.core.data;
 
+import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class Unit {
 
     // to be used only when building a unit during parsing
     private String rawName = null;
+    private OffsetPosition offsets = null;
 
     public List<String> getNames() {
         return names;
@@ -77,8 +79,33 @@ public class Unit {
         type = ty;
     }
 
+    public void setOffsetStart(int start) {
+    	if (offsets == null)
+            offsets = new OffsetPosition();
+        offsets.start = start;
+    }
+
+    public int getOffsetStart() {
+    	if (offsets != null)
+	        return offsets.start;
+	    else return -1;
+    }
+
+    public void setOffsetEnd(int end) {
+    	if (offsets == null)
+            offsets = new OffsetPosition();
+        offsets.end = end;
+    }
+
+    public int getOffsetEnd() {
+    	if (offsets != null)
+	        return offsets.end;
+	    else return -1;
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append("[ ");
         if (notations != null)
             builder.append(notations.toString()).append("\t");
         if (type != null)
@@ -88,7 +115,10 @@ public class Unit {
         if (names != null)
             builder.append(names.toString()).append("\t");
         if (rawName != null)
-            builder.append(rawName.toString());
+            builder.append(rawName.toString()).append("\t");
+        if (offsets != null)
+            builder.append(offsets.toString());
+        builder.append(" ]");
         return builder.toString();
     }
 

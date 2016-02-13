@@ -1,5 +1,10 @@
 package org.grobid.core.engines;
 
+import nu.xom.Attribute;
+import nu.xom.Element;
+import nu.xom.Node;
+import nu.xom.Text;
+
 import org.grobid.core.GrobidModels;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
@@ -19,6 +24,8 @@ import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.utilities.LayoutTokensUtil;
 import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.document.xml.XmlBuilderUtils;
+import org.grobid.core.document.xml.NodeChildrenIterator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +35,15 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import java.io.File;
 import java.io.IOException;
+import java.io.FilenameFilter;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+
+import static org.grobid.core.document.xml.XmlBuilderUtils.fromString;
+import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 
 /**
  * Quantity/measurement extraction.
@@ -38,6 +51,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * @author Patrice Lopez
  */
 public class QuantityParser extends AbstractParser {
+    private static final Logger logger = LoggerFactory.getLogger(FullTextParser.class);
 
     private QuantityLexicon quantityLexicon = null;
 
@@ -79,7 +93,7 @@ public class QuantityParser extends AbstractParser {
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
-            measurements = resultExtraction(res, tokenizations);
+            measurements = resultExtraction(text, res, tokenizations);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
@@ -87,16 +101,21 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
+    public int batchProcess(String inputDirectory,
+                             String outputDirectory,
+                             boolean isRecursive) throws IOException {
+        return 0;
+    }
+
     /**
      * Extract identified quantities from a labelled text.
      */
-    public List<Measurement> resultExtraction(String result,
+    public List<Measurement> resultExtraction(String text,
+                                              String result,
                                               List<LayoutToken> tokenizations) {
         List<Measurement> measurements = new ArrayList<>();
 
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.QUANTITIES, result, tokenizations);
-
-        String tokenLabel = null;
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
         Unit currentUnit = new Unit();
@@ -113,7 +132,8 @@ public class QuantityParser extends AbstractParser {
 
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             List<LayoutToken> theTokens = cluster.concatTokens();
-            String clusterContent = LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
+            String clusterContent = //LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
+                LayoutTokensUtil.toText(cluster.concatTokens());
 
             int endPos = pos;
             for (LayoutToken token : theTokens) {
@@ -121,108 +141,216 @@ public class QuantityParser extends AbstractParser {
                     endPos += token.getText().length();
             }
 
-            if (clusterLabel == TaggingLabel.VALUE_ATOMIC) {
-                System.out.println("atomic value: " + clusterContent);
-                if (isMeasurementValid(currentMeasurement)) {
-                    measurements.add(currentMeasurement);
-                    currentMeasurement = new Measurement();
-                    currentUnit = new Unit();
-                }
-                currentQuantity = new Quantity();
-                currentQuantity.setRawValue(clusterContent);
-                currentQuantity.setOffsetStart(pos);
-                currentQuantity.setOffsetEnd(endPos);
-                if (currentUnit.getRawName() != null) {
-                    currentQuantity.setRawUnit(currentUnit);
-                    currentMeasurement.setAtomicQuantity(currentQuantity);
-                    measurements.add(currentMeasurement);
-                    currentMeasurement = new Measurement();
+            switch (clusterLabel) {
+                case QUANTITY_VALUE_ATOMIC:
+                    System.out.println("atomic value: " + clusterContent);
+                    if (isMeasurementValid(currentMeasurement)) {
+                        measurements.add(currentMeasurement);
+                        currentMeasurement = new Measurement();
+                        currentUnit = new Unit();
+                    }
                     currentQuantity = new Quantity();
-                } else {
-                    // unit will be attached later
-                    currentMeasurement.setType(UnitUtilities.Measurement_Type.VALUE);
-                    currentMeasurement.setAtomicQuantity(currentQuantity);
-                    openMeasurement = UnitUtilities.Measurement_Type.VALUE;
-                }
-            } else if (clusterLabel == TaggingLabel.VALUE_LEAST) {
-                System.out.println("value least: " + clusterContent);
-                if (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL) {
-                    if (isMeasurementValid(currentMeasurement)) {
-                        measurements.add(currentMeasurement);
-                        currentMeasurement = new Measurement();
-                        currentUnit = new Unit();
+                    currentQuantity.setRawValue(clusterContent);
+                    if (text.charAt(pos) == ' ') {
+                        pos++;
                     }
-                }
-                currentQuantity = new Quantity();
-                currentQuantity.setRawValue(clusterContent);
-                currentQuantity.setOffsetStart(pos);
-                currentQuantity.setOffsetEnd(endPos);
-                if (currentUnit.getRawName() != null)
-                    currentQuantity.setRawUnit(currentUnit);
-                currentMeasurement.setQuantityLeast(currentQuantity);
-                currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL);
-                openMeasurement = UnitUtilities.Measurement_Type.INTERVAL;
-            } else if (clusterLabel == TaggingLabel.VALUE_MOST) {
-                System.out.println("value most: " + clusterContent);
-                if (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL) {
-                    if (isMeasurementValid(currentMeasurement)) {
-                        measurements.add(currentMeasurement);
-                        currentMeasurement = new Measurement();
-                        currentUnit = new Unit();
-                    }
-                }
-                currentQuantity = new Quantity();
-                currentQuantity.setRawValue(clusterContent);
-                currentQuantity.setOffsetStart(pos);
-                currentQuantity.setOffsetEnd(endPos);
-                if (currentUnit.getRawName() != null) {
-                    currentQuantity.setRawUnit(currentUnit);
-                }
-                currentMeasurement.setQuantityMost(currentQuantity);
-                currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL);
-                openMeasurement = UnitUtilities.Measurement_Type.INTERVAL;
-            } else if (clusterLabel == TaggingLabel.VALUE_LIST) {
-                System.out.println("value in list: " + clusterContent);
-                if (openMeasurement != UnitUtilities.Measurement_Type.CONJUNCTION) {
-                    if (isMeasurementValid(currentMeasurement)) {
+                    currentQuantity.setOffsetStart(pos);
+                    if (text.charAt(endPos-1) == ' ')
+                        endPos--;
+                    currentQuantity.setOffsetEnd(endPos);
+                    if (currentUnit.getRawName() != null) {
+                        currentQuantity.setRawUnit(currentUnit);
+                        currentMeasurement.setAtomicQuantity(currentQuantity);
                         measurements.add(currentMeasurement);
                         currentMeasurement = new Measurement();
                         currentQuantity = new Quantity();
-                        currentUnit = new Unit();
+                    } else {
+                        // unit will be attached later
+                        currentMeasurement.setType(UnitUtilities.Measurement_Type.VALUE);
+                        currentMeasurement.setAtomicQuantity(currentQuantity);
+                        openMeasurement = UnitUtilities.Measurement_Type.VALUE;
                     }
-                }
-                currentQuantity.setRawValue(clusterContent);
-                currentQuantity.setOffsetStart(pos);
-                currentQuantity.setOffsetEnd(endPos);
-                if (currentUnit.getRawName() != null)
+                    break;
+                case QUANTITY_VALUE_LEAST:
+                    System.out.println("value least: " + clusterContent);
+                    if (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL) {
+                        if (isMeasurementValid(currentMeasurement)) {
+                            measurements.add(currentMeasurement);
+                            currentMeasurement = new Measurement();
+                            currentUnit = new Unit();
+                        }
+                    }
+                    currentQuantity = new Quantity();
+                    currentQuantity.setRawValue(clusterContent);
+                    if (text.charAt(pos) == ' ') {
+                        pos++;
+                    }
+                    currentQuantity.setOffsetStart(pos);
+                    if (text.charAt(endPos-1) == ' ')
+                        endPos--;
+                    currentQuantity.setOffsetEnd(endPos);
+                    if (currentUnit.getRawName() != null)
+                        currentQuantity.setRawUnit(currentUnit);
+                    currentMeasurement.setQuantityLeast(currentQuantity);
+                    currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL);
+                    openMeasurement = UnitUtilities.Measurement_Type.INTERVAL;
+                    break;
+                case QUANTITY_VALUE_MOST:
+                    System.out.println("value most: " + clusterContent);
+                    if (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL) {
+                        if (isMeasurementValid(currentMeasurement)) {
+                            measurements.add(currentMeasurement);
+                            currentMeasurement = new Measurement();
+                            currentUnit = new Unit();
+                        }
+                    }
+                    currentQuantity = new Quantity();
+                    currentQuantity.setRawValue(clusterContent);
+                    if (text.charAt(pos) == ' ') {
+                        pos++;
+                    }
+                    currentQuantity.setOffsetStart(pos);
+                    if (text.charAt(endPos-1) == ' ')
+                        endPos--;
+                    currentQuantity.setOffsetEnd(endPos);
+                    if (currentUnit.getRawName() != null) {
+                        currentQuantity.setRawUnit(currentUnit);
+                    }
+                    currentMeasurement.setQuantityMost(currentQuantity);
+                    currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL);
+                    openMeasurement = UnitUtilities.Measurement_Type.INTERVAL;
+                    break;
+                case QUANTITY_VALUE_LIST:
+                    System.out.println("value in list: " + clusterContent);
+                    if (openMeasurement != UnitUtilities.Measurement_Type.CONJUNCTION) {
+                        if (isMeasurementValid(currentMeasurement)) {
+                            measurements.add(currentMeasurement);
+                            currentMeasurement = new Measurement();
+                            currentQuantity = new Quantity();
+                            currentUnit = new Unit();
+                        }
+                    }
+                    currentQuantity.setRawValue(clusterContent);
+                    if (text.charAt(pos) == ' ') {
+                        pos++;
+                    }
+                    currentQuantity.setOffsetStart(pos);
+                    if (text.charAt(endPos-1) == ' ')
+                        endPos--;
+                    currentQuantity.setOffsetEnd(endPos);
+                    if (currentUnit.getRawName() != null)
+                        currentQuantity.setRawUnit(currentUnit);
+                    currentMeasurement.addQuantity(currentQuantity);
+                    openMeasurement = UnitUtilities.Measurement_Type.CONJUNCTION;
+                    break;
+                case QUANTITY_UNIT_LEFT:
+                    System.out.println("unit (left attachment): " + clusterContent);
+                    currentUnit.setRawName(clusterContent);
                     currentQuantity.setRawUnit(currentUnit);
-                currentMeasurement.addQuantity(currentQuantity);
-                openMeasurement = UnitUtilities.Measurement_Type.CONJUNCTION;
-            } else if (clusterLabel == TaggingLabel.UNIT_LEFT) {
-                System.out.println("unit (left attachment): " + clusterContent);
-                currentUnit.setRawName(clusterContent);
-                currentQuantity.setRawUnit(currentUnit);
-                if ((currentMeasurement.getQuantities() != null) && (currentMeasurement.getQuantities().size() > 0)) {
-                    for (Quantity quantity : currentMeasurement.getQuantities()) {
-                        if (quantity.getRawUnit() == null)
-                            quantity.setRawUnit(currentUnit);
-                        else
-                            break;
+                    if (text.charAt(pos) == ' ') {
+                        pos++;
                     }
-                }
-                currentUnit = new Unit();
-            } else if (clusterLabel == TaggingLabel.UNIT_RIGHT) {
-                System.out.println("unit (right attachment): " + clusterContent);
-                currentUnit.setRawName(clusterContent);
+                    currentUnit.setOffsetStart(pos);
+                    if (text.charAt(endPos-1) == ' ')
+                        endPos--;
+                    currentUnit.setOffsetEnd(endPos);
+                    if ((currentMeasurement.getQuantities() != null) && (currentMeasurement.getQuantities().size() > 0)) {
+                        for (Quantity quantity : currentMeasurement.getQuantities()) {
+                            if (quantity.getRawUnit() == null)
+                                quantity.setRawUnit(currentUnit);
+                            else
+                                break;
+                        }
+                    }
+                    currentUnit = new Unit();
+                    break;
+                case QUANTITY_UNIT_RIGHT:
+                    System.out.println("unit (right attachment): " + clusterContent);
+                    if (text.charAt(pos) == ' ') {
+                        pos++;
+                    }
+                    currentUnit.setOffsetStart(pos);
+                    if (text.charAt(endPos-1) == ' ')
+                        endPos--;
+                    currentUnit.setOffsetEnd(endPos);
+                    currentUnit.setRawName(clusterContent);
+                    break;
+                case QUANTITY_OTHER:
+                    break; 
+                default:
+                    logger.error("Warning: unexpected label in quantity parser: " + clusterLabel + " for " + clusterContent);
             }
-            pos = endPos + 1;
+            pos = endPos;
         }
 
         if (isMeasurementValid(currentMeasurement)) {
             measurements.add(currentMeasurement);
         }
 
+        measurements = postCorrection(measurements);
+
         return measurements;
+    }
+
+    /**
+     * Check the wellformness of a given list of measurements. 
+     * In particular, if intervals are not consistent, they are transformed 
+     * in atomic value measurements. 
+     */
+    private List<Measurement> postCorrection(List<Measurement> measurements) {
+        List<Measurement> newMeasurements = new ArrayList<Measurement>();
+
+        for(Measurement measurement : measurements) {
+            if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
+                newMeasurements.add(measurement);
+            }
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
+                List<Quantity> quantities = measurement.getQuantities();
+                if ( (quantities.size() == 1) || (measurement.getQuantityLeast() == null) || (measurement.getQuantityMost() == null) ) {
+                    Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
+                    Quantity quantity = null;
+                    if (quantities.size() == 1)
+                        quantity = measurement.getQuantityLeast();
+                    else if ( (quantities.size() == 2)  && (quantities.get(0) == null) )
+                        quantity = quantities.get(1);
+                    else if (quantities.size() == 2)
+                        quantity = measurement.getQuantityLeast();
+                    if (quantity != null) {
+                        newMeasurement.setAtomicQuantity(quantity);
+                        newMeasurements.add(newMeasurement);
+                    }
+                }
+                else if ( (quantities.size() == 2) && (measurement.getQuantityLeast() != null) && (measurement.getQuantityMost() != null) ) {
+                    // if the interval is expressed over a chunck of text which is too large, it is a recognition error
+                    // and we can replace it by two atomic measurements
+                    Quantity quantityLeast = measurement.getQuantityLeast();
+                    Quantity quantityMost = measurement.getQuantityMost();
+                    int startL = quantityLeast.getOffsetStart();
+                    int endL = quantityLeast.getOffsetEnd();
+                    int startM = quantityMost.getOffsetStart();
+                    int endM = quantityMost.getOffsetEnd();
+
+                    if ( (Math.abs(endL-startM) > 80) && (Math.abs(endM-startL) > 80) ) {
+                        // we replace the interval measurement by two atomic measurements
+                        Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
+                        newMeasurement.setAtomicQuantity(quantityLeast);
+                        newMeasurements.add(newMeasurement);
+                        newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
+                        newMeasurement.setAtomicQuantity(quantityMost);
+                        newMeasurements.add(newMeasurement);
+                    }
+                    else
+                        newMeasurements.add(measurement);
+                }
+                else
+                    newMeasurements.add(measurement);
+            }
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
+                newMeasurements.add(measurement);
+            }
+        }
+
+        return newMeasurements;
     }
 
     /**
@@ -246,23 +374,21 @@ public class QuantityParser extends AbstractParser {
 
         if (inputFile.endsWith(".txt") || inputFile.endsWith(".TXT")) {
             String text = FileUtils.readFileToString(file); 
-
-            StringBuilder tei = new StringBuilder();
-            tei.append(getTEIHeader(id));
-
-            tei.append("<TEI>");
+            Element root = getTEIHeader(id);
+            Element textNode = teiElement("text");
             // for the moment we suppose we have english only...
-            tei.append("\t<text xml:lang=\"en\">\n");
+            textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
 
             // we process the text paragraph by paragraph
             String lines[] = text.split("\n");
             StringBuilder paragraph = new StringBuilder();
+            List<Measurement> measurements = null;
             for(int i=0; i<lines.length; i++) {
                 String line = lines[i].trim();
                 if (line.length() != 0) {
                     paragraph.append(line).append("\n");
                 }
-                else if (paragraph.length() > 0) {
+                if ( ((line.length() == 0) || (i == lines.length-1)) && (paragraph.length() > 0) ) {
                     // we have a new paragraph
                     text = paragraph.toString().replace("\n", " ");
                     List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
@@ -289,16 +415,82 @@ public class QuantityParser extends AbstractParser {
                     catch(Exception e) {
                         throw new GrobidException("CRF labeling for quantity parsing failed.", e);
                     }
-                    List<Measurement> measurements = resultExtraction(res, tokenizations);
+                    measurements = resultExtraction(text, res, tokenizations);
+                    if (measurements != null) {
+                        System.out.println("\n");
+                        for (Measurement measurement : measurements) {
+                            System.out.println(measurement.toString());
+                        }
+                    }
 
-
+                    textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
+                    paragraph = new StringBuilder();
                 }
-                else
-                    continue;
             }
 
-            tei.append("\t</text>");
-            tei.append("</TEI>");
+            root.appendChild(textNode);
+            System.out.println(XmlBuilderUtils.toXml(root));
+            try {
+                FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root));
+            }
+            catch(IOException e) {
+                throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
+            }
+        }
+    }
+
+    @SuppressWarnings({"UnusedParameters"})
+    public int createTrainingBatch(String inputDirectory,
+                                   String outputDirectory, 
+                                   int ind) throws IOException {
+        try {
+            File path = new File(inputDirectory);
+            if (!path.exists()) {
+                throw new GrobidException("Cannot create training data because input directory can not be accessed: " + inputDirectory);
+            }
+
+            File pathOut = new File(outputDirectory);
+            if (!pathOut.exists()) {
+                throw new GrobidException("Cannot create training data because ouput directory can not be accessed: " + outputDirectory);
+            }
+
+            // we process all pdf files in the directory
+            File[] refFiles = path.listFiles(new FilenameFilter() {
+                public boolean accept(File dir, String name) {
+                    System.out.println(name);
+                    return name.endsWith(".pdf") || name.endsWith(".PDF") || 
+                           name.endsWith(".txt") || name.endsWith(".TXT") || 
+                           name.endsWith(".xml") || name.endsWith(".tei"); 
+                }
+            });
+
+            if (refFiles == null)
+                return 0;
+
+            System.out.println(refFiles.length + " files to be processed.");
+
+            int n = 0;
+            if (ind == -1) {
+                // for undefined identifier (value at -1), we initialize it to 0
+                n = 1;
+            }
+            for (final File file : refFiles) {
+                try {
+                    if (file.getAbsolutePath().endsWith(".txt")) {
+                        String pathTEI = outputDirectory + "/" + file.getName().replace(".txt", ".training.tei.xml");
+                        createTraining(file.getAbsolutePath(), pathTEI, n);
+                    }
+                } catch (final Exception exp) {
+                    logger.error("An error occured while processing the following pdf: " 
+                        + file.getPath() + ": " + exp);
+                }
+                if (ind != -1)
+                    n++;
+            }
+
+            return refFiles.length;
+        } catch (final Exception exp) {
+            throw new GrobidException("An exception occured while running Grobid batch.", exp);
         }
     }
 
@@ -350,37 +542,257 @@ public class QuantityParser extends AbstractParser {
         return result.toString();
     }
 
+    private Element trainingExtraction(List<Measurement> measurements, String text, List<LayoutToken> tokenizations) {
+        Element p = teiElement("p");
+
+        int pos = 0;
+        for(Measurement measurement : measurements) {
+            Element measure = teiElement("measure");
+            List<Quantity> quantities = measurement.getQuantities();
+            if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
+                measure.addAttribute(new Attribute("type", "value"));
+                if (quantities.size() != 1)
+                    continue;
+                Quantity quantity = quantities.get(0);
+                int startQ = quantity.getOffsetStart();
+                int endQ = quantity.getOffsetEnd();
+
+                Element numNode = teiElement("num");
+                numNode.appendChild(text.substring(startQ, endQ));
+
+                Unit unit = quantity.getRawUnit();
+                int startU = -1;
+                int endU = -1; 
+                Element unitNode = null;
+                if (unit != null) {
+                    startU = unit.getOffsetStart();
+                    endU = unit.getOffsetEnd();
+
+                    unitNode = teiElement("measure");
+                    unitNode.addAttribute(new Attribute("type", "?"));
+                    unitNode.addAttribute(new Attribute("unit", "?"));
+                    unitNode.appendChild(text.substring(startU, endU));
+                }
+
+                int initPos = pos;
+                int firstPos = pos;
+                while(pos < text.length()) {
+                    if (pos == startQ) {
+                        if (initPos == firstPos)
+                           p.appendChild(text.substring(firstPos, startQ));
+                       else
+                           measure.appendChild(text.substring(initPos, startQ));
+                        measure.appendChild(numNode);
+                        pos = endQ;
+                        initPos = pos;
+                    }
+                    if (pos == startU) {
+                        if (initPos == firstPos)
+                            p.appendChild(text.substring(firstPos, startU));
+                        else
+                            measure.appendChild(text.substring(initPos, startU));
+                        measure.appendChild(unitNode);
+                        pos = endU;
+                        initPos = pos;
+                    }
+
+                    if ( (pos >= endQ) && (pos >= endU) ) 
+                        break; 
+                    pos++;
+                }
+            }
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
+                measure.addAttribute(new Attribute("type", "interval"));
+                if (quantities.size() != 2)
+                    continue;
+                Quantity quantityLeast = quantities.get(0);
+                Quantity quantityMost = quantities.get(1);
+
+                int startQL = quantityLeast.getOffsetStart();
+                int endQL = quantityLeast.getOffsetEnd();
+
+                Element numNodeL = teiElement("num");
+                numNodeL.addAttribute(new Attribute("atLeast", "?"));
+                numNodeL.appendChild(text.substring(startQL, endQL));
+
+                Unit unitL = quantityLeast.getRawUnit();
+                int startUL = -1;
+                int endUL = -1;
+
+                Element unitNodeL = null;
+                if (unitL != null) {
+                    startUL = unitL.getOffsetStart();
+                    endUL = unitL.getOffsetEnd();
+
+                    unitNodeL = teiElement("measure");
+                    unitNodeL.addAttribute(new Attribute("type", "?"));
+                    unitNodeL.addAttribute(new Attribute("unit", "?"));
+                    unitNodeL.appendChild(text.substring(startUL, endUL));
+                }
+
+                int startQM = quantityMost.getOffsetStart();
+                int endQM = quantityMost.getOffsetEnd();
+                Unit unitM = quantityMost.getRawUnit();
+
+                Element numNodeM = teiElement("num");
+                numNodeM.addAttribute(new Attribute("atMost", "?"));
+                numNodeM.appendChild(text.substring(startQM, endQM));
+
+                int startUM = -1;
+                int endUM = -1;
+                Element unitNodeM = null;
+                if (unitM != null) {
+                    startUM = unitM.getOffsetStart();
+                    endUM = unitM.getOffsetEnd();
+                    
+                    unitNodeM = teiElement("measure");
+                    unitNodeM.addAttribute(new Attribute("type", "?"));
+                    unitNodeM.addAttribute(new Attribute("unit", "?"));
+                    unitNodeM.appendChild(text.substring(startUM, endUM));
+                }
+
+                int initPos = pos;
+                int firstPos = pos;
+                while(pos < text.length()) {
+                    if (pos == startQL) {
+                        if (initPos == firstPos)
+                           p.appendChild(text.substring(firstPos, startQL));
+                       else
+                           measure.appendChild(text.substring(initPos, startQL));
+                        measure.appendChild(numNodeL);
+                        pos = endQL;
+                        initPos = pos;
+                    }
+                    if (pos == startQM) {
+                        if (initPos == firstPos)
+                            p.appendChild(text.substring(firstPos, startQM));
+                        else
+                            measure.appendChild(text.substring(initPos, startQM));
+                        measure.appendChild(numNodeM);
+                        pos = endQM;
+                        initPos = pos;
+                    }
+                    if (pos == startUL) {
+                        if (initPos == firstPos)
+                            p.appendChild(text.substring(firstPos, startUL));
+                        else
+                            measure.appendChild(text.substring(initPos, startUL));
+                        measure.appendChild(unitNodeL);
+                        pos = endUL;
+                        initPos = pos;
+                    }
+                    if ((pos == startUM) && (startUM != startUL) ) {
+                        if (initPos == firstPos)
+                            p.appendChild(text.substring(firstPos, startUM));
+                        else
+                            measure.appendChild(text.substring(initPos, startUM));
+                        measure.appendChild(unitNodeM);
+                        pos = endUM;
+                        initPos = pos;
+                    }
+
+                    if ( (pos >= endQL) && (pos >= endQM) && (pos >= endUL) && (pos >= endUM) )
+                        break; 
+                    pos++;
+                }
+            }
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
+                measure.addAttribute(new Attribute("type", "list"));
+                for(Quantity quantity : quantities) {
+                    int startQ = quantity.getOffsetStart();
+                    int endQ = quantity.getOffsetEnd();
+
+                    Element numNode = teiElement("num");
+                    numNode.appendChild(text.substring(startQ, endQ));
+
+                    Unit unit = quantity.getRawUnit();
+                    int startU = -1;
+                    int endU = -1; 
+                    Element unitNode = null;
+                    if (unit != null) {
+                        startU = unit.getOffsetStart();
+                        endU = unit.getOffsetEnd();
+
+                        unitNode = teiElement("measure");
+                        unitNode.addAttribute(new Attribute("type", "?"));
+                        unitNode.addAttribute(new Attribute("unit", "?"));
+                        unitNode.appendChild(text.substring(startU, endU));
+                    }
+
+                    int initPos = pos;
+                    int firstPos = pos;
+                    while(pos < text.length()) {
+                        if (pos == startQ) {
+                            if (initPos == firstPos)
+                               p.appendChild(text.substring(firstPos, startQ));
+                           else
+                               measure.appendChild(text.substring(initPos, startQ));
+                            measure.appendChild(numNode);
+                            pos = endQ;
+                            initPos = pos;
+                        }
+                        if (pos == startU) {
+                            if (initPos == firstPos)
+                                p.appendChild(text.substring(firstPos, startU));
+                            else
+                                measure.appendChild(text.substring(initPos, startU));
+                            measure.appendChild(unitNode);
+                            pos = endU;
+                            initPos = pos;
+                        }
+
+                        if ( (pos >= endQ) && (pos >= endU) ) 
+                            break; 
+                        pos++;
+                    }
+                }
+            }
+            p.appendChild(measure);    
+        }
+        p.appendChild(text.substring(pos, text.length()));
+        
+        return p;    
+    }
+
     private boolean isMeasurementValid(Measurement currentMeasurement) {
         return currentMeasurement.getType() != null &&
                 currentMeasurement.getQuantities() != null && currentMeasurement.getQuantities().size() > 0;
 	}
 
-    private String getTEIHeader(int id) {
-        StringBuilder header = new StringBuilder();
+    private Element getTEIHeader(int id) {
+        Element tei = teiElement("tei");
+        Element teiHeader = teiElement("teiHeader");
 
-        header.append("<?xml version=\"1.0\" ?>").append("\n").append("<tei>").append("\n\t").append("<teiHeader>");
         if (id != -1) {
-            header.append("\n\t\t").append("<fileDesc xml:id=\"_" + id + "\"/>");
+            Element fileDesc = teiElement("fileDesc");
+            fileDesc.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", "_" + id));
+            teiHeader.appendChild(fileDesc);
         }
 
-        header.append("\n\t\t<encodingDesc>\n");
-        header.append("\t\t\t<appInfo>\n");
+        Element encodingDesc = teiElement("encodingDesc");
+
+        Element appInfo = teiElement("appInfo");
 
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
         df.setTimeZone(tz);
         String dateISOString = df.format(new java.util.Date());
 
-        header.append("\t\t\t\t<application version=\"").append(GrobidProperties.getVersion())
-            .append("\" ident=\"GROBID\" when=\"" + dateISOString + "\">\n");
-        header.append("\t\t\t\t\t<ref target=\"https://github.com/kermitt2/grobid\">GROBID - ")
-            .append("A machine learning software for extracting information from scholarly documents</ref>\n");
-        header.append("\t\t\t\t</application>\n");
-        header.append("\t\t\t</appInfo>\n");
-        header.append("\t\t</encodingDesc>\n");
+        Element application = teiElement("application");
+        application.addAttribute(new Attribute("version", GrobidProperties.getVersion()));
+        application.addAttribute(new Attribute("ident", "GROBID"));
+        application.addAttribute(new Attribute("when", dateISOString));
 
-        header.append("\t").append("</teiHeader>");
+        Element ref = teiElement("ref");
+        ref.addAttribute(new Attribute("target", "https://github.com/kermitt2/grobid"));
+        ref.appendChild("A machine learning software for extracting information from scholarly documents");
 
-        return header.toString();
+        application.appendChild(ref);
+        appInfo.appendChild(application);
+        encodingDesc.appendChild(appInfo);
+        teiHeader.appendChild(encodingDesc);
+        tei.appendChild(teiHeader);
+
+        return tei;
     }
 }

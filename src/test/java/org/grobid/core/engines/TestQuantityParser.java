@@ -22,7 +22,7 @@ public class TestQuantityParser {
         LibraryLoader.load();
     }
 
-    @Test
+    /*@Test
     public void testQuantityParser1() throws Exception {
 
         String text = IOUtils.toString(
@@ -60,7 +60,7 @@ public class TestQuantityParser {
         } else {
             System.out.println("No measurement found.");
         }
-    }
+    }*/
 
     /*@Test
     public void testQuantityParser3() throws Exception {
@@ -80,4 +80,11 @@ public class TestQuantityParser {
             System.out.println("No measurement found.");
         }
     }*/
+
+    @Test
+    public void testCreateTrainingDataFromText() throws Exception {
+        QuantityParser parser = new QuantityParser();
+        parser.createTraining("./src/test/resources/test1.txt",
+                              "./src/test/resources/test1.training.tei.xml",0);
+    }
 }

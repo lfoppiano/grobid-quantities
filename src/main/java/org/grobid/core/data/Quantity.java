@@ -22,14 +22,14 @@ public class Quantity {
     // as a condition, when the normalized unit is instanciated, its type must be the same as the type
     // of the quantity
 
+    // offset for the value only, the offsets for the unit expression are available in the raw Unit object
+    // (given the fact that the same unit can be shared by several Quantity object)
     private OffsetPosition offsets = null;
 
     public Quantity() {
-        offsets = new OffsetPosition();
     }
 
     public Quantity(String rawString) {
-        offsets = new OffsetPosition();
         this.rawString = rawString;
     }
 
@@ -82,19 +82,27 @@ public class Quantity {
     }
 
     public void setOffsetStart(int start) {
+        if (offsets == null)
+            offsets = new OffsetPosition();
         offsets.start = start;
     }
 
     public int getOffsetStart() {
-        return offsets.start;
+        if (offsets != null)
+            return offsets.start;
+        else return -1;
     }
 
     public void setOffsetEnd(int end) {
+        if (offsets == null)
+            offsets = new OffsetPosition();
         offsets.end = end;
     }
 
     public int getOffsetEnd() {
-        return offsets.end;
+        if (offsets != null)
+            return offsets.end;
+        else return -1;
     }
 
     public String toString() {

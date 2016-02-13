@@ -55,6 +55,12 @@ public class Measurement {
         quantities.add(quantity);
     }
 
+    public Quantity getQuantityAtomic() {
+    	if (quantities.size() != 1)
+    		return null;
+    	return quantities.get(0);
+    }
+
     public void setQuantityLeast(Quantity quantity) {
         if (quantities == null) {
             quantities = new ArrayList<Quantity>();
@@ -63,6 +69,12 @@ public class Measurement {
             quantities.add(quantity);
         else if (quantities.size() >= 1)
             quantities.set(0, quantity);
+    }
+
+    public Quantity getQuantityLeast() {
+    	if (quantities.size() != 2)
+    		return null;
+    	return quantities.get(0);
     }
 
     public void setQuantityMost(Quantity quantity) {
@@ -76,6 +88,12 @@ public class Measurement {
             quantities.add(quantity);
         else
             quantities.set(1, quantity);
+    }
+
+    public Quantity getQuantityMost() {
+    	if (quantities.size() != 2)
+    		return null;
+    	return quantities.get(1);
     }
 
     public String toString() {
