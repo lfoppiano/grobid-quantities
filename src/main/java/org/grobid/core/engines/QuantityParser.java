@@ -16,6 +16,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.TextUtilities;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.UnitUtilities;
+import org.grobid.core.utilities.MeasurementUtilities;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
@@ -26,6 +27,7 @@ import org.grobid.core.utilities.LayoutTokensUtil;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.document.xml.NodeChildrenIterator;
+import org.grobid.core.sax.TextChunkSaxHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,9 @@ import java.io.FilenameFilter;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -256,7 +261,7 @@ public class QuantityParser extends AbstractParser {
                     currentUnit.setOffsetEnd(endPos);
                     if ((currentMeasurement.getQuantities() != null) && (currentMeasurement.getQuantities().size() > 0)) {
                         for (Quantity quantity : currentMeasurement.getQuantities()) {
-                            if (quantity.getRawUnit() == null)
+                            if ((quantity != null) && (quantity.getRawUnit() == null))
                                 quantity.setRawUnit(currentUnit);
                             else
                                 break;
@@ -287,71 +292,11 @@ public class QuantityParser extends AbstractParser {
             measurements.add(currentMeasurement);
         }
 
-        measurements = postCorrection(measurements);
+        measurements = MeasurementUtilities.postCorrection(measurements);
 
         return measurements;
     }
 
-    /**
-     * Check the wellformness of a given list of measurements. 
-     * In particular, if intervals are not consistent, they are transformed 
-     * in atomic value measurements. 
-     */
-    private List<Measurement> postCorrection(List<Measurement> measurements) {
-        List<Measurement> newMeasurements = new ArrayList<Measurement>();
-
-        for(Measurement measurement : measurements) {
-            if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
-                newMeasurements.add(measurement);
-            }
-            else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
-                List<Quantity> quantities = measurement.getQuantities();
-                if ( (quantities.size() == 1) || (measurement.getQuantityLeast() == null) || (measurement.getQuantityMost() == null) ) {
-                    Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
-                    Quantity quantity = null;
-                    if (quantities.size() == 1)
-                        quantity = measurement.getQuantityLeast();
-                    else if ( (quantities.size() == 2)  && (quantities.get(0) == null) )
-                        quantity = quantities.get(1);
-                    else if (quantities.size() == 2)
-                        quantity = measurement.getQuantityLeast();
-                    if (quantity != null) {
-                        newMeasurement.setAtomicQuantity(quantity);
-                        newMeasurements.add(newMeasurement);
-                    }
-                }
-                else if ( (quantities.size() == 2) && (measurement.getQuantityLeast() != null) && (measurement.getQuantityMost() != null) ) {
-                    // if the interval is expressed over a chunck of text which is too large, it is a recognition error
-                    // and we can replace it by two atomic measurements
-                    Quantity quantityLeast = measurement.getQuantityLeast();
-                    Quantity quantityMost = measurement.getQuantityMost();
-                    int startL = quantityLeast.getOffsetStart();
-                    int endL = quantityLeast.getOffsetEnd();
-                    int startM = quantityMost.getOffsetStart();
-                    int endM = quantityMost.getOffsetEnd();
-
-                    if ( (Math.abs(endL-startM) > 80) && (Math.abs(endM-startL) > 80) ) {
-                        // we replace the interval measurement by two atomic measurements
-                        Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
-                        newMeasurement.setAtomicQuantity(quantityLeast);
-                        newMeasurements.add(newMeasurement);
-                        newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
-                        newMeasurement.setAtomicQuantity(quantityMost);
-                        newMeasurements.add(newMeasurement);
-                    }
-                    else
-                        newMeasurements.add(measurement);
-                }
-                else
-                    newMeasurements.add(measurement);
-            }
-            else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
-                newMeasurements.add(measurement);
-            }
-        }
-
-        return newMeasurements;
-    }
 
     /**
      * Process the content of the specified input file and format the result as training data.
@@ -366,77 +311,162 @@ public class QuantityParser extends AbstractParser {
      */
     public void createTraining(String inputFile,
                                String pathTEI,
-                               int id) throws IOException {
+                               int id) throws Exception {
         File file = new File(inputFile);
         if (!file.exists()) {
             throw new GrobidException("Cannot create training data because input file can not be accessed: " + inputFile);
         }
 
+        Element root = getTEIHeader(id);
         if (inputFile.endsWith(".txt") || inputFile.endsWith(".TXT")) {
-            String text = FileUtils.readFileToString(file); 
-            Element root = getTEIHeader(id);
-            Element textNode = teiElement("text");
-            // for the moment we suppose we have english only...
-            textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+            root = createTrainingText(file, root);
+        }
+        else if (inputFile.endsWith(".xml") || inputFile.endsWith(".XML") || inputFile.endsWith(".tei") || inputFile.endsWith(".TEI")) {
+            root = createTrainingXML(file, root);
+        }
+        else if (inputFile.endsWith(".pdf") || inputFile.endsWith(".PDF")) {
+            root = createTrainingPDF(file, root);
+        }
 
-            // we process the text paragraph by paragraph
-            String lines[] = text.split("\n");
-            StringBuilder paragraph = new StringBuilder();
-            List<Measurement> measurements = null;
-            for(int i=0; i<lines.length; i++) {
-                String line = lines[i].trim();
-                if (line.length() != 0) {
-                    paragraph.append(line).append("\n");
-                }
-                if ( ((line.length() == 0) || (i == lines.length-1)) && (paragraph.length() > 0) ) {
-                    // we have a new paragraph
-                    text = paragraph.toString().replace("\n", " ");
-                    List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
+//System.out.println(XmlBuilderUtils.toXml(root));
+        try {
+            FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root));
+        }
+        catch(IOException e) {
+            throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
+        }
+    }
 
-                    if (tokenizations.size() == 0)
-                        continue;
+    private Element createTrainingText(File file, Element root) throws IOException {
+        String text = FileUtils.readFileToString(file); 
+            
+        Element textNode = teiElement("text");
+        // for the moment we suppose we have english only...
+        textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
 
-                    String ress = null;
-                    List<String> texts = new ArrayList<String>();
-                    for (LayoutToken token : tokenizations) {
-                        if (!token.getText().equals(" ")) {
-                            texts.add(token.getText());
-                        }
-                    }
-                    
-                    // to store unit term positions
-                    List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
-                    unitTokenPositions = quantityLexicon.inUnitNames(texts);
-                    ress = addFeatures(texts, unitTokenPositions);
-                    String res = null;
-                    try {
-                        res = label(ress);
-                    }
-                    catch(Exception e) {
-                        throw new GrobidException("CRF labeling for quantity parsing failed.", e);
-                    }
-                    measurements = resultExtraction(text, res, tokenizations);
-                    if (measurements != null) {
-                        System.out.println("\n");
-                        for (Measurement measurement : measurements) {
-                            System.out.println(measurement.toString());
-                        }
-                    }
-
-                    textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
-                    paragraph = new StringBuilder();
-                }
+        // we process the text paragraph by paragraph
+        String lines[] = text.split("\n");
+        StringBuilder paragraph = new StringBuilder();
+        List<Measurement> measurements = null;
+        for(int i=0; i<lines.length; i++) {
+            String line = lines[i].trim();
+            if (line.length() != 0) {
+                paragraph.append(line).append("\n");
             }
+            if ( ((line.length() == 0) || (i == lines.length-1)) && (paragraph.length() > 0) ) {
+                // we have a new paragraph
+                text = paragraph.toString().replace("\n", " ").replace("\r", " ");
+                List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
 
-            root.appendChild(textNode);
-            System.out.println(XmlBuilderUtils.toXml(root));
-            try {
-                FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root));
-            }
-            catch(IOException e) {
-                throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
+                if (tokenizations.size() == 0)
+                    continue;
+
+                String ress = null;
+                List<String> texts = new ArrayList<String>();
+                for (LayoutToken token : tokenizations) {
+                    if (!token.getText().equals(" ")) {
+                        texts.add(token.getText());
+                    }
+                }
+                
+                // to store unit term positions
+                List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
+                unitTokenPositions = quantityLexicon.inUnitNames(texts);
+                ress = addFeatures(texts, unitTokenPositions);
+                String res = null;
+                try {
+                    res = label(ress);
+                }
+                catch(Exception e) {
+                    throw new GrobidException("CRF labeling for quantity parsing failed.", e);
+                }
+                measurements = resultExtraction(text, res, tokenizations);
+                /*if (measurements != null) {
+                    System.out.println("\n");
+                    for (Measurement measurement : measurements) {
+                        System.out.println(measurement.toString());
+                    }
+                }*/
+
+                textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
+                root.appendChild(textNode);
+                paragraph = new StringBuilder();
             }
         }
+
+        return root;
+    }
+
+    private Element createTrainingXML(File file, Element root) throws IOException {
+        List<Measurement> measurements = null;
+        
+        Element textNode = teiElement("text");
+        // for the moment we suppose we have english only...
+        textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+
+        try {
+            // get a factory for SAX parser
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+
+            TextChunkSaxHandler handler = new TextChunkSaxHandler();
+
+            //get a new instance of parser
+            SAXParser p = spf.newSAXParser();
+            p.parse(file, handler);
+
+            List<String> chunks = handler.getChunks();
+            for(String text : chunks) {
+                text = text.replace("\n", " ").replace("\t", " ").replace(" ", " "); 
+                // the last one is a special "large" space missed by the regex "\\p{Space}+" used on the SAX parser
+                if (text.trim().length() == 0) 
+                    continue;
+                List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
+
+                if (tokenizations.size() == 0)
+                    continue;
+
+                String ress = null;
+                List<String> texts = new ArrayList<String>();
+                for (LayoutToken token : tokenizations) {
+                    if (!token.getText().equals(" ")) {
+                        texts.add(token.getText());
+                    }
+                }
+                
+                // to store unit term positions
+                List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
+                unitTokenPositions = quantityLexicon.inUnitNames(texts);
+                ress = addFeatures(texts, unitTokenPositions);
+                String res = null;
+                try {
+                    res = label(ress);
+                }
+                catch(Exception e) {   
+                    throw new GrobidException("CRF labeling for quantity parsing failed.", e);
+                }
+                measurements = resultExtraction(text, res, tokenizations);
+                /*if (measurements != null) {
+                    System.out.println("\n");
+                    for (Measurement measurement : measurements) {
+                        System.out.println(measurement.toString());
+                    }
+                }*/
+
+                textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
+            }
+            root.appendChild(textNode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath());
+        }
+
+        return root;
+    }
+
+    private Element createTrainingPDF(File file, Element root) throws IOException {
+
+        return root;
     }
 
     @SuppressWarnings({"UnusedParameters"})
@@ -460,7 +490,8 @@ public class QuantityParser extends AbstractParser {
                     System.out.println(name);
                     return name.endsWith(".pdf") || name.endsWith(".PDF") || 
                            name.endsWith(".txt") || name.endsWith(".TXT") || 
-                           name.endsWith(".xml") || name.endsWith(".tei"); 
+                           name.endsWith(".xml") || name.endsWith(".tei") || 
+                           name.endsWith(".XML") || name.endsWith(".TEI"); 
                 }
             });
 
@@ -476,10 +507,8 @@ public class QuantityParser extends AbstractParser {
             }
             for (final File file : refFiles) {
                 try {
-                    if (file.getAbsolutePath().endsWith(".txt")) {
-                        String pathTEI = outputDirectory + "/" + file.getName().replace(".txt", ".training.tei.xml");
-                        createTraining(file.getAbsolutePath(), pathTEI, n);
-                    }
+                    String pathTEI = outputDirectory + "/" + file.getName().substring(0, file.getName().length()-4) + ".training.tei.xml";
+                    createTraining(file.getAbsolutePath(), pathTEI, n);
                 } catch (final Exception exp) {
                     logger.error("An error occured while processing the following pdf: " 
                         + file.getPath() + ": " + exp);
