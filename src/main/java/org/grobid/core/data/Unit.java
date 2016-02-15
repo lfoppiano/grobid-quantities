@@ -90,7 +90,7 @@ public class Unit {
     public int getOffsetStart() {
     	if (offsets != null)
 	        return offsets.start;
-	    else 
+	    else
 	    	return -1;
     }
 
@@ -103,7 +103,7 @@ public class Unit {
     public int getOffsetEnd() {
         if (offsets != null)
 	        return offsets.end;
-	    else 
+	    else
 	    	return -1;
     }
 
@@ -123,12 +123,13 @@ public class Unit {
         if (offsets != null)
             builder.append(offsets.toString());
         builder.append(" ]");
+
         return builder.toString();
     }
 
-    /*public boolean isEmpty() {
+    public boolean isEmpty() {
         return (rawName != null);
-    }*/
+    }
 
     public String toJson() {
     	JsonStringEncoder encoder = JsonStringEncoder.getInstance();

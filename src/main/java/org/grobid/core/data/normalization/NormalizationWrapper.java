@@ -2,16 +2,17 @@ package org.grobid.core.data.normalization;
 
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import tec.units.ri.unit.BaseUnit;
+import tec.units.ri.unit.ProductUnit;
 import tec.units.ri.unit.TransformedUnit;
 
+import javax.measure.Dimension;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.Bootstrap;
 import javax.measure.spi.UnitFormatService;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.apache.commons.collections4.MapUtils.isEmpty;
 
 /**
  * Created by lfoppiano on 14.02.16.
@@ -27,7 +28,17 @@ public class NormalizationWrapper {
     }
 
 
-    public Map<String, Integer> extractUnitProducts(String rawUnit) throws NormalizationException {
+    public Quantity normalizeQuantityToBaseUnits(Quantity quantity) throws NormalizationException {
+        if (quantity.isEmpty()) {
+            return quantity;    //or throw new NormalizationException() :-)
+        }
+        javax.measure.Unit parsedUnit = parseUnit(quantity.getRawUnit().getRawName());
+
+        return normalizeQuantityToBaseUnits(quantity, parsedUnit);
+    }
+
+
+    protected javax.measure.Unit parseUnit(String rawUnit) throws NormalizationException {
         javax.measure.Unit parsedUnit = null;
 
         try {
@@ -46,85 +57,80 @@ public class NormalizationWrapper {
                     "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
         }
 
-        Map<javax.measure.Unit, Integer> products = parsedUnit.getProductUnits();
-        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
-
-        if (isEmpty(products)) {
-            wrappedUnitProducts.put(parsedUnit.getSymbol(), 1);
-        } else {
-            for (Map.Entry<javax.measure.Unit, Integer> unit : products.entrySet()) {
-                if (unit.getKey().getSymbol() != null) {
-                    wrappedUnitProducts.put(unit.getKey().getSymbol(), unit.getValue());
-                } else {
-                    String unitName = this.format.format(unit.getKey());
-                    wrappedUnitProducts.put(unitName, unit.getValue());
-                }
-            }
-        }
-
-        return wrappedUnitProducts;
+        return parsedUnit;
     }
 
+    protected Quantity normalizeQuantityToBaseUnits(Quantity quantity, javax.measure.Unit unit) {
 
-    public Quantity normalizeQuantity(Quantity quantity) throws NormalizationException {
-        if (quantity == null) {
-            return null;    //or throw new NormalizationException() :-)
-        }
-        else if (quantity.getRawUnit() == null) {
-            // unit not yet extracted for this quantity
-            return quantity;    //or throw new NormalizationException() :-)
-        }
-        else if (quantity.getRawUnit().getRawName() == null) {
-            // unknown unit for the quantity
-            return quantity;    //or throw new NormalizationException() :-)
-        }
-
-        String rawUnit = quantity.getRawUnit().getRawName();
-
-        javax.measure.Unit parsedUnit = null;
-        try {
-            parsedUnit = format.parse(rawUnit);
-        } catch (ParserException pe) {
-            throw new NormalizationException("The value " + rawUnit + "cannot be normalized. It is either not a valid unit" +
-                    "or it is not recognized from the available parsers.", pe);
-        }
-
-        Map<javax.measure.Unit, Integer> products = parsedUnit.getProductUnits();
+        boolean partialResult = false;
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
-
-        if (isEmpty(products)) {    //basic unit m, km and so on
-            populateNormalizedQuantityValue(quantity, parsedUnit);
-            wrappedUnitProducts.put(parsedUnit.getSymbol(), 1);
-        } else {
-            for (Map.Entry<javax.measure.Unit, Integer> unit : products.entrySet()) {
-                if (unit.getKey().getSymbol() != null) {
-                    wrappedUnitProducts.put(unit.getKey().getSymbol(), unit.getValue());
-                } else {    //symbol = null in non basic unit.
-                    populateNormalizedQuantityValue(quantity, unit.getKey());
-
-                    String unitName = this.format.format(unit.getKey());
-                    wrappedUnitProducts.put(unitName, unit.getValue());
-                }
-            }
-        }
-        quantity.setProductForm(wrappedUnitProducts);
-
-        return quantity;
-    }
-
-    private Quantity populateNormalizedQuantityValue(Quantity quantity, javax.measure.Unit unit) {
         Unit normalizedUnit = new Unit();
         if (unit instanceof TransformedUnit) {
             TransformedUnit transformedUnit = (TransformedUnit) unit;
             normalizedUnit.setRawName(transformedUnit.getParentUnit().toString());
             quantity.setNormalizedUnit(normalizedUnit);
             quantity.setNormalizedValue(transformedUnit.getConverter().convert(Double.parseDouble(quantity.getRawValue())));
+            wrappedUnitProducts.put(transformedUnit.getSymbol(), 1);
+        } else if (unit instanceof ProductUnit) {
+            ProductUnit productUnit = (ProductUnit) unit;
+//            Map<String, Integer> products = extractProduct(productUnit);
+//            quantity.setProductForm(products);
+
+            Map<javax.measure.Unit, Integer> productsUnit = productUnit.getProductUnits();
+            Dimension dimensions = productUnit.getDimension();
+
+            Map<javax.measure.Dimension, Integer> productDimensions = (Map<Dimension, Integer>) dimensions.getProductDimensions();
+
+            for (Map.Entry<javax.measure.Unit, Integer> productFactor : productsUnit.entrySet()) {
+                //String unitName = this.format.format(productFactor.getKey());
+
+                javax.measure.Unit transformedUnit = productFactor.getKey();
+
+                double converted = 0.0;
+                if (!partialResult) {
+                    converted = Double.parseDouble(quantity.getRawValue());
+                } else {
+                    converted = quantity.getNormalizedValue();
+                }
+
+                Integer pow = productDimensions.get(transformedUnit.getDimension());
+                double partialCount = 1.0;
+                if (transformedUnit instanceof TransformedUnit) {
+                    if (pow > 0) {
+                        partialCount = ((TransformedUnit) transformedUnit).getConverter().convert(converted);
+                        converted = Math.pow(partialCount, pow);
+                    } else {
+                        partialCount = ((TransformedUnit) transformedUnit).getConverter().convert(1.0);
+                        converted = converted * Math.pow(partialCount, pow);
+                    }
+                }
+
+                quantity.setNormalizedValue(converted);
+                partialResult = true;
+            }
         } else {
             normalizedUnit.setRawName(unit.getSymbol());
             quantity.setNormalizedUnit(normalizedUnit);
             quantity.setNormalizedValue(Double.parseDouble(quantity.getRawValue()));
         }
 
+        quantity.setProductForm(wrappedUnitProducts);
         return quantity;
+    }
+
+    @Deprecated
+    protected Map<String, Integer> extractProduct(ProductUnit productUnit) {
+        Map<javax.measure.Unit, Integer> products = productUnit.getProductUnits();
+        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
+
+        for (Map.Entry<javax.measure.Unit, Integer> productFactor : products.entrySet()) {
+            if (productFactor.getKey().getSymbol() != null) {
+                wrappedUnitProducts.put(productFactor.getKey().getSymbol(), productFactor.getValue());
+            } else {
+                String unitName = this.format.format(productFactor.getKey());
+                wrappedUnitProducts.put(unitName, productFactor.getValue());
+            }
+        }
+        return wrappedUnitProducts;
     }
 }

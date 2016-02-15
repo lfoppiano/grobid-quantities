@@ -41,7 +41,7 @@ public class Measurement {
 
     public void addQuantity(Quantity quantity) {
     	if (quantities == null)
-    		quantities = new ArrayList<Quantity>();
+    		quantities = new ArrayList<>();
         quantities.add(quantity);
     }
 
@@ -103,7 +103,7 @@ public class Measurement {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(type.getName()).append(": ");
-        if ((quantities != null) && (quantities.size() > 0)) {
+        if (isNotEmpty(quantities)) {
 	        for (Quantity quantity : quantities) {
 	            if (quantity != null) {
 	                builder.append(quantity.toString());
