@@ -27,7 +27,10 @@ import org.grobid.core.utilities.LayoutTokensUtil;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.document.xml.NodeChildrenIterator;
+import org.grobid.core.document.Document;
 import org.grobid.core.sax.TextChunkSaxHandler;
+import org.grobid.core.engines.config.GrobidAnalysisConfig;
+import org.grobid.core.factory.GrobidFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +41,14 @@ import java.util.TimeZone;
 import java.io.File;
 import java.io.IOException;
 import java.io.FilenameFilter;
+import java.io.StringReader;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.InputSource;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -328,12 +333,14 @@ public class QuantityParser extends AbstractParser {
             root = createTrainingPDF(file, root);
         }
 
-//System.out.println(XmlBuilderUtils.toXml(root));
-        try {
-            FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root));
-        }
-        catch(IOException e) {
-            throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
+        if (root != null) { 
+            //System.out.println(XmlBuilderUtils.toXml(root));
+            try {
+                FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root));
+            }
+            catch(IOException e) {
+                throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
+            }
         }
     }
 
@@ -465,6 +472,79 @@ public class QuantityParser extends AbstractParser {
     }
 
     private Element createTrainingPDF(File file, Element root) throws IOException {
+        // first we apply GROBID fulltext model on the PDF to get the full text TEI
+        Document teiDoc = null;
+        try {
+            teiDoc = GrobidFactory.getInstance().createEngine().fullTextToTEIDoc(file, GrobidAnalysisConfig.defaultInstance());
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            throw new GrobidException("Cannot create training data because GROBIL full text model failed on the PDF: " + file.getPath());
+        }
+        if (teiDoc == null) {
+            return null;
+        }
+
+        String teiXML = teiDoc.getTei();
+
+        // we parse this TEI string similarly as for createTrainingXML
+
+        List<Measurement> measurements = null;
+        
+        Element textNode = teiElement("text");
+        // for the moment we suppose we have english only...
+        textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+
+        try {
+            // get a factory for SAX parser
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+
+            TextChunkSaxHandler handler = new TextChunkSaxHandler();
+
+            //get a new instance of parser
+            SAXParser p = spf.newSAXParser();
+            p.parse(new InputSource(new StringReader(teiXML)), handler);
+
+            List<String> chunks = handler.getChunks();
+            for(String text : chunks) {
+                text = text.replace("\n", " ").replace("\t", " ").replace(" ", " "); 
+                // the last one is a special "large" space missed by the regex "\\p{Space}+" used on the SAX parser
+                if (text.trim().length() == 0) 
+                    continue;
+                List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
+
+                if (tokenizations.size() == 0)
+                    continue;
+
+                String ress = null;
+                List<String> texts = new ArrayList<String>();
+                for (LayoutToken token : tokenizations) {
+                    if (!token.getText().equals(" ")) {
+                        texts.add(token.getText());
+                    }
+                }
+                
+                // to store unit term positions
+                List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
+                unitTokenPositions = quantityLexicon.inUnitNames(texts);
+                ress = addFeatures(texts, unitTokenPositions);
+                String res = null;
+                try {
+                    res = label(ress);
+                }
+                catch(Exception e) {   
+                    throw new GrobidException("CRF labeling for quantity parsing failed.", e);
+                }
+                measurements = resultExtraction(text, res, tokenizations);
+
+                textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
+            }
+            root.appendChild(textNode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath());
+        }
 
         return root;
     }
