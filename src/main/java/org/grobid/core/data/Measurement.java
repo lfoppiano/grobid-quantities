@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import org.codehaus.jackson.io.JsonStringEncoder;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 /**
  * Class for managing a measurement representation. A mesurement is the high level representation
  * of the expression of a physical measure. A measurement can be an atomic quantity, an interval of
@@ -17,13 +20,12 @@ import org.codehaus.jackson.io.JsonStringEncoder;
  * @author Patrice Lopez
  */
 public class Measurement {
-
     private UnitUtilities.Measurement_Type type = null;
-    private List<Quantity> quantities = null;
+
+    private List<Quantity> quantities = new ArrayList<>(2);
 
     public Measurement() {
     }
-
 
     public Measurement(UnitUtilities.Measurement_Type type) {
         this.type = type;
@@ -38,9 +40,6 @@ public class Measurement {
     }
 
     public void addQuantity(Quantity quantity) {
-        if (quantities == null) {
-            quantities = new ArrayList<Quantity>();
-        }
         quantities.add(quantity);
     }
 
@@ -53,7 +52,6 @@ public class Measurement {
     }
 
     public void setAtomicQuantity(Quantity quantity) {
-        quantities = new ArrayList<Quantity>();
         quantities.add(quantity);
     }
 
@@ -64,13 +62,11 @@ public class Measurement {
     }
 
     public void setQuantityLeast(Quantity quantity) {
-        if (quantities == null) {
-            quantities = new ArrayList<Quantity>();
-        }
-        if (quantities.size() == 0)
+        if (quantities.size() == 0) {
             quantities.add(quantity);
-        else if (quantities.size() >= 1)
+        } else if (quantities.size() >= 1) {
             quantities.set(0, quantity);
+        }
     }
 
     public Quantity getQuantityLeast() {
@@ -80,16 +76,14 @@ public class Measurement {
     }
 
     public void setQuantityMost(Quantity quantity) {
-        if (quantities == null) {
-            quantities = new ArrayList<Quantity>();
-        }
         if (quantities.size() == 0) {
             quantities.add(null);
             quantities.add(quantity);
-        } else if (quantities.size() == 1)
+        } else if (quantities.size() == 1) {
             quantities.add(quantity);
-        else
+        } else {
             quantities.set(1, quantity);
+        }
     }
 
     public Quantity getQuantityMost() {
@@ -102,10 +96,9 @@ public class Measurement {
         StringBuilder builder = new StringBuilder();
 
         builder.append(type.getName()).append(": ");
-        if ((quantities != null) && (quantities.size() > 0)) {
-            for (Quantity quantity : quantities) {
-                if (quantity != null)
-                    builder.append(quantity.toString());
+        for (Quantity quantity : quantities) {
+            if (quantity != null) {
+                builder.append(quantity.toString());
             }
         }
 

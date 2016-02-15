@@ -41,18 +41,17 @@
 
     <dependencies>
 
+        <!-- SPECIALIZED LIBRARIES -->
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
             <version>0.4.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-trainer</artifactId>
             <version>0.4.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>org.chasen</groupId>
             <artifactId>crfpp</artifactId>
@@ -64,7 +63,18 @@
             <artifactId>wapiti</artifactId>
             <version>1.5.0</version>
         </dependency>
+        <dependency>
+            <groupId>tec.units</groupId>
+            <artifactId>unit-ri</artifactId>
+            <version>0.8</version>
+        </dependency>
+        <!--dependency>
+          <groupId>org.jscience</groupId>
+          <artifactId>jscience</artifactId>
+          <version>5.0-SNAPSHOT</version>
+        </dependency-->
 
+        <!-- TEST -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -72,6 +82,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- LOGS -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -80,7 +91,13 @@
             <optional>true</optional>
             <!--scope>runtime</scope -->
         </dependency>
-        <!-- for pooling e.g. Engine -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+
+        <!-- COMMONS -->
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
@@ -106,24 +123,6 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.6</version>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>slf4j-jdk14</artifactId>-->
-        <!--<version>1.6.1</version>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>directory-naming</groupId>
-            <artifactId>naming-java</artifactId>
-            <version>0.8</version>
-        </dependency>
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -131,11 +130,17 @@
         </dependency>
 
         <dependency>
+            <groupId>directory-naming</groupId>
+            <artifactId>naming-java</artifactId>
+            <version>0.8</version>
+        </dependency>
+
+        <!-- XML & JSON processing -->
+        <dependency>
           <groupId>org.codehaus.jackson</groupId>
           <artifactId>jackson-mapper-asl</artifactId>
           <version>1.8.5</version>
         </dependency>
-
     </dependencies>
 
     <build>

@@ -6,6 +6,8 @@ import org.grobid.core.utilities.UnitUtilities;
 import java.util.List;
 import java.util.ArrayList;
 
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 import org.codehaus.jackson.io.JsonStringEncoder;
 
 /**
@@ -14,20 +16,18 @@ import org.codehaus.jackson.io.JsonStringEncoder;
  * @author Patrice Lopez
  */
 public class Unit {
+    // usual full names for the unit, e.g. metre, meter
+    private List<String> names = new ArrayList<>();
 
-    private List<String> names = null; // usual full names for the unit, e.g. metre, meter
-
-    private List<String> notations = null;
     // standard notation, e.g. g for gram - there might be several notations for an unit
+    private List<String> notations = new ArrayList<>();
 
-    private UnitUtilities.Unit_Type type; // type of measurement
-
-    // boolean indicating  if the unit is a standard SI unit
-    private UnitUtilities.System_Type system;
+    private UnitUtilities.Unit_Type type;               // type of measurement
+    private UnitUtilities.System_Type system;           // type of system of unit
 
     // to be used only when building a unit during parsing
     private String rawName = null;
-    private OffsetPosition offsets = null;
+    private OffsetPosition offsets = new OffsetPosition();
 
     public List<String> getNames() {
         return names;
@@ -38,8 +38,6 @@ public class Unit {
     }
 
     public void addName(String name) {
-        if (names == null)
-            names = new ArrayList<String>();
         names.add(name);
     }
 
@@ -52,8 +50,6 @@ public class Unit {
     }
 
     public void addNotation(String not) {
-        if (notations == null)
-            notations = new ArrayList<String>();
         notations.add(not);
     }
 
@@ -82,46 +78,48 @@ public class Unit {
     }
 
     public void setOffsetStart(int start) {
-    	if (offsets == null)
-            offsets = new OffsetPosition();
         offsets.start = start;
     }
 
     public int getOffsetStart() {
-    	if (offsets != null)
-	        return offsets.start;
-	    else return -1;
+        return offsets.start;
     }
 
     public void setOffsetEnd(int end) {
-    	if (offsets == null)
-            offsets = new OffsetPosition();
         offsets.end = end;
     }
 
     public int getOffsetEnd() {
-    	if (offsets != null)
-	        return offsets.end;
-	    else return -1;
+        return offsets.end;
     }
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[ ");
-        if (notations != null)
+
+        if (isNotEmpty(notations)) {
             builder.append(notations.toString()).append("\t");
-        if (type != null)
+        }
+        if (type != null) {
             builder.append(type.getName()).append("\t");
-        if (system != null)
+        }
+        if (system != null) {
             builder.append(system.getName()).append("\t");
-        if (names != null)
+        }
+        if (isNotEmpty(names)) {
             builder.append(names.toString()).append("\t");
-        if (rawName != null)
-            builder.append(rawName).append("\t");
-        if (offsets != null)
-            builder.append(offsets.toString());
+        }
+        if (rawName != null) {
+            builder.append(rawName.toString()).append("\t");
+        }
+        builder.append(offsets.toString());
         builder.append(" ]");
+
         return builder.toString();
+    }
+
+    public boolean isEmpty() {
+        return (rawName != null);
     }
 
     public String toJson() {

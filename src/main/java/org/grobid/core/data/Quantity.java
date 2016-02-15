@@ -1,7 +1,13 @@
 package org.grobid.core.data;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
+import tec.units.ri.quantity.Quantities;
+import tec.units.ri.unit.Units;
+
+import javax.measure.quantity.Length;
+import java.util.Map;
 
 import org.codehaus.jackson.io.JsonStringEncoder;
 
@@ -12,13 +18,13 @@ import org.codehaus.jackson.io.JsonStringEncoder;
  * @author Patrice Lopez
  */
 public class Quantity {
+    private UnitUtilities.Unit_Type type; // type of measurement
 
+    private Unit rawUnit = null;
+    private String rawValue = null;
     private String rawString = null;
 
-    private UnitUtilities.Unit_Type type; // type of measurement
-    private Unit rawUnit = null;
     private Unit normalizedUnit = null; // which gives also the system of the unit (SI, imperial, etc.)
-    private String rawValue = null;
     private double normalizedValue = 0.0;
 
     // as a condition, when the normalized unit is instanciated, its type must be the same as the type
@@ -27,6 +33,7 @@ public class Quantity {
     // offset for the value only, the offsets for the unit expression are available in the raw Unit object
     // (given the fact that the same unit can be shared by several Quantity object)
     private OffsetPosition offsets = null;
+    private Map<String, Integer> productForm;
 
     public Quantity() {
     }
@@ -120,6 +127,18 @@ public class Quantity {
             builder.append(offsets.toString());
         builder.append(" ]");
         return builder.toString();
+    }
+
+    public boolean isEmpty() {
+        return StringUtils.isEmpty(rawValue) || ((rawUnit == null || rawUnit.isEmpty()) && StringUtils.isEmpty(rawValue));
+    }
+
+    public boolean isNormalized() {
+        return normalizedUnit != null;
+    }
+
+    public void setProductForm(Map<String, Integer> productForm) {
+        this.productForm = productForm;
     }
 
     public String toJson() {

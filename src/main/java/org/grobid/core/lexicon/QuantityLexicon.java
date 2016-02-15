@@ -1,6 +1,5 @@
 package org.grobid.core.lexicon;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Unit;
 import org.grobid.core.exceptions.GrobidException;
