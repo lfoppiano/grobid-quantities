@@ -37,19 +37,27 @@ public class MeasurementUtilities {
 
         for(Measurement measurement : measurements) {
             if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
+                List<Quantity> quantities = measurement.getQuantities();
+                if ( (quantities == null) || (quantities.size() == 0) )
+                    continue;
                 newMeasurements.add(measurement);
             }
             else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
                 List<Quantity> quantities = measurement.getQuantities();
+                if ( (quantities == null) || (quantities.size() == 0) )
+                    continue;
                 if ( (quantities.size() == 1) || (measurement.getQuantityLeast() == null) || (measurement.getQuantityMost() == null) ) {
                     Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
                     Quantity quantity = null;
-                    if (quantities.size() == 1)
+                    if (quantities.size() == 1) {
                         quantity = measurement.getQuantityLeast();
-                    else if ( (quantities.size() == 2)  && (quantities.get(0) == null) )
+                    }
+                    else if ( (quantities.size() == 2)  && (quantities.get(0) == null) ) {
                         quantity = quantities.get(1);
-                    else if (quantities.size() == 2)
+                    }
+                    else if (quantities.size() == 2) {
                         quantity = measurement.getQuantityLeast();
+                    }
                     if (quantity != null) {
                         newMeasurement.setAtomicQuantity(quantity);
                         newMeasurements.add(newMeasurement);
@@ -81,6 +89,45 @@ public class MeasurementUtilities {
                     newMeasurements.add(measurement);
             }
             else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
+                // list must be consistent in unit type, and avoid too large chunk 
+                List<Quantity> quantities = measurement.getQuantities();
+                if ( (quantities == null) || (quantities.size() == 0) )
+                    continue;
+
+                /* // case actually not seen
+                Unit currentUnit = null;
+                Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.CONJUNCTION);
+                for(Quantity quantity : quantities) {
+                    if (currentUnit == null)
+                        currentUnit = quantity.getRawUnit();
+                    else {
+                        Unit newUnit = quantity.getRawUnit();
+
+                        // is it a new unit?
+                        if ((currentUnit != null) && (newUnit != null) && (!currentUnit.getRawName().equals(newUnit.getRawName())) ) {
+                             // we have a new unit, so we split the list
+                            if ( (newMeasurement != null) && (newMeasurement.getQuantities() != null) && (newMeasurement.getQuantities().size() > 0) )
+                                newMeasurements.add(newMeasurement);
+                            newMeasurement = new Measurement(UnitUtilities.Measurement_Type.CONJUNCTION);
+                            newMeasurement.addQuantity(quantity);
+                            currentUnit = newUnit;
+                        }
+                        else {
+                            // same unit, we extend the current list
+                            newMeasurement.addQuantity(quantity);
+                        }
+                    }
+
+                }
+                if ( (newMeasurement != null) && (newMeasurement.getQuantities() != null) && (newMeasurement.getQuantities().size() > 0) )
+                    newMeasurements.add(newMeasurement);*/
+
+                // the case of atomic values within list should be cover here
+                // in this case, we have a list followed by an atomic value, then a following list without unit attachment, with possibly
+                // only one quantity - the correction is to extend the starting list with the remaining list after the atomic value, attaching
+                // the unit associated to the starting list to the added quantities 
+
+                
                 newMeasurements.add(measurement);
             }
         }
@@ -97,7 +144,7 @@ public class MeasurementUtilities {
             return;
         for(Quantity quantity : measurement.getQuantities()) {
             Unit rawUnit = quantity.getRawUnit();
-            
+
         }
     }
 

@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
 
 public class QuantityAnalyzer {
 
-    public static final String DELIMITERS = " \n\r\t([^%‰°,:;?.!/)-–\"“”‘’'`$]*\u2666\u2665\u2663\u2660\u00A0";
+    public static final String DELIMITERS = " \n\r\t([^%‰°,:;?.!/)-–=\"“”‘’'`$]*\u2666\u2665\u2663\u2660\u00A0";
     private static final String REGEX = "(?<=[a-zA-Z])(?=\\d)|(?<=\\d)(?=\\D)";
 
     public static List<String> tokenize(String text) {

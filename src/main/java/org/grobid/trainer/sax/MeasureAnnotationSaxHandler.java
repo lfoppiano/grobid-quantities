@@ -27,6 +27,8 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
     private boolean openList = false;
     private boolean openInterval = false;
     private boolean numEncountered = false;
+    private boolean openUnit = false;
+    private boolean openAtomicValueWithinList = false;
 
     private String currentTag = null;
 
@@ -62,20 +64,34 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 currentTag = null;
             }
             if (qName.equals("measure")) {
-                openList = false;
-                openInterval = false;
+                if (openAtomicValueWithinList) {
+                    openAtomicValueWithinList = false;
+                    openUnit = true;
+                }
+                else if (openUnit) {
+                    openUnit = false;
+                }
+                else {
+                    openList = false;
+                    openInterval = false;
+                    numEncountered = false;
+                }
             } else if (qName.equals("figure")) {
                 // figures (which include tables) were ignored !
                 ignore = false;
             }
             if (qName.equals("num")) {
                 numEncountered = true;
-            } else if (qName.equals("div")) {
+            } /*else if (qName.equals("div")) {
                 // let's consider a new CRF input per section
                 labeled.add(new Pair("\n", null));
-            } else if (qName.equals("p") || qName.equals("paragraph")) {
+            } */
+            else if (qName.equals("p") || qName.equals("paragraph")) {
                 // let's consider a new CRF input per paragraph too
                 labeled.add(new Pair("\n", null));
+                openList = false;
+                openInterval = false;
+                numEncountered = false;
             }
         } catch (Exception e) {
 //		    e.printStackTrace();
@@ -120,6 +136,11 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                             if (name.equals("type")) {
                                 if (value.equals("value")) {
                                     // i.e. atomic value, default case
+                                    if (openList) {
+                                        // this means that we have an embedded atomic value within a list - yes it happens :)
+                                        // e.g.  δ (ppm):8.64(2H, d, J=7.0Hz), 8.46 (2H, d, J=7.0Hz), 8.11(1H, d, J=5.4Hz), 7.27(1H, d, J=5.4Hz)
+                                        openAtomicValueWithinList = true;
+                                    }
                                 } else if (value.equals("interval")) {
                                     openInterval = true;
                                 } else if (value.equals("list")) {
@@ -137,15 +158,15 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                                     // if we know the measurement type, we check if we know the unit expression
                                     // if not we add it to the lexicon
 
-
                                     if (numEncountered)
                                         currentTag = "<unitLeft>";
                                     else
                                         currentTag = "<unitRight>";
                                     numEncountered = false;
+                                    openUnit = true;
                                 }
                             } else if (name.equals("unit")) {
-                                // nothing to do in principle for the moment...
+                                openUnit = true;
                             } else if (name.equals("scale")) {
                                 // nothing to do in principle for the moment...
                             } else {
@@ -157,7 +178,9 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     int length = atts.getLength();
                     if (length == 0) {
                         // not interval value
-                        if (openList) {
+                        if (openAtomicValueWithinList)
+                            currentTag = "<valueAtomic>";
+                        else if (openList) {
                             currentTag = "<valueList>";
                         } else {
                             currentTag = "<valueAtomic>";

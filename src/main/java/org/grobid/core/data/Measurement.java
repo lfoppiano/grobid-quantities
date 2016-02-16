@@ -5,6 +5,8 @@ import org.grobid.core.utilities.UnitUtilities;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.codehaus.jackson.io.JsonStringEncoder;
+
 /**
  * Class for managing a measurement representation. A mesurement is the high level representation
  * of the expression of a physical measure. A measurement can be an atomic quantity, an interval of
@@ -108,5 +110,75 @@ public class Measurement {
         }
 
         return builder.toString();
+    }
+
+    public String toJson() {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        StringBuilder json = new StringBuilder();
+        boolean started = false;
+        json.append("{ ");
+        if (type != null) {
+            byte[] encodedName = encoder.quoteAsUTF8(type.getName());
+            String outputName = new String(encodedName);
+            json.append("\"type\" : \"" + outputName + "\"");
+            started = true;
+        }
+
+        if (type == UnitUtilities.Measurement_Type.VALUE) {
+        	Quantity quantity = getQuantityAtomic();
+        	if (quantity != null) {
+        		if (!started) {
+                    started = true;
+                }
+                else
+                	json.append(", ");
+                json.append("\"quantity\" : " + quantity.toJson());
+        	}
+        }
+        else if (type == UnitUtilities.Measurement_Type.INTERVAL) {
+        	Quantity quantityLeast = getQuantityLeast();
+        	Quantity quantityMost = getQuantityMost();
+        	if (quantityLeast != null) {
+        		if (!started) {
+                    started = true;
+                }
+                else
+                	json.append(", ");
+                json.append("\"quantityLeast\" : " + quantityLeast.toJson());
+        	}
+        	if (quantityMost != null) {
+        		if (!started) {
+                    started = true;
+                }
+                else
+                	json.append(", ");
+                json.append("\"quantityMost\" : " + quantityMost.toJson());
+        	}
+        }
+        else if (type == UnitUtilities.Measurement_Type.CONJUNCTION) {
+        	if ( (quantities != null) && (quantities.size() > 0) ) {
+        		if (!started) {
+                    started = true;
+                    json.append("[ ");
+                }
+                else
+                	json.append(", [ ");
+                boolean started2 = false;
+	        	for(Quantity quantity :  quantities) {
+	        		if (quantity != null) {
+		        		if (!started2) {
+		                    started2 = true;
+		                }
+		                else
+		                	json.append(", ");
+		                json.append(quantity.toJson());
+		        	}
+	        	}
+	        	json.append(" ]");
+	        }
+        }
+
+        json.append(" }");
+        return json.toString();
     }
 }

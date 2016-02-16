@@ -130,11 +130,11 @@
             <version>16.0.1</version>
         </dependency>
 
-        <!--dependency>
-          <groupId>org.jscience</groupId>
-          <artifactId>jscience</artifactId>
-          <version>5.0-SNAPSHOT</version>
-        </dependency-->
+        <dependency>
+          <groupId>org.codehaus.jackson</groupId>
+          <artifactId>jackson-mapper-asl</artifactId>
+          <version>1.8.5</version>
+        </dependency>
 
     </dependencies>
 
@@ -153,14 +153,14 @@
             <!--plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId>
                 <configuration> <archive> <manifest> <mainClass>org.grobid.core.engines.Engine</mainClass>
                 </manifest> </archive> </configuration> </plugin -->
-            <!--plugin>
+            <plugin>
                 <groupId>com.jolira</groupId>
                 <artifactId>onejar-maven-plugin</artifactId>
                 <version>1.4.4</version>
                 <executions>
                     <execution>
                         <configuration>
-                            <mainClass>org.grobid.core.main.batch.GrobidMain</mainClass>
+                            <mainClass>org.grobid.core.main.batch.QuantityMain</mainClass>
                             <onejarVersion>0.97</onejarVersion>
                             <attachToBuild>true</attachToBuild>
                             <classifier>onejar</classifier>
@@ -170,7 +170,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin-->
+            </plugin>
 
             <!--plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

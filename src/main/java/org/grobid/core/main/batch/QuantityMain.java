@@ -164,12 +164,17 @@ public class QuantityMain {
         if (processArgs(args) && (gbdArgs.getProcessMethodName() != null)) {
             inferParamsNotSet();
             initProcess();
+            int nb = 0;
             QuantityParser quantityParser = new QuantityParser();
+            
+            long time = System.currentTimeMillis();
+
             if (gbdArgs.getProcessMethodName().equals("processQuantities")) {
-                quantityParser.batchProcess(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), gbdArgs.isRecursive());
+                nb = quantityParser.batchProcess(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), gbdArgs.isRecursive());
             } else if (gbdArgs.getProcessMethodName().equals("createTrainingQuantities")) {
-                quantityParser.createTrainingBatch(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), -1);
+                nb = quantityParser.createTrainingBatch(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), -1);
             }
+            System.out.println(nb + " files processed in " + (System.currentTimeMillis() - time) + " milliseconds");
         }
 
     }

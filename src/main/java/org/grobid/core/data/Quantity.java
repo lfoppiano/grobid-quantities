@@ -3,6 +3,8 @@ package org.grobid.core.data;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 
+import org.codehaus.jackson.io.JsonStringEncoder;
+
 /**
  * Class for managing a quantity representation. A quantity is a basically a value associated to a type
  * (type of the measurement) and a unit. Quantities are combined to form a measurement.
@@ -118,6 +120,62 @@ public class Quantity {
             builder.append(offsets.toString());
         builder.append(" ]");
         return builder.toString();
+    }
+
+    public String toJson() {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        StringBuilder json = new StringBuilder();
+        boolean started = false;
+        json.append("{ ");
+        if (type != null) {
+            byte[] encodedName = encoder.quoteAsUTF8(type.getName());
+            String outputName = new String(encodedName);
+            json.append("\"name\" : \"" + outputName + "\"");
+            started = true;
+        }
+        if (rawValue != null) {
+            if (!started) {
+                started = true;
+            }
+            else
+                json.append(", ");
+            byte[] encodedRawValue = encoder.quoteAsUTF8(rawValue);
+            String outputRawValue = new String(encodedRawValue);
+            if (!started) {
+                json.append(", ");
+                started = true;
+            }
+            json.append("\"rawValue\" : \"" + outputRawValue + "\"");
+        }
+        if (rawUnit != null) {
+            if (!started) {
+                started = true;
+            }
+            else
+                json.append(", ");
+            json.append("\"rawUnit\" : " + rawUnit.toJson() );
+        }
+        if (offsets != null) {
+            if (getOffsetStart() != -1) {
+                if (!started) {
+                    started = true;
+                }
+                else
+                    json.append(", ");
+                json.append("\"offsetStart\" : " + getOffsetStart());
+            }
+            if (getOffsetEnd() != -1) {
+                if (!started) {
+                    started = true;
+                }
+                else
+                    json.append(", ");
+                json.append("\"offsetEnd\" : " + getOffsetStart());
+            }
+        }
+
+        json.append(" }");
+        return json.toString();
     }
 
 }

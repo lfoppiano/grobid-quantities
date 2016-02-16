@@ -52,6 +52,8 @@ public class TextChunkSaxHandler extends DefaultHandler {
         String text = accumulator.toString().trim();
         text = text.replace("\n", " ");
         text = text.replace("\t", " ");
+        text = text.replace(" ", " "); 
+        // the last one is a special "large" space missed by the regex "\\p{Space}+" bellow
         text = text.replaceAll("\\p{Space}+", " ");
         return text;
     }

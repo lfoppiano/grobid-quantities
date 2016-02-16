@@ -6,6 +6,8 @@ import org.grobid.core.utilities.UnitUtilities;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.codehaus.jackson.io.JsonStringEncoder;
+
 /**
  * Class for managing normalized Unit representation.
  *
@@ -115,11 +117,76 @@ public class Unit {
         if (names != null)
             builder.append(names.toString()).append("\t");
         if (rawName != null)
-            builder.append(rawName.toString()).append("\t");
+            builder.append(rawName).append("\t");
         if (offsets != null)
             builder.append(offsets.toString());
         builder.append(" ]");
         return builder.toString();
+    }
+
+    public String toJson() {
+    	JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+    	StringBuilder json = new StringBuilder();
+    	boolean started = false;
+    	json.append("{ ");
+    	if ( (notations != null) && (notations.size() > 0) ) {
+    		String notation = notations.get(0);
+    		byte[] encodedNotation = encoder.quoteAsUTF8(notation);
+    		String outputNotation = new String(encodedNotation);
+            json.append("\"notation\" : \"" + outputNotation + "\"");
+            started = true;
+        }
+        if (type != null) {
+        	byte[] encodedName = encoder.quoteAsUTF8(type.getName());
+    		String outputName = new String(encodedName);
+    		if (!started) {
+                started = true;
+            }
+            else
+            	json.append(", ");
+            json.append("\"name\" : \"" + outputName + "\"");
+        }
+        if (system != null) {
+        	byte[] encodedSystem = encoder.quoteAsUTF8(system.getName());
+    		String outputSystem = new String(encodedSystem);
+    		if (!started) {
+                started = true;
+            }
+            else
+            	json.append(", ");
+            json.append("\"system\" : \"" + outputSystem + "\"");
+        }
+        if (rawName != null) {
+        	byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
+    		String outputRawName = new String(encodedRawName);
+    		if (!started) {
+                started = true;
+            }
+            else
+            	json.append(", ");
+            json.append("\"rawName\" : \"" + outputRawName + "\"");
+        }
+        if (offsets != null) {
+        	if (getOffsetStart() != -1) {
+        		if (!started) {
+            	    started = true;
+            	}
+            	else
+            		json.append(", ");
+    			json.append("\"offsetStart\" : " + getOffsetStart());
+        	}
+        	if (getOffsetEnd() != -1) {
+        		if (!started) {
+                	started = true;
+           		}
+           		else
+            		json.append(", ");
+    			json.append("\"offsetEnd\" : " + getOffsetStart());
+        	}
+        }
+
+    	json.append(" }");
+    	return json.toString();
     }
 
 }
