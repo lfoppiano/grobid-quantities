@@ -137,9 +137,9 @@
 
         <!-- XML & JSON processing -->
         <dependency>
-          <groupId>org.codehaus.jackson</groupId>
-          <artifactId>jackson-mapper-asl</artifactId>
-          <version>1.8.5</version>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.8.5</version>
         </dependency>
     </dependencies>
 
@@ -210,7 +210,7 @@
                     <testFailureIgnore>false</testFailureIgnore>
                     <skip>false</skip>
                     <systemPropertyVariables>
-                        <log4j.configuration>log4j-test.properties</log4j.configuration>
+                        <log4j.configuration>log4j-test.xml</log4j.configuration>
                     </systemPropertyVariables>
                     <!--argLine>-Djava.library.path=${basedir}/lib/</argLine> <systemProperties>
                         <property> <name>java.library.path</name> <value>lib/</value> </property>
