@@ -17,17 +17,17 @@ import org.codehaus.jackson.io.JsonStringEncoder;
  */
 public class Unit {
     // usual full names for the unit, e.g. metre, meter
-    private List<String> names = new ArrayList<>();
+    private List<String> names = null;
 
     // standard notation, e.g. g for gram - there might be several notations for an unit
-    private List<String> notations = new ArrayList<>();
+    private List<String> notations = null;
 
     private UnitUtilities.Unit_Type type;               // type of measurement
     private UnitUtilities.System_Type system;           // type of system of unit
 
     // to be used only when building a unit during parsing
     private String rawName = null;
-    private OffsetPosition offsets = new OffsetPosition();
+    private OffsetPosition offsets = null;
 
     public List<String> getNames() {
         return names;
@@ -38,6 +38,8 @@ public class Unit {
     }
 
     public void addName(String name) {
+    	if (names == null)
+    		names = new ArrayList<String>();
         names.add(name);
     }
 
@@ -50,6 +52,8 @@ public class Unit {
     }
 
     public void addNotation(String not) {
+    	if (notations == null)
+    		notations = new ArrayList<String>();
         notations.add(not);
     }
 
@@ -78,49 +82,53 @@ public class Unit {
     }
 
     public void setOffsetStart(int start) {
+    	if (offsets == null)
+    		offsets = new OffsetPosition();
         offsets.start = start;
     }
 
     public int getOffsetStart() {
-        return offsets.start;
+    	if (offsets != null)
+	        return offsets.start;
+	    else 
+	    	return -1;
     }
 
     public void setOffsetEnd(int end) {
+    	if (offsets == null)
+    		offsets = new OffsetPosition();
         offsets.end = end;
     }
 
     public int getOffsetEnd() {
-        return offsets.end;
+        if (offsets != null)
+	        return offsets.end;
+	    else 
+	    	return -1;
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder();
+    	StringBuilder builder = new StringBuilder();
         builder.append("[ ");
-
-        if (isNotEmpty(notations)) {
+        if (notations != null)
             builder.append(notations.toString()).append("\t");
-        }
-        if (type != null) {
+        if (type != null)
             builder.append(type.getName()).append("\t");
-        }
-        if (system != null) {
+        if (system != null)
             builder.append(system.getName()).append("\t");
-        }
-        if (isNotEmpty(names)) {
+        if (names != null)
             builder.append(names.toString()).append("\t");
-        }
-        if (rawName != null) {
-            builder.append(rawName.toString()).append("\t");
-        }
-        builder.append(offsets.toString());
+        if (rawName != null)
+            builder.append(rawName).append("\t");
+        if (offsets != null)
+            builder.append(offsets.toString());
         builder.append(" ]");
-
         return builder.toString();
     }
 
-    public boolean isEmpty() {
+    /*public boolean isEmpty() {
         return (rawName != null);
-    }
+    }*/
 
     public String toJson() {
     	JsonStringEncoder encoder = JsonStringEncoder.getInstance();

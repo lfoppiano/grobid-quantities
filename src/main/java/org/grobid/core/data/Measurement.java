@@ -22,7 +22,7 @@ import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 public class Measurement {
     private UnitUtilities.Measurement_Type type = null;
 
-    private List<Quantity> quantities = new ArrayList<>(2);
+    private List<Quantity> quantities = null;
 
     public Measurement() {
     }
@@ -40,6 +40,8 @@ public class Measurement {
     }
 
     public void addQuantity(Quantity quantity) {
+    	if (quantities == null)
+    		quantities = new ArrayList<Quantity>();
         quantities.add(quantity);
     }
 
@@ -52,6 +54,8 @@ public class Measurement {
     }
 
     public void setAtomicQuantity(Quantity quantity) {
+    	if (quantities == null)
+    		quantities = new ArrayList<Quantity>();
         quantities.add(quantity);
     }
 
@@ -62,6 +66,8 @@ public class Measurement {
     }
 
     public void setQuantityLeast(Quantity quantity) {
+    	if (quantities == null)
+    		quantities = new ArrayList<Quantity>();
         if (quantities.size() == 0) {
             quantities.add(quantity);
         } else if (quantities.size() >= 1) {
@@ -70,12 +76,14 @@ public class Measurement {
     }
 
     public Quantity getQuantityLeast() {
-    	if (quantities.size() != 2)
+    	if (quantities.size() == 0)
     		return null;
     	return quantities.get(0);
     }
 
     public void setQuantityMost(Quantity quantity) {
+    	if (quantities == null)
+    		quantities = new ArrayList<Quantity>();
         if (quantities.size() == 0) {
             quantities.add(null);
             quantities.add(quantity);
@@ -94,13 +102,14 @@ public class Measurement {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-
         builder.append(type.getName()).append(": ");
-        for (Quantity quantity : quantities) {
-            if (quantity != null) {
-                builder.append(quantity.toString());
-            }
-        }
+        if ((quantities != null) && (quantities.size() > 0)) {
+	        for (Quantity quantity : quantities) {
+	            if (quantity != null) {
+	                builder.append(quantity.toString());
+	            }
+	        }
+	    }
 
         return builder.toString();
     }

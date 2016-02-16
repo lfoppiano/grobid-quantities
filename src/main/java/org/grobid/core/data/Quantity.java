@@ -129,9 +129,9 @@ public class Quantity {
         return builder.toString();
     }
 
-    public boolean isEmpty() {
+    /*public boolean isEmpty() {
         return StringUtils.isEmpty(rawValue) || ((rawUnit == null || rawUnit.isEmpty()) && StringUtils.isEmpty(rawValue));
-    }
+    }*/
 
     public boolean isNormalized() {
         return normalizedUnit != null;

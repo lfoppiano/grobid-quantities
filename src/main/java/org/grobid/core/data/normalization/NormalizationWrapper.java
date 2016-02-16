@@ -67,9 +67,18 @@ public class NormalizationWrapper {
 
 
     public Quantity normalizeQuantity(Quantity quantity) throws NormalizationException {
-        if (quantity.isEmpty()) {
+        if (quantity == null) {
+            return null;    //or throw new NormalizationException() :-)
+        }
+        else if (quantity.getRawUnit() == null) {
+            // unit not yet extracted for this quantity
             return quantity;    //or throw new NormalizationException() :-)
         }
+        else if (quantity.getRawUnit().getRawName() == null) {
+            // unknown unit for the quantity
+            return quantity;    //or throw new NormalizationException() :-)
+        }
+
         String rawUnit = quantity.getRawUnit().getRawName();
 
         javax.measure.Unit parsedUnit = null;
