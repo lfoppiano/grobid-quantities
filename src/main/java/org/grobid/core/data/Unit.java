@@ -1,5 +1,7 @@
 package org.grobid.core.data;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 
@@ -38,8 +40,8 @@ public class Unit {
     }
 
     public void addName(String name) {
-    	if (names == null)
-    		names = new ArrayList<String>();
+        if (names == null)
+            names = new ArrayList<String>();
         names.add(name);
     }
 
@@ -52,8 +54,8 @@ public class Unit {
     }
 
     public void addNotation(String not) {
-    	if (notations == null)
-    		notations = new ArrayList<String>();
+        if (notations == null)
+            notations = new ArrayList<String>();
         notations.add(not);
     }
 
@@ -82,33 +84,33 @@ public class Unit {
     }
 
     public void setOffsetStart(int start) {
-    	if (offsets == null)
-    		offsets = new OffsetPosition();
+        if (offsets == null)
+            offsets = new OffsetPosition();
         offsets.start = start;
     }
 
     public int getOffsetStart() {
-    	if (offsets != null)
-	        return offsets.start;
-	    else
-	    	return -1;
+        if (offsets != null)
+            return offsets.start;
+        else
+            return -1;
     }
 
     public void setOffsetEnd(int end) {
-    	if (offsets == null)
-    		offsets = new OffsetPosition();
+        if (offsets == null)
+            offsets = new OffsetPosition();
         offsets.end = end;
     }
 
     public int getOffsetEnd() {
         if (offsets != null)
-	        return offsets.end;
-	    else
-	    	return -1;
+            return offsets.end;
+        else
+            return -1;
     }
 
     public String toString() {
-    	StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         builder.append("[ ");
         if (notations != null)
             builder.append(notations.toString()).append("\t");
@@ -127,73 +129,64 @@ public class Unit {
         return builder.toString();
     }
 
-    public boolean isEmpty() {
-        return (rawName != null);
-    }
-
     public String toJson() {
-    	JsonStringEncoder encoder = JsonStringEncoder.getInstance();
-    	StringBuilder json = new StringBuilder();
-    	boolean started = false;
-    	json.append("{ ");
-    	if ( (notations != null) && (notations.size() > 0) ) {
-    		String notation = notations.get(0);
-    		byte[] encodedNotation = encoder.quoteAsUTF8(notation);
-    		String outputNotation = new String(encodedNotation);
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        StringBuilder json = new StringBuilder();
+        boolean started = false;
+        json.append("{ ");
+        if (isNotEmpty(notations)) {
+            String notation = notations.get(0);
+            byte[] encodedNotation = encoder.quoteAsUTF8(notation);
+            String outputNotation = new String(encodedNotation);
             json.append("\"notation\" : \"" + outputNotation + "\"");
             started = true;
         }
         if (type != null) {
-        	byte[] encodedName = encoder.quoteAsUTF8(type.getName());
-    		String outputName = new String(encodedName);
-    		if (!started) {
+            byte[] encodedName = encoder.quoteAsUTF8(type.getName());
+            String outputName = new String(encodedName);
+            if (!started) {
                 started = true;
-            }
-            else
-            	json.append(", ");
+            } else
+                json.append(", ");
             json.append("\"name\" : \"" + outputName + "\"");
         }
         if (system != null) {
-        	byte[] encodedSystem = encoder.quoteAsUTF8(system.getName());
-    		String outputSystem = new String(encodedSystem);
-    		if (!started) {
+            byte[] encodedSystem = encoder.quoteAsUTF8(system.getName());
+            String outputSystem = new String(encodedSystem);
+            if (!started) {
                 started = true;
-            }
-            else
-            	json.append(", ");
+            } else
+                json.append(", ");
             json.append("\"system\" : \"" + outputSystem + "\"");
         }
         if (rawName != null) {
-        	byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
-    		String outputRawName = new String(encodedRawName);
-    		if (!started) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
+            String outputRawName = new String(encodedRawName);
+            if (!started) {
                 started = true;
-            }
-            else
-            	json.append(", ");
+            } else
+                json.append(", ");
             json.append("\"rawName\" : \"" + outputRawName + "\"");
         }
         if (offsets != null) {
-        	if (getOffsetStart() != -1) {
-        		if (!started) {
-            	    started = true;
-            	}
-            	else
-            		json.append(", ");
-    			json.append("\"offsetStart\" : " + getOffsetStart());
-        	}
-        	if (getOffsetEnd() != -1) {
-        		if (!started) {
-                	started = true;
-           		}
-           		else
-            		json.append(", ");
-    			json.append("\"offsetEnd\" : " + getOffsetStart());
-        	}
+            if (getOffsetStart() != -1) {
+                if (!started) {
+                    started = true;
+                } else
+                    json.append(", ");
+                json.append("\"offsetStart\" : " + getOffsetStart());
+            }
+            if (getOffsetEnd() != -1) {
+                if (!started) {
+                    started = true;
+                } else
+                    json.append(", ");
+                json.append("\"offsetEnd\" : " + getOffsetStart());
+            }
         }
 
-    	json.append(" }");
-    	return json.toString();
+        json.append(" }");
+        return json.toString();
     }
 
 }

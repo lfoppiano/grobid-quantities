@@ -211,16 +211,28 @@ public class NormalizationWrapperTest {
 
     @Test
     public void testExtractProduct_productOfSeveralTransformedUnits() throws Exception {
-        String unitSymbol = "Kg*km/h*g";
+        String unitSymbol = "km/h*kg";
 
         ProductUnit productUnit = (ProductUnit) target.parseUnit(unitSymbol);
 
         Map<String, Integer> output = target.extractProduct(productUnit);
-        assertThat(output.size(), is(2));
+        assertThat(output.size(), is(3));
         assertThat(output.get("h"), is(-1));
         assertThat(output.get("km"), is(1));
-        assertThat(output.get("kg"), is(1));
-        assertThat(output.get("g"), is(-1));
+        assertThat(output.get("kg"), is(-1));
+    }
+
+    @Test
+    public void testParseRawString() throws Exception {
+        String input = "10 7 cm 2 /s";
+
+        String[] output = target.parseRawString(input);
+
+        assertThat(output[0], is("107"));
+        assertThat(output[1], is("cm2/s"));
+
+//        System.out.println(target.parseUnit("cm^2/s"));
+
     }
 
 }

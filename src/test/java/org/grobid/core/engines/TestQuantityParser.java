@@ -7,6 +7,7 @@ import org.grobid.core.data.Quantity;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -22,7 +23,8 @@ public class TestQuantityParser {
         LibraryLoader.load();
     }
 
-    /*@Test
+
+    @Test
     public void testQuantityParser1() throws Exception {
 
         String text = IOUtils.toString(
@@ -60,13 +62,13 @@ public class TestQuantityParser {
         } else {
             System.out.println("No measurement found.");
         }
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void testQuantityParser3() throws Exception {
 
         String text = IOUtils.toString(
-                this.getClass().getResourceAsStream("/test3.txt"));
+                this.getClass().getResourceAsStream("/test0.training.txt"));
 
         QuantityParser parser = QuantityParser.getInstance();
 
@@ -79,12 +81,12 @@ public class TestQuantityParser {
         } else {
             System.out.println("No measurement found.");
         }
-    }*/
+    }
 
     @Test
     public void testCreateTrainingDataFromText() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
         parser.createTraining("./src/test/resources/test1.txt",
-                              "./src/test/resources/test1.training.tei.xml",0);
+                "./src/test/resources/test1.training.tei.xml", 0);
     }
 }
