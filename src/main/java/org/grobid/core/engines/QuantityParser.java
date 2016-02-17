@@ -63,9 +63,25 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 public class QuantityParser extends AbstractParser {
     private static final Logger logger = LoggerFactory.getLogger(FullTextParser.class);
 
+    private static volatile QuantityParser instance;
+
+    public static QuantityParser getInstance() {
+        if (instance == null) {
+            getNewInstance();
+        }
+        return instance;
+    }
+
+    /**
+     * Create a new instance.
+     */
+    private static synchronized void getNewInstance() {
+        instance = new QuantityParser();
+    }
+
     private QuantityLexicon quantityLexicon = null;
 
-    public QuantityParser() {
+    private QuantityParser() {
         super(GrobidModels.QUANTITIES);
         quantityLexicon = QuantityLexicon.getInstance();
     }

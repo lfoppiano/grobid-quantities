@@ -165,7 +165,7 @@ public class QuantityMain {
             inferParamsNotSet();
             initProcess();
             int nb = 0;
-            QuantityParser quantityParser = new QuantityParser();
+            QuantityParser quantityParser = QuantityParser.getInstance();
             
             long time = System.currentTimeMillis();
 

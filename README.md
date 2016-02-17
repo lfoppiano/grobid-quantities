@@ -33,3 +33,11 @@ Similarly as for Grobid, with executable name ```createTrainingQuantities```, fo
 > java -jar target/grobid-quantities-0.4.0-SNAPSHOT.one-jar.jar -gH ../grobid-home/ -gP ../grobid-home/config/grobid.properties -dIn ~/grobid/grobid-quantities/src/test/resources/ ~/test/ -exe createTrainingQuantities 
 
 The input directory can contain PDF (.pdf, scientific articles only), XML/TEI (.xml or .tei, for patents and scientific articles) and text files (.txt).
+
+
+## Start the service
+
+> mvn -Dmaven.test.skip=true jetty:run-war
+
+Demo/console web app is then accessible at ```http://localhost:8080```
+

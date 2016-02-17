@@ -29,7 +29,7 @@ public class TestQuantityParser {
                 this.getClass().getResourceAsStream("/test1.txt"));
         System.out.println("\ntest1.txt\n" + text + "\n");
 
-        QuantityParser parser = new QuantityParser();
+        QuantityParser parser = QuantityParser.getInstance();
 
         List<Measurement> measurements = parser.extractQuantities(text);
         if (measurements != null) {
@@ -49,7 +49,7 @@ public class TestQuantityParser {
                 this.getClass().getResourceAsStream("/test2.txt"));
         System.out.println("\ntest2.txt\n" + text + "\n");
 
-        QuantityParser parser = new QuantityParser();
+        QuantityParser parser = QuantityParser.getInstance();
 
         List<Measurement> measurements = parser.extractQuantities(text);
         if (measurements != null) {
@@ -68,7 +68,7 @@ public class TestQuantityParser {
         String text = IOUtils.toString(
                 this.getClass().getResourceAsStream("/test3.txt"));
 
-        QuantityParser parser = new QuantityParser();
+        QuantityParser parser = QuantityParser.getInstance();
 
         List<Measurement> measurements = parser.extractQuantities(text);
         if (measurements != null) {
@@ -83,7 +83,7 @@ public class TestQuantityParser {
 
     @Test
     public void testCreateTrainingDataFromText() throws Exception {
-        QuantityParser parser = new QuantityParser();
+        QuantityParser parser = QuantityParser.getInstance();
         parser.createTraining("./src/test/resources/test1.txt",
                               "./src/test/resources/test1.training.tei.xml",0);
     }
