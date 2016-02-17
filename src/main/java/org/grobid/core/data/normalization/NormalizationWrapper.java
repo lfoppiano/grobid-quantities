@@ -61,54 +61,27 @@ public class NormalizationWrapper {
     }
 
     protected Quantity normalizeQuantityToBaseUnits(Quantity quantity, javax.measure.Unit unit) {
-
-        boolean partialResult = false;
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
         Unit normalizedUnit = new Unit();
         if (unit instanceof TransformedUnit) {
+
             TransformedUnit transformedUnit = (TransformedUnit) unit;
             normalizedUnit.setRawName(transformedUnit.getParentUnit().toString());
             quantity.setNormalizedUnit(normalizedUnit);
             quantity.setNormalizedValue(transformedUnit.getConverter().convert(Double.parseDouble(quantity.getRawValue())));
             wrappedUnitProducts.put(transformedUnit.getSymbol(), 1);
+
         } else if (unit instanceof ProductUnit) {
+
             ProductUnit productUnit = (ProductUnit) unit;
-//            Map<String, Integer> products = extractProduct(productUnit);
-//            quantity.setProductForm(products);
+            Map<String, Integer> products = extractProduct(productUnit);
+            quantity.setProductForm(products);
+            normalizedUnit.setRawName(productUnit.toSystemUnit().toString());
+            quantity.setNormalizedUnit(normalizedUnit);
+            quantity.setNormalizedValue(productUnit.getSystemConverter().convert(Double.parseDouble(quantity.getRawValue())));
 
-            Map<javax.measure.Unit, Integer> productsUnit = productUnit.getProductUnits();
-            Dimension dimensions = productUnit.getDimension();
-
-            Map<javax.measure.Dimension, Integer> productDimensions = (Map<Dimension, Integer>) dimensions.getProductDimensions();
-
-            for (Map.Entry<javax.measure.Unit, Integer> productFactor : productsUnit.entrySet()) {
-                //String unitName = this.format.format(productFactor.getKey());
-
-                javax.measure.Unit transformedUnit = productFactor.getKey();
-
-                double converted = 0.0;
-                if (!partialResult) {
-                    converted = Double.parseDouble(quantity.getRawValue());
-                } else {
-                    converted = quantity.getNormalizedValue();
-                }
-
-                Integer pow = productDimensions.get(transformedUnit.getDimension());
-                double partialCount = 1.0;
-                if (transformedUnit instanceof TransformedUnit) {
-                    if (pow > 0) {
-                        partialCount = ((TransformedUnit) transformedUnit).getConverter().convert(converted);
-                        converted = Math.pow(partialCount, pow);
-                    } else {
-                        partialCount = ((TransformedUnit) transformedUnit).getConverter().convert(1.0);
-                        converted = converted * Math.pow(partialCount, pow);
-                    }
-                }
-
-                quantity.setNormalizedValue(converted);
-                partialResult = true;
-            }
         } else {
+
             normalizedUnit.setRawName(unit.getSymbol());
             quantity.setNormalizedUnit(normalizedUnit);
             quantity.setNormalizedValue(Double.parseDouble(quantity.getRawValue()));
@@ -118,7 +91,6 @@ public class NormalizationWrapper {
         return quantity;
     }
 
-    @Deprecated
     protected Map<String, Integer> extractProduct(ProductUnit productUnit) {
         Map<javax.measure.Unit, Integer> products = productUnit.getProductUnits();
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
