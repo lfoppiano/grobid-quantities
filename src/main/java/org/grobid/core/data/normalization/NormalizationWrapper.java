@@ -50,7 +50,7 @@ public class NormalizationWrapper {
         try {
             parsedUnit = format.parse(rawUnit);
         } catch (ParserException pe) {
-            throw new NormalizationException("The value " + rawUnit + " cannot be normalized. It is either not a valid unit " +
+            throw new NormalizationException("The unit " + rawUnit + " cannot be normalized. It is either not a valid unit " +
                     "or it is not recognized from the available parsers.", pe);
         }
 
@@ -59,14 +59,14 @@ public class NormalizationWrapper {
          *  (more correctly, IMHO) throwing a ParserException (see above)
          */
         if (parsedUnit == null) {
-            throw new NormalizationException("The value " + rawUnit + " cannot be normalized. It is either not a valid unit " +
+            throw new NormalizationException("The unit " + rawUnit + " cannot be normalized. It is either not a valid unit " +
                     "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
         }
 
         return parsedUnit;
     }
 
-    protected Quantity normalizeQuantityToBaseUnits(Quantity quantity, javax.measure.Unit unit) {
+    protected Quantity normalizeQuantityToBaseUnits(Quantity quantity, javax.measure.Unit unit) throws NormalizationException {
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
         Unit normalizedUnit = new Unit();
         normalizedUnit.setOffsetStart(quantity.getRawUnit().getOffsetStart());
@@ -77,7 +77,13 @@ public class NormalizationWrapper {
             TransformedUnit transformedUnit = (TransformedUnit) unit;
             normalizedUnit.setRawName(transformedUnit.getParentUnit().toString());
             quantity.setNormalizedUnit(normalizedUnit);
-            quantity.setNormalizedValue(transformedUnit.getConverter().convert(Double.parseDouble(quantity.getRawValue())));
+            try {
+                quantity.setNormalizedValue(transformedUnit.getConverter().convert(Double.parseDouble(quantity.getRawValue())));
+            }
+            catch(Exception e) {
+                throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
+                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+            }
             wrappedUnitProducts.put(transformedUnit.getSymbol(), 1);
 
         } else if (unit instanceof ProductUnit) {
@@ -87,13 +93,25 @@ public class NormalizationWrapper {
             quantity.setProductForm(products);
             normalizedUnit.setRawName(productUnit.toSystemUnit().toString());
             quantity.setNormalizedUnit(normalizedUnit);
-            quantity.setNormalizedValue(productUnit.getSystemConverter().convert(Double.parseDouble(quantity.getRawValue())));
+            try {
+                quantity.setNormalizedValue(productUnit.getSystemConverter().convert(Double.parseDouble(quantity.getRawValue())));
+            }
+            catch(Exception e) {
+                throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
+                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+            }
 
         } else {
 
             normalizedUnit.setRawName(unit.getSymbol());
             quantity.setNormalizedUnit(normalizedUnit);
-            quantity.setNormalizedValue(Double.parseDouble(quantity.getRawValue()));
+            try {
+                quantity.setNormalizedValue(Double.parseDouble(quantity.getRawValue()));
+            }
+            catch(Exception e) {
+                throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
+                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+            }
         }
 
         quantity.setProductForm(wrappedUnitProducts);

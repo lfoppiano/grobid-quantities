@@ -23,7 +23,7 @@ public class TestQuantityParser {
         LibraryLoader.load();
     }
 
-
+    @Ignore
     @Test
     public void testQuantityParser1() throws Exception {
 
@@ -44,6 +44,7 @@ public class TestQuantityParser {
         }
     }
 
+    @Ignore
     @Test
     public void testQuantityParser2() throws Exception {
 

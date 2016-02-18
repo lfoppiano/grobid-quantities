@@ -154,6 +154,8 @@ public class MeasurementUtilities {
 
                     if (foundUnit != null) {
                         rawUnit.setUnitDefinition(foundUnit);
+                        if (foundUnit.getType() != null)
+                            quantity.setType(foundUnit.getType());
                     }
                 }
             }

@@ -90,7 +90,7 @@ public class Unit {
                 started = true;
             } else
                 json.append(", ");
-            json.append("\"unitDefinition\" : " + getUnitDefinition().toJson());
+            json.append(getUnitDefinition().toJson());
         }
 
         if (offsets != null) {

@@ -91,8 +91,32 @@ public class UnitDefinition {
         return builder.toString();
     }
 
-
     public String toJson() {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        StringBuilder json = new StringBuilder();
+        boolean started = false;
+        if (type != null) {
+            byte[] encodedName = encoder.quoteAsUTF8(type.getName());
+            String outputName = new String(encodedName);
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"type\" : \"" + outputName + "\"");
+        }
+        if (system != null) {
+            byte[] encodedSystem = encoder.quoteAsUTF8(system.getName());
+            String outputSystem = new String(encodedSystem);
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"system\" : \"" + outputSystem + "\"");
+        }
+        return json.toString();
+    }
+
+    public String toJsonComplete() {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder json = new StringBuilder();
         boolean started = false;
