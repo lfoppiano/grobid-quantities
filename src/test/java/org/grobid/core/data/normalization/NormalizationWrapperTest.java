@@ -5,6 +5,7 @@ import org.grobid.core.data.Unit;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.Test;
+import scala.Product;
 import tec.units.ri.unit.ProductUnit;
 import tec.units.ri.unit.TransformedUnit;
 
@@ -39,7 +40,7 @@ public class NormalizationWrapperTest {
         String unitSymbol = "hm";
         javax.measure.Unit normalized = target.parseUnit(unitSymbol);
 
-        assertThat(((TransformedUnit)normalized).getParentUnit().getSymbol(), is("m"));
+        assertThat(((TransformedUnit) normalized).getParentUnit().getSymbol(), is("m"));
     }
 
     @Test
@@ -151,7 +152,7 @@ public class NormalizationWrapperTest {
 
         Quantity output = target.normalizeQuantityToBaseUnits(input);
         assertThat(output.getNormalizedValue(), is(0.5555555555555556));
-    //    assertThat(output.getNormalizedUnit().getRawName(), is("m/s"));
+        assertThat(output.getNormalizedUnit().getRawName(), is("m/s"));
     }
 
     @Test
@@ -166,7 +167,7 @@ public class NormalizationWrapperTest {
 
         Quantity output = target.normalizeQuantityToBaseUnits(input);
         assertThat(output.getNormalizedValue(), is(0.5555555555555556));
-    //    assertThat(output.getNormalizedUnit().getRawName(), is("m/s"));
+        assertThat(output.getNormalizedUnit().getRawName(), is("m·kg/s"));
     }
 
     @Test
@@ -181,7 +182,57 @@ public class NormalizationWrapperTest {
 
         Quantity output = target.normalizeQuantityToBaseUnits(input);
         assertThat(output.getNormalizedValue(), is(555.5555555555555));
-        //    assertThat(output.getNormalizedUnit().getRawName(), is("m/s"));
+        assertThat(output.getNormalizedUnit().getRawName(), is("m·kg/s"));
+    }
+
+    @Test
+    public void testExtractProduct_productOfBaseUnits() throws Exception {
+        String unitSymbol = "m/s";
+
+        ProductUnit productUnit = (ProductUnit) target.parseUnit(unitSymbol);
+
+        Map<String, Integer> output = target.extractProduct(productUnit);
+        assertThat(output.size(), is(2));
+        assertThat(output.get("s"), is(-1));
+        assertThat(output.get("m"), is(1));
+    }
+
+    @Test
+    public void testExtractProduct_productOfTransformedUnits() throws Exception {
+        String unitSymbol = "km/h";
+
+        ProductUnit productUnit = (ProductUnit) target.parseUnit(unitSymbol);
+
+        Map<String, Integer> output = target.extractProduct(productUnit);
+        assertThat(output.size(), is(2));
+        assertThat(output.get("h"), is(-1));
+        assertThat(output.get("km"), is(1));
+    }
+
+    @Test
+    public void testExtractProduct_productOfSeveralTransformedUnits() throws Exception {
+        String unitSymbol = "km/h*kg";
+
+        ProductUnit productUnit = (ProductUnit) target.parseUnit(unitSymbol);
+
+        Map<String, Integer> output = target.extractProduct(productUnit);
+        assertThat(output.size(), is(3));
+        assertThat(output.get("h"), is(-1));
+        assertThat(output.get("km"), is(1));
+        assertThat(output.get("kg"), is(-1));
+    }
+
+    @Test
+    public void testParseRawString() throws Exception {
+        String input = "10 7 cm 2 /s";
+
+        String[] output = target.parseRawString(input);
+
+        assertThat(output[0], is("107"));
+        assertThat(output[1], is("cm2/s"));
+
+//        System.out.println(target.parseUnit("cm^2/s"));
+
     }
 
 }

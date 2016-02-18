@@ -12,7 +12,6 @@ import static org.junit.Assert.assertNotNull;
 /**
  *  @author Patrice Lopez
  */
-//@Ignore
 public class TestQuantityLexicon {
 	
 	private QuantityLexicon lexicon = null;

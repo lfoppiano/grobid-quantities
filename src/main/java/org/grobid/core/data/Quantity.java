@@ -123,6 +123,12 @@ public class Quantity {
             builder.append(rawValue).append("\t");
         if (rawUnit != null)
             builder.append(rawUnit.toString()).append("\t");
+
+        if (normalizedUnit != null) {
+            builder.append(normalizedValue).append("\t")
+                    .append(normalizedUnit).append("\t");
+        }
+
         if (offsets != null)
             builder.append(offsets.toString());
         builder.append(" ]");
@@ -130,7 +136,7 @@ public class Quantity {
     }
 
     public boolean isEmpty() {
-        return StringUtils.isEmpty(rawValue) || ((rawUnit == null || rawUnit.isEmpty()) && StringUtils.isEmpty(rawValue));
+        return StringUtils.isEmpty(rawString) && (rawUnit == null) && StringUtils.isEmpty(rawValue);
     }
 
     public boolean isNormalized() {
@@ -155,8 +161,7 @@ public class Quantity {
         if (rawValue != null) {
             if (!started) {
                 started = true;
-            }
-            else
+            } else
                 json.append(", ");
             byte[] encodedRawValue = encoder.quoteAsUTF8(rawValue);
             String outputRawValue = new String(encodedRawValue);
@@ -169,25 +174,22 @@ public class Quantity {
         if (rawUnit != null) {
             if (!started) {
                 started = true;
-            }
-            else
+            } else
                 json.append(", ");
-            json.append("\"rawUnit\" : " + rawUnit.toJson() );
+            json.append("\"rawUnit\" : " + rawUnit.toJson());
         }
         if (offsets != null) {
             if (getOffsetStart() != -1) {
                 if (!started) {
                     started = true;
-                }
-                else
+                } else
                     json.append(", ");
                 json.append("\"offsetStart\" : " + getOffsetStart());
             }
             if (getOffsetEnd() != -1) {
                 if (!started) {
                     started = true;
-                }
-                else
+                } else
                     json.append(", ");
                 json.append("\"offsetEnd\" : " + getOffsetEnd());
             }

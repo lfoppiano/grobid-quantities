@@ -9,6 +9,8 @@ import org.grobid.core.GrobidModels;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.Measurement;
+import org.grobid.core.data.normalization.NormalizationException;
+import org.grobid.core.data.normalization.NormalizationWrapper;
 import org.grobid.core.engines.AbstractParser;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorQuantities;
@@ -42,16 +44,20 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FilenameFilter;
 import java.io.StringReader;
+
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.InputSource;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.grobid.core.document.xml.XmlBuilderUtils.fromString;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 
@@ -61,7 +67,7 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
  * @author Patrice Lopez
  */
 public class QuantityParser extends AbstractParser {
-    private static final Logger logger = LoggerFactory.getLogger(FullTextParser.class);
+    private static final Logger logger = LoggerFactory.getLogger(QuantityParser.class);
 
     private static volatile QuantityParser instance;
 
@@ -120,6 +126,7 @@ public class QuantityParser extends AbstractParser {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
             measurements = resultExtraction(text, res, tokenizations);
+            measurements = normalizeMeasurements(measurements);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
@@ -127,9 +134,36 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
+    private List<Measurement> normalizeMeasurements(List<Measurement> measurements) {
+        NormalizationWrapper normalizationWrapper = new NormalizationWrapper();
+        for (Measurement measurement : measurements) {
+            for (Quantity quantity : measurement.getQuantities()) {
+                if (isNotEmpty(quantity.getRawValue())) {
+                    String[] parsed = normalizationWrapper.parseRawString(quantity.getRawValue());
+                    if (quantity.getRawUnit() == null) {
+                        Unit raw = new Unit();
+                        raw.setRawName(parsed[1]);
+                        quantity.setRawUnit(raw);
+                        quantity.setRawValue(parsed[0]);
+                    }
+                }
+                try {
+                    Quantity quantity1 = normalizationWrapper.normalizeQuantityToBaseUnits(quantity);
+                    quantity.setNormalizedValue(quantity1.getNormalizedValue());
+                    quantity.setNormalizedUnit(quantity1.getNormalizedUnit());
+                } catch (NormalizationException ne) {
+
+                    //Buh... let's ignore it for the time being :) 
+                }
+            }
+
+        }
+        return measurements;
+    }
+
     public int batchProcess(String inputDirectory,
-                             String outputDirectory,
-                             boolean isRecursive) throws IOException {
+                            String outputDirectory,
+                            boolean isRecursive) throws IOException {
         return 0;
     }
 
@@ -159,7 +193,7 @@ public class QuantityParser extends AbstractParser {
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             List<LayoutToken> theTokens = cluster.concatTokens();
             String clusterContent = //LayoutTokensUtil.normalizeText(LayoutTokensUtil.toText(cluster.concatTokens()));
-                LayoutTokensUtil.toText(cluster.concatTokens());
+                    LayoutTokensUtil.toText(cluster.concatTokens());
 
             int endPos = pos;
             for (LayoutToken token : theTokens) {
@@ -182,7 +216,7 @@ public class QuantityParser extends AbstractParser {
                         pos++;
                     }
                     currentQuantity.setOffsetStart(pos);
-                    if (text.charAt(endPos-1) == ' ')
+                    if (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentQuantity.setOffsetEnd(endPos);
                     currentMeasurement.setType(UnitUtilities.Measurement_Type.VALUE);
@@ -201,7 +235,7 @@ public class QuantityParser extends AbstractParser {
                     break;
                 case QUANTITY_VALUE_LEAST:
                     System.out.println("value least: " + clusterContent);
-                    if ( (openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL) ) {
+                    if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL)) {
                         if (isMeasurementValid(currentMeasurement)) {
                             measurements.add(currentMeasurement);
                             currentMeasurement = new Measurement();
@@ -214,7 +248,7 @@ public class QuantityParser extends AbstractParser {
                         pos++;
                     }
                     currentQuantity.setOffsetStart(pos);
-                    if (text.charAt(endPos-1) == ' ')
+                    if (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null)
@@ -225,7 +259,7 @@ public class QuantityParser extends AbstractParser {
                     break;
                 case QUANTITY_VALUE_MOST:
                     System.out.println("value most: " + clusterContent);
-                    if ( (openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL) ) {
+                    if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL)) {
                         if (isMeasurementValid(currentMeasurement)) {
                             measurements.add(currentMeasurement);
                             currentMeasurement = new Measurement();
@@ -238,7 +272,7 @@ public class QuantityParser extends AbstractParser {
                         pos++;
                     }
                     currentQuantity.setOffsetStart(pos);
-                    if (text.charAt(endPos-1) == ' ')
+                    if (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
@@ -250,7 +284,7 @@ public class QuantityParser extends AbstractParser {
                     break;
                 case QUANTITY_VALUE_LIST:
                     System.out.println("value in list: " + clusterContent);
-                    if ( (openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.CONJUNCTION) ) {
+                    if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.CONJUNCTION)) {
                         if (isMeasurementValid(currentMeasurement)) {
                             measurements.add(currentMeasurement);
                             currentMeasurement = new Measurement();
@@ -263,7 +297,7 @@ public class QuantityParser extends AbstractParser {
                         pos++;
                     }
                     currentQuantity.setOffsetStart(pos);
-                    if (text.charAt(endPos-1) == ' ')
+                    if (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
@@ -281,18 +315,16 @@ public class QuantityParser extends AbstractParser {
                         pos++;
                     }
                     currentUnit.setOffsetStart(pos);
-                    if (text.charAt(endPos-1) == ' ')
+                    if (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentUnit.setOffsetEnd(endPos);
                     if ((currentMeasurement.getQuantities() != null) && (currentMeasurement.getQuantities().size() > 0)) {
                         for (Quantity quantity : currentMeasurement.getQuantities()) {
-                            if ((quantity != null) && ( (quantity.getRawUnit() == null) || (quantity.getRawUnit().getRawName() == null) )) {
+                            if ((quantity != null) && ((quantity.getRawUnit() == null) || (quantity.getRawUnit().getRawName() == null))) {
                                 quantity.setRawUnit(currentUnit);
-                            }
-                            else if ((quantity == null) && (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL)) {
+                            } else if ((quantity == null) && (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL)) {
                                 // we skip the least value, but we can still for robustness attach the unit to the upper range quantity
-                            }
-                            else
+                            } else
                                 break;
                         }
                     }
@@ -303,12 +335,11 @@ public class QuantityParser extends AbstractParser {
                             currentMeasurement = new Measurement();
                             openMeasurement = null;
                         }
-                    }
-                    else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL) {
+                    } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL) {
                         if (isMeasurementValid(currentMeasurement)) {
-                            if ( (currentMeasurement.getQuantities().size() == 2) && 
-                                 (currentMeasurement.getQuantityLeast() != null) && 
-                                 (currentMeasurement.getQuantityMost() != null) ) {
+                            if ((currentMeasurement.getQuantities().size() == 2) &&
+                                    (currentMeasurement.getQuantityLeast() != null) &&
+                                    (currentMeasurement.getQuantityMost() != null)) {
                                 measurements.add(currentMeasurement);
                                 currentMeasurement = new Measurement();
                                 openMeasurement = null;
@@ -318,7 +349,7 @@ public class QuantityParser extends AbstractParser {
                     break;
                 case QUANTITY_UNIT_RIGHT:
                     System.out.println("unit (right attachment): " + clusterContent);
-                    if ( (openMeasurement == UnitUtilities.Measurement_Type.VALUE) || (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) ) {
+                    if ((openMeasurement == UnitUtilities.Measurement_Type.VALUE) || (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION)) {
                         if (isMeasurementValid(currentMeasurement)) {
                             measurements.add(currentMeasurement);
                             currentMeasurement = new Measurement();
@@ -332,12 +363,12 @@ public class QuantityParser extends AbstractParser {
                         pos++;
                     }
                     currentUnit.setOffsetStart(pos);
-                    if (text.charAt(endPos-1) == ' ')
+                    if (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentUnit.setOffsetEnd(endPos);
                     break;
                 case QUANTITY_OTHER:
-                    break; 
+                    break;
                 default:
                     logger.error("Warning: unexpected label in quantity parser: " + clusterLabel + " for " + clusterContent);
             }
@@ -376,28 +407,25 @@ public class QuantityParser extends AbstractParser {
         Element root = getTEIHeader(id);
         if (inputFile.endsWith(".txt") || inputFile.endsWith(".TXT")) {
             root = createTrainingText(file, root);
-        }
-        else if (inputFile.endsWith(".xml") || inputFile.endsWith(".XML") || inputFile.endsWith(".tei") || inputFile.endsWith(".TEI")) {
+        } else if (inputFile.endsWith(".xml") || inputFile.endsWith(".XML") || inputFile.endsWith(".tei") || inputFile.endsWith(".TEI")) {
             root = createTrainingXML(file, root);
-        }
-        else if (inputFile.endsWith(".pdf") || inputFile.endsWith(".PDF")) {
+        } else if (inputFile.endsWith(".pdf") || inputFile.endsWith(".PDF")) {
             root = createTrainingPDF(file, root);
         }
 
-        if (root != null) { 
+        if (root != null) {
             //System.out.println(XmlBuilderUtils.toXml(root));
             try {
                 FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root));
-            }
-            catch(IOException e) {
+            } catch (IOException e) {
                 throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
             }
         }
     }
 
     private Element createTrainingText(File file, Element root) throws IOException {
-        String text = FileUtils.readFileToString(file); 
-            
+        String text = FileUtils.readFileToString(file);
+
         Element textNode = teiElement("text");
         // for the moment we suppose we have english only...
         textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
@@ -406,12 +434,12 @@ public class QuantityParser extends AbstractParser {
         String lines[] = text.split("\n");
         StringBuilder paragraph = new StringBuilder();
         List<Measurement> measurements = null;
-        for(int i=0; i<lines.length; i++) {
+        for (int i = 0; i < lines.length; i++) {
             String line = lines[i].trim();
             if (line.length() != 0) {
                 paragraph.append(line).append("\n");
             }
-            if ( ((line.length() == 0) || (i == lines.length-1)) && (paragraph.length() > 0) ) {
+            if (((line.length() == 0) || (i == lines.length - 1)) && (paragraph.length() > 0)) {
                 // we have a new paragraph
                 text = paragraph.toString().replace("\n", " ").replace("\r", " ");
                 List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
@@ -426,7 +454,7 @@ public class QuantityParser extends AbstractParser {
                         texts.add(token.getText());
                     }
                 }
-                
+
                 // to store unit term positions
                 List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
                 unitTokenPositions = quantityLexicon.inUnitNames(texts);
@@ -434,8 +462,7 @@ public class QuantityParser extends AbstractParser {
                 String res = null;
                 try {
                     res = label(ress);
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     throw new GrobidException("CRF labeling for quantity parsing failed.", e);
                 }
                 measurements = resultExtraction(text, res, tokenizations);
@@ -457,7 +484,7 @@ public class QuantityParser extends AbstractParser {
 
     private Element createTrainingXML(File file, Element root) throws IOException {
         List<Measurement> measurements = null;
-        
+
         Element textNode = teiElement("text");
         // for the moment we suppose we have english only...
         textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
@@ -473,9 +500,9 @@ public class QuantityParser extends AbstractParser {
             p.parse(file, handler);
 
             List<String> chunks = handler.getChunks();
-            for(String text : chunks) {
+            for (String text : chunks) {
                 //text = text.replace("\n", " ").replace("\t", " ");
-                if (text.trim().length() == 0) 
+                if (text.trim().length() == 0)
                     continue;
                 List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
 
@@ -489,7 +516,7 @@ public class QuantityParser extends AbstractParser {
                         texts.add(token.getText());
                     }
                 }
-                
+
                 // to store unit term positions
                 List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
                 unitTokenPositions = quantityLexicon.inUnitNames(texts);
@@ -497,8 +524,7 @@ public class QuantityParser extends AbstractParser {
                 String res = null;
                 try {
                     res = label(ress);
-                }
-                catch(Exception e) {   
+                } catch (Exception e) {
                     throw new GrobidException("CRF labeling for quantity parsing failed.", e);
                 }
                 measurements = resultExtraction(text, res, tokenizations);
@@ -513,8 +539,7 @@ public class QuantityParser extends AbstractParser {
                 textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
             }
             root.appendChild(textNode);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath());
         }
@@ -527,8 +552,7 @@ public class QuantityParser extends AbstractParser {
         Document teiDoc = null;
         try {
             teiDoc = GrobidFactory.getInstance().createEngine().fullTextToTEIDoc(file, GrobidAnalysisConfig.defaultInstance());
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot create training data because GROBIL full text model failed on the PDF: " + file.getPath());
         }
@@ -541,7 +565,7 @@ public class QuantityParser extends AbstractParser {
         // we parse this TEI string similarly as for createTrainingXML
 
         List<Measurement> measurements = null;
-        
+
         Element textNode = teiElement("text");
         // for the moment we suppose we have english only...
         textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
@@ -557,10 +581,10 @@ public class QuantityParser extends AbstractParser {
             p.parse(new InputSource(new StringReader(teiXML)), handler);
 
             List<String> chunks = handler.getChunks();
-            for(String text : chunks) {
-                text = text.replace("\n", " ").replace("\t", " ").replace(" ", " "); 
+            for (String text : chunks) {
+                text = text.replace("\n", " ").replace("\t", " ").replace(" ", " ");
                 // the last one is a special "large" space missed by the regex "\\p{Space}+" used on the SAX parser
-                if (text.trim().length() == 0) 
+                if (text.trim().length() == 0)
                     continue;
                 List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
 
@@ -574,7 +598,7 @@ public class QuantityParser extends AbstractParser {
                         texts.add(token.getText());
                     }
                 }
-                
+
                 // to store unit term positions
                 List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
                 unitTokenPositions = quantityLexicon.inUnitNames(texts);
@@ -582,8 +606,7 @@ public class QuantityParser extends AbstractParser {
                 String res = null;
                 try {
                     res = label(ress);
-                }
-                catch(Exception e) {   
+                } catch (Exception e) {
                     throw new GrobidException("CRF labeling for quantity parsing failed.", e);
                 }
                 measurements = resultExtraction(text, res, tokenizations);
@@ -591,8 +614,7 @@ public class QuantityParser extends AbstractParser {
                 textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
             }
             root.appendChild(textNode);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath());
         }
@@ -602,7 +624,7 @@ public class QuantityParser extends AbstractParser {
 
     @SuppressWarnings({"UnusedParameters"})
     public int createTrainingBatch(String inputDirectory,
-                                   String outputDirectory, 
+                                   String outputDirectory,
                                    int ind) throws IOException {
         try {
             File path = new File(inputDirectory);
@@ -619,10 +641,10 @@ public class QuantityParser extends AbstractParser {
             File[] refFiles = path.listFiles(new FilenameFilter() {
                 public boolean accept(File dir, String name) {
                     System.out.println(name);
-                    return name.endsWith(".pdf") || name.endsWith(".PDF") || 
-                           name.endsWith(".txt") || name.endsWith(".TXT") || 
-                           name.endsWith(".xml") || name.endsWith(".tei") || 
-                           name.endsWith(".XML") || name.endsWith(".TEI"); 
+                    return name.endsWith(".pdf") || name.endsWith(".PDF") ||
+                            name.endsWith(".txt") || name.endsWith(".TXT") ||
+                            name.endsWith(".xml") || name.endsWith(".tei") ||
+                            name.endsWith(".XML") || name.endsWith(".TEI");
                 }
             });
 
@@ -638,11 +660,11 @@ public class QuantityParser extends AbstractParser {
             }
             for (final File file : refFiles) {
                 try {
-                    String pathTEI = outputDirectory + "/" + file.getName().substring(0, file.getName().length()-4) + ".training.tei.xml";
+                    String pathTEI = outputDirectory + "/" + file.getName().substring(0, file.getName().length() - 4) + ".training.tei.xml";
                     createTraining(file.getAbsolutePath(), pathTEI, n);
                 } catch (final Exception exp) {
-                    logger.error("An error occured while processing the following pdf: " 
-                        + file.getPath() + ": " + exp);
+                    logger.error("An error occured while processing the following pdf: "
+                            + file.getPath() + ": " + exp);
                 }
                 if (ind != -1)
                     n++;
@@ -706,7 +728,7 @@ public class QuantityParser extends AbstractParser {
         Element p = teiElement("p");
 
         int pos = 0;
-        for(Measurement measurement : measurements) {
+        for (Measurement measurement : measurements) {
             Element measure = teiElement("measure");
             List<Quantity> quantities = measurement.getQuantities();
             if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
@@ -722,7 +744,7 @@ public class QuantityParser extends AbstractParser {
 
                 Unit unit = quantity.getRawUnit();
                 int startU = -1;
-                int endU = -1; 
+                int endU = -1;
                 Element unitNode = null;
                 if (unit != null) {
                     startU = unit.getOffsetStart();
@@ -736,12 +758,12 @@ public class QuantityParser extends AbstractParser {
 
                 int initPos = pos;
                 int firstPos = pos;
-                while(pos < text.length()) {
+                while (pos < text.length()) {
                     if (pos == startQ) {
                         if (initPos == firstPos)
-                           p.appendChild(text.substring(firstPos, startQ));
-                       else
-                           measure.appendChild(text.substring(initPos, startQ));
+                            p.appendChild(text.substring(firstPos, startQ));
+                        else
+                            measure.appendChild(text.substring(initPos, startQ));
                         measure.appendChild(numNode);
                         pos = endQ;
                         initPos = pos;
@@ -756,12 +778,11 @@ public class QuantityParser extends AbstractParser {
                         initPos = pos;
                     }
 
-                    if ( (pos >= endQ) && (pos >= endU) ) 
-                        break; 
+                    if ((pos >= endQ) && (pos >= endU))
+                        break;
                     pos++;
                 }
-            }
-            else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
                 measure.addAttribute(new Attribute("type", "interval"));
                 if (quantities.size() != 2)
                     continue;
@@ -804,7 +825,7 @@ public class QuantityParser extends AbstractParser {
                 if (unitM != null) {
                     startUM = unitM.getOffsetStart();
                     endUM = unitM.getOffsetEnd();
-                    
+
                     unitNodeM = teiElement("measure");
                     unitNodeM.addAttribute(new Attribute("type", "?"));
                     unitNodeM.addAttribute(new Attribute("unit", "?"));
@@ -813,12 +834,12 @@ public class QuantityParser extends AbstractParser {
 
                 int initPos = pos;
                 int firstPos = pos;
-                while(pos < text.length()) {
+                while (pos < text.length()) {
                     if (pos == startQL) {
                         if (initPos == firstPos)
-                           p.appendChild(text.substring(firstPos, startQL));
-                       else
-                           measure.appendChild(text.substring(initPos, startQL));
+                            p.appendChild(text.substring(firstPos, startQL));
+                        else
+                            measure.appendChild(text.substring(initPos, startQL));
                         measure.appendChild(numNodeL);
                         pos = endQL;
                         initPos = pos;
@@ -841,7 +862,7 @@ public class QuantityParser extends AbstractParser {
                         pos = endUL;
                         initPos = pos;
                     }
-                    if ((pos == startUM) && (startUM != startUL) ) {
+                    if ((pos == startUM) && (startUM != startUL)) {
                         if (initPos == firstPos)
                             p.appendChild(text.substring(firstPos, startUM));
                         else
@@ -851,15 +872,14 @@ public class QuantityParser extends AbstractParser {
                         initPos = pos;
                     }
 
-                    if ( (pos >= endQL) && (pos >= endQM) && (pos >= endUL) && (pos >= endUM) )
-                        break; 
+                    if ((pos >= endQL) && (pos >= endQM) && (pos >= endUL) && (pos >= endUM))
+                        break;
                     pos++;
                 }
-            }
-            else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                 measure.addAttribute(new Attribute("type", "list"));
 
-                for(Quantity quantity : quantities) {
+                for (Quantity quantity : quantities) {
                     int startQ = quantity.getOffsetStart();
                     int endQ = quantity.getOffsetEnd();
 
@@ -868,7 +888,7 @@ public class QuantityParser extends AbstractParser {
 
                     Unit unit = quantity.getRawUnit();
                     int startU = -1;
-                    int endU = -1; 
+                    int endU = -1;
                     Element unitNode = null;
                     if (unit != null) {
                         startU = unit.getOffsetStart();
@@ -882,12 +902,12 @@ public class QuantityParser extends AbstractParser {
 
                     int initPos = pos;
                     int firstPos = pos;
-                    while(pos < text.length()) {
+                    while (pos < text.length()) {
                         if (pos == startQ) {
                             if (initPos == firstPos)
-                               p.appendChild(text.substring(firstPos, startQ));
-                           else
-                               measure.appendChild(text.substring(initPos, startQ));
+                                p.appendChild(text.substring(firstPos, startQ));
+                            else
+                                measure.appendChild(text.substring(initPos, startQ));
                             measure.appendChild(numNode);
                             pos = endQ;
                             initPos = pos;
@@ -902,24 +922,24 @@ public class QuantityParser extends AbstractParser {
                             initPos = pos;
                         }
 
-                        if ( (pos >= endQ) && (pos >= endU) ) 
-                            break; 
+                        if ((pos >= endQ) && (pos >= endU))
+                            break;
                         pos++;
                     }
                 }
             }
-            p.appendChild(measure);    
+            p.appendChild(measure);
         }
         p.appendChild(text.substring(pos, text.length()));
-        
-        return p;    
+
+        return p;
     }
 
     private boolean isMeasurementValid(Measurement currentMeasurement) {
-        return ( (currentMeasurement.getType() != null) &&
-                 (currentMeasurement.getQuantities() != null) && 
-                 (currentMeasurement.getQuantities().size() > 0) );
-	}
+        return ((currentMeasurement.getType() != null) &&
+                (currentMeasurement.getQuantities() != null) &&
+                (currentMeasurement.getQuantities().size() > 0));
+    }
 
     private Element getTEIHeader(int id) {
         Element tei = teiElement("tei");
