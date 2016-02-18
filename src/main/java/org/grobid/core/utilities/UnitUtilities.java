@@ -7,6 +7,7 @@ import org.grobid.core.exceptions.GrobidResourceException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.io.*;
 
@@ -154,15 +155,20 @@ public class UnitUtilities {
         instance = new UnitUtilities();
     }
 
-    // full unit information accessible from the unit names and notation
-    // this mapping is dependent on the language
+    // full unit information accessible from the unit names
+    // this mapping depends on the language
     private Map<String, Unit> name2unit = null;
+
+    // full unit information accessible from the unit notation
+    // this mapping depends on the language
+    private Map<String, Unit> notation2unit = null;
 
     // mapping between measurement types and the SI units for this type, the type here is represented with
     // the name() value of the enum
     private Map<String, Unit> type2SIUnit = null;
 
     private UnitUtilities() {
+        initUnitUtilities();
     }
 
     public void initUnitUtilities() {
@@ -171,7 +177,7 @@ public class UnitUtilities {
         InputStreamReader isr = null;
         BufferedReader dis = null;
         try {
-            String path = "src/main/resources/units.en.txt";
+            String path = "src/main/resources/en/units.txt";
             file = new File(path);
             if (!file.exists()) {
                 throw new GrobidResourceException("Cannot init unit utilities, because file '"
@@ -197,9 +203,6 @@ public class UnitUtilities {
                     String[] notationList = notations.split(",");
                     if (st.hasMoreTokens()) {
                         String type = st.nextToken().trim();
-                        if (type.length() == 0) {
-                            continue;
-                        }
                         if ((type == null) || (type.length() == 0)) {
                             continue;
                         }
@@ -207,13 +210,20 @@ public class UnitUtilities {
                         if (st.hasMoreTokens()) {
                             String sys = st.nextToken().trim();
                             // here "deserialize" the enum type
-                            system = System_Type.valueOf(sys);
+                            try {
+                                system = System_Type.valueOf(sys);
+                            }
+                            catch(Exception e) {
+                                System.out.println("Invalid system type name: " + sys);
+                            }
                         }
                         List<String> names = null;
                         if (st.hasMoreTokens()) {
                             // usual name(s), e.g. metre, meter
                             StringTokenizer st2 = new StringTokenizer(st.nextToken(), ",");
                             while (st2.hasMoreTokens()) {
+                                if (names == null)
+                                    names = new ArrayList<String>();
                                 names.add(st2.nextToken().trim());
                             }
                         }
@@ -225,17 +235,34 @@ public class UnitUtilities {
                         }
                         unit.setSystem(system);
                         // here "deserialize" the enum type
-                        Unit_Type savedType = Unit_Type.valueOf(type);
+                        Unit_Type savedType = Unit_Type.UNKNOWN;
+                        try {
+                            savedType = Unit_Type.valueOf(type);
+                        }
+                        catch(Exception e) {
+                            System.out.println("Invalid unit type name: " + type);
+                        }
                         unit.setType(savedType);
                         unit.setNames(names);
 
-                        // add unit in the first map
+                        // add unit names in the first map
+                        if ((names != null) && (names.size() > 0)) {
+                            for (int j = 0; j < names.size(); j++) {
+                                if (name2unit == null)
+                                    name2unit = new HashMap<String, Unit>();
+                                name2unit.put(names.get(j).trim().toLowerCase(), unit);
+                            }
+                        }
+
+                        // add unit notation map
                         if ((notationList != null) && (notationList.length > 0)) {
                             for (int j = 0; j < notationList.length; j++) {
-                                name2unit.put(notationList[j].trim(), unit);
+                                if (notation2unit == null)
+                                    notation2unit = new HashMap<String, Unit>();
+                                notation2unit.put(notationList[j].trim().toLowerCase(), unit);
                             }
                         } else
-                            name2unit.put("no_notation", unit);
+                            notation2unit.put("no_notation", unit);
 
                         // add unit in the second map
                         if ((system == System_Type.SI_BASE) || (system == System_Type.SI_DERIVED)) {
@@ -273,13 +300,26 @@ public class UnitUtilities {
      * Return a unit object based on an unit name.
      */
     public Unit getUnitbyName(String name) {
+        if (name == null)
+            return null;
         return (Unit) name2unit.get(name.toLowerCase());
+    }
+
+    /**
+     * Return a unit object based on an unit notation.
+     */
+    public Unit getUnitbyNotation(String notation) {
+        if (notation == null)
+            return null;
+        return (Unit) notation2unit.get(notation.toLowerCase());
     }
 
     /**
      * Return the SI unit object from a measure type name
      */
     public Unit getSIUnitByType(String type) {
+        if (type == null)
+            return null;
         return (Unit) type2SIUnit.get(type);
     }
 }

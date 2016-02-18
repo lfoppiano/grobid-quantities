@@ -34,11 +34,11 @@ mol	AMOUNT_OF_SUBSTANCE	SI_BASE	mole
 M	CONCENTRATION	NON_SI	molarity
 m	CONCENTRATION	NON_SI	molality
 mol/L	CONCENTRATION	NON_SI	molarity
-mol/m^3,mol/m³	CONCENTRATION	SI	molarity
+mol/m^3,mol/m³	CONCENTRATION	SI_BASE	molarity
 w/w%	CONCENTRATION	NON_SI	weight/weight percent
 ppm	CONCENTRATION	NON_SI	part per million
 ppb	CONCENTRATION	NON_SI	part per billion
-m^3,m³	VOLUME	SI	cubic meter,cubic metre
+m^3,m³	VOLUME	SI_BASE	cubic meter,cubic metre
 l	VOLUME	NON_SI	litre,liter
 oz,fl oz,fl. oz.,oz. fl.	VOLUME	US,IMPERIAL	fluid ounce
 gi	VOLUME	US	gill
@@ -62,7 +62,7 @@ V/m	ELECTRIC_FIELD	SI_DERIVED	volt per metre,volt per meter
 A/m	MAGNETIC_FIELD_STRENGTH	SI_DERIVED	ampere per metre,ampere per meter
 rpm,round/min	FREQUENCY	NON_SI	round per minute
 rps,round/s	FREQUENCY	NON_SI	round per second
-Hz	FREQUENCY	SI	hertz
+Hz	FREQUENCY	SI_BASE	hertz
 cm^-1,cm⁻¹	ENERGY	SI_DERIVED	wavenumber,reciprocal centimeter
 m/s	VELOCITY	SI_DERIVED	meter per second,metre per second
 mi/h,mph	VELOCITY	US	mile per hour

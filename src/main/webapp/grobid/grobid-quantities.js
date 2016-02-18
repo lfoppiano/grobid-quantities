@@ -371,8 +371,7 @@ console.log(responseJson);
             measurementType = "List"; 
 
         var string = "";
-         string += "<div class='info-sense-box "+colorLabel+
-            "'><h2 style='color:#FFF;padding-left:10px;font-size:16;'>"+measurementType+"</h2>";
+        var first = true;
         for(var quantityListIndex=0; 
                 quantityListIndex<quantityMap.length; 
                 quantityListIndex++) {
@@ -399,10 +398,19 @@ console.log(responseJson);
                 endUnit = parseInt(unit.offsetEnd,10);
             }
 
+            if (first) {
+                string += "<div class='info-sense-box "+colorLabel+"'><h2 style='color:#FFF;padding-left:10px;font-size:16;'>"+measurementType;
+                string += "</h2>";
+                first = false;
+            }
+
             string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
                 "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;font-size:14;'>";
                 
-            if (rawValue)   
+            if (type)
+                string += "<p>quantity type: <b>"+type+"</b></p>";
+
+            if (rawValue)
                 string += "<p>raw value: <b>"+rawValue+"</b></p>";
 
             if (rawUnitName)   

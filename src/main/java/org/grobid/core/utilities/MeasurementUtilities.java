@@ -22,9 +22,11 @@ public class MeasurementUtilities {
     private static final Logger logger = LoggerFactory.getLogger(MeasurementUtilities.class);
 
     private QuantityLexicon quantityLexicon = null;
+    private UnitUtilities unitUtilities = null;
 
     public MeasurementUtilities() {
         quantityLexicon = QuantityLexicon.getInstance();
+        unitUtilities = UnitUtilities.getInstance();
     }
 
     /**
@@ -139,13 +141,36 @@ public class MeasurementUtilities {
      *  Right now, only basic matching of units based on lexicon look-up and value validation
      *  via regex.
      */
-    public void solve(Measurement measurement) {
-        if (measurement.getQuantities() == null)
-            return;
-        for(Quantity quantity : measurement.getQuantities()) {
-            Unit rawUnit = quantity.getRawUnit();
-
+    public List<Measurement> solve(List<Measurement> measurements) {
+        for(Measurement measurement : measurements) {
+            if ( (measurement.getQuantities() == null) || (measurement.getQuantities().size() == 0) )
+                continue;
+            for(Quantity quantity : measurement.getQuantities()) {
+                if (quantity == null)
+                    continue;
+                Unit rawUnit = quantity.getRawUnit();
+                if ((rawUnit != null) && rawUnit.getRawName() != null) {
+                    Unit foundUnit = unitUtilities.getUnitbyName(rawUnit.getRawName());
+                    if (foundUnit == null)
+                        foundUnit = unitUtilities.getUnitbyNotation(rawUnit.getRawName());
+                    if (foundUnit != null) {
+                        if ( (foundUnit.getNames() != null) && (foundUnit.getNames().size() > 0) ) {
+                            rawUnit.setNames(foundUnit.getNames());
+                        }
+                        if ( (foundUnit.getNotations() != null) && (foundUnit.getNotations().size() > 0) ) {
+                            rawUnit.setNotations(foundUnit.getNotations());
+                        }
+                        if (foundUnit.getType() != null) 
+                            rawUnit.setType(foundUnit.getType());
+                        if (foundUnit.getSystem() != null)
+                            rawUnit.setSystem(foundUnit.getSystem());
+                        if (foundUnit.getType() != null)
+                            quantity.setType(foundUnit.getType());
+                    }
+                }            
+            }
         }
+        return measurements;
     }
 
 }

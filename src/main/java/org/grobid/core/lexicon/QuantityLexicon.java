@@ -112,7 +112,7 @@ public class QuantityLexicon {
                                 }
                             }
                         }
-                    } else if (i == 1) {
+                    } else if (i == 2) {
                         UnitUtilities.System_Type system = null;
                         try {
                             system = UnitUtilities.System_Type.valueOf(piece);
@@ -120,7 +120,7 @@ public class QuantityLexicon {
                             logger.error("invalid unit system name: " + piece);
                         }
                         unit.setSystem(system);
-                    } else if (i == 2) {
+                    } else if (i == 1) {
                         UnitUtilities.Unit_Type type = null;
                         try {
                             type = UnitUtilities.Unit_Type.valueOf(piece);

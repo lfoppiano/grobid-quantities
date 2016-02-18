@@ -86,10 +86,12 @@ public class QuantityParser extends AbstractParser {
     }
 
     private QuantityLexicon quantityLexicon = null;
+    private MeasurementUtilities measurementUtilities = null;
 
     private QuantityParser() {
         super(GrobidModels.QUANTITIES);
         quantityLexicon = QuantityLexicon.getInstance();
+        measurementUtilities = new MeasurementUtilities();
     }
 
     /**
@@ -126,7 +128,8 @@ public class QuantityParser extends AbstractParser {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
             measurements = resultExtraction(text, res, tokenizations);
-            measurements = normalizeMeasurements(measurements);
+            measurements = measurementUtilities.solve(measurements);
+            //measurements = normalizeMeasurements(measurements);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }

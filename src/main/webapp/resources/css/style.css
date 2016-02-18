@@ -209,7 +209,7 @@ span.section-active { color: #BC0E0E; }
 p {word-break:normal;}
 span {word-break:normal;}
 
-[rel=popover][data-color=location] + .popover .popover-title {
+[rel=popover][data-color=TEMPERATURE] + .popover .popover-title {
     background-color: #398739; color: white;
 }
 
