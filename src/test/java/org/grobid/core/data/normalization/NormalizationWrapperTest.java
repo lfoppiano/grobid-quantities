@@ -224,9 +224,5 @@ public class NormalizationWrapperTest {
 
         assertThat(output[0], is("107"));
         assertThat(output[1], is("cm2/s"));
-
-//        System.out.println(target.parseUnit("cm^2/s"));
-
     }
-
 }

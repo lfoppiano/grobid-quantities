@@ -129,7 +129,7 @@ public class QuantityParser extends AbstractParser {
             }
             measurements = resultExtraction(text, res, tokenizations);
             measurements = measurementUtilities.solve(measurements);
-            //measurements = normalizeMeasurements(measurements);
+            measurements = normalizeMeasurements(measurements);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
@@ -156,7 +156,7 @@ public class QuantityParser extends AbstractParser {
                     quantity.setNormalizedUnit(quantity1.getNormalizedUnit());
                 } catch (NormalizationException ne) {
 
-                    //Buh... let's ignore it for the time being :) 
+                    //Buh... let's ignore it for the time being :)
                 }
             }
 

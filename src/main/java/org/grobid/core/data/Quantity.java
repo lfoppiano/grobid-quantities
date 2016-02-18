@@ -12,23 +12,22 @@ import java.util.Map;
 import org.codehaus.jackson.io.JsonStringEncoder;
 
 /**
- * Class for managing a quantity representation. A quantity is a basically a value associated to a type
- * (type of the measurement) and a unit. Quantities are combined to form a measurement.
+ * Class for managing a quantity representation.
+ * A quantity is a basically a value associated to a type (type of the measurement) and a unit.
+ * Quantities are combined to form a measurement.
  *
  * @author Patrice Lopez
  */
 public class Quantity {
-    private UnitUtilities.Unit_Type type; // type of measurement
+    private UnitUtilities.Unit_Type type;
 
     private Unit rawUnit = null;
     private String rawValue = null;
 
-    private Unit normalizedUnit = null; // which gives also the system of the unit (SI, imperial, etc.)
-    private double normalizedValue = 0.0;
+    private Unit normalizedUnit = null;         // which gives also the system of the unit (SI, imperial, etc.)
+    private Double normalizedValue = null;      // null = not normalized
 
-    // as a condition, when the normalized unit is instanciated, its type must be the same as the type
-    // of the quantity
-
+    // as a condition, when the normalized unit is instanciated, its type must be the same as the type of the quantity
     // offset for the value only, the offsets for the unit expression are available in the raw Unit object
     // (given the fact that the same unit can be shared by several Quantity object)
     private OffsetPosition offsets = null;
@@ -37,6 +36,16 @@ public class Quantity {
     public Quantity() {
     }
 
+    public Quantity(String rawValue, Unit rawUnit) {
+        this.rawValue = rawValue;
+        this.rawUnit = rawUnit;
+    }
+
+    public Quantity(String rawValue, Unit rawUnit, UnitUtilities.Unit_Type type) {
+        this.rawValue = rawValue;
+        this.rawUnit = rawUnit;
+        this.type = type;
+    }
 
     public UnitUtilities.Unit_Type getType() {
         return type;
@@ -105,30 +114,37 @@ public class Quantity {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[ ");
+
         if (type != null)
             builder.append(type.getName()).append("\t");
+
         if (rawValue != null)
             builder.append(rawValue).append("\t");
+
         if (rawUnit != null)
             builder.append(rawUnit.toString()).append("\t");
 
-        if (normalizedUnit != null) {
-            builder.append(normalizedValue).append("\t")
-                    .append(normalizedUnit).append("\t");
+        if (isNormalized()) {
+            builder.append(normalizedValue).append("\t");
+
+            if (normalizedUnit != null) {
+                builder.append(normalizedUnit).append("\t");
+            }
         }
 
         if (offsets != null)
             builder.append(offsets.toString());
+
         builder.append(" ]");
         return builder.toString();
     }
 
     public boolean isEmpty() {
-        return (rawUnit == null) && StringUtils.isEmpty(rawValue);
+        return rawUnit == null && StringUtils.isEmpty(rawValue);
     }
 
     public boolean isNormalized() {
-        return normalizedUnit != null;
+        return normalizedValue != null;
     }
 
     public void setProductForm(Map<String, Integer> productForm) {
@@ -140,12 +156,14 @@ public class Quantity {
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");
+
         if (type != null) {
             byte[] encodedName = encoder.quoteAsUTF8(type.getName());
             String outputName = new String(encodedName);
             json.append("\"type\" : \"" + outputName + "\"");
             started = true;
         }
+
         if (rawValue != null) {
             if (!started) {
                 started = true;
@@ -166,6 +184,15 @@ public class Quantity {
                 json.append(", ");
             json.append("\"rawUnit\" : " + rawUnit.toJson());
         }
+        if (normalizedUnit != null) {
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"normalizedValue\" : " + normalizedValue).append(", ")
+                    .append("\"normalizedUnit\" : " + normalizedUnit.toJson());
+        }
+
         if (offsets != null) {
             if (getOffsetStart() != -1) {
                 if (!started) {
@@ -174,11 +201,13 @@ public class Quantity {
                     json.append(", ");
                 json.append("\"offsetStart\" : " + getOffsetStart());
             }
+
             if (getOffsetEnd() != -1) {
                 if (!started) {
                     started = true;
-                } else
+                } else {
                     json.append(", ");
+                }
                 json.append("\"offsetEnd\" : " + getOffsetEnd());
             }
         }

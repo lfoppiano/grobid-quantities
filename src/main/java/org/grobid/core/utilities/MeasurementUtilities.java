@@ -3,6 +3,7 @@ package org.grobid.core.utilities;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.Measurement;
+import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.utilities.UnitUtilities;
@@ -12,6 +13,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 /**
  * Try to solve measurement extracted attributes (unit, values).
@@ -30,42 +33,38 @@ public class MeasurementUtilities {
     }
 
     /**
-     * Check the wellformness of a given list of measurements. 
-     * In particular, if intervals are not consistent, they are transformed 
-     * in atomic value measurements. 
+     * Check the wellformness of a given list of measurements.
+     * In particular, if intervals are not consistent, they are transformed
+     * in atomic value measurements.
      */
     public static List<Measurement> postCorrection(List<Measurement> measurements) {
         List<Measurement> newMeasurements = new ArrayList<Measurement>();
 
-        for(Measurement measurement : measurements) {
+        for (Measurement measurement : measurements) {
             if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
                 List<Quantity> quantities = measurement.getQuantities();
-                if ( (quantities == null) || (quantities.size() == 0) )
+                if ((quantities == null) || (quantities.size() == 0))
                     continue;
                 newMeasurements.add(measurement);
-            }
-            else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
                 List<Quantity> quantities = measurement.getQuantities();
-                if ( (quantities == null) || (quantities.size() == 0) )
+                if ((quantities == null) || (quantities.size() == 0))
                     continue;
-                if ( (quantities.size() == 1) || (measurement.getQuantityLeast() == null) || (measurement.getQuantityMost() == null) ) {
+                if ((quantities.size() == 1) || (measurement.getQuantityLeast() == null) || (measurement.getQuantityMost() == null)) {
                     Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
                     Quantity quantity = null;
                     if (quantities.size() == 1) {
                         quantity = measurement.getQuantityLeast();
-                    }
-                    else if ( (quantities.size() == 2)  && (quantities.get(0) == null) ) {
+                    } else if ((quantities.size() == 2) && (quantities.get(0) == null)) {
                         quantity = quantities.get(1);
-                    }
-                    else if (quantities.size() == 2) {
+                    } else if (quantities.size() == 2) {
                         quantity = measurement.getQuantityLeast();
                     }
                     if (quantity != null) {
                         newMeasurement.setAtomicQuantity(quantity);
                         newMeasurements.add(newMeasurement);
                     }
-                }
-                else if ( (quantities.size() == 2) && (measurement.getQuantityLeast() != null) && (measurement.getQuantityMost() != null) ) {
+                } else if ((quantities.size() == 2) && (measurement.getQuantityLeast() != null) && (measurement.getQuantityMost() != null)) {
                     // if the interval is expressed over a chunck of text which is too large, it is a recognition error
                     // and we can replace it by two atomic measurements
                     Quantity quantityLeast = measurement.getQuantityLeast();
@@ -75,7 +74,7 @@ public class MeasurementUtilities {
                     int startM = quantityMost.getOffsetStart();
                     int endM = quantityMost.getOffsetEnd();
 
-                    if ( (Math.abs(endL-startM) > 80) && (Math.abs(endM-startL) > 80) ) {
+                    if ((Math.abs(endL - startM) > 80) && (Math.abs(endM - startL) > 80)) {
                         // we replace the interval measurement by two atomic measurements
                         Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
                         newMeasurement.setAtomicQuantity(quantityLeast);
@@ -83,17 +82,14 @@ public class MeasurementUtilities {
                         newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
                         newMeasurement.setAtomicQuantity(quantityMost);
                         newMeasurements.add(newMeasurement);
-                    }
-                    else
+                    } else
                         newMeasurements.add(measurement);
-                }
-                else
+                } else
                     newMeasurements.add(measurement);
-            }
-            else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                 // list must be consistent in unit type, and avoid too large chunk 
                 List<Quantity> quantities = measurement.getQuantities();
-                if ( (quantities == null) || (quantities.size() == 0) )
+                if ((quantities == null) || (quantities.size() == 0))
                     continue;
 
                 /* // case actually not seen
@@ -129,7 +125,7 @@ public class MeasurementUtilities {
                 // only one quantity - the correction is to extend the starting list with the remaining list after the atomic value, attaching
                 // the unit associated to the starting list to the added quantities 
 
-                
+
                 newMeasurements.add(measurement);
             }
         }
@@ -138,39 +134,30 @@ public class MeasurementUtilities {
     }
 
     /**
-     *  Right now, only basic matching of units based on lexicon look-up and value validation
-     *  via regex.
+     * Right now, only basic matching of units based on lexicon look-up and value validation
+     * via regex.
      */
     public List<Measurement> solve(List<Measurement> measurements) {
-        for(Measurement measurement : measurements) {
-            if ( (measurement.getQuantities() == null) || (measurement.getQuantities().size() == 0) )
+        for (Measurement measurement : measurements) {
+            if (isEmpty(measurement.getQuantities()))
                 continue;
-            for(Quantity quantity : measurement.getQuantities()) {
+            for (Quantity quantity : measurement.getQuantities()) {
                 if (quantity == null)
                     continue;
+
                 Unit rawUnit = quantity.getRawUnit();
+
                 if ((rawUnit != null) && rawUnit.getRawName() != null) {
-                    Unit foundUnit = quantityLexicon.getUnitbyName(rawUnit.getRawName().trim());
+                    UnitDefinition foundUnit = quantityLexicon.getUnitbyName(rawUnit.getRawName().trim());
                     if (foundUnit == null)
                         foundUnit = quantityLexicon.getUnitbyNotation(rawUnit.getRawName().trim());
+
                     if (foundUnit != null) {
-                        /*if ( (foundUnit.getNames() != null) && (foundUnit.getNames().size() > 0) ) {
-                            rawUnit.addName(foundUnit.getNames().get(0));
-                        }*/
-                        /*if ( (foundUnit.getNotations() != null) && (foundUnit.getNotations().size() > 0) ) {
-                            rawUnit.addNotation(foundUnit.getNotations.get(0));
-                        }*/
-                        if (foundUnit.getType() != null) 
-                            rawUnit.setType(foundUnit.getType());
-                        if (foundUnit.getSystem() != null)
-                            rawUnit.setSystem(foundUnit.getSystem());
-                        if (foundUnit.getType() != null)
-                            quantity.setType(foundUnit.getType());
+                        rawUnit.setUnitDefinition(foundUnit);
                     }
-                }            
+                }
             }
         }
         return measurements;
     }
-
 }

@@ -241,7 +241,7 @@ console.log(responseJson);
                         var end = parseInt(quantity.offsetEnd,10);
                         if ( (startUnit != -1) && ( (startUnit == end) || (startUnit == end+1)) )
                             end = endUnit;
-                        if ( (endUnit != -1) && ( (endUnit == start) || (endUnit+1 == start)) ) 
+                        if ( (endUnit != -1) && ( (endUnit == start) || (endUnit+1 == start)) )
                             start = startUnit;
 
                         if (start < pos) {
@@ -387,6 +387,10 @@ console.log(responseJson);
                 
             var rawValue = quantity.rawValue;
             var unit = quantity.rawUnit;
+
+            var normalizedValue = quantity.normalizedValue;
+            var normalizedUnit = quantity.normalizedUnit;
+
             var rawUnitName = null;
             var unitName = null;
             var startUnit = -1;
@@ -415,6 +419,13 @@ console.log(responseJson);
 
             if (rawUnitName)   
                 string += "<p>raw unit name: <b>"+rawUnitName+"</b></p>";
+
+            if(normalizedValue)
+                string += "<p>normalized value: <b>" + normalizedValue + "</b></p>";
+
+            if (normalizedUnit) {
+                string += "<p>normalized unit name: <b>" + normalizedUnit.rawName + "</b></p>";
+            }
 
             string += "</td><td style='align:right;bgcolor:#fff'></td></tr>";
         

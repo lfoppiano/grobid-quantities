@@ -1,7 +1,7 @@
 package org.grobid.core.lexicon;
 
 import org.grobid.core.analyzers.QuantityAnalyzer;
-import org.grobid.core.data.Unit;
+import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.exceptions.GrobidResourceException;
 import org.grobid.core.utilities.OffsetPosition;
@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.*;
 import java.util.regex.PatternSyntaxException;
 
@@ -26,6 +28,32 @@ public class QuantityLexicon {
     private static final Logger logger = LoggerFactory.getLogger(QuantityLexicon.class);
 
     private static volatile QuantityLexicon instance;
+    private final String INFLECTION_PATH = "/en/inflection.txt";
+    private final String PREFIX_PATH = "/en/prefix.txt";
+    private final String UNITS_PATH = "/en/units.txt";
+
+    // lexical information - for feature generations
+    private FastMatcher unitPattern = null;
+
+    private Set<String> unitTokens = null;
+    private Map<String, String> prefixes = null; // map prefix symbol to prefix string
+    private Map<String, List<String>> inflection = null; // map a unit string to its morphological inflections
+
+    // full unit information accessible from the unit names
+    // this mapping depends on the language
+    private Map<String, UnitDefinition> name2unit = null;
+
+    // full unit information accessible from the unit notation
+    // this mapping depends on the language
+    private Map<String, UnitDefinition> notation2unit = null;
+
+    // mapping between measurement types and the SI units for this type, the type here is represented with
+    // the name() value of the enum
+    private Map<String, UnitDefinition> type2SIUnit = null;
+
+    private QuantityLexicon() {
+        init();
+    }
 
     public static QuantityLexicon getInstance() {
         if (instance == null) {
@@ -34,46 +62,23 @@ public class QuantityLexicon {
         return instance;
     }
 
-    /**
-     * Create a new instance.
-     */
     private static synchronized void getNewInstance() {
         instance = new QuantityLexicon();
-    }
-
-    // lexical information - for feature generations
-    private FastMatcher unitPattern = null;
-    private Set<String> unitTokens = null;
-    private Map<String, String> prefixes = null; // map prefix symbol to prefix string
-    private Map<String, List<String>> inflection = null; // map a unit string to its morphological inflections
-
-    // full unit information accessible from the unit names
-    // this mapping depends on the language
-    private Map<String, Unit> name2unit = null;
-
-    // full unit information accessible from the unit notation
-    // this mapping depends on the language
-    private Map<String, Unit> notation2unit = null;
-
-    // mapping between measurement types and the SI units for this type, the type here is represented with
-    // the name() value of the enum
-    private Map<String, Unit> type2SIUnit = null;
-
-    private QuantityLexicon() {
-        init();
     }
 
     private void init() {
         initPrefix();
         initInflection();
+
         File file = null;
         InputStream ist = null;
         InputStreamReader isr = null;
         BufferedReader dis = null;
+
         try {
             unitTokens = new HashSet<String>();
-            String path = "src/main/resources/en/units.txt";
-            file = new File(path);
+            URL path = this.getClass().getResource(UNITS_PATH);
+            file = new File(path.toURI());
             if (!file.exists()) {
                 throw new GrobidResourceException("Cannot add entries to unit dictionary, because file '"
                         + file.getAbsolutePath() + "' does not exists.");
@@ -84,9 +89,7 @@ public class QuantityLexicon {
             }
 
             unitPattern = new FastMatcher();
-            ist = getClass().getResourceAsStream(path);
-            if (ist == null)
-                ist = new FileInputStream(file);
+            ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 
@@ -94,7 +97,7 @@ public class QuantityLexicon {
             while ((l = dis.readLine()) != null) {
                 if (l.length() == 0) continue;
                 String[] pieces = l.split("\t");
-                Unit unit = new Unit();
+                UnitDefinition unitDefinition = new UnitDefinition();
                 UnitUtilities.Unit_Type type = null;
                 UnitUtilities.System_Type system = null;
                 for (int i = 0; i < pieces.length; i++) {
@@ -114,7 +117,7 @@ public class QuantityLexicon {
                                 } catch (Exception e) {
                                     logger.error("invalid unit term: " + derivation);
                                 }
-                                unit.addNotation(derivation);
+                                unitDefinition.addNotation(derivation);
 
                                 List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
                                 for (String word : subsubpieces) {
@@ -133,14 +136,14 @@ public class QuantityLexicon {
                         } catch (Exception e) {
                             logger.error("invalid unit type name: " + piece);
                         }
-                        unit.setType(type);
+                        unitDefinition.setType(type);
                     } else if (i == 2) {
                         try {
                             system = UnitUtilities.System_Type.valueOf(piece);
                         } catch (Exception e) {
                             logger.error("invalid unit system name: " + piece);
                         }
-                        unit.setSystem(system);
+                        unitDefinition.setSystem(system);
                     } else if (i == 3) {
                         String[] subpieces = piece.split(",");
                         for (int j = 0; j < subpieces.length; j++) {
@@ -150,11 +153,11 @@ public class QuantityLexicon {
                             List<String> inflections = inflectionalMorphologyExpansion(subpiece);
 
                             for (String inflectedForm : inflections) {
-                                if ( (system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED) ) {
+                                if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
                                     // expansion with derivational morphology, but only for SI units!
                                     List<String> derivations = derivationalMorphologyExpansion(inflectedForm, false);
                                     for (String derivation : derivations) {
-                                        unit.addName(derivation);
+                                        unitDefinition.addName(derivation);
                                         try {
                                             unitPattern.loadTerm(derivation);
                                         } catch (Exception e) {
@@ -170,11 +173,10 @@ public class QuantityLexicon {
                                             }
                                         }
                                     }
-                                }
-                                else {
-                                    unit.addName(inflectedForm);
+                                } else {
+                                    unitDefinition.addName(inflectedForm);
                                     try {
-                                            unitPattern.loadTerm(inflectedForm);
+                                        unitPattern.loadTerm(inflectedForm);
                                     } catch (Exception e) {
                                         logger.error("invalid unit term: " + inflectedForm);
                                     }
@@ -184,7 +186,7 @@ public class QuantityLexicon {
                                         if ((word.length() > 0) && !unitTokens.contains(word)) {
                                             // we don't add pure digit sub-token and token delimiters
                                             if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1))
-                                                 unitTokens.add(word);
+                                                unitTokens.add(word);
                                         }
                                     }
                                 }
@@ -194,47 +196,47 @@ public class QuantityLexicon {
                 }
 
                 // add unit names in the first map
-                List<String> names = unit.getNames();
+                List<String> names = unitDefinition.getNames();
                 if ((names != null) && (names.size() > 0)) {
                     for (int j = 0; j < names.size(); j++) {
                         if (name2unit == null)
-                            name2unit = new HashMap<String, Unit>();
-                        name2unit.put(names.get(j).trim().toLowerCase(), unit);
+                            name2unit = new HashMap<>();
+                        name2unit.put(names.get(j).trim().toLowerCase(), unitDefinition);
                     }
                 }
 
                 // add unit notation map
-                List<String> notations = unit.getNotations();
+                List<String> notations = unitDefinition.getNotations();
                 if ((notations != null) && (notations.size() > 0)) {
                     for (int j = 0; j < notations.size(); j++) {
                         if (notation2unit == null)
-                            notation2unit = new HashMap<String, Unit>();
-                        notation2unit.put(notations.get(j).trim(), unit);
+                            notation2unit = new HashMap<>();
+                        notation2unit.put(notations.get(j).trim(), unitDefinition);
                     }
                 } else
-                    notation2unit.put("no_notation", unit);
+                    notation2unit.put("no_notation", unitDefinition);
 
                 // add unit in the second map
-                system = unit.getSystem();
+                system = unitDefinition.getSystem();
                 if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
                     if (type2SIUnit == null) {
-                        type2SIUnit = new HashMap<String, Unit>();
+                        type2SIUnit = new HashMap<>();
                     }
                     if (type2SIUnit.get(type.getName()) == null)
-                        type2SIUnit.put(type.getName(), unit);
+                        type2SIUnit.put(type.getName(), unitDefinition);
                 }
-//System.out.print(notations); System.out.println(" -> " + type);       
+//System.out.print(notations); System.out.println(" -> " + type);
 //System.out.print(names); System.out.println(" -> " + type);
-        }
+            }
 //System.out.println(unitTokens.toString());
         } catch (PatternSyntaxException e) {
             throw new
                     GrobidResourceException("Error when compiling lexicon matcher for unit vocabulary.", e);
         } catch (FileNotFoundException e) {
-//	    	e.printStackTrace();
             throw new GrobidException("An exception occured while running Grobid.", e);
         } catch (IOException e) {
-//	    	e.printStackTrace();
+            throw new GrobidException("An exception occured while running Grobid.", e);
+        } catch (URISyntaxException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
             try {
@@ -257,8 +259,8 @@ public class QuantityLexicon {
         BufferedReader dis = null;
         try {
             unitTokens = new HashSet<String>();
-            String path = "src/main/resources/en/prefix.txt";
-            file = new File(path);
+            URL prefixUrl = this.getClass().getResource(PREFIX_PATH);
+            file = new File(prefixUrl.toURI());
             if (!file.exists()) {
                 throw new GrobidResourceException("Cannot add entries to unit prefix dictionary, because file '"
                         + file.getAbsolutePath() + "' does not exists.");
@@ -269,9 +271,7 @@ public class QuantityLexicon {
             }
 
             unitPattern = new FastMatcher();
-            ist = getClass().getResourceAsStream(path);
-            if (ist == null)
-                ist = new FileInputStream(file);
+            ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 
@@ -294,10 +294,10 @@ public class QuantityLexicon {
             throw new
                     GrobidResourceException("Error when compiling prefix map for unit vocabulary.", e);
         } catch (FileNotFoundException e) {
-//	    	e.printStackTrace();
             throw new GrobidException("An exception occured while running Grobid.", e);
         } catch (IOException e) {
-//	    	e.printStackTrace();
+            throw new GrobidException("An exception occured while running Grobid.", e);
+        } catch (URISyntaxException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
             try {
@@ -320,8 +320,8 @@ public class QuantityLexicon {
         BufferedReader dis = null;
         try {
             unitTokens = new HashSet<String>();
-            String path = "src/main/resources/en/inflection.txt";
-            file = new File(path);
+            URL inflectionUrl = this.getClass().getResource(INFLECTION_PATH);
+            file = new File(inflectionUrl.toURI());
             if (!file.exists()) {
                 throw new GrobidResourceException("Cannot add entries to inflection dictionary, because file '"
                         + file.getAbsolutePath() + "' does not exists.");
@@ -332,9 +332,7 @@ public class QuantityLexicon {
             }
 
             unitPattern = new FastMatcher();
-            ist = getClass().getResourceAsStream(path);
-            if (ist == null)
-                ist = new FileInputStream(file);
+            ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 
@@ -361,10 +359,10 @@ public class QuantityLexicon {
             throw new
                     GrobidResourceException("Error when compiling inflection unit vocabulary.", e);
         } catch (FileNotFoundException e) {
-//	    	e.printStackTrace();
             throw new GrobidException("An exception occured while running Grobid.", e);
         } catch (IOException e) {
-//	    	e.printStackTrace();
+            throw new GrobidException("An exception occured while running Grobid.", e);
+        } catch (URISyntaxException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
             try {
@@ -457,28 +455,28 @@ public class QuantityLexicon {
     /**
      * Return a unit object based on an unit name.
      */
-    public Unit getUnitbyName(String name) {
+    public UnitDefinition getUnitbyName(String name) {
         if (name == null)
             return null;
-        return (Unit) name2unit.get(name.toLowerCase());
+        return (UnitDefinition) name2unit.get(name.toLowerCase());
     }
 
     /**
      * Return a unit object based on an unit notation.
      */
-    public Unit getUnitbyNotation(String notation) {
+    public UnitDefinition getUnitbyNotation(String notation) {
         if (notation == null)
             return null;
-        return (Unit) notation2unit.get(notation);
+        return (UnitDefinition) notation2unit.get(notation);
     }
 
     /**
      * Return the SI unit object from a measure type name
      */
-    public Unit getSIUnitByType(String type) {
+    public UnitDefinition getSIUnitByType(String type) {
         if (type == null)
             return null;
-        return (Unit) type2SIUnit.get(type);
+        return (UnitDefinition) type2SIUnit.get(type);
     }
 
 }

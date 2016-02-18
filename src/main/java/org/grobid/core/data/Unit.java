@@ -1,14 +1,6 @@
 package org.grobid.core.data;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.UnitUtilities;
-
-import java.util.List;
-import java.util.ArrayList;
-
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 import org.codehaus.jackson.io.JsonStringEncoder;
 
@@ -18,45 +10,15 @@ import org.codehaus.jackson.io.JsonStringEncoder;
  * @author Patrice Lopez
  */
 public class Unit {
-    // usual full names for the unit, e.g. metre, meter
-    private List<String> names = null;
-
-    // standard notation, e.g. g for gram - there might be several notations for an unit
-    private List<String> notations = null;
-
-    private UnitUtilities.Unit_Type type;               // type of measurement
-    private UnitUtilities.System_Type system;           // type of system of unit
-
-    // to be used only when building a unit during parsing
     private String rawName = null;
     private OffsetPosition offsets = null;
+    private UnitDefinition unitDefinition = null;
 
-    public List<String> getNames() {
-        return names;
+    public Unit() {
     }
 
-    public void setNames(List<String> name) {
-        this.names = names;
-    }
-
-    public void addName(String name) {
-        if (names == null)
-            names = new ArrayList<String>();
-        names.add(name);
-    }
-
-    public List<String> getNotations() {
-        return notations;
-    }
-
-    public void setNotations(List<String> not) {
-        this.notations = not;
-    }
-
-    public void addNotation(String not) {
-        if (notations == null)
-            notations = new ArrayList<String>();
-        notations.add(not);
+    public Unit(String rawName) {
+        this.rawName = rawName;
     }
 
     public String getRawName() {
@@ -65,22 +27,6 @@ public class Unit {
 
     public void setRawName(String name) {
         rawName = name;
-    }
-
-    public UnitUtilities.System_Type getSystem() {
-        return system;
-    }
-
-    public void setSystem(UnitUtilities.System_Type si) {
-        system = si;
-    }
-
-    public UnitUtilities.Unit_Type getType() {
-        return type;
-    }
-
-    public void setType(UnitUtilities.Unit_Type ty) {
-        type = ty;
     }
 
     public void setOffsetStart(int start) {
@@ -112,18 +58,15 @@ public class Unit {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[ ");
-        if (notations != null)
-            builder.append(notations.toString()).append("\t");
-        if (type != null)
-            builder.append(type.getName()).append("\t");
-        if (system != null)
-            builder.append(system.getName()).append("\t");
-        if (names != null)
-            builder.append(names.toString()).append("\t");
-        if (rawName != null)
+        if (rawName != null) {
             builder.append(rawName).append("\t");
-        if (offsets != null)
+        }
+        if (offsets != null) {
             builder.append(offsets.toString());
+        }
+        if (unitDefinition != null)
+            builder.append(unitDefinition.toString()).append("\t");
+
         builder.append(" ]");
         return builder.toString();
     }
@@ -133,31 +76,6 @@ public class Unit {
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");
-        if (isNotEmpty(notations)) {
-            String notation = notations.get(0);
-            byte[] encodedNotation = encoder.quoteAsUTF8(notation);
-            String outputNotation = new String(encodedNotation);
-            json.append("\"notation\" : \"" + outputNotation + "\"");
-            started = true;
-        }
-        if (type != null) {
-            byte[] encodedName = encoder.quoteAsUTF8(type.getName());
-            String outputName = new String(encodedName);
-            if (!started) {
-                started = true;
-            } else
-                json.append(", ");
-            json.append("\"name\" : \"" + outputName + "\"");
-        }
-        if (system != null) {
-            byte[] encodedSystem = encoder.quoteAsUTF8(system.getName());
-            String outputSystem = new String(encodedSystem);
-            if (!started) {
-                started = true;
-            } else
-                json.append(", ");
-            json.append("\"system\" : \"" + outputSystem + "\"");
-        }
         if (rawName != null) {
             byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
             String outputRawName = new String(encodedRawName);
@@ -167,27 +85,40 @@ public class Unit {
                 json.append(", ");
             json.append("\"rawName\" : \"" + outputRawName + "\"");
         }
+        if (getUnitDefinition() != null) {
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"unitDefinition\" : " + getUnitDefinition().toJson());
+        }
+
         if (offsets != null) {
-        	if (getOffsetStart() != -1) {
-        		if (!started) {
-            	    started = true;
-            	}
-            	else
-            		json.append(", ");
-    			json.append("\"offsetStart\" : " + getOffsetStart());
-        	}
-        	if (getOffsetEnd() != -1) {
-        		if (!started) {
-                	started = true;
-           		}
-           		else
-            		json.append(", ");
-    			json.append("\"offsetEnd\" : " + getOffsetEnd());
-        	}
+            if (getOffsetStart() != -1) {
+                if (!started) {
+                    started = true;
+                } else
+                    json.append(", ");
+                json.append("\"offsetStart\" : " + getOffsetStart());
+            }
+            if (getOffsetEnd() != -1) {
+                if (!started) {
+                    started = true;
+                } else
+                    json.append(", ");
+                json.append("\"offsetEnd\" : " + getOffsetEnd());
+            }
         }
 
         json.append(" }");
         return json.toString();
     }
 
+    public UnitDefinition getUnitDefinition() {
+        return unitDefinition;
+    }
+
+    public void setUnitDefinition(UnitDefinition unitDefinition) {
+        this.unitDefinition = unitDefinition;
+    }
 }

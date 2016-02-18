@@ -1,6 +1,7 @@
 package org.grobid.core.utilities;
 
 import org.grobid.core.data.Unit;
+import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.exceptions.GrobidResourceException;
 
@@ -218,12 +219,12 @@ public class UnitUtilities {
                             }
                         }
 
-                        Unit unit = new Unit();
+                        UnitDefinition unitDefinition = new UnitDefinition();
                         if ((notationList != null) && (notationList.length > 0)) {
                             for (int j = 0; j < notationList.length; j++)
-                                unit.addNotation(notationList[j].trim());
+                                unitDefinition.addNotation(notationList[j].trim());
                         }
-                        unit.setSystem(system);
+                        unitDefinition.setSystem(system);
                         // here "deserialize" the enum type
                         Unit_Type savedType = Unit_Type.UNKNOWN;
                         try {
@@ -232,15 +233,15 @@ public class UnitUtilities {
                         catch(Exception e) {
                             System.out.println("Invalid unit type name: " + type);
                         }
-                        unit.setType(savedType);
-                        unit.setNames(names);
+                        unitDefinition.setType(savedType);
+                        unitDefinition.setNames(names);
 
                         // add unit names in the first map
                         if ((names != null) && (names.size() > 0)) {
                             for (int j = 0; j < names.size(); j++) {
                                 if (name2unit == null)
-                                    name2unit = new HashMap<String, Unit>();
-                                name2unit.put(names.get(j).trim().toLowerCase(), unit);
+                                    name2unit = new HashMap<>();
+                                name2unit.put(names.get(j).trim().toLowerCase(), unitDefinition);
                             }
                         }
 
@@ -248,29 +249,27 @@ public class UnitUtilities {
                         if ((notationList != null) && (notationList.length > 0)) {
                             for (int j = 0; j < notationList.length; j++) {
                                 if (notation2unit == null)
-                                    notation2unit = new HashMap<String, Unit>();
-                                notation2unit.put(notationList[j].trim().toLowerCase(), unit);
+                                    notation2unit = new HashMap<>();
+                                notation2unit.put(notationList[j].trim().toLowerCase(), unitDefinition);
                             }
                         } else
-                            notation2unit.put("no_notation", unit);
+                            notation2unit.put("no_notation", unitDefinition);
 
                         // add unit in the second map
                         if ((system == System_Type.SI_BASE) || (system == System_Type.SI_DERIVED)) {
                             if (type2SIUnit == null) {
-                                type2SIUnit = new HashMap<String, Unit>();
+                                type2SIUnit = new HashMap<>();
                             }
                             if (type2SIUnit.get(type) == null)
-                                type2SIUnit.put(type, unit);
+                                type2SIUnit.put(type, unitDefinition);
                         }
 
                     }
                 }
             }
         } catch (FileNotFoundException e) {
-//	    	e.printStackTrace();
             throw new GrobidException("An exception occured while running Grobid.", e);
         } catch (IOException e) {
-//	    	e.printStackTrace();
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
             try {
