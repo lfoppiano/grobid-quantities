@@ -27,11 +27,10 @@ public class Quantity {
     private Unit normalizedUnit = null;         // which gives also the system of the unit (SI, imperial, etc.)
     private Double normalizedValue = null;      // null = not normalized
 
-    // as a condition, when the normalized unit is instanciated, its type must be the same as the type of the quantity
+    // as a condition, when the normalized unit is instantiated, its type must be the same as the type of the quantity
     // offset for the value only, the offsets for the unit expression are available in the raw Unit object
     // (given the fact that the same unit can be shared by several Quantity object)
     private OffsetPosition offsets = null;
-    private Map<String, Integer> productForm;
 
     public Quantity() {
     }
@@ -145,10 +144,6 @@ public class Quantity {
 
     public boolean isNormalized() {
         return normalizedValue != null;
-    }
-
-    public void setProductForm(Map<String, Integer> productForm) {
-        this.productForm = productForm;
     }
 
     public String toJson() {

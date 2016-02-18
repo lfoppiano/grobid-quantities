@@ -141,22 +141,29 @@ public class QuantityParser extends AbstractParser {
         NormalizationWrapper normalizationWrapper = new NormalizationWrapper();
         for (Measurement measurement : measurements) {
             for (Quantity quantity : measurement.getQuantities()) {
-                if (isNotEmpty(quantity.getRawValue())) {
-                    String[] parsed = normalizationWrapper.parseRawString(quantity.getRawValue());
-                    if (quantity.getRawUnit() == null) {
-                        Unit raw = new Unit();
-                        raw.setRawName(parsed[1]);
-                        quantity.setRawUnit(raw);
-                        quantity.setRawValue(parsed[0]);
-                    }
-                }
-                try {
-                    Quantity quantity1 = normalizationWrapper.normalizeQuantityToBaseUnits(quantity);
-                    quantity.setNormalizedValue(quantity1.getNormalizedValue());
-                    quantity.setNormalizedUnit(quantity1.getNormalizedUnit());
-                } catch (NormalizationException ne) {
+                if (!quantity.isNormalized()) {
 
-                    //Buh... let's ignore it for the time being :)
+
+//                if (isNotEmpty(quantity.getRawValue())) {
+//                    String[] parsed = normalizationWrapper.parseRawString(quantity.getRawValue());
+//                    if (quantity.getRawUnit() == null) {
+//                        Unit raw = new Unit();
+//                        raw.setRawName(parsed[1]);
+//                        quantity.setRawUnit(raw);
+//                        quantity.setRawValue(parsed[0]);
+//                    }
+//                }
+
+                    try {
+                        Quantity quantity1 = normalizationWrapper.normalizeQuantityToBaseUnits(quantity);
+                        if(quantity1.isNormalized()) {
+                            quantity.setNormalizedValue(quantity1.getNormalizedValue());
+                            quantity.setNormalizedUnit(quantity1.getNormalizedUnit());
+                        }
+                    } catch (NormalizationException ne) {
+
+                        //Buh... let's ignore it for the time being :)
+                    }
                 }
             }
 

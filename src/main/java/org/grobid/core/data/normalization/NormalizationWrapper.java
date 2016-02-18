@@ -35,7 +35,7 @@ public class NormalizationWrapper {
 
 
     public Quantity normalizeQuantityToBaseUnits(Quantity quantity) throws NormalizationException {
-        if (quantity.isEmpty() || isEmpty(quantity.getRawUnit().getRawName())) {
+        if (quantity.isEmpty() || quantity.getRawUnit() == null || isEmpty(quantity.getRawUnit().getRawName())) {
             return quantity;    //or throw new NormalizationException() :-)
         }
         javax.measure.Unit parsedUnit = parseUnit(quantity.getRawUnit().getRawName());
@@ -79,10 +79,9 @@ public class NormalizationWrapper {
             quantity.setNormalizedUnit(normalizedUnit);
             try {
                 quantity.setNormalizedValue(transformedUnit.getConverter().convert(Double.parseDouble(quantity.getRawValue())));
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
-                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+                        "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
             }
             wrappedUnitProducts.put(transformedUnit.getSymbol(), 1);
 
@@ -90,31 +89,26 @@ public class NormalizationWrapper {
 
             ProductUnit productUnit = (ProductUnit) unit;
             Map<String, Integer> products = extractProduct(productUnit);
-            quantity.setProductForm(products);
             normalizedUnit.setRawName(productUnit.toSystemUnit().toString());
             quantity.setNormalizedUnit(normalizedUnit);
             try {
                 quantity.setNormalizedValue(productUnit.getSystemConverter().convert(Double.parseDouble(quantity.getRawValue())));
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
-                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+                        "or it is not recognized from the available parsers.");
             }
 
         } else {
-
             normalizedUnit.setRawName(unit.getSymbol());
             quantity.setNormalizedUnit(normalizedUnit);
             try {
                 quantity.setNormalizedValue(Double.parseDouble(quantity.getRawValue()));
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
-                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+                        "or it is not recognized from the available parsers.");
             }
         }
 
-        quantity.setProductForm(wrappedUnitProducts);
         return quantity;
     }
 

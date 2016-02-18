@@ -4,6 +4,9 @@ import org.grobid.core.utilities.OffsetPosition;
 
 import org.codehaus.jackson.io.JsonStringEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class for managing normalized Unit representation.
  *
@@ -13,6 +16,8 @@ public class Unit {
     private String rawName = null;
     private OffsetPosition offsets = null;
     private UnitDefinition unitDefinition = null;
+
+    private List<UnitBlock> productBlock = null;
 
     public Unit() {
     }
@@ -120,5 +125,58 @@ public class Unit {
 
     public void setUnitDefinition(UnitDefinition unitDefinition) {
         this.unitDefinition = unitDefinition;
+    }
+
+    public boolean addProductBlock(UnitBlock block) {
+        return getProductBlocks().add(block);
+    }
+
+    public List<UnitBlock> getProductBlocks() {
+        if (productBlock == null) {
+            productBlock = new ArrayList<>();
+        }
+        return productBlock;
+    }
+
+    public void setProductBlocks(List<UnitBlock> productForm) {
+        this.productBlock = productForm;
+    }
+
+
+    class UnitBlock {
+        private String prefix;
+        private String base;
+        private String pow;
+
+        public UnitBlock(String prefix, String base, String pow) {
+            this.prefix = prefix;
+            this.base = base;
+            this.pow = pow;
+        }
+
+
+        public String getPrefix() {
+            return prefix;
+        }
+
+        public void setPrefix(String prefix) {
+            this.prefix = prefix;
+        }
+
+        public String getBase() {
+            return base;
+        }
+
+        public void setBase(String base) {
+            this.base = base;
+        }
+
+        public String getPow() {
+            return pow;
+        }
+
+        public void setPow(String pow) {
+            this.pow = pow;
+        }
     }
 }
