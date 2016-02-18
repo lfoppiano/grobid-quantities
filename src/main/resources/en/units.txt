@@ -21,7 +21,7 @@ A	ELECTRIC_CURRENT	SI_BASE	ampere
 s	TIME	SI_BASE	second
 min	TIME	NON_SI	minute
 h	TIME	NON_SI	hour
-d	TIME	NON_SI	day
+	TIME	NON_SI	day
 	TIME	NON_SI	week
 	TIME	NON_SI	month
 	TIME	NON_SI	year
@@ -32,7 +32,6 @@ K	TEMPERATURE	SI_BASE	kelvin
 cd	LUMINOUS_INTENSITY	SI_BASE	candela
 mol	AMOUNT_OF_SUBSTANCE	SI_BASE	mole
 M	CONCENTRATION	NON_SI	molarity
-m	CONCENTRATION	NON_SI	molality
 mol/L	CONCENTRATION	NON_SI	molarity
 mol/m^3,mol/m³	CONCENTRATION	SI_BASE	molarity
 w/w%	CONCENTRATION	NON_SI	weight/weight percent

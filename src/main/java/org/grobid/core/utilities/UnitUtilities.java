@@ -155,23 +155,10 @@ public class UnitUtilities {
         instance = new UnitUtilities();
     }
 
-    // full unit information accessible from the unit names
-    // this mapping depends on the language
-    private Map<String, Unit> name2unit = null;
-
-    // full unit information accessible from the unit notation
-    // this mapping depends on the language
-    private Map<String, Unit> notation2unit = null;
-
-    // mapping between measurement types and the SI units for this type, the type here is represented with
-    // the name() value of the enum
-    private Map<String, Unit> type2SIUnit = null;
-
     private UnitUtilities() {
-        initUnitUtilities();
     }
 
-    public void initUnitUtilities() {
+    /*public void initUnitUtilities() {
         File file = null;
         InputStream ist = null;
         InputStreamReader isr = null;
@@ -224,7 +211,10 @@ public class UnitUtilities {
                             while (st2.hasMoreTokens()) {
                                 if (names == null)
                                     names = new ArrayList<String>();
-                                names.add(st2.nextToken().trim());
+                                String localName = st2.nextToken().trim();
+                                names.add(localName);
+                                // some expansions
+
                             }
                         }
 
@@ -294,32 +284,7 @@ public class UnitUtilities {
                 throw new GrobidResourceException("Cannot close all streams.", e);
             }
         }
-    }
+    }*/
 
-    /**
-     * Return a unit object based on an unit name.
-     */
-    public Unit getUnitbyName(String name) {
-        if (name == null)
-            return null;
-        return (Unit) name2unit.get(name.toLowerCase());
-    }
 
-    /**
-     * Return a unit object based on an unit notation.
-     */
-    public Unit getUnitbyNotation(String notation) {
-        if (notation == null)
-            return null;
-        return (Unit) notation2unit.get(notation.toLowerCase());
-    }
-
-    /**
-     * Return the SI unit object from a measure type name
-     */
-    public Unit getSIUnitByType(String type) {
-        if (type == null)
-            return null;
-        return (Unit) type2SIUnit.get(type);
-    }
 }

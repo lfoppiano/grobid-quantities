@@ -83,6 +83,7 @@ public class TestQuantityParser {
         }
     }
 
+    @Ignore
     @Test
     public void testCreateTrainingDataFromText() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();

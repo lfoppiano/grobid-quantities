@@ -239,9 +239,9 @@ console.log(responseJson);
                         }
                         var start = parseInt(quantity.offsetStart,10);
                         var end = parseInt(quantity.offsetEnd,10);
-                        if ((startUnit != -1) && (startUnit == end)) 
+                        if ( (startUnit != -1) && ( (startUnit == end) || (startUnit == end+1)) )
                             end = endUnit;
-                        if ((endUnit != -1) && (endUnit == start)) 
+                        if ( (endUnit != -1) && ( (endUnit == start) || (endUnit+1 == start)) ) 
                             start = startUnit;
 
                         if (start < pos) {

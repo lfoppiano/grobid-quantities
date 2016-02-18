@@ -41,10 +41,23 @@ public class QuantityLexicon {
         instance = new QuantityLexicon();
     }
 
+    // lexical information - for feature generations
     private FastMatcher unitPattern = null;
     private Set<String> unitTokens = null;
     private Map<String, String> prefixes = null; // map prefix symbol to prefix string
     private Map<String, List<String>> inflection = null; // map a unit string to its morphological inflections
+
+    // full unit information accessible from the unit names
+    // this mapping depends on the language
+    private Map<String, Unit> name2unit = null;
+
+    // full unit information accessible from the unit notation
+    // this mapping depends on the language
+    private Map<String, Unit> notation2unit = null;
+
+    // mapping between measurement types and the SI units for this type, the type here is represented with
+    // the name() value of the enum
+    private Map<String, Unit> type2SIUnit = null;
 
     private QuantityLexicon() {
         init();
@@ -82,6 +95,8 @@ public class QuantityLexicon {
                 if (l.length() == 0) continue;
                 String[] pieces = l.split("\t");
                 Unit unit = new Unit();
+                UnitUtilities.Unit_Type type = null;
+                UnitUtilities.System_Type system = null;
                 for (int i = 0; i < pieces.length; i++) {
                     String piece = pieces[i].trim();
                     if (piece.length() == 0)
@@ -112,22 +127,20 @@ public class QuantityLexicon {
                                 }
                             }
                         }
-                    } else if (i == 2) {
-                        UnitUtilities.System_Type system = null;
-                        try {
-                            system = UnitUtilities.System_Type.valueOf(piece);
-                        } catch (Exception e) {
-                            logger.error("invalid unit system name: " + piece);
-                        }
-                        unit.setSystem(system);
                     } else if (i == 1) {
-                        UnitUtilities.Unit_Type type = null;
                         try {
                             type = UnitUtilities.Unit_Type.valueOf(piece);
                         } catch (Exception e) {
                             logger.error("invalid unit type name: " + piece);
                         }
                         unit.setType(type);
+                    } else if (i == 2) {
+                        try {
+                            system = UnitUtilities.System_Type.valueOf(piece);
+                        } catch (Exception e) {
+                            logger.error("invalid unit system name: " + piece);
+                        }
+                        unit.setSystem(system);
                     } else if (i == 3) {
                         String[] subpieces = piece.split(",");
                         for (int j = 0; j < subpieces.length; j++) {
@@ -137,22 +150,41 @@ public class QuantityLexicon {
                             List<String> inflections = inflectionalMorphologyExpansion(subpiece);
 
                             for (String inflectedForm : inflections) {
-                                // expansion with derivational morphology, but only for SI units!
-                                List<String> derivations = derivationalMorphologyExpansion(inflectedForm, false);
-                                for (String derivation : derivations) {
-                                    unit.addName(derivation);
-                                    try {
-                                        unitPattern.loadTerm(derivation);
-                                    } catch (Exception e) {
-                                        logger.error("invalid unit term: " + derivation);
+                                if ( (system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED) ) {
+                                    // expansion with derivational morphology, but only for SI units!
+                                    List<String> derivations = derivationalMorphologyExpansion(inflectedForm, false);
+                                    for (String derivation : derivations) {
+                                        unit.addName(derivation);
+                                        try {
+                                            unitPattern.loadTerm(derivation);
+                                        } catch (Exception e) {
+                                            logger.error("invalid unit term: " + derivation);
+                                        }
+                                        List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
+                                        for (String word : subsubpieces) {
+                                            word = word.trim().toLowerCase();
+                                            if ((word.length() > 0) && !unitTokens.contains(word)) {
+                                                // we don't add pure digit sub-token and token delimiters
+                                                if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1))
+                                                    unitTokens.add(word);
+                                            }
+                                        }
                                     }
-                                    List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
+                                }
+                                else {
+                                    unit.addName(inflectedForm);
+                                    try {
+                                            unitPattern.loadTerm(inflectedForm);
+                                    } catch (Exception e) {
+                                        logger.error("invalid unit term: " + inflectedForm);
+                                    }
+                                    List<String> subsubpieces = QuantityAnalyzer.tokenize(inflectedForm);
                                     for (String word : subsubpieces) {
                                         word = word.trim().toLowerCase();
                                         if ((word.length() > 0) && !unitTokens.contains(word)) {
                                             // we don't add pure digit sub-token and token delimiters
                                             if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1))
-                                                unitTokens.add(word);
+                                                 unitTokens.add(word);
                                         }
                                     }
                                 }
@@ -160,7 +192,40 @@ public class QuantityLexicon {
                         }
                     }
                 }
-            }
+
+                // add unit names in the first map
+                List<String> names = unit.getNames();
+                if ((names != null) && (names.size() > 0)) {
+                    for (int j = 0; j < names.size(); j++) {
+                        if (name2unit == null)
+                            name2unit = new HashMap<String, Unit>();
+                        name2unit.put(names.get(j).trim().toLowerCase(), unit);
+                    }
+                }
+
+                // add unit notation map
+                List<String> notations = unit.getNotations();
+                if ((notations != null) && (notations.size() > 0)) {
+                    for (int j = 0; j < notations.size(); j++) {
+                        if (notation2unit == null)
+                            notation2unit = new HashMap<String, Unit>();
+                        notation2unit.put(notations.get(j).trim(), unit);
+                    }
+                } else
+                    notation2unit.put("no_notation", unit);
+
+                // add unit in the second map
+                system = unit.getSystem();
+                if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
+                    if (type2SIUnit == null) {
+                        type2SIUnit = new HashMap<String, Unit>();
+                    }
+                    if (type2SIUnit.get(type.getName()) == null)
+                        type2SIUnit.put(type.getName(), unit);
+                }
+//System.out.print(notations); System.out.println(" -> " + type);       
+//System.out.print(names); System.out.println(" -> " + type);
+        }
 //System.out.println(unitTokens.toString());
         } catch (PatternSyntaxException e) {
             throw new
@@ -389,5 +454,31 @@ public class QuantityLexicon {
         return unitTokens.contains(s.toLowerCase());
     }
 
+    /**
+     * Return a unit object based on an unit name.
+     */
+    public Unit getUnitbyName(String name) {
+        if (name == null)
+            return null;
+        return (Unit) name2unit.get(name.toLowerCase());
+    }
+
+    /**
+     * Return a unit object based on an unit notation.
+     */
+    public Unit getUnitbyNotation(String notation) {
+        if (notation == null)
+            return null;
+        return (Unit) notation2unit.get(notation);
+    }
+
+    /**
+     * Return the SI unit object from a measure type name
+     */
+    public Unit getSIUnitByType(String type) {
+        if (type == null)
+            return null;
+        return (Unit) type2SIUnit.get(type);
+    }
 
 }

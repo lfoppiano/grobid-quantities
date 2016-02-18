@@ -22,7 +22,6 @@ public class Quantity {
 
     private Unit rawUnit = null;
     private String rawValue = null;
-    private String rawString = null;
 
     private Unit normalizedUnit = null; // which gives also the system of the unit (SI, imperial, etc.)
     private double normalizedValue = 0.0;
@@ -38,17 +37,6 @@ public class Quantity {
     public Quantity() {
     }
 
-    public Quantity(String rawString) {
-        this.rawString = rawString;
-    }
-
-    public String getRawString() {
-        return rawString;
-    }
-
-    public void setRawString(String raw) {
-        this.rawString = raw;
-    }
 
     public UnitUtilities.Unit_Type getType() {
         return type;
@@ -136,7 +124,7 @@ public class Quantity {
     }
 
     public boolean isEmpty() {
-        return StringUtils.isEmpty(rawString) && (rawUnit == null) && StringUtils.isEmpty(rawValue);
+        return (rawUnit == null) && StringUtils.isEmpty(rawValue);
     }
 
     public boolean isNormalized() {

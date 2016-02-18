@@ -99,7 +99,6 @@ public class NormalizationWrapperTest {
     public void testNormalizeQuantity_simpleUnitWithoutNormalization_meters() throws Exception {
         Quantity input = new Quantity();
         input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawString("2 m");
         input.setRawValue("2");
         Unit raw = new Unit();
         raw.setRawName("m");
@@ -114,7 +113,6 @@ public class NormalizationWrapperTest {
     public void testNormalizeQuantity_simpleUnitWithNormalization_kmToMeters() throws Exception {
         Quantity input = new Quantity();
         input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawString("2 km");
         input.setRawValue("2");
         Unit raw = new Unit();
         raw.setRawName("km");
@@ -129,7 +127,6 @@ public class NormalizationWrapperTest {
     public void testNormalizeQuantity_simpleUnitWithNormalization_CelsiusToKelvin() throws Exception {
         Quantity input = new Quantity();
         input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawString("10°C");
         input.setRawValue("10");
         Unit raw = new Unit();
         raw.setRawName("°C");
@@ -144,7 +141,6 @@ public class NormalizationWrapperTest {
     public void testNormalizeQuantity_kmHourToMetersSecond() throws Exception {
         Quantity input = new Quantity();
         input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawString("2 km/h");
         input.setRawValue("2");
         Unit raw = new Unit();
         raw.setRawName("km/h");
@@ -159,7 +155,6 @@ public class NormalizationWrapperTest {
     public void testNormalizeQuantity2_kmHourToMetersSecond() throws Exception {
         Quantity input = new Quantity();
         input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawString("2000 km*g/h");
         input.setRawValue("2000");
         Unit raw = new Unit();
         raw.setRawName("km*g/h");
@@ -174,7 +169,6 @@ public class NormalizationWrapperTest {
     public void testNormalizeQuantity3_kmHourToMetersSecond() throws Exception {
         Quantity input = new Quantity();
         input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawString("2000 km*kg/h");
         input.setRawValue("2000");
         Unit raw = new Unit();
         raw.setRawName("km*kg/h");

@@ -150,16 +150,16 @@ public class MeasurementUtilities {
                     continue;
                 Unit rawUnit = quantity.getRawUnit();
                 if ((rawUnit != null) && rawUnit.getRawName() != null) {
-                    Unit foundUnit = unitUtilities.getUnitbyName(rawUnit.getRawName());
+                    Unit foundUnit = quantityLexicon.getUnitbyName(rawUnit.getRawName().trim());
                     if (foundUnit == null)
-                        foundUnit = unitUtilities.getUnitbyNotation(rawUnit.getRawName());
+                        foundUnit = quantityLexicon.getUnitbyNotation(rawUnit.getRawName().trim());
                     if (foundUnit != null) {
-                        if ( (foundUnit.getNames() != null) && (foundUnit.getNames().size() > 0) ) {
-                            rawUnit.setNames(foundUnit.getNames());
-                        }
-                        if ( (foundUnit.getNotations() != null) && (foundUnit.getNotations().size() > 0) ) {
-                            rawUnit.setNotations(foundUnit.getNotations());
-                        }
+                        /*if ( (foundUnit.getNames() != null) && (foundUnit.getNames().size() > 0) ) {
+                            rawUnit.addName(foundUnit.getNames().get(0));
+                        }*/
+                        /*if ( (foundUnit.getNotations() != null) && (foundUnit.getNotations().size() > 0) ) {
+                            rawUnit.addNotation(foundUnit.getNotations.get(0));
+                        }*/
                         if (foundUnit.getType() != null) 
                             rawUnit.setType(foundUnit.getType());
                         if (foundUnit.getSystem() != null)
