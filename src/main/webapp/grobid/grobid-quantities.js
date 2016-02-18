@@ -4,15 +4,13 @@
 *  Author: Patrice Lopez
 */
 
-//jQuery.fn.prettify = function () { this.html(prettyPrintOne(this.html(),'xml')); };
-
 var grobid = (function($) {
 
     // for components view
     var responseJson = null;
 
-    // for associating several entities to an annotation position (to support nbest mode visualisation)
-    var measurementMap = new Object();
+    // for associating several quantities to a measurement
+    var measurementMap = new Array();
 
     function defineBaseURL(ext) {
         var baseUrl = null;
@@ -37,7 +35,11 @@ var grobid = (function($) {
         $('#consolidateBlock').show();
         
         createInputTextArea('text');
-        setBaseUrl('processQuantityText');             
+        setBaseUrl('processQuantityText');
+        $('#example1').bind('click', function(event) {
+            event.preventDefault();
+            $('#inputTextArea').val(examples[0]);
+        });    
         $("#selectedService").val('processQuantityText');
 
         $('#selectedService').change(function() {
@@ -46,14 +48,6 @@ var grobid = (function($) {
         }); 
 
         $('#submitRequest').bind('click', submitQuery);
-
-        /*$('#gbdForm').ajaxForm({
-            beforeSubmit: ShowRequest,
-            data: $('#input').val(),
-            success: SubmitSuccesful,
-            error: AjaxError,
-            dataType: "text"
-        });*/
         
         $("#about").click(function() {
             $("#about").attr('class', 'section-active');
@@ -139,7 +133,7 @@ var grobid = (function($) {
             $.ajax({
               type: 'GET',
               url: urlLocal,
-              data: { text : $('#textInputArea').val() } ,
+              data: { text : $('#inputTextArea').val() } ,
               success: SubmitSuccesful,
               error: AjaxError,
               contentType:false  
@@ -170,7 +164,7 @@ var grobid = (function($) {
 
     function SubmitSuccesfulText(responseText, statusText) {   
         responseJson = responseText;
-        
+console.log(responseJson);        
         if ( (responseJson == null) || (responseJson.length == 0) ) {
             $('#requestResult')
                 .html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");   
@@ -189,74 +183,98 @@ var grobid = (function($) {
 
         display += '<pre style="background-color:#FFF;width:95%;" id="displayAnnotatedText">'; 
         
-        var string = $('#textInputArea').val();
+        var string = $('#inputTextArea').val();
+        var newString = "";
         var lastMaxIndex = string.length;
-        {    
-            display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">'; 
-            //var string = responseJson.text;
- 
-                display += '<tr style="background-color:#FFF;">';     
-                if (responseJson.measurements) {
-                    var currentAnnotationIndex = responseJson.measurements.length-1;
-                    for(var m=responseJson.measurements.length-1; m>=0; m--) {
-                        /*var entity = responseJson.measurements[m];
-                        var domains = entity.domains;
-                        var label = null;
-                        if (entity.type)
-                            label = entity.type;
-                        else if (domains && domains.length>0) {
-                            label = domains[0].toLowerCase();
-                        }
-                        else 
-                            label = entity.rawName;
+        
+        display += '<table id="sentenceNER" style="width:100%;table-layout:fixed;" class="table">'; 
+        //var string = responseJson.text;
 
-                        var start = parseInt(entity.offsetStart,10);
-                        var end = parseInt(entity.offsetEnd,10);       
-                        
-                        if (start > lastMaxIndex) {
-                            // we have a problem in the initial sort of the entities
-                            // the server response is not compatible with the client 
-                            console.log("Sorting of entities as present in the server's response not valid for this client.");
+        display += '<tr style="background-color:#FFF;">';
+        var measurements = responseJson.measurements;
+        if (measurements) {         
+            var pos = 0; // current position in the text
+
+            for(var currentMeasurementIndex=0; currentMeasurementIndex<measurements.length; currentMeasurementIndex++) {
+                var measurement = measurements[currentMeasurementIndex];
+                var measurementType = measurement.type;
+
+                var quantities = [];
+
+                if (measurementType == "value") {
+                    var quantity = measurement.quantity;
+                    if (quantity)
+                        quantities.push(quantity)
+                }
+                else if (measurementType == "interval") {
+                    var quantityLeast = measurement.quantityLeast;
+                    if (quantityLeast)
+                        quantities.push(quantityLeast)
+                    var quantityMost = measurement.quantityMost;
+                    if (quantityMost)
+                        quantities.push(quantityMost)
+                }
+                else {
+                    quantities = measurement.quantities;
+                }
+
+                if (quantities) {
+                    var quantityMap = new Array();
+                    for(var currentQuantityIndex=0; currentQuantityIndex<quantities.length; currentQuantityIndex++) {
+                        var quantity = quantities[currentQuantityIndex];
+                        quantityMap[currentQuantityIndex] = quantity;
+                        var quantityType = quantity.type;
+                        var value = quantity.value;
+                        var rawValue = quantity.rawValue;
+                        var unit = quantity.rawUnit;
+                        var rawUnitName = null;
+                        var unitName = null;
+                        var startUnit = -1;
+                        var endUnit = -1;
+                        if (unit) {
+                            rawUnitName = unit.rawName;
+                            unitName = unit.name;
+                            startUnit = parseInt(unit.offsetStart,10);
+                            endUnit = parseInt(unit.offsetEnd,10);
                         }
-                        else if (start == lastMaxIndex) {
-                            // the entity is associated to the previous map
-                            entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
-                        }
-                        else if (end > lastMaxIndex) {
-                            end = lastMaxIndex;
-                            lastMaxIndex = start;
-                            // the entity is associated to the previous map
-                            entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
+                        var start = parseInt(quantity.offsetStart,10);
+                        var end = parseInt(quantity.offsetEnd,10);
+                        if ((startUnit != -1) && (startUnit == end)) 
+                            end = endUnit;
+                        if ((endUnit != -1) && (endUnit == start)) 
+                            start = startUnit;
+
+                        if (start < pos) {
+                            // we have a problem in the initial sort of the quantities
+                            // the server response is not compatible with the present client 
+                            console.log("Sorting of quantities as present in the server's response not valid for this client.");
+                            // note: this should never happen?
                         }
                         else {
-                            string = string.substring(0,start) 
-                                + '<span id="annot-'+m+'" rel="popover" data-color="'+label+'">'
-                                + '<span class="label ' + label + '" style="cursor:hand;cursor:pointer;" >'
-                                + string.substring(start,end) + '</span></span>' + string.substring(end,string.length+1); 
-                            lastMaxIndex = start;
-                            currentAnnotationIndex = m;
-                            entityMap[currentAnnotationIndex] = [];
-                            entityMap[currentAnnotationIndex].push(responseJson.entities[m]);
-                        }   */                    
-                    } 
+                            newString += string.substring(pos, start)
+                                    + '<span id="annot-'+currentMeasurementIndex+'-'+currentQuantityIndex +'" rel="popover" data-color="'+quantityType+'">'
+                                    + '<span class="label ' + quantityType + '" style="cursor:hand;cursor:pointer;" >'
+                                    + string.substring(start,end) + '</span></span>';
+                            pos = end; 
+                        }
+                    }
+                    measurementMap[currentMeasurementIndex] = quantityMap;
                 }
-//console.log(entityMap);
-                string = "<p>" + string.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
-                //string = string.replace("<p></p>", "");
-            
-                display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p>'+string+'</p></td>';
-                display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>'; 
-
-                display += '</tr>';
-            
-
-            display += '</table>\n';
+            }
+            newString += string.substring(pos, string.length);          
         }
 
+        newString = "<p>" + newString.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
+        //string = string.replace("<p></p>", "");
+    
+        display += '<td style="font-size:small;width:60%;border:1px solid #CCC;"><p>'+newString+'</p></td>';
+        display += '<td style="font-size:small;width:40%;padding:0 5px; border:0"><span id="detailed_annot-0" /></td>'; 
 
+        display += '</tr>';
+        
 
-
-
+        display += '</table>\n';
+        
 
         display += '</pre>\n';
         
@@ -278,32 +296,138 @@ var grobid = (function($) {
         $('#requestResult').html(display);    
         window.prettyPrint && prettyPrint();
 
+        if (measurements) {
+            for(var measurementIndex=0; measurementIndex<measurements.length; measurementIndex++) {
+                var measurement = measurements[measurementIndex];
+                var measurementType = measurement.type;
+                var quantities = [];
 
+                if (measurementType == "value") {
+                    var quantity = measurement.quantity;
+                    if (quantity)
+                        quantities.push(quantity)
+                }
+                else if (measurementType == "interval") {
+                    var quantityLeast = measurement.quantityLeast;
+                    if (quantityLeast)
+                        quantities.push(quantityLeast)
+                    var quantityMost = measurement.quantityMost;
+                    if (quantityMost)
+                        quantities.push(quantityMost)
+                }
+                else {
+                    quantities = measurement.quantities;
+                }
 
-        /*var selected = $('#selectedService option:selected').attr('value');
-        var display = "<pre class='prettyprint lang-xml' id='xmlCode'>";  
-        var testStr = vkbeautify.xml(responseText);
-        
-        display += htmll(testStr);
+                if (quantities) {
+                    for(var quantityIndex=0; quantityIndex<quantities.length; quantityIndex++) {
+                        $('#annot-'+measurementIndex+'-'+quantityIndex).bind('hover', viewQuantity);
+                        $('#annot-'+measurementIndex+'-'+quantityIndex).bind('click', viewQuantity);
+                    }
+                }
+            }
+        }
+        /*for (var key in quantityMap) {
+            if (entityMap.hasOwnProperty(key)) {
+                $('#annot-'+key).bind('hover', viewQuantity);  
+                $('#annot-'+key).bind('click', viewQuantity);     
+            }
+        }*/
 
-        display += "</pre>";
-        $('#requestResult').html(display);
-        window.prettyPrint && prettyPrint();*/
+        $('#detailed_annot-0').hide();  
 
         $('#requestResult').show();
     }
+
+    function viewQuantity() {
+        var localID = $(this).attr('id');
+
+        if (responseJson.measurements == null) {
+            return;
+        }
+
+        var ind1 = localID.indexOf('-');
+        var ind2 = localID.indexOf('-', ind1+1);
+        var localMeasurementNumber = parseInt(localID.substring(ind1+1,ind2));
+        var localQuantityNumber = parseInt(localID.substring(ind2+1,localID.length));
+        if ( (measurementMap[localMeasurementNumber] == null) || (measurementMap[localMeasurementNumber].length == 0) ) {
+            // this should never be the case
+            console.log("Error for visualising annotation measurement with id " + localMeasurementNumber 
+                + ", empty list of measurement");
+        }
+        else if ( (measurementMap[localMeasurementNumber][localQuantityNumber] == null) ) {
+            // this should never be the case
+            console.log("Error for visualising annotation quantity with id " + localQuantityNumber + " with measurement id " + localMeasurementNumber 
+                + ", empty list of quantity");
+        }
+
+        var quantityMap = measurementMap[localMeasurementNumber];
+        var measurementType = null;
+        if (quantityMap.length == 1)
+            measurementType = "Atomic value";
+        else if (quantityMap.length == 2)
+            measurementType = "Interval";
+        else 
+            measurementType = "List"; 
+
+        var string = "";
+         string += "<div class='info-sense-box "+colorLabel+
+            "'><h2 style='color:#FFF;padding-left:10px;font-size:16;'>"+measurementType+"</h2>";
+        for(var quantityListIndex=0; 
+                quantityListIndex<quantityMap.length; 
+                quantityListIndex++) {
+
+            var quantity = quantityMap[quantityListIndex];
+            var type = quantity.type;
+
+            var colorLabel = null;
+            if (type)
+                colorLabel = type;
+            else
+                colorLabel = quantity.rawName;
+                
+            var rawValue = quantity.rawValue;
+            var unit = quantity.rawUnit;
+            var rawUnitName = null;
+            var unitName = null;
+            var startUnit = -1;
+            var endUnit = -1;
+            if (unit) {
+                rawUnitName = unit.rawName;
+                unitName = unit.name;
+                startUnit = parseInt(unit.offsetStart,10);
+                endUnit = parseInt(unit.offsetEnd,10);
+            }
+
+            string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
+                "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;font-size:14;'>";
+                
+            if (rawValue)   
+                string += "<p>raw value: <b>"+rawValue+"</b></p>";
+
+            if (rawUnitName)   
+                string += "<p>raw unit name: <b>"+rawUnitName+"</b></p>";
+
+            string += "</td><td style='align:right;bgcolor:#fff'></td></tr>";
+        
+            string += "</table></div>";
+        }
+        string += "</div>";
+        $('#detailed_annot-0').html(string);    
+        $('#detailed_annot-0').show();
+    }
     
-    $(document).ready(function() {
+    /*$(document).ready(function() {
         $(document).on('shown', '#xmlCode', function(event) {
             prettyPrint();
         });
-    });
+    });*/
     
     function processChange() {
         var selected = $('#selectedService option:selected').attr('value');
 
         if (selected == 'processQuantityText') {
-            createInputTextArea('text');
+            createInputTextArea();
             //$('#consolidateBlock').show();
             setBaseUrl('processQuantityText');
         } 
@@ -335,20 +459,21 @@ var grobid = (function($) {
         $('#gbdForm').attr('method', 'post'); 
     }
 
-    function createInputTextArea(nameInput) {
+    function createInputTextArea() {
         //$('#label').html('&nbsp;'); 
         $('#fileInputDiv').hide();
         //$('#input').remove();
         
         //$('#field').html('<table><tr><td><textarea class="span7" rows="5" id="input" name="'+nameInput+'" /></td>'+
         //"<td><span style='padding-left:20px;'>&nbsp;</span></td></tr></table>");
-        $('#textInputArea').attr('name', nameInput);
         $('#textInputDiv').show();
         
-        $('#gbdForm').attr('enctype', '');
-        $('#gbdForm').attr('method', 'post');
+        //$('#gbdForm').attr('enctype', '');
+        //$('#gbdForm').attr('method', 'post');
     }
 
+    var examples = ["A 20kg ingot is made in a high frequency induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C. Specimens No.2 to 4, 6 and 15 are materials embodying the invention. Others are for comparison. No.1 is a material equivalent to ASTM standard A469-88 class 8 for generator rotor shaft material. No. 5 is a material containing relatively high Al content. \n\n\
+These specimens underwent heat treatment by simulating the conditions for the large size rotor shaft centre of a large capacity generator. First, it was heated to 840°C to form austenite structure and cooled at the speed of 100°C/hour to harden. Then, the specimen was heated and held at 575 to 590°C for 32 hours and cooled at a speed of 15°C/hour. Tempering was done at such a temperature to secure tensile strength in the range of 100 to 105kg/mm2 for each specimen."]
         
 })(jQuery);
 

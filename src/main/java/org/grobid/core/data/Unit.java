@@ -123,7 +123,6 @@ public class Unit {
         if (offsets != null)
             builder.append(offsets.toString());
         builder.append(" ]");
-
         return builder.toString();
     }
 
@@ -188,7 +187,7 @@ public class Unit {
            		}
            		else
             		json.append(", ");
-    			json.append("\"offsetEnd\" : " + getOffsetStart());
+    			json.append("\"offsetEnd\" : " + getOffsetEnd());
         	}
         }
 

@@ -149,7 +149,7 @@ public class Quantity {
         if (type != null) {
             byte[] encodedName = encoder.quoteAsUTF8(type.getName());
             String outputName = new String(encodedName);
-            json.append("\"name\" : \"" + outputName + "\"");
+            json.append("\"type\" : \"" + outputName + "\"");
             started = true;
         }
         if (rawValue != null) {
@@ -189,7 +189,7 @@ public class Quantity {
                 }
                 else
                     json.append(", ");
-                json.append("\"offsetEnd\" : " + getOffsetStart());
+                json.append("\"offsetEnd\" : " + getOffsetEnd());
             }
         }
 

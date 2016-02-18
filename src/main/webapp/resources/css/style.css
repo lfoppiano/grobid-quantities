@@ -6,41 +6,41 @@
 
 .label {
     padding: 1px 3px 2px;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: bold;
     color: #ffffff;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     white-space: nowrap;
     background-color: #87A1A8;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-.label.location {
+.label.TEMPERATURE {
     background-color: #398739;
 }
-.label.person {
+.label.MASS {
     background-color: #c43c35;
 }
-.label.period {
+.label.TIME {
     background-color: #f89406;
 }
-.label.event {
+.label.LENGTH {
     background-color: #01A9DB;
 }
-.label.national {
+.label.FREQUENCY {
     background-color: #8904B1;
 }
-.label.measure {
+.label.FRACTION {
     background-color: #c43c35;
 }
-.label.acronym {
+.label.VOLUME {
     background-color: #c43c35;
 }
-.label.institution {
+.label.VELOCITY {
     background-color: #c43c35;
 }
-.label.sense {
+.label.AREA {
     background-color: #87A1A8;
 }
 
@@ -247,35 +247,35 @@ span {word-break:normal;}
 
 .info-sense-box,.details-list {
 	margin:1px 1;padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
-	font-size:14px;
+	font-size:13px;
 }
 
 /* NER */
-.info-sense-box.location {
+.info-sense-box.TEMPERATURE {
     background-color: #398739;
 }
-.info-sense-box.person {
+.info-sense-box.MASS {
     background-color: #c43c35;
 }
-.info-sense-box.period {
+.info-sense-box.TIME {
     background-color: #f89406;
 }
-.info-sense-box.event {
+.info-sense-box.LENGTH {
     background-color: #01A9DB;
 }
-.info-sense-box.national {
+.info-sense-box.FREQUENCY {
     background-color: #8904B1;
 }
-.info-sense-box.measure {
+.info-sense-box.FRACTION {
     background-color: #c43c35;
 }
-.info-sense-box.acronym {
+.info-sense-box.VOLUME {
     background-color: #c43c35;
 }
-.info-sense-box.institution {
+.info-sense-box.VELOCITY {
     background-color: #c43c35;
 }
-.info-sense-box.sense {
+.info-sense-box.AREA {
     background-color: #87A1A8;
 }
 
