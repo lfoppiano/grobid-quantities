@@ -28,9 +28,9 @@ public class QuantityLexicon {
     private static final Logger logger = LoggerFactory.getLogger(QuantityLexicon.class);
 
     private static volatile QuantityLexicon instance;
-    private final String INFLECTION_PATH = "/en/inflection.txt";
-    private final String PREFIX_PATH = "/en/prefix.txt";
-    private final String UNITS_PATH = "/en/units.txt";
+    private final String INFLECTION_PATH = "en/inflection.txt";
+    private final String PREFIX_PATH = "en/prefix.txt";
+    private final String UNITS_PATH = "en/units.txt";
 
     // lexical information - for feature generations
     private FastMatcher unitPattern = null;
@@ -77,19 +77,10 @@ public class QuantityLexicon {
 
         try {
             unitTokens = new HashSet<String>();
-            URL path = this.getClass().getResource(UNITS_PATH);
-            file = new File(path.toURI());
-            if (!file.exists()) {
-                throw new GrobidResourceException("Cannot add entries to unit dictionary, because file '"
-                        + file.getAbsolutePath() + "' does not exists.");
-            }
-            if (!file.canRead()) {
-                throw new GrobidResourceException("Cannot add entries to unit dictionary, because cannot read file '"
-                        + file.getAbsolutePath() + "'.");
-            }
-
+            ist = this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH);            
+            
             unitPattern = new FastMatcher();
-            ist = new FileInputStream(file);
+            //ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 
@@ -236,8 +227,6 @@ public class QuantityLexicon {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } catch (IOException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
-        } catch (URISyntaxException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
             try {
                 if (ist != null)
@@ -259,19 +248,10 @@ public class QuantityLexicon {
         BufferedReader dis = null;
         try {
             unitTokens = new HashSet<String>();
-            URL prefixUrl = this.getClass().getResource(PREFIX_PATH);
-            file = new File(prefixUrl.toURI());
-            if (!file.exists()) {
-                throw new GrobidResourceException("Cannot add entries to unit prefix dictionary, because file '"
-                        + file.getAbsolutePath() + "' does not exists.");
-            }
-            if (!file.canRead()) {
-                throw new GrobidResourceException("Cannot add entries to unit prefix dictionary, because cannot read file '"
-                        + file.getAbsolutePath() + "'.");
-            }
+            ist = this.getClass().getClassLoader().getResourceAsStream(PREFIX_PATH);
 
             unitPattern = new FastMatcher();
-            ist = new FileInputStream(file);
+            //ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 
@@ -289,15 +269,13 @@ public class QuantityLexicon {
                 prefixes.put(symbol, name);
             }
 
-//System.out.println(prefix.toString());
+//System.out.println(prefixes.toString());
         } catch (PatternSyntaxException e) {
             throw new
                     GrobidResourceException("Error when compiling prefix map for unit vocabulary.", e);
         } catch (FileNotFoundException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } catch (IOException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } catch (URISyntaxException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
             try {
@@ -320,19 +298,10 @@ public class QuantityLexicon {
         BufferedReader dis = null;
         try {
             unitTokens = new HashSet<String>();
-            URL inflectionUrl = this.getClass().getResource(INFLECTION_PATH);
-            file = new File(inflectionUrl.toURI());
-            if (!file.exists()) {
-                throw new GrobidResourceException("Cannot add entries to inflection dictionary, because file '"
-                        + file.getAbsolutePath() + "' does not exists.");
-            }
-            if (!file.canRead()) {
-                throw new GrobidResourceException("Cannot add entries to inflection dictionary, because cannot read file '"
-                        + file.getAbsolutePath() + "'.");
-            }
+            ist = this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH);    
 
             unitPattern = new FastMatcher();
-            ist = new FileInputStream(file);
+            //ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 
@@ -361,8 +330,6 @@ public class QuantityLexicon {
         } catch (FileNotFoundException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } catch (IOException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } catch (URISyntaxException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
             try {
