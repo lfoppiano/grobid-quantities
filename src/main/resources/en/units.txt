@@ -74,3 +74,5 @@ Bar	PRESSURE	NON_SI	bar
 at	PRESSURE	NON_SI	technical atmosphere
 Torr	PRESSURE	NON_SI	torr
 psi	PRESSURE	US	pound per square inch, pound-force per square inch
+Pl  VISCOSITY   SI_DERIVED  poiseuille, pascal per second
+P   VISCOSITY   NON_SI  poise

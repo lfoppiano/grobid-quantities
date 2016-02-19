@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
@@ -31,6 +31,9 @@ public class QuantityLexicon {
     private final String INFLECTION_PATH = "en/inflection.txt";
     private final String PREFIX_PATH = "en/prefix.txt";
     private final String UNITS_PATH = "en/units.txt";
+    private final String COMPOSED_UNIT_REGEX = "[^/*]+";
+
+    Pattern composedUnitPattern = Pattern.compile(COMPOSED_UNIT_REGEX);
 
     // lexical information - for feature generations
     private FastMatcher unitPattern = null;
@@ -77,8 +80,8 @@ public class QuantityLexicon {
 
         try {
             unitTokens = new HashSet<String>();
-            ist = this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH);            
-            
+            ist = this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH);
+
             unitPattern = new FastMatcher();
             //ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
@@ -95,6 +98,7 @@ public class QuantityLexicon {
                     String piece = pieces[i].trim();
                     if (piece.length() == 0)
                         continue;
+
                     if (i == 0) {
                         String[] subpieces = piece.split(",");
                         for (int j = 0; j < subpieces.length; j++) {
@@ -112,12 +116,7 @@ public class QuantityLexicon {
 
                                 List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
                                 for (String word : subsubpieces) {
-                                    word = word.trim().toLowerCase();
-                                    if ((word.length() > 0) && !unitTokens.contains(word)) {
-                                        // we don't add pure digit sub-token and token delimiters
-                                        if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1))
-                                            unitTokens.add(word);
-                                    }
+                                    addToUnitTokens(word);
                                 }
                             }
                         }
@@ -154,14 +153,9 @@ public class QuantityLexicon {
                                         } catch (Exception e) {
                                             logger.error("invalid unit term: " + derivation);
                                         }
-                                        List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
-                                        for (String word : subsubpieces) {
-                                            word = word.trim().toLowerCase();
-                                            if ((word.length() > 0) && !unitTokens.contains(word)) {
-                                                // we don't add pure digit sub-token and token delimiters
-                                                if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1))
-                                                    unitTokens.add(word);
-                                            }
+                                        List<String> subSubpieces = QuantityAnalyzer.tokenize(derivation);
+                                        for (String word : subSubpieces) {
+                                            addToUnitTokens(word);
                                         }
                                     }
                                 } else {
@@ -173,12 +167,7 @@ public class QuantityLexicon {
                                     }
                                     List<String> subsubpieces = QuantityAnalyzer.tokenize(inflectedForm);
                                     for (String word : subsubpieces) {
-                                        word = word.trim().toLowerCase();
-                                        if ((word.length() > 0) && !unitTokens.contains(word)) {
-                                            // we don't add pure digit sub-token and token delimiters
-                                            if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1))
-                                                unitTokens.add(word);
-                                        }
+                                        addToUnitTokens(word);
                                     }
                                 }
                             }
@@ -241,6 +230,15 @@ public class QuantityLexicon {
         }
     }
 
+    private void addToUnitTokens(String word) {
+        word = word.trim().toLowerCase();
+        if ((word.length() > 0) && !unitTokens.contains(word)) {
+            // we don't add pure digit sub-token and token delimiters
+            if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1))
+                unitTokens.add(word);
+        }
+    }
+
     private void initPrefix() {
         File file = null;
         InputStream ist = null;
@@ -298,7 +296,7 @@ public class QuantityLexicon {
         BufferedReader dis = null;
         try {
             unitTokens = new HashSet<String>();
-            ist = this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH);    
+            ist = this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH);
 
             unitPattern = new FastMatcher();
             //ist = new FileInputStream(file);
@@ -364,28 +362,69 @@ public class QuantityLexicon {
 
     /**
      * Expansion of a notation and non-notation unit name into derivations
-     * based on standard unit prefix. Note that the
-     * input unit name is included in the returned list of forms.
+     * based on standard unit prefix.
+     * Note that the input unit name is included in the returned list of forms.
      * To be called after the inflectional expansion.
      */
-    private List<String> derivationalMorphologyExpansion(String unitTerm, boolean isNotation) {
+    protected List<String> derivationalMorphologyExpansion(String unitTerm, boolean isNotation) {
         List<String> results = new ArrayList<>();
         results.add(unitTerm);
 
-        // we expand based on the prefix list
-        for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
-            String prefixString = "";
-            if (isNotation) {
-                // if we have a notation, we use notation prefix (e.g. g -> kg)
-                prefixString = prefix.getKey();
-            } else {
-                // otherwise we have a full form and we use the derivational prefix (e.g. gram -> kilogram)
-                prefixString = prefix.getValue();
+        if (!isComposed(unitTerm)) {
+            // we expand based on the prefix list
+            for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
+                String prefixString = selectPrefix(isNotation, prefix);
+                results.add(prefixString + unitTerm);
             }
-            results.add(prefixString + unitTerm);
+        } else {
+            //A String.split() could have done the same job, since it was not sure which requirements there were
+            //we have a more sophisticated - though useless way, that might be used if the expansion became more
+            // complex.
+
+            List<ValueHolder> decomposition = new ArrayList<>();
+            Matcher m = composedUnitPattern.matcher(unitTerm);
+
+            while (m.find()) {
+                decomposition.add(new ValueHolder(m.group(), m.start(), m.end()));
+            }
+
+            ValueHolder firstElement = decomposition.get(0);
+            ValueHolder secondElement = decomposition.get(1);
+
+            for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
+                String prefixString = selectPrefix(isNotation, prefix);
+                String firstElementExpanded = prefixString + firstElement.getValue();
+                results.add(unitTerm.replace(secondElement.getValue(), prefixString + secondElement.getValue()));
+
+                String outputExpanded = unitTerm.replace(firstElement.getValue(), firstElementExpanded);
+                results.add(outputExpanded);
+
+                for (Map.Entry<String, String> prefix2 : prefixes.entrySet()) {
+                    String prefixString2 = selectPrefix(isNotation, prefix2);
+
+                    results.add(outputExpanded.replace(secondElement.getValue(), prefixString2 + secondElement.getValue()));
+                }
+            }
         }
 
         return results;
+    }
+
+    private String selectPrefix(boolean isNotation, Map.Entry<String, String> prefix) {
+        String prefixString;
+        if (isNotation) {
+            // if we have a notation, we use notation prefix (e.g. g -> kg)
+            prefixString = prefix.getKey();
+        } else {
+            // otherwise we have a full form and we use the derivational prefix (e.g. gram -> kilogram)
+            prefixString = prefix.getValue();
+        }
+        return prefixString;
+    }
+
+    private boolean isComposed(String unitTerm) {
+        return unitTerm.contains("/") || unitTerm.contains("*");
+        //return composedUnitPattern.matcher(unitTerm).find();
     }
 
     /**
@@ -444,6 +483,42 @@ public class QuantityLexicon {
         if (type == null)
             return null;
         return (UnitDefinition) type2SIUnit.get(type);
+    }
+
+    class ValueHolder {
+        private String value;
+        private int start;
+        private int end;
+
+        public ValueHolder(String group, int start, int end) {
+            this.value = group;
+            this.start = start;
+            this.end = end;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public int getStart() {
+            return start;
+        }
+
+        public void setStart(int start) {
+            this.start = start;
+        }
+
+        public int getEnd() {
+            return end;
+        }
+
+        public void setEnd(int end) {
+            this.end = end;
+        }
     }
 
 }

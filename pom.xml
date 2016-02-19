@@ -411,7 +411,9 @@
 			                <value>log4j-jetty.properties</value>
 			            </systemProperty>
 			        </systemProperties>
-				</configuration>
+                    <stopKey/>
+                    <stopPort/>
+                </configuration>
 			</plugin>
 
         </plugins>
