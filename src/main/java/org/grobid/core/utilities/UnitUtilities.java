@@ -100,8 +100,8 @@ public class UnitUtilities {
         CONCENTRATION("concentration"),
         DENSITY("density"),
         ACIDITY("acidity"),
-        FRACTION("fraction");
-//		PROPORTION			("proportion"),	// -> this is fraction
+        FRACTION("fraction"),
+        COUNT("count");
 
         private String name;
 

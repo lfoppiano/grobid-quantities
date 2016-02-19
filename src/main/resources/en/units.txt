@@ -68,3 +68,9 @@ mi/h,mph	VELOCITY	US	mile per hour
 knot	VELOCITY	US	knot,nautical mile per hour
 ips	VELOCITY	US	inch per second
 Mach	VELOCITY	NON_SI	mach,speed of sound
+atm	PRESSURE	NON_SI	atmosphere
+Pa	PRESSURE	SI_DERIVED	pascal
+Bar	PRESSURE	NON_SI	bar
+at	PRESSURE	NON_SI	technical atmosphere
+Torr	PRESSURE	NON_SI	torr
+psi	PRESSURE	US	pound per square inch, pound-force per square inch

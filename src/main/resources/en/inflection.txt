@@ -81,3 +81,7 @@ nautical mile per hour	nautical miles per hour
 inch per second	inches per second
 mach
 speed of sound
+pascal	pascals
+bar	bars
+atmosphere	atmospheres
+torr	torrs
