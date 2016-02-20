@@ -202,6 +202,9 @@ public class QuantityLexicon {
                     if (type2SIUnit == null) {
                         type2SIUnit = new HashMap<>();
                     }
+                    if ( (type == null) || (type.getName() == null) )
+                        logger.error("unitDefinition has no type: " + unitDefinition.toString());
+
                     if (type2SIUnit.get(type.getName()) == null)
                         type2SIUnit.put(type.getName(), unitDefinition);
                 }

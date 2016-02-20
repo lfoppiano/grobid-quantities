@@ -77,5 +77,6 @@ psi	PRESSURE	US	pound per square inch,pound-force per square inch
 %	FRACTION	NON_SI	pourcentage
 ‰	FRACTION	NON_SI	per mille,per mil,permil,permill,permille
 ‱	FRACTION	NON_SI	per ten thousand,basis point,permyriad
-Pl	VISCOSITY	SI_DERIVED	poiseuille
-P	VISCOSITY	NON_SI	poise
+Pl	DYNAMIC_VISCOSITY	SI_DERIVED	poiseuille
+Pa.s	DYNAMIC_VISCOSITY	SI_DERIVED	pascal-second
+P	DYNAMIC_VISCOSITY	NON_SI	poise
