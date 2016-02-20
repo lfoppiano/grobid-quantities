@@ -476,6 +476,7 @@ public class QuantityParser extends AbstractParser {
                     throw new GrobidException("CRF labeling for quantity parsing failed.", e);
                 }
                 measurements = resultExtraction(text, res, tokenizations);
+                measurements = measurementUtilities.solve(measurements);
                 /*if (measurements != null) {
                     System.out.println("\n");
                     for (Measurement measurement : measurements) {
@@ -484,10 +485,10 @@ public class QuantityParser extends AbstractParser {
                 }*/
 
                 textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
-                root.appendChild(textNode);
                 paragraph = new StringBuilder();
             }
         }
+        root.appendChild(textNode);
 
         return root;
     }
@@ -538,6 +539,7 @@ public class QuantityParser extends AbstractParser {
                     throw new GrobidException("CRF labeling for quantity parsing failed.", e);
                 }
                 measurements = resultExtraction(text, res, tokenizations);
+                measurements = measurementUtilities.solve(measurements);
                 if (measurements != null) {
                     System.out.println("\n");
                     for (Measurement measurement : measurements) {
@@ -620,6 +622,7 @@ public class QuantityParser extends AbstractParser {
                     throw new GrobidException("CRF labeling for quantity parsing failed.", e);
                 }
                 measurements = resultExtraction(text, res, tokenizations);
+                measurements = measurementUtilities.solve(measurements);
 
                 textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
             }
@@ -761,8 +764,16 @@ public class QuantityParser extends AbstractParser {
                     endU = unit.getOffsetEnd();
 
                     unitNode = teiElement("measure");
-                    unitNode.addAttribute(new Attribute("type", "?"));
-                    unitNode.addAttribute(new Attribute("unit", "?"));
+                    if ( (unit.getUnitDefinition() != null) && (unit.getUnitDefinition().getType() != null) ) {
+                        unitNode.addAttribute(new Attribute("type", unit.getUnitDefinition().getType().toString()));
+                    }
+                    else
+                        unitNode.addAttribute(new Attribute("type", "?"));
+
+                    if (unit.getRawName() != null)
+                        unitNode.addAttribute(new Attribute("unit", unit.getRawName()));
+                    else
+                        unitNode.addAttribute(new Attribute("unit", "?"));
                     unitNode.appendChild(text.substring(startU, endU));
                 }
 

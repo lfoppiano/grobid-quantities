@@ -65,13 +65,8 @@ public class TextChunkSaxHandler extends DefaultHandler {
                 if (chunks == null) 
                     chunks = new ArrayList<String>();
                 chunks.add(getText());
+                accumulator.setLength(0);
             }
-            if (qName.equals("p") || qName.equals("paragraph")) {
-                if (chunks == null) 
-                    chunks = new ArrayList<String>();
-                chunks.add(getText());
-            }
-            accumulator.setLength(0);
         }
         if ((filters != null) && filters.equals(qName)) {
             accumule = true;
