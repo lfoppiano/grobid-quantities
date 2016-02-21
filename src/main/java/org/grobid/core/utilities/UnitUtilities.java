@@ -101,6 +101,7 @@ public class UnitUtilities {
         DENSITY("density"),
         ACIDITY("acidity"),
         FRACTION("fraction"),
+        VO2_MAX("VO2 max"),
         COUNT("count");
 
         private String name;

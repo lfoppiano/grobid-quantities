@@ -14,17 +14,19 @@ Try compiling everything with:
 
 > mvn -Dmaven.test.skip=true clean install
 
-Train the quantity model:
-> cd PATH-TO-GROBID/grobid/grobid-quantities
-
-> mvn generate-resources -Ptrain_quantities
-
-The model will be saved under grobid-home/models/quantities (the directory must exist).
-
 Run some test: 
 > cd PATH-TO-GROBID/grobid/grobid-quantities
 
 > mvn compile test
+
+## Training
+
+For training the quantity model:
+> cd PATH-TO-GROBID/grobid/grobid-quantities
+
+> mvn generate-resources -Ptrain_quantities
+
+The model will be saved under grobid-home/models/quantities (the directory must exist!).
 
 ## Generation of training data
 
