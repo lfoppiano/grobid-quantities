@@ -22,7 +22,12 @@ import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 public class Measurement {
     private UnitUtilities.Measurement_Type type = null;
 
-    private List<Quantity> quantities = null;
+    private Quantity quantityAtomic = null;
+    private Quantity quantityLeast = null;
+    private Quantity quantityMost = null;
+    private Quantity quantityBase = null;
+    private Quantity quantityRange = null;
+    private List<Quantity> quantityList = null;
 
     public Measurement() {
     }
@@ -39,72 +44,77 @@ public class Measurement {
         this.type = type;
     }
 
-    public void addQuantity(Quantity quantity) {
-    	if (quantities == null)
-    		quantities = new ArrayList<>();
-        quantities.add(quantity);
+    public void addQuantityList(Quantity quantity) {
+    	if (quantityList == null)
+    		quantityList = new ArrayList<>();
+        quantityList.add(quantity);
     }
 
-    public void setQuantities(List<Quantity> quantities) {
-        this.quantities = quantities;
+    public void setQuantityList(List<Quantity> quantities) {
+        this.quantityList = quantityList;
     }
 
-    public List<Quantity> getQuantities() {
-        return quantities;
+    public List<Quantity> getQuantityList() {
+        return quantityList;
     }
 
     public void setAtomicQuantity(Quantity quantity) {
-    	if (quantities == null)
-    		quantities = new ArrayList<Quantity>();
-        quantities.add(quantity);
+    	quantityAtomic = quantity;
     }
 
     public Quantity getQuantityAtomic() {
-    	if (quantities.size() != 1)
-    		return null;
-    	return quantities.get(0);
+    	return quantityAtomic;
     }
 
     public void setQuantityLeast(Quantity quantity) {
-    	if (quantities == null)
-    		quantities = new ArrayList<Quantity>();
-        if (quantities.size() == 0) {
-            quantities.add(quantity);
-        } else if (quantities.size() >= 1) {
-            quantities.set(0, quantity);
-        }
+    	quantityLeast = quantity;
     }
 
     public Quantity getQuantityLeast() {
-    	if (quantities.size() == 0)
-    		return null;
-    	return quantities.get(0);
+    	return quantityLeast;
     }
 
     public void setQuantityMost(Quantity quantity) {
-    	if (quantities == null)
-    		quantities = new ArrayList<Quantity>();
-        if (quantities.size() == 0) {
-            quantities.add(null);
-            quantities.add(quantity);
-        } else if (quantities.size() == 1) {
-            quantities.add(quantity);
-        } else {
-            quantities.set(1, quantity);
-        }
+    	quantityMost = quantity;
     }
 
     public Quantity getQuantityMost() {
-    	if (quantities.size() != 2)
-    		return null;
-    	return quantities.get(1);
+    	return quantityMost;
+    }
+
+    public void setQuantityBase(Quantity quantity) {
+        quantityBase = quantity;
+    }
+
+    public Quantity getQuantityBase() {
+        return quantityBase;
+    }
+
+    public void setQuantityRange(Quantity quantity) {
+        quantityRange = quantity;
+    }
+
+    public Quantity getQuantityRange() {
+        return quantityRange;
     }
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(type.getName()).append(": ");
-        if (isNotEmpty(quantities)) {
-	        for (Quantity quantity : quantities) {
+        if (quantityAtomic != null)
+            builder.append("atomic quantity: " + quantityAtomic.toString());
+        if (quantityLeast != null)
+            builder.append("quantity least: " + quantityLeast.toString());
+        if (quantityMost != null)
+            builder.append("quantity most: " + quantityMost.toString());
+        if (quantityBase != null)
+            builder.append("base quantity: " + quantityBase.toString());
+        if (quantityRange != null)
+            builder.append("range quantity: " + quantityRange.toString());
+
+        if (quantityList != null) {
+	        for (Quantity quantity : quantityList) {
+                builder.append("quantity list: ");
 	            if (quantity != null) {
 	                builder.append(quantity.toString());
 	            }
@@ -119,8 +129,13 @@ public class Measurement {
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");
+        byte[] encodedName = null;
         if (type != null) {
-            byte[] encodedName = encoder.quoteAsUTF8(type.getName());
+            if ( (type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) || 
+                 (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) )
+                encodedName = encoder.quoteAsUTF8("interval");
+            else
+                encodedName = encoder.quoteAsUTF8(type.getName());
             String outputName = new String(encodedName);
             json.append("\"type\" : \"" + outputName + "\"");
             started = true;
@@ -137,7 +152,7 @@ public class Measurement {
                 json.append("\"quantity\" : " + quantity.toJson());
         	}
         }
-        else if (type == UnitUtilities.Measurement_Type.INTERVAL) {
+        else if (type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
         	Quantity quantityLeast = getQuantityLeast();
         	Quantity quantityMost = getQuantityMost();
         	if (quantityLeast != null) {
@@ -157,8 +172,46 @@ public class Measurement {
                 json.append("\"quantityMost\" : " + quantityMost.toJson());
         	}
         }
+        else if (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
+            Quantity quantityBase = getQuantityBase();
+            Quantity quantityRange = getQuantityRange();
+            Quantity quantityLeast = getQuantityLeast();
+            Quantity quantityMost = getQuantityMost();
+            if (quantityBase != null) {
+                if (!started) {
+                    started = true;
+                }
+                else
+                    json.append(", ");
+                json.append("\"quantityBase\" : " + quantityBase.toJson());
+            }
+            if (quantityRange != null) {
+                if (!started) {
+                    started = true;
+                }
+                else
+                    json.append(", ");
+                json.append("\"quantityRange\" : " + quantityRange.toJson());
+            }
+            if (quantityLeast != null) {
+                if (!started) {
+                    started = true;
+                }
+                else
+                    json.append(", ");
+                json.append("\"quantityLeast\" : " + quantityLeast.toJson());
+            }
+            if (quantityMost != null) {
+                if (!started) {
+                    started = true;
+                }
+                else
+                    json.append(", ");
+                json.append("\"quantityMost\" : " + quantityMost.toJson());
+            }
+        }
         else if (type == UnitUtilities.Measurement_Type.CONJUNCTION) {
-        	if ( (quantities != null) && (quantities.size() > 0) ) {
+        	if ( (quantityList != null) && (quantityList.size() > 0) ) {
         		if (!started) {
                     started = true;
                     json.append("[ ");
@@ -166,7 +219,7 @@ public class Measurement {
                 else
                 	json.append(", [ ");
                 boolean started2 = false;
-	        	for(Quantity quantity :  quantities) {
+	        	for(Quantity quantity :  quantityList) {
 	        		if (quantity != null) {
 		        		if (!started2) {
 		                    started2 = true;

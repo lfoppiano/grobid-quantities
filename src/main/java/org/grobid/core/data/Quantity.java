@@ -138,8 +138,9 @@ public class Quantity {
         return builder.toString();
     }
 
+    // WARNING! a quantity can have a value without unit, and not being empty (e.g. counts) !!
     public boolean isEmpty() {
-        return rawUnit == null && StringUtils.isEmpty(rawValue);
+        return (rawUnit == null) && StringUtils.isEmpty(rawValue);
     }
 
     public boolean isNormalized() {

@@ -31,7 +31,7 @@ public class MeasurementUtilitiesTest {
         measurement.setType(UnitUtilities.Measurement_Type.VALUE);
 
         Quantity quantity = new Quantity("10m", new Unit("meter"));
-        measurement.addQuantity(quantity);
+        measurement.setAtomicQuantity(quantity);
         measurementList.add(measurement);
 
         System.out.println(target.solve(measurementList));

@@ -115,11 +115,11 @@ public class QuantityTrainer extends AbstractTrainer {
                     writer.write("\n");
                 }
                 // to store unit term positions
-                List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
+                /*List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
 
                 unitTokenPositions = quantityLexicon.inUnitNamesPairs(labeled);
 
-                addFeatures(labeled, writer, unitTokenPositions);
+                addFeatures(labeled, writer, unitTokenPositions);*/
                 writer.write("\n");
             }
 

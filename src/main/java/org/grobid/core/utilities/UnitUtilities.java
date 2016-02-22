@@ -120,7 +120,8 @@ public class UnitUtilities {
     // measurement type (atomic value, interval of conjuctive/disjunctive list of values/intervals)
     public enum Measurement_Type {
         VALUE("value"),
-        INTERVAL("interval"),
+        INTERVAL_MIN_MAX("interval min max"),
+        INTERVAL_BASE_RANGE("interval base range"),
         CONJUNCTION("listc"),
         DISJUNCTION("listd");
 

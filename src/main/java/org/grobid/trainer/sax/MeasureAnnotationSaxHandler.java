@@ -29,6 +29,8 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
     private boolean numEncountered = false;
     private boolean openUnit = false;
     private boolean openAtomicValueWithinList = false;
+    private boolean rangeBaseEncountered = false;
+    private boolean beginRangeBaseEncountered = false;
 
     private String currentTag = null;
 
@@ -75,6 +77,8 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     openList = false;
                     openInterval = false;
                     numEncountered = false;
+                    rangeBaseEncountered = false;
+                    beginRangeBaseEncountered = false;
                 }
             } else if (qName.equals("figure")) {
                 // figures (which include tables) were ignored !
@@ -115,7 +119,10 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 String text = getText();
                 if (text != null) {
                     if (text.length() > 0) {
-                        currentTag = "<other>";
+                        if (rangeBaseEncountered)
+                            currentTag = "<valueAtomic>";
+                        else
+                            currentTag = "<other>";
                         writeData(qName);
                     }
                 }
@@ -197,6 +204,9 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                                     currentTag = "<valueLeast>";
                                 } else if (name.equals("atMost")) {
                                     currentTag = "<valueMost>";
+                                } else if (value.equals("base") || value.equals("range")) {
+                                    currentTag = "<valueAtomic>";
+                                    rangeBaseEncountered= true;
                                 }
                             }
                         }
@@ -279,9 +289,10 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     String content = tok;
                     int i = 0;
                     if (content.length() > 0) {
-                        if (begin && (!currentTag.equals("<other>"))) {
-                            //if (begin) {
+                        if (begin && (!currentTag.equals("<other>")) && (!rangeBaseEncountered || !beginRangeBaseEncountered) ) {
                             labeled.add(new Pair(content, "I-" + currentTag));
+                            if (rangeBaseEncountered)
+                                beginRangeBaseEncountered = true;
                             begin = false;
                         } else {
                             labeled.add(new Pair(content, currentTag));

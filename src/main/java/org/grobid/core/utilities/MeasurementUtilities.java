@@ -42,33 +42,72 @@ public class MeasurementUtilities {
 
         for (Measurement measurement : measurements) {
             if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
-                List<Quantity> quantities = measurement.getQuantities();
-                if ((quantities == null) || (quantities.size() == 0))
+                Quantity quantity = measurement.getQuantityAtomic();
+                if (quantity == null)
                     continue;
-                newMeasurements.add(measurement);
-            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
-                List<Quantity> quantities = measurement.getQuantities();
-                if ((quantities == null) || (quantities.size() == 0))
+
+                // first check for a base range interval
+                if ( (quantity.getRawValue() != null) && (quantity.getRawValue().indexOf("±") != -1) ) {
+                    // base range interval
+                    measurement.setType(UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE);
+                    String rawValue = quantity.getRawValue();
+                    int ind = quantity.getRawValue().indexOf("±");
+                    Quantity quantityBase = new Quantity();
+                    quantityBase.setRawValue(rawValue.substring(0,ind-1).trim());
+                    quantityBase.setRawUnit(quantity.getRawUnit());
+                    quantityBase.setOffsetStart(quantity.getOffsetStart());
+                    quantityBase.setOffsetEnd(quantity.getOffsetStart()+ind-1);
+                    quantityBase.setType(quantity.getType());
+
+                    Quantity quantityRange = new Quantity();
+                    quantityRange.setRawValue(rawValue.substring(ind+1, rawValue.length()).trim());
+                    quantityRange.setRawUnit(quantity.getRawUnit());
+                    quantityRange.setOffsetStart(quantity.getOffsetStart()+ind+1);
+                    quantityRange.setOffsetEnd(quantity.getOffsetEnd());
+                    quantityRange.setType(quantity.getType());
+
+                    measurement.setQuantityBase(quantityBase);
+                    measurement.setQuantityRange(quantityRange);
+                    measurement.setAtomicQuantity(null);
+                    newMeasurements.add(measurement);
+                    System.out.println(measurement.toString());
+                }
+                else {
+                    // if the unit is too far from the value, the measurement needs to be filtered out
+                    int start = quantity.getOffsetStart();
+                    int end = quantity.getOffsetEnd();
+                    Unit rawUnit = quantity.getRawUnit();
+                    if (rawUnit != null) {
+                        int startU = rawUnit.getOffsetStart();
+                        int endU = rawUnit.getOffsetEnd();
+                        if ((Math.abs(end - startU) < 40) || (Math.abs(endU - start) < 40)) {
+                            newMeasurements.add(measurement);
+                        }
+                    }
+                    else
+                        newMeasurements.add(measurement);
+                }
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
+                Quantity quantityLeast = measurement.getQuantityLeast();
+                Quantity quantityMost = measurement.getQuantityMost();
+
+                if ((quantityLeast == null) && (quantityMost == null))
                     continue;
-                if ((quantities.size() == 1) || (measurement.getQuantityLeast() == null) || (measurement.getQuantityMost() == null)) {
+                if ( ((quantityLeast != null) && (quantityMost == null)) || ((quantityLeast == null) && (quantityMost != null)) ) {
                     Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
                     Quantity quantity = null;
-                    if (quantities.size() == 1) {
-                        quantity = measurement.getQuantityLeast();
-                    } else if ((quantities.size() == 2) && (quantities.get(0) == null)) {
-                        quantity = quantities.get(1);
-                    } else if (quantities.size() == 2) {
-                        quantity = measurement.getQuantityLeast();
+                    if (quantityLeast != null) {
+                        quantity = quantityLeast;
+                    } else if (quantityMost != null) {
+                        quantity = quantityMost;
                     }
                     if (quantity != null) {
                         newMeasurement.setAtomicQuantity(quantity);
                         newMeasurements.add(newMeasurement);
                     }
-                } else if ((quantities.size() == 2) && (measurement.getQuantityLeast() != null) && (measurement.getQuantityMost() != null)) {
+                } else if ( (quantityLeast != null) && (quantityMost != null)) {
                     // if the interval is expressed over a chunck of text which is too large, it is a recognition error
                     // and we can replace it by two atomic measurements
-                    Quantity quantityLeast = measurement.getQuantityLeast();
-                    Quantity quantityMost = measurement.getQuantityMost();
                     int startL = quantityLeast.getOffsetStart();
                     int endL = quantityLeast.getOffsetEnd();
                     int startM = quantityMost.getOffsetStart();
@@ -77,18 +116,43 @@ public class MeasurementUtilities {
                     if ((Math.abs(endL - startM) > 80) && (Math.abs(endM - startL) > 80)) {
                         // we replace the interval measurement by two atomic measurements
                         Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
-                        newMeasurement.setAtomicQuantity(quantityLeast);
-                        newMeasurements.add(newMeasurement);
+                        // have to check the position of value and unit for valid atomic measure
+                        Unit rawUnit = quantityLeast.getRawUnit();
+                        if (rawUnit != null) {
+                            int startU = rawUnit.getOffsetStart();
+                            int endU = rawUnit.getOffsetEnd();
+                            if ((Math.abs(endL - startU) < 40) || (Math.abs(endU - startL) < 40)) {
+                                newMeasurement.setAtomicQuantity(quantityLeast);
+                                newMeasurements.add(newMeasurement);
+                            }
+                        }
+                        else {
+                            newMeasurement.setAtomicQuantity(quantityLeast);
+                                newMeasurements.add(newMeasurement);
+                        }
+                        
                         newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
-                        newMeasurement.setAtomicQuantity(quantityMost);
-                        newMeasurements.add(newMeasurement);
+                        rawUnit = quantityMost.getRawUnit();
+                        if (rawUnit != null) {
+                            int startU = rawUnit.getOffsetStart();
+                            int endU = rawUnit.getOffsetEnd();
+                            if ((Math.abs(endL - startU) < 40) || (Math.abs(endU - startL) < 40)) {
+                                newMeasurement.setAtomicQuantity(quantityMost);
+                                newMeasurements.add(newMeasurement);
+                            }
+                        }
+                        else {
+                            newMeasurement.setAtomicQuantity(quantityMost);
+                                newMeasurements.add(newMeasurement);
+                        }
+
                     } else
                         newMeasurements.add(measurement);
                 } else
                     newMeasurements.add(measurement);
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                 // list must be consistent in unit type, and avoid too large chunk 
-                List<Quantity> quantities = measurement.getQuantities();
+                List<Quantity> quantities = measurement.getQuantityList();
                 if ((quantities == null) || (quantities.size() == 0))
                     continue;
 
@@ -139,27 +203,50 @@ public class MeasurementUtilities {
      */
     public List<Measurement> solve(List<Measurement> measurements) {
         for (Measurement measurement : measurements) {
-            if (isEmpty(measurement.getQuantities()))
+            if (measurement.getType() == null)
                 continue;
-            for (Quantity quantity : measurement.getQuantities()) {
-                if (quantity == null)
-                    continue;
-
-                Unit rawUnit = quantity.getRawUnit();
-
-                if ((rawUnit != null) && rawUnit.getRawName() != null) {
-                    UnitDefinition foundUnit = quantityLexicon.getUnitbyName(rawUnit.getRawName().trim());
-                    if (foundUnit == null)
-                        foundUnit = quantityLexicon.getUnitbyNotation(rawUnit.getRawName().trim());
-
-                    if (foundUnit != null) {
-                        rawUnit.setUnitDefinition(foundUnit);
-                        if (foundUnit.getType() != null)
-                            quantity.setType(foundUnit.getType());
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
+                updateQuantity(measurement.getQuantityAtomic());
+            }
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
+                updateQuantity(measurement.getQuantityLeast());
+                updateQuantity(measurement.getQuantityMost());
+            }
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
+                updateQuantity(measurement.getQuantityBase());
+                updateQuantity(measurement.getQuantityRange());
+                // the two quantities bellow are normally not yet set-up
+                //updateQuantity(measurement.getQuantityLeast());
+                //updateQuantity(measurement.getQuantityMost());
+            }
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
+                if (measurement.getQuantityList() != null) {
+                    for (Quantity quantity : measurement.getQuantityList()) {
+                        if (quantity == null)
+                            continue;
+                        updateQuantity(quantity);
                     }
                 }
             }
         }
         return measurements;
+    }
+
+    private void updateQuantity(Quantity quantity) {
+        if ((quantity != null) && (!quantity.isEmpty())) {
+            Unit rawUnit = quantity.getRawUnit();
+
+            if ((rawUnit != null) && rawUnit.getRawName() != null) {
+                UnitDefinition foundUnit = quantityLexicon.getUnitbyName(rawUnit.getRawName().trim());
+                if (foundUnit == null)
+                    foundUnit = quantityLexicon.getUnitbyNotation(rawUnit.getRawName().trim());
+
+                if (foundUnit != null) {
+                    rawUnit.setUnitDefinition(foundUnit);
+                    if (foundUnit.getType() != null)
+                        quantity.setType(foundUnit.getType());
+                }
+            }
+        }
     }
 }

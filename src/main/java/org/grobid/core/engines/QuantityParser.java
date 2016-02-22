@@ -138,37 +138,98 @@ public class QuantityParser extends AbstractParser {
     }
 
     private List<Measurement> normalizeMeasurements(List<Measurement> measurements) {
-        NormalizationWrapper normalizationWrapper = new NormalizationWrapper();
         for (Measurement measurement : measurements) {
-            for (Quantity quantity : measurement.getQuantities()) {
-                if (!quantity.isNormalized()) {
+            if (measurement.getType() == null)
+                continue;
+            else if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
+                normalizeQuantity(measurement.getQuantityAtomic());
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
+                normalizeQuantity(measurement.getQuantityLeast());
+                normalizeQuantity(measurement.getQuantityMost());
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
+                normalizeQuantity(measurement.getQuantityBase());
+                normalizeQuantity(measurement.getQuantityRange());
+                // the two quantities bellow are normally not yet set-up
+                Quantity quantityLeast = calculateQuantityLeast(measurement.getQuantityBase(), measurement.getQuantityRange());
+                if (quantityLeast != null)
+                    measurement.setQuantityLeast(quantityLeast);
+                Quantity quantityMost = calculateQuantityMost(measurement.getQuantityBase(), measurement.getQuantityRange());
+                if (quantityMost != null)
+                    measurement.setQuantityMost(quantityMost);
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
+                if (measurement.getQuantityList() != null) {
 
+                    for (Quantity quantity : measurement.getQuantityList()) {
 
-//                if (isNotEmpty(quantity.getRawValue())) {
-//                    String[] parsed = normalizationWrapper.parseRawString(quantity.getRawValue());
-//                    if (quantity.getRawUnit() == null) {
-//                        Unit raw = new Unit();
-//                        raw.setRawName(parsed[1]);
-//                        quantity.setRawUnit(raw);
-//                        quantity.setRawValue(parsed[0]);
-//                    }
-//                }
+    //                if (isNotEmpty(quantity.getRawValue())) {
+    //                    String[] parsed = normalizationWrapper.parseRawString(quantity.getRawValue());
+    //                    if (quantity.getRawUnit() == null) {
+    //                        Unit raw = new Unit();
+    //                        raw.setRawName(parsed[1]);
+    //                        quantity.setRawUnit(raw);
+    //                        quantity.setRawValue(parsed[0]);
+    //                    }
+    //                }
 
-                    try {
-                        Quantity quantity1 = normalizationWrapper.normalizeQuantityToBaseUnits(quantity);
-                        if(quantity1.isNormalized()) {
-                            quantity.setNormalizedValue(quantity1.getNormalizedValue());
-                            quantity.setNormalizedUnit(quantity1.getNormalizedUnit());
-                        }
-                    } catch (NormalizationException ne) {
-
-                        //Buh... let's ignore it for the time being :)
+                        normalizeQuantity(quantity);
                     }
                 }
             }
-
         }
         return measurements;
+    }
+
+    private void normalizeQuantity(Quantity quantity) {
+        NormalizationWrapper normalizationWrapper = new NormalizationWrapper();
+        if (quantity == null)
+            return;
+        if (quantity.isNormalized()) 
+            return;
+        try {
+            Quantity quantity1 = normalizationWrapper.normalizeQuantityToBaseUnits(quantity);
+            if(quantity1.isNormalized()) {
+                quantity.setNormalizedValue(quantity1.getNormalizedValue());
+                quantity.setNormalizedUnit(quantity1.getNormalizedUnit());
+            }
+        } catch (NormalizationException ne) {
+            //Buh... let's ignore it for the time being :)
+        }
+    }
+
+    private Quantity calculateQuantityLeast(Quantity quantityBase, Quantity quantityRange) {
+        if ((quantityBase == null) || (quantityRange == null))
+            return null;
+        if ((!quantityBase.isNormalized()) || (!quantityRange.isNormalized()))
+            return null;
+
+        Quantity quantityLeast = new Quantity();
+        Double value = quantityBase.getNormalizedValue() - quantityRange.getNormalizedValue();
+        quantityLeast.setNormalizedValue(value);
+        quantityLeast.setNormalizedUnit(quantityBase.getNormalizedUnit());
+        quantityLeast.setRawValue(quantityBase.getRawValue());
+        quantityLeast.setRawUnit(quantityBase.getRawUnit());
+        quantityLeast.setOffsetStart(quantityBase.getOffsetStart());
+        quantityLeast.setOffsetEnd(quantityBase.getOffsetEnd());
+        quantityLeast.setType(quantityBase.getType());
+        return quantityLeast;
+    }
+
+    private Quantity calculateQuantityMost(Quantity quantityBase, Quantity quantityRange) {
+        if ((quantityBase == null) || (quantityRange == null))
+            return null;
+        if ((!quantityBase.isNormalized()) || (!quantityRange.isNormalized()))
+            return null;
+
+        Quantity quantityMost = new Quantity();
+        Double value = quantityBase.getNormalizedValue() + quantityRange.getNormalizedValue();
+        quantityMost.setNormalizedValue(value);
+        quantityMost.setNormalizedUnit(quantityBase.getNormalizedUnit());
+        quantityMost.setRawValue(quantityRange.getRawValue());
+        quantityMost.setRawUnit(quantityRange.getRawUnit());
+        quantityMost.setOffsetStart(quantityRange.getOffsetStart());
+        quantityMost.setOffsetEnd(quantityRange.getOffsetEnd());
+        quantityMost.setType(quantityBase.getType());
+        return quantityMost;
     }
 
     public int batchProcess(String inputDirectory,
@@ -245,7 +306,7 @@ public class QuantityParser extends AbstractParser {
                     break;
                 case QUANTITY_VALUE_LEAST:
                     System.out.println("value least: " + clusterContent);
-                    if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL)) {
+                    if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
                         if (isMeasurementValid(currentMeasurement)) {
                             measurements.add(currentMeasurement);
                             currentMeasurement = new Measurement();
@@ -264,12 +325,12 @@ public class QuantityParser extends AbstractParser {
                     if (currentUnit.getRawName() != null)
                         currentQuantity.setRawUnit(currentUnit);
                     currentMeasurement.setQuantityLeast(currentQuantity);
-                    currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL);
-                    openMeasurement = UnitUtilities.Measurement_Type.INTERVAL;
+                    currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
+                    openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX;
                     break;
                 case QUANTITY_VALUE_MOST:
                     System.out.println("value most: " + clusterContent);
-                    if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL)) {
+                    if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
                         if (isMeasurementValid(currentMeasurement)) {
                             measurements.add(currentMeasurement);
                             currentMeasurement = new Measurement();
@@ -289,8 +350,8 @@ public class QuantityParser extends AbstractParser {
                         currentQuantity.setRawUnit(currentUnit);
                     }
                     currentMeasurement.setQuantityMost(currentQuantity);
-                    currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL);
-                    openMeasurement = UnitUtilities.Measurement_Type.INTERVAL;
+                    currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
+                    openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX;
                     break;
                 case QUANTITY_VALUE_LIST:
                     System.out.println("value in list: " + clusterContent);
@@ -313,7 +374,7 @@ public class QuantityParser extends AbstractParser {
                     if (currentUnit.getRawName() != null) {
                         currentQuantity.setRawUnit(currentUnit);
                     }
-                    currentMeasurement.addQuantity(currentQuantity);
+                    currentMeasurement.addQuantityList(currentQuantity);
                     currentMeasurement.setType(UnitUtilities.Measurement_Type.CONJUNCTION);
                     openMeasurement = UnitUtilities.Measurement_Type.CONJUNCTION;
                     break;
@@ -328,14 +389,30 @@ public class QuantityParser extends AbstractParser {
                     if (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentUnit.setOffsetEnd(endPos);
-                    if ((currentMeasurement.getQuantities() != null) && (currentMeasurement.getQuantities().size() > 0)) {
-                        for (Quantity quantity : currentMeasurement.getQuantities()) {
-                            if ((quantity != null) && ((quantity.getRawUnit() == null) || (quantity.getRawUnit().getRawName() == null))) {
-                                quantity.setRawUnit(currentUnit);
-                            } else if ((quantity == null) && (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL)) {
-                                // we skip the least value, but we can still for robustness attach the unit to the upper range quantity
-                            } else
-                                break;
+
+                    if (openMeasurement == UnitUtilities.Measurement_Type.VALUE) {
+                        if (currentMeasurement.getQuantityAtomic() != null)
+                            currentMeasurement.getQuantityAtomic().setRawUnit(currentUnit);
+                    }
+                    else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
+                        if ( (currentMeasurement.getQuantityMost() != null) && 
+                                ((currentMeasurement.getQuantityMost().getRawUnit() == null) || (currentMeasurement.getQuantityMost().getRawUnit().getRawName() == null)) ) {
+                            currentMeasurement.getQuantityMost().setRawUnit(currentUnit);
+                            if ( (currentMeasurement.getQuantityLeast() != null) && 
+                                ((currentMeasurement.getQuantityLeast().getRawUnit() == null) || (currentMeasurement.getQuantityLeast().getRawUnit().getRawName() == null)) )
+                                currentMeasurement.getQuantityLeast().setRawUnit(currentUnit);
+                        }
+                    }
+                    else if (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) {
+                        if ((currentMeasurement.getQuantityList() != null) && (currentMeasurement.getQuantityList().size() > 0)) {
+                            for (Quantity quantity : currentMeasurement.getQuantityList()) {
+                                if ((quantity != null) && ((quantity.getRawUnit() == null) || (quantity.getRawUnit().getRawName() == null))) {
+                                    quantity.setRawUnit(currentUnit);
+                                } else if ((quantity == null) && (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
+                                    // we skip the least value, but we can still for robustness attach the unit to the upper range quantity
+                                } else
+                                    break;
+                            }
                         }
                     }
                     currentUnit = new Unit();
@@ -345,11 +422,10 @@ public class QuantityParser extends AbstractParser {
                             currentMeasurement = new Measurement();
                             openMeasurement = null;
                         }
-                    } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL) {
+                    } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
                         if (isMeasurementValid(currentMeasurement)) {
-                            if ((currentMeasurement.getQuantities().size() == 2) &&
-                                    (currentMeasurement.getQuantityLeast() != null) &&
-                                    (currentMeasurement.getQuantityMost() != null)) {
+                            if ( (currentMeasurement.getQuantityLeast() != null) &&
+                                 (currentMeasurement.getQuantityMost() != null)) {
                                 measurements.add(currentMeasurement);
                                 currentMeasurement = new Measurement();
                                 openMeasurement = null;
@@ -477,12 +553,6 @@ public class QuantityParser extends AbstractParser {
                 }
                 measurements = resultExtraction(text, res, tokenizations);
                 measurements = measurementUtilities.solve(measurements);
-                /*if (measurements != null) {
-                    System.out.println("\n");
-                    for (Measurement measurement : measurements) {
-                        System.out.println(measurement.toString());
-                    }
-                }*/
 
                 textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
                 paragraph = new StringBuilder();
@@ -743,12 +813,13 @@ public class QuantityParser extends AbstractParser {
         int pos = 0;
         for (Measurement measurement : measurements) {
             Element measure = teiElement("measure");
-            List<Quantity> quantities = measurement.getQuantities();
+            
             if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
                 measure.addAttribute(new Attribute("type", "value"));
-                if (quantities.size() != 1)
+                Quantity quantity = measurement.getQuantityAtomic();
+                if (quantity == null)
                     continue;
-                Quantity quantity = quantities.get(0);
+                
                 int startQ = quantity.getOffsetStart();
                 int endQ = quantity.getOffsetEnd();
 
@@ -803,12 +874,13 @@ public class QuantityParser extends AbstractParser {
                         break;
                     pos++;
                 }
-            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL) {
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
                 measure.addAttribute(new Attribute("type", "interval"));
-                if (quantities.size() != 2)
+                Quantity quantityLeast = measurement.getQuantityLeast();
+                Quantity quantityMost = measurement.getQuantityMost();
+
+                if ((quantityLeast == null) || (quantityMost == null))
                     continue;
-                Quantity quantityLeast = quantities.get(0);
-                Quantity quantityMost = quantities.get(1);
 
                 int startQL = quantityLeast.getOffsetStart();
                 int endQL = quantityLeast.getOffsetEnd();
@@ -899,7 +971,7 @@ public class QuantityParser extends AbstractParser {
                 }
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                 measure.addAttribute(new Attribute("type", "list"));
-
+                List<Quantity> quantities = measurement.getQuantityList();
                 for (Quantity quantity : quantities) {
                     int startQ = quantity.getOffsetStart();
                     int endQ = quantity.getOffsetEnd();
@@ -957,10 +1029,13 @@ public class QuantityParser extends AbstractParser {
     }
 
     private boolean isMeasurementValid(Measurement currentMeasurement) {
-        return ((currentMeasurement.getType() != null) &&
-                (currentMeasurement.getQuantities() != null) &&
-                (currentMeasurement.getQuantities().size() > 0));
-    }
+        return ((currentMeasurement.getType() != null) && (
+                ((currentMeasurement.getQuantityList() != null) &&
+                 (currentMeasurement.getQuantityList().size() > 0)) ||
+                (currentMeasurement.getQuantityAtomic() != null) ||
+                ( (currentMeasurement.getQuantityLeast() != null) || (currentMeasurement.getQuantityMost() != null) ) )
+                );
+    }   
 
     private Element getTEIHeader(int id) {
         Element tei = teiElement("tei");
