@@ -94,7 +94,7 @@ public class QuantityTrainer extends AbstractTrainer {
 
                 // let's iterate by defined CRF input (separated by new line)
                 while (pos < labeled.size()) {
-                    bufferLabeled = new ArrayList<Pair<String, String>>();
+                    bufferLabeled = new ArrayList<>();
                     while (pos < labeled.size()) {
                         if (labeled.get(pos).getA().equals("\n")) {
                             pos++;
@@ -107,19 +107,11 @@ public class QuantityTrainer extends AbstractTrainer {
                     if (bufferLabeled.size() == 0)
                         continue;
 
-                    // to store unit term positions
-                    List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
-                    unitTokenPositions = quantityLexicon.inUnitNamesPairs(bufferLabeled);
+                    List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNamesPairs(bufferLabeled);
 
                     addFeatures(bufferLabeled, writer, unitTokenPositions);
                     writer.write("\n");
                 }
-                // to store unit term positions
-                /*List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
-
-                unitTokenPositions = quantityLexicon.inUnitNamesPairs(labeled);
-
-                addFeatures(labeled, writer, unitTokenPositions);*/
                 writer.write("\n");
             }
 
