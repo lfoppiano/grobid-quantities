@@ -136,7 +136,7 @@ public class MeasurementUtilities {
                         if (rawUnit != null) {
                             int startU = rawUnit.getOffsetStart();
                             int endU = rawUnit.getOffsetEnd();
-                            if ((Math.abs(endL - startU) < 40) || (Math.abs(endU - startL) < 40)) {
+                            if ((Math.abs(endM - startU) < 40) || (Math.abs(endU - startM) < 40)) {
                                 newMeasurement.setAtomicQuantity(quantityMost);
                                 newMeasurements.add(newMeasurement);
                             }
