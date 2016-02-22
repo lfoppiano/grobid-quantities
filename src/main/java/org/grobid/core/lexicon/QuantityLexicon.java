@@ -457,6 +457,10 @@ public class QuantityLexicon {
         return results;
     }
 
+    public boolean inPrefixDictionary(String s) {
+        return prefixes.containsKey(s.toLowerCase());
+    }
+
     public boolean inUnitDictionary(String s) {
         return unitTokens.contains(s.toLowerCase());
     }

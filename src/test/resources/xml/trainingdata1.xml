@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<units>
+    <unit>
+        <prefix>c</prefix>
+        <base>m</base>
+        <pow>2</pow>
+        <pow>/</pow>
+        <base>s</base>
+    </unit>
+    <unit>
+        <prefix>k</prefix>
+        <base>m</base>
+        <pow>/</pow>
+        <base>s</base>
+        <pow>2</pow>
+    </unit>
+    <unit>
+        <prefix>Y</prefix>
+        <base>m</base>
+        <pow>/</pow>
+        <base>s</base>
+        <pow>2</pow>
+        <pow>/</pow>
+        <base>g</base>
+        <pow>2</pow>
+    </unit>
+
+    <unit>
+        <prefix>m</prefix>
+        <base>H</base>
+        <base>z</base>
+        <pow>/</pow>
+        <base>s</base>
+        <pow>2</pow>
+    </unit>
+</units>

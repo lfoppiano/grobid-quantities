@@ -143,15 +143,20 @@ public class Unit {
     }
 
 
-    class UnitBlock {
-        private String prefix;
-        private String base;
-        private String pow;
+    public class UnitBlock {
+        private String prefix = "";
+        private String base = "";
+        private String pow = "";
+
 
         public UnitBlock(String prefix, String base, String pow) {
             this.prefix = prefix;
             this.base = base;
             this.pow = pow;
+        }
+
+        public UnitBlock() {
+
         }
 
 
@@ -178,5 +183,24 @@ public class Unit {
         public void setPow(String pow) {
             this.pow = pow;
         }
+
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("[");
+            sb.append(getPrefix());
+            sb.append(getBase());
+            sb.append("^");
+            if (getPow() == "") {
+                sb.append("1");
+            } else {
+                sb.append(getPow());
+            }
+            sb.append("]");
+
+            return sb.toString();
+        }
     }
+
 }

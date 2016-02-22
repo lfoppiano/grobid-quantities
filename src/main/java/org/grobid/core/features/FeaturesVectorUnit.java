@@ -14,6 +14,7 @@ public class FeaturesVectorUnit {
     public boolean isUpperCase = false;
     public boolean isDigit = false;
     public boolean isKnownUnitToken = false;
+    public boolean isKnownPrefixToken = false;
     public String label = null;             // label if known
 
     // one of NOPUNCT, OPENBRACKET, ENDBRACKET, DOT, COMMA, HYPHEN, QUOTE, PUNCT (default)
@@ -46,6 +47,12 @@ public class FeaturesVectorUnit {
             res.append(" ").append(0);
         }
 
+        if (isKnownPrefixToken) {
+            res.append(" ").append(1);
+        } else {
+            res.append(" ").append(0);
+        }
+
         res.append(" ").append(punctType);
 
         if (isNotEmpty(label)) {
@@ -60,9 +67,10 @@ public class FeaturesVectorUnit {
      */
     static public FeaturesVectorUnit addFeaturesUnit(String character,
                                                      String label,
-                                                     boolean isUnitToken) {
-        FeatureFactory featureFactory = FeatureFactory.getInstance();
+                                                     boolean isKnownUnitToken,
+                                                     boolean isKnownPrefixToken) {
 
+        FeatureFactory featureFactory = FeatureFactory.getInstance();
         FeaturesVectorUnit featuresVector = new FeaturesVectorUnit();
 
         featuresVector.value = character;
@@ -96,7 +104,8 @@ public class FeaturesVectorUnit {
             featuresVector.isDigit = false;
         }
 
-        featuresVector.isKnownUnitToken = isUnitToken;
+        featuresVector.isKnownUnitToken = isKnownUnitToken;
+        featuresVector.isKnownPrefixToken = isKnownPrefixToken;
 
         return featuresVector;
     }

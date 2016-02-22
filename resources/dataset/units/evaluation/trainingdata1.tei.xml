@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<units>
+    <unit>
+        <prefix>d</prefix>
+        <base>g</base>
+        <pow>/</pow>
+        <base>s</base>
+        <pow>76</pow>
+        <pow>/</pow>
+        <base>g</base>
+        <pow>2</pow>
+    </unit>
+    <unit>
+        <prefix>M</prefix>
+        <base>m</base>
+    </unit>
+    <unit>
+        <other>2</other>
+        <other>3</other>
+        <base>K</base>
+    </unit>
+
+    <unit>
+        <other>1</other>
+        <other>0</other>
+        <other>0</other>
+        <other>0</other>
+        <prefix>k</prefix>
+        <base>m</base>
+        <pow>2</pow>
+    </unit>
+</units>

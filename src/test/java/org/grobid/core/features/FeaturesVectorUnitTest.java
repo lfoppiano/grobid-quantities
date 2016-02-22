@@ -19,23 +19,23 @@ public class FeaturesVectorUnitTest {
 
     @Test
     public void testPrintVector_sample1() throws Exception {
-        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("c", "LABEL", false);
+        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("c", "LABEL", false, true);
         String outputString = output.printVector();
 
-        assertThat(outputString, is("c 0 0 0 NOPUNCT LABEL"));
+        assertThat(outputString, is("c 0 0 0 1 NOPUNCT LABEL"));
     }
 
     @Test
     public void testPrintVector_sample2() throws Exception {
-        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("2", "LABEL", false);
+        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("2", "LABEL", false, true);
         String outputString = output.printVector();
 
-        assertThat(outputString, is("2 1 1 0 NOPUNCT LABEL"));
+        assertThat(outputString, is("2 1 1 0 1 NOPUNCT LABEL"));
     }
 
     @Test
     public void testAddFeaturesUnit() throws Exception {
-        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("c", null, false);
+        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("c", null, false, true);
 
         assertNotNull(output.isDigit);
         assertNotNull(output.isKnownUnitToken);
