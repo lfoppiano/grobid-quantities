@@ -382,11 +382,11 @@ public class QuantityParser extends AbstractParser {
                     System.out.println("unit (left attachment): " + clusterContent);
                     currentUnit = new Unit();
                     currentUnit.setRawName(clusterContent);
-                    if (text.charAt(pos) == ' ') {
+                    while (text.charAt(pos) == ' ') {
                         pos++;
                     }
                     currentUnit.setOffsetStart(pos);
-                    if (text.charAt(endPos - 1) == ' ')
+                    while (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentUnit.setOffsetEnd(endPos);
 
@@ -445,11 +445,11 @@ public class QuantityParser extends AbstractParser {
                     }
                     currentUnit = new Unit();
                     currentUnit.setRawName(clusterContent);
-                    if (text.charAt(pos) == ' ') {
+                    while (text.charAt(pos) == ' ') {
                         pos++;
                     }
                     currentUnit.setOffsetStart(pos);
-                    if (text.charAt(endPos - 1) == ' ')
+                    while (text.charAt(endPos - 1) == ' ')
                         endPos--;
                     currentUnit.setOffsetEnd(endPos);
                     break;
@@ -842,7 +842,7 @@ public class QuantityParser extends AbstractParser {
                         unitNode.addAttribute(new Attribute("type", "?"));
 
                     if (unit.getRawName() != null)
-                        unitNode.addAttribute(new Attribute("unit", unit.getRawName()));
+                        unitNode.addAttribute(new Attribute("unit", unit.getRawName().trim()));
                     else
                         unitNode.addAttribute(new Attribute("unit", "?"));
                     unitNode.appendChild(text.substring(startU, endU));
@@ -886,7 +886,11 @@ public class QuantityParser extends AbstractParser {
                 int endQL = quantityLeast.getOffsetEnd();
 
                 Element numNodeL = teiElement("num");
-                numNodeL.addAttribute(new Attribute("atLeast", "?"));
+
+                if (quantityLeast.getRawValue() != null)
+                    numNodeL.addAttribute(new Attribute("atMost", quantityLeast.getRawValue().trim()));
+                else
+                    numNodeL.addAttribute(new Attribute("atLeast", "?"));
                 numNodeL.appendChild(text.substring(startQL, endQL));
 
                 Unit unitL = quantityLeast.getRawUnit();
@@ -899,8 +903,16 @@ public class QuantityParser extends AbstractParser {
                     endUL = unitL.getOffsetEnd();
 
                     unitNodeL = teiElement("measure");
-                    unitNodeL.addAttribute(new Attribute("type", "?"));
-                    unitNodeL.addAttribute(new Attribute("unit", "?"));
+                    if ( (unitL.getUnitDefinition() != null) && (unitL.getUnitDefinition().getType() != null) ) {
+                        unitNodeL.addAttribute(new Attribute("type", unitL.getUnitDefinition().getType().toString()));
+                    }
+                    else
+                        unitNodeL.addAttribute(new Attribute("type", "?"));
+
+                    if (unitL.getRawName() != null)
+                        unitNodeL.addAttribute(new Attribute("unit", unitL.getRawName().trim()));
+                    else
+                        unitNodeL.addAttribute(new Attribute("unit", "?"));
                     unitNodeL.appendChild(text.substring(startUL, endUL));
                 }
 
@@ -909,7 +921,10 @@ public class QuantityParser extends AbstractParser {
                 Unit unitM = quantityMost.getRawUnit();
 
                 Element numNodeM = teiElement("num");
-                numNodeM.addAttribute(new Attribute("atMost", "?"));
+                if (quantityMost.getRawValue() != null)
+                    numNodeM.addAttribute(new Attribute("atMost", quantityMost.getRawValue().trim()));
+                else
+                    numNodeM.addAttribute(new Attribute("atMost", "?"));
                 numNodeM.appendChild(text.substring(startQM, endQM));
 
                 int startUM = -1;
@@ -920,8 +935,18 @@ public class QuantityParser extends AbstractParser {
                     endUM = unitM.getOffsetEnd();
 
                     unitNodeM = teiElement("measure");
-                    unitNodeM.addAttribute(new Attribute("type", "?"));
-                    unitNodeM.addAttribute(new Attribute("unit", "?"));
+
+                    if ( (unitM.getUnitDefinition() != null) && (unitM.getUnitDefinition().getType() != null) ) {
+                        unitNodeM.addAttribute(new Attribute("type", unitM.getUnitDefinition().getType().toString()));
+                    }
+                    else
+                        unitNodeM.addAttribute(new Attribute("type", "?"));
+
+                    if (unitM.getRawName() != null)
+                        unitNodeM.addAttribute(new Attribute("unit", unitM.getRawName().trim()));
+                    else
+                        unitNodeM.addAttribute(new Attribute("unit", "?"));
+
                     unitNodeM.appendChild(text.substring(startUM, endUM));
                 }
 
@@ -988,10 +1013,20 @@ public class QuantityParser extends AbstractParser {
                         endU = unit.getOffsetEnd();
 
                         unitNode = teiElement("measure");
-                        unitNode.addAttribute(new Attribute("type", "?"));
-                        unitNode.addAttribute(new Attribute("unit", "?"));
-                        unitNode.appendChild(text.substring(startU, endU));
-                    }
+
+                        if ( (unit.getUnitDefinition() != null) && (unit.getUnitDefinition().getType() != null) ) {
+                            unitNode.addAttribute(new Attribute("type", unit.getUnitDefinition().getType().toString()));
+                        }
+                        else
+                            unitNode.addAttribute(new Attribute("type", "?"));
+
+                        if (unit.getRawName() != null)
+                            unitNode.addAttribute(new Attribute("unit", unit.getRawName().trim()));
+                        else
+                            unitNode.addAttribute(new Attribute("unit", "?"));
+
+                            unitNode.appendChild(text.substring(startU, endU));
+                        }
 
                     int initPos = pos;
                     int firstPos = pos;
