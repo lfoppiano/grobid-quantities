@@ -2,7 +2,6 @@ package org.grobid.trainer.sax;
 
 
 import org.grobid.core.utilities.Pair;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -46,17 +45,61 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
 
     }
 
+    /**
+     * After the data is extracted from the tags, the data is tokenized at character level and
+     * the label are calculated. The prefix 'I-' is attached to distinguish the beginning of a new
+     * tag (for example if we have <base>Hz</base><base>m</base>).
+     */
     private void writeData(String qName) {
         if (currentTag == null)
             currentTag = "<other>";
+
         if (isRelevantTag(qName)) {
             currentTag = "<" + qName + ">";
 
             String text = getText();
-            accumulator = new StringBuffer();
 
-            labeled.add(new Pair(text, currentTag));
+            // text segmentation
+            List<String> tokens = tokenize(text);
+
+            boolean begin = true;
+            for (String token : tokens) {
+                token = token.trim();
+
+                if (token.length() == 0)
+                    continue;
+
+                if (token.equals("+L+")) {
+                    labeled.add(new Pair("@newline", null));
+                } else if (token.equals("+PAGE+")) {
+                    labeled.add(new Pair("@newpage", null));
+                } else {
+                    String content = token;
+                    int i = 0;
+                    if (content.length() > 0) {
+                        if (begin && !currentTag.equals("<other>")) {
+                            labeled.add(new Pair(content, "I-" + currentTag));
+                            begin = false;
+                        } else {
+                            labeled.add(new Pair(content, currentTag));
+                        }
+                    }
+                }
+                begin = false;
+            }
+            accumulator.setLength(0);
+
+            //labeled.add(new Pair(text, currentTag));
         }
+    }
+
+    private List<String> tokenize(String text) {
+        char[] tokenizationByCharacter = text.toCharArray();
+        List<String> tokenizations = new ArrayList<>();
+        for (char characterToken : tokenizationByCharacter) {
+            tokenizations.add("" + characterToken);
+        }
+        return tokenizations;
     }
 
     private boolean isRelevantTag(String qName) {

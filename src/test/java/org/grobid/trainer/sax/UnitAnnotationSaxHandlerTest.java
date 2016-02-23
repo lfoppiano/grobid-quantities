@@ -27,7 +27,7 @@ public class UnitAnnotationSaxHandlerTest {
     }
 
     @Test
-    public void testHandler() throws Exception {
+    public void testHandler1() throws Exception {
         InputStream is = this.getClass().getResourceAsStream("/xml/trainingdata1.xml");
 
         SAXParser p = spf.newSAXParser();
@@ -35,7 +35,21 @@ public class UnitAnnotationSaxHandlerTest {
 
         List<Pair<String, String>> labeled = target.getLabeledResult();
 
-        assertThat(labeled.size(), is(21));
+        assertThat(labeled.size(), is(28));
+
+
+    }
+
+    @Test
+    public void testHandler2() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("/xml/trainingdata2.xml");
+
+        SAXParser p = spf.newSAXParser();
+        p.parse(is, target);
+
+        List<Pair<String, String>> labeled = target.getLabeledResult();
+
+        assertThat(labeled.size(), is(15));
 
 
     }

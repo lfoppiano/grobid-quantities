@@ -97,12 +97,9 @@ public class UnitParser extends AbstractParser {
     public List<Unit.UnitBlock> resultExtraction(String text,
                                                  String result,
                                                  List<LayoutToken> tokenizations) {
-        List<Unit> measurements = new ArrayList<>();
-
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.UNITS, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
-        Unit currentUnit = new Unit();
         int pos = 0; // position in term of characters for creating the offsets
 
         boolean denominator = false;
@@ -182,10 +179,6 @@ public class UnitParser extends AbstractParser {
     @SuppressWarnings({"UnusedParameters"})
     private String addFeatures(List<String> characters,
                                List<OffsetPosition> unitTokenPositions) {
-        int totalCharacters = characters.size();
-        int posit = 0;
-        int currentQuantityIndex = 0;
-        List<OffsetPosition> localPositions = unitTokenPositions;
 
         StringBuilder result = new StringBuilder();
         try {
@@ -194,9 +187,8 @@ public class UnitParser extends AbstractParser {
                         FeaturesVectorUnit.addFeaturesUnit(character, null, quantityLexicon.inUnitDictionary(character),
                                 quantityLexicon.inPrefixDictionary(character));
 
-                result.append(featuresVector.printVector());
-                result.append("\n");
-                posit++;
+                result.append(featuresVector.printVector())
+                        .append("\n");
             }
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);

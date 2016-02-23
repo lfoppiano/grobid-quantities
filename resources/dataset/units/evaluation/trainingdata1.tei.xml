@@ -15,18 +15,33 @@
         <base>m</base>
     </unit>
     <unit>
-        <other>2</other>
-        <other>3</other>
+        <other>23</other>
         <base>K</base>
     </unit>
 
     <unit>
-        <other>1</other>
-        <other>0</other>
-        <other>0</other>
-        <other>0</other>
+        <other>1000</other>
         <prefix>k</prefix>
         <base>m</base>
         <pow>2</pow>
+    </unit>
+    <unit>
+        <other>1000</other>
+        <prefix>k</prefix>
+        <base>W</base>
+        <pow>2</pow>
+    </unit>
+    <unit>
+        <other>-j393</other>
+        <prefix>G</prefix>
+        <base>Hz</base>
+        <pow>2</pow>
+    </unit>
+    <unit>
+        <base>Hz</base>
+        <pow>/</pow>
+        <base>2</base>
+        <pow>/</pow>
+        <base>s</base>
     </unit>
 </units>

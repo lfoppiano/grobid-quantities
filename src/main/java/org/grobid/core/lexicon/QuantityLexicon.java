@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.upperCase;
 
 /**
  * Class for managing the measurement lexical resources
@@ -39,6 +40,8 @@ public class QuantityLexicon {
     private FastMatcher unitPattern = null;
 
     private Set<String> unitTokens = null;
+    private Set<String> unitTokensLowerCase = null;
+
     private Map<String, String> prefixes = null; // map prefix symbol to prefix string
     private Map<String, List<String>> inflection = null; // map a unit string to its morphological inflections
 
@@ -79,7 +82,8 @@ public class QuantityLexicon {
         BufferedReader dis = null;
 
         try {
-            unitTokens = new HashSet<String>();
+            unitTokens = new HashSet<>();
+            unitTokensLowerCase = new HashSet<>();
             ist = this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH);
 
             unitPattern = new FastMatcher();
@@ -202,7 +206,7 @@ public class QuantityLexicon {
                     if (type2SIUnit == null) {
                         type2SIUnit = new HashMap<>();
                     }
-                    if ( (type == null) || (type.getName() == null) )
+                    if ((type == null) || (type.getName() == null))
                         logger.error("unitDefinition has no type: " + unitDefinition.toString());
 
                     if (type2SIUnit.get(type.getName()) == null)
@@ -237,8 +241,10 @@ public class QuantityLexicon {
         word = word.trim().toLowerCase();
         if ((word.length() > 0) && !unitTokens.contains(word)) {
             // we don't add pure digit sub-token and token delimiters
-            if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1))
+            if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1)) {
                 unitTokens.add(word);
+                unitTokensLowerCase.add(word.toLowerCase());
+            }
         }
     }
 
@@ -248,7 +254,6 @@ public class QuantityLexicon {
         InputStreamReader isr = null;
         BufferedReader dis = null;
         try {
-            unitTokens = new HashSet<String>();
             ist = this.getClass().getClassLoader().getResourceAsStream(PREFIX_PATH);
 
             unitPattern = new FastMatcher();
@@ -270,7 +275,6 @@ public class QuantityLexicon {
                 prefixes.put(symbol, name);
             }
 
-//System.out.println(prefixes.toString());
         } catch (PatternSyntaxException e) {
             throw new
                     GrobidResourceException("Error when compiling prefix map for unit vocabulary.", e);
@@ -293,12 +297,10 @@ public class QuantityLexicon {
     }
 
     private void initInflection() {
-        File file = null;
         InputStream ist = null;
         InputStreamReader isr = null;
         BufferedReader dis = null;
         try {
-            unitTokens = new HashSet<String>();
             ist = this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH);
 
             unitPattern = new FastMatcher();
@@ -458,11 +460,23 @@ public class QuantityLexicon {
     }
 
     public boolean inPrefixDictionary(String s) {
-        return prefixes.containsKey(s.toLowerCase());
+        return prefixes.containsKey(s);
+    }
+
+    public boolean inPrefixDictionaryCaseInsensitive(String s) {
+        boolean inPrefix = inPrefixDictionary(s);
+        if (inPrefix == false) {
+            return inPrefixDictionary(upperCase(s));
+        }
+        return inPrefix;
     }
 
     public boolean inUnitDictionary(String s) {
-        return unitTokens.contains(s.toLowerCase());
+        return unitTokens.contains(s);
+    }
+
+    public boolean inUnitDictionaryCaseInsensitive(String s) {
+        return unitTokensLowerCase.contains(s.toLowerCase());
     }
 
     /**
@@ -471,7 +485,7 @@ public class QuantityLexicon {
     public UnitDefinition getUnitbyName(String name) {
         if (name == null)
             return null;
-        return (UnitDefinition) name2unit.get(name.toLowerCase());
+        return name2unit.get(name.toLowerCase());
     }
 
     /**
@@ -480,7 +494,7 @@ public class QuantityLexicon {
     public UnitDefinition getUnitbyNotation(String notation) {
         if (notation == null)
             return null;
-        return (UnitDefinition) notation2unit.get(notation);
+        return notation2unit.get(notation);
     }
 
     /**

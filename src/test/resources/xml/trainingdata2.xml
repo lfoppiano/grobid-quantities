@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<units>
+    <unit>
+        <prefix>c</prefix>
+        <base>m</base>
+        <base>g</base>
+        <pow>/</pow>
+        <base>s</base>
+    </unit>
+    <unit>
+        <prefix>k</prefix>
+        <base>Hz</base>
+        <base>g</base>
+        <pow>/</pow>
+        <base>s</base>
+        <pow>22</pow>
+    </unit>
+</units>

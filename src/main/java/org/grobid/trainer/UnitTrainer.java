@@ -126,14 +126,14 @@ public class UnitTrainer extends AbstractTrainer {
         List<OffsetPosition> localPositions = unitTokenPositions;
 
         try {
-            for (Pair<String, String> lineP : texts) {
-                String token = lineP.getA();
+            for (Pair<String, String> text : texts) {
+                String token = text.getA();
                 if (token.trim().equals("@newline")) {
                     writer.write("\n");
                     writer.flush();
                 }
 
-                String label = lineP.getB();
+                String label = text.getB();
 
                 FeaturesVectorUnit featuresVector =
                         FeaturesVectorUnit.addFeaturesUnit(token, label,

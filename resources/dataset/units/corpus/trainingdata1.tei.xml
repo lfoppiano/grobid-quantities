@@ -47,20 +47,17 @@
         <base>m</base>
     </unit>
     <unit>
-        <base>°</base>
-        <base>C</base>
+        <base>°C</base>
     </unit>
     <unit>
-        <base>°</base>
-        <base>C</base>
+        <base>°C</base>
         <pow>/</pow>
         <base>m</base>
         <pow>2</pow>
     </unit>
     <unit>
         <other>1</other>
-        <base>°</base>
-        <base>C</base>
+        <base>°C</base>
         <pow>/</pow>
         <base>m</base>
         <pow>2</pow>
@@ -75,17 +72,14 @@
         <pow>2</pow>
     </unit>
     <unit>
-        <other>1</other>
-        <other>2</other>
-        <base>°</base>
-        <base>C</base>
+        <other>12</other>
+        <base>°C</base>
         <pow>/</pow>
         <base>m</base>
         <pow>2</pow>
     </unit>
     <unit>
-        <base>°</base>
-        <base>C</base>
+        <base>°C</base>
         <pow>/</pow>
         <base>m</base>
         <pow>222</pow>
@@ -106,26 +100,18 @@
         <other>5</other>
         <base>%</base>
     </unit>
-
-
-    LIR = 1011 L⊙
-    LIR = 1012 L⊙
-
-
     <unit>
         <base>σ</base>
     </unit>
 
     <unit>
-        <other>2</other>
-        <other>4</other>
+        <other>24</other>
         <prefix>μ</prefix>
         <base>m</base>
     </unit>
     <unit>
         <prefix>μ</prefix>
-        <base>J</base>
-        <base>y</base>
+        <base>JY</base>
     </unit>
     <unit>
         <prefix>G</prefix>
@@ -134,17 +120,44 @@
         <base>s</base>
     </unit>
     <unit>
-        <base>d</base>
-        <base>B</base>
+        <base>dB</base>
         <pow>*</pow>
         <base>m</base>
     </unit>
     <unit>
         <prefix>G</prefix>
-        <base>H</base>
-        <base>z</base>
+        <base>Hz</base>
     </unit>
     <unit>
+        <prefix>G</prefix>
+        <base>Hz</base>
+        <base>m</base>
+    </unit>
+    <unit>
+        <prefix>k</prefix>
+        <base>Hz</base>
+        <base>m</base>
+        <base>g</base>
+    </unit>
+    <unit>
+        <prefix>k</prefix>
+        <base>Hz</base>
+        <base>m</base>
+        <base>g</base>
+        <pow>33</pow>
+        <pow>/</pow>
+        <base>s</base>
+        <pow>3</pow>
+    </unit>
+    <unit>
+        <base>V</base>
+        <pow>/</pow>
+        <prefix>c</prefix>
+        <base>m</base>
+    </unit>
+
+    <unit>
+        <other>223455,6</other>
         <base>V</base>
         <pow>/</pow>
         <prefix>c</prefix>

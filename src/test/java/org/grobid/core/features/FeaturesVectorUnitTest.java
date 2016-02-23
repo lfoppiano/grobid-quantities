@@ -43,4 +43,15 @@ public class FeaturesVectorUnitTest {
         assertNotNull(output.punctType);
         assertNull(output.label);
     }
+
+    @Test
+    public void testAddFeaturesUnit_prefix1() throws Exception {
+        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("G", null, false, true);
+
+        assertNotNull(output.isDigit);
+        assertNotNull(output.isKnownUnitToken);
+        assertNotNull(output.isUpperCase);
+        assertNotNull(output.punctType);
+        assertNull(output.label);
+    }
 }

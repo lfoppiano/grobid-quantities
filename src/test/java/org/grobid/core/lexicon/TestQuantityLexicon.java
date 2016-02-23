@@ -94,4 +94,9 @@ public class TestQuantityLexicon {
 
         assertThat(output.size(), is(21));
     }
+
+    @Test
+    public void testInPrefixDictionary_G() throws Exception {
+        assertThat(target.inPrefixDictionary("G"), is(true));
+    }
 }

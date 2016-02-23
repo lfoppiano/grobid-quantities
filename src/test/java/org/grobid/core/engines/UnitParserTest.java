@@ -3,6 +3,7 @@ package org.grobid.core.engines;
 import org.grobid.core.data.Unit;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.xml.bind.SchemaOutputResolver;
@@ -15,6 +16,7 @@ import static org.junit.Assert.*;
 /**
  * Created by lfoppiano on 22.02.16.
  */
+@Ignore("Only for manual checks since it depends on the model")
 public class UnitParserTest {
 
     UnitParser target;
@@ -97,6 +99,38 @@ public class UnitParserTest {
         assertThat(output.get(0).getBase(), is("m"));
         assertThat(output.get(0).getPrefix(), is(""));
         assertThat(output.get(0).getPow(), is("22"));
+    }
+
+    @Test
+    public void testTagUnit6() throws Exception {
+
+        String input = "hZ/s";
+        List<Unit.UnitBlock> output = target.tagUnit(input);
+        System.out.println(input + " -> " + output);
+
+        assertThat(output.size(), is(2));
+        assertThat(output.get(0).getBase(), is("Hz"));
+        assertThat(output.get(0).getPrefix(), is(""));
+        assertThat(output.get(0).getPow(), is(""));
+        assertThat(output.get(1).getBase(), is("s"));
+        assertThat(output.get(1).getPrefix(), is(""));
+        assertThat(output.get(1).getPow(), is("-1"));
+    }
+
+    @Test
+    public void testTagUnit7() throws Exception {
+
+        String input = "hZs";
+        List<Unit.UnitBlock> output = target.tagUnit(input);
+        System.out.println(input + " -> " + output);
+
+        assertThat(output.size(), is(2));
+        assertThat(output.get(0).getBase(), is("Hz"));
+        assertThat(output.get(0).getPrefix(), is(""));
+        assertThat(output.get(0).getPow(), is(""));
+        assertThat(output.get(1).getBase(), is("s"));
+        assertThat(output.get(1).getPrefix(), is(""));
+        assertThat(output.get(1).getPow(), is(""));
     }
 
 

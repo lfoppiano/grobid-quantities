@@ -71,6 +71,7 @@ public class FeaturesVectorUnit {
                                                      boolean isKnownPrefixToken) {
 
         FeatureFactory featureFactory = FeatureFactory.getInstance();
+
         FeaturesVectorUnit featuresVector = new FeaturesVectorUnit();
 
         featuresVector.value = character;
@@ -94,6 +95,8 @@ public class FeaturesVectorUnit {
             featuresVector.punctType = "HYPHEN";
         } else if (character.equals("\"") || character.equals("\'") || character.equals("`")) {
             featuresVector.punctType = "QUOTE";
+        } else if (character.equals("/")) {
+            featuresVector.punctType = "SLASH";
         } else {
             featuresVector.punctType = "NOPUNCT";
         }
