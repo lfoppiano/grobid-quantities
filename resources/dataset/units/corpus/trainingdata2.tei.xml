@@ -5,9 +5,6 @@
   -->
 <units>
     <unit>
-        <other>days</other>
-    </unit>
-    <unit>
         <base>h</base>
     </unit>
     <unit>

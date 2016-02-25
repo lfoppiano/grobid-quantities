@@ -4,5 +4,5 @@ target
 *.log
 grobid.log*
 quantities.log*
-
+*.iml
 *.old

@@ -121,7 +121,7 @@
     </unit>
     <unit>
         <base>dB</base>
-        <pow>*</pow>
+        <other>*</other>
         <base>m</base>
     </unit>
     <unit>
