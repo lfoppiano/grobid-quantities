@@ -133,5 +133,53 @@ public class UnitParserTest {
         assertThat(output.get(1).getPow(), is(""));
     }
 
+    @Test
+    public void testTagUnit8() throws Exception {
+
+        String input = "Db/s";
+        List<Unit.UnitBlock> output = target.tagUnit(input);
+        System.out.println(input + " -> " + output);
+
+        assertThat(output.size(), is(2));
+        assertThat(output.get(0).getBase(), is("Db"));
+        assertThat(output.get(0).getPrefix(), is(""));
+        assertThat(output.get(0).getPow(), is(""));
+        assertThat(output.get(1).getBase(), is("s"));
+        assertThat(output.get(1).getPrefix(), is(""));
+        assertThat(output.get(1).getPow(), is("-1"));
+    }
+
+    @Test
+    public void testTagUnit9() throws Exception {
+
+        String input = "Dbs";
+        List<Unit.UnitBlock> output = target.tagUnit(input);
+        System.out.println(input + " -> " + output);
+
+        assertThat(output.size(), is(2));
+        assertThat(output.get(0).getBase(), is("Db"));
+        assertThat(output.get(0).getPrefix(), is(""));
+        assertThat(output.get(0).getPow(), is(""));
+        assertThat(output.get(1).getBase(), is("s"));
+        assertThat(output.get(1).getPrefix(), is(""));
+        assertThat(output.get(1).getPow(), is(""));
+    }
+
+    @Test
+    public void testTagUnit10() throws Exception {
+
+        String input = "Db*s";
+        List<Unit.UnitBlock> output = target.tagUnit(input);
+        System.out.println(input + " -> " + output);
+
+        assertThat(output.size(), is(2));
+        assertThat(output.get(0).getBase(), is("Db"));
+        assertThat(output.get(0).getPrefix(), is(""));
+        assertThat(output.get(0).getPow(), is(""));
+        assertThat(output.get(1).getBase(), is("s"));
+        assertThat(output.get(1).getPrefix(), is(""));
+        assertThat(output.get(1).getPow(), is(""));
+    }
+
 
 }
