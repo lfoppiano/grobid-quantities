@@ -102,7 +102,8 @@ public class UnitUtilities {
         ACIDITY("acidity"),
         FRACTION("fraction"),
         VO2_MAX("VO2 max"),
-        COUNT("count");
+        COUNT("count"),
+        DEGREE("angle");
 
         private String name;
 
