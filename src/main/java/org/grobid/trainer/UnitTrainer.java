@@ -28,12 +28,12 @@ public class UnitTrainer extends AbstractTrainer {
     private static final Logger LOGGER = LoggerFactory.getLogger(UnitTrainer.class);
 
     private final QuantityLexicon quantityLexicon;
-    protected double epsilon = 0.1;
-    protected int window = 20;
-
 
     public UnitTrainer() {
         super(GrobidModels.UNITS);
+        epsilon = 0.000001;
+        window = 20;
+
         quantityLexicon = QuantityLexicon.getInstance();
     }
 
