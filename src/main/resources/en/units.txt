@@ -81,3 +81,8 @@ Pl	DYNAMIC_VISCOSITY	SI_DERIVED	poiseuille
 Pa.s	DYNAMIC_VISCOSITY	SI_DERIVED	pascal-second
 P	DYNAMIC_VISCOSITY	NON_SI	poise
 ml/kg/min	VO2_MAX	NON_SI	millilitres per kilogramme of body weight per minute
+rad	RADIAN	SI	radian,radians
+°	ANGLE	NON_SI	angle,degree,degrees, deg
+'	ANGLE	NON_SI	arcmin,arcminute,am,MOA
+"	ANGLE	NON_SI	arcsec,asec,as
+sr	STERADIAN	SI	steradian,square radian

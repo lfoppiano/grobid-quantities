@@ -28,8 +28,8 @@ public class UnitTrainer extends AbstractTrainer {
     private static final Logger LOGGER = LoggerFactory.getLogger(UnitTrainer.class);
 
     private final QuantityLexicon quantityLexicon;
-    private double epsilon = 0.00001;
-    private int window = 20;
+    protected double epsilon = 0.1;
+    protected int window = 20;
 
 
     public UnitTrainer() {
