@@ -45,8 +45,8 @@ public class Measurement {
     }
 
     public void addQuantityList(Quantity quantity) {
-    	if (quantityList == null)
-    		quantityList = new ArrayList<>();
+        if (quantityList == null)
+            quantityList = new ArrayList<>();
         quantityList.add(quantity);
     }
 
@@ -59,27 +59,27 @@ public class Measurement {
     }
 
     public void setAtomicQuantity(Quantity quantity) {
-    	quantityAtomic = quantity;
+        quantityAtomic = quantity;
     }
 
     public Quantity getQuantityAtomic() {
-    	return quantityAtomic;
+        return quantityAtomic;
     }
 
     public void setQuantityLeast(Quantity quantity) {
-    	quantityLeast = quantity;
+        quantityLeast = quantity;
     }
 
     public Quantity getQuantityLeast() {
-    	return quantityLeast;
+        return quantityLeast;
     }
 
     public void setQuantityMost(Quantity quantity) {
-    	quantityMost = quantity;
+        quantityMost = quantity;
     }
 
     public Quantity getQuantityMost() {
-    	return quantityMost;
+        return quantityMost;
     }
 
     public void setQuantityBase(Quantity quantity) {
@@ -113,13 +113,13 @@ public class Measurement {
             builder.append("range quantity: " + quantityRange.toString());
 
         if (quantityList != null) {
-	        for (Quantity quantity : quantityList) {
+            for (Quantity quantity : quantityList) {
                 builder.append("quantity list: ");
-	            if (quantity != null) {
-	                builder.append(quantity.toString());
-	            }
-	        }
-	    }
+                if (quantity != null) {
+                    builder.append(quantity.toString());
+                }
+            }
+        }
 
         return builder.toString();
     }
@@ -131,8 +131,8 @@ public class Measurement {
         json.append("{ ");
         byte[] encodedName = null;
         if (type != null) {
-            if ( (type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) || 
-                 (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) )
+            if ((type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
+                    (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE))
                 encodedName = encoder.quoteAsUTF8("interval");
             else
                 encodedName = encoder.quoteAsUTF8(type.getName());
@@ -142,37 +142,32 @@ public class Measurement {
         }
 
         if (type == UnitUtilities.Measurement_Type.VALUE) {
-        	Quantity quantity = getQuantityAtomic();
-        	if (quantity != null) {
-        		if (!started) {
+            Quantity quantity = getQuantityAtomic();
+            if (quantity != null) {
+                if (!started) {
                     started = true;
-                }
-                else
-                	json.append(", ");
+                } else
+                    json.append(", ");
                 json.append("\"quantity\" : " + quantity.toJson());
-        	}
-        }
-        else if (type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
-        	Quantity quantityLeast = getQuantityLeast();
-        	Quantity quantityMost = getQuantityMost();
-        	if (quantityLeast != null) {
-        		if (!started) {
+            }
+        } else if (type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
+            Quantity quantityLeast = getQuantityLeast();
+            Quantity quantityMost = getQuantityMost();
+            if (quantityLeast != null) {
+                if (!started) {
                     started = true;
-                }
-                else
-                	json.append(", ");
+                } else
+                    json.append(", ");
                 json.append("\"quantityLeast\" : " + quantityLeast.toJson());
-        	}
-        	if (quantityMost != null) {
-        		if (!started) {
+            }
+            if (quantityMost != null) {
+                if (!started) {
                     started = true;
-                }
-                else
-                	json.append(", ");
+                } else
+                    json.append(", ");
                 json.append("\"quantityMost\" : " + quantityMost.toJson());
-        	}
-        }
-        else if (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
+            }
+        } else if (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
             Quantity quantityBase = getQuantityBase();
             Quantity quantityRange = getQuantityRange();
             Quantity quantityLeast = getQuantityLeast();
@@ -180,57 +175,52 @@ public class Measurement {
             if (quantityBase != null) {
                 if (!started) {
                     started = true;
-                }
-                else
+                } else
                     json.append(", ");
                 json.append("\"quantityBase\" : " + quantityBase.toJson());
             }
             if (quantityRange != null) {
                 if (!started) {
                     started = true;
-                }
-                else
+                } else
                     json.append(", ");
                 json.append("\"quantityRange\" : " + quantityRange.toJson());
             }
             if (quantityLeast != null) {
                 if (!started) {
                     started = true;
-                }
-                else
+                } else
                     json.append(", ");
                 json.append("\"quantityLeast\" : " + quantityLeast.toJson());
             }
             if (quantityMost != null) {
                 if (!started) {
                     started = true;
-                }
-                else
+                } else
                     json.append(", ");
                 json.append("\"quantityMost\" : " + quantityMost.toJson());
             }
-        }
-        else if (type == UnitUtilities.Measurement_Type.CONJUNCTION) {
-        	if ( (quantityList != null) && (quantityList.size() > 0) ) {
-        		if (!started) {
+        } else if (type == UnitUtilities.Measurement_Type.CONJUNCTION) {
+            if ((quantityList != null) && (quantityList.size() > 0)) {
+                if (!started) {
                     started = true;
                     json.append("[ ");
+                } else {
+                    json.append(", \"quantities\": [ ");
                 }
-                else
-                	json.append(", [ ");
+
                 boolean started2 = false;
-	        	for(Quantity quantity :  quantityList) {
-	        		if (quantity != null) {
-		        		if (!started2) {
-		                    started2 = true;
-		                }
-		                else
-		                	json.append(", ");
-		                json.append(quantity.toJson());
-		        	}
-	        	}
-	        	json.append(" ]");
-	        }
+                for (Quantity quantity : quantityList) {
+                    if (quantity != null) {
+                        if (!started2) {
+                            started2 = true;
+                        } else
+                            json.append(", ");
+                        json.append(quantity.toJson());
+                    }
+                }
+                json.append(" ]");
+            }
         }
 
         json.append(" }");
