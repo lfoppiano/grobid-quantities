@@ -389,18 +389,108 @@ var grobid = (function ($) {
 
         var quantityMap = measurementMap[localMeasurementNumber];
         var measurementType = null;
-        if (quantityMap.length == 1)
+        var string = "";
+        if (quantityMap.length == 1) {
             measurementType = "Atomic value";
-        else if (quantityMap.length == 2)
+            string = toHtml(quantityMap, measurementType);
+        } else if (quantityMap.length == 2) {
             measurementType = "Interval";
-        else
+            string = intervalToHtml(quantityMap, measurementType);
+        } else {
             measurementType = "List";
+            string = toHtml(quantityMap, measurementType);
+        }
 
+
+        $('#detailed_annot-0').html(string);
+        $('#detailed_annot-0').show();
+    }
+
+    /*$(document).ready(function() {
+     $(document).on('shown', '#xmlCode', function(event) {
+     prettyPrint();
+     });
+     });*/
+
+    function intervalToHtml(quantityMap, measurementType) {
+        var string = "";
+        var rawUnitName = null;
+
+        // LEAST value
+        var quantityLeast = quantityMap[0];
+        var type = quantityLeast.type;
+
+        var colorLabel = null;
+        if (type) {
+            colorLabel = type;
+        } else {
+            colorLabel = quantityLeast.rawName;
+        }
+
+
+        var leastValue = quantityLeast.rawValue;
+        var startUniLeast = -1;
+        var endUnitLeast = -1;
+
+        var unitLeast = quantityLeast.rawUnit;
+        if (unitLeast) {
+            rawUnitName = unitLeast.name;
+            startUniLeast = parseInt(quantityLeast.offsetStart, 10);
+            endUnitLeast = parseInt(quantityLeast.offsetEnd, 10);
+        }
+        var normalizedQuantityLeast = quantityLeast.normalizedQuantity;
+        var normalizedUnit = quantityLeast.normalizedUnit;
+
+        // MOST value
+        var quantityMost = quantityMap[1];
+        var mostValue = quantityMost.rawValue;
+        var startUniMost = -1;
+        var endUnitMost = -1;
+
+        var unitMost = quantityMost.rawUnit;
+        if (unitMost) {
+            startUniMost = parseInt(quantityMost.offsetStart, 10);
+            endUnitMost = parseInt(quantityMost.offsetEnd, 10);
+        }
+        var normalizedQuantityMost = quantityMost.normalizedQuantity;
+
+        string += "<div class='info-sense-box " + colorLabel + "'><h2 style='color:#FFF;padding-left:10px;font-size:16;'>" + measurementType;
+        string += "</h2>";
+        string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
+            "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;font-size:14;'>";
+
+        if (type) {
+            string += "<p>quantity type: <b>" + type + "</b></p>";
+        }
+
+        if (leastValue || mostValue) {
+            string += "<p>raw from: <b>" + leastValue + "</b> to <b>" + mostValue + "</b></p>";
+        }
+
+        if (rawUnitName) {
+            string += "<p>raw unit name: <b>" + rawUnitName + "</b></p>";
+        }
+
+        if (normalizedQuantityLeast || normalizedQuantityMost) {
+            string += "<p>normalized from: <b>" + normalizedQuantityLeast + "</b> to <b>"
+                + normalizedQuantityMost + "</b></p>";
+        }
+
+        if (normalizedUnit) {
+            string += "<p>normalized unit: <b>" + normalizedUnit.name + "</b></p>";
+        }
+
+        string += "</td><td style='align:right;bgcolor:#fff'></td></tr>";
+        string += "</table></div>";
+
+        return string;
+
+    }
+
+    function toHtml(quantityMap, measurementType) {
         var string = "";
         var first = true;
-        for (var quantityListIndex = 0;
-             quantityListIndex < quantityMap.length;
-             quantityListIndex++) {
+        for (var quantityListIndex = 0; quantityListIndex < quantityMap.length; quantityListIndex++) {
 
             var quantity = quantityMap[quantityListIndex];
             var type = quantity.type;
@@ -416,14 +506,13 @@ var grobid = (function ($) {
             var unit = quantity.rawUnit;
 
             var normalizedQuantity = quantity.normalizedQuantity;
+            var normalizedUnit = quantity.normalizedUnit;
 
             var rawUnitName = null;
-            var unitName = null;
             var startUnit = -1;
             var endUnit = -1;
             if (unit) {
-                rawUnitName = unit.rawName;
-                unitName = unit.name;
+                rawUnitName = unit.name;
                 startUnit = parseInt(unit.offsetStart, 10);
                 endUnit = parseInt(unit.offsetEnd, 10);
             }
@@ -450,23 +539,20 @@ var grobid = (function ($) {
             }
 
             if (normalizedQuantity) {
-                string += "<p>normalized value: <b>" + normalizedQuantity.normalizedValue + "</b></p>";
-                string += "<p>normalized unit name: <b>" + normalizedQuantity.normalizedUnit.rawName + "</b></p>";
+                string += "<p>normalized value: <b>" + normalizedQuantity + "</b></p>";
+            }
+
+            if (normalizedUnit) {
+                string += "<p>normalized unit name: <b>" + normalizedUnit.name + "</b></p>";
             }
 
             string += "</td><td style='align:right;bgcolor:#fff'></td></tr>";
             string += "</table></div>";
         }
         string += "</div>";
-        $('#detailed_annot-0').html(string);
-        $('#detailed_annot-0').show();
-    }
 
-    /*$(document).ready(function() {
-     $(document).on('shown', '#xmlCode', function(event) {
-     prettyPrint();
-     });
-     });*/
+        return string;
+    }
 
     function processChange() {
         var selected = $('#selectedService option:selected').attr('value');

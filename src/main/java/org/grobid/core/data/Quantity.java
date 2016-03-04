@@ -43,7 +43,7 @@ public class Quantity {
         if (isNormalized()) {
             return getNormalizedQuantity().getType();
         } else {
-            if(rawUnit != null && getRawUnit().hasDefinition()) {
+            if (rawUnit != null && getRawUnit().hasDefinition()) {
                 return getRawUnit().getUnitDefinition().getType();
             }
         }
@@ -183,7 +183,7 @@ public class Quantity {
 
     // WARNING! a quantity can have a value without unit, and not being empty (e.g. counts) !!
     public boolean isEmpty() {
-        return rawUnit == null && (StringUtils.isEmpty(rawValue) || !isParseable()) && normalizedQuantity.isEmpty();
+        return rawUnit == null && (StringUtils.isEmpty(rawValue) || !isParseable()) && (isNormalized() && normalizedQuantity.isEmpty());
     }
 
     public boolean isNormalized() {
@@ -241,7 +241,8 @@ public class Quantity {
             } else {
                 json.append(", ");
             }
-            json.append("\"normalizedQuantity\" : " + normalizedQuantity.toJson());
+            json.append("\"normalizedQuantity\" : " + normalizedQuantity.getValue() + ",");
+            json.append("\"normalizedUnit\" : " + normalizedQuantity.getUnit().toJson());
         }
 
         if (hasOffset()) {

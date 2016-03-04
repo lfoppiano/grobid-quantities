@@ -199,14 +199,17 @@ public class QuantityParser extends AbstractParser {
     private Quantity calculateQuantityLeast(Quantity quantityBase, Quantity quantityRange) {
         if ((quantityBase == null) || (quantityRange == null))
             return null;
-        if ((!quantityBase.isNormalized()) || (!quantityRange.isNormalized()))
-            return null;
 
         Quantity quantityLeast = new Quantity();
         Double value = quantityBase.getParsedValue() - quantityRange.getParsedValue();
         quantityLeast.setParsedValue(value);
         quantityLeast.setRawValue(value.toString());
-        quantityLeast.setNormalizedQuantity(quantityBase.getNormalizedQuantity());
+        if ((quantityBase.isNormalized()) && (quantityRange.isNormalized())) {
+            Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
+            normalizedQuantity.setValue(quantityBase.getNormalizedQuantity().getValue() - quantityRange.getNormalizedQuantity().getValue());
+            normalizedQuantity.setUnit(quantityBase.getNormalizedQuantity().getUnit());
+            quantityLeast.setNormalizedQuantity(normalizedQuantity);
+        }
 //        quantityLeast.setRawValue(quantityBase.getRawValue());
         quantityLeast.setRawUnit(quantityBase.getRawUnit());
         quantityLeast.setOffsetStart(quantityBase.getOffsetStart());
@@ -223,7 +226,12 @@ public class QuantityParser extends AbstractParser {
         Quantity quantityMost = new Quantity();
         Double value = quantityBase.getParsedValue() + quantityRange.getParsedValue();
         quantityMost.setParsedValue(value);
-        quantityMost.setNormalizedQuantity(quantityBase.getNormalizedQuantity());
+        if ((quantityBase.isNormalized()) && (quantityRange.isNormalized())) {
+            Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
+            normalizedQuantity.setValue(quantityBase.getNormalizedQuantity().getValue() + quantityRange.getNormalizedQuantity().getValue());
+            normalizedQuantity.setUnit(quantityBase.getNormalizedQuantity().getUnit());
+            quantityMost.setNormalizedQuantity(normalizedQuantity);
+        }
         quantityMost.setRawValue(value.toString());
         quantityMost.setRawUnit(quantityRange.getRawUnit());
         quantityMost.setOffsetStart(quantityRange.getOffsetStart());

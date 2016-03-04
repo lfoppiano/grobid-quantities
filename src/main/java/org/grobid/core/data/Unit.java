@@ -98,7 +98,7 @@ public class Unit {
                 started = true;
             } else
                 json.append(", ");
-            json.append("\"rawName\" : \"" + outputRawName + "\"");
+            json.append("\"name\" : \"" + outputRawName + "\"");
         }
         if (getUnitDefinition() != null) {
             if (!started) {
