@@ -60,7 +60,17 @@ public class Unit {
             return -1;
     }
 
+    @Override
     public String toString() {
+        final StringBuilder sb = new StringBuilder("Unit{");
+        sb.append("rawName='").append(rawName).append('\'');
+        sb.append(", offsets=").append(offsets);
+        sb.append(", productBlock=").append(productBlock);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    /*    public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[ ");
         if (rawName != null) {
@@ -74,7 +84,7 @@ public class Unit {
 
         builder.append(" ]");
         return builder.toString();
-    }
+    }*/
 
     public String toJson() {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
@@ -142,6 +152,10 @@ public class Unit {
         this.productBlock = productForm;
     }
 
+    public boolean hasDefinition() {
+        return unitDefinition != null;
+    }
+
 
     public class UnitBlock {
         private String prefix = "";
@@ -186,7 +200,7 @@ public class Unit {
 
 
         public String toString() {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder("UnitBlock{");
 
             sb.append("[");
             sb.append(getPrefix());
@@ -197,7 +211,8 @@ public class Unit {
             } else {
                 sb.append(getPow());
             }
-            sb.append("]");
+            sb.append("]")
+                    .append("}");
 
             return sb.toString();
         }

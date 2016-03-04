@@ -2,7 +2,9 @@ package org.grobid.core.data.normalization;
 
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.engines.FullTextParser;
+import org.grobid.core.utilities.MeasurementUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tec.units.ri.internal.format.l10n.NumberFormat;
@@ -27,32 +29,41 @@ public class NormalizationWrapper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NormalizationWrapper.class);
     private final UnitFormat format;
+    private MeasurementUtilities measurementUtilities;
 
     public NormalizationWrapper() {
         UnitFormatService formatService = Bootstrap.getService(UnitFormatService.class);
         format = formatService.getUnitFormat();
+        measurementUtilities = new MeasurementUtilities();
     }
 
-
-    public Quantity normalizeQuantityToBaseUnits(Quantity quantity) throws NormalizationException {
+    public Quantity.Normalized normalizeQuantityToBaseUnits(Quantity quantity) throws NormalizationException {
         if (quantity.isEmpty() || quantity.getRawUnit() == null || isEmpty(quantity.getRawUnit().getRawName())) {
-            return quantity;    //or throw new NormalizationException() :-)
+            return null;    //or throw new NormalizationException() :-)
         }
-        javax.measure.Unit parsedUnit = parseUnit(quantity.getRawUnit().getRawName());
+        javax.measure.Unit parsedUnit = parseUnit(quantity.getRawUnit());
 
         return normalizeQuantityToBaseUnits(quantity, parsedUnit);
     }
 
+    protected javax.measure.Unit parseUnit(String rawString) throws NormalizationException {
+        return parseUnit(new Unit(rawString));
+    }
 
-    protected javax.measure.Unit parseUnit(String rawUnit) throws NormalizationException {
+    protected javax.measure.Unit parseUnit(Unit rawUnit) throws NormalizationException {
         javax.measure.Unit parsedUnit = null;
+        UnitDefinition definition = measurementUtilities.lookup(rawUnit);
 
         try {
-            parsedUnit = format.parse(rawUnit);
+            parsedUnit = format.parse(rawUnit.getRawName());
         } catch (ParserException pe) {
-            throw new NormalizationException("The unit " + rawUnit + " cannot be normalized. It is either not a valid unit " +
-                    "or it is not recognized from the available parsers.", pe);
+
+            if (definition == null) {
+                throw new NormalizationException("The unit " + rawUnit + " cannot be normalized. It is either not a valid unit " +
+                        "or it is not recognized from the available parsers.", pe);
+            }
         }
+        rawUnit.setUnitDefinition(definition);
 
         /**
          * workaround to avoid passing througt with a null parsedUnit - in unit-ri version 0.9 the parse() method is
@@ -66,50 +77,58 @@ public class NormalizationWrapper {
         return parsedUnit;
     }
 
-    protected Quantity normalizeQuantityToBaseUnits(Quantity quantity, javax.measure.Unit unit) throws NormalizationException {
+    protected Quantity.Normalized normalizeQuantityToBaseUnits(Quantity quantity, javax.measure.Unit unit) throws NormalizationException {
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
-        Unit normalizedUnit = new Unit();
-        normalizedUnit.setOffsetStart(quantity.getRawUnit().getOffsetStart());
-        normalizedUnit.setOffsetEnd(quantity.getRawUnit().getOffsetEnd());
+        Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         if (unit instanceof TransformedUnit) {
 
             TransformedUnit transformedUnit = (TransformedUnit) unit;
-            normalizedUnit.setRawName(transformedUnit.getParentUnit().toString());
-            quantity.setNormalizedUnit(normalizedUnit);
+            normalizedQuantity.setUnit(new Unit(transformedUnit.getParentUnit().toString()));
             try {
-                quantity.setNormalizedValue(transformedUnit.getConverter().convert(Double.parseDouble(quantity.getRawValue())));
+                normalizedQuantity.setValue(transformedUnit.getConverter().convert(Double.parseDouble(quantity.getRawValue())));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
             }
+            quantity.setNormalizedQuantity(normalizedQuantity);
             wrappedUnitProducts.put(transformedUnit.getSymbol(), 1);
 
         } else if (unit instanceof ProductUnit) {
 
             ProductUnit productUnit = (ProductUnit) unit;
-            Map<String, Integer> products = extractProduct(productUnit);
-            normalizedUnit.setRawName(productUnit.toSystemUnit().toString());
-            quantity.setNormalizedUnit(normalizedUnit);
+            //Map<String, Integer> products = extractProduct(productUnit);
+            normalizedQuantity.setUnit(new Unit(productUnit.toSystemUnit().toString()));
+
+
+            quantity.setNormalizedQuantity(normalizedQuantity);
             try {
-                quantity.setNormalizedValue(productUnit.getSystemConverter().convert(Double.parseDouble(quantity.getRawValue())));
+                normalizedQuantity.setValue(productUnit.getSystemConverter().convert(Double.parseDouble(quantity.getRawValue())));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.");
             }
 
         } else {
-            normalizedUnit.setRawName(unit.getSymbol());
-            quantity.setNormalizedUnit(normalizedUnit);
+            normalizedQuantity.setRawValue(unit.getSymbol());
+            normalizedQuantity.setUnit(new Unit(unit.getSymbol()));
             try {
-                quantity.setNormalizedValue(Double.parseDouble(quantity.getRawValue()));
+                normalizedQuantity.setValue(Double.parseDouble(quantity.getRawValue()));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.");
             }
+            quantity.setNormalizedQuantity(normalizedQuantity);
         }
 
-        return quantity;
+        if (quantity.isNormalized()) {
+            UnitDefinition definition = measurementUtilities.lookup(quantity.getNormalizedQuantity().getUnit());
+            if (definition != null) {
+                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
+            }
+        }
+
+        return normalizedQuantity;
     }
 
     protected Map<String, Integer> extractProduct(ProductUnit productUnit) {
@@ -128,7 +147,6 @@ public class NormalizationWrapper {
     }
 
     public String[] parseRawString(String rawString) {
-
         /**
          * I'm not fond of this:
          *  - parsedString[0] -> rawValue

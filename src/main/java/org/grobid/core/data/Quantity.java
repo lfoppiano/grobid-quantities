@@ -14,18 +14,17 @@ import org.codehaus.jackson.io.JsonStringEncoder;
 /**
  * Class for managing a quantity representation.
  * A quantity is a basically a value associated to a type (type of the measurement) and a unit.
+ * All known quantities can be normalized to the base normalization measure system.
  * Quantities are combined to form a measurement.
  *
  * @author Patrice Lopez
  */
 public class Quantity {
-    private UnitUtilities.Unit_Type type;
-
     private Unit rawUnit = null;
     private String rawValue = null;
+    private Double parsedValue = null;
 
-    private Unit normalizedUnit = null;         // which gives also the system of the unit (SI, imperial, etc.)
-    private Double normalizedValue = null;      // null = not normalized
+    private Quantity.Normalized normalizedQuantity = null;
 
     // as a condition, when the normalized unit is instantiated, its type must be the same as the type of the quantity
     // offset for the value only, the offsets for the unit expression are available in the raw Unit object
@@ -40,18 +39,16 @@ public class Quantity {
         this.rawUnit = rawUnit;
     }
 
-    public Quantity(String rawValue, Unit rawUnit, UnitUtilities.Unit_Type type) {
-        this.rawValue = rawValue;
-        this.rawUnit = rawUnit;
-        this.type = type;
-    }
-
     public UnitUtilities.Unit_Type getType() {
-        return type;
-    }
+        if (isNormalized()) {
+            return getNormalizedQuantity().getType();
+        } else {
+            if(rawUnit != null && getRawUnit().hasDefinition()) {
+                return getRawUnit().getUnitDefinition().getType();
+            }
+        }
 
-    public void setType(UnitUtilities.Unit_Type type) {
-        this.type = type;
+        return null;
     }
 
     public Unit getRawUnit() {
@@ -62,12 +59,12 @@ public class Quantity {
         this.rawUnit = raw;
     }
 
-    public Unit getNormalizedUnit() {
-        return normalizedUnit;
+    public Quantity.Normalized getNormalizedQuantity() {
+        return normalizedQuantity;
     }
 
-    public void setNormalizedUnit(Unit normalized) {
-        this.normalizedUnit = normalized;
+    public void setNormalizedQuantity(Quantity.Normalized normalized) {
+        this.normalizedQuantity = normalized;
     }
 
     public String getRawValue() {
@@ -78,38 +75,74 @@ public class Quantity {
         this.rawValue = raw;
     }
 
-    public double getNormalizedValue() {
-        return normalizedValue;
+    /**
+     * Set the value of the quantity and the parsedVavlue.
+     * TODO: I don't know whether is better to manage the failure should be managed by who is setting the value or just ignored.
+     *
+     * @param raw
+     * @throws NumberFormatException
+     */
+    public void setValue(String raw) {
+        this.rawValue = raw;
+        try {
+            this.parsedValue = Double.parseDouble(raw);
+        } catch (NumberFormatException nfe) {
+
+        }
     }
 
-    public void setNormalizedValue(double normalized) {
-        this.normalizedValue = normalized;
+    public double getParsedValue() {
+        return parsedValue;
+    }
+
+    public void setParsedValue(double parsedValue) {
+        this.parsedValue = parsedValue;
     }
 
     public void setOffsetStart(int start) {
-        if (offsets == null)
+        if (!hasOffset()) {
             offsets = new OffsetPosition();
+        }
         offsets.start = start;
     }
 
     public int getOffsetStart() {
-        if (offsets != null)
+        if (hasOffset()) {
             return offsets.start;
-        else return -1;
+        } else {
+            return -1;
+        }
     }
 
     public void setOffsetEnd(int end) {
-        if (offsets == null)
+        if (!hasOffset()) {
             offsets = new OffsetPosition();
+        }
         offsets.end = end;
     }
 
     public int getOffsetEnd() {
-        if (offsets != null)
+        if (hasOffset()) {
             return offsets.end;
-        else return -1;
+        } else {
+            return -1;
+        }
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Quantity{");
+        sb.append("type=").append(getType());
+        sb.append(", rawUnit=").append(rawUnit);
+        sb.append(", rawValue='").append(rawValue).append('\'');
+        sb.append(", parsedValue=").append(parsedValue);
+        sb.append(", normalizedQuantity=").append(normalizedQuantity);
+        sb.append(", offsets=").append(offsets);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    /*
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[ ");
@@ -123,28 +156,38 @@ public class Quantity {
         if (rawUnit != null)
             builder.append(rawUnit.toString()).append("\t");
 
-        if (isNormalized()) {
-            builder.append(normalizedValue).append("\t");
-
-            if (normalizedUnit != null) {
-                builder.append(normalizedUnit).append("\t");
-            }
+        if (isParseable()) {
+            builder.append(parsedValue).append("\t");
         }
 
-        if (offsets != null)
+        if (isNormalized()) {
+            builder.append(normalizedQuantity).append("\t");
+        }
+
+        if (hasOffset()) {
             builder.append(offsets.toString());
+        }
 
         builder.append(" ]");
         return builder.toString();
     }
+    */
+
+    private boolean hasOffset() {
+        return offsets != null;
+    }
+
+    private boolean isParseable() {
+        return parsedValue != null;
+    }
 
     // WARNING! a quantity can have a value without unit, and not being empty (e.g. counts) !!
     public boolean isEmpty() {
-        return (rawUnit == null) && StringUtils.isEmpty(rawValue);
+        return rawUnit == null && (StringUtils.isEmpty(rawValue) || !isParseable()) && normalizedQuantity.isEmpty();
     }
 
     public boolean isNormalized() {
-        return normalizedValue != null;
+        return normalizedQuantity != null;
     }
 
     public String toJson() {
@@ -153,8 +196,8 @@ public class Quantity {
         boolean started = false;
         json.append("{ ");
 
-        if (type != null) {
-            byte[] encodedName = encoder.quoteAsUTF8(type.getName());
+        if (getType() != null) {
+            byte[] encodedName = encoder.quoteAsUTF8(getType().getName());
             String outputName = new String(encodedName);
             json.append("\"type\" : \"" + outputName + "\"");
             started = true;
@@ -163,8 +206,9 @@ public class Quantity {
         if (rawValue != null) {
             if (!started) {
                 started = true;
-            } else
+            } else {
                 json.append(", ");
+            }
             byte[] encodedRawValue = encoder.quoteAsUTF8(rawValue);
             String outputRawValue = new String(encodedRawValue);
             if (!started) {
@@ -173,6 +217,7 @@ public class Quantity {
             }
             json.append("\"rawValue\" : \"" + outputRawValue + "\"");
         }
+
         if (rawUnit != null) {
             if (!started) {
                 started = true;
@@ -180,16 +225,26 @@ public class Quantity {
                 json.append(", ");
             json.append("\"rawUnit\" : " + rawUnit.toJson());
         }
-        if (normalizedUnit != null) {
+
+        if (isParseable()) {
             if (!started) {
                 started = true;
-            } else
+            } else {
                 json.append(", ");
-            json.append("\"normalizedValue\" : " + normalizedValue).append(", ")
-                    .append("\"normalizedUnit\" : " + normalizedUnit.toJson());
+            }
+            json.append("\"parsedValue\" : " + parsedValue);
         }
 
-        if (offsets != null) {
+        if (isNormalized()) {
+            if (!started) {
+                started = true;
+            } else {
+                json.append(", ");
+            }
+            json.append("\"normalizedQuantity\" : " + normalizedQuantity.toJson());
+        }
+
+        if (hasOffset()) {
             if (getOffsetStart() != -1) {
                 if (!started) {
                     started = true;
@@ -212,4 +267,90 @@ public class Quantity {
         return json.toString();
     }
 
+    public class Normalized {
+        private String rawValue = null;
+        private Double value = null;
+        private Unit unit = null;
+
+        private UnitUtilities.Unit_Type type;
+
+        public String getRawValue() {
+            return rawValue;
+        }
+
+        public void setRawValue(String rawValue) {
+            this.rawValue = rawValue;
+        }
+
+        public Double getValue() {
+            return value;
+        }
+
+        public void setValue(Double value) {
+            this.value = value;
+        }
+
+        public Unit getUnit() {
+            return unit;
+        }
+
+        public void setUnit(Unit unit) {
+            this.unit = unit;
+        }
+
+        //A normalized quantity without either a value or an unit, is not valid, therefore empty.
+        public boolean isEmpty() {
+            return unit == null || value == null;
+        }
+
+        public String toJson() {
+            JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+            StringBuilder json = new StringBuilder();
+            boolean started = false;
+            json.append("{ ");
+
+            if (unit != null) {
+                if (!started) {
+                    started = true;
+                } else {
+                    json.append(", ");
+                }
+                json.append("\"normalizedUnit\":" + unit.toJson());
+            }
+
+            if (value != null) {
+                if (!started) {
+                    started = true;
+                } else {
+                    json.append(", ");
+                }
+                json.append("\"normalizedValue\":" + value.toString());
+            }
+
+            json.append("}");
+            return json.toString();
+
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("Normalized{");
+            sb.append("rawValue='").append(rawValue).append('\'');
+            sb.append(", value=").append(value);
+            sb.append(", unit=").append(unit);
+            sb.append('}');
+            return sb.toString();
+        }
+
+        public UnitUtilities.Unit_Type getType() {
+            if (hasUnitDefinition()) {
+                return getUnit().getUnitDefinition().getType();
+            }
+            return null;
+        }
+
+        private boolean hasUnitDefinition() {
+            return getUnit() != null && getUnit().hasDefinition();
+        }
+    }
 }

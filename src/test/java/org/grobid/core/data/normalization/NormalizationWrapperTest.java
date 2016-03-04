@@ -2,6 +2,7 @@ package org.grobid.core.data.normalization;
 
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.Test;
@@ -98,85 +99,79 @@ public class NormalizationWrapperTest {
     @Test
     public void testNormalizeQuantity_simpleUnitWithoutNormalization_meters() throws Exception {
         Quantity input = new Quantity();
-        input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawValue("2");
+        input.setValue("2");
         Unit raw = new Unit();
         raw.setRawName("m");
         input.setRawUnit(raw);
 
-        Quantity output = target.normalizeQuantityToBaseUnits(input);
-        assertThat(output.getNormalizedUnit().getRawName(), is("m"));
-        assertThat(output.getNormalizedValue(), is(2.0));
+        Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
+        assertThat(output.getUnit().getRawName(), is("m"));
+        assertThat(output.getValue(), is(2.0));
     }
 
     @Test
     public void testNormalizeQuantity_simpleUnitWithNormalization_kmToMeters() throws Exception {
         Quantity input = new Quantity();
-        input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawValue("2");
+        input.setValue("2");
         Unit raw = new Unit();
         raw.setRawName("km");
         input.setRawUnit(raw);
 
-        Quantity output = target.normalizeQuantityToBaseUnits(input);
-        assertThat(output.getNormalizedUnit().getRawName(), is("m"));
-        assertThat(output.getNormalizedValue(), is(2000.0));
+        Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
+        assertThat(output.getUnit().getRawName(), is("m"));
+        assertThat(output.getValue(), is(2000.0));
     }
 
     @Test
     public void testNormalizeQuantity_simpleUnitWithNormalization_CelsiusToKelvin() throws Exception {
         Quantity input = new Quantity();
-        input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawValue("10");
+        input.setValue("10");
         Unit raw = new Unit();
         raw.setRawName("°C");
         input.setRawUnit(raw);
 
-        Quantity output = target.normalizeQuantityToBaseUnits(input);
-        assertThat(output.getNormalizedUnit().getRawName(), is("K"));
-        assertThat(output.getNormalizedValue(), is(283.15));
+        Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
+        assertThat(output.getUnit().getRawName(), is("K"));
+        assertThat(output.getValue(), is(283.15));
     }
 
     @Test
     public void testNormalizeQuantity_kmHourToMetersSecond() throws Exception {
         Quantity input = new Quantity();
-        input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawValue("2");
+        input.setValue("2");
         Unit raw = new Unit();
         raw.setRawName("km/h");
         input.setRawUnit(raw);
 
-        Quantity output = target.normalizeQuantityToBaseUnits(input);
-        assertThat(output.getNormalizedValue(), is(0.5555555555555556));
-        assertThat(output.getNormalizedUnit().getRawName(), is("m/s"));
+        Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
+        assertThat(output.getUnit().getRawName(), is("m/s"));
+        assertThat(output.getValue(), is(0.5555555555555556));
     }
 
     @Test
     public void testNormalizeQuantity2_kmHourToMetersSecond() throws Exception {
         Quantity input = new Quantity();
-        input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawValue("2000");
+        input.setValue("2000");
         Unit raw = new Unit();
         raw.setRawName("km*g/h");
         input.setRawUnit(raw);
 
-        Quantity output = target.normalizeQuantityToBaseUnits(input);
-        assertThat(output.getNormalizedValue(), is(0.5555555555555556));
-        assertThat(output.getNormalizedUnit().getRawName(), is("m·kg/s"));
+        Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
+        assertThat(output.getValue(), is(0.5555555555555556));
+        assertThat(output.getUnit().getRawName(), is("m·kg/s"));
     }
 
     @Test
     public void testNormalizeQuantity3_kmHourToMetersSecond() throws Exception {
         Quantity input = new Quantity();
-        input.setType(UnitUtilities.Unit_Type.LENGTH);
-        input.setRawValue("2000");
+        input.setValue("2000");
         Unit raw = new Unit();
         raw.setRawName("km*kg/h");
         input.setRawUnit(raw);
 
-        Quantity output = target.normalizeQuantityToBaseUnits(input);
-        assertThat(output.getNormalizedValue(), is(555.5555555555555));
-        assertThat(output.getNormalizedUnit().getRawName(), is("m·kg/s"));
+        Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
+        assertThat(output.getValue(), is(555.5555555555555));
+        assertThat(output.getUnit().getRawName(), is("m·kg/s"));
     }
 
     @Test

@@ -25,6 +25,46 @@ public class TestQuantityParser {
 
     @Ignore
     @Test
+    public void testNotNormalizedQuantity() throws Exception {
+        QuantityParser parser = QuantityParser.getInstance();
+
+        List<Measurement> measurements = parser.extractQuantities("10 meters");
+
+
+        if (measurements != null) {
+            System.out.println("\n");
+            for (Measurement measurement : measurements) {
+                System.out.println(measurement.toString());
+                System.out.println(measurement.toJson());
+            }
+        } else {
+            System.out.println("No measurement found.");
+        }
+
+    }
+
+    @Ignore
+    @Test
+    public void testNormalizeableQuantity() throws Exception {
+        QuantityParser parser = QuantityParser.getInstance();
+
+        List<Measurement> measurements = parser.extractQuantities("10 km");
+
+
+        if (measurements != null) {
+            System.out.println("\n");
+            for (Measurement measurement : measurements) {
+                System.out.println(measurement.toString());
+                System.out.println(measurement.toJson());
+            }
+        } else {
+            System.out.println("No measurement found.");
+        }
+
+    }
+
+    @Ignore
+    @Test
     public void testQuantityParser1() throws Exception {
 
         String text = IOUtils.toString(
