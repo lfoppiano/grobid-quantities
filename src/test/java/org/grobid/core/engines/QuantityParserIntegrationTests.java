@@ -1,29 +1,25 @@
 package org.grobid.core.engines;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.grobid.core.data.Measurement;
-import org.grobid.core.data.Quantity;
-import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.List;
 
 /**
- * @author Patrice Lopez
+ * Created by lfoppiano on 04.03.16.
  */
-public class TestQuantityParser {
+@Ignore
+public class QuantityParserIntegrationTests {
 
     @BeforeClass
     public static void init() {
         LibraryLoader.load();
     }
 
-    @Ignore
     @Test
     public void testNotNormalizedQuantity() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
@@ -43,7 +39,6 @@ public class TestQuantityParser {
 
     }
 
-    @Ignore
     @Test
     public void testNormalizeableQuantity() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
@@ -63,7 +58,6 @@ public class TestQuantityParser {
 
     }
 
-    @Ignore
     @Test
     public void testQuantityParser1() throws Exception {
 
@@ -84,7 +78,6 @@ public class TestQuantityParser {
         }
     }
 
-    @Ignore
     @Test
     public void testQuantityParser2() throws Exception {
 
@@ -124,11 +117,11 @@ public class TestQuantityParser {
         }
     }
 
-    @Ignore
     @Test
     public void testCreateTrainingDataFromText() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
         parser.createTraining("./src/test/resources/test1.txt",
                 "./src/test/resources/test1.training.tei.xml", 0);
     }
+
 }

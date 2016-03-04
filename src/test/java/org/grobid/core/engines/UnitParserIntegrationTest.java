@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * Created by lfoppiano on 22.02.16.
  */
 @Ignore("Only for manual checks since it depends on the model")
-public class UnitParserTest {
+public class UnitParserIntegrationTest {
 
     UnitParser target;
 

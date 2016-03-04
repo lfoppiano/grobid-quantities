@@ -13,7 +13,8 @@ import java.util.List;
 /**
  * Created by lfoppiano on 18.02.16.
  */
-public class MeasurementUtilitiesTest {
+@Ignore
+public class MeasurementUtilitiesIntegrationTest {
 
     private MeasurementUtilities target;
 
