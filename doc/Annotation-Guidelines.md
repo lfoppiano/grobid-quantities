@@ -75,6 +75,14 @@ Lists introduce a serie of values. The unit can be expressed per value or for se
  <measure type="list"><measure type="ENERGY" unit="cm^-1">cm-1</measure>: <num>3440</num>(br), <num>1662</num>, <num>1632</num>, <num>1575</num>, <num>1536</num>, <num>1498</num>, <num>1411</num>, <num>1370</num>, <num>1212</num>, <num>1006</num>, <num>826</num>, <num>751</num></measure> 
 ```
 
+### Special cases
+
++ Room temperature (Raumtemperatur, température ambiante, ...) is used very frequently in chemistry and related fields. It is 21 °C, although not really formally defined.
+
+```
+<measure type="value"><measure type="TEMPERATURE">Raumtemperatur</measure></measure>
+```
+
 ### Quantified substance
 
 The quantified substance is the substanced for which the measurement is expressed.  
