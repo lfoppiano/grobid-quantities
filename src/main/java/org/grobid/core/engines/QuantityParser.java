@@ -892,7 +892,7 @@ public class QuantityParser extends AbstractParser {
                 Element numNodeL = teiElement("num");
 
                 if (quantityLeast.getRawValue() != null)
-                    numNodeL.addAttribute(new Attribute("atMost", quantityLeast.getRawValue().trim()));
+                    numNodeL.addAttribute(new Attribute("atLeast", quantityLeast.getRawValue().trim()));
                 else
                     numNodeL.addAttribute(new Attribute("atLeast", "?"));
                 numNodeL.appendChild(text.substring(startQL, endQL));

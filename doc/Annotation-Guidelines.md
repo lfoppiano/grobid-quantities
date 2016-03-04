@@ -55,6 +55,12 @@ An interval introduces a range of values. We can distinguish two kinds of interv
 team races that can last from <measure type="interval"><num atLeast="4">4</num> to more than <num atMost="12">12</num> <measure type="TIME" unit="hour">h</measure></measure>
 ```
 
+Note that an interval can be introduced by only one boundary value: 
+
+```
+A rotor shaft according to any one of the preceding claims having a diameter of at least <measure type="interval"><num atLeast="1">1</num><measure type="LENGTH" unit="m">m</measure></measure> 
+```
+
 + Interval defined by a base value and a differential value. In the following example, after two "counts", four measurements express intervals following this form. Similarly as in the previous interval case, an attribute in element ```<num>```, here @type, characterizes the base value and the differential/range value. 
 
 ```
