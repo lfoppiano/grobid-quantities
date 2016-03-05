@@ -26,8 +26,9 @@ public class QuantityTrainer extends AbstractTrainer {
 
     public QuantityTrainer() {
         super(GrobidModels.QUANTITIES);
-        epsilon = 0.00001;
-        window = 20;
+		// adjusting CRF training parameters for this model
+		epsilon = 0.000001;
+		window = 20;
 
         quantityLexicon = QuantityLexicon.getInstance();
     }
