@@ -63,10 +63,22 @@ A rotor shaft according to any one of the preceding claims having a diameter of 
 
 + Interval defined by a base value and a differential value. In the following example, after two "counts", four measurements express intervals following this form. Similarly as in the previous interval case, an attribute in element ```<num>```, here @type, characterizes the base value and the differential/range value. 
 
+In the following example, after two "counts", four measurements express intervals following this form.  
 ```
-<measure type="value"><num>4</num></measure> women and <measure type="value"><num>15</num></measure> men, <measure type="interval"><num type="base">30</num> ± <num type="range">10</num> <measure type="TIME" unit="year">years</measure></measure>, <measure type="interval"><num type="base">176</num> ± <num type="range">7</num> <measure type="LENGTH" unit="cm">cm</measure></measure>, <measure type="interval"><num type="base">70</num> ± <num type="range">9</num> <measure type="MASS" unit="kg">kg</measure></measure>, <measure type="interval"><num type="base">15</num> ± <num type="range">5</num> <measure type="FRACTION" unit="percentage">%</measure></measure> of fat mass
+<measure type="value"><num>4</num></measure> women and <measure type="value"><num>15</num></measure> men,
+```
+Similarly as in the previous interval case, an attribute in element ```<num>```, here @type, characterizes the base value and the differential/range value.
+```
+<measure type="interval"><num type="base">30</num> ± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>, 
+<measure type="interval"><num type="base">176</num> ± <num type="range">7</num><measure type="LENGTH" unit="cm">cm</measure></measure>, 
+<measure type="interval"><num type="base">70</num> ± <num type="range">9</num> <measure type="MASS" unit="kg">kg</measure></measure>, 
+<measure type="interval"><num type="base">15</num> ± <num type="range">5</num> <measure type="FRACTION" unit="percentage">%</measure></measure> of fat mass
 ```
 
+If the quantity is expressed only in term of range (without base) it can be implicitly assumed that the base=0, see example ± 10 years
+```
+<measure type="interval">± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>
+```
 ### Lists
 
 Lists introduce a serie of values. The unit can be expressed per value or for several values at the same time. A ```<measure>``` element encloses the whole list of values including their units: 

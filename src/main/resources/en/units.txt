@@ -86,3 +86,4 @@ rad	RADIAN	SI	radian,radians
 '	ANGLE	NON_SI	arcmin,arcminute,am,MOA
 "	ANGLE	NON_SI	arcsec,asec,as
 sr	STERADIAN	SI	steradian,square radian
+au	ASTRONOMICAL_UNIT	SI	astronomical unit, astronomical system of units
