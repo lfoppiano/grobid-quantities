@@ -89,7 +89,7 @@ Lists introduce a serie of values. The unit can be expressed per value or for se
 
 ### Special cases
 
-+ Room temperature (Raumtemperatur, température ambiante, ...) is used very frequently in chemistry and related fields. It is 21 °C, although not really formally defined.
++ Room temperature (Raumtemperatur, température ambiante, ...) is used very frequently in chemistry and related fields. It can be considered as 20 °C (293 Kelvin), although not defined in a standard manner (https://de.wikipedia.org/wiki/Raumtemperatur).
 
 ```
 <measure type="value"><measure type="TEMPERATURE">Raumtemperatur</measure></measure>
