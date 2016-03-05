@@ -81,9 +81,9 @@ Pl	DYNAMIC_VISCOSITY	SI_DERIVED	poiseuille
 Pa.s	DYNAMIC_VISCOSITY	SI_DERIVED	pascal-second
 P	DYNAMIC_VISCOSITY	NON_SI	poise
 ml/kg/min	VO2_MAX	NON_SI	millilitres per kilogramme of body weight per minute
-rad	RADIAN	SI	radian,radians
-°	ANGLE	NON_SI	angle,degree,degrees, deg
-'	ANGLE	NON_SI	arcmin,arcminute,am,MOA
-"	ANGLE	NON_SI	arcsec,asec,as
-sr	STERADIAN	SI	steradian,square radian
-au	ASTRONOMICAL_UNIT	SI	astronomical unit, astronomical system of units
+rad	RADIAN	SI	radian
+°,deg	ANGLE	NON_SI	degree
+',am	ANGLE	NON_SI	arcmin,arcminute,MOA,minute of arc,minute arc
+",as	ANGLE	NON_SI	arcsec,asec
+sr	SOLID_ANGLE	SI	steradian,square radian
+AU,au	LENGTH	NON_SI	astronomical unit
