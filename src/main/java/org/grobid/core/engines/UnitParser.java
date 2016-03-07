@@ -138,6 +138,9 @@ public class UnitParser extends AbstractParser {
                         if (!TaggingLabel.UNIT_VALUE_PREFIX.equals(previousTag)) {
                             units.add(unitBlock);
                             unitBlock = new Unit().new UnitBlock();
+                            if (denominator) {
+                                unitBlock.setPow("-1");
+                            }
                         }
                     }
                     unitBlock.setBase(clusterContent);
@@ -154,6 +157,8 @@ public class UnitParser extends AbstractParser {
                     } else if (clusterContent.endsWith("/")) {
                         denominator = true;
                         unitBlock.setPow(clusterContent.replace("/", ""));
+                    } else if (clusterContent.equals("*")) {
+                        //nothing to do
                     } else {
                         if (denominator == true) {
                             String pow = "-" + clusterContent;

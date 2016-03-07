@@ -104,7 +104,7 @@ public class UnitParserIntegrationTest {
     @Test
     public void testTagUnit6() throws Exception {
 
-        String input = "hZ/s";
+        String input = "Hz/s";
         List<Unit.UnitBlock> output = target.tagUnit(input);
         System.out.println(input + " -> " + output);
 
@@ -120,7 +120,7 @@ public class UnitParserIntegrationTest {
     @Test
     public void testTagUnit7() throws Exception {
 
-        String input = "hZs";
+        String input = "Hzs";
         List<Unit.UnitBlock> output = target.tagUnit(input);
         System.out.println(input + " -> " + output);
 

@@ -31,7 +31,7 @@ public class UnitTrainer extends AbstractTrainer {
 
     public UnitTrainer() {
         super(GrobidModels.UNITS);
-        epsilon = 0.000001;
+        epsilon = 0.0000001;
         window = 20;
 
         quantityLexicon = QuantityLexicon.getInstance();

@@ -15,6 +15,18 @@
         <base>Hz</base>
     </unit>
     <unit>
+        <prefix>k</prefix>
+        <base>Hz</base>
+    </unit>
+    <unit>
+        <prefix>M</prefix>
+        <base>Hz</base>
+    </unit>
+    <unit>
+        <prefix>m</prefix>
+        <base>Hz</base>
+    </unit>
+    <unit>
         <base>K</base>
     </unit>
     <unit>

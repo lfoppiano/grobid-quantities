@@ -1,11 +1,13 @@
 package org.grobid.trainer.sax;
 
+import org.apache.commons.io.IOUtils;
 import org.grobid.core.utilities.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -36,8 +38,6 @@ public class UnitAnnotationSaxHandlerTest {
         List<Pair<String, String>> labeled = target.getLabeledResult();
 
         assertThat(labeled.size(), is(28));
-
-
     }
 
     @Test
@@ -50,7 +50,22 @@ public class UnitAnnotationSaxHandlerTest {
         List<Pair<String, String>> labeled = target.getLabeledResult();
 
         assertThat(labeled.size(), is(15));
+    }
 
+    @Test
+    public void testParser_doubleBaseName() throws Exception {
+        String input= "<units><unit><base>Hz</base></unit></units>";
+        InputStream is = IOUtils.toInputStream(input);
 
+        SAXParser p = spf.newSAXParser();
+        p.parse(is, target);
+
+        List<Pair<String, String>> labeled = target.getLabeledResult();
+
+        assertThat(labeled.size(), is(3));
+        assertThat(labeled.get(0).getA(), is("H"));
+        assertThat(labeled.get(0).getB(), is("I-<base>"));
+        assertThat(labeled.get(1).getA(), is("z"));
+        assertThat(labeled.get(1).getB(), is("<base>"));
     }
 }
