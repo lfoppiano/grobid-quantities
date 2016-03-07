@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<units>
+    <unit>
+        <base>°</base>
+    </unit>
+    <unit>
+        <base>%</base>
+    </unit>
+    <unit>
+        <prefix>c</prefix>
+        <base>m</base>
+    </unit>
+    <unit>
+        <prefix>G</prefix>
+        <base>Hz</base>
+    </unit>
+    <unit>
+        <base>K</base>
+    </unit>
+    <unit>
+        <base>m</base>
+    </unit>
+    <unit>
+        <prefix>m</prefix>
+        <base>m</base>
+    </unit>
+    <unit>
+        <prefix>m</prefix>
+        <base>K</base>
+    </unit>
+    <unit>
+        <prefix>&#xB5;</prefix>
+        <base>m</base>
+    </unit>
+    <unit>
+        <prefix>&#xB5;</prefix>
+        <base>K</base>
+    </unit>
+</units>
