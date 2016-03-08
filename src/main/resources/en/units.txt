@@ -87,3 +87,5 @@ rad	RADIAN	SI	radian
 ",as	ANGLE	NON_SI	arcsec,asec
 sr	SOLID_ANGLE	SI	steradian,square radian
 AU,au	LENGTH	NON_SI	astronomical unit
+kg/m3	DENSITY	SI	kilogram per cubic metre
+g/cc	DENSITY	SI_DERIVED	gram per cubic centimetre

@@ -87,6 +87,12 @@ Lists introduce a serie of values. The unit can be expressed per value or for se
  <measure type="list"><measure type="ENERGY" unit="cm^-1">cm-1</measure>: <num>3440</num>(br), <num>1662</num>, <num>1632</num>, <num>1575</num>, <num>1536</num>, <num>1498</num>, <num>1411</num>, <num>1370</num>, <num>1212</num>, <num>1006</num>, <num>826</num>, <num>751</num></measure> 
 ```
 
+List can be disjunctive or conjunctive, we do not distinguish the two kinds of list at the present time:
+
+```
+batches of <measure type="list"><num>three</num> or <num>four</num></measure> observations
+```
+
 ### Special cases
 
 + Room temperature (Raumtemperatur, température ambiante, ...) is used very frequently in chemistry and related fields. It can be considered as 20 °C (293 Kelvin), although not defined in a standard manner (https://de.wikipedia.org/wiki/Raumtemperatur).
@@ -98,3 +104,13 @@ Lists introduce a serie of values. The unit can be expressed per value or for se
 ### Quantified substance
 
 The quantified substance is the substanced for which the measurement is expressed.  
+
+
+### Case not yet supported
+
+sigma estimation:
+
+```
+We selected the A 1 uncertainty so that its range would span from 0 au/d 2 to twice the nominal value at 3&#x3C3;.
+```
+
