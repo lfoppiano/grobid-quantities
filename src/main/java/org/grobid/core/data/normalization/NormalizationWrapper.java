@@ -2,22 +2,21 @@ package org.grobid.core.data.normalization;
 
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.data.UnitBlock;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.engines.FullTextParser;
+import org.grobid.core.engines.UnitParser;
 import org.grobid.core.utilities.MeasurementUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tec.units.ri.internal.format.l10n.NumberFormat;
-import tec.units.ri.unit.BaseUnit;
 import tec.units.ri.unit.ProductUnit;
 import tec.units.ri.unit.TransformedUnit;
 
-import javax.measure.Dimension;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.Bootstrap;
 import javax.measure.spi.UnitFormatService;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -28,12 +27,14 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class NormalizationWrapper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NormalizationWrapper.class);
-    private final UnitFormat format;
+    private final UnitFormat defaultFormatService;
     private MeasurementUtilities measurementUtilities;
+    private UnitParser unitParser;
 
     public NormalizationWrapper() {
         UnitFormatService formatService = Bootstrap.getService(UnitFormatService.class);
-        format = formatService.getUnitFormat();
+        unitParser = UnitParser.getInstance();
+        defaultFormatService = formatService.getUnitFormat();
         measurementUtilities = new MeasurementUtilities();
     }
 
@@ -41,38 +42,46 @@ public class NormalizationWrapper {
         if (quantity.isEmpty() || quantity.getRawUnit() == null || isEmpty(quantity.getRawUnit().getRawName())) {
             return null;    //or throw new NormalizationException() :-)
         }
+        quantity.setRawUnit(findDefinition(quantity.getRawUnit()));
         javax.measure.Unit parsedUnit = parseUnit(quantity.getRawUnit());
 
         return normalizeQuantityToBaseUnits(quantity, parsedUnit);
+    }
+
+    public Unit findDefinition(Unit unit) {
+        UnitDefinition definition = measurementUtilities.lookup(unit);
+
+        if (definition != null) {
+            unit.setUnitDefinition(definition);
+        }
+        return unit;
     }
 
     protected javax.measure.Unit parseUnit(String rawString) throws NormalizationException {
         return parseUnit(new Unit(rawString));
     }
 
+    /**
+     * Method to parse and recognize the unit.
+     * <p>
+     * TODO: integrate additional parsers in case the default parser is not able to successfully recognize the unit.
+     */
     protected javax.measure.Unit parseUnit(Unit rawUnit) throws NormalizationException {
+        List<UnitBlock> unitBlockList = unitParser.tagUnit(rawUnit.getRawName());
+
+        String stringUnitProduct = UnitBlock.unitBlocksToString(unitBlockList);
         javax.measure.Unit parsedUnit = null;
-        UnitDefinition definition = measurementUtilities.lookup(rawUnit);
 
         try {
-            parsedUnit = format.parse(rawUnit.getRawName());
+            parsedUnit = defaultFormatService.parse(stringUnitProduct);
         } catch (ParserException pe) {
-
-            if (definition == null) {
-                throw new NormalizationException("The unit " + rawUnit + " cannot be normalized. It is either not a valid unit " +
-                        "or it is not recognized from the available parsers.", pe);
-            }
+            parsedUnit = defaultFormatService.parse(rawUnit.getRawName());
         }
-        rawUnit.setUnitDefinition(definition);
 
-        /**
-         * workaround to avoid passing througt with a null parsedUnit - in unit-ri version 0.9 the parse() method is
-         *  (more correctly, IMHO) throwing a ParserException (see above)
-         */
-        if (parsedUnit == null) {
+/*        if (parsedUnit == null) {
             throw new NormalizationException("The unit " + rawUnit + " cannot be normalized. It is either not a valid unit " +
                     "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
-        }
+        }*/
 
         return parsedUnit;
     }
@@ -139,64 +148,10 @@ public class NormalizationWrapper {
             if (productFactor.getKey().getSymbol() != null) {
                 wrappedUnitProducts.put(productFactor.getKey().getSymbol(), productFactor.getValue());
             } else {
-                String unitName = this.format.format(productFactor.getKey());
+                String unitName = this.defaultFormatService.format(productFactor.getKey());
                 wrappedUnitProducts.put(unitName, productFactor.getValue());
             }
         }
         return wrappedUnitProducts;
-    }
-
-    public String[] parseRawString(String rawString) {
-        /**
-         * I'm not fond of this:
-         *  - parsedString[0] -> rawValue
-         *  - parsedString[1] -> rawUnit
-         */
-
-        String[] parsedString = new String[2];
-
-        // Attempt 1: is just a number
-        try {
-            parsedString[0] = "" + Double.parseDouble(rawString);
-            return parsedString;
-        } catch (NumberFormatException nfe) {
-            LOGGER.warn("Ignoring NumberFormatException.");
-        }
-
-        // Attempt 2: try to parse as a unit
-
-        try {
-            Unit parsed = (Unit) parseUnit(rawString);
-        } catch (NormalizationException e) {
-            LOGGER.warn("Ignoring NormalizationException.");
-        }
-
-        // Attempt 3: iterating through it - assuming value comes before the unit
-        StringBuilder sb = new StringBuilder();
-        boolean value = false;
-        boolean unit = false;
-        rawString = rawString.trim();
-        for (int i = 0; i < rawString.length(); i++) {
-            if (rawString.charAt(i) != ' ') {
-                if (Character.isDigit(rawString.charAt(i)) && i == 0 && !value) {
-                    sb.append(rawString.charAt(i));
-                    value = true;
-                } else if ((Character.isDigit(rawString.charAt(i)) || rawString.charAt(i) == '.' || rawString.charAt(i) == ',') && value) {
-                    sb.append(rawString.charAt(i));
-                } else if (Character.isLetter(rawString.charAt(i)) && value) {
-                    value = false;
-                    parsedString[0] = sb.toString();
-                    sb = new StringBuilder();
-                    sb.append(rawString.charAt(i));
-                    unit = true;
-                } else if (unit == true) {
-                    sb.append(rawString.charAt(i));
-                }
-            }
-        }
-        parsedString[1] = sb.toString();
-
-
-        return parsedString;
     }
 }

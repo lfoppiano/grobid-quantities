@@ -83,11 +83,11 @@ public class FeaturesVectorUnit {
             featuresVector.isUpperCase = false;
         }
 
-        if ((character.equals("(")) || (character.equals("["))) {
+        if (character.equals("(") || character.equals("[") || character.equals("{")) {
             featuresVector.punctType = "OPENBRACKET";
-        } else if ((character.equals(")")) || (character.equals("]"))) {
+        } else if (character.equals(")") || character.equals("]") || character.equals("}")) {
             featuresVector.punctType = "ENDBRACKET";
-        } else if (character.equals(".")) {
+        } else if (character.equals(".") || character.equals("·")) {
             featuresVector.punctType = "DOT";
         } else if (character.equals(",")) {
             featuresVector.punctType = "COMMA";
@@ -97,6 +97,8 @@ public class FeaturesVectorUnit {
             featuresVector.punctType = "QUOTE";
         } else if (character.equals("/")) {
             featuresVector.punctType = "SLASH";
+        } else if (character.equals("^")) {
+            featuresVector.punctType = "EXPONENT";
         } else {
             featuresVector.punctType = "NOPUNCT";
         }

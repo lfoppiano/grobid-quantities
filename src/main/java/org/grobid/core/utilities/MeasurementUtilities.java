@@ -192,7 +192,6 @@ public class MeasurementUtilities {
     }
 
 
-
     /**
      * Right now, only basic matching of units based on lexicon look-up and value validation
      * via regex.
@@ -239,8 +238,19 @@ public class MeasurementUtilities {
     public UnitDefinition lookup(Unit rawUnit) {
         if ((rawUnit != null) && rawUnit.getRawName() != null) {
             UnitDefinition foundUnit = quantityLexicon.getUnitbyName(rawUnit.getRawName().trim());
-            if (foundUnit == null)
+            if (foundUnit == null) {
                 foundUnit = quantityLexicon.getUnitbyNotation(rawUnit.getRawName().trim());
+            }
+
+            return foundUnit;
+        }
+
+        return null;
+    }
+
+    public UnitDefinition find(Unit rawUnit) {
+        if ((rawUnit != null) && rawUnit.getRawName() != null) {
+            UnitDefinition foundUnit = quantityLexicon.getUnitbyNotation(rawUnit.getRawName().trim());
 
             return foundUnit;
         }

@@ -483,8 +483,9 @@ public class QuantityLexicon {
      * Return a unit object based on an unit name.
      */
     public UnitDefinition getUnitbyName(String name) {
-        if (name == null)
+        if (name == null) {
             return null;
+        }
         return name2unit.get(name.toLowerCase());
     }
 
@@ -492,8 +493,9 @@ public class QuantityLexicon {
      * Return a unit object based on an unit notation.
      */
     public UnitDefinition getUnitbyNotation(String notation) {
-        if (notation == null)
+        if (notation == null) {
             return null;
+        }
         return notation2unit.get(notation);
     }
 

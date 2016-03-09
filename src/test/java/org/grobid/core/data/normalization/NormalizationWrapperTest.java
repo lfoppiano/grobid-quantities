@@ -3,8 +3,11 @@ package org.grobid.core.data.normalization;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
+import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import scala.Product;
 import tec.units.ri.unit.ProductUnit;
@@ -23,6 +26,11 @@ public class NormalizationWrapperTest {
 
     private NormalizationWrapper target;
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        LibraryLoader.load();
+    }
+
     @Before
     public void setUp() throws Exception {
         target = new NormalizationWrapper();
@@ -31,6 +39,15 @@ public class NormalizationWrapperTest {
     @Test
     public void testParse_baseUnit_noPow() throws Exception {
         String unitSymbol = "m";
+        javax.measure.Unit normalized = target.parseUnit(unitSymbol);
+
+        assertThat(normalized.getSymbol(), is("m"));
+    }
+
+    @Ignore("Not yet supported")
+    @Test
+    public void testParse_baseUnit_fullName_noPow() throws Exception {
+        String unitSymbol = "meter";
         javax.measure.Unit normalized = target.parseUnit(unitSymbol);
 
         assertThat(normalized.getSymbol(), is("m"));
@@ -209,15 +226,5 @@ public class NormalizationWrapperTest {
         assertThat(output.get("h"), is(-1));
         assertThat(output.get("km"), is(1));
         assertThat(output.get("kg"), is(-1));
-    }
-
-    @Test
-    public void testParseRawString() throws Exception {
-        String input = "10 7 cm 2 /s";
-
-        String[] output = target.parseRawString(input);
-
-        assertThat(output[0], is("107"));
-        assertThat(output[1], is("cm2/s"));
     }
 }

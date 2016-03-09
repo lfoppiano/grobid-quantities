@@ -2,11 +2,11 @@ package org.grobid.core.engines;
 
 import org.grobid.core.GrobidModels;
 import org.grobid.core.data.Unit;
+import org.grobid.core.data.UnitBlock;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorUnit;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.QuantityLexicon;
-import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.LayoutTokensUtil;
@@ -51,11 +51,14 @@ public class UnitParser extends AbstractParser {
     /**
      * Extract all occurences of measurement/quantities from a simple piece of text.
      */
-    public List<Unit.UnitBlock> tagUnit(String text) throws Exception {
+    public List<UnitBlock> tagUnit(String text) {
         if (isBlank(text)) {
             return null;
         }
-        List<Unit.UnitBlock> units = new ArrayList<>();
+
+        //Remove spaces. It's a workaround (to be check whether it is working) because spaces are causing troubles
+        text = text.replaceAll(" ", "");
+        List<UnitBlock> units = new ArrayList<>();
 
         try {
             text = text.replace("\n", " ");
@@ -94,9 +97,9 @@ public class UnitParser extends AbstractParser {
     /**
      * Extract identified quantities from a labelled text.
      */
-    public List<Unit.UnitBlock> resultExtraction(String text,
-                                                 String result,
-                                                 List<LayoutToken> tokenizations) {
+    public List<UnitBlock> resultExtraction(String text,
+                                            String result,
+                                            List<LayoutToken> tokenizations) {
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.UNITS, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
@@ -107,8 +110,8 @@ public class UnitParser extends AbstractParser {
         boolean startUnit = false;
         TaggingLabel previousTag = null;
 
-        List<Unit.UnitBlock> units = new ArrayList<>();
-        Unit.UnitBlock unitBlock = new Unit().new UnitBlock();
+        List<UnitBlock> units = new ArrayList<>();
+        UnitBlock unitBlock = new UnitBlock();
 
         for (TaggingTokenCluster cluster : clusters) {
             if (cluster == null) {
@@ -124,7 +127,7 @@ public class UnitParser extends AbstractParser {
                         startUnit = true;
                     } else {
                         units.add(unitBlock);
-                        unitBlock = new Unit().new UnitBlock();
+                        unitBlock = new UnitBlock();
                     }
                     unitBlock.setPrefix(clusterContent);
 
@@ -133,14 +136,15 @@ public class UnitParser extends AbstractParser {
                 case UNIT_VALUE_BASE:
                     if (!startUnit) {
                         startUnit = true;
-                        unitBlock = new Unit().new UnitBlock();
+                        unitBlock = new UnitBlock();
                     } else {
                         if (!TaggingLabel.UNIT_VALUE_PREFIX.equals(previousTag)) {
                             units.add(unitBlock);
-                            unitBlock = new Unit().new UnitBlock();
-                            if (denominator) {
-                                unitBlock.setPow("-1");
-                            }
+                            unitBlock = new UnitBlock();
+                        }
+
+                        if (denominator) {
+                            unitBlock.setPow("-1");
                         }
                     }
                     unitBlock.setBase(clusterContent);
@@ -161,9 +165,7 @@ public class UnitParser extends AbstractParser {
                         //nothing to do
                     } else {
                         if (denominator == true) {
-                            String pow = "-" + clusterContent;
-
-                            unitBlock.setPow(pow.replace("/", ""));
+                            unitBlock.setPow("-" + clusterContent);
                         } else {
                             unitBlock.setPow(clusterContent);
                         }
