@@ -78,10 +78,10 @@ public class NormalizationWrapper {
             parsedUnit = defaultFormatService.parse(rawUnit.getRawName());
         }
 
-/*        if (parsedUnit == null) {
+        if (parsedUnit == null) {
             throw new NormalizationException("The unit " + rawUnit + " cannot be normalized. It is either not a valid unit " +
                     "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
-        }*/
+        }
 
         return parsedUnit;
     }
