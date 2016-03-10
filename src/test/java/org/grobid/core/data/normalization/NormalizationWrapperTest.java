@@ -101,12 +101,14 @@ public class NormalizationWrapperTest {
     }
 
 
+    @Ignore("Obsolete")
     @Test(expected = NormalizationException.class)
     public void testParse_productUnit_unknown() throws Exception {
-        String unitSymbol = "m*J*y";
+        String unitSymbol = "m*Jy";
         target.parseUnit(unitSymbol);
     }
 
+    @Ignore("Obsolete")
     @Test(expected = NormalizationException.class)
     public void testNormalization_productUnit_unknown2() throws Exception {
         String unitSymbol = "μ*m";
