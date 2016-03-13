@@ -128,7 +128,9 @@ public class QuantityParser extends AbstractParser {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
             measurements = resultExtraction(text, res, tokenizations);
+//System.out.println(measurements.toString());
             measurements = normalizeMeasurements(measurements);
+//System.out.println(measurements.toString());
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }

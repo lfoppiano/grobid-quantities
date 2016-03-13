@@ -214,7 +214,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                                 } else if (value.equals("range")) {
                                     currentTag = "<valueRange>";
                                     rangeBaseEncountered= true;
-                                } 
+                                }
                             }
                         }
                     }
