@@ -8,6 +8,13 @@ import tec.units.ri.unit.Units;
 
 import javax.measure.quantity.Length;
 import java.util.Map;
+import java.lang.Number;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.text.ParseException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.codehaus.jackson.io.JsonStringEncoder;
 
@@ -20,6 +27,8 @@ import org.codehaus.jackson.io.JsonStringEncoder;
  * @author Patrice Lopez
  */
 public class Quantity {
+    private static final Logger logger = LoggerFactory.getLogger(Quantity.class);
+
     private Unit rawUnit = null;
     private String rawValue = null;
     private Double parsedValue = null;
@@ -80,22 +89,29 @@ public class Quantity {
      * TODO: I don't know whether is better to manage the failure should be managed by who is setting the value or just ignored.
      *
      * @param raw
+     * @param local LOCALE (default is ENGLISH)
      * @throws NumberFormatException
      */
     public void setValue(String raw) {
+        setValue(raw, Locale.ENGLISH);
+    }
+    
+    public void setValue(String raw, Locale local) {
         this.rawValue = raw;
+        NumberFormat format = NumberFormat.getInstance(local);
         try {
-            this.parsedValue = Double.parseDouble(raw);
-        } catch (NumberFormatException nfe) {
-
+            Number number = format.parse(raw);
+            this.parsedValue = number.doubleValue();
+        } catch (ParseException pe) {
+            logger.error("Invalid value expression: " + raw + " , for LOCALE: " + local);
         }
     }
 
-    public double getParsedValue() {
+    public Double getParsedValue() {
         return parsedValue;
     }
 
-    public void setParsedValue(double parsedValue) {
+    public void setParsedValue(Double parsedValue) {
         this.parsedValue = parsedValue;
     }
 

@@ -84,7 +84,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 // figures (which include tables) were ignored !
                 ignore = false;
             }
-            if (qName.equals("num")) {
+            if (qName.equals("num") || qName.equals("date")) {
                 numEncountered = true;
             } /*else if (qName.equals("div")) {
                 // let's consider a new CRF input per section
@@ -119,10 +119,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 String text = getText();
                 if (text != null) {
                     if (text.length() > 0) {
-                        if (rangeBaseEncountered)
-                            currentTag = "<valueAtomic>";
-                        else
-                            currentTag = "<other>";
+                        currentTag = "<other>";
                         writeData(qName);
                     }
                 }
@@ -181,9 +178,16 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                             }
                         }
                     }
-                } else if (qName.equals("num") && !ignore) {
+                } else if ((qName.equals("num") || qName.equals("date")) && !ignore) {
+                    boolean whenEncountered = false;
                     int length = atts.getLength();
-                    if (length == 0) {
+                    for (int i = 0; i < length; i++) { 
+                        String name = atts.getQName(i);
+                        if (name != null && name.equals("when")) {
+                            whenEncountered = true;
+                        }
+                    }
+                    if ( (length == 0) || ((length == 1) && whenEncountered) ) {
                         // not interval value
                         if (openAtomicValueWithinList)
                             currentTag = "<valueAtomic>";
@@ -200,19 +204,22 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                             String value = atts.getValue(i);
 
                             if ((name != null) && (value != null)) {
-                                if (name.equals("atLeast")) {
+                                if (name.equals("atLeast") || name.equals("from-iso")) {
                                     currentTag = "<valueLeast>";
-                                } else if (name.equals("atMost")) {
+                                } else if (name.equals("atMost") || name.equals("to-iso")) {
                                     currentTag = "<valueMost>";
-                                } else if (value.equals("base") || value.equals("range")) {
-                                    currentTag = "<valueAtomic>";
+                                } else if (value.equals("base")) {
+                                    currentTag = "<valueBase>";
                                     rangeBaseEncountered= true;
-                                }
+                                } else if (value.equals("range")) {
+                                    currentTag = "<valueRange>";
+                                    rangeBaseEncountered= true;
+                                } 
                             }
                         }
                     }
                     numEncountered = true;
-                }
+                } 
                 /*else if (qName.equals("div")) {
                     int length = atts.getLength();
 
@@ -237,7 +244,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 else if (qName.equals("figure")) {
                     // figures are ignored ! this includes tables
                     ignore = true;
-                } else if (qName.equals("TEI") || qName.equals("tei")) {
+                } else if (qName.equals("TEI") || qName.equals("tei") || qName.equals("teiCorpus") ) {
                     //measureBuffer = new StringBuilder();
                     //quantityBuffer = new StringBuilder();
                     labeled = new ArrayList<>();
@@ -256,7 +263,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
         if (currentTag == null)
             currentTag = "<other>";
         if ((qName.equals("other")) ||
-                (qName.equals("measure")) || (qName.equals("num")) ||
+                (qName.equals("measure")) || (qName.equals("num")) || (qName.equals("date")) ||
                 (qName.equals("paragraph")) || (qName.equals("p")) ||
                 (qName.equals("div"))
                 ) {

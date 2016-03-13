@@ -120,10 +120,10 @@ public class FeaturesVectorQuantities {
         res.append(" " + punctType); // in case the token is a punctuation (NO otherwise)
 
         // token length
-        res.append(" " + string.length());
+        //res.append(" " + string.length());
 
         // shadow number
-        res.append(" " + shadowNumber);
+        //res.append(" " + shadowNumber);
 
         // word shape
         res.append(" " + wordShape);
@@ -136,11 +136,11 @@ public class FeaturesVectorQuantities {
         else
             res.append(" 0");
 
-        if (isPartOfUnitPattern)
+        /*if (isPartOfUnitPattern)
             res.append(" 1");
         else
             res.append(" 0");
-
+        */
         // label - for training data (1)
         if (label != null)
             res.append(" " + label + "");
@@ -210,9 +210,9 @@ public class FeaturesVectorQuantities {
 
         featuresVector.isKnownUnitToken = isUnitToken;
 
-        featuresVector.isPartOfUnitPattern = isUnitPattern;
+        //featuresVector.isPartOfUnitPattern = isUnitPattern;
 
-        featuresVector.shadowNumber = TextUtilities.shadowNumbers(word);
+        //featuresVector.shadowNumber = TextUtilities.shadowNumbers(word);
 
         featuresVector.wordShape = TextUtilities.wordShape(word);
 

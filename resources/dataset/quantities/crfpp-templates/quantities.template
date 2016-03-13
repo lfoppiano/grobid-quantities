@@ -22,19 +22,17 @@ U12:%x[0,1]
 U13:%x[1,1]
 U14:%x[2,1]
 
-# Prefix 1-5 characters
+# Prefix 1-4 characters
 U20:%x[0,2]
 U21:%x[0,3]
 U22:%x[0,4]
 U23:%x[0,5]
-#U24:%x[0,4]
 
-# Suffix 1-5 characters
+# Suffix 1-4 characters
 U30:%x[0,6]
 U31:%x[0,7]
 U32:%x[0,8]
 U33:%x[0,9]
-#U34:%x[0,7]
 
 # Capitalization
 U40:%x[0,10]
@@ -60,29 +58,17 @@ U62:%x[1,12]
 
 # Dict info
 #U70:%x[0,13]
-U71:%x[0,13]
-U72:%x[-1,13]
-U73:%x[1,13]
-
-# biomedicine information
-#U80:%x[-1,14]
-#U81:%x[0,14]
-#U82:%x[1,14]
-
-#U90:%x[-2,14]
-#U91:%x[-1,14]
-#U92:%x[0,14]
-#U93:%x[1,14]
-#U94:%x[2,14]
+#U71:%x[-1,13]
+#U72:%x[1,13]
 
 # Punctuation
-UA0:%x[0,14]
-UA1:%x[-1,14]
-UA2:%x[-2,14]
-UA3:%x[1,14]
-UA4:%x[2,14]
-#UA5:%x[-1,14]/%x[0,14]
-#UA6:%x[0,14]/%x[1,14]
+UA0:%x[0,13]
+UA1:%x[-1,13]
+UA2:%x[-2,13]
+UA3:%x[1,13]
+UA4:%x[2,13]
+#UA5:%x[-1,13]/%x[0,13]
+#UA6:%x[0,13]/%x[1,13]
 
 # token length
 #UB0:%x[-1,15]
@@ -90,33 +76,33 @@ UA4:%x[2,14]
 #UB2:%x[1,15]
 
 # shadow number
-UC0:%x[-1,15]
-UC1:%x[0,15]
-UC2:%x[1,15]
+#UC0:%x[-1,15]
+#UC1:%x[0,15]
+#UC2:%x[1,15]
 
 # word shape
-UD0:%x[-1,16]
-UD1:%x[0,16]
-UD2:%x[1,16]
+UD0:%x[-1,14]
+UD1:%x[0,14]
+UD2:%x[1,14]
 
 # word shape trimmed
-UE0:%x[-1,17]
-UE1:%x[0,17]
-UE2:%x[1,17]
+UE0:%x[-1,15]
+UE1:%x[0,15]
+UE2:%x[1,15]
 
 # isKnownUnitToken: token is part of a known unit
-UF0:%x[-2,18]
-UF1:%x[-1,18]
-UF2:%x[0,18]
-UF3:%x[1,18]
-UF4:%x[2,18]
+UF0:%x[-2,16]
+UF1:%x[-1,16]
+UF2:%x[0,16]
+UF3:%x[1,16]
+UF4:%x[2,16]
 
 # isKnownUnitPattern: token is part of the full sequence of a known unit 
-UG0:%x[-2,19]
-UG1:%x[-1,19]
-UG2:%x[0,19]
-UG3:%x[1,19]
-UG4:%x[2,18]
+#UG0:%x[-2,17]
+#UG1:%x[-1,17]
+#UG2:%x[0,17]
+#UG3:%x[1,17]
+#UG4:%x[2,17]
 
 # Output
 B

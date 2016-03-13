@@ -464,7 +464,7 @@ var grobid = (function ($) {
         }
 
         if (leastValue || mostValue) {
-            string += "<p>raw from: <b>" + leastValue + "</b> to <b>" + mostValue + "</b></p>";
+            string += "<p>raw: from <b>" + leastValue + "</b> to <b>" + mostValue + "</b></p>";
         }
 
         if (rawUnitName) {
@@ -472,7 +472,7 @@ var grobid = (function ($) {
         }
 
         if (normalizedQuantityLeast || normalizedQuantityMost) {
-            string += "<p>normalized from: <b>" + normalizedQuantityLeast + "</b> to <b>"
+            string += "<p>normalized: from <b>" + normalizedQuantityLeast + "</b> to <b>"
                 + normalizedQuantityMost + "</b></p>";
         }
 

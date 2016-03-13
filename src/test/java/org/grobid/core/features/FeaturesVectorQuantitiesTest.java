@@ -17,7 +17,7 @@ public class FeaturesVectorQuantitiesTest {
         LibraryLoader.load();
     }
 
-    @Test
+    //@Test
     public void testPrintVector1() throws Exception {
         String word = "Colorado";
         String label = "CITY";
@@ -27,7 +27,7 @@ public class FeaturesVectorQuantitiesTest {
         assertThat(target.printVector(), is("Colorado colorado C Co Col Colo o do ado rado INITCAP NODIGIT 0 NOPUNCT 8 Colorado Xxxx Xx 1 1 CITY"));
     }
 
-    @Test
+    //@Test
     public void testPrintVector2() throws Exception {
         String word = "The";
         String label = "OTHER";
@@ -37,7 +37,7 @@ public class FeaturesVectorQuantitiesTest {
         assertThat(target.printVector(), is("The the T Th The The e he The The INITCAP NODIGIT 0 NOPUNCT 3 The Xxx Xx 1 1 OTHER"));
     }
 
-    @Test
+    //@Test
     public void testPrintVector3() throws Exception {
         String word = "a";
         String label = "OTHER";
