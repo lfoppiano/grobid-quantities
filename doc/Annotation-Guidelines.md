@@ -21,7 +21,7 @@ The list of units is however not controlled and GROBID supports units never seen
 
 We can distinguish two kinds of atomic values expressions:
 
-+ Atomic values with units: Following TEI, the numeric value is identify with the element ```<num>``` and the unit with the element ```<measure>``` where the unit type is given by the attribute @type. The indicate of the unit name by the attribute @unit is optional: if present it might be used to augment the unit lexicon if not yet represented in the lexicon. A global ```<measure>``` element encodes the complete measurement (composed by the numeric value and the unit) associated with the measurement type given by the attribute @type ```value```. 
++ Atomic values with units: Following TEI, the numeric value is identify with the element ```<num>``` and the unit with the element ```<measure>``` where the unit type is given by the attribute ```@type```. The indicate of the unit name by the attribute ```@unit``` is optional: if present it might be used to augment the unit lexicon if not yet represented in the lexicon. A global ```<measure>``` element encodes the complete measurement (composed by the numeric value and the unit) associated with the measurement type given by the attribute ```@type``` ```value```. 
 
 ```
 We monitored nutritional behaviour of amateur ski-mountaineering athletes during <measure type="value"><num>4</num> <measure type="TIME" unit="day">days</measure></measure> prior to a major competition to compare it with official recommendations and with the athletes' beliefs.</p>
@@ -61,7 +61,7 @@ Note that an interval can be introduced by only one boundary value:
 A rotor shaft according to any one of the preceding claims having a diameter of at least <measure type="interval"><num atLeast="1">1</num><measure type="LENGTH" unit="m">m</measure></measure> 
 ```
 
-+ Interval defined by a base value and a differential value. In the following example, after two "counts", four measurements express intervals following this form. Similarly as in the previous interval case, an attribute in element ```<num>```, here @type, characterizes the base value and the differential/range value. 
++ Interval defined by a base value and a differential value. In the following example, after two "counts", four measurements express intervals following this form. Similarly as in the previous interval case, an attribute in element ```<num>```, here ```@type```, characterizes the base value and the differential/range value. 
 
 In the following example, after two "counts", four measurements express intervals following this form.  
 ```
@@ -94,6 +94,24 @@ batches of <measure type="list"><num>three</num> or <num>four</num></measure> ob
 ```
 
 ### Special cases
+
++ **Dates* are time measurements, they are thus also encoded in the training data as a complement to the other _TIME_ expressions involving time units. In TEI P5, the dates are maked with a specific element ```<date>``` which can be contained in an element ```<measure>```. The encoding is then straightforward for atomic values (with attribute ```@when```), intervals (with attribute ```@from-iso``` and ```@to-iso``` in case on min-max intervals) and lists:
+
+```
+Comet C/2013 A1 (Siding Spring) will have a close encounter with Mars on <measure type="value"><date when="2014-10-19">October 19, 2014</date></measure>.
+```
+
+```
+ The arrival time of these particles spans a <measure type="interval"><num type="range">20</num>-<measure type="TIME" unit="minute">minute</measure> time interval centered at <date when="2014-10-19T20:09">October 19, 2014 at 20:09 TDB</date></measure>
+```
+
+```
+Observations took place from <measure type="interval"><date from-iso="2014-10-19">October 19, 2014</date> to <date to-iso="2014-10-25">October 25, 2014</date></measure>.
+```
+
+```
+Observations were performed on <measure type="list"><date when="2013-10-29">October 29, 2013</date>, on <date when="2014-01-21">Jan 21, 2014</date>, and on <date when="2014-03-11">March 11, 2014</date></measure>.
+```
 
 + Room temperature (Raumtemperatur, température ambiante, ...) is used very frequently in chemistry and related fields. It can be considered as 20 °C (293 Kelvin), although not defined in a standard manner (https://de.wikipedia.org/wiki/Raumtemperatur).
 
