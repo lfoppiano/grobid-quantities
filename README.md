@@ -1,6 +1,8 @@
 # grobid-quantities
 
-Early work in progress.
+![GROBID Quantity Demo](doc/img/Screenshot.png)
+
+__Work in progress.__
 
 The goal of this GROBID module is to recognize in textual documents any expressions of measurements (e.g. _pressure_, _temperature_, etc.), to parse and normalization them, and finally to convert these measurements into SI units. 
 
