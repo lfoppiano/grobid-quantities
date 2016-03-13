@@ -2,6 +2,16 @@
 
 Early work in progress.
 
+The goal of this GROBID module is to recognize in textual documents any expressions of measurements (e.g. _pressure_, _temperature_, etc.), to parse and normalization them, and finally to convert these measurements into SI units. 
+
+One additional goal is also to identify and attached to the measurements the "quantified" substance, e.g. _silicon nitride powder_ in 
+
+```
+A mixture of 10kg silicon nitride powder was charged into the mixing chamber 20 of the mixing vessel 18.
+```
+
+As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
+
 ## Install, build, run
 
 First install the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
@@ -19,6 +29,8 @@ Run some test:
 
 > mvn compile test
 
+The models have to be trained before running the tests!
+
 ## Training
 
 For training the quantity model:
@@ -26,7 +38,11 @@ For training the quantity model:
 
 > mvn generate-resources -Ptrain_quantities
 
-The model will be saved under grobid-home/models/quantities (the directory must exist!).
+For training the unit model:
+
+> mvn generate-resources -Ptrain_units
+
+The models will be saved under grobid-home/models/quantities and grobid-home/models/quantities respectively.
 
 ## Generation of training data
 
