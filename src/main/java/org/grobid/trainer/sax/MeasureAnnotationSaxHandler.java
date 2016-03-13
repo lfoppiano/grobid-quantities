@@ -119,9 +119,9 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 String text = getText();
                 if (text != null) {
                     if (text.length() > 0) {
-                        if (rangeBaseEncountered)
+                        /*if (rangeBaseEncountered)
                             currentTag = "<valueAtomic>";
-                        else
+                        else*/
                             currentTag = "<other>";
                         writeData(qName);
                     }
@@ -204,8 +204,11 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                                     currentTag = "<valueLeast>";
                                 } else if (name.equals("atMost")) {
                                     currentTag = "<valueMost>";
-                                } else if (value.equals("base") || value.equals("range")) {
-                                    currentTag = "<valueAtomic>";
+                                } else if (value.equals("base")) {
+                                    currentTag = "<valueBase>";
+                                    rangeBaseEncountered= true;
+                                } else if (value.equals("range")) {
+                                    currentTag = "<valueRange>";
                                     rangeBaseEncountered= true;
                                 }
                             }

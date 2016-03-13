@@ -39,57 +39,37 @@ public class MeasurementUtilities {
      */
     public static List<Measurement> postCorrection(List<Measurement> measurements) {
         List<Measurement> newMeasurements = new ArrayList<Measurement>();
-
         for (Measurement measurement : measurements) {
             if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
                 Quantity quantity = measurement.getQuantityAtomic();
                 if (quantity == null)
                     continue;
-
-                // first check for a base range interval
-                if ((quantity.getRawValue() != null) && (quantity.getRawValue().indexOf("±") != -1)) {
-                    // base range interval
-                    measurement.setType(UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE);
-                    String rawValue = quantity.getRawValue();
-                    int ind = quantity.getRawValue().indexOf("±");
-                    Quantity quantityBase = new Quantity();
-                    quantityBase.setValue(rawValue.substring(0, ind - 1).trim());
-                    quantityBase.setRawUnit(quantity.getRawUnit());
-                    quantityBase.setOffsetStart(quantity.getOffsetStart());
-                    quantityBase.setOffsetEnd(quantity.getOffsetStart() + ind - 1);
-
-                    Quantity quantityRange = new Quantity();
-                    quantityRange.setValue(rawValue.substring(ind + 1, rawValue.length()).trim());
-                    quantityRange.setRawUnit(quantity.getRawUnit());
-                    quantityRange.setOffsetStart(quantity.getOffsetStart() + ind + 1);
-                    quantityRange.setOffsetEnd(quantity.getOffsetEnd());
-
-                    measurement.setQuantityBase(quantityBase);
-                    measurement.setQuantityRange(quantityRange);
-                    measurement.setAtomicQuantity(null);
-                    newMeasurements.add(measurement);
-                    System.out.println(measurement.toString());
-                } else {
-                    // if the unit is too far from the value, the measurement needs to be filtered out
-                    int start = quantity.getOffsetStart();
-                    int end = quantity.getOffsetEnd();
-                    Unit rawUnit = quantity.getRawUnit();
-                    if (rawUnit != null) {
-                        int startU = rawUnit.getOffsetStart();
-                        int endU = rawUnit.getOffsetEnd();
-                        if ((Math.abs(end - startU) < 40) || (Math.abs(endU - start) < 40)) {
-                            newMeasurements.add(measurement);
-                        }
-                    } else
+                // if the unit is too far from the value, the measurement needs to be filtered out
+                int start = quantity.getOffsetStart();
+                int end = quantity.getOffsetEnd();
+                Unit rawUnit = quantity.getRawUnit();
+                if (rawUnit != null) {
+                    int startU = rawUnit.getOffsetStart();
+                    int endU = rawUnit.getOffsetEnd();
+                    if ((Math.abs(end - startU) < 40) || (Math.abs(endU - start) < 40)) {
                         newMeasurements.add(measurement);
-                }
-            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
+                    }
+                } else
+                    newMeasurements.add(measurement);
+                
+            } else if ( (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) || 
+                        (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) ) {
+                // values of the interval do not matter if min/max or base/range
                 Quantity quantityLeast = measurement.getQuantityLeast();
+                if (quantityLeast == null)
+                    quantityLeast = measurement.getQuantityBase();
                 Quantity quantityMost = measurement.getQuantityMost();
+                if (quantityMost == null)
+                    quantityMost = measurement.getQuantityRange();
 
                 if ((quantityLeast == null) && (quantityMost == null))
                     continue;
-                if (((quantityLeast != null) && (quantityMost == null)) || ((quantityLeast == null) && (quantityMost != null))) {
+                /*if (((quantityLeast != null) && (quantityMost == null)) || ((quantityLeast == null) && (quantityMost != null))) {
                     Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
                     Quantity quantity = null;
                     if (quantityLeast != null) {
@@ -101,7 +81,7 @@ public class MeasurementUtilities {
                         newMeasurement.setAtomicQuantity(quantity);
                         newMeasurements.add(newMeasurement);
                     }
-                } else if ((quantityLeast != null) && (quantityMost != null)) {
+                } else*/ if ((quantityLeast != null) && (quantityMost != null)) {
                     // if the interval is expressed over a chunck of text which is too large, it is a recognition error
                     // and we can replace it by two atomic measurements
                     int startL = quantityLeast.getOffsetStart();
