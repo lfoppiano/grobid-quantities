@@ -4,17 +4,13 @@ import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.lexicon.QuantityLexicon;
-import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 /**
  * Try to solve measurement extracted attributes (unit, values).
@@ -219,7 +215,7 @@ public class MeasurementUtilities {
         if ((rawUnit != null) && rawUnit.getRawName() != null) {
             UnitDefinition foundUnit = quantityLexicon.getUnitbyName(rawUnit.getRawName().trim());
             if (foundUnit == null) {
-                foundUnit = quantityLexicon.getUnitbyNotation(rawUnit.getRawName().trim());
+                foundUnit = quantityLexicon.getUnitByNotation(rawUnit.getRawName().trim());
             }
 
             return foundUnit;
@@ -230,7 +226,7 @@ public class MeasurementUtilities {
 
     public UnitDefinition find(Unit rawUnit) {
         if ((rawUnit != null) && rawUnit.getRawName() != null) {
-            UnitDefinition foundUnit = quantityLexicon.getUnitbyNotation(rawUnit.getRawName().trim());
+            UnitDefinition foundUnit = quantityLexicon.getUnitByNotation(rawUnit.getRawName().trim());
 
             return foundUnit;
         }

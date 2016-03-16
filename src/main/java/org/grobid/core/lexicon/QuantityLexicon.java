@@ -1,6 +1,9 @@
 package org.grobid.core.lexicon;
 
+import org.apache.commons.collections4.Closure;
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.data.RegexValueHolder;
 import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.exceptions.GrobidResourceException;
@@ -17,7 +20,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.upperCase;
 
 /**
@@ -32,9 +34,11 @@ public class QuantityLexicon {
     private final String INFLECTION_PATH = "en/inflection.txt";
     private final String PREFIX_PATH = "en/prefix.txt";
     private final String UNITS_PATH = "en/units.txt";
-    private final String COMPOSED_UNIT_REGEX = "[^/*]+";
+    private static final String COMPOSED_UNIT_REGEX = "[^/*]";
+    private static final String COMPOSED_UNIT_REGEX_WITH_DELIMITER = String.format("((?<=%1$s)|(?=%1$s))", "[/*]{1}");
 
     Pattern composedUnitPattern = Pattern.compile(COMPOSED_UNIT_REGEX);
+    Pattern composedUnitPatternWithDelimiter = Pattern.compile(COMPOSED_UNIT_REGEX_WITH_DELIMITER);
 
     // lexical information - for feature generations
     private FastMatcher unitPattern = null;
@@ -57,6 +61,10 @@ public class QuantityLexicon {
     // the name() value of the enum
     private Map<String, UnitDefinition> type2SIUnit = null;
 
+    // mapping between inflection (meter, meters) to name (m), considering kilometer a different unit than meter,
+    // altough they are two different representation of the same unit
+    private Map<String, String> inflection2name = null;
+
     private QuantityLexicon() {
         init();
     }
@@ -73,167 +81,167 @@ public class QuantityLexicon {
     }
 
     private void init() {
-        initPrefix();
-        initInflection();
+        prefixes = loadPrefixes(this.getClass().getClassLoader().getResourceAsStream(PREFIX_PATH));
+        inflection = loadInflections(this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH));
 
-        File file = null;
-        InputStream ist = null;
-        InputStreamReader isr = null;
-        BufferedReader dis = null;
+        unitTokens = new HashSet<>();
+        unitTokensLowerCase = new HashSet<>();
+        unitPattern = new FastMatcher();
 
-        try {
-            unitTokens = new HashSet<>();
-            unitTokensLowerCase = new HashSet<>();
-            ist = this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH);
+        InputStream ist = this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH);
+        loadUnits(ist, new Closure<String>() {
+            @Override
+            public void execute(String l) {
+                processLine(l);
+            }
+        });
+    }
 
-            unitPattern = new FastMatcher();
-            //ist = new FileInputStream(file);
-            isr = new InputStreamReader(ist, "UTF8");
-            dis = new BufferedReader(isr);
+    private void processLine(String l) {
+        String[] pieces = l.split("\t");
+        UnitDefinition unitDefinition = new UnitDefinition();
+        UnitUtilities.Unit_Type type = null;
+        UnitUtilities.System_Type system = null;
 
-            String l = null;
-            while ((l = dis.readLine()) != null) {
-                if (l.length() == 0) continue;
-                String[] pieces = l.split("\t");
-                UnitDefinition unitDefinition = new UnitDefinition();
-                UnitUtilities.Unit_Type type = null;
-                UnitUtilities.System_Type system = null;
-                for (int i = 0; i < pieces.length; i++) {
-                    String piece = pieces[i].trim();
-                    if (piece.length() == 0)
-                        continue;
+        for (int i = 0; i < pieces.length; i++) {
+            String piece = pieces[i].trim();
+            if (piece.length() == 0)
+                continue;
 
-                    if (i == 0) {
-                        String[] subpieces = piece.split(",");
-                        for (int j = 0; j < subpieces.length; j++) {
-                            String subpiece = subpieces[j].trim();
+            if (i == 0) {
+                String[] subPieces = piece.split(",");
+                for (int j = 0; j < subPieces.length; j++) {
+                    String subPiece = subPieces[j].trim();
 
-                            //expansion
-                            List<String> derivations = derivationalMorphologyExpansion(subpiece, true);
+                    //expansion
+                    List<String> derivations = derivationalMorphologyExpansion(subPiece, true);
+                    for (String derivation : derivations) {
+                        try {
+                            unitPattern.loadTerm(derivation);
+                        } catch (Exception e) {
+                            logger.error("Invalid unit term: " + derivation);
+                        }
+                        unitDefinition.addNotation(derivation);
+
+                        List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
+                        for (String word : subSubPieces) {
+                            addToUnitTokens(word);
+                        }
+                    }
+                }
+            } else if (i == 1) {
+                try {
+                    type = UnitUtilities.Unit_Type.valueOf(piece);
+                } catch (Exception e) {
+                    logger.warn("Invalid unit type name: " + piece);
+                }
+                unitDefinition.setType(type);
+            } else if (i == 2) {
+                try {
+                    system = UnitUtilities.System_Type.valueOf(piece);
+                } catch (Exception e) {
+                    logger.warn("Invalid unit system name: " + piece);
+                }
+                unitDefinition.setSystem(system);
+            } else if (i == 3) {
+                String[] subPieces = piece.split(",");
+                for (int j = 0; j < subPieces.length; j++) {
+                    String subPiece = subPieces[j].trim();
+
+                    // expansion with inflections
+                    List<String> inflections = getInflections(subPiece);
+
+                    for (String inflectedForm : inflections) {
+                        if (inflection2name == null) {
+                            inflection2name = new HashMap<>();
+                        }
+                        final String name = pieces[0];
+                        inflection2name.put(inflectedForm, name);
+
+                        for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
+                            inflection2name.put(prefix.getValue() + inflectedForm, prefix.getKey() + name);
+                        }
+
+                        if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
+                            // expansion with derivational morphology, but only for SI units!
+                            List<String> derivations = derivationalMorphologyExpansion(inflectedForm, false);
                             for (String derivation : derivations) {
+                                unitDefinition.addName(derivation);
                                 try {
                                     unitPattern.loadTerm(derivation);
                                 } catch (Exception e) {
                                     logger.error("invalid unit term: " + derivation);
                                 }
-                                unitDefinition.addNotation(derivation);
-
-                                List<String> subsubpieces = QuantityAnalyzer.tokenize(derivation);
-                                for (String word : subsubpieces) {
+                                List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
+                                for (String word : subSubPieces) {
                                     addToUnitTokens(word);
                                 }
                             }
-                        }
-                    } else if (i == 1) {
-                        try {
-                            type = UnitUtilities.Unit_Type.valueOf(piece);
-                        } catch (Exception e) {
-                            logger.error("invalid unit type name: " + piece);
-                        }
-                        unitDefinition.setType(type);
-                    } else if (i == 2) {
-                        try {
-                            system = UnitUtilities.System_Type.valueOf(piece);
-                        } catch (Exception e) {
-                            logger.error("invalid unit system name: " + piece);
-                        }
-                        unitDefinition.setSystem(system);
-                    } else if (i == 3) {
-                        String[] subpieces = piece.split(",");
-                        for (int j = 0; j < subpieces.length; j++) {
-                            String subpiece = subpieces[j].trim();
-
-                            // expansion with inflections
-                            List<String> inflections = inflectionalMorphologyExpansion(subpiece);
-
-                            for (String inflectedForm : inflections) {
-                                if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
-                                    // expansion with derivational morphology, but only for SI units!
-                                    List<String> derivations = derivationalMorphologyExpansion(inflectedForm, false);
-                                    for (String derivation : derivations) {
-                                        unitDefinition.addName(derivation);
-                                        try {
-                                            unitPattern.loadTerm(derivation);
-                                        } catch (Exception e) {
-                                            logger.error("invalid unit term: " + derivation);
-                                        }
-                                        List<String> subSubpieces = QuantityAnalyzer.tokenize(derivation);
-                                        for (String word : subSubpieces) {
-                                            addToUnitTokens(word);
-                                        }
-                                    }
-                                } else {
-                                    unitDefinition.addName(inflectedForm);
-                                    try {
-                                        unitPattern.loadTerm(inflectedForm);
-                                    } catch (Exception e) {
-                                        logger.error("invalid unit term: " + inflectedForm);
-                                    }
-                                    List<String> subsubpieces = QuantityAnalyzer.tokenize(inflectedForm);
-                                    for (String word : subsubpieces) {
-                                        addToUnitTokens(word);
-                                    }
-                                }
+                        } else {
+                            unitDefinition.addName(inflectedForm);
+                            try {
+                                unitPattern.loadTerm(inflectedForm);
+                            } catch (Exception e) {
+                                logger.error("invalid unit term: " + inflectedForm);
+                            }
+                            List<String> subsubpieces = QuantityAnalyzer.tokenize(inflectedForm);
+                            for (String word : subsubpieces) {
+                                addToUnitTokens(word);
                             }
                         }
                     }
                 }
-
-                // add unit names in the first map
-                List<String> names = unitDefinition.getNames();
-                if ((names != null) && (names.size() > 0)) {
-                    for (int j = 0; j < names.size(); j++) {
-                        if (name2unit == null)
-                            name2unit = new HashMap<>();
-                        name2unit.put(names.get(j).trim().toLowerCase(), unitDefinition);
-                    }
-                }
-
-                // add unit notation map
-                List<String> notations = unitDefinition.getNotations();
-                if ((notations != null) && (notations.size() > 0)) {
-                    for (int j = 0; j < notations.size(); j++) {
-                        if (notation2unit == null)
-                            notation2unit = new HashMap<>();
-                        notation2unit.put(notations.get(j).trim(), unitDefinition);
-                    }
-                } else
-                    notation2unit.put("no_notation", unitDefinition);
-
-                // add unit in the second map
-                system = unitDefinition.getSystem();
-                if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
-                    if (type2SIUnit == null) {
-                        type2SIUnit = new HashMap<>();
-                    }
-                    if ((type == null) || (type.getName() == null))
-                        logger.error("unitDefinition has no type: " + unitDefinition.toString());
-
-                    if (type2SIUnit.get(type.getName()) == null)
-                        type2SIUnit.put(type.getName(), unitDefinition);
-                }
-//System.out.print(notations); System.out.println(" -> " + type);
-//System.out.print(names); System.out.println(" -> " + type);
             }
-//System.out.println(unitTokens.toString());
-        } catch (PatternSyntaxException e) {
-            throw new
-                    GrobidResourceException("Error when compiling lexicon matcher for unit vocabulary.", e);
-        } catch (FileNotFoundException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } catch (IOException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } finally {
-            try {
-                if (ist != null)
-                    ist.close();
-                if (isr != null)
-                    isr.close();
-                if (dis != null)
-                    dis.close();
-            } catch (Exception e) {
-                throw new GrobidResourceException("Cannot close all streams.", e);
+        }
+
+        // add unit names in the first map
+        List<String> names = unitDefinition.getNames();
+        if ((names != null) && (names.size() > 0)) {
+            for (int j = 0; j < names.size(); j++) {
+                if (name2unit == null) {
+                    name2unit = new HashMap<>();
+                }
+                name2unit.put(names.get(j).trim().toLowerCase(), unitDefinition);
             }
+        }
+
+        // add unit notation map
+        List<String> notations = unitDefinition.getNotations();
+        if ((notations != null) && (notations.size() > 0)) {
+            for (int j = 0; j < notations.size(); j++) {
+                if (notation2unit == null) {
+                    notation2unit = new HashMap<>();
+                }
+                notation2unit.put(notations.get(j).trim(), unitDefinition);
+            }
+        } else {
+            notation2unit.put("no_notation", unitDefinition);
+        }
+
+        // add unit in the second map
+        system = unitDefinition.getSystem();
+        if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
+            if (type2SIUnit == null) {
+                type2SIUnit = new HashMap<>();
+            }
+            if ((type == null) || (type.getName() == null))
+                logger.error("unitDefinition has no type: " + unitDefinition.toString());
+
+            if (type2SIUnit.get(type.getName()) == null)
+                type2SIUnit.put(type.getName(), unitDefinition);
+        }
+    }
+
+    private static void closeStreams(InputStream ist, InputStreamReader isr, BufferedReader dis) {
+        try {
+            if (ist != null)
+                ist.close();
+            if (isr != null)
+                isr.close();
+            if (dis != null)
+                dis.close();
+        } catch (Exception e) {
+            throw new GrobidResourceException("Cannot close all streams.", e);
         }
     }
 
@@ -248,16 +256,11 @@ public class QuantityLexicon {
         }
     }
 
-    private void initPrefix() {
-        File file = null;
-        InputStream ist = null;
+    public static Map<String, String> loadPrefixes(InputStream ist) {
+        Map<String, String> prefixes = new HashMap<>();
         InputStreamReader isr = null;
         BufferedReader dis = null;
         try {
-            ist = this.getClass().getClassLoader().getResourceAsStream(PREFIX_PATH);
-
-            unitPattern = new FastMatcher();
-            //ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 
@@ -269,11 +272,11 @@ public class QuantityLexicon {
                     continue;
                 String symbol = pieces[1].trim();
                 String name = pieces[2].trim();
-                if (prefixes == null)
-                    prefixes = new HashMap<String, String>();
+
 
                 prefixes.put(symbol, name);
             }
+            return prefixes;
 
         } catch (PatternSyntaxException e) {
             throw new
@@ -283,50 +286,43 @@ public class QuantityLexicon {
         } catch (IOException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
-            try {
-                if (ist != null)
-                    ist.close();
-                if (isr != null)
-                    isr.close();
-                if (dis != null)
-                    dis.close();
-            } catch (Exception e) {
-                throw new GrobidResourceException("Cannot close all streams.", e);
-            }
+            closeStreams(ist, isr, dis);
         }
     }
 
-    private void initInflection() {
-        InputStream ist = null;
+    public static Map<String, List<String>> loadInflections(InputStream ist) {
+        Map<String, List<String>> inflection = new HashMap<>();
+
         InputStreamReader isr = null;
         BufferedReader dis = null;
         try {
-            ist = this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH);
-
-            unitPattern = new FastMatcher();
-            //ist = new FileInputStream(file);
             isr = new InputStreamReader(ist, "UTF8");
             dis = new BufferedReader(isr);
 
-            String l = null;
+            String l;
             while ((l = dis.readLine()) != null) {
-                if (l.length() == 0) continue;
-                String pieces[] = l.split("\t");
-                if (pieces.length != 2)
+                if (l.length() == 0) {
                     continue;
+                }
+                String pieces[] = l.split("\t");
+                if (pieces.length != 2) {
+                    continue;
+                }
                 String name = pieces[0].trim();
                 String inflections = pieces[1].trim();
-                List<String> inflectionList = new ArrayList<String>();
+                List<String> inflectionList = new ArrayList<>();
                 String[] subinflections = inflections.split(",");
-                for (int i = 0; i < subinflections.length; i++) {
-                    inflectionList.add(subinflections[i].trim());
+
+                for (String subflection : subinflections) {
+                    inflectionList.add(subflection.trim());
                 }
-                if (inflection == null)
-                    inflection = new HashMap<String, List<String>>();
-                if (inflectionList.size() > 0)
+
+                if (inflectionList.size() > 0) {
                     inflection.put(name, inflectionList);
+                }
             }
-//System.out.println(inflection.toString());
+
+            return inflection;
         } catch (PatternSyntaxException e) {
             throw new
                     GrobidResourceException("Error when compiling inflection unit vocabulary.", e);
@@ -335,16 +331,31 @@ public class QuantityLexicon {
         } catch (IOException e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
-            try {
-                if (ist != null)
-                    ist.close();
-                if (isr != null)
-                    isr.close();
-                if (dis != null)
-                    dis.close();
-            } catch (Exception e) {
-                throw new GrobidResourceException("Cannot close all streams.", e);
+            closeStreams(ist, isr, dis);
+        }
+    }
+
+    public static void loadUnits(InputStream ist, Closure<String> onLine) {
+        InputStreamReader isr = null;
+        BufferedReader dis = null;
+        try {
+            isr = new InputStreamReader(ist, "UTF8");
+            dis = new BufferedReader(isr);
+
+            String l = null;
+            while ((l = dis.readLine()) != null) {
+                if (l.length() == 0) continue;
+
+                onLine.execute(l);
             }
+        } catch (PatternSyntaxException e) {
+            throw new
+                    GrobidResourceException("Error when compiling lexicon matcher for unit vocabulary.", e);
+        } catch (IOException e) {
+            throw new GrobidException("An exception occurred while running GROBID.", e);
+
+        } finally {
+            closeStreams(ist, isr, dis);
         }
     }
 
@@ -352,14 +363,13 @@ public class QuantityLexicon {
      * Expansion of a non-notation unit name into its inflected forms. Note that the
      * input unit name is included in the returned list of forms.
      */
-    private List<String> inflectionalMorphologyExpansion(String unitTerm) {
+    public List<String> getInflections(String unitTerm) {
         List<String> results = new ArrayList<>();
         results.add(unitTerm);
 
         List<String> inflections = inflection.get(unitTerm);
-        if (isNotEmpty(inflections)) {
-            for (String inflect : inflections)
-                results.add(inflect);
+        if (CollectionUtils.isNotEmpty(inflections)) {
+            results.addAll(inflections);
         }
 
         return results;
@@ -371,11 +381,11 @@ public class QuantityLexicon {
      * Note that the input unit name is included in the returned list of forms.
      * To be called after the inflectional expansion.
      */
-    protected List<String> derivationalMorphologyExpansion(String unitTerm, boolean isNotation) {
+    public List<String> derivationalMorphologyExpansion(String unitTerm, boolean isNotation) {
         List<String> results = new ArrayList<>();
         results.add(unitTerm);
 
-        if (!isComposed(unitTerm)) {
+        if (!isComposedUnit(unitTerm)) {
             // we expand based on the prefix list
             for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
                 String prefixString = selectPrefix(isNotation, prefix);
@@ -386,15 +396,9 @@ public class QuantityLexicon {
             //we have a more sophisticated - though useless way, that might be used if the expansion became more
             // complex.
 
-            List<ValueHolder> decomposition = new ArrayList<>();
-            Matcher m = composedUnitPattern.matcher(unitTerm);
-
-            while (m.find()) {
-                decomposition.add(new ValueHolder(m.group(), m.start(), m.end()));
-            }
-
-            ValueHolder firstElement = decomposition.get(0);
-            ValueHolder secondElement = decomposition.get(1);
+            List<RegexValueHolder> decomposition = decomposeComplexUnit(unitTerm);
+            RegexValueHolder firstElement = decomposition.get(0);
+            RegexValueHolder secondElement = decomposition.get(1);
 
             for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
                 String prefixString = selectPrefix(isNotation, prefix);
@@ -427,9 +431,34 @@ public class QuantityLexicon {
         return prefixString;
     }
 
-    private boolean isComposed(String unitTerm) {
-        return unitTerm.contains("/") || unitTerm.contains("*");
-        //return composedUnitPattern.matcher(unitTerm).find();
+    public static boolean isComposedUnit(String unitTerm) {
+        return unitTerm.contains("/")
+                || unitTerm.contains("*")
+                || unitTerm.contains("·");
+    }
+
+    public List<RegexValueHolder> decomposeComplexUnit(String unitTerm) {
+        List<RegexValueHolder> decomposition = new ArrayList<>();
+        Matcher m = composedUnitPattern.matcher(unitTerm);
+
+        while (m.find()) {
+            decomposition.add(new RegexValueHolder(m.group(), m.start(), m.end()));
+        }
+
+        return decomposition;
+    }
+
+    public static List<RegexValueHolder> decomposeComplexUnitWithDelimiter(String unitTerm) {
+        List<RegexValueHolder> decomposition = new ArrayList<>();
+        String[] splits = unitTerm.split(COMPOSED_UNIT_REGEX_WITH_DELIMITER);
+
+        int i = 0;
+        for (String split : splits) {
+            decomposition.add(new RegexValueHolder(split, i, i = i + split.length()));
+//            i += split.length();
+        }
+
+        return decomposition;
     }
 
     /**
@@ -457,6 +486,10 @@ public class QuantityLexicon {
         }
         List<OffsetPosition> results = unitPattern.matcherPairs(s);
         return results;
+    }
+
+    public String getNameByInflection(String inflection) {
+        return inflection2name.get(inflection);
     }
 
     public boolean inPrefixDictionary(String s) {
@@ -492,7 +525,7 @@ public class QuantityLexicon {
     /**
      * Return a unit object based on an unit notation.
      */
-    public UnitDefinition getUnitbyNotation(String notation) {
+    public UnitDefinition getUnitByNotation(String notation) {
         if (notation == null) {
             return null;
         }
@@ -506,42 +539,6 @@ public class QuantityLexicon {
         if (type == null)
             return null;
         return (UnitDefinition) type2SIUnit.get(type);
-    }
-
-    class ValueHolder {
-        private String value;
-        private int start;
-        private int end;
-
-        public ValueHolder(String group, int start, int end) {
-            this.value = group;
-            this.start = start;
-            this.end = end;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-        public int getStart() {
-            return start;
-        }
-
-        public void setStart(int start) {
-            this.start = start;
-        }
-
-        public int getEnd() {
-            return end;
-        }
-
-        public void setEnd(int end) {
-            this.end = end;
-        }
     }
 
 }

@@ -1,14 +1,14 @@
 package org.grobid.core.main.batch;
 
-import java.io.File;
-import java.util.List;
-import java.util.Arrays;
-
-import org.grobid.core.mock.MockContext;
-import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.Utilities;
 import org.grobid.core.engines.QuantityParser;
 import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.mock.MockContext;
+import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.core.utilities.UnitTrainingDataGenerator;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The entrance point for starting grobid from command line and perform batch processing
@@ -17,7 +17,8 @@ import org.grobid.core.main.LibraryLoader;
  */
 public class QuantityMain {
 
-    private static List<String> availableCommands = Arrays.asList("processQuantities", "createTrainingQuantities");
+    private static List<String> availableCommands = Arrays.asList("processQuantities",
+            "createTrainingQuantities", "generateTrainingUnits");
 
     /**
      * Arguments of the batch.
@@ -173,6 +174,9 @@ public class QuantityMain {
                 nb = quantityParser.batchProcess(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), gbdArgs.isRecursive());
             } else if (gbdArgs.getProcessMethodName().equals("createTrainingQuantities")) {
                 nb = quantityParser.createTrainingBatch(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), -1);
+            } else if(gbdArgs.getProcessMethodName().equals("generateTrainingUnits")){
+                UnitTrainingDataGenerator unitTrainingDataGenerator = new UnitTrainingDataGenerator();
+                unitTrainingDataGenerator.generateData(gbdArgs.getPath2Input(), gbdArgs.getPath2Output());
             }
             System.out.println(nb + " files processed in " + (System.currentTimeMillis() - time) + " milliseconds");
         }

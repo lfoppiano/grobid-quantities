@@ -1,7 +1,6 @@
 package org.grobid.core.data;
 
 import org.codehaus.jackson.io.JsonStringEncoder;
-import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.ArrayList;
@@ -32,8 +31,9 @@ public class UnitDefinition {
     }
 
     public void addName(String name) {
-        if (names == null)
-            names = new ArrayList<String>();
+        if (names == null) {
+            names = new ArrayList<>();
+        }
         names.add(name);
     }
 
@@ -47,7 +47,7 @@ public class UnitDefinition {
 
     public void addNotation(String not) {
         if (notations == null)
-            notations = new ArrayList<String>();
+            notations = new ArrayList<>();
         notations.add(not);
     }
 

@@ -1,18 +1,17 @@
 package org.grobid.core.lexicon;
 
+import org.grobid.core.data.RegexValueHolder;
+import org.grobid.core.utilities.OffsetPosition;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.grobid.core.utilities.OffsetPosition;
-import org.junit.Test;
-import org.junit.Before;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
 
 /**
  * @author Patrice Lopez
@@ -86,6 +85,51 @@ public class TestQuantityLexicon {
 
         Set<String> set = new HashSet<>(output);
         assertThat(set.size(), is(output.size()));
+        assertThat(output.get(0), is("m/s"));
+        assertThat(output.get(1), is("m/as"));
+    }
+
+    @Test
+    public void testDerivationalMorphologyExpansion_simpleNotation_noNotation_ChecknoDuplicates() throws Exception {
+
+    }
+
+    @Test
+    public void testDerivationalMorphologyExpansion_simpleName_noNotation_ChecknoDuplicates() throws Exception {
+        List<String> output = target.derivationalMorphologyExpansion("meter", false);
+
+        Set<String> set = new HashSet<>(output);
+        assertThat(set.size(), is(output.size()));
+
+        assertThat(output.get(0), is("meter"));
+        assertThat(output.get(1), is("attometer"));
+        assertThat(output.get(2), is("centimeter"));
+    }
+
+    @Test
+    public void testInflectionMorphologyExpansion_simpleNotation_noNotation_ChecknoDuplicates() throws Exception {
+        List<String> output = target.getInflections("meter");
+
+        Set<String> set = new HashSet<>(output);
+        assertThat(set.size(), is(output.size()));
+        assertThat(set.size(), is(2));
+
+        assertThat(output.get(0), is("meter"));
+        assertThat(output.get(1), is("meters"));
+    }
+
+    @Test
+    public void testLookupNameByInflection_simpleUnit_shouldWork() throws Exception {
+        String output = target.getNameByInflection("meter");
+
+        assertThat(output, is("m"));
+    }
+
+    @Test
+    public void testLookupNameByInflection_complexUnit_shouldWork() throws Exception {
+        String output = target.getNameByInflection("kilometer");
+
+        assertThat(output, is("km"));
     }
 
     @Test
@@ -93,10 +137,70 @@ public class TestQuantityLexicon {
         List<String> output = target.derivationalMorphologyExpansion("m", true);
 
         assertThat(output.size(), is(21));
+        assertThat(output.get(0), is("m"));
+        assertThat(output.get(1), is("am"));
+        assertThat(output.get(2), is("cm"));
+        assertThat(output.get(3), is("dm"));
+    }
+
+    @Test
+    public void testDerivationalMorphologyExpansion_noNotation() throws Exception {
+        List<String> output = target.derivationalMorphologyExpansion("metre", false);
+
+        assertThat(output.size(), is(21));
+        assertThat(output.get(0), is("metre"));
+        assertThat(output.get(1), is("attometre"));
+        assertThat(output.get(2), is("centimetre"));
+        assertThat(output.get(3), is("decimetre"));
     }
 
     @Test
     public void testInPrefixDictionary_G() throws Exception {
         assertThat(target.inPrefixDictionary("G"), is(true));
+    }
+
+    @Test
+    public void testDecomposeComplexUnitWithDelimiter() throws Exception {
+        List<RegexValueHolder> out = target.decomposeComplexUnitWithDelimiter("m/s2");
+
+        assertThat(out.size(), is(3));
+
+        assertThat(out.get(0).getValue(), is("m"));
+        assertThat(out.get(0).getStart(), is(0));
+        assertThat(out.get(0).getEnd(), is(1));
+        assertThat(out.get(1).getValue(), is("/"));
+        assertThat(out.get(1).getStart(), is(1));
+        assertThat(out.get(1).getEnd(), is(2));
+        assertThat(out.get(2).getValue(), is("s2"));
+        assertThat(out.get(2).getStart(), is(2));
+        assertThat(out.get(2).getEnd(), is(4));
+    }
+
+    @Test
+    public void testDecomposeComplexUnitWithDelimiter2() throws Exception {
+        List<RegexValueHolder> out = target.decomposeComplexUnitWithDelimiter("mol/m^3");
+
+        assertThat(out.size(), is(3));
+
+        assertThat(out.get(0).getValue(), is("mol"));
+        assertThat(out.get(0).getStart(), is(0));
+        assertThat(out.get(0).getEnd(), is(3));
+        assertThat(out.get(1).getValue(), is("/"));
+        assertThat(out.get(1).getStart(), is(3));
+        assertThat(out.get(1).getEnd(), is(4));
+        assertThat(out.get(2).getValue(), is("m^3"));
+        assertThat(out.get(2).getStart(), is(4));
+        assertThat(out.get(2).getEnd(), is(7));
+    }
+
+    @Test
+    public void testDecomposeComplexUnitWithDelimiter3() throws Exception {
+        List<RegexValueHolder> out = target.decomposeComplexUnitWithDelimiter("cm⁻¹");
+
+        assertThat(out.size(), is(1));
+
+        assertThat(out.get(0).getValue(), is("cm⁻¹"));
+        assertThat(out.get(0).getStart(), is(0));
+        assertThat(out.get(0).getEnd(), is(4));
     }
 }

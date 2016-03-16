@@ -22,7 +22,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by lfoppiano on 14.02.16.
  */
-public class NormalizationWrapperTest {
+@Ignore("This tests depends on the unit model, therefore cannot be run as unit test.")
+public class NormalizationWrapperIntegrationTest {
 
     private NormalizationWrapper target;
 
