@@ -129,6 +129,8 @@ The quantified substance is the substanced for which the measurement is expresse
 
 ### Case not yet supported
 
+The following cases are not annotated at this stage. The sentence when these cases occur should be put in comments for the moment.  
+
 + sigma estimation:
 
 ```
@@ -136,10 +138,21 @@ We selected the A 1 uncertainty so that its range would span from 0 au/d 2 to tw
 ```
 
 + interval embedded in intervals: 
+
 ```
 [..]only Mars is near enough that the orbital motion can extend a single viewing window from 45 days to as much as 60 to 90 days.
 ```
-only the external interval is retained
-```
-[..]only Mars is near enough that the orbital motion can extend a single viewing window from <measure type="interval"><num atLeast="45">45</num><measure type="TIME" unit="days">days</measure></measure> to as much as 60 to <num atMost="90">90</num> <measure type="TIME" unit="days">days</measure></measure>.[..]
 
+```
+For the wide scenario the uncertainty goes from 45 min down to 1–2 min.
+```
+
+Note: one possibility is to only mark the external boundaries of the interval.
+
+```
+[..]only Mars is near enough that the orbital motion can extend a single viewing window from <measure type="interval"><num atLeast="45">45</num><measure type="TIME" unit="day">days</measure> to as much as 60 to <num atMost="90">90</num> <measure type="TIME" unit="day">days</measure></measure>.
+```
+
+```
+For the wide scenario the uncertainty goes from <measure type="interval"><num atLeast="45">45</num> <measure type="TIME" unit="days">min</measure> down to 1–<num atMost="2">2</num> <measure type="TIME" unit="min">min</measure></measure>.
+```
