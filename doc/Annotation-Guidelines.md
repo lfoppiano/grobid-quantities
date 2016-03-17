@@ -60,6 +60,9 @@ Note that an interval can be introduced by only one boundary value:
 ```
 A rotor shaft according to any one of the preceding claims having a diameter of at least <measure type="interval"><num atLeast="1">1</num><measure type="LENGTH" unit="m">m</measure></measure> 
 ```
+```
+[..]sky positions lie within a <measure type="value"><num atMost="7">7</num> <measure type="ANGLE" unit="°">°</measure></measure> radius of other planets[..]
+```
 
 + Interval defined by a base value and a differential value. In the following example, after two "counts", four measurements express intervals following this form. Similarly as in the previous interval case, an attribute in element ```<num>```, here ```@type```, characterizes the base value and the differential/range value. 
 
@@ -126,9 +129,17 @@ The quantified substance is the substanced for which the measurement is expresse
 
 ### Case not yet supported
 
-sigma estimation:
++ sigma estimation:
 
 ```
 We selected the A 1 uncertainty so that its range would span from 0 au/d 2 to twice the nominal value at 3&#x3C3;.
 ```
+
++ interval embedded in intervals: 
+```
+[..]only Mars is near enough that the orbital motion can extend a single viewing window from 45 days to as much as 60 to 90 days.
+```
+only the external interval is retained
+```
+[..]only Mars is near enough that the orbital motion can extend a single viewing window from <measure type="interval"><num atLeast="45">45</num><measure type="TIME" unit="days">days</measure></measure> to as much as 60 to <num atMost="90">90</num> <measure type="TIME" unit="days">days</measure></measure>.[..]
 
