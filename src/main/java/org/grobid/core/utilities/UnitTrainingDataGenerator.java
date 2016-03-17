@@ -117,7 +117,7 @@ public class UnitTrainingDataGenerator {
 
     public void generateData(String inputDirectoryPath, String outputFilePath) throws IOException {
         Calendar calendar = Calendar.getInstance();
-        java.util.Date now = calendar.getTime();
+        long now = calendar.getTime().getTime();
         String outputName = "generated.training." + now + ".tei.xml";
 
         File inputDirectory = new File(inputDirectoryPath);

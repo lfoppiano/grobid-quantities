@@ -34,6 +34,7 @@ import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.factory.GrobidFactory;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -128,9 +129,7 @@ public class QuantityParser extends AbstractParser {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
             measurements = resultExtraction(text, res, tokenizations);
-//System.out.println(measurements.toString());
             measurements = normalizeMeasurements(measurements);
-//System.out.println(measurements.toString());
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
@@ -194,7 +193,7 @@ public class QuantityParser extends AbstractParser {
                 quantity.setNormalizedQuantity(quantity1);
             }
         } catch (NormalizationException ne) {
-            //Buh... let's ignore it for the time being :)
+            logger.warn("Could not normalize the value: "+quantity.getRawValue()+". ", ne);
         }
     }
 
@@ -204,12 +203,12 @@ public class QuantityParser extends AbstractParser {
         if ((quantityBase.getParsedValue() == null) || (quantityRange.getParsedValue() == null))
             return null;
         Quantity quantityLeast = new Quantity();
-        Double value = quantityBase.getParsedValue() - quantityRange.getParsedValue();
+        BigDecimal value = quantityBase.getParsedValue().subtract(quantityRange.getParsedValue());
         quantityLeast.setParsedValue(value);
         quantityLeast.setRawValue(value.toString());
         if ((quantityBase.isNormalized()) && (quantityRange.isNormalized())) {
             Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
-            normalizedQuantity.setValue(quantityBase.getNormalizedQuantity().getValue() - quantityRange.getNormalizedQuantity().getValue());
+            normalizedQuantity.setValue(quantityBase.getNormalizedQuantity().getValue().subtract(quantityRange.getNormalizedQuantity().getValue()));
             normalizedQuantity.setUnit(quantityBase.getNormalizedQuantity().getUnit());
             quantityLeast.setNormalizedQuantity(normalizedQuantity);
         }
@@ -227,12 +226,12 @@ public class QuantityParser extends AbstractParser {
             return null;
 
         Quantity quantityMost = new Quantity();
-        Double value = quantityBase.getParsedValue() + quantityRange.getParsedValue();
+        BigDecimal value = quantityBase.getParsedValue().add(quantityRange.getParsedValue());
         quantityMost.setParsedValue(value);
         quantityMost.setRawValue(value.toString());
         if ((quantityBase.isNormalized()) && (quantityRange.isNormalized())) {
             Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
-            normalizedQuantity.setValue(quantityBase.getNormalizedQuantity().getValue() + quantityRange.getNormalizedQuantity().getValue());
+            normalizedQuantity.setValue(quantityBase.getNormalizedQuantity().getValue().add(quantityRange.getNormalizedQuantity().getValue()));
             normalizedQuantity.setUnit(quantityBase.getNormalizedQuantity().getUnit());
             quantityMost.setNormalizedQuantity(normalizedQuantity);
         }

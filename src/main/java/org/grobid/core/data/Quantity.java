@@ -1,22 +1,16 @@
 package org.grobid.core.data;
 
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.io.JsonStringEncoder;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
-import tec.units.ri.quantity.Quantities;
-import tec.units.ri.unit.Units;
-
-import javax.measure.quantity.Length;
-import java.util.Map;
-import java.lang.Number;
-import java.text.NumberFormat;
-import java.util.Locale;
-import java.text.ParseException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.codehaus.jackson.io.JsonStringEncoder;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 /**
  * Class for managing a quantity representation.
@@ -31,7 +25,7 @@ public class Quantity {
 
     private Unit rawUnit = null;
     private String rawValue = null;
-    private Double parsedValue = null;
+    private BigDecimal parsedValue = null;
 
     private Quantity.Normalized normalizedQuantity = null;
 
@@ -84,34 +78,35 @@ public class Quantity {
         this.rawValue = raw;
     }
 
+    public void setValue(String raw) {
+        setValue(raw, Locale.ENGLISH);
+    }
+
     /**
      * Set the value of the quantity and the parsedVavlue.
-     * TODO: I don't know whether is better to manage the failure should be managed by who is setting the value or just ignored.
+     * TODO: I don't know whether is better to manage the failure should be managed by who
+     * is setting the value or just ignored.
      *
      * @param raw
      * @param local LOCALE (default is ENGLISH)
      * @throws NumberFormatException
      */
-    public void setValue(String raw) {
-        setValue(raw, Locale.ENGLISH);
-    }
-    
     public void setValue(String raw, Locale local) {
         this.rawValue = raw;
         NumberFormat format = NumberFormat.getInstance(local);
         try {
             Number number = format.parse(raw);
-            this.parsedValue = number.doubleValue();
+            this.parsedValue = BigDecimal.valueOf(number.doubleValue());
         } catch (ParseException pe) {
             logger.error("Invalid value expression: " + raw + " , for LOCALE: " + local);
         }
     }
 
-    public Double getParsedValue() {
+    public BigDecimal getParsedValue() {
         return parsedValue;
     }
 
-    public void setParsedValue(Double parsedValue) {
+    public void setParsedValue(BigDecimal parsedValue) {
         this.parsedValue = parsedValue;
     }
 
@@ -265,8 +260,9 @@ public class Quantity {
             if (getOffsetStart() != -1) {
                 if (!started) {
                     started = true;
-                } else
+                } else {
                     json.append(", ");
+                }
                 json.append("\"offsetStart\" : " + getOffsetStart());
             }
 
@@ -286,7 +282,7 @@ public class Quantity {
 
     public class Normalized {
         private String rawValue = null;
-        private Double value = null;
+        private BigDecimal value = null;
         private Unit unit = null;
 
         private UnitUtilities.Unit_Type type;
@@ -299,11 +295,11 @@ public class Quantity {
             this.rawValue = rawValue;
         }
 
-        public Double getValue() {
+        public BigDecimal getValue() {
             return value;
         }
 
-        public void setValue(Double value) {
+        public void setValue(BigDecimal value) {
             this.value = value;
         }
 

@@ -28,7 +28,7 @@ import static org.apache.commons.lang3.StringUtils.upperCase;
  * @author Patrice Lopez
  */
 public class QuantityLexicon {
-    private static final Logger logger = LoggerFactory.getLogger(QuantityLexicon.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuantityLexicon.class);
 
     private static volatile QuantityLexicon instance;
     private final String INFLECTION_PATH = "en/inflection.txt";
@@ -119,7 +119,7 @@ public class QuantityLexicon {
                         try {
                             unitPattern.loadTerm(derivation);
                         } catch (Exception e) {
-                            logger.error("Invalid unit term: " + derivation);
+                            LOGGER.error("Invalid unit term: " + derivation);
                         }
                         unitDefinition.addNotation(derivation);
 
@@ -133,14 +133,14 @@ public class QuantityLexicon {
                 try {
                     type = UnitUtilities.Unit_Type.valueOf(piece);
                 } catch (Exception e) {
-                    logger.warn("Invalid unit type name: " + piece);
+                    LOGGER.warn("Invalid unit type name: " + piece);
                 }
                 unitDefinition.setType(type);
             } else if (i == 2) {
                 try {
                     system = UnitUtilities.System_Type.valueOf(piece);
                 } catch (Exception e) {
-                    logger.warn("Invalid unit system name: " + piece);
+                    LOGGER.warn("Invalid unit system name: " + piece);
                 }
                 unitDefinition.setSystem(system);
             } else if (i == 3) {
@@ -170,7 +170,7 @@ public class QuantityLexicon {
                                 try {
                                     unitPattern.loadTerm(derivation);
                                 } catch (Exception e) {
-                                    logger.error("invalid unit term: " + derivation);
+                                    LOGGER.error("invalid unit term: " + derivation);
                                 }
                                 List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
                                 for (String word : subSubPieces) {
@@ -182,7 +182,7 @@ public class QuantityLexicon {
                             try {
                                 unitPattern.loadTerm(inflectedForm);
                             } catch (Exception e) {
-                                logger.error("invalid unit term: " + inflectedForm);
+                                LOGGER.error("invalid unit term: " + inflectedForm);
                             }
                             List<String> subsubpieces = QuantityAnalyzer.tokenize(inflectedForm);
                             for (String word : subsubpieces) {
@@ -225,7 +225,7 @@ public class QuantityLexicon {
                 type2SIUnit = new HashMap<>();
             }
             if ((type == null) || (type.getName() == null))
-                logger.error("unitDefinition has no type: " + unitDefinition.toString());
+                LOGGER.error("unitDefinition has no type: " + unitDefinition.toString());
 
             if (type2SIUnit.get(type.getName()) == null)
                 type2SIUnit.put(type.getName(), unitDefinition);

@@ -15,6 +15,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.Bootstrap;
 import javax.measure.spi.UnitFormatService;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class NormalizationWrapper {
 
     /**
      * Method to parse and recognize the unit.
-     * <p>
+     * <p/>
      * TODO: integrate additional parsers in case the default parser is not able to successfully recognize the unit.
      */
     protected javax.measure.Unit parseUnit(Unit rawUnit) throws NormalizationException {
@@ -75,7 +76,11 @@ public class NormalizationWrapper {
         try {
             parsedUnit = defaultFormatService.parse(stringUnitProduct);
         } catch (ParserException pe) {
-            parsedUnit = defaultFormatService.parse(rawUnit.getRawName());
+            try {
+                parsedUnit = defaultFormatService.parse(rawUnit.getRawName());
+            } catch (ParserException pep) {
+                //buh
+            }
         }
 
         if (parsedUnit == null) {
@@ -91,11 +96,11 @@ public class NormalizationWrapper {
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         if (unit instanceof TransformedUnit) {
-
             TransformedUnit transformedUnit = (TransformedUnit) unit;
             normalizedQuantity.setUnit(new Unit(transformedUnit.getParentUnit().toString()));
             try {
-                normalizedQuantity.setValue(transformedUnit.getConverter().convert(Double.parseDouble(quantity.getRawValue())));
+//                normalizedQuantity.setValue(((AbstractConverter) transformedUnit.getConverter()).convert(quantity.getParsedValue()));
+                normalizedQuantity.setValue(BigDecimal.valueOf(transformedUnit.getConverter().convert(quantity.getParsedValue().doubleValue())));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
@@ -109,10 +114,10 @@ public class NormalizationWrapper {
             //Map<String, Integer> products = extractProduct(productUnit);
             normalizedQuantity.setUnit(new Unit(productUnit.toSystemUnit().toString()));
 
-
             quantity.setNormalizedQuantity(normalizedQuantity);
             try {
-                normalizedQuantity.setValue(productUnit.getSystemConverter().convert(Double.parseDouble(quantity.getRawValue())));
+                normalizedQuantity.setValue(BigDecimal.valueOf(productUnit.getSystemConverter().convert(quantity.getParsedValue().doubleValue())));
+//                normalizedQuantity.setValue(((AbstractConverter) productUnit.getSystemConverter()).convert(quantity.getParsedValue()));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.");
@@ -122,7 +127,7 @@ public class NormalizationWrapper {
             normalizedQuantity.setRawValue(unit.getSymbol());
             normalizedQuantity.setUnit(new Unit(unit.getSymbol()));
             try {
-                normalizedQuantity.setValue(Double.parseDouble(quantity.getRawValue()));
+                normalizedQuantity.setValue(new BigDecimal(quantity.getRawValue()));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.");
@@ -153,5 +158,9 @@ public class NormalizationWrapper {
             }
         }
         return wrappedUnitProducts;
+    }
+
+    public void setUnitParser(UnitParser unitParser) {
+        this.unitParser = unitParser;
     }
 }

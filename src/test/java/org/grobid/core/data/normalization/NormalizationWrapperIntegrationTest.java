@@ -3,6 +3,7 @@ package org.grobid.core.data.normalization;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
+import org.grobid.core.engines.UnitParser;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
@@ -15,6 +16,7 @@ import tec.units.ri.unit.TransformedUnit;
 
 import java.util.Map;
 
+import static org.easymock.EasyMock.createMock;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -22,10 +24,10 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by lfoppiano on 14.02.16.
  */
-@Ignore("This tests depends on the unit model, therefore cannot be run as unit test.")
 public class NormalizationWrapperIntegrationTest {
 
     private NormalizationWrapper target;
+    UnitParser mockUnitParser;
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -35,6 +37,8 @@ public class NormalizationWrapperIntegrationTest {
     @Before
     public void setUp() throws Exception {
         target = new NormalizationWrapper();
+        mockUnitParser = createMock(UnitParser.class);
+        //target.setUnitParser(mockUnitParser);
     }
 
     @Test
@@ -126,7 +130,7 @@ public class NormalizationWrapperIntegrationTest {
 
         Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
         assertThat(output.getUnit().getRawName(), is("m"));
-        assertThat(output.getValue(), is(2.0));
+        assertThat(output.getValue().doubleValue(), is(2.0));
     }
 
     @Test
@@ -139,7 +143,7 @@ public class NormalizationWrapperIntegrationTest {
 
         Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
         assertThat(output.getUnit().getRawName(), is("m"));
-        assertThat(output.getValue(), is(2000.0));
+        assertThat(output.getValue().doubleValue(), is(2000.0));
     }
 
     @Test
@@ -152,7 +156,7 @@ public class NormalizationWrapperIntegrationTest {
 
         Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
         assertThat(output.getUnit().getRawName(), is("K"));
-        assertThat(output.getValue(), is(283.15));
+        assertThat(output.getValue().doubleValue(), is(283.15));
     }
 
     @Test
@@ -165,7 +169,7 @@ public class NormalizationWrapperIntegrationTest {
 
         Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
         assertThat(output.getUnit().getRawName(), is("m/s"));
-        assertThat(output.getValue(), is(0.5555555555555556));
+        assertThat(output.getValue().doubleValue(), is(0.5555555555555556));
     }
 
     @Test
@@ -177,7 +181,7 @@ public class NormalizationWrapperIntegrationTest {
         input.setRawUnit(raw);
 
         Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
-        assertThat(output.getValue(), is(0.5555555555555556));
+        assertThat(output.getValue().doubleValue(), is(0.5555555555555556));
         assertThat(output.getUnit().getRawName(), is("m·kg/s"));
     }
 
@@ -190,7 +194,7 @@ public class NormalizationWrapperIntegrationTest {
         input.setRawUnit(raw);
 
         Quantity.Normalized output = target.normalizeQuantityToBaseUnits(input);
-        assertThat(output.getValue(), is(555.5555555555555));
+        assertThat(output.getValue().doubleValue(), is(555.5555555555555));
         assertThat(output.getUnit().getRawName(), is("m·kg/s"));
     }
 
