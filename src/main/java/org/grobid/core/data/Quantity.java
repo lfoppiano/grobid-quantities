@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
@@ -93,10 +94,10 @@ public class Quantity {
      */
     public void setValue(String raw, Locale local) {
         this.rawValue = raw;
-        NumberFormat format = NumberFormat.getInstance(local);
+        DecimalFormat format = (DecimalFormat)NumberFormat.getInstance(local);
+        format.setParseBigDecimal(true);
         try {
-            Number number = format.parse(raw);
-            this.parsedValue = BigDecimal.valueOf(number.doubleValue());
+            this.parsedValue = (BigDecimal)format.parse(raw);
         } catch (ParseException pe) {
             logger.error("Invalid value expression: " + raw + " , for LOCALE: " + local);
         }
