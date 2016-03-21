@@ -8,8 +8,8 @@ import org.grobid.core.engines.UnitParser;
 import org.grobid.core.utilities.MeasurementUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tec.units.ri.unit.ProductUnit;
-import tec.units.ri.unit.TransformedUnit;
+import tec.uom.se.unit.ProductUnit;
+import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
@@ -99,8 +99,7 @@ public class NormalizationWrapper {
             TransformedUnit transformedUnit = (TransformedUnit) unit;
             normalizedQuantity.setUnit(new Unit(transformedUnit.getParentUnit().toString()));
             try {
-//                normalizedQuantity.setValue(((AbstractConverter) transformedUnit.getConverter()).convert(quantity.getParsedValue()));
-                normalizedQuantity.setValue(BigDecimal.valueOf(transformedUnit.getConverter().convert(quantity.getParsedValue().doubleValue())));
+                normalizedQuantity.setValue(new BigDecimal(transformedUnit.getConverter().convert(quantity.getParsedValue()).toString()));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
@@ -116,8 +115,7 @@ public class NormalizationWrapper {
 
             quantity.setNormalizedQuantity(normalizedQuantity);
             try {
-                normalizedQuantity.setValue(BigDecimal.valueOf(productUnit.getSystemConverter().convert(quantity.getParsedValue().doubleValue())));
-//                normalizedQuantity.setValue(((AbstractConverter) productUnit.getSystemConverter()).convert(quantity.getParsedValue()));
+                normalizedQuantity.setValue(new BigDecimal(productUnit.getSystemConverter().convert(quantity.getParsedValue()).toString()));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.");

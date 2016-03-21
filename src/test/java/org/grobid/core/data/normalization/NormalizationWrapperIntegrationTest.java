@@ -2,24 +2,20 @@ package org.grobid.core.data.normalization;
 
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
-import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.engines.UnitParser;
 import org.grobid.core.main.LibraryLoader;
-import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import scala.Product;
-import tec.units.ri.unit.ProductUnit;
-import tec.units.ri.unit.TransformedUnit;
+import tec.uom.se.unit.ProductUnit;
+import tec.uom.se.unit.TransformedUnit;
 
 import java.util.Map;
 
 import static org.easymock.EasyMock.createMock;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by lfoppiano on 14.02.16.

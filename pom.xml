@@ -70,9 +70,9 @@
             <version>1.5.0</version>
         </dependency>
         <dependency>
-            <groupId>tec.units</groupId>
-            <artifactId>unit-ri</artifactId>
-            <version>0.8</version>
+            <groupId>tec.uom</groupId>
+            <artifactId>uom-se</artifactId>
+            <version>0.9-SNAPSHOT</version>
         </dependency>
         <!--dependency>
           <groupId>org.jscience</groupId>
@@ -289,8 +289,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
