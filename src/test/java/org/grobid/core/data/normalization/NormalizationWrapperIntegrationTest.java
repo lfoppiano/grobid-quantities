@@ -11,6 +11,10 @@ import org.junit.Test;
 import tec.uom.se.unit.ProductUnit;
 import tec.uom.se.unit.TransformedUnit;
 
+import javax.measure.format.UnitFormat;
+import javax.measure.spi.Bootstrap;
+import javax.measure.spi.UnitFormatService;
+import java.math.BigDecimal;
 import java.util.Map;
 
 import static org.easymock.EasyMock.createMock;
@@ -20,6 +24,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by lfoppiano on 14.02.16.
  */
+@Ignore("Integration test")
 public class NormalizationWrapperIntegrationTest {
 
     private NormalizationWrapper target;
@@ -229,5 +234,21 @@ public class NormalizationWrapperIntegrationTest {
         assertThat(output.get("h"), is(-1));
         assertThat(output.get("km"), is(1));
         assertThat(output.get("kg"), is(-1));
+    }
+
+    @Test
+    public void testCheckPrecision() throws Exception {
+        UnitFormatService formatService = Bootstrap.getService(UnitFormatService.class);
+        UnitFormat defaultFormatService = formatService.getUnitFormat();
+
+        TransformedUnit unit = (TransformedUnit) defaultFormatService.parse("g");
+        System.out.println("Conversion using double: " + unit.getSystemConverter().convert(0.39));
+        System.out.println("Conversion using BigDecimal: " + (unit.getSystemConverter().convert(new BigDecimal("0.39"))));
+        System.out.println("Conversion using BigDecimal output Double: " + new BigDecimal(unit.getSystemConverter().convert(new BigDecimal("0.39")).toString()).doubleValue());
+
+        unit = (TransformedUnit) defaultFormatService.parse("%");
+        System.out.println("Conversion using double: " + unit.getSystemConverter().convert(0.009));
+        System.out.println("Conversion using BigDecimal: " + (unit.getSystemConverter().convert(new BigDecimal("0.009"))));
+        System.out.println("Conversion using BigDecimal output Double: " + new BigDecimal(unit.getSystemConverter().convert(new BigDecimal("0.009")).toString()).doubleValue());
     }
 }

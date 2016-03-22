@@ -86,7 +86,7 @@ public class TestQuantityLexicon {
         Set<String> set = new HashSet<>(output);
         assertThat(set.size(), is(output.size()));
         assertThat(output.get(0), is("m/s"));
-        assertThat(output.get(1), is("m/as"));
+        assertThat(output.get(1), is("m/zs"));
     }
 
     @Test
@@ -102,13 +102,13 @@ public class TestQuantityLexicon {
         assertThat(set.size(), is(output.size()));
 
         assertThat(output.get(0), is("meter"));
-        assertThat(output.get(1), is("attometer"));
-        assertThat(output.get(2), is("centimeter"));
+        assertThat(output.get(1), is("zeptometer"));
+        assertThat(output.get(2), is("zettameter"));
     }
 
     @Test
     public void testInflectionMorphologyExpansion_simpleNotation_noNotation_ChecknoDuplicates() throws Exception {
-        List<String> output = target.getInflections("meter");
+        List<String> output = target.getInflectionsByTerm("meter");
 
         Set<String> set = new HashSet<>(output);
         assertThat(set.size(), is(output.size()));
@@ -138,8 +138,8 @@ public class TestQuantityLexicon {
 
         assertThat(output.size(), is(21));
         assertThat(output.get(0), is("m"));
-        assertThat(output.get(1), is("am"));
-        assertThat(output.get(2), is("cm"));
+        assertThat(output.get(1), is("zm"));
+        assertThat(output.get(2), is("Zm"));
         assertThat(output.get(3), is("dm"));
     }
 
@@ -149,8 +149,8 @@ public class TestQuantityLexicon {
 
         assertThat(output.size(), is(21));
         assertThat(output.get(0), is("metre"));
-        assertThat(output.get(1), is("attometre"));
-        assertThat(output.get(2), is("centimetre"));
+        assertThat(output.get(1), is("zeptometre"));
+        assertThat(output.get(2), is("zettametre"));
         assertThat(output.get(3), is("decimetre"));
     }
 

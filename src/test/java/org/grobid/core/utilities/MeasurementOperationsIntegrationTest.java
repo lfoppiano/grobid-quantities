@@ -14,13 +14,13 @@ import java.util.List;
  * Created by lfoppiano on 18.02.16.
  */
 @Ignore
-public class MeasurementUtilitiesIntegrationTest {
+public class MeasurementOperationsIntegrationTest {
 
-    private MeasurementUtilities target;
+    private MeasurementOperations target;
 
     @Before
     public void setUp() throws Exception {
-        target = new MeasurementUtilities();
+        target = new MeasurementOperations();
     }
 
     @Ignore("Doesn't test anything...")
@@ -35,7 +35,7 @@ public class MeasurementUtilitiesIntegrationTest {
         measurement.setAtomicQuantity(quantity);
         measurementList.add(measurement);
 
-        System.out.println(target.solve(measurementList));
+        System.out.println(target.resolveMeasurement(measurementList));
     }
 
 

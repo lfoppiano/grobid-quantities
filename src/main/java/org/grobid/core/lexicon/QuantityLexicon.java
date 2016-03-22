@@ -4,23 +4,20 @@ import org.apache.commons.collections4.Closure;
 import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.RegexValueHolder;
+import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.exceptions.GrobidResourceException;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.Pair;
-import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.utilities.UnitUtilities;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 import static org.apache.commons.lang3.StringUtils.upperCase;
+import static org.grobid.core.lexicon.LexiconLoader.loadInflections;
+import static org.grobid.core.lexicon.LexiconLoader.loadPrefixes;
+import static org.grobid.core.lexicon.LexiconLoader.readFile;
 
 /**
  * Class for managing the measurement lexical resources
@@ -42,7 +39,6 @@ public class QuantityLexicon {
 
     // lexical information - for feature generations
     private FastMatcher unitPattern = null;
-
     private Set<String> unitTokens = null;
     private Set<String> unitTokensLowerCase = null;
 
@@ -81,23 +77,22 @@ public class QuantityLexicon {
     }
 
     private void init() {
-        prefixes = loadPrefixes(this.getClass().getClassLoader().getResourceAsStream(PREFIX_PATH));
-        inflection = loadInflections(this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH));
-
         unitTokens = new HashSet<>();
         unitTokensLowerCase = new HashSet<>();
         unitPattern = new FastMatcher();
 
-        InputStream ist = this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH);
-        loadUnits(ist, new Closure<String>() {
+        prefixes = loadPrefixes(this.getClass().getClassLoader().getResourceAsStream(PREFIX_PATH));
+        inflection = loadInflections(this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH));
+
+        readFile(this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH), new Closure<String>() {
             @Override
             public void execute(String l) {
-                processLine(l);
+                processLineLoadUnits(l);
             }
         });
     }
 
-    private void processLine(String l) {
+    private void processLineLoadUnits(String l) {
         String[] pieces = l.split("\t");
         UnitDefinition unitDefinition = new UnitDefinition();
         UnitUtilities.Unit_Type type = null;
@@ -149,7 +144,7 @@ public class QuantityLexicon {
                     String subPiece = subPieces[j].trim();
 
                     // expansion with inflections
-                    List<String> inflections = getInflections(subPiece);
+                    List<String> inflections = getInflectionsByTerm(subPiece);
 
                     for (String inflectedForm : inflections) {
                         if (inflection2name == null) {
@@ -224,24 +219,13 @@ public class QuantityLexicon {
             if (type2SIUnit == null) {
                 type2SIUnit = new HashMap<>();
             }
-            if ((type == null) || (type.getName() == null))
+            if ((type == null) || (type.getName() == null)) {
                 LOGGER.error("unitDefinition has no type: " + unitDefinition.toString());
+            }
 
-            if (type2SIUnit.get(type.getName()) == null)
+            if (type2SIUnit.get(type.getName()) == null) {
                 type2SIUnit.put(type.getName(), unitDefinition);
-        }
-    }
-
-    private static void closeStreams(InputStream ist, InputStreamReader isr, BufferedReader dis) {
-        try {
-            if (ist != null)
-                ist.close();
-            if (isr != null)
-                isr.close();
-            if (dis != null)
-                dis.close();
-        } catch (Exception e) {
-            throw new GrobidResourceException("Cannot close all streams.", e);
+            }
         }
     }
 
@@ -256,114 +240,11 @@ public class QuantityLexicon {
         }
     }
 
-    public static Map<String, String> loadPrefixes(InputStream ist) {
-        Map<String, String> prefixes = new HashMap<>();
-        InputStreamReader isr = null;
-        BufferedReader dis = null;
-        try {
-            isr = new InputStreamReader(ist, "UTF8");
-            dis = new BufferedReader(isr);
-
-            String l = null;
-            while ((l = dis.readLine()) != null) {
-                if (l.length() == 0) continue;
-                String pieces[] = l.split("\t");
-                if (pieces.length != 3)
-                    continue;
-                String symbol = pieces[1].trim();
-                String name = pieces[2].trim();
-
-
-                prefixes.put(symbol, name);
-            }
-            return prefixes;
-
-        } catch (PatternSyntaxException e) {
-            throw new
-                    GrobidResourceException("Error when compiling prefix map for unit vocabulary.", e);
-        } catch (FileNotFoundException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } catch (IOException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } finally {
-            closeStreams(ist, isr, dis);
-        }
-    }
-
-    public static Map<String, List<String>> loadInflections(InputStream ist) {
-        Map<String, List<String>> inflection = new HashMap<>();
-
-        InputStreamReader isr = null;
-        BufferedReader dis = null;
-        try {
-            isr = new InputStreamReader(ist, "UTF8");
-            dis = new BufferedReader(isr);
-
-            String l;
-            while ((l = dis.readLine()) != null) {
-                if (l.length() == 0) {
-                    continue;
-                }
-                String pieces[] = l.split("\t");
-                if (pieces.length != 2) {
-                    continue;
-                }
-                String name = pieces[0].trim();
-                String inflections = pieces[1].trim();
-                List<String> inflectionList = new ArrayList<>();
-                String[] subinflections = inflections.split(",");
-
-                for (String subflection : subinflections) {
-                    inflectionList.add(subflection.trim());
-                }
-
-                if (inflectionList.size() > 0) {
-                    inflection.put(name, inflectionList);
-                }
-            }
-
-            return inflection;
-        } catch (PatternSyntaxException e) {
-            throw new
-                    GrobidResourceException("Error when compiling inflection unit vocabulary.", e);
-        } catch (FileNotFoundException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } catch (IOException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } finally {
-            closeStreams(ist, isr, dis);
-        }
-    }
-
-    public static void loadUnits(InputStream ist, Closure<String> onLine) {
-        InputStreamReader isr = null;
-        BufferedReader dis = null;
-        try {
-            isr = new InputStreamReader(ist, "UTF8");
-            dis = new BufferedReader(isr);
-
-            String l = null;
-            while ((l = dis.readLine()) != null) {
-                if (l.length() == 0) continue;
-
-                onLine.execute(l);
-            }
-        } catch (PatternSyntaxException e) {
-            throw new
-                    GrobidResourceException("Error when compiling lexicon matcher for unit vocabulary.", e);
-        } catch (IOException e) {
-            throw new GrobidException("An exception occurred while running GROBID.", e);
-
-        } finally {
-            closeStreams(ist, isr, dis);
-        }
-    }
-
     /**
      * Expansion of a non-notation unit name into its inflected forms. Note that the
      * input unit name is included in the returned list of forms.
      */
-    public List<String> getInflections(String unitTerm) {
+    public List<String> getInflectionsByTerm(String unitTerm) {
         List<String> results = new ArrayList<>();
         results.add(unitTerm);
 
@@ -538,7 +419,29 @@ public class QuantityLexicon {
     public UnitDefinition getSIUnitByType(String type) {
         if (type == null)
             return null;
-        return (UnitDefinition) type2SIUnit.get(type);
+        return type2SIUnit.get(type);
     }
 
+    public UnitDefinition lookup(Unit rawUnit) {
+        if ((rawUnit != null) && rawUnit.getRawName() != null) {
+            UnitDefinition foundUnit = getUnitbyName(rawUnit.getRawName().trim());
+            if (foundUnit == null) {
+                foundUnit = getUnitByNotation(rawUnit.getRawName().trim());
+            }
+
+            return foundUnit;
+        }
+
+        return null;
+    }
+
+    public UnitDefinition find(Unit rawUnit) {
+        if ((rawUnit != null) && rawUnit.getRawName() != null) {
+            UnitDefinition foundUnit = getUnitByNotation(rawUnit.getRawName().trim());
+
+            return foundUnit;
+        }
+
+        return null;
+    }
 }

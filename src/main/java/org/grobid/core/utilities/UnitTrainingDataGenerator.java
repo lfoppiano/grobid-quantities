@@ -3,6 +3,7 @@ package org.grobid.core.utilities;
 import org.apache.commons.collections4.Closure;
 import org.apache.commons.io.FileUtils;
 import org.grobid.core.data.RegexValueHolder;
+import org.grobid.core.lexicon.LexiconLoader;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,9 +129,9 @@ public class UnitTrainingDataGenerator {
 
         if (inputDirectory != null && inputDirectory.isDirectory()) {
 
-            final Map<String, List<String>> inflections = QuantityLexicon.loadInflections(new FileInputStream(inputDirectoryPath + File.separator + INFLECTION_FILE_NAME));
-            final Map<String, String> prefixes = QuantityLexicon.loadPrefixes(new FileInputStream(inputDirectoryPath + File.separator + PREFIX_FILE_NAME));
-            QuantityLexicon.loadUnits(new FileInputStream(inputDirectoryPath + File.separator + UNITS_FILE_NAME), new Closure<String>() {
+            final Map<String, List<String>> inflections = LexiconLoader.loadInflections(new FileInputStream(inputDirectoryPath + File.separator + INFLECTION_FILE_NAME));
+            final Map<String, String> prefixes = LexiconLoader.loadPrefixes(new FileInputStream(inputDirectoryPath + File.separator + PREFIX_FILE_NAME));
+            LexiconLoader.readFile(new FileInputStream(inputDirectoryPath + File.separator + UNITS_FILE_NAME), new Closure<String>() {
                 @Override
                 public void execute(String inputLine) {
                     processLine(inputLine, write, prefixes, inflections);
@@ -241,7 +242,7 @@ public class UnitTrainingDataGenerator {
         /*String[] subPieces = names.split(",");
         for (String subPiece : subPieces) {
 
-            List<String> inflections = quantityLexicon.getInflections(subPiece);
+            List<String> inflections = quantityLexicon.getInflectionsByTerm(subPiece);
 
             for (String inflection : inflections) {
                 if (system == UnitUtilities.System_Type.SI_BASE || system == UnitUtilities.System_Type.SI_DERIVED) {

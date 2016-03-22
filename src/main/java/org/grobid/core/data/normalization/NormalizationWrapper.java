@@ -5,7 +5,8 @@ import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.engines.UnitParser;
-import org.grobid.core.utilities.MeasurementUtilities;
+import org.grobid.core.lexicon.QuantityLexicon;
+import org.grobid.core.utilities.MeasurementOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tec.uom.se.unit.ProductUnit;
@@ -29,14 +30,16 @@ public class NormalizationWrapper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NormalizationWrapper.class);
     private final UnitFormat defaultFormatService;
-    private MeasurementUtilities measurementUtilities;
+    private MeasurementOperations measurementOperations;
     private UnitParser unitParser;
+    private QuantityLexicon quantityLexicon;
 
     public NormalizationWrapper() {
         UnitFormatService formatService = Bootstrap.getService(UnitFormatService.class);
         unitParser = UnitParser.getInstance();
         defaultFormatService = formatService.getUnitFormat();
-        measurementUtilities = new MeasurementUtilities();
+        measurementOperations = new MeasurementOperations();
+        quantityLexicon = QuantityLexicon.getInstance();
     }
 
     public Quantity.Normalized normalizeQuantityToBaseUnits(Quantity quantity) throws NormalizationException {
@@ -50,7 +53,7 @@ public class NormalizationWrapper {
     }
 
     public Unit findDefinition(Unit unit) {
-        UnitDefinition definition = measurementUtilities.lookup(unit);
+        UnitDefinition definition = measurementOperations.quantityLexicon.lookup(unit);
 
         if (definition != null) {
             unit.setUnitDefinition(definition);
@@ -68,13 +71,16 @@ public class NormalizationWrapper {
      * TODO: integrate additional parsers in case the default parser is not able to successfully recognize the unit.
      */
     protected javax.measure.Unit parseUnit(Unit rawUnit) throws NormalizationException {
-        List<UnitBlock> unitBlockList = unitParser.tagUnit(rawUnit.getRawName());
+        String unitName = quantityLexicon.getNameByInflection(rawUnit.getRawName());
+        if (unitName == null) {
+            List<UnitBlock> unitBlockList = unitParser.tagUnit(rawUnit.getRawName());
+            unitName = UnitBlock.unitBlocksToString(unitBlockList);
+        }
 
-        String stringUnitProduct = UnitBlock.unitBlocksToString(unitBlockList);
         javax.measure.Unit parsedUnit = null;
 
         try {
-            parsedUnit = defaultFormatService.parse(stringUnitProduct);
+            parsedUnit = defaultFormatService.parse(unitName);
         } catch (ParserException pe) {
             try {
                 parsedUnit = defaultFormatService.parse(rawUnit.getRawName());
@@ -134,7 +140,7 @@ public class NormalizationWrapper {
         }
 
         if (quantity.isNormalized()) {
-            UnitDefinition definition = measurementUtilities.lookup(quantity.getNormalizedQuantity().getUnit());
+            UnitDefinition definition = measurementOperations.quantityLexicon.lookup(quantity.getNormalizedQuantity().getUnit());
             if (definition != null) {
                 quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
             }

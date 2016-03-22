@@ -1,7 +1,6 @@
 package org.grobid.core.engines;
 
 import org.grobid.core.GrobidModels;
-import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorUnit;
@@ -10,7 +9,7 @@ import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.MeasurementUtilities;
+import org.grobid.core.utilities.MeasurementOperations;
 import org.grobid.core.utilities.OffsetPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,12 +39,12 @@ public class UnitParser extends AbstractParser {
     }
 
     private QuantityLexicon quantityLexicon = null;
-    private MeasurementUtilities measurementUtilities = null;
+    private MeasurementOperations measurementOperations = null;
 
     private UnitParser() {
         super(GrobidModels.UNITS);
         quantityLexicon = QuantityLexicon.getInstance();
-        measurementUtilities = new MeasurementUtilities();
+        measurementOperations = new MeasurementOperations();
     }
 
     /**
