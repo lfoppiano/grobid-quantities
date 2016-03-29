@@ -9,7 +9,7 @@ import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.normalization.NormalizationException;
-import org.grobid.core.data.normalization.NormalizationWrapper;
+import org.grobid.core.data.normalization.QuantityNormalizer;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
@@ -163,13 +163,13 @@ public class QuantityParser extends AbstractParser {
     }
 
     private void normalizeQuantity(Quantity quantity) {
-        NormalizationWrapper normalizationWrapper = new NormalizationWrapper();
+        QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
         if (quantity == null)
             return;
         if (quantity.isNormalized())
             return;
         try {
-            Quantity.Normalized quantity1 = normalizationWrapper.normalizeQuantityToBaseUnits(quantity);
+            Quantity.Normalized quantity1 = quantityNormalizer.normalizeQuantity(quantity);
             if (quantity1 != null) {
                 quantity.setNormalizedQuantity(quantity1);
             }
@@ -193,7 +193,6 @@ public class QuantityParser extends AbstractParser {
             normalizedQuantity.setUnit(quantityBase.getNormalizedQuantity().getUnit());
             quantityLeast.setNormalizedQuantity(normalizedQuantity);
         }
-//        quantityLeast.setRawValue(quantityBase.getRawValue());
         quantityLeast.setRawUnit(quantityBase.getRawUnit());
         quantityLeast.setOffsetStart(quantityBase.getOffsetStart());
         quantityLeast.setOffsetEnd(quantityBase.getOffsetEnd());
@@ -216,7 +215,6 @@ public class QuantityParser extends AbstractParser {
             normalizedQuantity.setUnit(quantityBase.getNormalizedQuantity().getUnit());
             quantityMost.setNormalizedQuantity(normalizedQuantity);
         }
-//        quantityMost.setRawValue(value.toString());
         quantityMost.setRawUnit(quantityRange.getRawUnit());
         quantityMost.setOffsetStart(quantityRange.getOffsetStart());
         quantityMost.setOffsetEnd(quantityRange.getOffsetEnd());
@@ -286,22 +284,21 @@ public class QuantityParser extends AbstractParser {
             if (((line.length() == 0) || (i == lines.length - 1)) && (paragraph.length() > 0)) {
                 // we have a new paragraph
                 text = paragraph.toString().replace("\n", " ").replace("\r", " ");
-                List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
+                List<LayoutToken> tokens = QuantityAnalyzer.tokenizeWithLayoutToken(text);
 
-                if (tokenizations.size() == 0)
+                if (tokens.size() == 0)
                     continue;
 
                 String ress = null;
-                List<String> texts = new ArrayList<String>();
-                for (LayoutToken token : tokenizations) {
+                List<String> texts = new ArrayList<>();
+                for (LayoutToken token : tokens) {
                     if (!token.getText().equals(" ")) {
                         texts.add(token.getText());
                     }
                 }
 
                 // to store unit term positions
-                List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
-                unitTokenPositions = quantityLexicon.inUnitNames(texts);
+                List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
                 ress = addFeatures(texts, unitTokenPositions);
                 String res = null;
                 try {
@@ -309,10 +306,10 @@ public class QuantityParser extends AbstractParser {
                 } catch (Exception e) {
                     throw new GrobidException("CRF labeling for quantity parsing failed.", e);
                 }
-                measurements = measurementOperations.extractMeasurement(text, res, tokenizations);
+                measurements = measurementOperations.extractMeasurement(text, res, tokens);
                 measurements = measurementOperations.resolveMeasurement(measurements);
 
-                textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
+                textNode.appendChild(trainingExtraction(measurements, text, tokens));
                 paragraph = new StringBuilder();
             }
         }

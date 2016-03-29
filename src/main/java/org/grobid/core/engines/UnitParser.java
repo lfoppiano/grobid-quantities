@@ -39,12 +39,10 @@ public class UnitParser extends AbstractParser {
     }
 
     private QuantityLexicon quantityLexicon = null;
-    private MeasurementOperations measurementOperations = null;
 
     private UnitParser() {
         super(GrobidModels.UNITS);
         quantityLexicon = QuantityLexicon.getInstance();
-        measurementOperations = new MeasurementOperations();
     }
 
     /**

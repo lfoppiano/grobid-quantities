@@ -12,9 +12,13 @@ public class UnitBlock {
 
 
     public UnitBlock(String prefix, String base, String pow) {
-        this.prefix = prefix;
-        this.base = base;
-        this.pow = pow;
+        setPrefix(prefix);
+        setBase(base);
+        setPow(pow);
+    }
+
+    public UnitBlock(String base) {
+        setBase(base);
     }
 
     public UnitBlock() {
@@ -27,7 +31,9 @@ public class UnitBlock {
     }
 
     public void setPrefix(String prefix) {
-        this.prefix = prefix;
+        if (prefix != null) {
+            this.prefix = prefix;
+        }
     }
 
     public String getBase() {
@@ -35,7 +41,9 @@ public class UnitBlock {
     }
 
     public void setBase(String base) {
-        this.base = base;
+        if (base != null) {
+            this.base = base;
+        }
     }
 
     public String getPow() {
@@ -43,7 +51,9 @@ public class UnitBlock {
     }
 
     public void setPow(String pow) {
-        this.pow = pow;
+        if (pow != null) {
+            this.pow = pow;
+        }
     }
 
 
@@ -59,7 +69,7 @@ public class UnitBlock {
         return sb.toString();
     }
 
-    public static String unitBlocksToString(List<UnitBlock> unitBlockList) {
+    public static String asProduct(List<UnitBlock> unitBlockList) {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
         for (UnitBlock ub : unitBlockList) {
@@ -72,5 +82,45 @@ public class UnitBlock {
         }
 
         return sb.toString();
+    }
+
+    public static String asString(List<UnitBlock> unitBlockList) {
+        StringBuilder numerator = new StringBuilder();
+        StringBuilder denominator = new StringBuilder();
+        boolean firstNumerator = true;
+        boolean firstDenominator = true;
+        boolean fraction = false;
+        for (UnitBlock ub : unitBlockList) {
+            if (!ub.getPow().equals("0")) {
+                if (ub.getPow().contains("-")) {
+                    fraction = true;
+                    String den = ub.toString().replace("-", "");
+                    if (den.endsWith("^1")) {
+                        den = den.replace("^1", "");
+                    }
+
+                    if (!firstDenominator) {
+                        denominator.append("·");
+                    } else {
+                        firstDenominator = false;
+                    }
+                    denominator.append(den);
+                } else {
+                    if (!firstNumerator) {
+                        numerator.append("·");
+                    } else {
+                        firstNumerator = false;
+                    }
+
+                    numerator.append(ub.toString());
+                }
+            }
+        }
+
+        if (fraction) {
+            return numerator.append("/").append(denominator.toString()).toString();
+        } else {
+            return numerator.toString();
+        }
     }
 }

@@ -24,6 +24,7 @@ public class Quantity {
     private static final Logger logger = LoggerFactory.getLogger(Quantity.class);
 
     private Unit rawUnit = null;
+    private Unit parsedUnit = null;
     private String rawValue = null;
     private BigDecimal parsedValue = null;
 
@@ -278,6 +279,14 @@ public class Quantity {
 
         json.append(" }");
         return json.toString();
+    }
+
+    public Unit getParsedUnit() {
+        return parsedUnit;
+    }
+
+    public void setParsedUnit(Unit parsedUnit) {
+        this.parsedUnit = parsedUnit;
     }
 
     public class Normalized {

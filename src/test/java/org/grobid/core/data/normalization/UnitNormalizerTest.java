@@ -1,0 +1,164 @@
+package org.grobid.core.data.normalization;
+
+import org.grobid.core.data.UnitBlock;
+import org.grobid.core.engines.UnitParser;
+import org.grobid.core.lexicon.QuantityLexicon;
+import org.grobid.core.main.LibraryLoader;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.easymock.EasyMock.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+/**
+ * Created by lfoppiano on 24/03/16.
+ */
+public class UnitNormalizerTest {
+
+    private UnitNormalizer target;
+    private UnitParser mockUnitParser;
+    private QuantityLexicon mockQuantityLexicon;
+
+    /**
+     * We shall run the test without this...
+     */
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        LibraryLoader.load();
+    }
+
+    @Before
+    public void setUp() {
+        target = new UnitNormalizer();
+        mockUnitParser = createMock(UnitParser.class);
+        target.setUnitParser(mockUnitParser);
+
+        mockQuantityLexicon = createMock(QuantityLexicon.class);
+        target.setQuantityLexicon(mockQuantityLexicon);
+    }
+
+    @Test
+    public void testParseAndReformat_baseUnit_noPow() throws Exception {
+        String unitSymbol = "m";
+
+        expect(mockQuantityLexicon.getNameByInflection("m")).andReturn(null);
+        final UnitBlock block = new UnitBlock("m");
+        expect(mockUnitParser.tagUnit("m")).andReturn(Arrays.asList(new UnitBlock[]{block}));
+
+        replay(mockQuantityLexicon, mockUnitParser);
+        String reformatted = target.parseAndReformat(unitSymbol);
+        verify(mockQuantityLexicon, mockUnitParser);
+
+        assertThat(reformatted, is("m"));
+    }
+    @Test
+    public void testParseAndReformat_baseUnit_noPow2() throws Exception {
+        String unitSymbol = "s";
+
+        expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
+        final UnitBlock block = new UnitBlock("s");
+        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block}));
+
+        replay(mockQuantityLexicon, mockUnitParser);
+        String reformatted = target.parseAndReformat(unitSymbol);
+        verify(mockQuantityLexicon, mockUnitParser);
+
+        assertThat(reformatted, is("s"));
+    }
+
+    @Test
+    public void testParseAndReformat_baseUnit_noPow3() throws Exception {
+        String unitSymbol = "ml";
+
+        expect(mockQuantityLexicon.getNameByInflection("ml")).andReturn(null);
+        final UnitBlock block = new UnitBlock("ml");
+        expect(mockUnitParser.tagUnit("ml")).andReturn(Arrays.asList(new UnitBlock[]{block}));
+
+        replay(mockQuantityLexicon, mockUnitParser);
+        String reformatted = target.parseAndReformat(unitSymbol);
+        verify(mockQuantityLexicon, mockUnitParser);
+
+        assertThat(reformatted, is("ml"));
+    }
+
+    @Test
+    public void testParseAndReformat_baseUnit_fullName_noPow() throws Exception {
+        String unitSymbol = "meter";
+
+        expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn("m");
+        replay(mockQuantityLexicon);
+        String reformatted = target.parseAndReformat(unitSymbol);
+        verify(mockQuantityLexicon);
+
+        assertThat(reformatted, is("m"));
+    }
+
+    @Test
+    public void testParseAndReformat_composedUnit_noPow() throws Exception {
+        String unitSymbol = "hm";
+        expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
+
+        final UnitBlock block = new UnitBlock("h", "m", null);
+        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block}));
+
+        replay(mockQuantityLexicon, mockUnitParser);
+        String normalized = target.parseAndReformat(unitSymbol);
+        verify(mockQuantityLexicon, mockUnitParser);
+
+        assertThat(normalized, is("hm"));
+    }
+
+    @Test
+    public void testParseAndReformat_baseUnit_pow2() throws Exception {
+        String unitSymbol = "m^2";
+        expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
+        final UnitBlock block = new UnitBlock(null, "m", "2");
+        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block}));
+
+        replay(mockQuantityLexicon, mockUnitParser);
+        String normalized = target.parseAndReformat(unitSymbol);
+        verify(mockQuantityLexicon, mockUnitParser);
+        String normalizedUnit = "m²";
+
+        assertThat(normalized, is(normalizedUnit));
+
+    }
+
+
+    @Test
+    public void testParseAndReformat_transformedUnit_pow2() throws Exception {
+        String unitSymbol = "km^2";
+        expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
+        final UnitBlock block = new UnitBlock("k", "m", "2");
+        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block}));
+
+        replay(mockUnitParser, mockQuantityLexicon);
+        String reformatted = target.parseAndReformat(unitSymbol);
+        verify(mockUnitParser, mockQuantityLexicon);
+        String expected = "km²";
+
+        assertThat(reformatted, is(expected));
+    }
+
+
+    @Test
+    public void testParseAndReformat_productUnit_pow2() throws Exception {
+        String unitSymbol = "m/s^2";
+        expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
+        final UnitBlock block1 = new UnitBlock("m");
+        final UnitBlock block2 = new UnitBlock(null, "s", "-2");
+        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block1, block2}));
+
+        replay(mockUnitParser, mockQuantityLexicon);
+        String reformatted = target.parseAndReformat(unitSymbol);
+        verify(mockUnitParser, mockQuantityLexicon);
+        String expected = "m/s²";
+
+        assertThat(reformatted, is(expected));
+    }
+
+}

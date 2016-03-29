@@ -5,6 +5,7 @@ import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.UnitDefinition;
+import org.grobid.core.data.normalization.UnitNormalizer;
 import org.grobid.core.engines.TaggingLabel;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.QuantityLexicon;
@@ -25,12 +26,9 @@ import org.slf4j.LoggerFactory;
 public class MeasurementOperations {
     private static final Logger logger = LoggerFactory.getLogger(MeasurementOperations.class);
 
-    public QuantityLexicon quantityLexicon = null;
-    private UnitUtilities unitUtilities = null;
+    UnitNormalizer un = new UnitNormalizer();
 
     public MeasurementOperations() {
-        quantityLexicon = QuantityLexicon.getInstance();
-        unitUtilities = UnitUtilities.getInstance();
     }
 
     /**
@@ -207,7 +205,7 @@ public class MeasurementOperations {
     private void updateQuantity(Quantity quantity) {
         if ((quantity != null) && (!quantity.isEmpty())) {
             Unit rawUnit = quantity.getRawUnit();
-            UnitDefinition foundUnit = quantityLexicon.lookup(rawUnit);
+            UnitDefinition foundUnit  = un.findDefinition(rawUnit);
 
             if (foundUnit != null) {
                 rawUnit.setUnitDefinition(foundUnit);
@@ -378,7 +376,7 @@ public class MeasurementOperations {
                     currentQuantity.setValue(clusterContent);
                     pos = adjustStartOffset(text, pos);
                     currentQuantity.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, pos);
+                    endPos = adjustEndOffset(text, endPos);
                     currentQuantity.setOffsetEnd(endPos);
 
                     if (currentUnit.getRawName() != null) {
