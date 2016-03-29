@@ -270,7 +270,7 @@ var grobid = (function ($) {
                         }
                         else {
                             newString += string.substring(pos, start)
-                                + '<span id="annot-' + currentMeasurementIndex + '-' + currentQuantityIndex + '" rel="popover" data-color="' + quantityType + '">'
+                                + ' <span id="annot-' + currentMeasurementIndex + '-' + currentQuantityIndex + '" rel="popover" data-color="' + quantityType + '">'
                                 + '<span class="label ' + quantityType + '" style="cursor:hand;cursor:pointer;" >'
                                 + string.substring(start, end) + '</span></span>';
                             pos = end;
