@@ -6,7 +6,10 @@ import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.RegexValueHolder;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.utilities.*;
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.TextUtilities;
+import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,10 +17,10 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.upperCase;
-import static org.grobid.core.lexicon.LexiconLoader.loadInflections;
-import static org.grobid.core.lexicon.LexiconLoader.loadPrefixes;
-import static org.grobid.core.lexicon.LexiconLoader.readFile;
+import static org.grobid.core.lexicon.LexiconLoader.*;
 
 /**
  * Class for managing the measurement lexical resources
@@ -150,7 +153,10 @@ public class QuantityLexicon {
                         if (inflection2name == null) {
                             inflection2name = new HashMap<>();
                         }
-                        final String name = pieces[0];
+                        String name = pieces[0];
+                        if (isBlank(name) /*&& !name.equals(subPiece)*/) {
+                            name = subPiece;
+                        }
                         inflection2name.put(inflectedForm, name);
 
                         for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
