@@ -54,11 +54,13 @@ J	ENERGY	SI_DERIVED	joule
 C	ELECTRIC_CHARGE	SI_DERIVED	coulomb
 H	INDUCTANCE	SI_DERIVED	henri,henry
 W	POWER	SI_DERIVED	watt
+VA	POWER	NON_SI	volt-ampere
 T	MAGNETIC_INDUCTION	SI_DERIVED	tesla
 Wb	MAGNETIC_FLUX	SI_DERIVED	weber
 dB	ATTENUATION	SI_DERIVED	decibel
 V/m	ELECTRIC_FIELD	SI_DERIVED	volt per metre,volt per meter
 A/m	MAGNETIC_FIELD_STRENGTH	SI_DERIVED	ampere per metre,ampere per meter
+AT/m	MAGNETIC_FIELD_STRENGTH	SI_DERIVED	ampere-turn per metre,ampere-turn per meter
 rpm,round/min	FREQUENCY	NON_SI	round per minute
 rps,round/s	FREQUENCY	NON_SI	round per second
 Hz	FREQUENCY	SI_BASE	hertz

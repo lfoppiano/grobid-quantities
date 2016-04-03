@@ -1061,6 +1061,23 @@
     {
       "notations": [
         {
+          "raw": "VA"
+        }
+      ],
+      "type": "POWER",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "volt-ampere",
+          "inflections": [
+            "volt-amperes"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "T"
         }
       ],
@@ -1173,6 +1190,40 @@
           "lemma": "ampere per meter",
           "inflections": [
             "amperes per meter"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "AT/m",
+          "decomposition": [
+            {
+              "base": "AT"
+            },
+            {
+              "pow": "/"
+            },
+            {
+              "base": "m"
+            }
+          ]
+        }
+      ],
+      "type": "MAGNETIC_FIELD_STRENGTH",
+      "system": "SI_DERIVED",
+      "names": [
+        {
+          "lemma": "ampere-turn per metre",
+          "inflections": [
+            "ampere-turns per metre"
+          ]
+        },
+        {
+          "lemma": "ampere-turn per meter",
+          "inflections": [
+            "ampere-turns per meter"
           ]
         }
       ]
