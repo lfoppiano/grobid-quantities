@@ -8,7 +8,7 @@ import org.grobid.core.lexicon.QuantityLexicon;
 
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
-import javax.measure.spi.Bootstrap;
+import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class UnitNormalizer {
     private QuantityLexicon quantityLexicon;
 
     public UnitNormalizer() {
-        UnitFormatService formatService = Bootstrap.getService(UnitFormatService.class);
+        UnitFormatService formatService = ServiceProvider.current().getUnitFormatService();
         defaultFormatService = formatService.getUnitFormat();
 
         unitParser = UnitParser.getInstance();

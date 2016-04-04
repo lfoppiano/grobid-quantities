@@ -11,7 +11,7 @@ import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
-import javax.measure.spi.Bootstrap;
+import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class QuantityNormalizer {
     private UnitNormalizer unitNormalizer;
 
     public QuantityNormalizer() {
-        UnitFormatService formatService = Bootstrap.getService(UnitFormatService.class);
+        UnitFormatService formatService = ServiceProvider.current().getUnitFormatService();
         defaultFormatService = formatService.getUnitFormat();
         measurementOperations = new MeasurementOperations();
         unitNormalizer = new UnitNormalizer();

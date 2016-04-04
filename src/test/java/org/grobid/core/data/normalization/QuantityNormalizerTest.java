@@ -6,12 +6,11 @@ import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.format.UnitFormat;
-import javax.measure.spi.Bootstrap;
+import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -191,7 +190,7 @@ public class QuantityNormalizerTest {
 
     @Test
     public void testCheckPrecision() throws Exception {
-        UnitFormatService formatService = Bootstrap.getService(UnitFormatService.class);
+        UnitFormatService formatService = ServiceProvider.current().getUnitFormatService();
         UnitFormat defaultFormatService = formatService.getUnitFormat();
 
         TransformedUnit unit = (TransformedUnit) defaultFormatService.parse("g");

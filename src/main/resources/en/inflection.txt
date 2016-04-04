@@ -34,7 +34,7 @@ celsius
 celcius
 fahrenheit	fahrenheit
 candela	candelas
-mole	moles
+mole	moles,mols
 molarity
 weight	weights
 weight percent	weight percents
