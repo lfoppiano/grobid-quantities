@@ -65,3 +65,8 @@ The input directory can contain PDF (.pdf, scientific articles only), XML/TEI (.
 
 Demo/console web app is then accessible at ```http://localhost:8080```
 
+Using ```curl```:
+
+```
+curl -G --data-urlencode "text=I've lost one minute." localhost:8080/processQuantityText
+```
