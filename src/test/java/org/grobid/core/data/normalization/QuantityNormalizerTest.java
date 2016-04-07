@@ -62,6 +62,27 @@ public class QuantityNormalizerTest {
     }
 
     @Test
+    public void testNormalizeQuantity_wordsValue_simpleUnitWithNormalization_kmToMeters() throws Exception {
+        Quantity input = new Quantity();
+        input.setValue("twenty two");
+        Unit raw = new Unit();
+        raw.setRawName("km");
+        input.setRawUnit(raw);
+        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(new Unit("km"));
+        final UnitDefinition fakeDefinition = new UnitDefinition();
+        fakeDefinition.setNotations(Arrays.asList(new String[]{"km"}));
+        fakeDefinition.setNames(Arrays.asList(new String[]{"kilometer", "kilometers", "kilometres"}));
+        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(fakeDefinition);
+
+        replay(mockUnitNormalizer);
+        Quantity.Normalized output = target.normalizeQuantity(input);
+
+        verify(mockUnitNormalizer);
+        assertThat(output.getUnit().getRawName(), is("m"));
+        assertThat(output.getValue().doubleValue(), is(22000.0));
+    }
+
+    @Test
     public void testNormalizeQuantity_simpleUnitWithNormalization_CelsiusToKelvin() throws Exception {
         Quantity input = new Quantity();
         input.setValue("10");

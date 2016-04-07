@@ -503,6 +503,7 @@ var grobid = (function ($) {
             }
 
             var rawValue = quantity.rawValue;
+            var parsedValue = quantity.parsedValue;
             var unit = quantity.rawUnit;
 
             var normalizedQuantity = quantity.normalizedQuantity;
@@ -532,6 +533,10 @@ var grobid = (function ($) {
 
             if (rawValue) {
                 string += "<p>raw value: <b>" + rawValue + "</b></p>";
+            }
+
+            if (parsedValue && (parsedValue != rawValue)) {
+                string += "<p>parsed value: <b>" + parsedValue + "</b></p>";
             }
 
             if (rawUnitName) {

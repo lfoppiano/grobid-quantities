@@ -59,6 +59,25 @@ public class QuantityParserIntegrationTests {
     }
 
     @Test
+    public void testNormalizeableWordsQuantity() throws Exception {
+        QuantityParser parser = QuantityParser.getInstance();
+
+        List<Measurement> measurements = parser.extractQuantities("ten km");
+
+
+        if (measurements != null) {
+            System.out.println("\n");
+            for (Measurement measurement : measurements) {
+                System.out.println(measurement.toString());
+                System.out.println(measurement.toJson());
+            }
+        } else {
+            System.out.println("No measurement found.");
+        }
+
+    }
+
+    @Test
     public void testNormalizeableQuantity2() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
 

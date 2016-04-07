@@ -11,6 +11,10 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.grobid.core.utilities.WordsToNumber;
 
 /**
  * Class for managing a quantity representation.
@@ -94,12 +98,21 @@ public class Quantity {
      */
     public void setValue(String raw, Locale local) {
         this.rawValue = raw;
-        NumberFormat format = NumberFormat.getInstance(local);
-        try {
-            Number number = format.parse(raw);
-            this.parsedValue = new BigDecimal(number.toString());
-        } catch (ParseException pe) {
-            logger.error("Invalid value expression: " + raw + " , for LOCALE: " + local);
+
+        // if we have alphabetical characters, weuse the word to number parser
+        Pattern pattern = Pattern.compile("[a-zA-Z]");
+        Matcher matcher = pattern.matcher(raw);
+        if (matcher.find()) {
+            WordsToNumber w2n = new WordsToNumber();
+            this.parsedValue = w2n.normalize(raw);
+        } else {
+            NumberFormat format = NumberFormat.getInstance(local);
+            try {
+                Number number = format.parse(raw);
+                this.parsedValue = new BigDecimal(number.toString());
+            } catch (ParseException pe) {
+                logger.error("Invalid value expression: " + raw + " , for LOCALE: " + local);
+            }
         }
     }
 
