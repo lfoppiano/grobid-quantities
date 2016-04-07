@@ -99,12 +99,12 @@ public class Quantity {
     public void setValue(String raw, Locale local) {
         this.rawValue = raw;
 
-        // if we have alphabetical characters, weuse the word to number parser
+        // if we have alphabetical characters, we use the word to number parser
         Pattern pattern = Pattern.compile("[a-zA-Z]");
         Matcher matcher = pattern.matcher(raw);
         if (matcher.find()) {
             WordsToNumber w2n = new WordsToNumber();
-            this.parsedValue = w2n.normalize(raw);
+            this.parsedValue = w2n.normalize(raw, local);
         } else {
             NumberFormat format = NumberFormat.getInstance(local);
             try {

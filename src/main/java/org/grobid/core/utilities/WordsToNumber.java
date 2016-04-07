@@ -1,6 +1,9 @@
 package org.grobid.core.utilities;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.*;
 
 import org.slf4j.Logger;
@@ -19,7 +22,17 @@ public class WordsToNumber {
         "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen");
     private static List<String> tens = Arrays.asList(null, null, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety");
     private static List<String> scales = Arrays.asList("hundred", "thousand", "million", "billion", "trillion");
-    private static List<String> decimal = Arrays.asList("point");
+    private static String decimalMark = "point";
+
+    // TBD: special words for numbers to be considered
+    /*
+    .put("dozen", 12);
+    .put("score", 20);
+    .put("gross", 144);
+    .put("quarter", 0.25);
+    .put("half", 0.5);
+    .put("oh", 0);
+    */
 
     // the lexicon
     private Map<String, ScaleIncrementPair> numWord = null; 
@@ -45,25 +58,61 @@ public class WordsToNumber {
         }
     }
 
-    public BigDecimal normalize(String text) {
+    public BigDecimal normalize(String text, Locale local) {
         double current = 0; 
         double result = 0;
         text = text.toLowerCase();
-        String pieces[] = text.split("\\W"); // or limit to split(" |-|—");
 
-        for(int i=0; i< pieces.length; i++) {
-            String word = pieces[i];
-            ScaleIncrementPair scaleIncrement = numWord.get(word);
-            if (scaleIncrement == null) {
-                logger.warn("Invalid token to be converted into number: " + word);
-                continue;
+        // split integer and possible decimal part
+        String pieces[] = text.split(decimalMark);
+        String integerPart = pieces[0].trim();
+        String decimalPart = null;
+        if (pieces.length > 1)
+            decimalPart = pieces[1].trim();
+
+        if ((integerPart != null) && (integerPart.length() > 0)) {
+            pieces = integerPart.split("\\W"); // or limit to split(" |-|—");
+            for(int i=0; i< pieces.length; i++) {
+                String word = pieces[i];
+                ScaleIncrementPair scaleIncrement = numWord.get(word);
+                if (scaleIncrement == null) {
+                    logger.warn("Invalid token to be converted into number: " + word);
+                    continue;
+                }
+                current = current * scaleIncrement.scale + scaleIncrement.increment;
+                if (scaleIncrement.scale > 100) {
+                    result += current;
+                    current = 0;
+                }
             }
-            current = current * scaleIncrement.scale + scaleIncrement.increment;
-            if (scaleIncrement.scale > 100) {
-                result += current;
-                current = 0;
+            result += current;
+        }
+
+        // decimal part 
+        BigDecimal decimalResult = new BigDecimal(0);
+        if ((decimalPart != null) && (decimalPart.length() > 0)) {
+            pieces = decimalPart.split("\\W"); // or limit to split(" |-|—");
+            StringBuilder res = new StringBuilder().append("0.");
+            for(int i=0; i< pieces.length; i++) {
+                String word = pieces[i].trim();
+                if (word.length() == 0) 
+                    continue;
+                ScaleIncrementPair scaleIncrement = numWord.get(word);
+                if (scaleIncrement == null) {
+                    logger.warn("Invalid decimal token to be converted into number: " + word);
+                    continue;
+                }
+                res.append(scaleIncrement.increment); 
+            }
+            NumberFormat format = NumberFormat.getInstance(local);
+            try {
+                Number number = format.parse(res.toString());
+                decimalResult = new BigDecimal(number.toString());
+            } catch (ParseException pe) {
+                logger.error("Invalid value expression: " + res.toString() + " , for: " + decimalPart);
             }
         }
-        return new BigDecimal(result + current);
+
+        return new BigDecimal(result).add(decimalResult);
     }
 }
