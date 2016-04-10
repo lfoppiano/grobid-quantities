@@ -75,3 +75,8 @@ Using ```curl```:
 ```
 curl -G --data-urlencode "text=I've lost one minute." localhost:8080/processQuantityText
 ```
+## License
+
+GROBID and grobid-quantities are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
+
+Contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
