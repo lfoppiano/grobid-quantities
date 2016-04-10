@@ -7,14 +7,14 @@
 
 __Work in progress.__
 
-The goal of this GROBID module is to recognize in textual documents any expressions of measurements (e.g. _pressure_, _temperature_, etc.), to parse and normalization them, and finally to convert these measurements into SI units. 
+The goal of this GROBID module is to recognize in textual documents any expressions of measurements (e.g. _pressure_, _temperature_, etc.), to parse and normalization them, and finally to convert these measurements into SI units. We focus our work on technical and scientific articles (text, XML and PDF input) and patents (text and XML input). 
 
 ![GROBID Quantity Demo](doc/img/Screenshot.png)
 
 One additional goal is also to identify and attached to the measurements the "quantified" substance, e.g. _silicon nitride powder_ in 
 
 ```
-A mixture of 10kg silicon nitride powder was charged into the mixing chamber 20 of the mixing vessel 18.
+A mixture of 10kg _silicon nitride powder_ was charged into the mixing chamber 20 of the mixing vessel 18.
 ```
 
 As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
@@ -57,7 +57,7 @@ As the rest of GROBID, the training data is encoded following the [TEI P5](http:
 
 ## Generation of training data
 
-Similarly as for Grobid, with executable name ```createTrainingQuantities```, for example: 
+Training data generation works the same as in GROBID, with executable name ```createTrainingQuantities```, for example: 
 
 > java -jar target/grobid-quantities-0.4.0-SNAPSHOT.one-jar.jar -gH ../grobid-home/ -gP ../grobid-home/config/grobid.properties -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/ -exe createTrainingQuantities
 
@@ -79,4 +79,4 @@ curl -G --data-urlencode "text=I've lost one minute." localhost:8080/processQuan
 
 GROBID and grobid-quantities are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
 
-Contact: Patrice Lopez (<patrice.lopez@science-miner.com>)
+Contact: Patrice Lopez (<patrice.lopez@science-miner.com>), Luca Foppiano (<luca.foppiano@inria.fr>)
