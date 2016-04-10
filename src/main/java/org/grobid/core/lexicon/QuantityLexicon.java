@@ -17,15 +17,19 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.grobid.core.utilities.WordsToNumber;
+
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.upperCase;
 import static org.grobid.core.lexicon.LexiconLoader.*;
 
 /**
- * Class for managing the measurement lexical resources
+ * Class for managing the measurement lexical resources.
  *
- * @author Patrice Lopez
+ * To be done: generalize to n different languages
+ *
+ * @author Patrice, Luca
  */
 public class QuantityLexicon {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityLexicon.class);
@@ -44,6 +48,10 @@ public class QuantityLexicon {
     private FastMatcher unitPattern = null;
     private Set<String> unitTokens = null;
     private Set<String> unitTokensLowerCase = null;
+
+    // the list of tokens involved for expressing numbers with words
+    // this set depends on the language
+    private Set<String> numberTokens = null;
 
     private Map<String, String> prefixes = null; // map prefix symbol to prefix string
     private Map<String, List<String>> inflection = null; // map a unit string to its morphological inflections
@@ -93,6 +101,8 @@ public class QuantityLexicon {
                 processLineLoadUnits(l);
             }
         });
+
+        numberTokens = WordsToNumber.getInstance().getTokenSet();
     }
 
     private void processLineLoadUnits(String l) {
@@ -449,5 +459,13 @@ public class QuantityLexicon {
         }
 
         return null;
+    }
+
+    public boolean isNumberToken(String token) {
+        if (token == null)
+            return false;
+        if (numberTokens == null)
+            init();
+        return numberTokens.contains(token.toLowerCase());
     }
 }

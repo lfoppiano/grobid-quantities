@@ -104,5 +104,12 @@ UF4:%x[2,16]
 #UG3:%x[1,17]
 #UG4:%x[2,17]
 
+# isNumberToken: token can express a number
+UG0:%x[-2,17]
+UG1:%x[-1,17]
+UG2:%x[0,17]
+UG3:%x[1,17]
+UG4:%x[2,17]
+
 # Output
 B

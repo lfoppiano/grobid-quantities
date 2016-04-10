@@ -1,7 +1,7 @@
 package org.grobid.core.data;
 
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.io.*;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
@@ -103,7 +103,7 @@ public class Quantity {
         Pattern pattern = Pattern.compile("[a-zA-Z]");
         Matcher matcher = pattern.matcher(raw);
         if (matcher.find()) {
-            WordsToNumber w2n = new WordsToNumber();
+            WordsToNumber w2n = WordsToNumber.getInstance();
             this.parsedValue = w2n.normalize(raw, local);
         } else {
             NumberFormat format = NumberFormat.getInstance(local);

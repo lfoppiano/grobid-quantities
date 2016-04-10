@@ -38,6 +38,8 @@ public class FeaturesVectorQuantities {
 
     public String wordShapeTrimmed = null;
 
+    private boolean isNumberToken = false;
+
     public FeaturesVectorQuantities() {
     }
 
@@ -141,6 +143,12 @@ public class FeaturesVectorQuantities {
         else
             res.append(" 0");
         */
+
+        if (isNumberToken)
+            res.append(" 1");
+        else
+            res.append(" 0");
+
         // label - for training data (1)
         if (label != null)
             res.append(" " + label + "");
@@ -156,7 +164,8 @@ public class FeaturesVectorQuantities {
     static public FeaturesVectorQuantities addFeaturesQuantities(String word,
                                                                  String label,
                                                                  boolean isUnitToken,
-                                                                 boolean isUnitPattern) {
+                                                                 boolean isUnitPattern, 
+                                                                 boolean isNumberToken) {
         FeatureFactory featureFactory = FeatureFactory.getInstance();
 
         FeaturesVectorQuantities featuresVector = new FeaturesVectorQuantities();
@@ -217,6 +226,8 @@ public class FeaturesVectorQuantities {
         featuresVector.wordShape = TextUtilities.wordShape(word);
 
         featuresVector.wordShapeTrimmed = TextUtilities.wordShapeTrimmed(word);
+
+        featuresVector.isNumberToken = isNumberToken;
 
         return featuresVector;
     }

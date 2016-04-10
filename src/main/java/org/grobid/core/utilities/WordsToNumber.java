@@ -5,9 +5,14 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.*;
+import java.io.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.io.*;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
 
 /**
  * Convert a number expressed with alphabetical charcaters into a normalized numerical value.
@@ -18,44 +23,110 @@ public class WordsToNumber {
 
     private static final Logger logger = LoggerFactory.getLogger(WordsToNumber.class);
 
-    private static List<String> units = Arrays.asList("zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
-        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen");
-    private static List<String> tens = Arrays.asList(null, null, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety");
-    private static List<String> scales = Arrays.asList("hundred", "thousand", "million", "billion", "trillion");
-    private static String decimalMark = "point";
+    private static volatile WordsToNumber instance;
 
-    // TBD: special words for numbers to be considered
-    /*
-    .put("dozen", 12);
-    .put("score", 20);
-    .put("gross", 144);
-    .put("quarter", 0.25);
-    .put("half", 0.5);
-    .put("oh", 0);
-    */
+    private final String VALUES_PATH = "en/values.json";
 
+    private static List<String> bases = null; 
+    private static List<String> tens = null; 
+    private static List<String> scales = null; 
+    private static String decimalMark = null; 
+
+    private Set<String> numberTokens = null;
+ 
     // the lexicon
     private Map<String, ScaleIncrementPair> numWord = null; 
 
-    public WordsToNumber() {
+    public static WordsToNumber getInstance() {
+        if (instance == null) {
+            getNewInstance();
+        }
+        return instance;
+    }
+
+    private static synchronized void getNewInstance() {
+        instance = new WordsToNumber();
+    }
+
+    private WordsToNumber() {
         // init the lexicon with the numerical operations
         numWord = new HashMap<String, ScaleIncrementPair>();
         numWord.put("and", new ScaleIncrementPair(1, 0));
 
-        for (int i = 0; i < units.size(); i++) {
-            numWord.put(units.get(i), new ScaleIncrementPair(1, i));
+        init();
+    }
+
+    private void init() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            JsonNode rootNode = mapper.readTree(this.getClass().getClassLoader().getResourceAsStream(VALUES_PATH));
+
+            bases = new ArrayList<String>();
+            tens = new ArrayList<String>();
+            scales = new ArrayList<String>();
+            numberTokens = new HashSet<String>();
+            List<String> decimalMarks = new ArrayList<String>();
+
+            JsonNode basesNode = rootNode.findPath("bases");
+            if ((basesNode != null) && (!basesNode.isMissingNode())) {
+                Iterator<JsonNode> iter = basesNode.elements();
+                while (iter.hasNext()) {
+                    String text = ((JsonNode) iter.next()).textValue();
+                    bases.add(text);
+                    numberTokens.add(text);
+                }
+            }
+            for (int i = 0; i < bases.size(); i++) {
+                numWord.put(bases.get(i), new ScaleIncrementPair(1, i));
+            }
+
+            JsonNode tensNode = rootNode.findPath("tens");
+            if ((tensNode != null) && (!tensNode.isMissingNode())) {
+                Iterator<JsonNode> iter = tensNode.elements();
+                while (iter.hasNext()) {
+                    String text = ((JsonNode) iter.next()).textValue();
+                    tens.add(text);
+                    numberTokens.add(text);
+                }
+            }
+            for (int i = 1; i < tens.size(); i++) {
+                numWord.put(tens.get(i), new ScaleIncrementPair(1, i * 10));                
+            }
+
+            JsonNode scalesNode = rootNode.findPath("scales");
+            if ((scalesNode != null) && (!scalesNode.isMissingNode())) {
+                Iterator<JsonNode> iter = scalesNode.elements();
+                while (iter.hasNext()) {
+                    String text = ((JsonNode) iter.next()).textValue();
+                    scales.add(text);
+                    numberTokens.add(text);
+                }
+            }
+            for (int i = 0; i < scales.size(); i++) {
+                if(i == 0)
+                    numWord.put(scales.get(i), new ScaleIncrementPair(100, 0));
+                else
+                    numWord.put(scales.get(i), new ScaleIncrementPair(Math.pow(10, (i*3)), 0));
+            }
+
+            JsonNode decimalNode = rootNode.findPath("decimalMark");
+            if ((decimalNode != null) && (!decimalNode.isMissingNode())) {
+                Iterator<JsonNode> iter = decimalNode.elements();
+                while (iter.hasNext()) {
+                    String text = ((JsonNode) iter.next()).textValue();
+                    decimalMarks.add(text);
+                    numberTokens.add(text);
+                }
+            }
+            decimalMark = decimalMarks.get(0);
+        } catch(IOException e) {
+            logger.error("Error when reading the values.json file");
         }
 
-        for (int i = 1; i < tens.size(); i++) {
-            numWord.put(tens.get(i), new ScaleIncrementPair(1, i * 10));                
-        }
+    }
 
-        for (int i = 0; i < scales.size(); i++) {
-            if(i == 0)
-                numWord.put(scales.get(i), new ScaleIncrementPair(100, 0));
-            else
-                numWord.put(scales.get(i), new ScaleIncrementPair(Math.pow(10, (i*3)), 0));
-        }
+    public Set<String> getTokenSet() {
+        return numberTokens;
     }
 
     public BigDecimal normalize(String text, Locale local) {
@@ -114,5 +185,16 @@ public class WordsToNumber {
         }
 
         return new BigDecimal(result).add(decimalResult);
+    }
+
+    public class ScaleIncrementPair {
+
+        public double scale;
+        public int increment;
+
+        public ScaleIncrementPair(double s, int i) {
+            scale = s;
+            increment = i;
+        }
     }
 }

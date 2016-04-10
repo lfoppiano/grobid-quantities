@@ -2,7 +2,7 @@ package org.grobid.core.data;
 
 import org.grobid.core.utilities.OffsetPosition;
 
-import org.codehaus.jackson.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.io.*;
 
 import java.util.ArrayList;
 import java.util.List;

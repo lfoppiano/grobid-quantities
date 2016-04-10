@@ -22,7 +22,7 @@ public class FeaturesVectorQuantitiesTest {
         String word = "Colorado";
         String label = "CITY";
 
-        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true);
+        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
         assertThat(target.printVector(), is("Colorado colorado C Co Col Colo o do ado rado INITCAP NODIGIT 0 NOPUNCT 8 Colorado Xxxx Xx 1 1 CITY"));
     }
@@ -32,7 +32,7 @@ public class FeaturesVectorQuantitiesTest {
         String word = "The";
         String label = "OTHER";
 
-        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true);
+        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
         assertThat(target.printVector(), is("The the T Th The The e he The The INITCAP NODIGIT 0 NOPUNCT 3 The Xxx Xx 1 1 OTHER"));
     }
@@ -42,7 +42,7 @@ public class FeaturesVectorQuantitiesTest {
         String word = "a";
         String label = "OTHER";
 
-        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true);
+        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
         assertThat(target.printVector(), is("a a a a a a a a a a NOCAPS NODIGIT 1 NOPUNCT 1 a x x 1 1 OTHER"));
     }

@@ -1,0 +1,17 @@
+{
+    "bases" : [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", 
+                "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" ],
+    "tens" : [ null, null, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" ],
+    "scales" : [ "hundred", "thousand", "million", "billion", "trillion", "quadrillon", "quintillion"],
+    "decimalMark" : [ "point"], 
+    "specials" : [ 
+        {
+            "oh" : 0,
+            "dozen" : 12,
+            "score" : 20,
+            "gross" : 144,
+            "quarter" : 0.25,
+            "half" : 0.5
+        }
+    ]
+}

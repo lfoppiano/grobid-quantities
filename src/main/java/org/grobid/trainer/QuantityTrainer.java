@@ -162,7 +162,7 @@ public class QuantityTrainer extends AbstractTrainer {
 
                 FeaturesVectorQuantities featuresVector =
                         FeaturesVectorQuantities.addFeaturesQuantities(token, label,
-                                quantityLexicon.inUnitDictionary(token), isUnitPattern);
+                                quantityLexicon.inUnitDictionary(token), isUnitPattern, quantityLexicon.isNumberToken(token));
                 if (featuresVector.label == null)
                     continue;
                 writer.write(featuresVector.printVector());

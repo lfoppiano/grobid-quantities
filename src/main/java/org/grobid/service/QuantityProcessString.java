@@ -17,10 +17,10 @@ import javax.ws.rs.core.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.codehaus.jackson.map.*;
-import org.codehaus.jackson.*;
-import org.codehaus.jackson.io.*;
-import org.codehaus.jackson.node.*;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.core.io.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.annotation.*;
 
 /**
  * 

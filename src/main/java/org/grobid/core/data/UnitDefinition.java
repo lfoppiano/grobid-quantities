@@ -1,6 +1,7 @@
 package org.grobid.core.data;
 
-import org.codehaus.jackson.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.io.*;
+
 import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.ArrayList;

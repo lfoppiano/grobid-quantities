@@ -5,7 +5,7 @@ import org.grobid.core.utilities.UnitUtilities;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.codehaus.jackson.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.io.*;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;

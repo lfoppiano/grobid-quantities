@@ -21,11 +21,10 @@ import static org.junit.Assert.assertThat;
  */
 public class WordsToNumberTest {
 
-    private WordsToNumber wordsToNumber = null;
+    private WordsToNumber wordsToNumber = WordsToNumber.getInstance();
 
     @Before
     public void setUp() throws Exception {
-        wordsToNumber = new WordsToNumber();
     }
 
     @Test
