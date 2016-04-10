@@ -21,6 +21,8 @@ As the other GROBID models, the module relies only on machine learning and uses 
 
 ## Install, build, run
 
+Building grobid-quantities requires maven and JDK 1.8.  
+
 First install the latest development version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 
 Copy the module quantities as sibling sub-project to grobid-core, grobid-trainer, etc.:
@@ -49,7 +51,7 @@ For training the unit model:
 
 > mvn generate-resources -Ptrain_units
 
-The models will be saved under grobid-home/models/quantities and grobid-home/models/quantities respectively.
+The models will be saved under ```grobid-home/models/quantities``` and ```grobid-home/models/units``` respectively.
 
 ## Training data
 
