@@ -38,7 +38,7 @@ Run some test:
 
 > mvn compile test
 
-The models have to be trained before running the tests!
+**The models have to be trained before running the tests!**
 
 ## Training
 
@@ -59,7 +59,7 @@ As the rest of GROBID, the training data is encoded following the [TEI P5](http:
 
 ## Generation of training data
 
-Training data generation works the same as in GROBID, with executable name ```createTrainingQuantities```, for example: 
+Training data generation works the same as in GROBID, with executable name ```createTrainingQuantities```, for example:
 
 > java -jar target/grobid-quantities-0.4.0-SNAPSHOT.one-jar.jar -gH ../grobid-home/ -gP ../grobid-home/config/grobid.properties -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/ -exe createTrainingQuantities
 

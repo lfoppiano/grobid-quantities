@@ -6,10 +6,7 @@ import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.RegexValueHolder;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.Pair;
-import org.grobid.core.utilities.TextUtilities;
-import org.grobid.core.utilities.UnitUtilities;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,16 +14,13 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.grobid.core.utilities.WordsToNumber;
-
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.upperCase;
 import static org.grobid.core.lexicon.LexiconLoader.*;
 
 /**
  * Class for managing the measurement lexical resources.
- *
+ * <p>
  * To be done: generalize to n different languages
  *
  * @author Patrice, Luca
@@ -167,11 +161,19 @@ public class QuantityLexicon {
                         if (isBlank(name) /*&& !name.equals(subPiece)*/) {
                             name = subPiece;
                         }
+
+                        // inflected -> name (e.g. meters -> m)
                         inflection2name.put(inflectedForm, name);
 
+
                         for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
+                            // complex unit inflected form -> name (kilometers -> km)
                             inflection2name.put(prefix.getValue() + inflectedForm, prefix.getKey() + name);
+
+                            // (variation) complex unit inflected form -> name (e.g. kmeter -> km)
+                            inflection2name.put(prefix.getKey() + inflectedForm, prefix.getKey() + name);
                         }
+
 
                         if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
                             // expansion with derivational morphology, but only for SI units!
