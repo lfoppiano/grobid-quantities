@@ -3,12 +3,7 @@
     {
       "notations": [
         {
-          "raw": "m",
-          "decomposition": [
-            {
-              "base": "m"
-            }
-          ]
+          "raw": "m"
         }
       ],
       "type": "LENGTH",
@@ -18,16 +13,10 @@
           "lemma": "metre",
           "inflections": [
             "metres"
-          ],
-          "inflections": [
-            "metres"
           ]
         },
         {
           "lemma": "meter",
-          "inflections": [
-            "meters"
-          ],
           "inflections": [
             "meters"
           ]
@@ -41,7 +30,7 @@
           "decomposition": [
             {
               "base": "m",
-              "pow": "^3"
+              "pow": "3"
             }
           ]
         },
@@ -50,7 +39,7 @@
           "decomposition": [
             {
               "base": "m",
-              "pow": "³"
+              "pow": "3"
             }
           ]
         }
@@ -618,6 +607,12 @@
           "lemma": "mole",
           "inflections": [
             "moles"
+          ]
+        },
+        {
+          "lemma": "mol",
+          "inflections": [
+            "mols"
           ]
         }
       ]
@@ -1724,8 +1719,8 @@
           "raw": "rad"
         }
       ],
-      "type": "RADIAN",
-      "system": "SI",
+      "type": "ANGLE",
+      "system": "SI_DERIVED",
       "names": [
         {
           "lemma": "radian",
@@ -1817,7 +1812,7 @@
         }
       ],
       "type": "SOLID_ANGLE",
-      "system": "SI",
+      "system": "SI_DERIVED",
       "names": [
         {
           "lemma": "steradian",
@@ -1870,7 +1865,7 @@
         }
       ],
       "type": "DENSITY",
-      "system": "SI",
+      "system": "SI_DERIVED",
       "names": [
         {
           "lemma": "kilogram per cubic metre",

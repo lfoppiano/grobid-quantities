@@ -3,6 +3,7 @@ package org.grobid.core.lexicon;
 import org.grobid.core.data.RegexValueHolder;
 import org.grobid.core.utilities.OffsetPosition;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -107,6 +108,7 @@ public class TestQuantityLexicon {
     }
 
     @Test
+    @Ignore("Obsolete")
     public void testInflectionMorphologyExpansion_simpleNotation_noNotation_ChecknoDuplicates() throws Exception {
         List<String> output = target.getInflectionsByTerm("meter");
 

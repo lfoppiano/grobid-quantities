@@ -1,17 +1,5 @@
 package org.grobid.core.utilities;
 
-import org.grobid.core.data.Unit;
-import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.exceptions.GrobidResourceException;
-
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.io.*;
-
 /**
  * Utilities for managing SI and non-SI units.
  *
@@ -150,143 +138,12 @@ public class UnitUtilities {
         return instance;
     }
 
-    /**
-     * Creates a new instance.
-     */
     private static synchronized void getNewInstance() {
-        //LOGGER.debug("Get new instance of Lexicon");
-        //GrobidProperties.getInstance();
         instance = new UnitUtilities();
     }
 
     private UnitUtilities() {
     }
-
-    /*public void initUnitUtilities() {
-        File file = null;
-        InputStream ist = null;
-        InputStreamReader isr = null;
-        BufferedReader dis = null;
-        try {
-            String path = "src/main/resources/en/units.txt";
-            file = new File(path);
-            if (!file.exists()) {
-                throw new GrobidResourceException("Cannot init unit utilities, because file '"
-                        + file.getAbsolutePath() + "' does not exists.");
-            }
-            if (!file.canRead()) {
-                throw new GrobidResourceException("Cannot init unit utilities, because cannot read file '"
-                        + file.getAbsolutePath() + "'.");
-            }
-
-            ist = getClass().getResourceAsStream(path);
-            if (ist == null)
-                ist = new FileInputStream(file);
-            isr = new InputStreamReader(ist, "UTF8");
-            dis = new BufferedReader(isr);
-
-            String l = null;
-            while ((l = dis.readLine()) != null) {
-                if (l.length() == 0) continue;
-                StringTokenizer st = new StringTokenizer(l, "\t");
-                if (st.hasMoreTokens()) {
-                    String notations = st.nextToken().trim();
-                    String[] notationList = notations.split(",");
-                    if (st.hasMoreTokens()) {
-                        String type = st.nextToken().trim();
-                        if ((type == null) || (type.length() == 0)) {
-                            continue;
-                        }
-                        System_Type system = System_Type.UNKNOWN;
-                        if (st.hasMoreTokens()) {
-                            String sys = st.nextToken().trim();
-                            // here "deserialize" the enum type
-                            try {
-                                system = System_Type.valueOf(sys);
-                            }
-                            catch(Exception e) {
-                                System.out.println("Invalid system type name: " + sys);
-                            }
-                        }
-                        List<String> names = null;
-                        if (st.hasMoreTokens()) {
-                            // usual name(s), e.g. metre, meter
-                            StringTokenizer st2 = new StringTokenizer(st.nextToken(), ",");
-                            while (st2.hasMoreTokens()) {
-                                if (names == null)
-                                    names = new ArrayList<String>();
-                                String localName = st2.nextToken().trim();
-                                names.add(localName);
-                                // some expansions
-
-                            }
-                        }
-
-                        UnitDefinition unitDefinition = new UnitDefinition();
-                        if ((notationList != null) && (notationList.length > 0)) {
-                            for (int j = 0; j < notationList.length; j++)
-                                unitDefinition.addNotation(notationList[j].trim());
-                        }
-                        unitDefinition.setSystem(system);
-                        // here "deserialize" the enum type
-                        Unit_Type savedType = Unit_Type.UNKNOWN;
-                        try {
-                            savedType = Unit_Type.valueOf(type);
-                        }
-                        catch(Exception e) {
-                            System.out.println("Invalid unit type name: " + type);
-                        }
-                        unitDefinition.setType(savedType);
-                        unitDefinition.setNames(names);
-
-                        // add unit names in the first map
-                        if ((names != null) && (names.size() > 0)) {
-                            for (int j = 0; j < names.size(); j++) {
-                                if (name2unit == null)
-                                    name2unit = new HashMap<>();
-                                name2unit.put(names.get(j).trim().toLowerCase(), unitDefinition);
-                            }
-                        }
-
-                        // add unit notation map
-                        if ((notationList != null) && (notationList.length > 0)) {
-                            for (int j = 0; j < notationList.length; j++) {
-                                if (notation2unit == null)
-                                    notation2unit = new HashMap<>();
-                                notation2unit.put(notationList[j].trim().toLowerCase(), unitDefinition);
-                            }
-                        } else
-                            notation2unit.put("no_notation", unitDefinition);
-
-                        // add unit in the second map
-                        if ((system == System_Type.SI_BASE) || (system == System_Type.SI_DERIVED)) {
-                            if (type2SIUnit == null) {
-                                type2SIUnit = new HashMap<>();
-                            }
-                            if (type2SIUnit.get(type) == null)
-                                type2SIUnit.put(type, unitDefinition);
-                        }
-
-                    }
-                }
-            }
-        } catch (FileNotFoundException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } catch (IOException e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        } finally {
-            try {
-                if (ist != null)
-                    ist.close();
-                if (isr != null)
-                    isr.close();
-                if (dis != null)
-                    dis.close();
-            } catch (Exception e) {
-                throw new GrobidResourceException("Cannot close all streams.", e);
-            }
-        }
-    }*/
 
 
 }

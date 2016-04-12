@@ -1,0 +1,70 @@
+{
+  "units": [
+    {
+      "notations": [
+        {
+          "raw": "m",
+          "decomposition": [
+            {
+              "base": "m"
+            }
+          ]
+        }
+      ],
+      "type": "LENGTH",
+      "system": "SI_BASE",
+      "names": [
+        {
+          "lemma": "metre",
+          "inflections": [
+            "metres"
+          ]
+        },
+        {
+          "lemma": "meter",
+          "inflections": [
+            "meters"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "m^3",
+          "decomposition": [
+            {
+              "base": "m",
+              "pow": "^3"
+            }
+          ]
+        },
+        {
+          "raw": "m³",
+          "decomposition": [
+            {
+              "base": "m",
+              "pow": "³"
+            }
+          ]
+        }
+      ],
+      "type": "VOLUME",
+      "system": "SI_BASE",
+      "names": [
+        {
+          "lemma": "cubic meter",
+          "inflections": [
+            "cubic meters"
+          ]
+        },
+        {
+          "lemma": "cubic metre",
+          "inflections": [
+            "cubic metres"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 package org.grobid.core.lexicon;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections4.Closure;
 import org.apache.commons.collections4.map.HashedMap;
 import org.grobid.core.exceptions.GrobidException;
@@ -10,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.PatternSyntaxException;
@@ -19,7 +23,30 @@ import java.util.regex.PatternSyntaxException;
  */
 public class LexiconLoader {
 
-    public static void readFile(InputStream ist, Closure<String> onLine) {
+    public static void readJsonFile(InputStream ist, String listName, Closure<JsonNode> onElement) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            JsonNode rootNode = mapper.readTree(ist);
+
+            Iterator<JsonNode> it = rootNode.get(listName).elements();
+            while(it.hasNext()){
+                JsonNode node = it.next();
+
+                onElement.execute(node);
+            }
+        } catch (JsonProcessingException e) {
+            throw new
+                    GrobidResourceException("Error when compiling lexicon matcher in vocabulary.", e);
+        } catch (IOException e) {
+            throw new GrobidException("An exception occurred while running GROBID.", e);
+        } finally {
+            closeStreams(ist, null, null);
+        }
+
+
+    }
+
+    public static void readCsvFile(InputStream ist, Closure<String> onLine) {
         InputStreamReader isr = null;
         BufferedReader dis = null;
         try {
@@ -60,7 +87,7 @@ public class LexiconLoader {
     public static Map<String, String> loadPrefixes(InputStream is) {
         Map<String, String> prefixes = new HashedMap<>();
 
-        readFile(is, new Closure<String>() {
+        readCsvFile(is, new Closure<String>() {
             @Override
             public void execute(String input) {
                 String pieces[] = input.split("\t");
@@ -81,7 +108,7 @@ public class LexiconLoader {
     public static Map<String, List<String>> loadInflections(InputStream is) {
         Map<String, List<String>> inflection = new HashedMap<>();
 
-        readFile(is, new Closure<String>() {
+        readCsvFile(is, new Closure<String>() {
                     @Override
                     public void execute(String input) {
                         String pieces[] = input.split("\t");

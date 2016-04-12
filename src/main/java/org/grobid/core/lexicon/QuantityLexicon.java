@@ -1,6 +1,6 @@
 package org.grobid.core.lexicon;
 
-import org.apache.commons.collections4.Closure;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.RegexValueHolder;
@@ -16,7 +16,8 @@ import java.util.regex.Pattern;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.upperCase;
-import static org.grobid.core.lexicon.LexiconLoader.*;
+import static org.grobid.core.lexicon.LexiconLoader.loadPrefixes;
+import static org.grobid.core.lexicon.LexiconLoader.readJsonFile;
 
 /**
  * Class for managing the measurement lexical resources.
@@ -29,9 +30,9 @@ public class QuantityLexicon {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityLexicon.class);
 
     private static volatile QuantityLexicon instance;
-    private final String INFLECTION_PATH = "en/inflection.txt";
     private final String PREFIX_PATH = "en/prefix.txt";
-    private final String UNITS_PATH = "en/units.txt";
+    private final String UNITS_PATH = "en/units.json";
+
     private static final String COMPOSED_UNIT_REGEX = "[^/*]";
     private static final String COMPOSED_UNIT_REGEX_WITH_DELIMITER = String.format("((?<=%1$s)|(?=%1$s))", "[/*]{1}");
 
@@ -87,137 +88,80 @@ public class QuantityLexicon {
         unitPattern = new FastMatcher();
 
         prefixes = loadPrefixes(this.getClass().getClassLoader().getResourceAsStream(PREFIX_PATH));
-        inflection = loadInflections(this.getClass().getClassLoader().getResourceAsStream(INFLECTION_PATH));
-
-        readFile(this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH), new Closure<String>() {
-            @Override
-            public void execute(String l) {
-                processLineLoadUnits(l);
-            }
-        });
+        readJsonFile(this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH), "units", l -> processJsonNode(l));
 
         numberTokens = WordsToNumber.getInstance().getTokenSet();
     }
 
-    private void processLineLoadUnits(String l) {
-        String[] pieces = l.split("\t");
+
+    private void processJsonNode(JsonNode node) {
+        UnitUtilities.Unit_Type type = UnitUtilities.Unit_Type.valueOf(node.get("type").asText());
+        UnitUtilities.System_Type system = UnitUtilities.System_Type.valueOf(node.get("system").asText());
+
         UnitDefinition unitDefinition = new UnitDefinition();
-        UnitUtilities.Unit_Type type = null;
-        UnitUtilities.System_Type system = null;
+        unitDefinition.setSystem(system);
+        unitDefinition.setType(type);
 
-        for (int i = 0; i < pieces.length; i++) {
-            String piece = pieces[i].trim();
-            if (piece.length() == 0)
-                continue;
+        JsonNode notations = node.get("notations");
+        final Iterator<JsonNode> elements = notations.elements();
+        String defaultRawNotation = "";
+        while (elements.hasNext()) {
+            String rawNotation = elements.next().get("raw").asText();
 
-            if (i == 0) {
-                String[] subPieces = piece.split(",");
-                for (int j = 0; j < subPieces.length; j++) {
-                    String subPiece = subPieces[j].trim();
+            if (isBlank(defaultRawNotation)) {
+                defaultRawNotation = rawNotation;
+            }
+            expandAndAdd(unitDefinition, rawNotation);
+        }
 
-                    //expansion
-                    List<String> derivations = derivationalMorphologyExpansion(subPiece, true);
-                    for (String derivation : derivations) {
-                        try {
-                            unitPattern.loadTerm(derivation);
-                        } catch (Exception e) {
-                            LOGGER.error("Invalid unit term: " + derivation);
-                        }
-                        unitDefinition.addNotation(derivation);
 
-                        List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
-                        for (String word : subSubPieces) {
-                            addToUnitTokens(word);
-                        }
-                    }
+        JsonNode namesNode = node.get("names");
+        final Iterator<JsonNode> names = namesNode.elements();
+        while (names.hasNext()) {
+            JsonNode name = names.next();
+
+            String lemma = name.get("lemma").asText();
+            if (name.has("inflections")) {
+                JsonNode inflections = name.get("inflections");
+                List<String> inflectionsList = new ArrayList<>();
+                Iterator<JsonNode> inflectionsIterator = inflections.elements();
+                inflectionsList.add(lemma);
+                while (inflectionsIterator.hasNext()) {
+                    inflectionsList.add(inflectionsIterator.next().asText());
                 }
-            } else if (i == 1) {
-                try {
-                    type = UnitUtilities.Unit_Type.valueOf(piece);
-                } catch (Exception e) {
-                    LOGGER.warn("Invalid unit type name: " + piece);
+
+                processInflections(defaultRawNotation, unitDefinition, lemma, inflectionsList);
+
+                if (inflection == null) {
+                    inflection = new HashMap<>();
                 }
-                unitDefinition.setType(type);
-            } else if (i == 2) {
-                try {
-                    system = UnitUtilities.System_Type.valueOf(piece);
-                } catch (Exception e) {
-                    LOGGER.warn("Invalid unit system name: " + piece);
-                }
-                unitDefinition.setSystem(system);
-            } else if (i == 3) {
-                String[] subPieces = piece.split(",");
-                for (int j = 0; j < subPieces.length; j++) {
-                    String subPiece = subPieces[j].trim();
-
-                    // expansion with inflections
-                    List<String> inflections = getInflectionsByTerm(subPiece);
-
-                    for (String inflectedForm : inflections) {
-                        if (inflection2name == null) {
-                            inflection2name = new HashMap<>();
-                        }
-                        String name = pieces[0];
-                        if (isBlank(name) /*&& !name.equals(subPiece)*/) {
-                            name = subPiece;
-                        }
-
-                        // inflected -> name (e.g. meters -> m)
-                        inflection2name.put(inflectedForm, name);
-
-
-                        for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
-                            // complex unit inflected form -> name (kilometers -> km)
-                            inflection2name.put(prefix.getValue() + inflectedForm, prefix.getKey() + name);
-
-                            // (variation) complex unit inflected form -> name (e.g. kmeter -> km)
-                            inflection2name.put(prefix.getKey() + inflectedForm, prefix.getKey() + name);
-                        }
-
-
-                        if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
-                            // expansion with derivational morphology, but only for SI units!
-                            List<String> derivations = derivationalMorphologyExpansion(inflectedForm, false);
-                            for (String derivation : derivations) {
-                                unitDefinition.addName(derivation);
-                                try {
-                                    unitPattern.loadTerm(derivation);
-                                } catch (Exception e) {
-                                    LOGGER.error("invalid unit term: " + derivation);
-                                }
-                                List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
-                                for (String word : subSubPieces) {
-                                    addToUnitTokens(word);
-                                }
-                            }
-                        } else {
-                            unitDefinition.addName(inflectedForm);
-                            try {
-                                unitPattern.loadTerm(inflectedForm);
-                            } catch (Exception e) {
-                                LOGGER.error("invalid unit term: " + inflectedForm);
-                            }
-                            List<String> subsubpieces = QuantityAnalyzer.tokenize(inflectedForm);
-                            for (String word : subsubpieces) {
-                                addToUnitTokens(word);
-                            }
-                        }
-                    }
-                }
+                inflection.put(lemma, inflectionsList);
             }
         }
 
-        // add unit names in the first map
-        List<String> names = unitDefinition.getNames();
-        if ((names != null) && (names.size() > 0)) {
-            for (int j = 0; j < names.size(); j++) {
-                if (name2unit == null) {
-                    name2unit = new HashMap<>();
-                }
-                name2unit.put(names.get(j).trim().toLowerCase(), unitDefinition);
+        populateName2Unit(unitDefinition);
+        populateNotation2Unit(unitDefinition);
+        populateType2SiUnit(unitDefinition);
+    }
+
+    private void populateType2SiUnit(UnitDefinition unitDefinition) {
+        UnitUtilities.Unit_Type type = unitDefinition.getType();
+        UnitUtilities.System_Type system = unitDefinition.getSystem();
+        if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
+            if (type2SIUnit == null) {
+                type2SIUnit = new HashMap<>();
+            }
+            if ((type == null) || (type.getName() == null)) {
+                LOGGER.error("unitDefinition has no type: " + unitDefinition.toString());
+            }
+
+            if (type2SIUnit.get(type.getName()) == null) {
+                type2SIUnit.put(type.getName(), unitDefinition);
             }
         }
+    }
 
+    private void populateNotation2Unit(UnitDefinition unitDefinition) {
         // add unit notation map
         List<String> notations = unitDefinition.getNotations();
         if ((notations != null) && (notations.size() > 0)) {
@@ -230,19 +174,89 @@ public class QuantityLexicon {
         } else {
             notation2unit.put("no_notation", unitDefinition);
         }
+    }
 
-        // add unit in the second map
-        system = unitDefinition.getSystem();
-        if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
-            if (type2SIUnit == null) {
-                type2SIUnit = new HashMap<>();
-            }
-            if ((type == null) || (type.getName() == null)) {
-                LOGGER.error("unitDefinition has no type: " + unitDefinition.toString());
+    private void populateName2Unit(UnitDefinition unitDefinition) {
+        // add unit names in the first map
+        List<String> names = unitDefinition.getNames();
+        if (CollectionUtils.isNotEmpty(names)) {
+            if (name2unit == null) {
+                name2unit = new HashMap<>();
             }
 
-            if (type2SIUnit.get(type.getName()) == null) {
-                type2SIUnit.put(type.getName(), unitDefinition);
+            for (int j = 0; j < names.size(); j++) {
+                name2unit.put(names.get(j).trim().toLowerCase(), unitDefinition);
+            }
+        }
+    }
+
+    private void processInflections(String notation, UnitDefinition unitDefinition, String lemma, List<String> inflections) {
+        UnitUtilities.System_Type system = unitDefinition.getSystem();
+        if (inflection2name == null) {
+            inflection2name = new HashMap<>();
+        }
+        for (String inflectedForm : inflections) {
+            String name = notation;
+            if (isBlank(name) /*&& !name.equals(subPiece)*/) {
+                name = lemma;
+            }
+
+            // inflected -> name (e.g. meters -> m)
+            inflection2name.put(inflectedForm, name);
+
+
+            for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
+                // complex unit inflected form -> name (kilometers -> km)
+                inflection2name.put(prefix.getValue() + inflectedForm, prefix.getKey() + name);
+
+                // (variation) complex unit inflected form -> name (e.g. kmeter -> km)
+                inflection2name.put(prefix.getKey() + inflectedForm, prefix.getKey() + name);
+            }
+
+
+            if ((system == UnitUtilities.System_Type.SI_BASE) || (system == UnitUtilities.System_Type.SI_DERIVED)) {
+                // expansion with derivational morphology, but only for SI units!
+                List<String> derivations = derivationalMorphologyExpansion(inflectedForm, false);
+                for (String derivation : derivations) {
+                    unitDefinition.addName(derivation);
+                    try {
+                        unitPattern.loadTerm(derivation);
+                    } catch (Exception e) {
+                        LOGGER.error("invalid unit term: " + derivation);
+                    }
+                    List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
+                    for (String word : subSubPieces) {
+                        addToUnitTokens(word);
+                    }
+                }
+            } else {
+                unitDefinition.addName(inflectedForm);
+                try {
+                    unitPattern.loadTerm(inflectedForm);
+                } catch (Exception e) {
+                    LOGGER.error("invalid unit term: " + inflectedForm);
+                }
+                List<String> subsubpieces = QuantityAnalyzer.tokenize(inflectedForm);
+                for (String word : subsubpieces) {
+                    addToUnitTokens(word);
+                }
+            }
+        }
+    }
+
+    private void expandAndAdd(UnitDefinition unitDefinition, String subPiece) {
+        List<String> derivations = derivationalMorphologyExpansion(subPiece, true);
+        for (String derivation : derivations) {
+            try {
+                unitPattern.loadTerm(derivation);
+            } catch (Exception e) {
+                LOGGER.error("Invalid unit term: " + derivation);
+            }
+            unitDefinition.addNotation(derivation);
+
+            List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
+            for (String word : subSubPieces) {
+                addToUnitTokens(word);
             }
         }
     }
@@ -347,6 +361,7 @@ public class QuantityLexicon {
         return decomposition;
     }
 
+    @Deprecated
     public static List<RegexValueHolder> decomposeComplexUnitWithDelimiter(String unitTerm) {
         List<RegexValueHolder> decomposition = new ArrayList<>();
         String[] splits = unitTerm.split(COMPOSED_UNIT_REGEX_WITH_DELIMITER);
@@ -464,10 +479,12 @@ public class QuantityLexicon {
     }
 
     public boolean isNumberToken(String token) {
-        if (token == null)
+        if (token == null) {
             return false;
-        if (numberTokens == null)
+        }
+        if (numberTokens == null) {
             init();
+        }
         return numberTokens.contains(token.toLowerCase());
     }
 }

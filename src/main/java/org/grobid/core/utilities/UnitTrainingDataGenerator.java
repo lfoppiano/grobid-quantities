@@ -131,7 +131,7 @@ public class UnitTrainingDataGenerator {
 
             final Map<String, List<String>> inflections = LexiconLoader.loadInflections(new FileInputStream(inputDirectoryPath + File.separator + INFLECTION_FILE_NAME));
             final Map<String, String> prefixes = LexiconLoader.loadPrefixes(new FileInputStream(inputDirectoryPath + File.separator + PREFIX_FILE_NAME));
-            LexiconLoader.readFile(new FileInputStream(inputDirectoryPath + File.separator + UNITS_FILE_NAME), new Closure<String>() {
+            LexiconLoader.readCsvFile(new FileInputStream(inputDirectoryPath + File.separator + UNITS_FILE_NAME), new Closure<String>() {
                 @Override
                 public void execute(String inputLine) {
                     processLine(inputLine, write, prefixes, inflections);
