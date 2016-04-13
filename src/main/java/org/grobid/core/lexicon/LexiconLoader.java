@@ -87,17 +87,14 @@ public class LexiconLoader {
     public static Map<String, String> loadPrefixes(InputStream is) {
         Map<String, String> prefixes = new HashedMap<>();
 
-        readCsvFile(is, new Closure<String>() {
-            @Override
-            public void execute(String input) {
-                String pieces[] = input.split("\t");
-                if (pieces.length == 3) {
+        readCsvFile(is, input -> {
+            String pieces[] = input.split("\t");
+            if (pieces.length == 3) {
 
-                    String symbol = pieces[1].trim();
-                    String name = pieces[2].trim();
+                String symbol = pieces[1].trim();
+                String name = pieces[2].trim();
 
-                    prefixes.put(symbol, name);
-                }
+                prefixes.put(symbol, name);
             }
         });
 
@@ -108,27 +105,24 @@ public class LexiconLoader {
     public static Map<String, List<String>> loadInflections(InputStream is) {
         Map<String, List<String>> inflection = new HashedMap<>();
 
-        readCsvFile(is, new Closure<String>() {
-                    @Override
-                    public void execute(String input) {
-                        String pieces[] = input.split("\t");
-                        if (pieces.length == 2) {
+        readCsvFile(is, input -> {
+            String pieces[] = input.split("\t");
+            if (pieces.length == 2) {
 
-                            String name = pieces[0].trim();
-                            String inflections = pieces[1].trim();
-                            List<String> inflectionList = new ArrayList<>();
-                            String[] subInflection = inflections.split(",");
+                String name = pieces[0].trim();
+                String inflections = pieces[1].trim();
+                List<String> inflectionList = new ArrayList<>();
+                String[] subInflection = inflections.split(",");
 
-                            for (String subFlection : subInflection) {
-                                inflectionList.add(subFlection.trim());
-                            }
-
-                            if (inflectionList.size() > 0) {
-                                inflection.put(name, inflectionList);
-                            }
-                        }
-                    }
+                for (String subFlection : subInflection) {
+                    inflectionList.add(subFlection.trim());
                 }
+
+                if (inflectionList.size() > 0) {
+                    inflection.put(name, inflectionList);
+                }
+            }
+        }
 
         );
 
