@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 /**
  * @author Patrice Lopez
  */
-public class TestQuantityLexicon {
+public class QuantityLexiconTest {
 
     private QuantityLexicon target = null;
 

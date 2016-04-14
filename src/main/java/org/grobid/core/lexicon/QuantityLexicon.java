@@ -105,16 +105,18 @@ public class QuantityLexicon {
         unitDefinition.setSystem(system);
         unitDefinition.setType(type);
 
-        JsonNode notations = node.get("notations");
-        final Iterator<JsonNode> elements = notations.elements();
         String defaultRawNotation = "";
-        while (elements.hasNext()) {
-            String rawNotation = elements.next().get("raw").asText();
+        if(node.has("notations")) {
+            JsonNode notations = node.get("notations");
+            final Iterator<JsonNode> elements = notations.elements();
+            while (elements.hasNext()) {
+                String rawNotation = elements.next().get("raw").asText();
 
-            if (isBlank(defaultRawNotation)) {
-                defaultRawNotation = rawNotation;
+                if (isBlank(defaultRawNotation)) {
+                    defaultRawNotation = rawNotation;
+                }
+                expandAndAdd(unitDefinition, rawNotation);
             }
-            expandAndAdd(unitDefinition, rawNotation);
         }
 
 

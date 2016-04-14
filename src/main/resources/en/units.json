@@ -445,11 +445,6 @@
       ]
     },
     {
-      "notations": [
-        {
-          "raw": "d"
-        }
-      ],
       "type": "TIME",
       "system": "NON_SI",
       "names": [
@@ -462,11 +457,6 @@
       ]
     },
     {
-      "notations": [
-        {
-          "raw": "w"
-        }
-      ],
       "type": "TIME",
       "system": "NON_SI",
       "names": [
@@ -479,11 +469,6 @@
       ]
     },
     {
-      "notations": [
-        {
-          "raw": "m"
-        }
-      ],
       "type": "TIME",
       "system": "NON_SI",
       "names": [
@@ -496,11 +481,6 @@
       ]
     },
     {
-      "notations": [
-        {
-          "raw": "y"
-        }
-      ],
       "type": "TIME",
       "system": "NON_SI",
       "names": [
@@ -513,11 +493,6 @@
       ]
     },
     {
-      "notations": [
-        {
-          "raw": ""
-        }
-      ],
       "type": "TIME",
       "system": "NON_SI",
       "names": [
