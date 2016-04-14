@@ -30,8 +30,8 @@ public class QuantityLexicon {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityLexicon.class);
 
     private static volatile QuantityLexicon instance;
-    private final String PREFIX_PATH = "en/prefix.txt";
-    private final String UNITS_PATH = "en/units.json";
+    public static final String PREFIX_EN_PATH = "en/prefix.txt";
+    public static final String UNITS_EN_PATH = "en/units.json";
 
     private static final String COMPOSED_UNIT_REGEX = "[^/*]";
     private static final String COMPOSED_UNIT_REGEX_WITH_DELIMITER = String.format("((?<=%1$s)|(?=%1$s))", "[/*]{1}");
@@ -87,8 +87,8 @@ public class QuantityLexicon {
         unitTokensLowerCase = new HashSet<>();
         unitPattern = new FastMatcher();
 
-        prefixes = loadPrefixes(this.getClass().getClassLoader().getResourceAsStream(PREFIX_PATH));
-        readJsonFile(this.getClass().getClassLoader().getResourceAsStream(UNITS_PATH), "units", l -> processJsonNode(l));
+        prefixes = loadPrefixes(this.getClass().getClassLoader().getResourceAsStream(PREFIX_EN_PATH));
+        readJsonFile(this.getClass().getClassLoader().getResourceAsStream(UNITS_EN_PATH), "units", l -> processJsonNode(l));
 
         numberTokens = WordsToNumber.getInstance().getTokenSet();
     }

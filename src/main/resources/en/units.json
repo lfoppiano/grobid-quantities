@@ -27,7 +27,7 @@
       "notations": [
         {
           "raw": "m^3",
-          "decomposition": [
+          "product": [
             {
               "base": "m",
               "pow": "3"
@@ -36,7 +36,7 @@
         },
         {
           "raw": "m³",
-          "decomposition": [
+          "product": [
             {
               "base": "m",
               "pow": "3"
@@ -447,7 +447,7 @@
     {
       "notations": [
         {
-          "raw": ""
+          "raw": "d"
         }
       ],
       "type": "TIME",
@@ -464,7 +464,7 @@
     {
       "notations": [
         {
-          "raw": ""
+          "raw": "w"
         }
       ],
       "type": "TIME",
@@ -481,7 +481,7 @@
     {
       "notations": [
         {
-          "raw": ""
+          "raw": "m"
         }
       ],
       "type": "TIME",
@@ -498,7 +498,7 @@
     {
       "notations": [
         {
-          "raw": ""
+          "raw": "y"
         }
       ],
       "type": "TIME",
@@ -624,45 +624,37 @@
         },
         {
           "raw": "mol/L",
-          "decomposition": [
+          "product": [
             {
               "base": "mol"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "L"
+              "base": "L",
+              "pow": "-1"
             }
           ]
         },
         {
           "raw": "mol/m^3",
-          "decomposition": [
+          "product": [
             {
               "base": "mol"
             },
             {
-              "pow": "/"
-            },
-            {
               "base": "m",
-              "pow": "^3"
+              "pow": "-3"
             }
           ]
         },
         {
           "raw": "mol/m³",
-          "decomposition": [
+          "product": [
             {
               "base": "mol"
             },
             {
-              "pow": "/"
-            },
-            {
               "base": "m",
-              "pow": "³"
+              "pow": "-3"
             }
           ]
         }
@@ -685,15 +677,13 @@
       "notations": [
         {
           "raw": "w/w%",
-          "decomposition": [
+          "product": [
             {
               "base": "w"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "w%"
+              "base": "w%",
+              "pow": "-1"
             }
           ]
         }
@@ -1125,15 +1115,13 @@
       "notations": [
         {
           "raw": "V/m",
-          "decomposition": [
+          "product": [
             {
               "base": "V"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "m"
+              "base": "m",
+              "pow": "-1"
             }
           ]
         }
@@ -1159,15 +1147,13 @@
       "notations": [
         {
           "raw": "A/m",
-          "decomposition": [
+          "product": [
             {
               "base": "A"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "m"
+              "base": "m",
+              "pow": "-1"
             }
           ]
         }
@@ -1193,15 +1179,13 @@
       "notations": [
         {
           "raw": "AT/m",
-          "decomposition": [
+          "product": [
             {
               "base": "AT"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "m"
+              "base": "m",
+              "pow": "-1"
             }
           ]
         }
@@ -1230,15 +1214,13 @@
         },
         {
           "raw": "round/min",
-          "decomposition": [
+          "product": [
             {
               "base": "round"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "min"
+              "base": "min",
+              "pow": "-1"
             }
           ]
         }
@@ -1261,15 +1243,13 @@
         },
         {
           "raw": "round/s",
-          "decomposition": [
+          "product": [
             {
               "base": "round"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "s"
+              "base": "s",
+              "pow": "-1"
             }
           ]
         }
@@ -1303,21 +1283,21 @@
       "notations": [
         {
           "raw": "cm^-1",
-          "decomposition": [
+          "product": [
             {
               "prefix": "c",
               "base": "m",
-              "pow": "^-1"
+              "pow": "-1"
             }
           ]
         },
         {
           "raw": "cm⁻¹",
-          "decomposition": [
+          "product": [
             {
               "prefix": "c",
               "base": "m",
-              "pow": "⁻¹"
+              "pow": "-1"
             }
           ]
         }
@@ -1343,15 +1323,13 @@
       "notations": [
         {
           "raw": "m/s",
-          "decomposition": [
+          "product": [
             {
               "base": "m"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "s"
+              "base": "s",
+              "pow": "-1"
             }
           ]
         }
@@ -1377,15 +1355,13 @@
       "notations": [
         {
           "raw": "mi/h",
-          "decomposition": [
+          "product": [
             {
               "base": "mi"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "h"
+              "base": "h",
+              "pow": "-1"
             }
           ]
         },
@@ -1684,23 +1660,20 @@
       "notations": [
         {
           "raw": "ml/kg/min",
-          "decomposition": [
+          "product": [
             {
               "prefix": "m",
               "base": "l"
             },
             {
-              "pow": "/"
-            },
-            {
               "prefix": "k",
-              "base": "g"
+              "base": "g",
+              "pow": "-1"
+
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "min"
+              "base": "min",
+              "pow": "-1"
             }
           ]
         }
@@ -1791,6 +1764,12 @@
           "raw": "\""
         },
         {
+          "raw": "``"
+        },
+        {
+          "raw": "''"
+        },
+        {
           "raw": "as"
         }
       ],
@@ -1849,17 +1828,27 @@
       "notations": [
         {
           "raw": "kg/m3",
-          "decomposition": [
+          "product": [
             {
               "prefix": "k",
               "base": "g"
             },
             {
-              "pow": "/"
+              "base": "m",
+              "pow": "-3"
+            }
+          ]
+        },
+        {
+          "raw": "kg/m^3",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
             },
             {
               "base": "m",
-              "pow": "3"
+              "pow": "-3"
             }
           ]
         }
@@ -1885,31 +1874,26 @@
       "notations": [
         {
           "raw": "g/cc",
-          "decomposition": [
+          "product": [
             {
               "base": "g"
             },
             {
-              "pow": "/"
-            },
-            {
-              "base": "cc"
+              "base": "cc",
+              "pow": "-1"
             }
           ]
         },
         {
           "raw": "g/cm2",
-          "decomposition": [
+          "product": [
             {
               "base": "g"
             },
             {
-              "pow": "/"
-            },
-            {
               "prefix": "c",
               "base": "m",
-              "pow": "2"
+              "pow": "-2"
             }
           ]
         }

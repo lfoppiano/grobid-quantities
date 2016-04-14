@@ -1,18 +1,16 @@
 package org.grobid.core.utilities;
 
-import org.apache.commons.collections4.Closure;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.io.FileUtils;
 import org.grobid.core.data.RegexValueHolder;
+import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.lexicon.LexiconLoader;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
@@ -30,9 +28,6 @@ public class UnitTrainingDataGenerator {
             UnitUtilities.Unit_Type.DENSITY
     });
 
-    private final String INFLECTION_FILE_NAME = "inflection.txt";
-    private final String PREFIX_FILE_NAME = "prefix.txt";
-    private final String UNITS_FILE_NAME = "units.txt";
     private String XML_PREFIX = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 
     private String XML_UNITS_START = "<units>";
@@ -121,6 +116,7 @@ public class UnitTrainingDataGenerator {
         long now = calendar.getTime().getTime();
         String outputName = "generated.training." + now + ".tei.xml";
 
+        System.out.println("Generating file " + outputName);
         File inputDirectory = new File(inputDirectoryPath);
         FileOutputStream outputFile = FileUtils.openOutputStream(new File(outputFilePath + File.separator + outputName));
         final PrintWriter write = new PrintWriter(outputFile);
@@ -128,14 +124,9 @@ public class UnitTrainingDataGenerator {
         write.append(XML_UNITS_START).append("\n");
 
         if (inputDirectory != null && inputDirectory.isDirectory()) {
-
-            final Map<String, List<String>> inflections = LexiconLoader.loadInflections(new FileInputStream(inputDirectoryPath + File.separator + INFLECTION_FILE_NAME));
-            final Map<String, String> prefixes = LexiconLoader.loadPrefixes(new FileInputStream(inputDirectoryPath + File.separator + PREFIX_FILE_NAME));
-            LexiconLoader.readCsvFile(new FileInputStream(inputDirectoryPath + File.separator + UNITS_FILE_NAME), new Closure<String>() {
-                @Override
-                public void execute(String inputLine) {
-                    processLine(inputLine, write, prefixes, inflections);
-                }
+            final Map<String, String> prefixes = LexiconLoader.loadPrefixes(new FileInputStream(inputDirectoryPath + File.separator + QuantityLexicon.PREFIX_EN_PATH));
+            LexiconLoader.readJsonFile(new FileInputStream(inputDirectoryPath + File.separator + QuantityLexicon.UNITS_EN_PATH), "units", input -> {
+                processNode(input, write, prefixes);
             });
         }
 
@@ -145,6 +136,29 @@ public class UnitTrainingDataGenerator {
         write.close();
         outputFile.close();
     }
+
+    protected void processNode(JsonNode node, PrintWriter write, Map<String, String> prefixesList) {
+        UnitUtilities.Unit_Type type = UnitUtilities.Unit_Type.valueOf(node.get("type").asText());
+
+        if (exclusions.contains(type)) {
+            return;
+        }
+        UnitUtilities.System_Type system = UnitUtilities.System_Type.valueOf(node.get("system").asText());
+
+        UnitDefinition unitDefinition = new UnitDefinition();
+        unitDefinition.setSystem(system);
+        unitDefinition.setType(type);
+
+        JsonNode notations = node.get("notations");
+        final Iterator<JsonNode> elements = notations.elements();
+        while (elements.hasNext()) {
+            final JsonNode element = elements.next();
+            String rawNotation = element.get("raw").asText();
+
+            processRawUnit(rawNotation, write, prefixesList, system);
+        }
+    }
+
 
     protected void processLine(String inputLine, PrintWriter write, Map<String, String> prefixesList, Map<String, List<String>> inflectionsList) {
         String[] pieces = inputLine.split("\t", -2);
@@ -175,92 +189,71 @@ public class UnitTrainingDataGenerator {
             //Processing units.
             String[] subPieces = units.split(",");
             for (String subPiece : subPieces) {
-                if (system == UnitUtilities.System_Type.SI_BASE || system == UnitUtilities.System_Type.SI_DERIVED) {
-                    if (!QuantityLexicon.isComposedUnit(subPiece)) {
-                        appendUnit(write, subPiece);
-
-                        for (Map.Entry<String, String> prefix : prefixesList.entrySet()) {
-
-                            String prefixString = prefix.getKey();
-
-                            appendUnit(write, prefixString, subPiece, null, null, null);
-                        }
-                    } else {
-                        List<RegexValueHolder> decomposition = QuantityLexicon.decomposeComplexUnitWithDelimiter(subPiece);
-
-                        //Assuming there are only two elements
-                        RegexValueHolder firstElement = decomposition.get(0);
-                        RegexValueHolder operation = decomposition.get(1);
-                        RegexValueHolder secondElement = decomposition.get(2);
-
-                        appendUnit(write, null, firstElement.getValue(), operation.getValue(),
-                                null, secondElement.getValue());
-
-                        for (Map.Entry<String, String> prefix : prefixesList.entrySet()) {
-                            String prefixString = prefix.getKey();
-
-                            appendUnit(write, null, firstElement.getValue(),
-                                    operation.getValue(), prefixString,
-                                    secondElement.getValue());
-
-                            appendUnit(write, prefixString, firstElement.getValue(),
-                                    operation.getValue(), null,
-                                    secondElement.getValue());
-
-                            for (Map.Entry<String, String> prefix2 : prefixesList.entrySet()) {
-                                String prefixString2 = prefix2.getKey();
-
-                                appendUnit(write, prefixString, firstElement.getValue(),
-                                        operation.getValue(), prefixString2,
-                                        secondElement.getValue());
-
-                            }
-                        }
-                    }
-                } else {
-                    if (!QuantityLexicon.isComposedUnit(subPiece)) {
-                        appendUnit(write, subPiece);
-                    } else {
-                        List<RegexValueHolder> decomposition = QuantityLexicon.decomposeComplexUnitWithDelimiter(subPiece);
-
-                        //Assuming there are only two elements
-                        RegexValueHolder firstElement = decomposition.get(0);
-                        RegexValueHolder operation = decomposition.get(1);
-                        RegexValueHolder secondElement = decomposition.get(2);
-
-                        appendUnit(write, null, firstElement.getValue(),
-                                operation.getValue(), null,
-                                secondElement.getValue());
-
-
-                    }
-                }
+                processRawUnit(subPiece, write, prefixesList, system);
             }
         }
+    }
 
-        //Processing unit names
-        /*String[] subPieces = names.split(",");
-        for (String subPiece : subPieces) {
+    private void processRawUnit(String subPiece, PrintWriter write, Map<String, String> prefixesList, UnitUtilities.System_Type system) {
+        if (system == UnitUtilities.System_Type.SI_BASE || system == UnitUtilities.System_Type.SI_DERIVED) {
+            if (!QuantityLexicon.isComposedUnit(subPiece)) {
+                appendUnit(write, subPiece);
 
-            List<String> inflections = quantityLexicon.getInflectionsByTerm(subPiece);
+                for (Map.Entry<String, String> prefix : prefixesList.entrySet()) {
 
-            for (String inflection : inflections) {
-                if (system == UnitUtilities.System_Type.SI_BASE || system == UnitUtilities.System_Type.SI_DERIVED) {
-                    if (subPiece.split(" ").length == 1) {
+                    String prefixString = prefix.getKey();
 
-                        for (Map.Entry<String, String> prefix : prefixesList.entrySet()) {
-                            String prefixString = prefix.getValue();
+                    appendUnit(write, prefixString, subPiece, null, null, null);
+                }
+            } else {
+                List<RegexValueHolder> decomposition = QuantityLexicon.decomposeComplexUnitWithDelimiter(subPiece);
 
-                            appendUnit(write, prefixString, inflection, null, null, null);
-                        }
-                    } else {
-                        appendUnit(write, null, inflection, null, null, null);
+                //Assuming there are only two elements
+                RegexValueHolder firstElement = decomposition.get(0);
+                RegexValueHolder operation = decomposition.get(1);
+                RegexValueHolder secondElement = decomposition.get(2);
+
+                appendUnit(write, null, firstElement.getValue(), operation.getValue(),
+                        null, secondElement.getValue());
+
+                for (Map.Entry<String, String> prefix : prefixesList.entrySet()) {
+                    String prefixString = prefix.getKey();
+
+                    appendUnit(write, null, firstElement.getValue(),
+                            operation.getValue(), prefixString,
+                            secondElement.getValue());
+
+                    appendUnit(write, prefixString, firstElement.getValue(),
+                            operation.getValue(), null,
+                            secondElement.getValue());
+
+                    for (Map.Entry<String, String> prefix2 : prefixesList.entrySet()) {
+                        String prefixString2 = prefix2.getKey();
+
+                        appendUnit(write, prefixString, firstElement.getValue(),
+                                operation.getValue(), prefixString2,
+                                secondElement.getValue());
+
                     }
-                } else {
-                    appendUnit(write, inflection);
                 }
             }
+        } else {
+            if (!QuantityLexicon.isComposedUnit(subPiece)) {
+                appendUnit(write, subPiece);
+            } else {
+                List<RegexValueHolder> decomposition = QuantityLexicon.decomposeComplexUnitWithDelimiter(subPiece);
 
-        }*/
+                //Assuming there are only two elements
+                RegexValueHolder firstElement = decomposition.get(0);
+                RegexValueHolder operation = decomposition.get(1);
+                RegexValueHolder secondElement = decomposition.get(2);
+
+                appendUnit(write, null, firstElement.getValue(),
+                        operation.getValue(), null,
+                        secondElement.getValue());
+
+
+            }
+        }
     }
 }
