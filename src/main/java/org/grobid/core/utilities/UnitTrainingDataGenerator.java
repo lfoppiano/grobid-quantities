@@ -124,8 +124,8 @@ public class UnitTrainingDataGenerator {
         write.append(XML_UNITS_START).append("\n");
 
         if (inputDirectory != null && inputDirectory.isDirectory()) {
-            final Map<String, String> prefixes = LexiconLoader.loadPrefixes(new FileInputStream(inputDirectoryPath + File.separator + QuantityLexicon.PREFIX_EN_PATH));
-            LexiconLoader.readJsonFile(new FileInputStream(inputDirectoryPath + File.separator + QuantityLexicon.UNITS_EN_PATH), "units", input -> {
+            final Map<String, String> prefixes = LexiconLoader.loadPrefixes(new FileInputStream(inputDirectoryPath + File.separator + QuantityLexicon.PREFIX_FILENAME));
+            LexiconLoader.readJsonFile(new FileInputStream(inputDirectoryPath + File.separator + QuantityLexicon.UNITS_FILENAME), "units", input -> {
                 processNode(input, write, prefixes);
             });
         }

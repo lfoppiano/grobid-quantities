@@ -30,8 +30,11 @@ public class QuantityLexicon {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityLexicon.class);
 
     private static volatile QuantityLexicon instance;
-    public static final String PREFIX_EN_PATH = "en/prefix.txt";
-    public static final String UNITS_EN_PATH = "en/units.json";
+    public static final String PREFIX_FILENAME = "prefix.txt";
+    public static final String PREFIX_EN_PATH = "en/" + PREFIX_FILENAME;
+
+    public static final String UNITS_FILENAME = "units.json";
+    public static final String UNITS_EN_PATH = "en/" + UNITS_FILENAME;
 
     private static final String COMPOSED_UNIT_REGEX = "[^/*]";
     private static final String COMPOSED_UNIT_REGEX_WITH_DELIMITER = String.format("((?<=%1$s)|(?=%1$s))", "[/*]{1}");
