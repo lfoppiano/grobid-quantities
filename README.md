@@ -51,6 +51,7 @@ For training the unit model:
 
 > mvn generate-resources -Ptrain_units
 
+For the moment, the default training stop criteria are used. So, the training can be stopped manually after 1000 iterations, simply do a "control-C" to stop the training and save the model produced in the latest iteration. 1000 iterations are largely enough. Otherwise, the training will continue beyond several thousand iterations before stopping. 
 The models will be saved under ```grobid-home/models/quantities``` and ```grobid-home/models/units``` respectively.
 
 ## Training data
