@@ -87,7 +87,7 @@ public class QuantityRestService implements QuantityPaths {
     @Path(PATH_QUANTITY_TEXT)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @POST
-    public Response processText_post(@QueryParam(TEXT) String text) {
+    public Response processText_post(@FormParam(TEXT) String text) {
         System.out.println(text);
         return QuantityProcessString.processText(text);
     }
