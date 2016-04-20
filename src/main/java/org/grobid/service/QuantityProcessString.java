@@ -1,37 +1,21 @@
 package org.grobid.service;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Collections;
-import java.io.*;
-
-import org.grobid.core.engines.QuantityParser;
 import org.grobid.core.data.Measurement;
-
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.HttpHeaders; 
-
+import org.grobid.core.engines.QuantityParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.core.io.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.annotation.*;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
- * 
  * @author Patrice
- * 
  */
 public class QuantityProcessString {
-
-    /**
-     * The class Logger.
-     */
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityProcessString.class);
 
 
@@ -50,10 +34,10 @@ public class QuantityProcessString {
             if (measurements != null) {
                 jsonBuilder = new StringBuilder();
                 jsonBuilder.append("{ ");
-                jsonBuilder.append("\"runtime\" : " + (end-start));
+                jsonBuilder.append("\"runtime\" : " + (end - start));
                 jsonBuilder.append(", \"measurements\" : [ ");
                 boolean first = true;
-                for(Measurement measurement : measurements)   {
+                for (Measurement measurement : measurements) {
                     if (first)
                         first = false;
                     else
@@ -61,38 +45,31 @@ public class QuantityProcessString {
                     jsonBuilder.append(measurement.toJson());
                 }
                 jsonBuilder.append("] }");
-            }
-            else
+            } else
                 response = Response.status(Status.NO_CONTENT).build();
 
             System.out.println(jsonBuilder.toString());
 
             if (jsonBuilder != null) {
                 response = Response.status(Status.OK).entity(jsonBuilder.toString())
-                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
-                    .build();
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .build();
             }
         } catch (NoSuchElementException nseExp) {
-            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.");
+            LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.", nseExp);
             response = Response.status(Status.SERVICE_UNAVAILABLE).build();
         } catch (Exception e) {
             LOGGER.error("An unexpected exception occurs. ", e);
             response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getCause().getMessage()).build();
-        } 
+        }
         LOGGER.debug(methodLogOut());
         return response;
     }
 
-    /**
-     * @return
-     */
     private static String methodLogIn() {
         return ">> " + QuantityProcessString.class.getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
     }
 
-    /**
-     * @return
-     */
     private static String methodLogOut() {
         return "<< " + QuantityProcessString.class.getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
     }
