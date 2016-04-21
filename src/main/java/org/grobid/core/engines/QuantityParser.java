@@ -89,6 +89,7 @@ public class QuantityParser extends AbstractParser {
         List<Measurement> measurements = new ArrayList<>();
         try {
             text = text.replace("\n", " ");
+            text = text.replace("\t", " ");
             List<LayoutToken> tokens = QuantityAnalyzer.tokenizeWithLayoutToken(text);
 
             if (tokens.size() == 0) {
@@ -98,7 +99,7 @@ public class QuantityParser extends AbstractParser {
             String ress = null;
             List<String> texts = new ArrayList<>();
             for (LayoutToken token : tokens) {
-                if (!token.getText().equals(" ")) {
+                if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
                     texts.add(token.getText());
                 }
             }
@@ -287,7 +288,7 @@ public class QuantityParser extends AbstractParser {
             }
             if (((line.length() == 0) || (i == lines.length - 1)) && (paragraph.length() > 0)) {
                 // we have a new paragraph
-                text = paragraph.toString().replace("\n", " ").replace("\r", " ");
+                text = paragraph.toString().replace("\n", " ").replace("\r", " ").replace("\t", " ");
                 List<LayoutToken> tokens = QuantityAnalyzer.tokenizeWithLayoutToken(text);
 
                 if (tokens.size() == 0)
@@ -296,7 +297,7 @@ public class QuantityParser extends AbstractParser {
                 String ress = null;
                 List<String> texts = new ArrayList<>();
                 for (LayoutToken token : tokens) {
-                    if (!token.getText().equals(" ")) {
+                    if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
                         texts.add(token.getText());
                     }
                 }
@@ -352,7 +353,7 @@ public class QuantityParser extends AbstractParser {
                 String ress = null;
                 List<String> texts = new ArrayList<String>();
                 for (LayoutToken token : tokenizations) {
-                    if (!token.getText().equals(" ")) {
+                    if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
                         texts.add(token.getText());
                     }
                 }
@@ -423,7 +424,7 @@ public class QuantityParser extends AbstractParser {
 
             List<String> chunks = handler.getChunks();
             for (String text : chunks) {
-                text = text.replace("\n", " ").replace("\t", " ").replace(" ", " ");
+                text = text.toString().replace("\n", " ").replace("\r", " ").replace("\t", " ");
                 // the last one is a special "large" space missed by the regex "\\p{Space}+" used on the SAX parser
                 if (text.trim().length() == 0)
                     continue;
@@ -435,7 +436,7 @@ public class QuantityParser extends AbstractParser {
                 String ress = null;
                 List<String> texts = new ArrayList<String>();
                 for (LayoutToken token : tokenizations) {
-                    if (!token.getText().equals(" ")) {
+                    if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
                         texts.add(token.getText());
                     }
                 }
