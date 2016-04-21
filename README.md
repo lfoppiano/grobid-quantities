@@ -85,11 +85,19 @@ The input directory should be the directory containing prefixes.txt and units.js
 
 Demo/console web app is then accessible at ```http://localhost:8080```
 
-Using ```curl```:
+Using ```curl``` POST/GET requests:
+
 
 ```
-curl -G --data-urlencode "text=I've lost one minute." localhost:8080/processQuantityText
+curl -X POST -d "text=I've lost one minute." localhost:8080/processQuantityText
 ```
+
+```
+curl -GET --data-urlencode "text=I've lost one minute." localhost:8080/processQuantityText
+```
+
+Note that the model is designed and trained to work at __paragraph level__. It means that, for the moment, the expected input to the parser is a paragraph or a text segment of similar size, not a complete document. In case you have a long textual document, it is better either to exploit existing structures (e.g. XML/HTML elements) to segment it initially into paragraphs or sentences, or to apply an automatic paragraph/sentence segmentation, and then send separately to grobid-quantities the equivalent of a paragraph-size texts to be processed. 
+
 ## License
 
 GROBID and grobid-quantities are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
