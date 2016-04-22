@@ -610,9 +610,7 @@ public class QuantityParser extends AbstractParser {
                     }
                     currentQuantity = new Quantity();
                     currentQuantity.setValue(clusterContent);
-                    adjustStartOffset(text, pos);
                     currentQuantity.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, endPos);
                     currentQuantity.setOffsetEnd(endPos);
                     currentMeasurement.setType(UnitUtilities.Measurement_Type.VALUE);
                     if (currentUnit.getRawName() != null) {
@@ -639,9 +637,7 @@ public class QuantityParser extends AbstractParser {
                     }
                     currentQuantity = new Quantity();
                     currentQuantity.setValue(clusterContent);
-                    adjustStartOffset(text, pos);
                     currentQuantity.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, endPos);
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null)
                         currentQuantity.setRawUnit(currentUnit);
@@ -660,9 +656,7 @@ public class QuantityParser extends AbstractParser {
                     }
                     currentQuantity = new Quantity();
                     currentQuantity.setValue(clusterContent);
-                    adjustStartOffset(text, pos);
                     currentQuantity.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, endPos);
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
                         currentQuantity.setRawUnit(currentUnit);
@@ -682,9 +676,7 @@ public class QuantityParser extends AbstractParser {
                     }
                     currentQuantity = new Quantity();
                     currentQuantity.setValue(clusterContent);
-                    adjustStartOffset(text, pos);
                     currentQuantity.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, endPos);
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
                         currentQuantity.setRawUnit(currentUnit);
@@ -704,9 +696,7 @@ public class QuantityParser extends AbstractParser {
                     }
                     currentQuantity = new Quantity();
                     currentQuantity.setValue(clusterContent);
-                    adjustStartOffset(text, pos);
                     currentQuantity.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, endPos);
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
                         currentQuantity.setRawUnit(currentUnit);
@@ -726,9 +716,7 @@ public class QuantityParser extends AbstractParser {
                     }
                     currentQuantity = new Quantity();
                     currentQuantity.setValue(clusterContent);
-                    pos = adjustStartOffset(text, pos);
                     currentQuantity.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, endPos);
                     currentQuantity.setOffsetEnd(endPos);
 
                     if (currentUnit.getRawName() != null) {
@@ -742,9 +730,7 @@ public class QuantityParser extends AbstractParser {
                     System.out.println("unit (left attachment): " + clusterContent);
                     currentUnit = new Unit();
                     currentUnit.setRawName(clusterContent);
-                    pos = adjustStartOffset(text, pos);
                     currentUnit.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, endPos);
                     currentUnit.setOffsetEnd(endPos);
 
                     if (openMeasurement == UnitUtilities.Measurement_Type.VALUE) {
@@ -817,9 +803,7 @@ public class QuantityParser extends AbstractParser {
                     }
                     currentUnit = new Unit();
                     currentUnit.setRawName(clusterContent);
-                    pos = adjustStartOffset(text, pos);
                     currentUnit.setOffsetStart(pos);
-                    endPos = adjustEndOffset(text, endPos);
                     currentUnit.setOffsetEnd(endPos);
                     break;
                 case QUANTITY_OTHER:
@@ -834,22 +818,17 @@ public class QuantityParser extends AbstractParser {
             measurements.add(currentMeasurement);
         }
 
+        adjustEndOffsets(measurements);
+
         measurements = MeasurementOperations.postCorrection(measurements);
         return measurements;
     }
 
-    private int adjustEndOffset(String text, int endPos) {
-        while (text.charAt(endPos - 1) == ' ') {
-            endPos--;
-        }
-        return endPos;
-    }
+    private void adjustEndOffsets(List<Measurement> measurements) {
+        for (Measurement measurement : measurements) {
 
-    private int adjustStartOffset(String text, int pos) {
-        while (text.charAt(pos) == ' ') {
-            pos++;
+
         }
-        return pos;
     }
 
     private boolean isMeasurementValid(Measurement currentMeasurement) {
