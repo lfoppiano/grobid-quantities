@@ -1889,6 +1889,23 @@
           ]
         }
       ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "pH"
+        }
+      ],
+      "type": "ACIDITY",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "power of hydrogen",
+          "inflections": [
+            "powers of hydrogen"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -347,8 +347,6 @@
 <unit><prefix>k</prefix><base>H</base></unit>
 <unit><prefix>h</prefix><base>H</base></unit>
 <unit><prefix>c</prefix><base>H</base></unit>
-<unit><prefix>p</prefix><base>H</base></unit>
-<unit><prefix>P</prefix><base>H</base></unit>
 <unit><prefix>da</prefix><base>H</base></unit>
 <unit><prefix>µ</prefix><base>H</base></unit>
 <unit><prefix>G</prefix><base>H</base></unit>

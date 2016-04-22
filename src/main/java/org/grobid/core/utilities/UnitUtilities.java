@@ -91,6 +91,7 @@ public class UnitUtilities {
         FRACTION("fraction"),
         VO2_MAX("VO2 max"),
         COUNT("count"),
+        ACCELERATION("acceleration"),
         DEGREE("angle");
 
         private String name;
