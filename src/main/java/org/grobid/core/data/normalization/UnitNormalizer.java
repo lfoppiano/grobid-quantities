@@ -38,12 +38,12 @@ public class UnitNormalizer {
      * form (including inflections), e.g. m <- meters, A/V <- volt per meter
      * - if not found, parse the unit using the Unit CRF model
      */
-    public List<UnitBlock> parseToProduct(String rawUnit) {
+    public List<UnitBlock> parseToProduct(String rawUnit, boolean isUnitLeft) {
         String unitName = quantityLexicon.getNameByInflection(rawUnit);
 
         List<UnitBlock> unitBlockList = new ArrayList<>();
         if (unitName == null) {
-            unitBlockList = unitParser.tagUnit(rawUnit);
+            unitBlockList = unitParser.tagUnit(rawUnit, isUnitLeft);
         } else {
             unitBlockList.add(new UnitBlock(null, unitName, null));
         }
@@ -64,14 +64,14 @@ public class UnitNormalizer {
         return parsedUnit.toString();
     }
 
-    public String parseAndReformat(String rawUnit) throws NormalizationException {
-        final List<UnitBlock> unitBlockList = parseToProduct(rawUnit);
+    public String parseAndReformat(String rawUnit, boolean isUnitLeft) throws NormalizationException {
+        final List<UnitBlock> unitBlockList = parseToProduct(rawUnit, isUnitLeft);
         return reformat(unitBlockList);
 
     }
 
     public Unit parseUnit(Unit rawUnit) throws NormalizationException {
-        List<UnitBlock> blocks = parseToProduct(rawUnit.getRawName());
+        List<UnitBlock> blocks = parseToProduct(rawUnit.getRawName(), rawUnit.isUnitLeft());
 
         Unit parsedUnit = new Unit();
         parsedUnit.setOffsetStart(rawUnit.getOffsetStart());

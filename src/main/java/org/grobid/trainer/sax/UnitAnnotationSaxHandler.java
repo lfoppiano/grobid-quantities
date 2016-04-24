@@ -2,6 +2,8 @@ package org.grobid.trainer.sax;
 
 
 import org.grobid.core.utilities.Pair;
+import org.grobid.trainer.UnitLabeled;
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -20,7 +22,8 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
     StringBuffer accumulator = new StringBuffer(); // Accumulate parsed text
     private String currentTag = null;
 
-    private List<Pair<String, String>> labeled = new ArrayList<>(); // store line by line the labeled data
+    private List<UnitLabeled> labeled = new ArrayList<>(); // store line by line the labeled data
+    UnitLabeled currentUnit = new UnitLabeled();
 
     public void characters(char[] buffer, int start, int length) {
         accumulator.append(buffer, start, length);
@@ -30,8 +33,30 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
         return accumulator.toString().trim();
     }
 
-    public List<Pair<String, String>> getLabeledResult() {
+    public List<UnitLabeled> getLabeledResult() {
         return labeled;
+    }
+
+    public void startElement(String uri, String localName,
+                             String qName, Attributes attributes) {
+
+        if (isUnitTag(qName)) {
+            currentUnit = new UnitLabeled();
+
+            if (isLeftPosition(attributes)) {
+                currentUnit.setUnitLeft(true);
+            }
+        }
+
+    }
+
+    private boolean isLeftPosition(Attributes attributes) {
+        final int leftIdx = attributes.getIndex("left");
+        if (leftIdx > -1) {
+            return "true".equals(attributes.getValue(leftIdx));
+        } else {
+            return false;
+        }
     }
 
     public void endElement(String uri,
@@ -40,7 +65,8 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
         if (isRelevantTag(qName)) {
             writeData(qName);
         } else if ("unit".equals(qName)) {
-            labeled.add(new Pair("\n", null));
+            //currentUnit.addLabel(new Pair("\n", null));
+            labeled.add(currentUnit);
         }
 
     }
@@ -70,18 +96,18 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
                     continue;
 
                 if (token.equals("+L+")) {
-                    labeled.add(new Pair("@newline", null));
+                    currentUnit.addLabel(new Pair("@newline", null));
                 } else if (token.equals("+PAGE+")) {
-                    labeled.add(new Pair("@newpage", null));
+                    currentUnit.addLabel(new Pair("@newpage", null));
                 } else {
                     String content = token;
                     int i = 0;
                     if (content.length() > 0) {
                         if (begin && !currentTag.equals("<other>")) {
-                            labeled.add(new Pair(content, "I-" + currentTag));
+                            currentUnit.addLabel(new Pair(content, "I-" + currentTag));
                             begin = false;
                         } else {
-                            labeled.add(new Pair(content, currentTag));
+                            currentUnit.addLabel(new Pair(content, currentTag));
                         }
                     }
                 }
@@ -105,6 +131,13 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
     private boolean isRelevantTag(String qName) {
         if ("pow".equals(qName) || "base".equals(qName)
                 || "prefix".equals(qName) || "other".equals(qName)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isUnitTag(String qName) {
+        if ("unit".equals(qName)) {
             return true;
         }
         return false;

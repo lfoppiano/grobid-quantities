@@ -15,6 +15,7 @@ public class FeaturesVectorUnit {
     public boolean isDigit = false;
     public boolean isKnownUnitToken = false;
     public boolean isKnownPrefixToken = false;
+    public boolean isUnitLeft = false; // the unit is happearing on the left of the quantity (e.g. pH)
     public String label = null;             // label if known
 
     // one of NOPUNCT, OPENBRACKET, ENDBRACKET, DOT, COMMA, HYPHEN, QUOTE, PUNCT (default)
@@ -55,11 +56,32 @@ public class FeaturesVectorUnit {
 
         res.append(" ").append(punctType);
 
+        if (isUnitLeft) {
+            res.append(" ").append(1);
+        } else {
+            res.append(" ").append(0);
+        }
+
         if (isNotEmpty(label)) {
             res.append(" ").append(label);
         }
 
         return res.toString();
+    }
+
+    /*
+        Use static public FeaturesVectorUnit addFeaturesUnit(String character,
+                                                     String label,
+                                                     boolean isKnownUnitToken,
+                                                     boolean isKnownPrefixToken,
+                                                     boolean isUnitLeft) {
+     */
+    @Deprecated
+    static public FeaturesVectorUnit addFeaturesUnit(String character,
+                                                     String label,
+                                                     boolean isKnownUnitToken,
+                                                     boolean isKnownPrefixToken) {
+        return addFeaturesUnit(character, label, isKnownUnitToken, isKnownPrefixToken, false);
     }
 
     /**
@@ -68,7 +90,8 @@ public class FeaturesVectorUnit {
     static public FeaturesVectorUnit addFeaturesUnit(String character,
                                                      String label,
                                                      boolean isKnownUnitToken,
-                                                     boolean isKnownPrefixToken) {
+                                                     boolean isKnownPrefixToken,
+                                                     boolean isLeftUnit) {
 
         FeatureFactory featureFactory = FeatureFactory.getInstance();
 
@@ -109,6 +132,7 @@ public class FeaturesVectorUnit {
             featuresVector.isDigit = false;
         }
 
+        featuresVector.isUnitLeft = isLeftUnit;
         featuresVector.isKnownUnitToken = isKnownUnitToken;
         featuresVector.isKnownPrefixToken = isKnownPrefixToken;
 

@@ -9,7 +9,6 @@ import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.MeasurementOperations;
 import org.grobid.core.utilities.OffsetPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,9 +45,14 @@ public class UnitParser extends AbstractParser {
     }
 
     /**
-     * Extract all occurences of measurement/quantities from a simple piece of text.
+     * please use List<UnitBlock> tagUnit(String text, boolean isUnitLeft)
      */
+    @Deprecated
     public List<UnitBlock> tagUnit(String text) {
+        return tagUnit(text, false);
+    }
+
+    public List<UnitBlock> tagUnit(String text, boolean isUnitLeft) {
         if (isBlank(text)) {
             return null;
         }
@@ -76,7 +80,7 @@ public class UnitParser extends AbstractParser {
                 //unitTokenPositions.add(new OffsetPosition(text.indexOf(character), text.indexOf(character) + 1));
             }
 
-            ress = addFeatures(characters, unitTokenPositions);
+            ress = addFeatures(characters, unitTokenPositions, isUnitLeft);
             String res;
             try {
                 res = label(ress);
@@ -182,14 +186,14 @@ public class UnitParser extends AbstractParser {
 
     @SuppressWarnings({"UnusedParameters"})
     private String addFeatures(List<String> characters,
-                               List<OffsetPosition> unitTokenPositions) {
+                               List<OffsetPosition> unitTokenPositions, boolean isUnitLeft) {
 
         StringBuilder result = new StringBuilder();
         try {
             for (String character : characters) {
                 FeaturesVectorUnit featuresVector =
                         FeaturesVectorUnit.addFeaturesUnit(character, null, quantityLexicon.inUnitDictionary(character),
-                                quantityLexicon.inPrefixDictionary(character));
+                                quantityLexicon.inPrefixDictionary(character), isUnitLeft);
 
                 result.append(featuresVector.printVector())
                         .append("\n");

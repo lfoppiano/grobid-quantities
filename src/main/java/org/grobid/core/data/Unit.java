@@ -1,8 +1,7 @@
 package org.grobid.core.data;
 
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import org.grobid.core.utilities.OffsetPosition;
-
-import com.fasterxml.jackson.core.io.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,7 @@ public class Unit {
     private String rawName = null;
     private OffsetPosition offsets = null;
     private UnitDefinition unitDefinition = null;
+    private boolean isUnitLeft = false;
 
     private List<UnitBlock> productBlock = null;
 
@@ -157,4 +157,11 @@ public class Unit {
     }
 
 
+    public boolean isUnitLeft() {
+        return isUnitLeft;
+    }
+
+    public void setUnitLeft(boolean unitLeft) {
+        isUnitLeft = unitLeft;
+    }
 }

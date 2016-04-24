@@ -1,13 +1,12 @@
 package org.grobid.trainer.sax;
 
 import org.apache.commons.io.IOUtils;
-import org.grobid.core.utilities.Pair;
+import org.grobid.trainer.UnitLabeled;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -35,9 +34,12 @@ public class UnitAnnotationSaxHandlerTest {
         SAXParser p = spf.newSAXParser();
         p.parse(is, target);
 
-        List<Pair<String, String>> labeled = target.getLabeledResult();
+        List<UnitLabeled> labeled = target.getLabeledResult();
 
-        assertThat(labeled.size(), is(28));
+        assertThat(labeled.size(), is(4));
+
+        assertThat(labeled.get(0).isUnitLeft(), is(true));
+        assertThat(labeled.get(0).getLabels().size(), is(5));
     }
 
     @Test
@@ -47,25 +49,29 @@ public class UnitAnnotationSaxHandlerTest {
         SAXParser p = spf.newSAXParser();
         p.parse(is, target);
 
-        List<Pair<String, String>> labeled = target.getLabeledResult();
+        List<UnitLabeled> labeled = target.getLabeledResult();
 
-        assertThat(labeled.size(), is(15));
+        assertThat(labeled.size(), is(2));
+        assertThat(labeled.get(0).isUnitLeft(), is(false));
+        assertThat(labeled.get(0).getLabels().size(), is(5));
     }
 
     @Test
     public void testParser_doubleBaseName() throws Exception {
-        String input= "<units><unit><base>Hz</base></unit></units>";
+        String input = "<units><unit left=\"true\"><base>Hz</base></unit></units>";
         InputStream is = IOUtils.toInputStream(input);
 
         SAXParser p = spf.newSAXParser();
         p.parse(is, target);
 
-        List<Pair<String, String>> labeled = target.getLabeledResult();
+        List<UnitLabeled> labeled = target.getLabeledResult();
 
-        assertThat(labeled.size(), is(3));
-        assertThat(labeled.get(0).getA(), is("H"));
-        assertThat(labeled.get(0).getB(), is("I-<base>"));
-        assertThat(labeled.get(1).getA(), is("z"));
-        assertThat(labeled.get(1).getB(), is("<base>"));
+        assertThat(labeled.size(), is(1));
+        assertThat(labeled.get(0).isUnitLeft(), is(true));
+        assertThat(labeled.get(0).getLabels().size(), is(2));
+        assertThat(labeled.get(0).getLabels().get(0).getA(), is("H"));
+        assertThat(labeled.get(0).getLabels().get(0).getB(), is("I-<base>"));
+        assertThat(labeled.get(0).getLabels().get(1).getA(), is("z"));
+        assertThat(labeled.get(0).getLabels().get(1).getB(), is("<base>"));
     }
 }

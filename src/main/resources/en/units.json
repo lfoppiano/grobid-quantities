@@ -524,7 +524,8 @@
     {
       "notations": [
         {
-          "raw": "°C"
+          "raw": "°C",
+          "supportsPrefixes": false
         }
       ],
       "type": "TEMPERATURE",
@@ -541,7 +542,8 @@
     {
       "notations": [
         {
-          "raw": "°F"
+          "raw": "°F",
+          "supportsPrefixes": false
         }
       ],
       "type": "TEMPERATURE",

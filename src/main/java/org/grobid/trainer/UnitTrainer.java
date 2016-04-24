@@ -2,7 +2,6 @@ package org.grobid.trainer;
 
 import org.grobid.core.GrobidModels;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.features.FeaturesVectorQuantities;
 import org.grobid.core.features.FeaturesVectorUnit;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.mock.MockContext;
@@ -10,7 +9,6 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
 import org.grobid.trainer.evaluation.EvaluationUtilities;
-import org.grobid.trainer.sax.MeasureAnnotationSaxHandler;
 import org.grobid.trainer.sax.UnitAnnotationSaxHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,36 +75,22 @@ public class UnitTrainer extends AbstractTrainer {
                 SAXParser p = spf.newSAXParser();
                 p.parse(thefile, handler);
 
-                List<Pair<String, String>> labeled = handler.getLabeledResult();
+                List<UnitLabeled> labeledUnits = handler.getLabeledResult();
 
                 // we need to add now the features to the labeled tokens
-                List<Pair<String, String>> bufferLabeled = null;
                 int pos = 0;
 
-                // let's iterate by defined CRF input (separated by new line)
-                while (pos < labeled.size()) {
-                    bufferLabeled = new ArrayList<>();
-                    while (pos < labeled.size()) {
-                        if (labeled.get(pos).getA().equals("\n")) {
-                            pos++;
-                            break;
-                        }
-                        bufferLabeled.add(labeled.get(pos));
-                        pos++;
-                    }
-
-                    if (bufferLabeled.size() == 0)
-                        continue;
-
-                    // to store unit term positions
-                    List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
+                for (UnitLabeled labeledUnit : labeledUnits) {
+                    List<Pair<String, String>> labels = labeledUnit.getLabels();
+                    List<OffsetPosition> unitTokenPositions = new ArrayList<>();
                     OffsetPosition offsetPosition = new OffsetPosition();
                     offsetPosition.start = pos;
                     offsetPosition.end = pos + 1;
                     unitTokenPositions.add(offsetPosition);
 
-                    addFeatures(bufferLabeled, writer, unitTokenPositions);
+                    addFeatures(labels, writer, unitTokenPositions, labeledUnit.isUnitLeft());
                     writer.write("\n");
+                    pos++;
                 }
             }
 
@@ -120,7 +104,7 @@ public class UnitTrainer extends AbstractTrainer {
     @SuppressWarnings({"UnusedParameters"})
     private void addFeatures(List<Pair<String, String>> texts,
                              Writer writer,
-                             List<OffsetPosition> unitTokenPositions) {
+                             List<OffsetPosition> unitTokenPositions, boolean isUnitLeft) {
 
         int posit = 0;
         List<OffsetPosition> localPositions = unitTokenPositions;
@@ -137,7 +121,8 @@ public class UnitTrainer extends AbstractTrainer {
 
                 FeaturesVectorUnit featuresVector =
                         FeaturesVectorUnit.addFeaturesUnit(token, label,
-                                quantityLexicon.inUnitDictionary(token), quantityLexicon.inPrefixDictionary(token));
+                                quantityLexicon.inPlainUnitDictionary(token), quantityLexicon.inPrefixDictionary(token),
+                                isUnitLeft);
 
                 if (featuresVector.label == null) {
                     continue;

@@ -47,24 +47,25 @@ public class UnitNormalizerTest {
 
         expect(mockQuantityLexicon.getNameByInflection("m")).andReturn(null);
         final UnitBlock block = new UnitBlock("m");
-        expect(mockUnitParser.tagUnit("m")).andReturn(Arrays.asList(new UnitBlock[]{block}));
+        expect(mockUnitParser.tagUnit("m", false)).andReturn(Arrays.asList(new UnitBlock[]{block}));
 
         replay(mockQuantityLexicon, mockUnitParser);
-        String reformatted = target.parseAndReformat(unitSymbol);
+        String reformatted = target.parseAndReformat(unitSymbol, false);
         verify(mockQuantityLexicon, mockUnitParser);
 
         assertThat(reformatted, is("m"));
     }
+
     @Test
     public void testParseAndReformat_baseUnit_noPow2() throws Exception {
         String unitSymbol = "s";
 
         expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
         final UnitBlock block = new UnitBlock("s");
-        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block}));
+        expect(mockUnitParser.tagUnit(unitSymbol, false)).andReturn(Arrays.asList(new UnitBlock[]{block}));
 
         replay(mockQuantityLexicon, mockUnitParser);
-        String reformatted = target.parseAndReformat(unitSymbol);
+        String reformatted = target.parseAndReformat(unitSymbol, false);
         verify(mockQuantityLexicon, mockUnitParser);
 
         assertThat(reformatted, is("s"));
@@ -76,10 +77,10 @@ public class UnitNormalizerTest {
 
         expect(mockQuantityLexicon.getNameByInflection("ml")).andReturn(null);
         final UnitBlock block = new UnitBlock("ml");
-        expect(mockUnitParser.tagUnit("ml")).andReturn(Arrays.asList(new UnitBlock[]{block}));
+        expect(mockUnitParser.tagUnit("ml", false)).andReturn(Arrays.asList(new UnitBlock[]{block}));
 
         replay(mockQuantityLexicon, mockUnitParser);
-        String reformatted = target.parseAndReformat(unitSymbol);
+        String reformatted = target.parseAndReformat(unitSymbol, false);
         verify(mockQuantityLexicon, mockUnitParser);
 
         assertThat(reformatted, is("ml"));
@@ -91,7 +92,7 @@ public class UnitNormalizerTest {
 
         expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn("m");
         replay(mockQuantityLexicon);
-        String reformatted = target.parseAndReformat(unitSymbol);
+        String reformatted = target.parseAndReformat(unitSymbol, false);
         verify(mockQuantityLexicon);
 
         assertThat(reformatted, is("m"));
@@ -103,10 +104,10 @@ public class UnitNormalizerTest {
         expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
 
         final UnitBlock block = new UnitBlock("h", "m", null);
-        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block}));
+        expect(mockUnitParser.tagUnit(unitSymbol, false)).andReturn(Arrays.asList(new UnitBlock[]{block}));
 
         replay(mockQuantityLexicon, mockUnitParser);
-        String normalized = target.parseAndReformat(unitSymbol);
+        String normalized = target.parseAndReformat(unitSymbol, false);
         verify(mockQuantityLexicon, mockUnitParser);
 
         assertThat(normalized, is("hm"));
@@ -117,10 +118,10 @@ public class UnitNormalizerTest {
         String unitSymbol = "m^2";
         expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
         final UnitBlock block = new UnitBlock(null, "m", "2");
-        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block}));
+        expect(mockUnitParser.tagUnit(unitSymbol, false)).andReturn(Arrays.asList(new UnitBlock[]{block}));
 
         replay(mockQuantityLexicon, mockUnitParser);
-        String normalized = target.parseAndReformat(unitSymbol);
+        String normalized = target.parseAndReformat(unitSymbol, false);
         verify(mockQuantityLexicon, mockUnitParser);
         String normalizedUnit = "m²";
 
@@ -134,10 +135,10 @@ public class UnitNormalizerTest {
         String unitSymbol = "km^2";
         expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
         final UnitBlock block = new UnitBlock("k", "m", "2");
-        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block}));
+        expect(mockUnitParser.tagUnit(unitSymbol, false)).andReturn(Arrays.asList(new UnitBlock[]{block}));
 
         replay(mockUnitParser, mockQuantityLexicon);
-        String reformatted = target.parseAndReformat(unitSymbol);
+        String reformatted = target.parseAndReformat(unitSymbol, false);
         verify(mockUnitParser, mockQuantityLexicon);
         String expected = "km²";
 
@@ -151,10 +152,10 @@ public class UnitNormalizerTest {
         expect(mockQuantityLexicon.getNameByInflection(unitSymbol)).andReturn(null);
         final UnitBlock block1 = new UnitBlock("m");
         final UnitBlock block2 = new UnitBlock(null, "s", "-2");
-        expect(mockUnitParser.tagUnit(unitSymbol)).andReturn(Arrays.asList(new UnitBlock[]{block1, block2}));
+        expect(mockUnitParser.tagUnit(unitSymbol, false)).andReturn(Arrays.asList(new UnitBlock[]{block1, block2}));
 
         replay(mockUnitParser, mockQuantityLexicon);
-        String reformatted = target.parseAndReformat(unitSymbol);
+        String reformatted = target.parseAndReformat(unitSymbol, false);
         verify(mockUnitParser, mockQuantityLexicon);
         String expected = "m/s²";
 

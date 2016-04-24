@@ -19,6 +19,8 @@ public class UnitDefinition {
     // standard notation, e.g. g for gram - there might be several notations for an unit
     private List<String> notations = null;
 
+    private boolean hasPrefixes = false;
+
     private UnitUtilities.Unit_Type type;               // type of measurement
 
     private UnitUtilities.System_Type system;           // type of system of unit
@@ -27,7 +29,7 @@ public class UnitDefinition {
         return names;
     }
 
-    public void setNames(List<String> name) {
+    public void setNames(List<String> names) {
         this.names = names;
     }
 

@@ -93,7 +93,7 @@
         <prefix>μ</prefix>
         <base>m</base>
     </unit>
-    
+
     <unit>
         <other>~</other>
         <other>7</other>
@@ -172,16 +172,16 @@
         <prefix>μ</prefix>
         <base>l</base>
     </unit>
-    <unit>
+    <unit left="true">
         <base>pH</base>
     </unit>
-    <unit>
+    <unit left="true">
         <base>pH</base>
     </unit>
-    <unit>
+    <unit left="true">
         <base>pH</base>
     </unit>
-    <unit>
+    <unit left="true">
         <base>pH</base>
     </unit>
 
@@ -193,18 +193,18 @@
         <prefix>μ</prefix>
         <base>l</base>
     </unit>
-    <unit>
+    <unit left="true">
         <base>pH</base>
     </unit>
-    <unit>
+    <unit left="true">
         <base>pH</base>
     </unit>
-    <unit>
+    <unit left="true">
         <base>pH</base>
     </unit>
-    <unit>
+    <unit left="true">
         <base>pH</base>
     </unit>
 
-    
+
 </units>
