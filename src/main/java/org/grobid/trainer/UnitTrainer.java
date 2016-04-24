@@ -121,7 +121,7 @@ public class UnitTrainer extends AbstractTrainer {
 
                 FeaturesVectorUnit featuresVector =
                         FeaturesVectorUnit.addFeaturesUnit(token, label,
-                                quantityLexicon.inPlainUnitDictionary(token), quantityLexicon.inPrefixDictionary(token),
+                                quantityLexicon.inUnitDictionary(token), quantityLexicon.inPrefixDictionary(token),
                                 isUnitLeft);
 
                 if (featuresVector.label == null) {
