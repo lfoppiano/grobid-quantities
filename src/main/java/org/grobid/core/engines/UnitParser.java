@@ -45,7 +45,7 @@ public class UnitParser extends AbstractParser {
     }
 
     /**
-     * please use List<UnitBlock> tagUnit(String text, boolean isUnitLeft)
+     * please use List<UnitBlock> tagUnit(String text, boolean hasUnitRightAttachment)
      */
     @Deprecated
     public List<UnitBlock> tagUnit(String text) {

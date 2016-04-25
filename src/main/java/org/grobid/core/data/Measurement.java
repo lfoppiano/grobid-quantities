@@ -21,7 +21,6 @@ import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
  */
 public class Measurement {
     private UnitUtilities.Measurement_Type type = null;
-
     private Quantity quantityAtomic = null;
     private Quantity quantityLeast = null;
     private Quantity quantityMost = null;

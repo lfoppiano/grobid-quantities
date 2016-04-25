@@ -6,6 +6,7 @@
 # - isKnownUnitToken
 # - isKnownPrefixToken
 # - punctType
+# - hasRightAttachment
 
 
 # Unigram
@@ -69,7 +70,7 @@ U55:%x[-1,5]/%x[0,5]
 U56:%x[0,5]/%x[1,5]
 U57:%x[1,5]/%x[2,5]
 
-# isLeftUnit
+# hasRightAttachment
 #U60:%x[-2,6]
 #U61:%x[-1,6]
 U62:%x[0,6]

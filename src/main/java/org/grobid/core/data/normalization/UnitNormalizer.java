@@ -32,12 +32,6 @@ public class UnitNormalizer {
     }
 
 
-    /**
-     * Unit parsing:
-     * - infer the name (name + decomposition) from the written
-     * form (including inflections), e.g. m <- meters, A/V <- volt per meter
-     * - if not found, parse the unit using the Unit CRF model
-     */
     public List<UnitBlock> parseToProduct(String rawUnit, boolean isUnitLeft) {
         String unitName = quantityLexicon.getNameByInflection(rawUnit);
 
@@ -54,6 +48,7 @@ public class UnitNormalizer {
     public String reformat(List<UnitBlock> unitBlockList) throws NormalizationException {
         javax.measure.Unit parsedUnit = null;
         String unitName = UnitBlock.asString(unitBlockList);
+
         try {
             parsedUnit = defaultFormatService.parse(unitName);
         } catch (ParserException pe) {
@@ -70,14 +65,29 @@ public class UnitNormalizer {
 
     }
 
+    /**
+     * Unit parsing:
+     * - infer the name (name + decomposition) from the written
+     * form (including inflections), e.g. m <- meters, A/V <- volt per meter
+     * - if not found, parse the unit using the Unit CRF model
+     */
     public Unit parseUnit(Unit rawUnit) throws NormalizationException {
-        List<UnitBlock> blocks = parseToProduct(rawUnit.getRawName(), rawUnit.isUnitLeft());
+        List<UnitBlock> blocks = parseToProduct(rawUnit.getRawName(), rawUnit.hasUnitRightAttachment());
 
         Unit parsedUnit = new Unit();
         parsedUnit.setOffsetStart(rawUnit.getOffsetStart());
         parsedUnit.setOffsetEnd(rawUnit.getOffsetEnd());
         parsedUnit.setProductBlocks(blocks);
-        parsedUnit.setRawName(reformat(blocks));
+        final String reformatted = reformat(blocks);
+        parsedUnit.setRawName(reformatted);
+        parsedUnit.setUnitRightAttachment(rawUnit.hasUnitRightAttachment());
+
+        UnitDefinition def = quantityLexicon.getUnitByNotation(reformatted);
+        if(def == null) {
+            def = quantityLexicon.getUnitbyName(reformatted);
+        }
+
+        parsedUnit.setUnitDefinition(def);
 
         return parsedUnit;
     }

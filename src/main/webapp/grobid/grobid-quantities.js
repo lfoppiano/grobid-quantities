@@ -427,7 +427,6 @@ var grobid = (function ($) {
             colorLabel = quantityLeast.rawName;
         }
 
-
         var leastValue = quantityLeast.rawValue;
         var startUniLeast = -1;
         var endUnitLeast = -1;
@@ -503,8 +502,10 @@ var grobid = (function ($) {
             }
 
             var rawValue = quantity.rawValue;
-            var parsedValue = quantity.parsedValue;
             var unit = quantity.rawUnit;
+
+            var parsedValue = quantity.parsedValue;
+            // var parsedUnit = quantity.parsedUnit;
 
             var normalizedQuantity = quantity.normalizedQuantity;
             var normalizedUnit = quantity.normalizedUnit;

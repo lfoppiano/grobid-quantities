@@ -15,7 +15,7 @@ public class Unit {
     private String rawName = null;
     private OffsetPosition offsets = null;
     private UnitDefinition unitDefinition = null;
-    private boolean isUnitLeft = false;
+    private boolean hasRightAttachment = false;
 
     private List<UnitBlock> productBlock = null;
 
@@ -157,11 +157,11 @@ public class Unit {
     }
 
 
-    public boolean isUnitLeft() {
-        return isUnitLeft;
+    public boolean hasUnitRightAttachment() {
+        return hasRightAttachment;
     }
 
-    public void setUnitLeft(boolean unitLeft) {
-        isUnitLeft = unitLeft;
+    public void setUnitRightAttachment(boolean hasRightAttachment) {
+        this.hasRightAttachment = hasRightAttachment;
     }
 }

@@ -1,22 +1,15 @@
 package org.grobid.core.utilities;
 
-import org.grobid.core.GrobidModels;
+import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
-import org.grobid.core.data.Measurement;
 import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.data.normalization.UnitNormalizer;
-import org.grobid.core.engines.TaggingLabel;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.lexicon.QuantityLexicon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.grobid.core.tokenization.TaggingTokenCluster;
-import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Try to resolveMeasurement measurement extracted attributes (unit, values).
@@ -56,8 +49,8 @@ public class MeasurementOperations {
                 } else
                     newMeasurements.add(measurement);
 
-            } else if ( (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                        (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) ) {
+            } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
+                    (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                 // values of the interval do not matter if min/max or base/range
                 Quantity quantityLeast = measurement.getQuantityLeast();
                 if (quantityLeast == null)
@@ -80,7 +73,8 @@ public class MeasurementOperations {
                         newMeasurement.setAtomicQuantity(quantity);
                         newMeasurements.add(newMeasurement);
                     }
-                } else*/ if ((quantityLeast != null) && (quantityMost != null)) {
+                } else*/
+                if ((quantityLeast != null) && (quantityMost != null)) {
                     // if the interval is expressed over a chunck of text which is too large, it is a recognition error
                     // and we can replace it by two atomic measurements
                     int startL = quantityLeast.getOffsetStart();
@@ -202,10 +196,11 @@ public class MeasurementOperations {
         }
         return measurements;
     }
+
     private void updateQuantity(Quantity quantity) {
         if ((quantity != null) && (!quantity.isEmpty())) {
             Unit rawUnit = quantity.getRawUnit();
-            UnitDefinition foundUnit  = un.findDefinition(rawUnit);
+            UnitDefinition foundUnit = un.findDefinition(rawUnit);
 
             if (foundUnit != null) {
                 rawUnit.setUnitDefinition(foundUnit);

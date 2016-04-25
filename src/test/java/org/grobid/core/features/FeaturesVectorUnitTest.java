@@ -41,7 +41,7 @@ public class FeaturesVectorUnitTest {
         assertNotNull(output.isKnownUnitToken);
         assertNotNull(output.isUpperCase);
         assertNotNull(output.punctType);
-        assertNotNull(output.isUnitLeft);
+        assertNotNull(output.hasRightAttachment);
         assertNull(output.label);
     }
 
@@ -53,7 +53,7 @@ public class FeaturesVectorUnitTest {
         assertNotNull(output.isKnownUnitToken);
         assertNotNull(output.isUpperCase);
         assertNotNull(output.punctType);
-        assertTrue(output.isUnitLeft);
+        assertTrue(output.hasRightAttachment);
         assertNull(output.label);
     }
 }

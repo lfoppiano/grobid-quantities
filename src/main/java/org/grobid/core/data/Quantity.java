@@ -1,9 +1,10 @@
 package org.grobid.core.data;
 
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import org.apache.commons.lang3.StringUtils;
-import com.fasterxml.jackson.core.io.*;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
+import org.grobid.core.utilities.WordsToNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +14,6 @@ import java.text.ParseException;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.grobid.core.utilities.WordsToNumber;
 
 /**
  * Class for managing a quantity representation.
@@ -50,6 +49,8 @@ public class Quantity {
     public UnitUtilities.Unit_Type getType() {
         if (isNormalized()) {
             return getNormalizedQuantity().getType();
+        } else if (parsedUnit != null && parsedUnit.getUnitDefinition() != null) {
+            return getParsedUnit().getUnitDefinition().getType();
         } else {
             if (rawUnit != null && getRawUnit().hasDefinition()) {
                 return getRawUnit().getUnitDefinition().getType();
@@ -259,6 +260,15 @@ public class Quantity {
             }
             json.append("\"parsedValue\" : " + parsedValue);
         }
+
+        /*if (parsedUnit != null) {
+            if (!started) {
+                started = true;
+            } else {
+                json.append(", ");
+            }
+            json.append("\"parsedUnit\" : " + parsedUnit.toJson());
+        }*/
 
         if (isNormalized()) {
             if (!started) {

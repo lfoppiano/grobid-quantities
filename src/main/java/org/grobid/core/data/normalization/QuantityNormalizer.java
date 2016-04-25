@@ -4,6 +4,7 @@ import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.utilities.MeasurementOperations;
+import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tec.uom.se.unit.ProductUnit;
@@ -48,7 +49,12 @@ public class QuantityNormalizer {
 
         Unit parsedUnit = unitNormalizer.parseUnit(quantity.getRawUnit());
         quantity.setParsedUnit(parsedUnit);
-        return generateNormalizedQuantity(quantity);
+        if (parsedUnit.getUnitDefinition() != null && ((parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE)
+                || (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED))) {
+            return generateNormalizedQuantity(quantity);
+        } else {
+            return null;
+        }
     }
 
     protected Quantity.Normalized generateNormalizedQuantity(Quantity quantity) throws NormalizationException {

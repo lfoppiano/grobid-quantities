@@ -19,13 +19,9 @@ import org.grobid.core.features.FeaturesVectorQuantities;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
-import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.MeasurementOperations;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.UnitUtilities;
-import org.grobid.core.utilities.LayoutTokensUtil;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -184,14 +180,17 @@ public class QuantityParser extends AbstractParser {
     }
 
     private Quantity calculateQuantityLeast(Quantity quantityBase, Quantity quantityRange) {
-        if ((quantityBase == null) || (quantityRange == null))
+        if ((quantityBase == null) || (quantityRange == null)) {
             return null;
-        if ((quantityBase.getParsedValue() == null) || (quantityRange.getParsedValue() == null))
+        }
+        if ((quantityBase.getParsedValue() == null) || (quantityRange.getParsedValue() == null)) {
             return null;
+        }
         Quantity quantityLeast = new Quantity();
         BigDecimal value = quantityBase.getParsedValue().subtract(quantityRange.getParsedValue());
         quantityLeast.setParsedValue(value);
         quantityLeast.setRawValue(value.toString());
+        quantityLeast.setParsedUnit(quantityBase.getParsedUnit());
         if ((quantityBase.isNormalized()) && (quantityRange.isNormalized())) {
             Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
             normalizedQuantity.setValue(quantityBase.getNormalizedQuantity().getValue().subtract(quantityRange.getNormalizedQuantity().getValue()));
@@ -214,6 +213,7 @@ public class QuantityParser extends AbstractParser {
         BigDecimal value = quantityBase.getParsedValue().add(quantityRange.getParsedValue());
         quantityMost.setParsedValue(value);
         quantityMost.setRawValue(value.toString());
+        quantityMost.setParsedUnit(quantityBase.getParsedUnit());
         if ((quantityBase.isNormalized()) && (quantityRange.isNormalized())) {
             Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
             normalizedQuantity.setValue(quantityBase.getNormalizedQuantity().getValue().add(quantityRange.getNormalizedQuantity().getValue()));
@@ -554,7 +554,7 @@ public class QuantityParser extends AbstractParser {
 
                 FeaturesVectorQuantities featuresVector =
                         FeaturesVectorQuantities.addFeaturesQuantities(token, null,
-                                quantityLexicon.inUnitDictionary(token), isUnitPattern, 
+                                quantityLexicon.inUnitDictionary(token), isUnitPattern,
                                 quantityLexicon.isNumberToken(token));
                 result.append(featuresVector.printVector());
                 result.append("\n");
@@ -639,8 +639,9 @@ public class QuantityParser extends AbstractParser {
                     currentQuantity.setValue(clusterContent);
                     currentQuantity.setOffsetStart(pos);
                     currentQuantity.setOffsetEnd(endPos);
-                    if (currentUnit.getRawName() != null)
+                    if (currentUnit.getRawName() != null) {
                         currentQuantity.setRawUnit(currentUnit);
+                    }
                     currentMeasurement.setQuantityLeast(currentQuantity);
                     currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
                     openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX;
@@ -805,6 +806,7 @@ public class QuantityParser extends AbstractParser {
                     currentUnit.setRawName(clusterContent);
                     currentUnit.setOffsetStart(pos);
                     currentUnit.setOffsetEnd(endPos);
+                    currentUnit.setUnitRightAttachment(true);
                     break;
                 case QUANTITY_OTHER:
                     break;
