@@ -3,5 +3,11 @@ language: java
 jdk:
   - oraclejdk8
 
+sudo: false
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
 after_success:
   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report

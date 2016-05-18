@@ -820,18 +820,18 @@ public class QuantityParser extends AbstractParser {
             measurements.add(currentMeasurement);
         }
 
-        adjustEndOffsets(measurements);
+//        adjustEndOffsets(measurements);
 
         measurements = MeasurementOperations.postCorrection(measurements);
         return measurements;
     }
 
-    private void adjustEndOffsets(List<Measurement> measurements) {
+    /*private void adjustEndOffsets(List<Measurement> measurements) {
         for (Measurement measurement : measurements) {
 
 
         }
-    }
+    }*/
 
     private boolean isMeasurementValid(Measurement currentMeasurement) {
         return ((currentMeasurement.getType() != null) && (
