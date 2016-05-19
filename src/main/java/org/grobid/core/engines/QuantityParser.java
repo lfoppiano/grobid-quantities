@@ -51,6 +51,7 @@ public class QuantityParser extends AbstractParser {
     private static final Logger logger = LoggerFactory.getLogger(QuantityParser.class);
 
     private static volatile QuantityParser instance;
+    private ValueParser valueParser = ValueParser.getInstance();
 
     public static QuantityParser getInstance() {
         if (instance == null) {
@@ -609,7 +610,8 @@ public class QuantityParser extends AbstractParser {
                         currentUnit = new Unit();
                     }
                     currentQuantity = new Quantity();
-                    currentQuantity.setValue(clusterContent);
+                    currentQuantity.setRawValue(clusterContent);
+                    valueParser.parseValue(currentQuantity);
                     currentQuantity.setOffsetStart(pos);
                     currentQuantity.setOffsetEnd(endPos);
                     currentMeasurement.setType(UnitUtilities.Measurement_Type.VALUE);
@@ -636,7 +638,8 @@ public class QuantityParser extends AbstractParser {
                         }
                     }
                     currentQuantity = new Quantity();
-                    currentQuantity.setValue(clusterContent);
+                    currentQuantity.setRawValue(clusterContent);
+                    valueParser.parseValue(currentQuantity);
                     currentQuantity.setOffsetStart(pos);
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
@@ -656,7 +659,8 @@ public class QuantityParser extends AbstractParser {
                         }
                     }
                     currentQuantity = new Quantity();
-                    currentQuantity.setValue(clusterContent);
+                    currentQuantity.setRawValue(clusterContent);
+                    valueParser.parseValue(currentQuantity);
                     currentQuantity.setOffsetStart(pos);
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
@@ -676,7 +680,8 @@ public class QuantityParser extends AbstractParser {
                         }
                     }
                     currentQuantity = new Quantity();
-                    currentQuantity.setValue(clusterContent);
+                    currentQuantity.setRawValue(clusterContent);
+                    valueParser.parseValue(currentQuantity);
                     currentQuantity.setOffsetStart(pos);
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
@@ -696,7 +701,8 @@ public class QuantityParser extends AbstractParser {
                         }
                     }
                     currentQuantity = new Quantity();
-                    currentQuantity.setValue(clusterContent);
+                    currentQuantity.setRawValue(clusterContent);
+                    valueParser.parseValue(currentQuantity);
                     currentQuantity.setOffsetStart(pos);
                     currentQuantity.setOffsetEnd(endPos);
                     if (currentUnit.getRawName() != null) {
@@ -716,7 +722,8 @@ public class QuantityParser extends AbstractParser {
                         }
                     }
                     currentQuantity = new Quantity();
-                    currentQuantity.setValue(clusterContent);
+                    currentQuantity.setRawValue(clusterContent);
+                    valueParser.parseValue(currentQuantity);
                     currentQuantity.setOffsetStart(pos);
                     currentQuantity.setOffsetEnd(endPos);
 

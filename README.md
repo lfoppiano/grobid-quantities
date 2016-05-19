@@ -9,7 +9,7 @@ __Work in progress.__
 
 The goal of this GROBID module is to recognize in textual documents any expressions of measurements (e.g. _pressure_, _temperature_, etc.), to parse and normalization them, and finally to convert these measurements into SI units. We focus our work on technical and scientific articles (text, XML and PDF input) and patents (text and XML input). 
 
-![GROBID Quantity Demo](doc/img/Screenshot.png)
+![GROBID Quantity Demo](doc/img/Screenshot2.png)
 
 One additional goal is also to identify and attached to the measurements the "quantified" substance, e.g. _silicon nitride powder_ in 
 

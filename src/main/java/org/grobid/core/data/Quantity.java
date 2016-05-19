@@ -9,11 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
+/*import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.Pattern;*/
 
 /**
  * Class for managing a quantity representation.
@@ -84,10 +84,6 @@ public class Quantity {
         this.rawValue = raw;
     }
 
-    public void setValue(String raw) {
-        setValue(raw, Locale.ENGLISH);
-    }
-
     /**
      * Set the value of the quantity and the parsedVavlue.
      * TODO: I don't know whether is better to manage the failure should be managed by who
@@ -97,7 +93,7 @@ public class Quantity {
      * @param local LOCALE (default is ENGLISH)
      * @throws NumberFormatException
      */
-    public void setValue(String raw, Locale local) {
+    /*public void setValue(String raw, Locale local) {
         this.rawValue = raw;
 
         // if we have alphabetical characters, we use the word to number parser
@@ -115,7 +111,7 @@ public class Quantity {
                 logger.error("Invalid value expression: " + raw + " , for LOCALE: " + local);
             }
         }
-    }
+    }*/
 
     public BigDecimal getParsedValue() {
         return parsedValue;
