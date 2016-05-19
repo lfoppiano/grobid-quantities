@@ -49,8 +49,10 @@ public class QuantityNormalizer {
 
         Unit parsedUnit = unitNormalizer.parseUnit(quantity.getRawUnit());
         quantity.setParsedUnit(parsedUnit);
-        if (parsedUnit.getUnitDefinition() != null && ((parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE)
-                || (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED))) {
+        if (parsedUnit.getUnitDefinition() != null
+                && ((parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE)
+                || (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED))
+                ) {
             return generateNormalizedQuantity(quantity);
         } else {
             return null;
@@ -76,7 +78,6 @@ public class QuantityNormalizer {
             wrappedUnitProducts.put(transformedUnit.getSymbol(), 1);
 
         } else if (unit instanceof ProductUnit) {
-
             ProductUnit productUnit = (ProductUnit) unit;
             //Map<String, Integer> products = extractProduct(productUnit);
             normalizedQuantity.setUnit(new Unit(productUnit.toSystemUnit().toString()));

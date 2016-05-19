@@ -155,7 +155,6 @@ public class QuantityNormalizerTest {
         assertThat(output.getValue().doubleValue(), is(0.5555555555555556));
     }
 
-    @Ignore
     @Test
     public void testNormalizeQuantity2_3composedUnits() throws Exception {
         Quantity input = new Quantity();
@@ -164,7 +163,12 @@ public class QuantityNormalizerTest {
         Unit raw = new Unit();
         raw.setRawName("km*g/h");
         input.setRawUnit(raw);
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(new Unit("km·g/h"));
+        final Unit parsedUnit = new Unit("km·g/h");
+        UnitDefinition unitDefinition = new UnitDefinition();
+        unitDefinition.setSystem(UnitUtilities.System_Type.SI_DERIVED);
+        unitDefinition.setType(UnitUtilities.Unit_Type.VELOCITY);
+        parsedUnit.setUnitDefinition(unitDefinition);
+        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
         expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(new UnitDefinition());
 
         replay(mockUnitNormalizer);
@@ -175,7 +179,6 @@ public class QuantityNormalizerTest {
         assertThat(output.getUnit().getRawName(), is("m·kg/s"));
     }
 
-    @Ignore
     @Test
     public void testNormalizeQuantity3_2composedUnits() throws Exception {
         Quantity input = new Quantity();
@@ -185,7 +188,13 @@ public class QuantityNormalizerTest {
         raw.setRawName("km*kg/h");
         input.setRawUnit(raw);
 
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(new Unit("km·kg/h"));
+        final Unit parsedUnit = new Unit("km·kg/h");
+        UnitDefinition unitDefinition = new UnitDefinition();
+        unitDefinition.setSystem(UnitUtilities.System_Type.SI_DERIVED);
+        unitDefinition.setType(UnitUtilities.Unit_Type.VELOCITY);
+        parsedUnit.setUnitDefinition(unitDefinition);
+
+        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
         expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(new UnitDefinition());
 
         replay(mockUnitNormalizer);
