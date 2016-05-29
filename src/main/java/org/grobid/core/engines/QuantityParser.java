@@ -602,16 +602,20 @@ public class QuantityParser extends AbstractParser {
             boolean start = true;
             for (LayoutToken token : theTokens) {
                 if (token.getText() != null) {
-                    if (start && token.getText().equals(" "))
+                    if (start && token.getText().equals(" ")) {
+                        pos++;
+                        endPos++;
                         continue;
+                    }
                     if (start)
                         start = false;
                     endPos += token.getText().length();
                 }
             }
-System.out.println(endPos);
-            //if ( (endPos>0) && (text.charAt(endPos-1) == ' ') )
-            //    endPos = endPos-1;
+
+            if ( (endPos > 0) && (text.charAt(endPos-1) == ' ') )
+                endPos--;
+
             Quantity currentQuantity = null;
 
             switch (clusterLabel) {
@@ -840,18 +844,9 @@ System.out.println(endPos);
             measurements.add(currentMeasurement);
         }
 
-//        adjustEndOffsets(measurements);
-
         measurements = MeasurementOperations.postCorrection(measurements);
         return measurements;
     }
-
-    /*private void adjustEndOffsets(List<Measurement> measurements) {
-        for (Measurement measurement : measurements) {
-
-
-        }
-    }*/
 
     private boolean isMeasurementValid(Measurement currentMeasurement) {
         return ((currentMeasurement.getType() != null) && (
