@@ -33,14 +33,14 @@ public class ValueParser {
     }
 
     private static synchronized void getNewInstance() {
-        instance = new StupidValueParser();
+        instance = new DefaultValueParser();
     }
 
     protected ValueParser() {
         //super(GrobidModels.VALUE);
     }
 
-    /** do nothing for the moment, use StupidValueParser ;) */
+    /** do nothing for the moment, use DefaultValueParser ;) */
     public void parseValue(Quantity quantity) {
     }
 

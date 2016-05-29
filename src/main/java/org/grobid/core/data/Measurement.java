@@ -27,6 +27,7 @@ public class Measurement {
     private Quantity quantityBase = null;
     private Quantity quantityRange = null;
     private List<Quantity> quantityList = null;
+    private QuantifiedObject substance = null; // what is quantified, as extracted from the text
 
     public Measurement() {
     }
@@ -97,6 +98,14 @@ public class Measurement {
         return quantityRange;
     }
 
+    public void setQuantifiedObject(QuantifiedObject substance) {
+        this.substance = substance;
+    }
+
+    public QuantifiedObject getQuantifiedObject() {
+        return substance;
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(type.getName()).append(": ");
@@ -118,6 +127,10 @@ public class Measurement {
                     builder.append(quantity.toString());
                 }
             }
+        }
+
+        if (substance != null) {
+            builder.append(", quantified : " + substance.toString());
         }
 
         return builder.toString();
@@ -220,6 +233,10 @@ public class Measurement {
                 }
                 json.append(" ]");
             }
+        }
+
+        if (substance != null) {
+            json.append(", \"quantified\" : " + substance.toJson());
         }
 
         json.append(" }");

@@ -1,0 +1,21 @@
+<configuration>
+    <language>en</language>
+    <dictionary>../model/dictionary-1.1.0.zip</dictionary>
+    <pos_model>../model/ontonotes-en-pos-1.1.0g.jar</pos_model>
+
+    <reader type="dep">
+        <column index="1" field="id"/>
+        <column index="2" field="form"/>
+        <column index="3" field="lemma"/>
+        <column index="4" field="pos"/>
+        <column index="5" field="feats"/>
+        <column index="6" field="headId"/>
+        <column index="7" field="deprel"/>
+    </reader>
+
+    <train>
+        <algorithm name="liblinear" solver="0" cost="0.1" eps="0.1" bias="-1"/>
+        <threads>8</threads>
+    </train>
+</configuration>
+

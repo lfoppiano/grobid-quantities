@@ -49,6 +49,10 @@ var grobid = (function ($) {
             event.preventDefault();
             $('#inputTextArea').val(examples[2]);
         });
+        $('#example3').bind('click', function (event) {
+            event.preventDefault();
+            $('#inputTextArea').val(examples[3]);
+        });
         $("#selectedService").val('processQuantityText');
 
         $('#selectedService').change(function () {
@@ -207,29 +211,34 @@ var grobid = (function ($) {
             for (var currentMeasurementIndex = 0; currentMeasurementIndex < measurements.length; currentMeasurementIndex++) {
                 var measurement = measurements[currentMeasurementIndex];
                 var measurementType = measurement.type;
+                var substance = measurement.quantified;
 
                 var quantities = [];
 
                 if (measurementType == "value") {
                     var quantity = measurement.quantity;
-                    if (quantity)
+                    if (quantity) {
                         quantities.push(quantity)
+                    }
                 }
                 else if (measurementType == "interval") {
                     var quantityLeast = measurement.quantityLeast;
-                    if (quantityLeast)
+                    if (quantityLeast) {
                         quantities.push(quantityLeast);
+                    }
                     var quantityMost = measurement.quantityMost;
-                    if (quantityMost)
+                    if (quantityMost) {
                         quantities.push(quantityMost);
-
+                    }
                     if (!quantityLeast && !quantityMost) {
                         var quantityBase = measurement.quantityBase;
-                        if (quantityBase)
+                        if (quantityBase) {
                             quantities.push(quantityBase);
+                        }
                         var quantityRange = measurement.quantityRange;
-                        if (quantityRange)
+                        if (quantityRange) {
                             quantities.push(quantityRange);
+                        }
                     }
                 }
                 else {
@@ -240,6 +249,7 @@ var grobid = (function ($) {
                     var quantityMap = new Array();
                     for (var currentQuantityIndex = 0; currentQuantityIndex < quantities.length; currentQuantityIndex++) {
                         var quantity = quantities[currentQuantityIndex];
+                        quantity['quantified'] = substance;
                         quantityMap[currentQuantityIndex] = quantity;
                         var quantityType = quantity.type;
                         var value = quantity.value;
@@ -440,6 +450,8 @@ var grobid = (function ($) {
         var normalizedQuantityLeast = quantityLeast.normalizedQuantity;
         var normalizedUnit = quantityLeast.normalizedUnit;
 
+        var substance = quantityLeast.quantified;
+
         // MOST value
         var quantityMost = quantityMap[1];
         var mostValue = quantityMost.rawValue;
@@ -453,10 +465,13 @@ var grobid = (function ($) {
         }
         var normalizedQuantityMost = quantityMost.normalizedQuantity;
 
+        if (!substance)
+            substance = quantityMost.quantified;
+
         string += "<div class='info-sense-box " + colorLabel + "'><h2 style='color:#FFF;padding-left:10px;font-size:16;'>" + measurementType;
         string += "</h2>";
-        string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
-            "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;font-size:14;'>";
+        string += "<div class='container-fluid' style='background-color:#FFF;color:#70695C;border:padding:5px;margin-top:5px;'>" +
+            "<table style='width:100%;display:inline-table;'><tr style='display:inline-table;'><td>";
 
         if (type) {
             string += "<p>quantity type: <b>" + type + "</b></p>";
@@ -477,6 +492,17 @@ var grobid = (function ($) {
 
         if (normalizedUnit) {
             string += "<p>normalized unit: <b>" + normalizedUnit.name + "</b></p>";
+        }
+
+        if (substance) {
+            string += "</td></tr><tr style='width:100%;display:inline-table;'><td style='border-top-width:1px;width:100%;border-top:1px solid #ddd;display:inline-table;'>";
+            string += "<p style='display:inline-table;'>quantified (experimental):" 
+            string += "<table style='width:100%;display:inline-table;'><tr><td>";
+            string +=  "<p>raw: <b>" + substance.rawName;
+            string += "</b></p>";
+            string +=  "<p>normalized: <b>" + substance.normalizedName;
+            string += "</b></p></td></tr></table>";
+            string += "</p>";
         }
 
         string += "</td><td style='align:right;bgcolor:#fff'></td></tr>";
@@ -510,6 +536,8 @@ var grobid = (function ($) {
             var normalizedQuantity = quantity.normalizedQuantity;
             var normalizedUnit = quantity.normalizedUnit;
 
+            var substance = quantity.quantified;
+
             var rawUnitName = null;
             var startUnit = -1;
             var endUnit = -1;
@@ -525,8 +553,8 @@ var grobid = (function ($) {
                 first = false;
             }
 
-            string += "<div class='container-fluid' style='background-color:#F9F9F9;color:#70695C;border:padding:5px;margin-top:5px;'>" +
-                "<table style='width:100%;background-color:#fff;border:0px'><tr style='background-color:#fff;border:0px;'><td style='background-color:#fff;border:0px;font-size:14;'>";
+            string += "<div class='container-fluid' style='background-color:#FFF;color:#70695C;border:padding:5px;margin-top:5px;'>" +
+                "<table style='width:100%;display:inline-table;'><tr style='display:inline-table;'><td>";
 
             if (type) {
                 string += "<p>quantity type: <b>" + type + "</b></p>";
@@ -552,7 +580,18 @@ var grobid = (function ($) {
                 string += "<p>normalized unit name: <b>" + normalizedUnit.name + "</b></p>";
             }
 
-            string += "</td><td style='align:right;bgcolor:#fff'></td></tr>";
+            if (substance) {
+                string += "</td></tr><tr style='width:100%;display:inline-table;'><td style='border-top-width:1px;width:100%;border-top:1px solid #ddd;display:inline-table;'>";
+                string += "<p style='display:inline-table;'>quantified (experimental):" 
+                string += "<table style='width:100%;display:inline-table;'><tr><td>";
+                string +=  "<p>raw: <b>" + substance.rawName;
+                string += "</b></p>";
+                string +=  "<p>normalized: <b>" + substance.normalizedName;
+                string += "</b></p></td></tr></table>";
+                string += "</p>";
+            }
+
+            string += "</td></tr>";
             string += "</table></div>";
         }
         string += "</div>";
@@ -613,7 +652,9 @@ var grobid = (function ($) {
 These specimens underwent heat treatment by simulating the conditions for the large size rotor shaft centre of a large capacity generator. First, it was heated to 840°C to form austenite structure and cooled at the speed of 100°C/hour to harden. Then, the specimen was heated and held at 575 to 590°C for 32 hours and cooled at a speed of 15°C/hour. Tempering was done at such a temperature to secure tensile strength in the range of 100 to 105kg/mm2 for each specimen.",
         "The cells were washed three times with RPMI1640  medium (Nissui Pharmaceutical Co.). The cells (1 x107) were incubated in RPMI-1640 medium containing 10% calf fetal serum (Gibco Co.), 50 µg/ml streptomycin, 50 IU/ml of penicillin, 2-mercaptoethanol (5 x 10-5 M), sheep red blood cells (5 x 106 cells) and a test compound dissolved in dimethyl sulfoxide supplied on a microculture plate (NUNC Co., 24 wells) in a carbon dioxide gas incubator (TABAI ESPEC CORP) at 37°C for 5 days.\n\n\
         A solution of 1.18 g (4.00 mmols) of the Compound a obtained in Reference Example 1, 0.39 g (4.13 mmols) of 4-aminopyridine and 20 ml of toluene was heated to reflux for 2 hours. After cooling, the reaction mixture was poured into 1 N sodium hydroxide aqueous solution, and washed twice with chloroform. 2 N Hydrochloric acid aqueous solution was added to the aqueous layer and the precipitated white crystals were filtered and dried to give 0.73 g (yield: 53%) of Compound 3.",
-        "Fifty-three journals were collected: 13 were eliminated from analysis, because they were incomplete, unclear or unreadable. 40 journals were analysed: 19 were journals of subjects of race Z (4 women and 15 men, 30 ± 10 years, 176 ± 7 cm, 70 ± 9 kg, 15 ± 5 % of fat mass, VO 2max : 50 ± 8 ml · kg −1 · min −1 and 21 of race A (6 women and 15 men, 40 ± 7 years, 176 ± 7 cm, 72 ± 10 kg, 18 ± 8 % fat mass, VO 2max : 58 ± 8 ml · kg −1 · min −1 ). Energy, macronutrients (CHO, fat and proteins) and liquid intakes were analysed."]
+        "Fifty-three journals were collected: 13 were eliminated from analysis, because they were incomplete, unclear or unreadable. 40 journals were analysed: 19 were journals of subjects of race Z (4 women and 15 men, 30 ± 10 years, 176 ± 7 cm, 70 ± 9 kg, 15 ± 5 % of fat mass, VO 2max : 50 ± 8 ml · kg −1 · min −1 and 21 of race A (6 women and 15 men, 40 ± 7 years, 176 ± 7 cm, 72 ± 10 kg, 18 ± 8 % fat mass, VO 2max : 58 ± 8 ml · kg −1 · min −1 ). Energy, macronutrients (CHO, fat and proteins) and liquid intakes were analysed.",
+        "COS-7 cells transfected with the indicated plasmids were lysed in Laemmli sample buffer or the lysis buffer mentioned above. E18.5 mouse brains (ICR) were homogenized in 20 mm HEPES (pH 7.4), 0.1 mm EDTA, 0.1 mm EGTA, 150 mm NaCl, 2 mm MgCl2, 1 mm Na3VO4, 0.4 mm 4-(2-aminoethyl)benzenesulfonyl fluoride hydrochloride, 10 μg/ml leupeptin, and 1 mm dithiothreitol with a Teflon pestle homogenizer. The lysates or homogenates were centrifuged at 15,000 × g for 20 min, and the supernatants were used for immunoprecipitation of Cdk5 with anti-Cdk5 (C8) or anti-p35 (C19). In some cases, immunoprecipitation was performed with anti-Cdk5 (C8) or anti-p35 (C19) that had been cross-linked to protein A-Sepharose beads using the Pierce Crosslink IP kit according to the protocol of the manufacturer. The cell extracts were incubated with 1.5 μg of antibody and 20 μl of protein A-Sepharose beads and rotated overnight at 4 °C. The beads were washed with washing buffer (25 mm Tris-HCl (pH 7.5), 0.1 mm EDTA, 0.1 mm EGTA, 500 mm NaCl, 0.5% Nonidet P-40, and 1 mm dithiothreitol) five times. The kinase activity of Cdk5 was measured with histone H1 as a substrate in kinase buffer (10 mm MOPS (pH 6.8), 1 mm MgCl2, 0.1 mm EDTA, and 0.1 mm EGTA) at 37 °C for 30 min. After SDS-PAGE, phosphorylation was visualized by autoradiography with an imaging plate."]
+
 
 })(jQuery);
 

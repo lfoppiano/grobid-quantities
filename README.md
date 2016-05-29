@@ -13,9 +13,7 @@ The goal of this GROBID module is to recognize in textual documents any expressi
 
 One additional goal is also to identify and attached to the measurements the "quantified" substance, e.g. _silicon nitride powder_ in 
 
-```
-A mixture of 10kg _silicon nitride powder_ was charged into the mixing chamber 20 of the mixing vessel 18.
-```
+![GROBID Quantity Demo](doc/img/Screenshot5.png)
 
 As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
 

@@ -52,6 +52,7 @@ public class QuantityParser extends AbstractParser {
 
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
+    private SubstanceParser substanceParser = SubstanceParser.getInstance();
 
     public static QuantityParser getInstance() {
         if (instance == null) {
@@ -113,6 +114,7 @@ public class QuantityParser extends AbstractParser {
 
             measurements = extractMeasurement(text, res, tokens);
             measurements = normalizeMeasurements(measurements);
+            measurements = substanceParser.parseSubstance(text, measurements);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
@@ -594,11 +596,22 @@ public class QuantityParser extends AbstractParser {
             List<LayoutToken> theTokens = cluster.concatTokens();
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens()).trim();
 
+            if ( (pos < text.length()-1) && (text.charAt(pos) == ' ') )
+                pos += 1;
             int endPos = pos;
+            boolean start = true;
             for (LayoutToken token : theTokens) {
-                if (token.getText() != null)
+                if (token.getText() != null) {
+                    if (start && token.getText().equals(" "))
+                        continue;
+                    if (start)
+                        start = false;
                     endPos += token.getText().length();
+                }
             }
+System.out.println(endPos);
+            //if ( (endPos>0) && (text.charAt(endPos-1) == ' ') )
+            //    endPos = endPos-1;
             Quantity currentQuantity = null;
 
             switch (clusterLabel) {
