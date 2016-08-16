@@ -17,33 +17,33 @@ public class FeaturesVectorQuantitiesTest {
         LibraryLoader.load();
     }
 
-    //@Test
+    @Test
     public void testPrintVector1() throws Exception {
         String word = "Colorado";
         String label = "CITY";
 
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
-        assertThat(target.printVector(), is("Colorado colorado C Co Col Colo o do ado rado INITCAP NODIGIT 0 NOPUNCT 8 Colorado Xxxx Xx 1 1 CITY"));
+        assertThat(target.printVector(), is("Colorado colorado C Co Col Colo o do ado rado INITCAP NODIGIT 0 NOPUNCT Xxxx Xx 1 0 CITY"));
     }
 
-    //@Test
+    @Test
     public void testPrintVector2() throws Exception {
         String word = "The";
         String label = "OTHER";
 
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
-        assertThat(target.printVector(), is("The the T Th The The e he The The INITCAP NODIGIT 0 NOPUNCT 3 The Xxx Xx 1 1 OTHER"));
+        assertThat(target.printVector(), is("The the T Th The The e he The The INITCAP NODIGIT 0 NOPUNCT Xxx Xx 1 0 OTHER"));
     }
 
-    //@Test
+    @Test
     public void testPrintVector3() throws Exception {
         String word = "a";
         String label = "OTHER";
 
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
-        assertThat(target.printVector(), is("a a a a a a a a a a NOCAPS NODIGIT 1 NOPUNCT 1 a x x 1 1 OTHER"));
+        assertThat(target.printVector(), is("a a a a a a a a a a NOCAPS NODIGIT 1 NOPUNCT x x 1 0 OTHER"));
     }
 }

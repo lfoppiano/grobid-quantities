@@ -8,7 +8,6 @@
       ],
       "type": "LENGTH",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "metre",
@@ -47,7 +46,6 @@
       ],
       "type": "VOLUME",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "cubic meter",
@@ -71,7 +69,6 @@
       ],
       "type": "LENGTH",
       "system": "IMPERIAL",
-      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "thou"
@@ -222,7 +219,6 @@
       ],
       "type": "MASS",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "gram",
@@ -405,7 +401,6 @@
       ],
       "type": "TIME",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "second",
@@ -530,14 +525,10 @@
       "notations": [
         {
           "raw": "°C"
-        },
-        {
-          "raw": "℃"
         }
       ],
       "type": "TEMPERATURE",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "celsius"
@@ -555,7 +546,6 @@
       ],
       "type": "TEMPERATURE",
       "system": "US",
-      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "fahrenheit"
@@ -570,7 +560,6 @@
       ],
       "type": "LUMINOUS_INTENSITY",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "candela",
@@ -588,7 +577,6 @@
       ],
       "type": "AMOUNT_OF_SUBSTANCE",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "mole",
@@ -953,7 +941,6 @@
       ],
       "type": "ELECTRIC_CONDUCTANCE",
       "system": "SI_DERIVED",
-      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "siemens"
@@ -1292,7 +1279,6 @@
       ],
       "type": "ENERGY",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "wavenumber",
@@ -1323,7 +1309,6 @@
           ]
         }
       ],
-      "type": "VELOCITY",
       "type": "VELOCITY",
       "system": "SI_DERIVED",
       "names": [
@@ -1659,24 +1644,7 @@
               "prefix": "k",
               "base": "g",
               "pow": "-1"
-            },
-            {
-              "base": "min",
-              "pow": "-1"
-            }
-          ]
-        },
-        {
-          "raw": "ml/(kg*min)",
-          "product": [
-            {
-              "prefix": "m",
-              "base": "l"
-            },
-            {
-              "prefix": "k",
-              "base": "g",
-              "pow": "-1"
+
             },
             {
               "base": "min",
@@ -1862,7 +1830,6 @@
       ],
       "type": "DENSITY",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "kilogram per cubic metre",
@@ -1908,7 +1875,6 @@
       ],
       "type": "DENSITY",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "gram per cubic centimetre",
@@ -1920,23 +1886,6 @@
           "lemma": "gram per cubic centimeter",
           "inflections": [
             "grams per cubic centimeter"
-          ]
-        }
-      ]
-    },
-    {
-      "notations": [
-        {
-          "raw": "pH"
-        }
-      ],
-      "type": "ACIDITY",
-      "system": "NON_SI",
-      "names": [
-        {
-          "lemma": "power of hydrogen",
-          "inflections": [
-            "powers of hydrogen"
           ]
         }
       ]

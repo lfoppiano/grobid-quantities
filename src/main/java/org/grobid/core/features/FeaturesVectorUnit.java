@@ -21,7 +21,6 @@ public class FeaturesVectorUnit {
     // one of NOPUNCT, OPENBRACKET, ENDBRACKET, DOT, COMMA, HYPHEN, QUOTE, PUNCT (default)
     public String punctType = null;
 
-
     public String printVector() {
         if (isEmpty(value)) {
             return null;
@@ -72,7 +71,7 @@ public class FeaturesVectorUnit {
     /**
      * Add the features for the chemical entity extraction model.
      */
-    static public FeaturesVectorUnit addFeaturesUnit(String character,
+    public static FeaturesVectorUnit addFeaturesUnit(String character,
                                                      String label,
                                                      boolean isKnownUnitToken,
                                                      boolean isKnownPrefixToken,

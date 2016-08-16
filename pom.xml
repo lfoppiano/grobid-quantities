@@ -52,22 +52,6 @@
             <artifactId>grobid-trainer</artifactId>
             <version>0.4.1-SNAPSHOT</version>
         </dependency>
-        <!--dependency>
-            <groupId>org.chasen</groupId>
-            <artifactId>crfpp</artifactId>
-            <version>1.0.2</version>
-            <scope>compile</scope>
-        </dependency-->
-        <dependency>
-            <groupId>fr.limsi.wapiti</groupId>
-            <artifactId>wapiti</artifactId>
-            <version>1.5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>pdfbox</artifactId>
-            <version>1.8.9</version>
-        </dependency>
         <dependency>
             <groupId>net.arnx</groupId>
             <artifactId>jsonic</artifactId>
@@ -83,24 +67,25 @@
         <dependency>
             <groupId>tec.uom</groupId>
             <artifactId>uom-se</artifactId>
-            <version>0.9-SNAPSHOT</version>
+            <version>0.9</version>
         </dependency>
-        <!--dependency>
-          <groupId>org.jscience</groupId>
-          <artifactId>jscience</artifactId>
-          <version>5.0-SNAPSHOT</version>
-        </dependency-->
         <dependency>
             <groupId>systems.uom</groupId>
             <artifactId>systems-ucum-java8</artifactId>
-            <version>0.3-SNAPSHOT</version>
+            <version>0.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>systems.uom</groupId>
+            <artifactId>systems-quantity</artifactId>
+            <version>0.3</version>
         </dependency>
 
         <!-- TEST -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
         <dependency>

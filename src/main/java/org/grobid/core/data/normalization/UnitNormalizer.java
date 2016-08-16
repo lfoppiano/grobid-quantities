@@ -83,12 +83,10 @@ public class UnitNormalizer {
         parsedUnit.setUnitRightAttachment(rawUnit.hasUnitRightAttachment());
 
         UnitDefinition def = quantityLexicon.getUnitByNotation(reformatted);
-        if(def == null) {
+        if (def == null) {
             def = quantityLexicon.getUnitbyName(reformatted);
         }
-
         parsedUnit.setUnitDefinition(def);
-
         return parsedUnit;
     }
 

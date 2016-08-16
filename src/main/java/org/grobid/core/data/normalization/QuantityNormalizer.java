@@ -7,6 +7,8 @@ import org.grobid.core.utilities.MeasurementOperations;
 import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import systems.uom.ucum.format.UCUMFormat;
+import systems.uom.ucum.internal.format.TokenException;
 import tec.uom.se.unit.ProductUnit;
 import tec.uom.se.unit.TransformedUnit;
 
@@ -32,6 +34,7 @@ public class QuantityNormalizer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityNormalizer.class);
     private final UnitFormat defaultFormatService;
+    private final UnitFormat ucumFormatService = UCUMFormat.getInstance(UCUMFormat.Variant.CASE_SENSITIVE);
     private MeasurementOperations measurementOperations;
     private UnitNormalizer unitNormalizer;
 
@@ -49,22 +52,63 @@ public class QuantityNormalizer {
 
         Unit parsedUnit = unitNormalizer.parseUnit(quantity.getRawUnit());
         quantity.setParsedUnit(parsedUnit);
-        if (parsedUnit.getUnitDefinition() != null
-                && ((parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE)
-                || (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED))
-                ) {
-            return generateNormalizedQuantity(quantity);
+
+        //The unit cannot be found between the known units - we should try to decompose it
+        if (parsedUnit.getUnitDefinition() == null) {
+            return normalizeNonSIQuantities(quantity);
+        } else if (((parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) ||
+                (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED))) {
+
+            //I normalize with the simpleUnitFormat only SI and SI_DERIVED units...
+            return normalizeSIQuantities(quantity);
         } else {
-            return null;
+            return normalizeNonSIQuantities(quantity);
         }
     }
 
-    protected Quantity.Normalized generateNormalizedQuantity(Quantity quantity) throws NormalizationException {
+    protected Quantity.Normalized normalizeNonSIQuantities(Quantity quantity) throws NormalizationException {
+        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
+        Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
+
+        javax.measure.Unit unit = null;
+        try {
+            unit = ucumFormatService.parse(quantity.getParsedUnit().getRawName());
+        } catch (TokenException te) {
+            return null;
+        }
+
+        composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
+
+        if (quantity.isNormalized()) {
+            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
+            if (definition != null) {
+                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
+            }
+        }
+
+        return normalizedQuantity;
+    }
+
+
+    protected Quantity.Normalized normalizeSIQuantities(Quantity quantity) throws NormalizationException {
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         javax.measure.Unit unit = defaultFormatService.parse(quantity.getParsedUnit().getRawName());
 
+        composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
+
+        if (quantity.isNormalized()) {
+            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
+            if (definition != null) {
+                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
+            }
+        }
+
+        return normalizedQuantity;
+    }
+
+    private void composeUnit(Quantity quantity, Map<String, Integer> wrappedUnitProducts, Quantity.Normalized normalizedQuantity, javax.measure.Unit unit) throws NormalizationException {
         if (unit instanceof TransformedUnit) {
             TransformedUnit transformedUnit = (TransformedUnit) unit;
             normalizedQuantity.setUnit(new Unit(transformedUnit.getParentUnit().toString()));
@@ -101,19 +145,10 @@ public class QuantityNormalizer {
             }
             quantity.setNormalizedQuantity(normalizedQuantity);
         }
-
-        if (quantity.isNormalized()) {
-            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
-            if (definition != null) {
-                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
-            }
-        }
-
-        return normalizedQuantity;
     }
 
     protected Map<String, Integer> extractProduct(ProductUnit productUnit) {
-        Map<javax.measure.Unit, Integer> products = productUnit.getProductUnits();
+        Map<javax.measure.Unit, Integer> products = productUnit.getBaseUnits();
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
 
         for (Map.Entry<javax.measure.Unit, Integer> productFactor : products.entrySet()) {

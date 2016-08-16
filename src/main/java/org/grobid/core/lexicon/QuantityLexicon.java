@@ -106,7 +106,7 @@ public class QuantityLexicon {
         unitDefinition.setType(type);
 
         String defaultRawNotation = "";
-        if(node.has("notations")) {
+        if (node.has("notations")) {
             JsonNode notations = node.get("notations");
             final Iterator<JsonNode> elements = notations.elements();
             while (elements.hasNext()) {

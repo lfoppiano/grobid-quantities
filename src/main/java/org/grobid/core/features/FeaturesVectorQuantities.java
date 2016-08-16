@@ -161,10 +161,10 @@ public class FeaturesVectorQuantities {
     /**
      * Add the features for the chemical entity extraction model.
      */
-    static public FeaturesVectorQuantities addFeaturesQuantities(String word,
+    public static FeaturesVectorQuantities addFeaturesQuantities(String word,
                                                                  String label,
                                                                  boolean isUnitToken,
-                                                                 boolean isUnitPattern, 
+                                                                 boolean isUnitPattern,
                                                                  boolean isNumberToken) {
         FeatureFactory featureFactory = FeatureFactory.getInstance();
 
