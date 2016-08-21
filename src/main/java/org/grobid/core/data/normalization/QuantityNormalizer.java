@@ -55,7 +55,8 @@ public class QuantityNormalizer {
 
         //The unit cannot be found between the known units - we should try to decompose it
         if (parsedUnit.getUnitDefinition() == null) {
-            return normalizeNonSIQuantities(quantity);
+            //not sure this is working
+            return normalizeSIQuantities(quantity);
         } else if (((parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) ||
                 (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED))) {
 

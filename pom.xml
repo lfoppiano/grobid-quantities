@@ -37,6 +37,37 @@
             <url>http://download.java.net/maven/2/</url>
             <layout>default</layout>
         </repository>
+
+
+    <!-- Additional repositories -->
+    <!-- Helps to resolve Parent POM and Snapshot artifacts -->
+
+        <repository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-release</id>
+            <name>libs-release</name>
+            <url>http://oss.jfrog.org/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>bintray-snapshot</id>
+            <name>libs-snapshot</name>
+            <url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
+        </repository>
+        <repository>
+            <id>geotoolkit</id>
+            <name>Geotoolkit.org project</name>
+            <url>http://maven.geotoolkit.org</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -73,12 +104,30 @@
             <groupId>systems.uom</groupId>
             <artifactId>systems-ucum-java8</artifactId>
             <version>0.4-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>si.uom</groupId>
+            <artifactId>si-quantity</artifactId>
+            <version>0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>si.uom</groupId>
+            <artifactId>si-units</artifactId>
+            <version>0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>si.uom</groupId>
+            <artifactId>si-units-java8</artifactId>
+            <version>0.5</version>
         </dependency>
 
         <dependency>
             <groupId>systems.uom</groupId>
             <artifactId>systems-quantity</artifactId>
-            <version>0.3</version>
+            <version>0.4-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- TEST -->
