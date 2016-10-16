@@ -7,7 +7,14 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Default tokenizer adequate for all Indo-European languages.
+ * Quantity tokenizer adequate for all Indo-European languages and special characters.
+ *
+ * The difference with the Standard Grobid tokenizer is that this tokenizer
+ * is also tokenizing mixture of alphabetical and numerical characters.
+ *
+ * 1m74 ->  tokens.add(new LayoutToken("1"));
+ *          tokens.add(new LayoutToken("m"));
+ *          tokens.add(new LayoutToken("74"));
  *
  * @author Patrice Lopez
  */

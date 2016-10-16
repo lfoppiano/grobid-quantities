@@ -1,25 +1,16 @@
 package org.grobid.core.engines;
 
-import org.grobid.core.GrobidModels;
-import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.data.Measurement;
+import org.grobid.core.data.QuantifiedObject;
+import org.grobid.core.data.Quantity;
+import org.grobid.core.data.Unit;
 import org.grobid.core.features.FeatureFactory;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.tokenization.TaggingTokenCluster;
-import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.*;
-import org.grobid.core.data.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Basic implementation of substance parser without CRF. The goal here is to be able to bootstrap
