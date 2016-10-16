@@ -592,7 +592,7 @@ public class QuantityParser extends AbstractParser {
                 continue;
             }
 
-            TaggingLabel clusterLabel = cluster.getTaggingLabel();
+            TaggingLabels clusterLabel = cluster.getTaggingLabels();
             List<LayoutToken> theTokens = cluster.concatTokens();
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens()).trim();
 

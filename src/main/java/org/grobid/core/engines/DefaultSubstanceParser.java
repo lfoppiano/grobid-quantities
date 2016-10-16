@@ -2,6 +2,7 @@ package org.grobid.core.engines;
 
 import org.grobid.core.GrobidModels;
 import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
@@ -242,7 +243,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
                     (funct.equals("pobj") && pos.startsWith("NN")) ||
                     (previousFunct.equals("num") && pos.startsWith("NN"))
                     ) {
-                    if (TextUtilities.test_digit(pieces[1]))
+                    if (FeatureFactory.test_digit(pieces[1]))
                         substance = new QuantifiedObject(pieces[1], pieces[1]);
                     else
                         substance = new QuantifiedObject(pieces[1], pieces[2]);

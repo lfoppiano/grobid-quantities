@@ -109,7 +109,7 @@ public class UnitParser extends AbstractParser {
         boolean denominator = false;
         int currentPow = 1;
         boolean startUnit = false;
-        TaggingLabel previousTag = null;
+        TaggingLabels previousTag = null;
 
         List<UnitBlock> units = new ArrayList<>();
         UnitBlock unitBlock = new UnitBlock();
@@ -119,7 +119,7 @@ public class UnitParser extends AbstractParser {
                 continue;
             }
 
-            TaggingLabel clusterLabel = cluster.getTaggingLabel();
+            TaggingLabels clusterLabel = cluster.getTaggingLabels();
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens());
 
             switch (clusterLabel) {
@@ -139,7 +139,7 @@ public class UnitParser extends AbstractParser {
                         startUnit = true;
                         unitBlock = new UnitBlock();
                     } else {
-                        if (!TaggingLabel.UNIT_VALUE_PREFIX.equals(previousTag)) {
+                        if (!TaggingLabels.UNIT_VALUE_PREFIX.equals(previousTag)) {
                             units.add(unitBlock);
                             unitBlock = new UnitBlock();
                         }
