@@ -48,9 +48,8 @@ public class QuantityProcessString {
             } else
                 response = Response.status(Status.NO_CONTENT).build();
 
-            System.out.println(jsonBuilder.toString());
-
             if (jsonBuilder != null) {
+                System.out.println(jsonBuilder.toString());
                 response = Response.status(Status.OK).entity(jsonBuilder.toString())
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
                         .build();
@@ -60,7 +59,11 @@ public class QuantityProcessString {
             response = Response.status(Status.SERVICE_UNAVAILABLE).build();
         } catch (Exception e) {
             LOGGER.error("An unexpected exception occurs. ", e);
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getCause().getMessage()).build();
+            String message = "Error in " + e.getStackTrace()[0].toString();
+            if (e.getCause() != null) {
+                message = e.getCause().getMessage();
+            }
+            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(message).build();
         }
         LOGGER.debug(methodLogOut());
         return response;
