@@ -140,9 +140,9 @@ public class QuantityTrainer extends AbstractTrainer {
                 }
 
                 String label = lineP.getB();
-                if (label != null) {
+                /*if (label != null) {
                     isUnitPattern = true;
-                }
+                }*/
 
                 // do we have a unit at position posit?
                 if ((localPositions != null) && (localPositions.size() > 0)) {

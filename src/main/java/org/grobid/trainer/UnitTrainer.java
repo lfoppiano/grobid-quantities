@@ -109,6 +109,7 @@ public class UnitTrainer extends AbstractTrainer {
         int posit = 0;
         List<OffsetPosition> localPositions = unitTokenPositions;
 
+        // PL: to be reviewed, unitTokenPositions not used !
         try {
             for (Pair<String, String> text : texts) {
                 String token = text.getA();
