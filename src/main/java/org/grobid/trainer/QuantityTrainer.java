@@ -1,6 +1,7 @@
 package org.grobid.trainer;
 
 import org.grobid.core.GrobidModels;
+import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorQuantities;
 import org.grobid.core.lexicon.QuantityLexicon;
@@ -25,7 +26,7 @@ public class QuantityTrainer extends AbstractTrainer {
     private QuantityLexicon quantityLexicon = null;
 
     public QuantityTrainer() {
-        super(GrobidModels.QUANTITIES);
+        super(QuantitiesModels.QUANTITIES);
 		// adjusting CRF training parameters for this model
 		epsilon = 0.000001;
 		window = 20;

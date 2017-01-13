@@ -1,6 +1,7 @@
 package org.grobid.trainer;
 
 import org.grobid.core.GrobidModels;
+import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorUnit;
 import org.grobid.core.lexicon.QuantityLexicon;
@@ -28,7 +29,7 @@ public class UnitTrainer extends AbstractTrainer {
     private final QuantityLexicon quantityLexicon;
 
     public UnitTrainer() {
-        super(GrobidModels.UNITS);
+        super(QuantitiesModels.UNITS);
         epsilon = 0.0000001;
         window = 20;
 
