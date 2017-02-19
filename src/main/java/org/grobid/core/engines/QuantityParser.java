@@ -11,6 +11,7 @@ import org.grobid.core.data.normalization.NormalizationException;
 import org.grobid.core.data.normalization.QuantityNormalizer;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.xml.XmlBuilderUtils;
+import org.grobid.core.document.DocumentSource;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
@@ -40,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
@@ -55,6 +58,7 @@ public class QuantityParser extends AbstractParser {
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
     private SubstanceParser substanceParser = SubstanceParser.getInstance();
+    private EngineParsers parsers;
 
     public static QuantityParser getInstance() {
         if (instance == null) {
@@ -77,6 +81,7 @@ public class QuantityParser extends AbstractParser {
         super(QuantitiesModels.QUANTITIES);
         quantityLexicon = QuantityLexicon.getInstance();
         measurementOperations = new MeasurementOperations();
+        parsers = new EngineParsers();
     }
 
     /**
@@ -122,6 +127,61 @@ public class QuantityParser extends AbstractParser {
         }
 
         return measurements;
+    }
+
+    public Pair<List<Measurement>, Document> extractQuantitiesPDF(File file) throws IOException {
+        List<Measurement> measurements = new ArrayList<Measurement>();
+        Document doc = null;
+        try {
+            GrobidAnalysisConfig config = 
+                new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().build();
+            DocumentSource documentSource = 
+                DocumentSource.fromPdf(file, config.getStartPage(), config.getEndPage());
+            doc = parsers.getSegmentationParser().processing(documentSource, config);
+
+            // here we process all the textural content of the document -
+            // for refining the process based on structures, we can filter
+            // segment of interest (e.g. header, body, annex) and apply the 
+            // corresponding model to further filter by structure types 
+            List<LayoutToken> tokenizations = doc.getTokenizations();
+
+            StringBuilder textBuilder = new StringBuilder();
+            for(LayoutToken token : tokenizations) {
+                textBuilder.append(token.getText());
+            }
+            String text = textBuilder.toString();
+
+            String ress = null;
+            List<String> texts = new ArrayList<>();
+            for (LayoutToken token : tokenizations) {
+                if (isNotEmpty(trim(token.getText())) && 
+                    !token.getText().equals(" ") &&
+                    !token.getText().equals("\n") && 
+                    !token.getText().equals("\r") &&  
+                    !token.getText().equals("\t") && 
+                    !token.getText().equals("\u00A0")) {
+                        texts.add(token.getText());
+                }
+            }
+
+            List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
+            ress = addFeatures(texts, unitTokenPositions);
+            String res = null;
+            try {
+                res = label(ress);
+            } catch (Exception e) {
+                throw new GrobidException("CRF labeling for quantity parsing failed.", e);
+            }
+
+            measurements = extractMeasurement(text, res, tokenizations);
+            measurements = normalizeMeasurements(measurements);
+            measurements = substanceParser.parseSubstance(text, measurements);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GrobidException("Cannot process pdf file: " + file.getPath());
+        }
+
+        return new Pair<List<Measurement>,Document>(measurements, doc);
     }
 
     private List<Measurement> normalizeMeasurements(List<Measurement> measurements) {

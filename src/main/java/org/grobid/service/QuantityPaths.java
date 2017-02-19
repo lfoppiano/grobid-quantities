@@ -21,12 +21,7 @@ public interface QuantityPaths {
      * path extension for extracting quantities from an XML file.
      */
     public static final String PATH_QUANTITY_XML= "processQuantityXML";
-
-    /**
-     * path extension for extracting quantities from a PDF file.
-     */
-    public static final String PATH_QUANTITY_PDF= "processQuantityPDF";
-
+    
     /**
      * path extension for annotating a PDF file with quantities.
      */

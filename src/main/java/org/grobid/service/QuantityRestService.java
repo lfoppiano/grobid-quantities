@@ -10,8 +10,13 @@ import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
+
+import java.io.*;
+import java.util.Properties;
+
+import com.sun.jersey.multipart.FormDataParam;
+import com.sun.jersey.spi.resource.Singleton;
 
 /**
  * RESTful service for GROBID quantity extension.
@@ -27,6 +32,7 @@ public class QuantityRestService implements QuantityPaths {
     private static final String TEXT = "text";
     private static final String XML = "xml";
     private static final String PDF = "pdf";
+    private static final String INPUT = "input";
 
     public QuantityRestService() {
         LOGGER.info("Init Servlet QuantityRestService.");
@@ -68,4 +74,11 @@ public class QuantityRestService implements QuantityPaths {
         return QuantityProcessString.processText(text);
     }
 
+    @Path(PATH_ANNOTATE_QUANTITY_PDF)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces("application/json")
+    @POST
+    public Response processPDFAnnotation(@FormDataParam(INPUT) InputStream inputStream) {
+        return QuantityProcessFile.processPDFAnnotation(inputStream);
+    }
 }
