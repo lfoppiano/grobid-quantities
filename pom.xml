@@ -22,6 +22,8 @@
         <package.file>${project.groupId}.${project.artifactId}_${project.version}.war</package.file>
         <license.file>${basedir}/LICENSE</license.file>
         <!-- <notice.file>${basedir}/NOTICE</notice.file> -->
+        <jersey.version>1.8</jersey.version>
+        <jackson.version>2.8.5</jackson.version>
     </properties>
 
     <repositories>
@@ -39,8 +41,8 @@
         </repository>
 
 
-    <!-- Additional repositories -->
-    <!-- Helps to resolve Parent POM and Snapshot artifacts -->
+        <!-- Additional repositories -->
+        <!-- Helps to resolve Parent POM and Snapshot artifacts -->
 
         <repository>
             <id>jcenter</id>
@@ -91,7 +93,7 @@
         <dependency>
             <groupId>com.googlecode.clearnlp</groupId>
             <artifactId>clearnlp</artifactId>
-            <version>1.3.0</version>
+            <version>1.3.1</version>
         </dependency>
 
         <!-- measurement normalization libraries -->
@@ -165,29 +167,29 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.6</version>
+            <version>1.7.22</version>
         </dependency>
 
         <!-- COMMONS -->
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
-            <version>1.4</version>
+            <version>1.6</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.0.1</version>
+            <version>2.5</version>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.0.1</version>
+            <version>3.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -197,7 +199,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>16.0.1</version>
+            <version>20.0</version>
         </dependency>
 
         <dependency>
@@ -215,7 +217,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.7.2</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -232,19 +234,25 @@
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>1.8</version>
+            <version>${jersey.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>1.8</version>
+            <version>${jersey.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-core</artifactId>
-            <version>1.8</version>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+            <version>${jersey.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>asm</groupId>
@@ -255,12 +263,6 @@
             <groupId>org.jvnet</groupId>
             <artifactId>mimepull</artifactId>
             <version>1.6</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey.contribs</groupId>
-            <artifactId>jersey-multipart</artifactId>
-            <version>1.8</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -282,21 +284,11 @@
     </dependencies>
 
     <build>
-        <!-- Not standard -->
-        <!-- finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName -->
-
-        <!--<resources> -->
-        <!--<resource> -->
-        <!--<directory>src/main/native</directory> -->
-        <!--</resource> -->
-        <!--</resources> -->
-
-        <!--pluginManagement -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.0.2</version>
                 <executions>
                     <execution>
                         <id>make-a-jar</id>
@@ -327,23 +319,10 @@
                 </executions>
             </plugin>
 
-            <!--plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>${assemblies.name}</descriptor>
-                    </descriptors>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName>
-                    <outputDirectory>target/distribution</outputDirectory>
-                    <workDirectory>target/assembly/work</workDirectory>
-                </configuration>
-            </plugin-->
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>3.6.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -353,9 +332,8 @@
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12.4</version>
+                <version>2.19.1</version>
                 <configuration>
-                    <forkMode>pertest</forkMode>
                     <argLine>-Xms256m -Xmx1024m</argLine>
                     <testFailureIgnore>false</testFailureIgnore>
                     <skip>false</skip>
@@ -374,7 +352,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
+                <version>3.0.0</version>
                 <configuration>
                     <webResources>
                         <resource>
@@ -400,39 +378,17 @@
                 </configuration>
             </plugin>
 
-            <!--plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <configuration>
-                    <jvmArgs>-Xms2G -Xmx8G -Dfile.encoding=UTF-8</jvmArgs>
-                    <contextPath>/</contextPath>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <connectors>
-                           <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                              <port>8080</port>
-                              <maxIdleTime>60000</maxIdleTime>
-                              <requestHeaderSize>65536</requestHeaderSize>
-                              <requestBufferSize>2097152</requestBufferSize>
-                           </connector>
-                    </connectors>
-                      <resourceBases>
-                        <resourceBase>src/main/webapp</resourceBase>
-                    </resourceBases>
-                    <jettyConfig>target/classes/jetty.xml</jettyConfig>
-                </configuration>
-            </plugin-->
-
-            <!--<plugin>
+            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.7.v20160115</version>
+                <version>9.3.14.v20161028</version>
 
                 <configuration>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                     <stopKey/>
                     <stopPort/>
                     <systemProperties>
-                        &lt;!&ndash; enable easy JMX connection to JConsole &ndash;&gt;
+                        <!-- enable easy JMX connection to JConsole -->
                         <systemProperty>
                             <name>com.sun.management.jmxremote</name>
                             <value/>
@@ -451,34 +407,6 @@
                         </systemProperty>
                     </systemProperties>
                 </configuration>
-            </plugin>-->
-
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.10</version>
-                <configuration>
-                    <contextPath>/</contextPath>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <connectors>
-                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                            <port>8080</port>
-                            <maxIdleTime>60000</maxIdleTime>
-                        </connector>
-                    </connectors>
-                    <resourceBases>
-                        <resourceBase>${basedir}/src/main/webapp</resourceBase>
-                    </resourceBases>
-                    <!--jettyConfig>target/classes/jetty.xml</jettyConfig-->
-                    <systemProperties>
-                        <systemProperty>
-                            <name>log4j.configuration</name>
-                            <value>log4j-jetty.properties</value>
-                        </systemProperty>
-                    </systemProperties>
-                    <stopKey/>
-                    <stopPort/>
-                </configuration>
             </plugin>
 
         </plugins>
@@ -493,7 +421,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.1.1</version>
+                        <version>1.5.0</version>
                         <executions>
                             <execution>
                                 <phase>generate-resources</phase>
@@ -516,7 +444,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.1.1</version>
+                        <version>1.5.0</version>
                         <executions>
                             <execution>
                                 <phase>generate-resources</phase>
