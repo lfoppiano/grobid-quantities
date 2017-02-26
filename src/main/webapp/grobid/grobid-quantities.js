@@ -136,13 +136,27 @@ var grobid = (function ($) {
         responseJson = null;
     }
 
+    function AjaxError2(message) {
+        if (!message)
+            message = "";
+        message += " - The PDF document cannot be annotated. Please check the server logs.";
+        $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>"+message+"</font>");
+        responseJson = null;
+        return true;
+    }
+
     function htmll(s) {
         return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
     function submitQuery() {
+        var selected = $('#selectedService option:selected').attr('value');
         var urlLocal = $('#gbdForm').attr('action');
-        {
+
+        $('#infoResult').html('<font color="grey">Requesting server...</font>');
+        $('#requestResult').html('');
+        
+        if (selected == 'processQuantityText') {
             $.ajax({
                 type: 'GET',
                 url: urlLocal,
@@ -153,8 +167,128 @@ var grobid = (function ($) {
                 //dataType: "text"
             });
         }
+        else if (selected == 'annotateQuantityPDF') {
+            // we will have JSON annotations to be layered on the PDF
 
-        $('#requestResult').html('<font color="grey">Requesting server...</font>');
+            // request for the annotation information
+            var form = document.getElementById('gbdForm');
+            var formData = new FormData(form);
+            var xhr = new XMLHttpRequest();
+            var url = $('#gbdForm').attr('action');
+            xhr.responseType = 'json'; 
+            xhr.open('POST', url, true);
+            //ShowRequest2();
+
+            var nbPages = -1;
+
+            // display the local PDF
+            if ((document.getElementById("input").files[0].type == 'application/pdf') ||
+                (document.getElementById("input").files[0].name.endsWith(".pdf")) ||
+                (document.getElementById("input").files[0].name.endsWith(".PDF")))
+                var reader = new FileReader();
+            reader.onloadend = function () {
+                // to avoid cross origin issue
+                //PDFJS.disableWorker = true;
+                var pdfAsArray = new Uint8Array(reader.result);
+                // Use PDFJS to render a pdfDocument from pdf array
+                PDFJS.getDocument(pdfAsArray).then(function (pdf) {
+                    // Get div#container and cache it for later use
+                    var container = document.getElementById("requestResult");
+                    // enable hyperlinks within PDF files.
+                    //var pdfLinkService = new PDFJS.PDFLinkService();
+                    //pdfLinkService.setDocument(pdf, null);
+
+                    //$('#requestResult').html('');
+                    nbPages = pdf.numPages;
+
+                    // Loop from 1 to total_number_of_pages in PDF document
+                    for (var i = 1; i <= nbPages; i++) {
+
+                        // Get desired page
+                        pdf.getPage(i).then(function (page) {
+
+                            var div0 = document.createElement("div");
+                            div0.setAttribute("style", "text-align: center; margin-top: 1cm;");
+                            var pageInfo = document.createElement("p");
+                            var t = document.createTextNode("page " + (page.pageIndex + 1) + "/" + (nbPages));
+                            pageInfo.appendChild(t);
+                            div0.appendChild(pageInfo);
+                            container.appendChild(div0);
+
+                            var scale = 1.5;
+                            var viewport = page.getViewport(scale);
+                            var div = document.createElement("div");
+
+                            // Set id attribute with page-#{pdf_page_number} format
+                            div.setAttribute("id", "page-" + (page.pageIndex + 1));
+
+                            // This will keep positions of child elements as per our needs, and add a light border
+                            div.setAttribute("style", "position: relative; border-style: solid; border-width: 1px; border-color: gray;");
+
+                            // Append div within div#container
+                            container.appendChild(div);
+
+                            // Create a new Canvas element
+                            var canvas = document.createElement("canvas");
+
+                            // Append Canvas within div#page-#{pdf_page_number}
+                            div.appendChild(canvas);
+
+                            var context = canvas.getContext('2d');
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+
+                            var renderContext = {
+                                canvasContext: context,
+                                viewport: viewport
+                            };
+
+                            // Render PDF page
+                            page.render(renderContext).then(function () {
+                                // Get text-fragments
+                                return page.getTextContent();
+                            })
+                                .then(function (textContent) {
+                                    // Create div which will hold text-fragments
+                                    var textLayerDiv = document.createElement("div");
+
+                                    // Set it's class to textLayer which have required CSS styles
+                                    textLayerDiv.setAttribute("class", "textLayer");
+
+                                    // Append newly created div in `div#page-#{pdf_page_number}`
+                                    div.appendChild(textLayerDiv);
+
+                                    // Create new instance of TextLayerBuilder class
+                                    var textLayer = new TextLayerBuilder({
+                                        textLayerDiv: textLayerDiv,
+                                        pageIndex: page.pageIndex,
+                                        viewport: viewport
+                                    });
+
+                                    // Set text-fragments
+                                    textLayer.setTextContent(textContent);
+
+                                    // Render text-fragments
+                                    textLayer.render();
+                                });
+                        });
+                    }
+                });
+            }
+            reader.readAsArrayBuffer(document.getElementById("input").files[0]);
+
+            xhr.onreadystatechange = function (e) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = e.target.response;
+                    //var response = JSON.parse(xhr.responseText);
+                    //console.log(response);
+                    setupAnnotations(response);
+                } else if (xhr.status != 200) {
+                    AjaxError2("Response " + xhr.status + ": ");
+                }
+            };
+            xhr.send(formData);
+        }
     }
 
     function SubmitSuccesful(responseText, statusText) {
@@ -164,10 +298,10 @@ var grobid = (function ($) {
             SubmitSuccesfulText(responseText, statusText);
         }
         else if (selected == 'processQuantityXML') {
-            //SubmitSuccesfulXML(responseText, statusText);          
+            SubmitSuccessfulXML(responseText, statusText);          
         }
         else if (selected == 'annotateQuantityPDF') {
-            //SubmitSuccesfulPDFAnnotated(responseText, statusText);          
+            SubmitSuccessfulPDF(responseText, statusText);          
         }
 
     }
@@ -588,6 +722,14 @@ var grobid = (function ($) {
         string += "</div>";
 
         return string;
+    }
+
+    function SubmitSuccessfulPDF(responseText, statusText) {
+        $('#requestResult').html("<p>Not implemented yet ;)</p>");
+    }
+
+    function SubmitSuccessfulXML(responseText, statusText) {
+        $('#requestResult').html("<p>Not implemented yet ;)</p>");
     }
 
     function processChange() {

@@ -1,6 +1,8 @@
 package org.grobid.core.data;
 
 import org.grobid.core.utilities.UnitUtilities;
+import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.layout.LayoutToken;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -28,6 +30,9 @@ public class Measurement {
     private Quantity quantityRange = null;
     private List<Quantity> quantityList = null;
     private QuantifiedObject substance = null; // what is quantified, as extracted from the text
+
+    // optional bounding box in the source document
+    private List<BoundingBox> boundingBoxes = null;
 
     public Measurement() {
     }
@@ -105,6 +110,20 @@ public class Measurement {
     public QuantifiedObject getQuantifiedObject() {
         return substance;
     }
+
+    public List<BoundingBox> getBoundingBoxes() {
+        return boundingBoxes;
+    }
+
+    public void setBoundingBoxes(List<BoundingBox> boundingBoxes) {
+        this.boundingBoxes = boundingBoxes;
+    }
+
+    public void addBoundingBoxes(BoundingBox boundingBox) {
+        if (this.boundingBoxes == null)
+            this.boundingBoxes = new ArrayList<BoundingBox>();
+        this.boundingBoxes.add(boundingBox);
+    }    
 
     public String toString() {
         StringBuilder builder = new StringBuilder();

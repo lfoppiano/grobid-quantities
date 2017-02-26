@@ -15,15 +15,15 @@ public interface QuantityPaths {
     /**
      * path extension for extracting quantities from a text.
      */
-    public static final String PATH_QUANTITY_TEXT= "processQuantityText";
+    public static final String PATH_QUANTITY_TEXT = "processQuantityText";
 
     /**
      * path extension for extracting quantities from an XML file.
      */
-    public static final String PATH_QUANTITY_XML= "processQuantityXML";
+    public static final String PATH_QUANTITY_XML = "processQuantityXML";
     
     /**
      * path extension for annotating a PDF file with quantities.
      */
-    public static final String PATH_ANNOTATE_QUANTITY_PDF= "annotateQuantityPDF";
+    public static final String PATH_ANNOTATE_QUANTITY_PDF = "annotateQuantityPDF";
 }

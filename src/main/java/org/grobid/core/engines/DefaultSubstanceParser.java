@@ -191,12 +191,16 @@ public class DefaultSubstanceParser extends SubstanceParser {
                         if (quantityMost == null)
                             quantityMost = measurement.getQuantityRange();
 
-                        lastPosition = quantityLeast.getOffsetStart()-startSentencePosition;
-                        if (lastPosition>position)
-                            position = lastPosition;
-                        lastPosition = quantityMost.getOffsetStart()-startSentencePosition;
-                        if (lastPosition>position)
-                            position = lastPosition;
+                        if (quantityLeast != null) {
+                            lastPosition = quantityLeast.getOffsetStart()-startSentencePosition;
+                            if (lastPosition>position)
+                                position = lastPosition;
+                        }
+                        if (quantityMost != null) {
+                            lastPosition = quantityMost.getOffsetStart()-startSentencePosition;
+                            if (lastPosition>position)
+                                position = lastPosition;
+                        }
                     }
                     String nextStruct = getNextStruct(position+1, indexMeasurementTokens, 
                         processedSentence.getOffsetEnd()-processedSentence.getOffsetStart(), parse);
@@ -416,24 +420,29 @@ public class DefaultSubstanceParser extends SubstanceParser {
                 if (quantityMost == null)
                     quantityMost = measurement.getQuantityRange();
 
-                int position = quantityLeast.getOffsetStart();
-                addTokenIndex(position-startSentencePosition, quantityLeast.getOffsetEnd()-quantityLeast.getOffsetStart(), parse, result);
+                if (quantityLeast != null) {
+                    int position = quantityLeast.getOffsetStart();
+                    addTokenIndex(position-startSentencePosition, quantityLeast.getOffsetEnd()-quantityLeast.getOffsetStart(), parse, result);
+                
 
-                // unit position
-                Unit rawUnit = quantityLeast.getRawUnit();
-                if (rawUnit != null) {
-                    position = rawUnit.getOffsetStart();
-                    addTokenIndex(position-startSentencePosition, rawUnit.getOffsetEnd()-rawUnit.getOffsetStart(), parse, result);
+                    // unit position
+                    Unit rawUnit = quantityLeast.getRawUnit();
+                    if (rawUnit != null) {
+                        position = rawUnit.getOffsetStart();
+                        addTokenIndex(position-startSentencePosition, rawUnit.getOffsetEnd()-rawUnit.getOffsetStart(), parse, result);
+                    }
                 }
 
-                position = quantityMost.getOffsetStart();
-                addTokenIndex(position-startSentencePosition, quantityMost.getOffsetEnd()-quantityMost.getOffsetStart(), parse, result);
+                if (quantityMost != null) {
+                    int position = quantityMost.getOffsetStart();
+                    addTokenIndex(position-startSentencePosition, quantityMost.getOffsetEnd()-quantityMost.getOffsetStart(), parse, result);
 
-                // unit position
-                rawUnit = quantityMost.getRawUnit();
-                if (rawUnit != null) {
-                    position = rawUnit.getOffsetStart();
-                    addTokenIndex(position-startSentencePosition, rawUnit.getOffsetEnd()-rawUnit.getOffsetStart(), parse, result);
+                    // unit position
+                    Unit rawUnit = quantityMost.getRawUnit();
+                    if (rawUnit != null) {
+                        position = rawUnit.getOffsetStart();
+                        addTokenIndex(position-startSentencePosition, rawUnit.getOffsetEnd()-rawUnit.getOffsetStart(), parse, result);
+                    }
                 }
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                 // list must be consistent in unit type, and avoid too large chunk

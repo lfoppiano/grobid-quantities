@@ -65,7 +65,8 @@ public class UnitParser extends AbstractParser {
         List<UnitBlock> units = new ArrayList<>();
 
         try {
-            text = text.replace("\n", " ");
+            //text = text.replace("\n", " "); // temporary fix... 
+            text = text.replace("\n", "");
             List<LayoutToken> tokenizations = new ArrayList<>();
 
             String ress = null;
@@ -84,6 +85,8 @@ public class UnitParser extends AbstractParser {
             }
 
             ress = addFeatures(characters, unitTokenPositions, isUnitLeft);
+System.out.println(text);  
+System.out.println(ress);            
             String res;
             try {
                 res = label(ress);

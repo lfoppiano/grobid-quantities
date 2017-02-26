@@ -23,6 +23,14 @@
         
         <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css">
         
+        <!-- PDF.js stuff -->
+        <link type="text/css" href="resources/pdf.js/web/text_layer_builder.css" rel="stylesheet"/>
+        <link type="text/css" href="resources/pdf.js/web/annotation_layer_builder.css" rel="stylesheet"/>
+        <script type="text/javascript" src="resources/pdf.js/web/text_layer_builder.js"></script>
+        <script type="text/javascript" src="resources/pdf.js/web/pdf_link_service.js"></script>
+        <script type="text/javascript" src="resources/pdf.js/web/annotation_layer_builder.js"></script>
+        <script type="text/javascript" src="resources/pdf.js/build/pdf.js"></script>
+        s
         <!-- for using brat -->
         <!-- script src="brat/client/lib/jquery.svg.min.js"></script> 
         <script src="brat/client/lib/jquery.svgdom.min.js"></script>  
@@ -52,17 +60,17 @@
             <div class="page-header">
                  <h1><span style="color:#333;">GROBID Quantities<!--img src="resources/img/grobid_header_logo.png" /--> 
                      <span style="padding-left:40px;color:#AE0C0C;">        
-        <h2><small> 
-            <a class="section-active" id="about" href="#">About</a> 
-                <span style="padding-left:20px;">&nbsp;</span> 
-            <!--a class="section-active" id="demo" href="#">Demo</a> 
-                <span style="padding-left:20px;">&nbsp;</span-->        
-            <a class="section-not-active" id="rest" href="#">RESTfull services</a> 
-                <span style="padding-left:20px;">&nbsp;</span> 
-            <a class="section-not-active" id="doc" href="#">Doc</a> 
-                <span style="padding-left:20px;">&nbsp;</span> 
-        </small></h2>
-        </span></h1>
+                <h2><small> 
+                    <a class="section-active" id="about" href="#">About</a> 
+                        <span style="padding-left:20px;">&nbsp;</span> 
+                    <!--a class="section-active" id="demo" href="#">Demo</a> 
+                        <span style="padding-left:20px;">&nbsp;</span-->        
+                    <a class="section-not-active" id="rest" href="#">RESTfull services</a> 
+                        <span style="padding-left:20px;">&nbsp;</span> 
+                    <a class="section-not-active" id="doc" href="#">Doc</a> 
+                        <span style="padding-left:20px;">&nbsp;</span> 
+                </small></h2>
+                </span></h1>
             </div>
     
             <table border="0">
@@ -83,7 +91,8 @@
             </table>
             
             <div id="divRestI">      
-                <div class="form-horizontal" method="post" id="gbdForm" target=_blank accept-charset="UTF-8">
+                <form class="form-horizontal" method="post" id="gbdForm" target=_blank accept-charset="UTF-8">
+                <!--div class="form-horizontal" method="post" id="gbdForm" target=_blank accept-charset="UTF-8"-->
                 <!--form class="form-horizontal" method="post" id="gbdForm" target=_blank accept-charset="UTF-8"-->
                     <table border="0">
                         <tr>
@@ -138,19 +147,18 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>&nbsp;</td><td colspan="2"><input id="submitRequest" type="submit" value="Submit" class="btn"/></td>
+                            <td>&nbsp;</td><td colspan="2"><input id="submitRequest" value="Submit" class="btn"/></td>
                         </tr>   
                     </table>
                 </div>
                 <br>
+                <div id="infoResult"></div>
                 <div id="requestResult"></div>
             </div>
-    
-        </div>  
-        
-        <footer>
-          <p><span style="color:#848484;">&copy; GROBID contributors - 2016 </span></p>
-          </footer>
+            
+            <footer>
+              <p><span style="color:#848484;">&copy; GROBID contributors - 2016 </span></p>
+            </footer>
         </div>
         
     </body> 
