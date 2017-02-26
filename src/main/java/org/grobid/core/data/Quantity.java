@@ -23,7 +23,7 @@ import java.util.regex.Pattern;*/
  *
  * @author Patrice Lopez
  */
-public class Quantity {
+public class Quantity implements Comparable<Quantity> {
     private static final Logger logger = LoggerFactory.getLogger(Quantity.class);
 
     private Unit rawUnit = null;
@@ -393,5 +393,16 @@ public class Quantity {
         private boolean hasUnitDefinition() {
             return getUnit() != null && getUnit().hasDefinition();
         }
+    }
+
+    @Override
+    public int compareTo(Quantity theQuantity) {
+        int start = theQuantity.getOffsetStart();
+        int end = theQuantity.getOffsetEnd();
+        
+        if (offsets.start != start) 
+            return offsets.start - start;
+        else 
+            return offsets.end - end;
     }
 }

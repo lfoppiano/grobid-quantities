@@ -242,4 +242,9 @@ public class Measurement {
         json.append(" }");
         return json.toString();
     }
+
+    /*@Override
+    public int compareTo(Measurement theMeasurement) {
+        // TBD, based on position of measurement quantities
+    }*/
 }

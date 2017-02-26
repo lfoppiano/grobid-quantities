@@ -166,9 +166,6 @@ var grobid = (function ($) {
         else if (selected == 'processQuantityXML') {
             //SubmitSuccesfulXML(responseText, statusText);          
         }
-        else if (selected == 'processQuantityPDF') {
-            //SubmitSuccesfulPDF(responseText, statusText);          
-        }
         else if (selected == 'annotateQuantityPDF') {
             //SubmitSuccesfulPDFAnnotated(responseText, statusText);          
         }
@@ -416,12 +413,6 @@ var grobid = (function ($) {
         $('#detailed_annot-0').show();
     }
 
-    /*$(document).ready(function() {
-     $(document).on('shown', '#xmlCode', function(event) {
-     prettyPrint();
-     });
-     });*/
-
     function intervalToHtml(quantityMap, measurementType) {
         var string = "";
         var rawUnitName = null;
@@ -611,11 +602,6 @@ var grobid = (function ($) {
             createInputFile(selected)
             //$('#consolidateBlock').show();
             setBaseUrl('processQuantityXML');
-        }
-        else if (selected == 'processQuantityPDF') {
-            createInputFile(selected);
-            //$('#consolidateBlock').hide();
-            setBaseUrl('processQuantityPDF');
         }
         else if (selected == 'annotateQuantityPDF') {
             createInputFile(selected);

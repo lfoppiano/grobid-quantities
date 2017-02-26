@@ -7,9 +7,10 @@ import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.normalization.NormalizationException;
 import org.grobid.core.data.normalization.QuantityNormalizer;
-import org.grobid.core.document.Document;
+import org.grobid.core.document.*;
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.document.DocumentSource;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
@@ -23,6 +24,8 @@ import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
+import org.grobid.core.engines.label.TaggingLabel;
+import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +40,7 @@ import java.io.StringReader;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.trim;
@@ -139,49 +140,169 @@ public class QuantityParser extends AbstractParser {
                 DocumentSource.fromPdf(file, config.getStartPage(), config.getEndPage());
             doc = parsers.getSegmentationParser().processing(documentSource, config);
 
-            // here we process all the textural content of the document -
-            // for refining the process based on structures, we can filter
-            // segment of interest (e.g. header, body, annex) and apply the 
-            // corresponding model to further filter by structure types 
-            List<LayoutToken> tokenizations = doc.getTokenizations();
+            // here we process the relevant textual content of the document
 
-            StringBuilder textBuilder = new StringBuilder();
-            for(LayoutToken token : tokenizations) {
-                textBuilder.append(token.getText());
-            }
-            String text = textBuilder.toString();
+            // for refining the process based on structures, we need to filter
+            // segment of interest (e.g. header, body, annex) and possibly apply 
+            // the corresponding model to further filter by structure types 
 
-            String ress = null;
-            List<String> texts = new ArrayList<>();
-            for (LayoutToken token : tokenizations) {
-                if (isNotEmpty(trim(token.getText())) && 
-                    !token.getText().equals(" ") &&
-                    !token.getText().equals("\n") && 
-                    !token.getText().equals("\r") &&  
-                    !token.getText().equals("\t") && 
-                    !token.getText().equals("\u00A0")) {
-                        texts.add(token.getText());
+            // from the header, we are interested in title, abstract and keywords
+            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabel.HEADER);
+            if (documentParts != null) {
+                String header = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                String labeledResult = null;
+                if ((header != null) && (header.trim().length() > 0)) {
+                    labeledResult = parsers.getHeaderParser().label(header);
+
+                    BiblioItem resHeader = new BiblioItem();
+                    //parsers.getHeaderParser().processingHeaderSection(false, doc, resHeader);
+                    resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+
+                    // title
+                    List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
+                    if (titleTokens != null) {
+                        processLayoutTokenSequence(titleTokens, doc, measurements);
+                    } 
+
+                    // abstract
+                    List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
+                    if (abstractTokens != null) {
+                        processLayoutTokenSequence(abstractTokens, doc, measurements);
+                    } 
+
+                    // keywords
+                    List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
+                    if (keywordTokens != null) {
+                        processLayoutTokenSequence(keywordTokens, doc, measurements);
+                    }
                 }
             }
 
-            List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
-            ress = addFeatures(texts, unitTokenPositions);
-            String res = null;
-            try {
-                res = label(ress);
-            } catch (Exception e) {
-                throw new GrobidException("CRF labeling for quantity parsing failed.", e);
+            // we can process all the body, in the future figure and table could be the 
+            // object of more refined processing
+            documentParts = doc.getDocumentPart(SegmentationLabel.BODY);
+            if (documentParts != null) {
+                processDocumentPart(documentParts, doc, measurements);
             }
 
-            measurements = extractMeasurement(text, res, tokenizations);
-            measurements = normalizeMeasurements(measurements);
-            measurements = substanceParser.parseSubstance(text, measurements);
+            // we don't process references (although reference titles could be relevant)
+            // acknowledgement? 
+
+            // we can process annexes
+            documentParts = doc.getDocumentPart(SegmentationLabel.ANNEX);
+            if (documentParts != null) {
+                processDocumentPart(documentParts, doc, measurements);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot process pdf file: " + file.getPath());
         }
 
+        // for next line, comparable measurement needs to be implemented
+        //Collections.sort(measurements);
         return new Pair<List<Measurement>,Document>(measurements, doc);
+    }
+
+        /**
+     * Process with the quantity model a segment coming from the segmentation model
+     */ 
+    private List<Measurement> processDocumentPart(SortedSet<DocumentPiece> documentParts, 
+                                                  Document doc,
+                                                  List<Measurement> measurements) {
+        // List<LayoutToken> for the selected segment
+        List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+
+        // text of the selected segment
+        String text = doc.getDocumentPieceText(documentParts);
+        
+        // list of textual tokens of the selected segment
+        List<String> texts = getTexts(tokenizationParts);
+        
+        // positions for lexical match
+        List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
+        
+        // string representation of the feature matrix for CRF lib
+        String ress = addFeatures(texts, unitTokenPositions);     
+        
+        // labeled result from CRF lib
+        String res = null;
+        try {
+            res = label(ress);
+        } catch (Exception e) {
+            throw new GrobidException("CRF labeling for quantity parsing failed.", e);
+        }
+
+        List<Measurement> localMeasurements = extractMeasurement(text, res, tokenizationParts);
+        if ( (localMeasurements == null) || (localMeasurements.size() == 0) )
+            return measurements;
+
+        localMeasurements = normalizeMeasurements(localMeasurements);
+        localMeasurements = substanceParser.parseSubstance(text, localMeasurements);
+
+        measurements.addAll(localMeasurements);
+
+        return measurements;
+    }
+
+    /**
+     * Process with the quantity model an arbitrary sequence of LayoutToken objects
+     */ 
+    private List<Measurement> processLayoutTokenSequence(List<LayoutToken> layoutTokens, 
+                                                  Document doc,
+                                                  List<Measurement> measurements) {
+        // List<LayoutToken> for the selected segment
+        List<LayoutToken> tokenizationParts = layoutTokens;
+
+        // text of the selected segment
+        String text = LayoutTokensUtil.toText(layoutTokens);
+        
+        // list of textual tokens of the selected segment
+        List<String> texts = getTexts(tokenizationParts);
+        
+        // positions for lexical match
+        List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
+        
+        // string representation of the feature matrix for CRF lib
+        String ress = addFeatures(texts, unitTokenPositions);     
+        
+        // labeled result from CRF lib
+        String res = null;
+        try {
+            res = label(ress);
+        } catch (Exception e) {
+            throw new GrobidException("CRF labeling for quantity parsing failed.", e);
+        }
+
+        List<Measurement> localMeasurements = extractMeasurement(text, res, tokenizationParts);
+        if ( (localMeasurements == null) || (localMeasurements.size() == 0) )
+            return measurements;
+        
+        localMeasurements = normalizeMeasurements(localMeasurements);
+        localMeasurements = substanceParser.parseSubstance(text, localMeasurements);
+
+        measurements.addAll(localMeasurements);
+
+        return measurements;
+    }
+
+    /**
+     * Give the list of textual tokens from a list of LayoutToken
+     */
+    private static List<String> getTexts(List<LayoutToken> tokenizations) {
+        List<String> texts = new ArrayList<>();
+        for (LayoutToken token : tokenizations) {
+            if (isNotEmpty(trim(token.getText())) && 
+                !token.getText().equals(" ") &&
+                !token.getText().equals("\n") && 
+                !token.getText().equals("\r") &&  
+                !token.getText().equals("\t") && 
+                !token.getText().equals("\u00A0")) {
+                    texts.add(token.getText());
+            }
+        }
+        return texts;
     }
 
     private List<Measurement> normalizeMeasurements(List<Measurement> measurements) {
