@@ -26,6 +26,7 @@ import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
+import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -779,6 +780,10 @@ public class QuantityParser extends AbstractParser {
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             List<LayoutToken> theTokens = cluster.concatTokens();
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens()).trim();
+            List<BoundingBox> boundingBoxes = null;
+
+            if (!clusterLabel.equals(QUANTITY_OTHER))
+                boundingBoxes = BoundingBoxCalculator.calculate(cluster.concatTokens());
 
             if ((pos < text.length() - 1) && (text.charAt(pos) == ' '))
                 pos += 1;
@@ -827,6 +832,7 @@ public class QuantityParser extends AbstractParser {
                     currentMeasurement.setAtomicQuantity(currentQuantity);
                     openMeasurement = UnitUtilities.Measurement_Type.VALUE;
                 }
+                currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_LEAST)) {
                 System.out.println("value least: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
@@ -847,6 +853,7 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.setQuantityLeast(currentQuantity);
                 currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
                 openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX;
+                currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_MOST)) {
                 System.out.println("value most: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
@@ -867,6 +874,7 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.setQuantityMost(currentQuantity);
                 currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
                 openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX;
+                currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_BASE)) {
                 System.out.println("base value: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
@@ -887,6 +895,7 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.setQuantityBase(currentQuantity);
                 currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE);
                 openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE;
+                currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_RANGE)) {
                 System.out.println("range value: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
@@ -907,6 +916,7 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.setQuantityRange(currentQuantity);
                 currentMeasurement.setType(UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE);
                 openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE;
+                currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_LIST)) {
                 System.out.println("value in list: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.CONJUNCTION)) {
@@ -928,6 +938,7 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addQuantityList(currentQuantity);
                 currentMeasurement.setType(UnitUtilities.Measurement_Type.CONJUNCTION);
                 openMeasurement = UnitUtilities.Measurement_Type.CONJUNCTION;
+                currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_UNIT_LEFT)) {
                 System.out.println("unit (left attachment): " + clusterContent);
                 currentUnit = new Unit();
@@ -936,29 +947,43 @@ public class QuantityParser extends AbstractParser {
                 currentUnit.setOffsetEnd(endPos);
 
                 if (openMeasurement == UnitUtilities.Measurement_Type.VALUE) {
-                    if (currentMeasurement.getQuantityAtomic() != null)
+                    if (currentMeasurement.getQuantityAtomic() != null) {
                         currentMeasurement.getQuantityAtomic().setRawUnit(currentUnit);
+                        currentMeasurement.addBoundingBoxes(boundingBoxes);
+                    }
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
                     if ((currentMeasurement.getQuantityMost() != null) &&
-                            ((currentMeasurement.getQuantityMost().getRawUnit() == null) || (currentMeasurement.getQuantityMost().getRawUnit().getRawName() == null))) {
+                            ((currentMeasurement.getQuantityMost().getRawUnit() == null) || 
+                                (currentMeasurement.getQuantityMost().getRawUnit().getRawName() == null))) {
                         currentMeasurement.getQuantityMost().setRawUnit(currentUnit);
+
                         if ((currentMeasurement.getQuantityLeast() != null) &&
-                                ((currentMeasurement.getQuantityLeast().getRawUnit() == null) || (currentMeasurement.getQuantityLeast().getRawUnit().getRawName() == null)))
+                                ((currentMeasurement.getQuantityLeast().getRawUnit() == null) || 
+                                    (currentMeasurement.getQuantityLeast().getRawUnit().getRawName() == null)))
                             currentMeasurement.getQuantityLeast().setRawUnit(currentUnit);
+
+                        currentMeasurement.addBoundingBoxes(boundingBoxes);
                     }
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
                     if ((currentMeasurement.getQuantityRange() != null) &&
-                            ((currentMeasurement.getQuantityRange().getRawUnit() == null) || (currentMeasurement.getQuantityRange().getRawUnit().getRawName() == null))) {
+                            ((currentMeasurement.getQuantityRange().getRawUnit() == null) || 
+                                (currentMeasurement.getQuantityRange().getRawUnit().getRawName() == null))) {
                         currentMeasurement.getQuantityRange().setRawUnit(currentUnit);
+
                         if ((currentMeasurement.getQuantityBase() != null) &&
-                                ((currentMeasurement.getQuantityBase().getRawUnit() == null) || (currentMeasurement.getQuantityBase().getRawUnit().getRawName() == null)))
+                                ((currentMeasurement.getQuantityBase().getRawUnit() == null) || 
+                                    (currentMeasurement.getQuantityBase().getRawUnit().getRawName() == null)))
                             currentMeasurement.getQuantityBase().setRawUnit(currentUnit);
+
+                        currentMeasurement.addBoundingBoxes(boundingBoxes);
                     }
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) {
                     if ((currentMeasurement.getQuantityList() != null) && (currentMeasurement.getQuantityList().size() > 0)) {
                         for (Quantity quantity : currentMeasurement.getQuantityList()) {
-                            if ((quantity != null) && ((quantity.getRawUnit() == null) || (quantity.getRawUnit().getRawName() == null))) {
+                            if ((quantity != null) && ((quantity.getRawUnit() == null) || 
+                                (quantity.getRawUnit().getRawName() == null))) {
                                 quantity.setRawUnit(currentUnit);
+                                currentMeasurement.addBoundingBoxes(boundingBoxes);
                             } else if ((quantity == null) && (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
                                 // we skip the least value, but we can still for robustness attach the unit to the upper range quantity
                             } else
@@ -1007,10 +1032,12 @@ public class QuantityParser extends AbstractParser {
                 currentUnit.setOffsetStart(pos);
                 currentUnit.setOffsetEnd(endPos);
                 currentUnit.setUnitRightAttachment(true);
+                currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_OTHER)) {
             } else {
                 logger.error("Warning: unexpected label in quantity parser: " + clusterLabel.getLabel() + " for " + clusterContent);
             }
+            
             pos = endPos;
         }
 

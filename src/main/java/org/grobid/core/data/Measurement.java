@@ -120,9 +120,20 @@ public class Measurement {
     }
 
     public void addBoundingBoxes(BoundingBox boundingBox) {
+        if (boundingBox == null)
+            return;
         if (this.boundingBoxes == null)
             this.boundingBoxes = new ArrayList<BoundingBox>();
         this.boundingBoxes.add(boundingBox);
+    }    
+
+    public void addBoundingBoxes(List<BoundingBox> boundingBoxes) {
+        if (boundingBoxes == null)
+            return;
+        if (this.boundingBoxes == null)
+            this.boundingBoxes = new ArrayList<BoundingBox>();
+        for(BoundingBox box : boundingBoxes) 
+            this.boundingBoxes.add(box);
     }    
 
     public String toString() {
@@ -256,6 +267,19 @@ public class Measurement {
 
         if (substance != null) {
             json.append(", \"quantified\" : " + substance.toJson());
+        }
+
+        if (boundingBoxes != null) {
+            json.append(", \"boundingBoxes\" : [");
+            boolean first = true;
+            for (BoundingBox box : boundingBoxes) {
+                if (first)
+                    first = false;
+                else
+                    json.append(",");
+                json.append("{").append(box.toJson()).append("}");
+            }
+            json.append("] ");
         }
 
         json.append(" }");

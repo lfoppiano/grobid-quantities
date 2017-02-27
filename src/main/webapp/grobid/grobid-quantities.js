@@ -177,7 +177,6 @@ var grobid = (function ($) {
             var url = $('#gbdForm').attr('action');
             xhr.responseType = 'json'; 
             xhr.open('POST', url, true);
-            //ShowRequest2();
 
             var nbPages = -1;
 
@@ -505,6 +504,76 @@ var grobid = (function ($) {
         $('#detailed_annot-0').hide();
 
         $('#requestResult').show();
+    }
+
+    function setupAnnotations(response) {
+        // we must check/wait that the corresponding PDF page is rendered at this point
+        if ((response == null) || (response.length == 0)) {
+            $('#infoResult')
+                .html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");
+            return;
+        } else {
+            $('#infoResult').html('');
+        }
+
+        var json = response;
+        var pageInfo = json.pages;
+
+        var page_height = 0.0;
+        var page_width = 0.0;
+
+        var entities = json.entities;
+        if (entities) {
+            for(var n in entities) {
+                var annotation = entities[n];
+                var theId = annotation.rawForm;
+                var theUrl = null;
+                //var theUrl = annotation.url;
+                var pos = annotation.boundingBoxes;
+                pos.forEach(function(thePos, m) {
+                    // get page information for the annotation
+                    var pageNumber = thePos.p;
+                    if (pageInfo[pageNumber-1]) {
+                        page_height = pageInfo[pageNumber-1].page_height;
+                        page_width = pageInfo[pageNumber-1].page_width;
+                    }
+                    annotateEntity(theId, thePos, theUrl, page_height, page_width);
+                });
+            }
+        }
+    }
+
+    function annotateEntity(theId, thePos, theUrl, page_height, page_width) {
+        var page = thePos.p;
+        var pageDiv = $('#page-'+page);
+        var canvas = pageDiv.children('canvas').eq(0);;
+
+        var canvasHeight = canvas.height();
+        var canvasWidth = canvas.width();
+        var scale_x = canvasHeight / page_height;
+        var scale_y = canvasWidth / page_width;
+
+        var x = thePos.x * scale_x - 1;
+        var y = thePos.y * scale_y - 1 ;
+        var width = thePos.w * scale_x + 1;
+        var height = thePos.h * scale_y + 1;
+
+        //make clickable the area
+        var element = document.createElement("a");
+        var attributes = "display:block; width:"+width+"px; height:"+height+"px; position:absolute; top:"+
+            y+"px; left:"+x+"px;";
+        element.setAttribute("style", attributes + "border:2px solid; border-color: #800080;");
+        element.setAttribute("data-toggle", "popover");
+        element.setAttribute("data-placement", "top");
+        element.setAttribute("data-content", "content");
+        element.setAttribute("data-trigger", "hover");
+        $(element).popover({
+            content: "<p>Mesurement Object</p><p>" +theId+"<p>",
+            html: true,
+            container: 'body'
+        });
+        
+        pageDiv.append(element);
     }
 
     function viewQuantity() {
