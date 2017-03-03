@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Relatively stupid SAX parser which identify structural chunk of textual content like paragraph, titles, ...
- * The parser should work with many usual formats like TEI and ST.36. 
+ * The parser should "work" (at the expected level of stupidity) with many usual formats like TEI and ST.36. 
  * 
  * @author Patrice Lopez
  */

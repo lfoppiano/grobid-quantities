@@ -24,7 +24,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Basic implementation of value parser without CRF
+ * Basic implementation of value parser without CRF. Thi could be used in the future to 
+ * bootstrap a more efficient ML model. 
  */
 public class DefaultValueParser extends ValueParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultValueParser.class);

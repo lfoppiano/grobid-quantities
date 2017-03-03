@@ -280,7 +280,13 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
             String text = getText();
             // we segment the text
             //StringTokenizer st = new StringTokenizer(text, " \n\t" + TextUtilities.fullPunctuations, true);
-            List<String> tokenizations = QuantityAnalyzer.tokenize(text);
+            List<String> tokenizations = null;
+            try {
+                tokenizations = QuantityAnalyzer.getInstance().tokenize(text);
+            } catch(Exception e) {
+                //logger.error("fail to tokenize:, " + text, e);
+                throw new GrobidException("fail to tokenize:, " + text, e);
+            }
             boolean begin = true;
             for (String tok : tokenizations) {
                 tok = tok.trim();

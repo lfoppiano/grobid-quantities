@@ -13,4 +13,8 @@ public class NormalizationException extends Exception {
     public NormalizationException(String s, ParserException pe) {
         super(s, pe);
     }
+
+    public NormalizationException(String s, Exception e) {
+        super(s, e);
+    }
 }

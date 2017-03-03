@@ -49,7 +49,7 @@ public class QuantityProcessString {
                 response = Response.status(Status.NO_CONTENT).build();
 
             if (jsonBuilder != null) {
-                System.out.println(jsonBuilder.toString());
+                //System.out.println(jsonBuilder.toString());
                 response = Response.status(Status.OK).entity(jsonBuilder.toString())
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
                         .build();

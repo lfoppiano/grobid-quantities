@@ -56,7 +56,6 @@ public class UnitBlock {
         }
     }
 
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getPrefix());

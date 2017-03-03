@@ -84,9 +84,7 @@ public class UnitParser extends AbstractParser {
                 //unitTokenPositions.add(new OffsetPosition(text.indexOf(character), text.indexOf(character) + 1));
             }
 
-            ress = addFeatures(characters, unitTokenPositions, isUnitLeft);
-System.out.println(text);  
-System.out.println(ress);            
+            ress = addFeatures(characters, unitTokenPositions, isUnitLeft);           
             String res;
             try {
                 res = label(ress);

@@ -54,6 +54,8 @@ public class UnitNormalizer {
         } catch (ParserException pe) {
             throw new NormalizationException("The unit " + unitName + " cannot be normalized. It is either not a valid unit " +
                     "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+        } catch (Exception e) {
+            throw new NormalizationException("Unexpected normalization error for the unit " + unitName, e);
         }
 
         return parsedUnit.toString();

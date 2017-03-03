@@ -153,6 +153,8 @@ var grobid = (function ($) {
         var selected = $('#selectedService option:selected').attr('value');
         var urlLocal = $('#gbdForm').attr('action');
 
+        measurementMap = new Array();
+
         $('#infoResult').html('<font color="grey">Requesting server...</font>');
         $('#requestResult').html('');
         
@@ -205,15 +207,24 @@ var grobid = (function ($) {
 
                         // Get desired page
                         pdf.getPage(i).then(function (page) {
+                            var table = document.createElement("table");
+                            var tr = document.createElement("tr");
+                            var td1 = document.createElement("td"); 
+                            var td2 = document.createElement("td"); 
+
+                            tr.appendChild(td1);
+                            tr.appendChild(td2);
+                            table.appendChild(tr);
 
                             var div0 = document.createElement("div");
-                            div0.setAttribute("style", "text-align: center; margin-top: 1cm;");
+                            div0.setAttribute("style", "text-align: center; margin-top: 1cm; width:80%;");
                             var pageInfo = document.createElement("p");
                             var t = document.createTextNode("page " + (page.pageIndex + 1) + "/" + (nbPages));
                             pageInfo.appendChild(t);
                             div0.appendChild(pageInfo);
-                            container.appendChild(div0);
-
+                            
+                            td1.appendChild(div0);
+                            
                             var scale = 1.5;
                             var viewport = page.getViewport(scale);
                             var div = document.createElement("div");
@@ -222,16 +233,26 @@ var grobid = (function ($) {
                             div.setAttribute("id", "page-" + (page.pageIndex + 1));
 
                             // This will keep positions of child elements as per our needs, and add a light border
-                            div.setAttribute("style", "position: relative; border-style: solid; border-width: 1px; border-color: gray;");
+                            div.setAttribute("style", "position: relative; ");
 
-                            // Append div within div#container
-                            container.appendChild(div);
-
+                           
                             // Create a new Canvas element
                             var canvas = document.createElement("canvas");
+                            canvas.setAttribute("style", "border-style: solid; border-width: 1px; border-color: gray;");
 
                             // Append Canvas within div#page-#{pdf_page_number}
                             div.appendChild(canvas);
+                            
+                            // Append div within div#container
+                            td1.appendChild(div);
+
+                            var annot = document.createElement("div");
+                            annot.setAttribute('style', 'vertical-align:top;');
+                            annot.setAttribute('id', 'detailed_annot-' + (page.pageIndex+1));
+                            td2.setAttribute('style', 'vertical-align:top;');
+                            td2.appendChild(annot);
+
+                            container.appendChild(table);
 
                             var context = canvas.getContext('2d');
                             canvas.height = viewport.height;
@@ -307,7 +328,8 @@ var grobid = (function ($) {
 
     function SubmitSuccesfulText(responseText, statusText) {
         responseJson = responseText;
-        console.log(responseJson);
+        //console.log(responseJson);
+        $('#infoResult').html('');
         if ((responseJson == null) || (responseJson.length == 0)) {
             $('#requestResult')
                 .html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");
@@ -507,7 +529,7 @@ var grobid = (function ($) {
     }
 
     function setupAnnotations(response) {
-        // we must check/wait that the corresponding PDF page is rendered at this point
+        // TBD: we must check/wait that the corresponding PDF page is rendered at this point
         if ((response == null) || (response.length == 0)) {
             $('#infoResult')
                 .html("<font color='red'>Error encountered while receiving the server's answer: response is empty.</font>");
@@ -522,31 +544,78 @@ var grobid = (function ($) {
         var page_height = 0.0;
         var page_width = 0.0;
 
-        var entities = json.entities;
-        if (entities) {
-            for(var n in entities) {
-                var annotation = entities[n];
-                var theId = annotation.rawForm;
+        var measurements = json.measurements;
+        if (measurements) {
+            // hey bro, this must be asynchronous to avoid blocking the brother ;)
+            measurements.forEach(function(measurement, n) {
+                var measurementType = measurement.type;
+                var quantities = [];
+                var substance = measurement.quantified;
+
+                if (measurementType == "value") {
+                    var quantity = measurement.quantity;
+                    if (quantity)
+                        quantities.push(quantity)
+                }
+                else if (measurementType == "interval") {
+                    var quantityLeast = measurement.quantityLeast;
+                    if (quantityLeast)
+                        quantities.push(quantityLeast);
+                    var quantityMost = measurement.quantityMost;
+                    if (quantityMost)
+                        quantities.push(quantityMost);
+
+                    if (!quantityLeast && !quantityMost) {
+                        var quantityBase = measurement.quantityBase;
+                        if (quantityBase)
+                            quantities.push(quantityBase);
+                        var quantityRange = measurement.quantityRange;
+                        if (quantityRange)
+                            quantities.push(quantityRange);
+                    }
+                }
+                else {
+                    quantities = measurement.quantities;
+                }
+
+                var quantityType = null;
+                if (quantities) {
+                    var quantityMap = new Array();
+                    for (var currentQuantityIndex = 0; currentQuantityIndex < quantities.length; currentQuantityIndex++) {
+                        var quantity = quantities[currentQuantityIndex];
+                        quantity['quantified'] = substance;
+                        quantityMap[currentQuantityIndex] = quantity;
+                        if (quantityType == null)
+                            quantityType = quantity.type;
+                    }
+                }
+
+                measurementMap[n] = quantities;
+
+                //var theId = measurement.type;
                 var theUrl = null;
                 //var theUrl = annotation.url;
-                var pos = annotation.boundingBoxes;
-                pos.forEach(function(thePos, m) {
-                    // get page information for the annotation
-                    var pageNumber = thePos.p;
-                    if (pageInfo[pageNumber-1]) {
-                        page_height = pageInfo[pageNumber-1].page_height;
-                        page_width = pageInfo[pageNumber-1].page_width;
-                    }
-                    annotateEntity(theId, thePos, theUrl, page_height, page_width);
-                });
-            }
+                var pos = measurement.boundingBoxes;
+                if ( (pos != null) && (pos.length > 0) ) {
+                    pos.forEach(function(thePos, m) {
+                        // get page information for the annotation
+                        var pageNumber = thePos.p;
+                        if (pageInfo[pageNumber-1]) {
+                            page_height = pageInfo[pageNumber-1].page_height;
+                            page_width = pageInfo[pageNumber-1].page_width;
+                        }
+                        annotateEntity(quantityType, thePos, theUrl, page_height, page_width, n, m);
+                    });   
+                }
+            });
         }
     }
 
-    function annotateEntity(theId, thePos, theUrl, page_height, page_width) {
+    function annotateEntity(theId, thePos, theUrl, page_height, page_width, measurementIndex, positionIndex) {
         var page = thePos.p;
         var pageDiv = $('#page-'+page);
-        var canvas = pageDiv.children('canvas').eq(0);;
+        var canvas = pageDiv.children('canvas').eq(0);
+        //var canvas = pageDiv.find('canvas').eq(0);;
 
         var canvasHeight = canvas.height();
         var canvasWidth = canvas.width();
@@ -562,8 +631,12 @@ var grobid = (function ($) {
         var element = document.createElement("a");
         var attributes = "display:block; width:"+width+"px; height:"+height+"px; position:absolute; top:"+
             y+"px; left:"+x+"px;";
-        element.setAttribute("style", attributes + "border:2px solid; border-color: #800080;");
-        element.setAttribute("data-toggle", "popover");
+        element.setAttribute("style", attributes + "border:2px solid; border-color: " + getColor(theId) +";");
+        //element.setAttribute("style", attributes + "border:2px solid;");
+        element.setAttribute("class", theId);
+        element.setAttribute("id", 'annot-' + measurementIndex  + '-' + positionIndex);
+        element.setAttribute("page", page);
+        /*element.setAttribute("data-toggle", "popover");
         element.setAttribute("data-placement", "top");
         element.setAttribute("data-content", "content");
         element.setAttribute("data-trigger", "hover");
@@ -571,9 +644,12 @@ var grobid = (function ($) {
             content: "<p>Mesurement Object</p><p>" +theId+"<p>",
             html: true,
             container: 'body'
-        });
-        
+        });*/
+
         pageDiv.append(element);
+
+        $('#annot-' + measurementIndex + '-' + positionIndex).bind('hover', viewQuantityPDF);
+        $('#annot-' + measurementIndex + '-' + positionIndex).bind('click', viewQuantityPDF);
     }
 
     function viewQuantity() {
@@ -597,26 +673,60 @@ var grobid = (function ($) {
                 + ", empty list of quantity");
         }
 
-        var quantityMap = measurementMap[localMeasurementNumber];
+        var quantityMap = measurementMap[localMeasurementNumber];       
         var measurementType = null;
         var string = "";
         if (quantityMap.length == 1) {
             measurementType = "Atomic value";
-            string = toHtml(quantityMap, measurementType);
+            string = toHtml(quantityMap, measurementType, -1);
         } else if (quantityMap.length == 2) {
             measurementType = "Interval";
-            string = intervalToHtml(quantityMap, measurementType);
+            string = intervalToHtml(quantityMap, measurementType, -1);
         } else {
             measurementType = "List";
-            string = toHtml(quantityMap, measurementType);
+            string = toHtml(quantityMap, measurementType, -1);
         }
-
 
         $('#detailed_annot-0').html(string);
         $('#detailed_annot-0').show();
     }
 
-    function intervalToHtml(quantityMap, measurementType) {
+    function viewQuantityPDF() {
+        var pageIndex = $(this).attr('page');
+        var localID = $(this).attr('id');
+
+console.log('viewQuanityPDF ' + pageIndex + ' / ' + localID);
+
+        var ind1 = localID.indexOf('-');
+        var ind2 = localID.indexOf('-', ind1 + 1);
+        var localMeasurementNumber = parseInt(localID.substring(ind1 + 1, ind2));
+        //var localMeasurementNumber = parseInt(localID.substring(ind1 + 1, localID.length));
+        if ((measurementMap[localMeasurementNumber] == null) || (measurementMap[localMeasurementNumber].length == 0)) {
+            // this should never be the case
+            console.log("Error for visualising annotation measurement with id " + localMeasurementNumber
+                + ", empty list of measurement");
+        } 
+
+        var quantityMap = measurementMap[localMeasurementNumber];
+console.log(quantityMap); 
+        var measurementType = null;
+        var string = "";
+        if (quantityMap.length == 1) {
+            measurementType = "Atomic value";
+            string = toHtml(quantityMap, measurementType, $(this).position().top);
+        } else if (quantityMap.length == 2) {
+            measurementType = "Interval";
+            string = intervalToHtml(quantityMap, measurementType, $(this).position().top);
+        } else {
+            measurementType = "List";
+            string = toHtml(quantityMap, measurementType, $(this).position().top);
+        }
+//console.log(string); 
+        $('#detailed_annot-'+pageIndex).html(string);
+        $('#detailed_annot-'+pageIndex).show();
+    }
+
+    function intervalToHtml(quantityMap, measurementType, topPos) {
         var string = "";
         var rawUnitName = null;
 
@@ -662,7 +772,10 @@ var grobid = (function ($) {
         if (!substance)
             substance = quantityMost.quantified;
 
-        string += "<div class='info-sense-box " + colorLabel + "'><h2 style='color:#FFF;padding-left:10px;font-size:16;'>" + measurementType;
+        string += "<div class='info-sense-box " + colorLabel + "'";
+        if (topPos != -1) 
+            string += " style='vertical-align:top; position:relative; top:" + topPos + "'";
+        string += "><h2 style='color:#FFF;padding-left:10px;font-size:16;'>" + measurementType;
         string += "</h2>";
         string += "<div class='container-fluid' style='background-color:#FFF;color:#70695C;border:padding:5px;margin-top:5px;'>" +
             "<table style='width:100%;display:inline-table;'><tr style='display:inline-table;'><td>";
@@ -706,7 +819,7 @@ var grobid = (function ($) {
 
     }
 
-    function toHtml(quantityMap, measurementType) {
+    function toHtml(quantityMap, measurementType, topPos) {
         var string = "";
         var first = true;
         for (var quantityListIndex = 0; quantityListIndex < quantityMap.length; quantityListIndex++) {
@@ -742,7 +855,10 @@ var grobid = (function ($) {
             }
 
             if (first) {
-                string += "<div class='info-sense-box " + colorLabel + "'><h2 style='color:#FFF;padding-left:10px;font-size:16;'>" + measurementType;
+                string += "<div class='info-sense-box " + colorLabel + "'";
+                if (topPos != -1) 
+                     string += " style='vertical-align:top; position:relative; top:" + topPos + "'";
+                string += "><h2 style='color:#FFF;padding-left:10px;font-size:16;'>" + measurementType;
                 string += "</h2>";
                 first = false;
             }
@@ -843,6 +959,21 @@ var grobid = (function ($) {
 
         //$('#gbdForm').attr('enctype', '');
         //$('#gbdForm').attr('method', 'post');
+    }
+
+    var mapColor = { 'area':'#87A1A8',
+        'volume':'#c43c35',
+        'velocity':'#c43c35',
+        'fraction':'#c43c35',
+        'length':'#01A9DB',
+        'time':'#f89406', 
+        'mass': '#c43c35', 
+        'temperature': '#398739', 
+        'frequency': '#8904B1;'};
+
+    /* return a color based on the quantity type */
+    function getColor(type) {
+        return mapColor[type];
     }
 
     var examples = ["A 20kg ingot is made in a high frequency induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C. Specimens No.2 to 4, 6 and 15 are materials embodying the invention. Others are for comparison. No.1 is a material equivalent to ASTM standard A469-88 class 8 for generator rotor shaft material. No. 5 is a material containing relatively high Al content. \n\n\

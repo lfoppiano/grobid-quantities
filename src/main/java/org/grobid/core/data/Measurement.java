@@ -16,6 +16,7 @@ import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
  * Class for managing a measurement representation. A mesurement is the high level representation
  * of the expression of a physical measure. A measurement can be an atomic quantity, an interval of
  * quantities or a list (conjunctive or disjunctive) of quantities or intervals.
+ * Quantity objects part of the measurement are the components of the represented measure.
  * <p>
  * The parser will return a list of measurements as result of the text processing.
  *

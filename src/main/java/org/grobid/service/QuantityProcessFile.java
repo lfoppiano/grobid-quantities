@@ -92,7 +92,7 @@ public class QuantityProcessFile {
                     json.append(", \"page_width\":" + page.getWidth() + "}");
                 }
 
-                json.append("], \"entities\":[");
+                json.append("], \"measurements\":[");
                 first = true;
                 for(Measurement entity : measurements) {
                     if (!first)

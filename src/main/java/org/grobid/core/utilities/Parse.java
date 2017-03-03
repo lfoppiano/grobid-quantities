@@ -140,7 +140,12 @@ public class Parse {
 
                 // check subtokenization (grobid-quantities tokenizes more than ClearNLP)
                 int oldStartPosition = startPosition;
-                List<String> subtokens = QuantityAnalyzer.tokenize(token);
+                List<String> subtokens = null;
+                try {
+                    subtokens = QuantityAnalyzer.getInstance().tokenize(token);
+                } catch(Exception e) {
+                    logger.error("fail to (sub)tokenize:, " + token, e);
+                }
                 if (subtokens.size()>1) {
                     boolean start = true;
                     for(String subtoken : subtokens) {

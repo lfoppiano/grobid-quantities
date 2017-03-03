@@ -169,6 +169,8 @@ public class DefaultSubstanceParser extends SubstanceParser {
                 if (indexMeasurementTokens.contains(currentIndex)) {
                     // we do not increment the level as we are still in the measurement phrase
                     previousFunct = funct;
+                    if (headStruct == null)
+                        break;
                     continue;
                 }
      
@@ -251,7 +253,8 @@ public class DefaultSubstanceParser extends SubstanceParser {
                     // normalized name 
 
                 }
-                else if (headStruct == null)
+                //else
+                if (headStruct == null)
                     break;
 
                 if (level == 3)

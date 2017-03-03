@@ -97,9 +97,14 @@ public class QuantityParser extends AbstractParser {
         try {
             text = text.replace("\n", " ");
             text = text.replace("\t", " ");
-            List<LayoutToken> tokens = QuantityAnalyzer.tokenizeWithLayoutToken(text);
+            List<LayoutToken> tokens = null;
+            try {
+                tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
+            } catch(Exception e) {
+                logger.error("fail to tokenize:, " + text, e);
+            }
 
-            if (tokens.size() == 0) {
+            if ((tokens == null) || (tokens.size() == 0) ) {
                 return null;
             }
 
@@ -136,12 +141,13 @@ public class QuantityParser extends AbstractParser {
         Document doc = null;
         try {
             GrobidAnalysisConfig config = 
-                new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().build();
+                new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
+                    .build();
             DocumentSource documentSource = 
                 DocumentSource.fromPdf(file, config.getStartPage(), config.getEndPage());
             doc = parsers.getSegmentationParser().processing(documentSource, config);
 
-            // here we process the relevant textual content of the document
+            // in the following, we process the relevant textual content of the document
 
             // for refining the process based on structures, we need to filter
             // segment of interest (e.g. header, body, annex) and possibly apply 
@@ -214,37 +220,7 @@ public class QuantityParser extends AbstractParser {
                                                   List<Measurement> measurements) {
         // List<LayoutToken> for the selected segment
         List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-
-        // text of the selected segment
-        String text = doc.getDocumentPieceText(documentParts);
-        
-        // list of textual tokens of the selected segment
-        List<String> texts = getTexts(tokenizationParts);
-        
-        // positions for lexical match
-        List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
-        
-        // string representation of the feature matrix for CRF lib
-        String ress = addFeatures(texts, unitTokenPositions);     
-        
-        // labeled result from CRF lib
-        String res = null;
-        try {
-            res = label(ress);
-        } catch (Exception e) {
-            throw new GrobidException("CRF labeling for quantity parsing failed.", e);
-        }
-
-        List<Measurement> localMeasurements = extractMeasurement(text, res, tokenizationParts);
-        if ( (localMeasurements == null) || (localMeasurements.size() == 0) )
-            return measurements;
-
-        localMeasurements = normalizeMeasurements(localMeasurements);
-        localMeasurements = substanceParser.parseSubstance(text, localMeasurements);
-
-        measurements.addAll(localMeasurements);
-
-        return measurements;
+        return processLayoutTokenSequence(tokenizationParts, doc, measurements);
     }
 
     /**
@@ -259,14 +235,24 @@ public class QuantityParser extends AbstractParser {
         // text of the selected segment
         String text = LayoutTokensUtil.toText(layoutTokens);
         
+        // we need to retokenize according to the QuantityAnalyzer (which tokenize
+        // more than the default grobid-core analyzer)
+        tokenizationParts = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(tokenizationParts);
+
         // list of textual tokens of the selected segment
         List<String> texts = getTexts(tokenizationParts);
-        
+
+        if ( (texts == null) || (texts.size() == 0) ) 
+            return measurements;
+
         // positions for lexical match
         List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
         
         // string representation of the feature matrix for CRF lib
         String ress = addFeatures(texts, unitTokenPositions);     
+
+        if ( (ress == null) || (ress.trim().length() == 0) ) 
+            return measurements;
         
         // labeled result from CRF lib
         String res = null;
@@ -477,9 +463,14 @@ public class QuantityParser extends AbstractParser {
             if (((line.length() == 0) || (i == lines.length - 1)) && (paragraph.length() > 0)) {
                 // we have a new paragraph
                 text = paragraph.toString().replace("\n", " ").replace("\r", " ").replace("\t", " ");
-                List<LayoutToken> tokens = QuantityAnalyzer.tokenizeWithLayoutToken(text);
+                List<LayoutToken> tokens = null;
+                try {
+                    tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
+                } catch(Exception e) {
+                    logger.error("fail to tokenize:, " + text, e);
+                }
 
-                if (tokens.size() == 0)
+                if ((tokens == null) || (tokens.size() == 0))
                     continue;
 
                 String ress = null;
@@ -533,9 +524,14 @@ public class QuantityParser extends AbstractParser {
                 //text = text.replace("\n", " ").replace("\t", " ");
                 if (text.trim().length() == 0)
                     continue;
-                List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
+                List<LayoutToken> tokenizations = null;
+                try {
+                    tokenizations = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
+                } catch(Exception e) {
+                    logger.error("fail to tokenize:, " + text, e);
+                }
 
-                if (tokenizations.size() == 0)
+                if ((tokenizations == null) || (tokenizations.size() == 0))
                     continue;
 
                 String ress = null;
@@ -581,7 +577,10 @@ public class QuantityParser extends AbstractParser {
         // first we apply GROBID fulltext model on the PDF to get the full text TEI
         Document teiDoc = null;
         try {
-            teiDoc = GrobidFactory.getInstance().createEngine().fullTextToTEIDoc(file, GrobidAnalysisConfig.defaultInstance());
+            GrobidAnalysisConfig config = 
+                new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
+                    .build();
+            teiDoc = GrobidFactory.getInstance().createEngine().fullTextToTEIDoc(file, config);
         } catch (Exception e) {
             e.printStackTrace();
             throw new GrobidException("Cannot create training data because GROBIL full text model failed on the PDF: " + file.getPath());
@@ -616,9 +615,13 @@ public class QuantityParser extends AbstractParser {
                 // the last one is a special "large" space missed by the regex "\\p{Space}+" used on the SAX parser
                 if (text.trim().length() == 0)
                     continue;
-                List<LayoutToken> tokenizations = QuantityAnalyzer.tokenizeWithLayoutToken(text);
-
-                if (tokenizations.size() == 0)
+                List<LayoutToken> tokenizations = null;
+                try {
+                    tokenizations = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
+                } catch(Exception e) {
+                    logger.error("fail to tokenize:, " + text, e);
+                }
+                if ((tokenizations == null) || (tokenizations.size() == 0))
                     continue;
 
                 String ress = null;

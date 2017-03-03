@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for representing the quantitfied object/substance.
+ * Class for representing the quantitfied object/substance. For  given measurement, the 
+ * quantitfied object/substance is the entity which is measured. 
+ * The quantified object is described with a raw string - the surface form of its mention
+ * in the text, a normalized form and optionally an entity object resulting from the 
+ * disambiguation against a knowledge base - usually Wikipedia/Wikidata.  
  *
  * @author Patrice Lopez
  */
@@ -15,6 +19,7 @@ public class QuantifiedObject {
     private String rawName = null;
     private String normalizedName = null;
     private OffsetPosition offsets = null;
+    //private NerdEntity = null;
 
     public QuantifiedObject() {
     }

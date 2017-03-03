@@ -338,3 +338,32 @@ span {word-break:normal;}
 .info-sense-box.electronics {
     background-color: #01A9DB;
 }
+
+// links for box PDF annotations
+a.TEMPERATURE {
+    border-color: #398739;
+}
+a.MASS {
+    border-color: #c43c35;
+}
+a.TIME {
+    border-color: #f89406;
+}
+a.LENGTH {
+    border-color: #01A9DB;
+}
+a.FREQUENCY {
+    border-color: #8904B1;
+}
+a.FRACTION {
+    border-color: #c43c35;
+}
+a.VOLUME {
+    border-color: #c43c35;
+}
+a.VELOCITY {
+    border-color: #c43c35;
+}
+a.AREA {
+    border-color: #87A1A8;
+}

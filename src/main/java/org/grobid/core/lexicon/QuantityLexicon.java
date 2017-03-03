@@ -229,9 +229,15 @@ public class QuantityLexicon {
                     } catch (Exception e) {
                         LOGGER.error("invalid unit term: " + derivation);
                     }
-                    List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
-                    for (String word : subSubPieces) {
-                        addToUnitTokens(word);
+                    List<String> subSubPieces = null;
+                    try {
+                        subSubPieces = QuantityAnalyzer.getInstance().tokenize(derivation);
+
+                        for (String word : subSubPieces) {
+                            addToUnitTokens(word);
+                        }
+                    } catch(Exception e) {
+                        LOGGER.error("fail to tokenize:, " + derivation, e);
                     }
                 }
             } else {
@@ -241,9 +247,14 @@ public class QuantityLexicon {
                 } catch (Exception e) {
                     LOGGER.error("invalid unit term: " + inflectedForm);
                 }
-                List<String> subsubpieces = QuantityAnalyzer.tokenize(inflectedForm);
-                for (String word : subsubpieces) {
-                    addToUnitTokens(word);
+                List<String> subsubpieces = null;
+                try {
+                    subsubpieces = QuantityAnalyzer.getInstance().tokenize(inflectedForm);
+                    for (String word : subsubpieces) {
+                        addToUnitTokens(word);
+                    }
+                } catch(Exception e) {
+                    LOGGER.error("fail to tokenize:, " + inflectedForm, e);
                 }
             }
         }
@@ -259,9 +270,14 @@ public class QuantityLexicon {
             }
             unitDefinition.addNotation(derivation);
 
-            List<String> subSubPieces = QuantityAnalyzer.tokenize(derivation);
-            for (String word : subSubPieces) {
-                addToUnitTokens(word);
+            List<String> subSubPieces = null;
+            try {
+                subSubPieces = QuantityAnalyzer.getInstance().tokenize(derivation);
+                for (String word : subSubPieces) {
+                    addToUnitTokens(word);
+                }
+            } catch(Exception e) {
+                LOGGER.error("fail to tokenize:, " + derivation, e);
             }
         }
     }
