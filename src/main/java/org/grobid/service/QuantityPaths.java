@@ -26,4 +26,9 @@ public interface QuantityPaths {
      * path extension for annotating a PDF file with quantities.
      */
     public static final String PATH_ANNOTATE_QUANTITY_PDF = "annotateQuantityPDF";
+    
+    /**
+	 * path extension for is alive request.
+	 */
+    public static final String PATH_IS_ALIVE = "isalive";
 }

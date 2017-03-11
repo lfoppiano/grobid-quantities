@@ -81,4 +81,14 @@ public class QuantityRestService implements QuantityPaths {
     public Response processPDFAnnotation(@FormDataParam(INPUT) InputStream inputStream) {
         return QuantityProcessFile.processPDFAnnotation(inputStream);
     }
+
+    /**
+     * @see org.grobid.service.QuantitiesRestProcessGeneric#isAlive()
+     */
+    @Path(PATH_IS_ALIVE)
+    @Produces(MediaType.TEXT_PLAIN)
+    @GET
+    public Response isAlive() {
+        return QuantitiesRestProcessGeneric.isAlive();
+    }
 }
