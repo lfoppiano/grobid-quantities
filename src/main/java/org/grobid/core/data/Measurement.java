@@ -270,7 +270,7 @@ public class Measurement {
             json.append(", \"quantified\" : " + substance.toJson());
         }
 
-        if (boundingBoxes != null) {
+        if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {
             json.append(", \"boundingBoxes\" : [");
             boolean first = true;
             for (BoundingBox box : boundingBoxes) {

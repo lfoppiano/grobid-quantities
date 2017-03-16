@@ -28,6 +28,11 @@ public interface QuantityPaths {
     public static final String PATH_ANNOTATE_QUANTITY_PDF = "annotateQuantityPDF";
     
     /**
+     * path extension for parsing quantities from a non or partially structured measure.
+     */
+    public static final String PATH_PARSE_MEASURE = "parseMeasure";
+
+    /**
 	 * path extension for is alive request.
 	 */
     public static final String PATH_IS_ALIVE = "isalive";

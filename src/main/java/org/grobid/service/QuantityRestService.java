@@ -74,6 +74,14 @@ public class QuantityRestService implements QuantityPaths {
         return QuantityProcessString.processText(text);
     }
 
+    @Path(PATH_PARSE_MEASURE)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @POST
+    public Response parseMeasure_post(String json) {
+        LOGGER.info(json);
+        return QuantityProcessJson.parseMeasure(json);
+    }
+
     @Path(PATH_ANNOTATE_QUANTITY_PDF)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces("application/json")
