@@ -1940,6 +1940,74 @@
           ]
         }
       ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Gy"
+        }
+      ],
+      "type": "ABSORBED_DOSE",
+      "system": "SI_DERIVED",
+      "names": [
+        {
+          "lemma": "gray",
+          "inflections": [
+            "grays"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Ci"
+        }
+      ],
+      "type": "RADIOACTIVITY",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "curie",
+          "inflections": [
+            "curies"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Bq"
+        }
+      ],
+      "type": "RADIOACTIVITY",
+      "system": "SI_DERIVED",
+      "names": [
+        {
+          "lemma": "becquerel",
+          "inflections": [
+            "becquerels"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Sv"
+        }
+      ],
+      "type": "EQUIVALENT_DOSE",
+      "system": "SI_DERIVED",
+      "names": [
+        {
+          "lemma": "sievert",
+          "inflections": [
+            "sieverts"
+          ]
+        }
+      ]
     }
   ]
 }
