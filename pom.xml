@@ -242,12 +242,12 @@
             <artifactId>jersey-multipart</artifactId>
             <version>${jersey.version}</version>
         </dependency>
- <!--       <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-bundle</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>-->
-        
+        <!--       <dependency>
+                   <groupId>com.sun.jersey</groupId>
+                   <artifactId>jersey-bundle</artifactId>
+                   <version>${jersey.version}</version>
+               </dependency>-->
+
         <dependency>
             <groupId>org.jvnet</groupId>
             <artifactId>mimepull</artifactId>
@@ -260,8 +260,8 @@
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -370,7 +370,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.14.v20161028</version>
+                <version>9.4.2.v20170220</version>
 
                 <configuration>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
