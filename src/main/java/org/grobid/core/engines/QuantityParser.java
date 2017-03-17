@@ -1,32 +1,37 @@
 package org.grobid.core.engines;
 
+import com.google.common.collect.Iterables;
 import nu.xom.Attribute;
 import nu.xom.Element;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
-import org.grobid.core.data.BiblioItem;
 import org.grobid.core.data.normalization.NormalizationException;
 import org.grobid.core.data.normalization.QuantityNormalizer;
-import org.grobid.core.document.*;
-import org.grobid.core.document.xml.XmlBuilderUtils;
+import org.grobid.core.document.Document;
+import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
+import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
+import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.features.FeaturesVectorQuantities;
+import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.sax.TextChunkSaxHandler;
+import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.core.engines.label.TaggingLabel;
-import org.grobid.core.engines.label.TaggingLabels;
-import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,11 +46,13 @@ import java.io.StringReader;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TimeZone;
+import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.trim;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 
@@ -100,11 +107,11 @@ public class QuantityParser extends AbstractParser {
             List<LayoutToken> tokens = null;
             try {
                 tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 logger.error("fail to tokenize:, " + text, e);
             }
 
-            if ((tokens == null) || (tokens.size() == 0) ) {
+            if ((tokens == null) || (tokens.size() == 0)) {
                 return null;
             }
 
@@ -137,17 +144,17 @@ public class QuantityParser extends AbstractParser {
     }
 
     public Pair<List<Measurement>, Document> extractQuantitiesPDF(File file) throws IOException {
-        List<Measurement> measurements = new ArrayList<Measurement>();
+        List<Measurement> measurements = new ArrayList<>();
         Document doc = null;
         try {
-            GrobidAnalysisConfig config = 
-                new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
-                    .build();
-            DocumentSource documentSource = 
-                DocumentSource.fromPdf(file, config.getStartPage(), config.getEndPage());
+            GrobidAnalysisConfig config =
+                    new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
+                            .build();
+            DocumentSource documentSource =
+                    DocumentSource.fromPdf(file, config.getStartPage(), config.getEndPage());
             doc = parsers.getSegmentationParser().processing(documentSource, config);
 
-            // in the following, we process the relevant textual content of the document
+            // In the following, we process the relevant textual content of the document
 
             // for refining the process based on structures, we need to filter
             // segment of interest (e.g. header, body, annex) and possibly apply 
@@ -169,19 +176,19 @@ public class QuantityParser extends AbstractParser {
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                     if (titleTokens != null) {
-                        processLayoutTokenSequence(titleTokens, doc, measurements);
-                    } 
+                        processLayoutTokenSequence(titleTokens, measurements);
+                    }
 
                     // abstract
                     List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                     if (abstractTokens != null) {
-                        processLayoutTokenSequence(abstractTokens, doc, measurements);
-                    } 
+                        processLayoutTokenSequence(abstractTokens, measurements);
+                    }
 
                     // keywords
                     List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                     if (keywordTokens != null) {
-                        processLayoutTokenSequence(keywordTokens, doc, measurements);
+                        processLayoutTokenSequence(keywordTokens, measurements);
                     }
                 }
             }
@@ -190,7 +197,38 @@ public class QuantityParser extends AbstractParser {
             // object of more refined processing
             documentParts = doc.getDocumentPart(SegmentationLabel.BODY);
             if (documentParts != null) {
-                processDocumentPart(documentParts, doc, measurements);
+                Pair<String, LayoutTokenization> featSeg = parsers.getFullTextParser().getBodyTextFeatured(doc, documentParts);
+
+                String fulltextTaggedRawResult = null;
+                if (featSeg != null) {
+                    String featureText = featSeg.getA();
+                    LayoutTokenization layoutTokenization = featSeg.getB();
+
+                    if (StringUtils.isNotEmpty(featureText)) {
+                        fulltextTaggedRawResult = parsers.getFullTextParser().label(featureText);
+                    }
+
+                    TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, fulltextTaggedRawResult,
+                            layoutTokenization.getTokenization(), true);
+
+                    //Iterate and exclude figures and tables
+                    for (TaggingTokenCluster cluster : Iterables.filter(clusteror.cluster(),
+                            new TaggingTokenClusteror
+                                    .LabelTypeExcludePredicate(TaggingLabels.FIGURE, TaggingLabels.TABLE,
+                                    TaggingLabels.EQUATION, TaggingLabels.FORMULA))) {
+
+                        final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
+
+                        // extract all the layout tokens from the cluster as a list
+                        List<LayoutToken> tokens = labeledTokensContainers.stream()
+                                .map(LabeledTokensContainer::getLayoutTokens)
+                                .flatMap(List::stream)
+                                .collect(Collectors.toList());
+
+                        processLayoutTokenSequence(tokens, measurements);
+
+                    }
+                }
             }
 
             // we don't process references (although reference titles could be relevant)
@@ -209,32 +247,31 @@ public class QuantityParser extends AbstractParser {
 
         // for next line, comparable measurement needs to be implemented
         //Collections.sort(measurements);
-        return new Pair<List<Measurement>,Document>(measurements, doc);
+        return new Pair<List<Measurement>, Document>(measurements, doc);
     }
 
-        /**
+    /**
      * Process with the quantity model a segment coming from the segmentation model
-     */ 
-    private List<Measurement> processDocumentPart(SortedSet<DocumentPiece> documentParts, 
+     */
+    private List<Measurement> processDocumentPart(SortedSet<DocumentPiece> documentParts,
                                                   Document doc,
                                                   List<Measurement> measurements) {
         // List<LayoutToken> for the selected segment
         List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-        return processLayoutTokenSequence(tokenizationParts, doc, measurements);
+        return processLayoutTokenSequence(tokenizationParts, measurements);
     }
 
     /**
      * Process with the quantity model an arbitrary sequence of LayoutToken objects
-     */ 
-    private List<Measurement> processLayoutTokenSequence(List<LayoutToken> layoutTokens, 
-                                                  Document doc,
-                                                  List<Measurement> measurements) {
+     */
+    private List<Measurement> processLayoutTokenSequence(List<LayoutToken> layoutTokens,
+                                                         List<Measurement> measurements) {
         // List<LayoutToken> for the selected segment
         List<LayoutToken> tokenizationParts = layoutTokens;
 
         // text of the selected segment
         String text = LayoutTokensUtil.toText(layoutTokens);
-        
+
         // we need to retokenize according to the QuantityAnalyzer (which tokenize
         // more than the default grobid-core analyzer)
         tokenizationParts = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(tokenizationParts);
@@ -242,18 +279,18 @@ public class QuantityParser extends AbstractParser {
         // list of textual tokens of the selected segment
         List<String> texts = getTexts(tokenizationParts);
 
-        if ( (texts == null) || (texts.size() == 0) ) 
+        if ((texts == null) || (texts.size() == 0))
             return measurements;
 
         // positions for lexical match
         List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
-        
-        // string representation of the feature matrix for CRF lib
-        String ress = addFeatures(texts, unitTokenPositions);     
 
-        if ( (ress == null) || (ress.trim().length() == 0) ) 
+        // string representation of the feature matrix for CRF lib
+        String ress = addFeatures(texts, unitTokenPositions);
+
+        if ((ress == null) || (ress.trim().length() == 0))
             return measurements;
-        
+
         // labeled result from CRF lib
         String res = null;
         try {
@@ -263,9 +300,9 @@ public class QuantityParser extends AbstractParser {
         }
 
         List<Measurement> localMeasurements = extractMeasurement(text, res, tokenizationParts);
-        if ( (localMeasurements == null) || (localMeasurements.size() == 0) )
+        if ((localMeasurements == null) || (localMeasurements.size() == 0))
             return measurements;
-        
+
         localMeasurements = normalizeMeasurements(localMeasurements);
         localMeasurements = substanceParser.parseSubstance(text, localMeasurements);
 
@@ -280,13 +317,13 @@ public class QuantityParser extends AbstractParser {
     private static List<String> getTexts(List<LayoutToken> tokenizations) {
         List<String> texts = new ArrayList<>();
         for (LayoutToken token : tokenizations) {
-            if (isNotEmpty(trim(token.getText())) && 
-                !token.getText().equals(" ") &&
-                !token.getText().equals("\n") && 
-                !token.getText().equals("\r") &&  
-                !token.getText().equals("\t") && 
-                !token.getText().equals("\u00A0")) {
-                    texts.add(token.getText());
+            if (isNotEmpty(trim(token.getText())) &&
+                    !token.getText().equals(" ") &&
+                    !token.getText().equals("\n") &&
+                    !token.getText().equals("\r") &&
+                    !token.getText().equals("\t") &&
+                    !token.getText().equals("\u00A0")) {
+                texts.add(token.getText());
             }
         }
         return texts;
@@ -466,7 +503,7 @@ public class QuantityParser extends AbstractParser {
                 List<LayoutToken> tokens = null;
                 try {
                     tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     logger.error("fail to tokenize:, " + text, e);
                 }
 
@@ -527,7 +564,7 @@ public class QuantityParser extends AbstractParser {
                 List<LayoutToken> tokenizations = null;
                 try {
                     tokenizations = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     logger.error("fail to tokenize:, " + text, e);
                 }
 
@@ -577,9 +614,9 @@ public class QuantityParser extends AbstractParser {
         // first we apply GROBID fulltext model on the PDF to get the full text TEI
         Document teiDoc = null;
         try {
-            GrobidAnalysisConfig config = 
-                new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
-                    .build();
+            GrobidAnalysisConfig config =
+                    new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
+                            .build();
             teiDoc = GrobidFactory.getInstance().createEngine().fullTextToTEIDoc(file, config);
         } catch (Exception e) {
             e.printStackTrace();
@@ -618,7 +655,7 @@ public class QuantityParser extends AbstractParser {
                 List<LayoutToken> tokenizations = null;
                 try {
                     tokenizations = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     logger.error("fail to tokenize:, " + text, e);
                 }
                 if ((tokenizations == null) || (tokenizations.size() == 0))
@@ -956,26 +993,26 @@ public class QuantityParser extends AbstractParser {
                     }
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
                     if ((currentMeasurement.getQuantityMost() != null) &&
-                            ((currentMeasurement.getQuantityMost().getRawUnit() == null) || 
-                                (currentMeasurement.getQuantityMost().getRawUnit().getRawName() == null))) {
+                            ((currentMeasurement.getQuantityMost().getRawUnit() == null) ||
+                                    (currentMeasurement.getQuantityMost().getRawUnit().getRawName() == null))) {
                         currentMeasurement.getQuantityMost().setRawUnit(currentUnit);
 
                         if ((currentMeasurement.getQuantityLeast() != null) &&
-                                ((currentMeasurement.getQuantityLeast().getRawUnit() == null) || 
-                                    (currentMeasurement.getQuantityLeast().getRawUnit().getRawName() == null)))
+                                ((currentMeasurement.getQuantityLeast().getRawUnit() == null) ||
+                                        (currentMeasurement.getQuantityLeast().getRawUnit().getRawName() == null)))
                             currentMeasurement.getQuantityLeast().setRawUnit(currentUnit);
 
                         currentMeasurement.addBoundingBoxes(boundingBoxes);
                     }
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
                     if ((currentMeasurement.getQuantityRange() != null) &&
-                            ((currentMeasurement.getQuantityRange().getRawUnit() == null) || 
-                                (currentMeasurement.getQuantityRange().getRawUnit().getRawName() == null))) {
+                            ((currentMeasurement.getQuantityRange().getRawUnit() == null) ||
+                                    (currentMeasurement.getQuantityRange().getRawUnit().getRawName() == null))) {
                         currentMeasurement.getQuantityRange().setRawUnit(currentUnit);
 
                         if ((currentMeasurement.getQuantityBase() != null) &&
-                                ((currentMeasurement.getQuantityBase().getRawUnit() == null) || 
-                                    (currentMeasurement.getQuantityBase().getRawUnit().getRawName() == null)))
+                                ((currentMeasurement.getQuantityBase().getRawUnit() == null) ||
+                                        (currentMeasurement.getQuantityBase().getRawUnit().getRawName() == null)))
                             currentMeasurement.getQuantityBase().setRawUnit(currentUnit);
 
                         currentMeasurement.addBoundingBoxes(boundingBoxes);
@@ -983,8 +1020,8 @@ public class QuantityParser extends AbstractParser {
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) {
                     if ((currentMeasurement.getQuantityList() != null) && (currentMeasurement.getQuantityList().size() > 0)) {
                         for (Quantity quantity : currentMeasurement.getQuantityList()) {
-                            if ((quantity != null) && ((quantity.getRawUnit() == null) || 
-                                (quantity.getRawUnit().getRawName() == null))) {
+                            if ((quantity != null) && ((quantity.getRawUnit() == null) ||
+                                    (quantity.getRawUnit().getRawName() == null))) {
                                 quantity.setRawUnit(currentUnit);
                                 currentMeasurement.addBoundingBoxes(boundingBoxes);
                             } else if ((quantity == null) && (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
@@ -1040,7 +1077,7 @@ public class QuantityParser extends AbstractParser {
             } else {
                 logger.error("Warning: unexpected label in quantity parser: " + clusterLabel.getLabel() + " for " + clusterContent);
             }
-            
+
             pos = endPos;
         }
 

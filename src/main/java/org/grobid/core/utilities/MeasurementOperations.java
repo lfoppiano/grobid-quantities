@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Try to resolveMeasurement measurement extracted attributes (unit, values).
+ * Try to resolve measurement extracted attributes (unit, values).
  *
  * @author Patrice Lopez
  */

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 
 /**
- * Convert a number expressed with alphabetical charcaters into a normalized numerical value.
+ * Convert a number expressed with alphabetical characters into a normalized numerical value.
  * 
  * @author Patrice Lopez
  */
