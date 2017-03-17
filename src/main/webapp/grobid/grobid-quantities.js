@@ -803,11 +803,11 @@ console.log(quantityMap);
 
         if (substance) {
             string += "</td></tr><tr style='width:100%;display:inline-table;'><td style='border-top-width:1px;width:100%;border-top:1px solid #ddd;display:inline-table;'>";
-            string += "<p style='display:inline-table;'>quantified (experimental):" 
+            string += "<p style='display:inline-table;'>quantified (experimental):"
             string += "<table style='width:100%;display:inline-table;'><tr><td>";
-            string +=  "<p>raw: <b>" + substance.rawName;
+            string += "<p>raw: <b>" + substance.rawName;
             string += "</b></p>";
-            string +=  "<p>normalized: <b>" + substance.normalizedName;
+            string += "<p>normalized: <b>" + substance.normalizedName;
             string += "</b></p></td></tr></table>";
             string += "</p>";
         }
@@ -892,11 +892,11 @@ console.log(quantityMap);
 
             if (substance) {
                 string += "</td></tr><tr style='width:100%;display:inline-table;'><td style='border-top-width:1px;width:100%;border-top:1px solid #ddd;display:inline-table;'>";
-                string += "<p style='display:inline-table;'>quantified (experimental):" 
+                string += "<p style='display:inline-table;'>quantified (experimental):"
                 string += "<table style='width:100%;display:inline-table;'><tr><td>";
-                string +=  "<p>raw: <b>" + substance.rawName;
+                string += "<p>raw: <b>" + substance.rawName;
                 string += "</b></p>";
-                string +=  "<p>normalized: <b>" + substance.normalizedName;
+                string += "<p>normalized: <b>" + substance.normalizedName;
                 string += "</b></p></td></tr></table>";
                 string += "</p>";
             }

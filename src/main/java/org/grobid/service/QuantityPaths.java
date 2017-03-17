@@ -10,23 +10,24 @@ public interface QuantityPaths {
     /**
      * path extension for Nerd service.
      */
-    public static final String PATH_QUANTITY = "/";
+    String PATH_QUANTITY = "/";
     
     /**
      * path extension for extracting quantities from a text.
      */
-    public static final String PATH_QUANTITY_TEXT = "processQuantityText";
+    String PATH_QUANTITY_TEXT= "processQuantityText";
 
     /**
      * path extension for extracting quantities from an XML file.
      */
-    public static final String PATH_QUANTITY_XML = "processQuantityXML";
-    
+    String PATH_QUANTITY_XML= "processQuantityXML";
+
+
     /**
      * path extension for annotating a PDF file with quantities.
      */
-    public static final String PATH_ANNOTATE_QUANTITY_PDF = "annotateQuantityPDF";
-    
+    String PATH_ANNOTATE_QUANTITY_PDF= "annotateQuantityPDF";
+
     /**
      * path extension for parsing quantities from a non or partially structured measure.
      */
@@ -35,5 +36,5 @@ public interface QuantityPaths {
     /**
 	 * path extension for is alive request.
 	 */
-    public static final String PATH_IS_ALIVE = "isalive";
+    String PATH_IS_ALIVE = "isalive";
 }

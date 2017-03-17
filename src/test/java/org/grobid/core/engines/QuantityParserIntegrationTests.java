@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * Created by lfoppiano on 04.03.16.
  */
@@ -100,7 +102,7 @@ public class QuantityParserIntegrationTests {
     public void testQuantityParser1() throws Exception {
 
         String text = IOUtils.toString(
-                this.getClass().getResourceAsStream("/test1.txt"));
+                this.getClass().getResourceAsStream("/test1.txt"), UTF_8);
         System.out.println("\ntest1.txt\n" + text + "\n");
 
         QuantityParser parser = QuantityParser.getInstance();
@@ -120,7 +122,7 @@ public class QuantityParserIntegrationTests {
     public void testQuantityParser2() throws Exception {
 
         String text = IOUtils.toString(
-                this.getClass().getResourceAsStream("/test2.txt"));
+                this.getClass().getResourceAsStream("/test2.txt"), UTF_8);
         System.out.println("\ntest2.txt\n" + text + "\n");
 
         QuantityParser parser = QuantityParser.getInstance();
@@ -140,7 +142,7 @@ public class QuantityParserIntegrationTests {
     public void testQuantityParser3() throws Exception {
 
         String text = IOUtils.toString(
-                this.getClass().getResourceAsStream("/test0.training.txt"));
+                this.getClass().getResourceAsStream("/test0.training.txt"), UTF_8);
 
         QuantityParser parser = QuantityParser.getInstance();
 

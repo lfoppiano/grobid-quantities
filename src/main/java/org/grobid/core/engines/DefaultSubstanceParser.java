@@ -12,16 +12,18 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
 /**
  * Basic implementation of substance parser without CRF. The goal here is to be able to bootstrap
- * training data for a next cleaner ML model. 
+ * training data for a next cleaner ML model.
  */
 public class DefaultSubstanceParser extends SubstanceParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultSubstanceParser.class);
 
     @Override
     public List<Measurement> parseSubstance(String text, List<Measurement> measurements) {
-        if ( (measurements == null) || (measurements.size() == 0) )
+        if (isEmpty(measurements))
             return null;
         try {
             TextParser textParser = TextParser.getInstance();
@@ -30,12 +32,12 @@ public class DefaultSubstanceParser extends SubstanceParser {
             int offset = 0;
 
             // this part is for identifying for each sentence, the measurements belonging to the sentence 
-            for(ProcessedSentence processedSentence : parsedSentences) {
+            for (ProcessedSentence processedSentence : parsedSentences) {
                 // list of measureemnts for the current sentence
                 List<Measurement> sentenceMeasurements = new ArrayList<Measurement>();
                 List<Integer> positionMeasurements = new ArrayList<Integer>();
                 while (indexMeasurement < measurements.size()) {
-                    Measurement measurement = measurements.get(indexMeasurement); 
+                    Measurement measurement = measurements.get(indexMeasurement);
                     int position = -1;
                     // is the measurement quantities in the current sentence?
                     UnitUtilities.Measurement_Type type = measurement.getType();
@@ -52,7 +54,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
                         }
                         position = quantity.getOffsetStart();
                     } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                        (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                            (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                         // values of the interval do not matter if min/max or base/range
                         Quantity quantityLeast = measurement.getQuantityLeast();
                         if (quantityLeast == null)
@@ -60,21 +62,21 @@ public class DefaultSubstanceParser extends SubstanceParser {
                         Quantity quantityMost = measurement.getQuantityMost();
                         if (quantityMost == null)
                             quantityMost = measurement.getQuantityRange();
-                        if ( (quantityLeast != null) && (quantityLeast.getOffsetEnd() < processedSentence.getOffsetStart()) ) {
+                        if ((quantityLeast != null) && (quantityLeast.getOffsetEnd() < processedSentence.getOffsetStart())) {
                             // next measurement
                             indexMeasurement++;
                             continue;
                         }
-                        if ( (quantityLeast != null) && (quantityLeast.getOffsetStart() > processedSentence.getOffsetEnd()) ) {
+                        if ((quantityLeast != null) && (quantityLeast.getOffsetStart() > processedSentence.getOffsetEnd())) {
                             // next sentence
                             break;
                         }
-                        if ( (quantityMost != null) && (quantityMost.getOffsetEnd() < processedSentence.getOffsetStart()) ) {
+                        if ((quantityMost != null) && (quantityMost.getOffsetEnd() < processedSentence.getOffsetStart())) {
                             // next measurement
                             indexMeasurement++;
-                            continue;                            
+                            continue;
                         }
-                        if ( (quantityMost != null) && (quantityMost.getOffsetStart() > processedSentence.getOffsetEnd()) ) {
+                        if ((quantityMost != null) && (quantityMost.getOffsetStart() > processedSentence.getOffsetEnd())) {
                             // next sentence
                             break;
                         }
@@ -85,7 +87,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
                     } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                         // list must be consistent in unit type, and avoid too large chunk
                         List<Quantity> quantities = measurement.getQuantityList();
-                        if ( (quantities != null) && (quantities.size() > 0) ) {
+                        if ((quantities != null) && (quantities.size() > 0)) {
                             // just exploit the first quantity for positioning
                             Quantity quantity = quantities.get(0);
                             if (quantity.getOffsetEnd() < processedSentence.getOffsetStart()) {
@@ -102,30 +104,30 @@ public class DefaultSubstanceParser extends SubstanceParser {
                     }
 
                     // if we arrive here, this measurement is in the current sentence
-                    
+
                     sentenceMeasurements.add(measurement);
                     positionMeasurements.add(new Integer(position));
                     indexMeasurement++;
                 }
-                
+
                 // get the list of indexes corresponding to measurement parts
                 List<String> indexMeasurementTokens = getIndexMeasurementTokens(sentenceMeasurements, processedSentence);
 
-                // find the syntactic head... this will instancied the QuantifiedObject to the measurements
+                // find the syntactic head... this will define the QuantifiedObject to the measurements
                 setHeads(processedSentence, sentenceMeasurements, positionMeasurements, indexMeasurementTokens);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             logger.error("error in substance parser: ", e);
         }
         return measurements;
     }
 
 
-    private void setHeads(ProcessedSentence processedSentence, 
-                        List<Measurement> measurements, 
-                        List<Integer> positionMeasurements,
-                        List<String> indexMeasurementTokens) {
-        if ( (measurements == null) || (measurements.size() == 0) )
+    private void setHeads(ProcessedSentence processedSentence,
+                          List<Measurement> measurements,
+                          List<Integer> positionMeasurements,
+                          List<String> indexMeasurementTokens) {
+        if (isEmpty(measurements))
             return;
 
         int startSentencePosition = processedSentence.getOffsetStart();
@@ -136,10 +138,10 @@ public class DefaultSubstanceParser extends SubstanceParser {
             return;
         Parse parse = parses.get(0);
         int p = 0;
-        for(Measurement measurement : measurements) {
+        for (Measurement measurement : measurements) {
             int position = positionMeasurements.get(p);
             p++;
-            position = position-startSentencePosition; 
+            position = position - startSentencePosition;
 
             QuantifiedObject substance = null;
             String headStruct = parse.getTokenStructureByPosition(position);
@@ -155,7 +157,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
 
             // now loop in the dependency tree
             int level = 1;
-            while(substance == null) {
+            while (substance == null) {
                 pieces = headStruct.split("\t");
                 if (pieces.length != 8)
                     break;
@@ -173,7 +175,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
                         break;
                     continue;
                 }
-     
+
                 if (funct.equals("root"))
                     break;
 
@@ -183,7 +185,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
                     // if case of an interval, we need to take the last quantity object for the position
                     UnitUtilities.Measurement_Type type = measurement.getType();
                     if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                        (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                            (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
 
                         int lastPosition = position;
                         Quantity quantityLeast = measurement.getQuantityLeast();
@@ -194,18 +196,18 @@ public class DefaultSubstanceParser extends SubstanceParser {
                             quantityMost = measurement.getQuantityRange();
 
                         if (quantityLeast != null) {
-                            lastPosition = quantityLeast.getOffsetStart()-startSentencePosition;
-                            if (lastPosition>position)
+                            lastPosition = quantityLeast.getOffsetStart() - startSentencePosition;
+                            if (lastPosition > position)
                                 position = lastPosition;
                         }
                         if (quantityMost != null) {
-                            lastPosition = quantityMost.getOffsetStart()-startSentencePosition;
-                            if (lastPosition>position)
+                            lastPosition = quantityMost.getOffsetStart() - startSentencePosition;
+                            if (lastPosition > position)
                                 position = lastPosition;
                         }
                     }
-                    String nextStruct = getNextStruct(position+1, indexMeasurementTokens, 
-                        processedSentence.getOffsetEnd()-processedSentence.getOffsetStart(), parse);
+                    String nextStruct = getNextStruct(position + 1, indexMeasurementTokens,
+                            processedSentence.getOffsetEnd() - processedSentence.getOffsetStart(), parse);
                     if (nextStruct != null) {
                         String[] subpieces = nextStruct.split("\t");
                         if (subpieces.length == 8) {
@@ -214,11 +216,11 @@ public class DefaultSubstanceParser extends SubstanceParser {
                             String nextHeadIndex = subpieces[5].trim();
                             String nextFunct = subpieces[6].trim();
                             String nextPos = subpieces[3].trim();
-                            if ( (nextFunct.equals("prep") && nextPos.startsWith("IN") && !nextToken.equals("to")) || 
-                                (nextFunct.equals("nn") && nextPos.startsWith("NN")) ) {
+                            if ((nextFunct.equals("prep") && nextPos.startsWith("IN") && !nextToken.equals("to")) ||
+                                    (nextFunct.equals("nn") && nextPos.startsWith("NN"))) {
                                 OffsetPosition phrasePosition = new OffsetPosition(parse.getOffsetStartIndex(nextIndex), parse.getOffsetEndIndex(nextIndex));
                                 phrasePosition = getFullPhrase(phrasePosition, parse, indexMeasurementTokens, false);
-                                phrasePosition.start = parse.getOffsetEndIndex(nextIndex)+1;
+                                phrasePosition.start = parse.getOffsetEndIndex(nextIndex) + 1;
                                 if (phrasePosition.end <= phrasePosition.start) {
                                     break;
                                 }
@@ -233,19 +235,19 @@ public class DefaultSubstanceParser extends SubstanceParser {
                 }
 
                 // case dependency to the syntactic head
-                if ( 
-                    (funct.equals("nsubjpass") && pos.startsWith("NN")) ||
-                    (funct.equals("conj") && pos.startsWith("NN")) ||
-                    (funct.equals("appos") && pos.startsWith("NN")) ||
-                    (funct.equals("pobj") && pos.startsWith("NN")) ||
-                    (previousFunct.equals("num") && pos.startsWith("NN"))
-                    ) {
+                if (
+                        (funct.equals("nsubjpass") && pos.startsWith("NN")) ||
+                                (funct.equals("conj") && pos.startsWith("NN")) ||
+                                (funct.equals("appos") && pos.startsWith("NN")) ||
+                                (funct.equals("pobj") && pos.startsWith("NN")) ||
+                                (previousFunct.equals("num") && pos.startsWith("NN"))
+                        ) {
                     if (FeatureFactory.test_digit(pieces[1]))
                         substance = new QuantifiedObject(pieces[1], pieces[1]);
                     else
                         substance = new QuantifiedObject(pieces[1], pieces[2]);
-                    OffsetPosition substancePosition = 
-                        new OffsetPosition(parse.getOffsetStartIndex(currentIndex), parse.getOffsetEndIndex(currentIndex));
+                    OffsetPosition substancePosition =
+                            new OffsetPosition(parse.getOffsetStartIndex(currentIndex), parse.getOffsetEndIndex(currentIndex));
                     substancePosition = getFullPhrase(substancePosition, parse, indexMeasurementTokens, true);
                     substance.setOffsetStart(substancePosition.start + startSentencePosition);
                     substance.setOffsetEnd(substancePosition.end + startSentencePosition);
@@ -265,14 +267,14 @@ public class DefaultSubstanceParser extends SubstanceParser {
             if (substance != null)
                 measurement.setQuantifiedObject(substance);
         }
-        
+
     }
 
- 
-    private OffsetPosition getFullPhrase(OffsetPosition offsetPosition, 
-                                        Parse parse, 
-                                        List<String> indexMeasurementTokens, 
-                                        boolean strictExpansion) {
+
+    private OffsetPosition getFullPhrase(OffsetPosition offsetPosition,
+                                         Parse parse,
+                                         List<String> indexMeasurementTokens,
+                                         boolean strictExpansion) {
         if (offsetPosition == null)
             return null;
         // get structure for the position of the QuantifiedObject
@@ -291,7 +293,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
         int headIndexInt = -1;
         try {
             headIndexInt = Integer.parseInt(headIndex);
-        } catch(Exception e) {
+        } catch (Exception e) {
             logger.info("ClearNLP / Token index is not a parsable number: " + headIndex);
         }
 
@@ -299,12 +301,12 @@ public class DefaultSubstanceParser extends SubstanceParser {
             return offsetPosition;
 
         List<String> children = parse.getTokenChildStructureByHeadIndex(headIndex);
-        if ( (children == null) || (children.size() == 0) ) {
+        if ((children == null) || (children.size() == 0)) {
             return offsetPosition;
         }
 
         // first loop for extension on the right
-        for(String child : children) {
+        for (String child : children) {
             struct = parse.getTokenStructureByIndex(child);
             pieces = struct.split("\t");
             if (pieces.length != 8)
@@ -314,7 +316,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
             int currentIndexInt = -1;
             try {
                 currentIndexInt = Integer.parseInt(currentIndex);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 logger.info("ClearNLP / Token index is not a parsable number: " + currentIndex);
             }
 
@@ -331,19 +333,19 @@ public class DefaultSubstanceParser extends SubstanceParser {
             }
 
             if ((parse.getOffsetStartIndex(currentIndex) != -1) && (parse.getOffsetEndIndex(currentIndex) != -1)) {
-                OffsetPosition subOffsetPosition = 
-                    new OffsetPosition(parse.getOffsetStartIndex(currentIndex), 
-                        parse.getOffsetEndIndex(currentIndex));
+                OffsetPosition subOffsetPosition =
+                        new OffsetPosition(parse.getOffsetStartIndex(currentIndex),
+                                parse.getOffsetEndIndex(currentIndex));
                 //subOffsetPosition = getFullPhrase(subOffsetPosition, parse, indexMeasurementTokens);
 
-                if ( (subOffsetPosition.start > offsetPosition.end) && 
-                    ((subOffsetPosition.start - offsetPosition.end < 3) || !strictExpansion) ) 
+                if ((subOffsetPosition.start > offsetPosition.end) &&
+                        ((subOffsetPosition.start - offsetPosition.end < 3) || !strictExpansion))
                     offsetPosition.end = subOffsetPosition.end;
             }
         }
 
         // second loop for extension on the left
-        for(int j=children.size()-1; j>=0; j--) {
+        for (int j = children.size() - 1; j >= 0; j--) {
             String child = children.get(j);
 
             struct = parse.getTokenStructureByIndex(child);
@@ -356,7 +358,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
             int currentIndexInt = -1;
             try {
                 currentIndexInt = Integer.parseInt(currentIndex);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 logger.info("ClearNLP / Token index is not a parsable number: " + currentIndex);
             }
 
@@ -373,13 +375,13 @@ public class DefaultSubstanceParser extends SubstanceParser {
             }
 
             if ((parse.getOffsetStartIndex(currentIndex) != -1) && (parse.getOffsetEndIndex(currentIndex) != -1)) {
-                OffsetPosition subOffsetPosition = 
-                    new OffsetPosition(parse.getOffsetStartIndex(currentIndex), 
-                        parse.getOffsetEndIndex(currentIndex));
+                OffsetPosition subOffsetPosition =
+                        new OffsetPosition(parse.getOffsetStartIndex(currentIndex),
+                                parse.getOffsetEndIndex(currentIndex));
                 //subOffsetPosition = getFullPhrase(subOffsetPosition, parse, indexMeasurementTokens);
 
-                if ( (subOffsetPosition.end < offsetPosition.start) && 
-                    ((offsetPosition.start - subOffsetPosition.end < 3) || !strictExpansion ) )
+                if ((subOffsetPosition.end < offsetPosition.start) &&
+                        ((offsetPosition.start - subOffsetPosition.end < 3) || !strictExpansion))
                     offsetPosition.start = subOffsetPosition.start;
             }
         }
@@ -387,10 +389,10 @@ public class DefaultSubstanceParser extends SubstanceParser {
         return offsetPosition;
     }
 
-    
-    private List<String> getIndexMeasurementTokens(List<Measurement> measurements, 
-                                                ProcessedSentence processedSentence) {
-        if ( (measurements == null) || (measurements.size() == 0) )
+
+    private List<String> getIndexMeasurementTokens(List<Measurement> measurements,
+                                                   ProcessedSentence processedSentence) {
+        if ((measurements == null) || (measurements.size() == 0))
             return null;
         List<String> result = new ArrayList<String>();
         int startSentencePosition = processedSentence.getOffsetStart();
@@ -400,21 +402,21 @@ public class DefaultSubstanceParser extends SubstanceParser {
             return null;
         Parse parse = parses.get(0);
 
-        for(Measurement measurement : measurements) {
+        for (Measurement measurement : measurements) {
             UnitUtilities.Measurement_Type type = measurement.getType();
             if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
                 Quantity quantity = measurement.getQuantityAtomic();
                 int position = quantity.getOffsetStart();
-                addTokenIndex(position-startSentencePosition, quantity.getOffsetEnd()-quantity.getOffsetStart(), parse, result);
+                addTokenIndex(position - startSentencePosition, quantity.getOffsetEnd() - quantity.getOffsetStart(), parse, result);
 
                 // unit position
                 Unit rawUnit = quantity.getRawUnit();
                 if (rawUnit != null) {
                     position = rawUnit.getOffsetStart();
-                    addTokenIndex(position-startSentencePosition, rawUnit.getOffsetEnd()-rawUnit.getOffsetStart(), parse, result);
+                    addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
                 }
             } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                    (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                 // values of the interval do not matter if min/max or base/range
                 Quantity quantityLeast = measurement.getQuantityLeast();
                 if (quantityLeast == null)
@@ -425,42 +427,42 @@ public class DefaultSubstanceParser extends SubstanceParser {
 
                 if (quantityLeast != null) {
                     int position = quantityLeast.getOffsetStart();
-                    addTokenIndex(position-startSentencePosition, quantityLeast.getOffsetEnd()-quantityLeast.getOffsetStart(), parse, result);
-                
+                    addTokenIndex(position - startSentencePosition, quantityLeast.getOffsetEnd() - quantityLeast.getOffsetStart(), parse, result);
+
 
                     // unit position
                     Unit rawUnit = quantityLeast.getRawUnit();
                     if (rawUnit != null) {
                         position = rawUnit.getOffsetStart();
-                        addTokenIndex(position-startSentencePosition, rawUnit.getOffsetEnd()-rawUnit.getOffsetStart(), parse, result);
+                        addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
                     }
                 }
 
                 if (quantityMost != null) {
                     int position = quantityMost.getOffsetStart();
-                    addTokenIndex(position-startSentencePosition, quantityMost.getOffsetEnd()-quantityMost.getOffsetStart(), parse, result);
+                    addTokenIndex(position - startSentencePosition, quantityMost.getOffsetEnd() - quantityMost.getOffsetStart(), parse, result);
 
                     // unit position
                     Unit rawUnit = quantityMost.getRawUnit();
                     if (rawUnit != null) {
                         position = rawUnit.getOffsetStart();
-                        addTokenIndex(position-startSentencePosition, rawUnit.getOffsetEnd()-rawUnit.getOffsetStart(), parse, result);
+                        addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
                     }
                 }
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                 // list must be consistent in unit type, and avoid too large chunk
                 List<Quantity> quantities = measurement.getQuantityList();
-                if ( (quantities != null) && (quantities.size() > 0) ) {
+                if ((quantities != null) && (quantities.size() > 0)) {
                     // just exploit the first quantity for positioning
                     Quantity quantity = quantities.get(0);
                     int position = quantity.getOffsetStart();
-                    addTokenIndex(position-startSentencePosition, quantity.getOffsetEnd()-quantity.getOffsetStart(), parse, result);
+                    addTokenIndex(position - startSentencePosition, quantity.getOffsetEnd() - quantity.getOffsetStart(), parse, result);
 
                     // unit position
                     Unit rawUnit = quantity.getRawUnit();
                     if (rawUnit != null) {
                         position = rawUnit.getOffsetStart();
-                        addTokenIndex(position-startSentencePosition, rawUnit.getOffsetEnd()-rawUnit.getOffsetStart(), parse, result);
+                        addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
                     }
                 }
             }
@@ -483,8 +485,8 @@ public class DefaultSubstanceParser extends SubstanceParser {
             logger.info("Invalid position: " + position + " - no parse result find at this position.");
         }
         // brute force adding all subtokens in the specified interval
-        for(int i=1; i<length; i++) {
-            tokenStruct = parse.getTokenStructureByPosition(position+i);
+        for (int i = 1; i < length; i++) {
+            tokenStruct = parse.getTokenStructureByPosition(position + i);
             if (tokenStruct != null) {
                 String[] pieces = tokenStruct.split("\t");
                 if (pieces.length == 8) {
@@ -501,12 +503,12 @@ public class DefaultSubstanceParser extends SubstanceParser {
 
     private String getNextStruct(int position, List<String> indexMeasurementTokens, int sentenceLength, Parse parse) {
         String childStruct = null;
-        int j=0;
+        int j = 0;
         String currentIndex = null;
-        while(childStruct == null) {
-            if (position+j >= sentenceLength)
+        while (childStruct == null) {
+            if (position + j >= sentenceLength)
                 break;
-            childStruct = parse.getTokenStructureByPosition(position+j);
+            childStruct = parse.getTokenStructureByPosition(position + j);
             if (childStruct != null) {
                 String[] pieces = childStruct.split("\t");
                 if (pieces.length != 8)
