@@ -30,6 +30,7 @@ public class QuantityRestService implements QuantityPaths {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityRestService.class);
 
     private static final String TEXT = "text";
+    private static final String JSON = "text";
     private static final String XML = "xml";
     private static final String PDF = "pdf";
     private static final String INPUT = "input";
@@ -78,7 +79,7 @@ public class QuantityRestService implements QuantityPaths {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @POST
     public Response parseMeasure_post(String json) {
-        LOGGER.info(json);
+        LOGGER.info("parseMeasure_post: " + json);
         return QuantityProcessJson.parseMeasure(json);
     }
 

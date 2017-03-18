@@ -52,8 +52,10 @@ System.out.println(text);
             if (jsonBuilder != null) {
 System.out.println(jsonBuilder.toString());
                 response = Response.status(Status.OK).entity(jsonBuilder.toString())
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
-                        .build();
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .build();
             }
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.", nseExp);
@@ -70,7 +72,7 @@ System.out.println(jsonBuilder.toString());
         return response;
     }
 
-    public static Response parseTextMeasure(String text) {
+    /*public static Response parseTextMeasure(String text) {
         LOGGER.debug(methodLogIn());
         Response response = null;
 
@@ -103,6 +105,8 @@ System.out.println(jsonBuilder.toString());
                 //System.out.println(jsonBuilder.toString());
                 response = Response.status(Status.OK).entity(jsonBuilder.toString())
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                         .build();
             }
         } catch (NoSuchElementException nseExp) {
@@ -118,7 +122,7 @@ System.out.println(jsonBuilder.toString());
         }
         LOGGER.debug(methodLogOut());
         return response;
-    }
+    }*/
 
     private static String methodLogIn() {
         return ">> " + QuantityProcessString.class.getName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();

@@ -842,7 +842,7 @@ public class QuantityParser extends AbstractParser {
                 }
             }
 
-            if ((endPos > 0) && (text.charAt(endPos - 1) == ' '))
+            if ((endPos > 0) && (endPos <= text.length()) && (text.charAt(endPos - 1) == ' '))
                 endPos--;
 
             Quantity currentQuantity = null;

@@ -39,6 +39,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>grobid-service</servlet-name>
+        <url-pattern>/parseMeasure</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>grobid-service</servlet-name>
         <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>

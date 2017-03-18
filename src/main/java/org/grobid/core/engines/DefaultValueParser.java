@@ -46,6 +46,8 @@ public class DefaultValueParser extends ValueParser {
             WordsToNumber w2n = WordsToNumber.getInstance();
             quantity.setParsedValue(w2n.normalize(raw, local));
         } else {
+            // remove possible trailing punctuations (due to noisy PDF)
+            raw = raw.replaceAll("[^\\d]+$", "");
             NumberFormat format = NumberFormat.getInstance(local);
             try {
                 Number number = format.parse(raw);
