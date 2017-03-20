@@ -724,7 +724,7 @@
         }
       ],
       "type": "VOLUME",
-      "system": "NON_SI",
+      "system": "SI_DERIVED",
       "names": [
         {
           "lemma": "litre",

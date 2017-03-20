@@ -38,7 +38,7 @@ w/w%	CONCENTRATION	NON_SI	weight/weight percent
 ppm	CONCENTRATION	NON_SI	part per million
 ppb	CONCENTRATION	NON_SI	part per billion
 m^3,m³	VOLUME	SI_BASE	cubic meter,cubic metre
-l	VOLUME	NON_SI	litre,liter
+l	VOLUME	SI_DERIVED	litre,liter
 oz,fl oz,fl. oz.,oz. fl.	VOLUME	US,IMPERIAL	fluid ounce
 gi	VOLUME	US	gill
 c	VOLUME	US	cup
