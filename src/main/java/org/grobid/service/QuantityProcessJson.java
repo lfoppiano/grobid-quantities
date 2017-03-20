@@ -40,7 +40,11 @@ public class QuantityProcessJson {
             JsonNode jsonAnnotation = mapper.readTree(json);
             if ((jsonAnnotation == null) || (jsonAnnotation.isMissingNode())) {
                 LOGGER.error("JSON input appears empty.");
-                response = Response.status(Status.BAD_REQUEST).build();
+                response = Response.status(Status.BAD_REQUEST)
+                            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+                            .header("Access-Control-Allow-Origin", "*")
+                            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                            .build();
             } else {
                 long start = System.currentTimeMillis();
                 // get the provided parameters
@@ -135,14 +139,22 @@ public class QuantityProcessJson {
             }
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.", nseExp);
-            response = Response.status(Status.SERVICE_UNAVAILABLE).build();
+            response = Response.status(Status.SERVICE_UNAVAILABLE)
+                            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+                            .header("Access-Control-Allow-Origin", "*")
+                            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                            .build();
         } catch (Exception e) {
             LOGGER.error("An unexpected exception occurs. ", e);
             String message = "Error in " + e.getStackTrace()[0].toString();
             if (e.getCause() != null) {
                 message = e.getCause().getMessage();
             }
-            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(message).build();
+            response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(message)
+                            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
+                            .header("Access-Control-Allow-Origin", "*")
+                            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                            .build();
         }
         LOGGER.debug(methodLogOut());
         return response;

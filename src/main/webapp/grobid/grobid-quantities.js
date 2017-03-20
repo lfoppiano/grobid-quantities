@@ -628,6 +628,9 @@ var grobid = (function ($) {
         var height = thePos.h * scale_y + 1;
 
         //make clickable the area
+        theId = "" + theId;
+        if (theId)
+            theId = theId.replace(" ", "_");
         var element = document.createElement("a");
         var attributes = "display:block; width:"+width+"px; height:"+height+"px; position:absolute; top:"+
             y+"px; left:"+x+"px;";
@@ -740,7 +743,8 @@ console.log(quantityMap);
         } else {
             colorLabel = quantityLeast.rawName;
         }
-
+        if (colorLabel)
+            colorLabel = colorLabel.replace(" ", "_");
         var leastValue = quantityLeast.rawValue;
         var startUniLeast = -1;
         var endUnitLeast = -1;
@@ -969,7 +973,8 @@ console.log(quantityMap);
         'time':'#f89406', 
         'mass': '#c43c35', 
         'temperature': '#398739', 
-        'frequency': '#8904B1;'};
+        'frequency': '#8904B1;',
+        'concentration' : '#31B404'};
 
     /* return a color based on the quantity type */
     function getColor(type) {

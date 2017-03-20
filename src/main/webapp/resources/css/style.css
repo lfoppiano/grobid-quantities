@@ -43,6 +43,9 @@
 .label.AREA {
     background-color: #87A1A8;
 }
+.label.CONCENTRATION {
+    background-color: #31B404;
+}
 
 .label.biology {
     background-color: #398739;
@@ -282,6 +285,9 @@ span {word-break:normal;}
 .info-sense-box.AREA {
     background-color: #87A1A8;
 }
+.info-sense-box.CONCENTRATION {
+    background-color: #31B404;
+}
 
 /* DOMAINS */
 .info-sense-box.biology {
@@ -366,4 +372,7 @@ a.VELOCITY {
 }
 a.AREA {
     border-color: #87A1A8;
+}
+a.CONCENTRATION {
+    border-color: #31B404;
 }
