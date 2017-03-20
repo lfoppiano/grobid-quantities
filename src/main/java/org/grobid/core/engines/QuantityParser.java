@@ -385,8 +385,9 @@ public class QuantityParser extends AbstractParser {
                 quantity.setNormalizedQuantity(quantity1);
             }
         } catch (NormalizationException ne) {
-            //logger.warn("Could not normalize the value: " + quantity.getRawValue() + ". ", ne);
-            logger.warn("Could not normalize the value: " + quantity.getRawValue() + ". ");
+            final String rawName = quantity.getRawUnit() != null ? quantity.getRawUnit().getRawName() : null;
+            logger.warn("Could not normalize the value: '" + quantity.getRawValue()
+                    + "' with unit '" + rawName + "'. ", ne.getMessage());
         }
     }
 
