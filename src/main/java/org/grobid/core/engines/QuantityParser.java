@@ -62,7 +62,7 @@ import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
  * @author Patrice Lopez
  */
 public class QuantityParser extends AbstractParser {
-    private static final Logger logger = LoggerFactory.getLogger(QuantityParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuantityParser.class);
 
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
@@ -108,7 +108,7 @@ public class QuantityParser extends AbstractParser {
             try {
                 tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
             } catch (Exception e) {
-                logger.error("fail to tokenize:, " + text, e);
+                LOGGER.error("fail to tokenize:, " + text, e);
             }
 
             if ((tokens == null) || (tokens.size() == 0)) {
@@ -241,8 +241,7 @@ public class QuantityParser extends AbstractParser {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new GrobidException("Cannot process pdf file: " + file.getPath());
+            throw new GrobidException("Cannot process pdf file: " + file.getPath(), e);
         }
 
         // for next line, comparable measurement needs to be implemented
@@ -386,7 +385,7 @@ public class QuantityParser extends AbstractParser {
             }
         } catch (NormalizationException ne) {
             final String rawName = quantity.getRawUnit() != null ? quantity.getRawUnit().getRawName() : null;
-            logger.warn("Could not normalize the value: '" + quantity.getRawValue()
+            LOGGER.warn("Could not normalize the value: '" + quantity.getRawValue()
                     + "' with unit '" + rawName + "'. ", ne.getMessage());
         }
     }
@@ -505,7 +504,7 @@ public class QuantityParser extends AbstractParser {
                 try {
                     tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
                 } catch (Exception e) {
-                    logger.error("fail to tokenize:, " + text, e);
+                    LOGGER.error("fail to tokenize:, " + text, e);
                 }
 
                 if ((tokens == null) || (tokens.size() == 0))
@@ -566,7 +565,7 @@ public class QuantityParser extends AbstractParser {
                 try {
                     tokenizations = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
                 } catch (Exception e) {
-                    logger.error("fail to tokenize:, " + text, e);
+                    LOGGER.error("fail to tokenize:, " + text, e);
                 }
 
                 if ((tokenizations == null) || (tokenizations.size() == 0))
@@ -604,8 +603,7 @@ public class QuantityParser extends AbstractParser {
             }
             root.appendChild(textNode);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath());
+            throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath(), e);
         }
 
         return root;
@@ -620,8 +618,7 @@ public class QuantityParser extends AbstractParser {
                             .build();
             teiDoc = GrobidFactory.getInstance().createEngine().fullTextToTEIDoc(file, config);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new GrobidException("Cannot create training data because GROBIL full text model failed on the PDF: " + file.getPath());
+            throw new GrobidException("Cannot create training data because GROBIL full text model failed on the PDF: " + file.getPath(), e);
         }
         if (teiDoc == null) {
             return null;
@@ -657,7 +654,7 @@ public class QuantityParser extends AbstractParser {
                 try {
                     tokenizations = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
                 } catch (Exception e) {
-                    logger.error("fail to tokenize:, " + text, e);
+                    LOGGER.error("fail to tokenize:, " + text, e);
                 }
                 if ((tokenizations == null) || (tokenizations.size() == 0))
                     continue;
@@ -686,8 +683,7 @@ public class QuantityParser extends AbstractParser {
             }
             root.appendChild(textNode);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath());
+            throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath(), e);
         }
 
         return root;
@@ -734,7 +730,7 @@ public class QuantityParser extends AbstractParser {
                     String pathTEI = outputDirectory + "/" + file.getName().substring(0, file.getName().length() - 4) + ".training.tei.xml";
                     createTraining(file.getAbsolutePath(), pathTEI, n);
                 } catch (final Exception exp) {
-                    logger.error("An error occured while processing the following pdf: "
+                    LOGGER.error("An error occured while processing the following pdf: "
                             + file.getPath() + ": " + exp);
                 }
                 if (ind != -1)
@@ -849,7 +845,7 @@ public class QuantityParser extends AbstractParser {
             Quantity currentQuantity = null;
 
             if (clusterLabel.equals(QuantitiesTaggingLabels.QUANTITY_VALUE_ATOMIC)) {
-                System.out.println("atomic value: " + clusterContent);
+                LOGGER.debug("atomic value: " + clusterContent);
                 if (isMeasurementValid(currentMeasurement)) {
                     measurements.add(currentMeasurement);
                     currentMeasurement = new Measurement();
@@ -875,7 +871,7 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_LEAST)) {
-                System.out.println("value least: " + clusterContent);
+                LOGGER.debug("value least: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
                     if (isMeasurementValid(currentMeasurement)) {
                         measurements.add(currentMeasurement);
@@ -896,7 +892,7 @@ public class QuantityParser extends AbstractParser {
                 openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX;
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_MOST)) {
-                System.out.println("value most: " + clusterContent);
+                LOGGER.debug("value most: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
                     if (isMeasurementValid(currentMeasurement)) {
                         measurements.add(currentMeasurement);
@@ -917,7 +913,7 @@ public class QuantityParser extends AbstractParser {
                 openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX;
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_BASE)) {
-                System.out.println("base value: " + clusterContent);
+                LOGGER.debug("base value: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                     if (isMeasurementValid(currentMeasurement)) {
                         measurements.add(currentMeasurement);
@@ -938,7 +934,7 @@ public class QuantityParser extends AbstractParser {
                 openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE;
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_RANGE)) {
-                System.out.println("range value: " + clusterContent);
+                LOGGER.debug("range value: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                     if (isMeasurementValid(currentMeasurement)) {
                         measurements.add(currentMeasurement);
@@ -959,7 +955,7 @@ public class QuantityParser extends AbstractParser {
                 openMeasurement = UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE;
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_LIST)) {
-                System.out.println("value in list: " + clusterContent);
+                LOGGER.debug("value in list: " + clusterContent);
                 if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.CONJUNCTION)) {
                     if (isMeasurementValid(currentMeasurement)) {
                         measurements.add(currentMeasurement);
@@ -981,7 +977,7 @@ public class QuantityParser extends AbstractParser {
                 openMeasurement = UnitUtilities.Measurement_Type.CONJUNCTION;
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_UNIT_LEFT)) {
-                System.out.println("unit (left attachment): " + clusterContent);
+                LOGGER.debug("unit (left attachment): " + clusterContent);
                 currentUnit = new Unit();
                 currentUnit.setRawName(clusterContent);
                 currentUnit.setOffsetStart(pos);
@@ -1059,7 +1055,7 @@ public class QuantityParser extends AbstractParser {
                     }
                 }
             } else if (clusterLabel.equals(QUANTITY_UNIT_RIGHT)) {
-                System.out.println("unit (right attachment): " + clusterContent);
+                LOGGER.debug("unit (right attachment): " + clusterContent);
                 if ((openMeasurement == UnitUtilities.Measurement_Type.VALUE) || (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION)) {
                     if (isMeasurementValid(currentMeasurement)) {
                         measurements.add(currentMeasurement);
@@ -1076,7 +1072,7 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_OTHER)) {
             } else {
-                logger.error("Warning: unexpected label in quantity parser: " + clusterLabel.getLabel() + " for " + clusterContent);
+                LOGGER.error("Warning: unexpected label in quantity parser: " + clusterLabel.getLabel() + " for " + clusterContent);
             }
 
             pos = endPos;

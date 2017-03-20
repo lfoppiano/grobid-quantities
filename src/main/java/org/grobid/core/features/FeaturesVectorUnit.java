@@ -106,7 +106,9 @@ public class FeaturesVectorUnit {
             featuresVector.punctType = "SLASH";
         } else if (character.equals("^")) {
             featuresVector.punctType = "EXPONENT";
-        } else {
+        } else if (character.equals("*")) {
+            featuresVector.punctType = "ASTERISK";
+        }else {
             featuresVector.punctType = "NOPUNCT";
         }
 

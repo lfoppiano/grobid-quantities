@@ -2,9 +2,12 @@ package org.grobid.trainer.sax;
 
 
 import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.engines.UnitParser;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.UnitUtilities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -20,6 +23,8 @@ import java.util.List;
  * @author Patrice Lopez
  */
 public class MeasureAnnotationSaxHandler extends DefaultHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MeasureAnnotationSaxHandler.class);
 
     StringBuffer accumulator = new StringBuffer(); // Accumulate parsed text
 
@@ -98,7 +103,6 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 numEncountered = false;
             }
         } catch (Exception e) {
-//		    e.printStackTrace();
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
     }
@@ -157,7 +161,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                                     try {
                                         unitType = UnitUtilities.Unit_Type.valueOf(measureType);
                                     } catch (Exception e) {
-                                        System.out.println("Warning: unknown measure type, " + value);
+                                        LOGGER.warn("Unknown measure type, " + value);
                                     }
                                     // if we know the measurement type, we check if we know the unit expression
                                     // if not we add it to the lexicon
@@ -174,7 +178,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                             } else if (name.equals("scale")) {
                                 // nothing to do in principle for the moment...
                             } else {
-                                System.out.println("Warning: unknown measure attribute name, " + name);
+                                LOGGER.warn("Unknown measure attribute name, " + name);
                             }
                         }
                     }
@@ -254,7 +258,6 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 }
             }
         } catch (Exception e) {
-//		    e.printStackTrace();
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
     }

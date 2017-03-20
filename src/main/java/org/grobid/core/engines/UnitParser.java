@@ -48,9 +48,9 @@ public class UnitParser extends AbstractParser {
     }
 
     /**
-     * please use List<UnitBlock> tagUnit(String text, boolean hasUnitRightAttachment)
+     * hasUnitRightAttachment indicate whether the unit is appearing before the value,
+     * for example `pH 5.5`
      */
-    @Deprecated
     public List<UnitBlock> tagUnit(String text) {
         return tagUnit(text, false);
     }
@@ -73,15 +73,14 @@ public class UnitParser extends AbstractParser {
             List<String> characters = new ArrayList<>();
             List<OffsetPosition> unitTokenPositions = new ArrayList<>();
             for (char character : text.toCharArray()) {
-                characters.add("" + character);
+                characters.add(String.valueOf(character));
                 OffsetPosition position = new OffsetPosition();
                 position.start = text.indexOf(character);
                 position.end = text.indexOf(character) + 1;
-                LayoutToken lt = new LayoutToken("" + character);
+                LayoutToken lt = new LayoutToken(String.valueOf(character));
                 tokenizations.add(lt);
 
                 unitTokenPositions.add(position);
-                //unitTokenPositions.add(new OffsetPosition(text.indexOf(character), text.indexOf(character) + 1));
             }
 
             ress = addFeatures(characters, unitTokenPositions, isUnitLeft);           
@@ -91,9 +90,9 @@ public class UnitParser extends AbstractParser {
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
-            units = resultExtraction(text, res, tokenizations);
+            units = resultExtraction(res, tokenizations);
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
 
         return units;
@@ -102,8 +101,7 @@ public class UnitParser extends AbstractParser {
     /**
      * Extract identified quantities from a labelled text.
      */
-    public List<UnitBlock> resultExtraction(String text,
-                                            String result,
+    public List<UnitBlock> resultExtraction(String result,
                                             List<LayoutToken> tokenizations) {
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.UNITS, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
@@ -134,14 +132,14 @@ public class UnitParser extends AbstractParser {
                     unitBlock = new UnitBlock();
                 }
                 unitBlock.setPrefix(clusterContent);
-
+                LOGGER.debug(clusterContent + "(Pr)");
 
             } else if (clusterLabel.equals(QuantitiesTaggingLabels.UNIT_VALUE_BASE)) {
                 if (!startUnit) {
                     startUnit = true;
                     unitBlock = new UnitBlock();
                 } else {
-                    if (QuantitiesTaggingLabels.UNIT_VALUE_PREFIX != previousTag) {
+                    if (!QuantitiesTaggingLabels.UNIT_VALUE_PREFIX.equals(previousTag)) {
                         units.add(unitBlock);
                         unitBlock = new UnitBlock();
                     }
@@ -151,9 +149,9 @@ public class UnitParser extends AbstractParser {
                     }
                 }
                 unitBlock.setBase(clusterContent);
-                System.out.print(clusterContent + "(B)");
+                LOGGER.debug(clusterContent + "(B)");
             } else if (clusterLabel.equals(UNIT_VALUE_OTHER)) {
-                System.out.print(clusterContent + "(O)");
+                LOGGER.debug(clusterContent + "(O)");
             } else if (clusterLabel.equals(UNIT_VALUE_POW)) {
                 if (clusterContent.equals("/")) {
                     denominator = true;
@@ -169,14 +167,12 @@ public class UnitParser extends AbstractParser {
                         unitBlock.setPow(clusterContent);
                     }
                 }
-                System.out.print(clusterContent + "(P)");
-                break;
-
+                LOGGER.debug(clusterContent + "(P)");
             }
             previousTag = clusterLabel;
         }
         units.add(unitBlock);
-        System.out.println("]");
+        LOGGER.debug("]");
 
         return units;
     }

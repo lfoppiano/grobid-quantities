@@ -20,12 +20,11 @@ public class QuantityProcessString {
 
 
     public static Response processText(String text) {
-        LOGGER.debug(methodLogIn());
         Response response = null;
 
         try {
             LOGGER.debug(">> set raw text for stateless quantity service'...");
-System.out.println(text);
+            LOGGER.debug(text);
             long start = System.currentTimeMillis();
             QuantityParser quantityParser = QuantityParser.getInstance();
             List<Measurement> measurements = quantityParser.extractQuantities(text);
@@ -50,12 +49,12 @@ System.out.println(text);
                 response = Response.status(Status.NO_CONTENT).build();
 
             if (jsonBuilder != null) {
-System.out.println(jsonBuilder.toString());
+                System.out.println(jsonBuilder.toString());
                 response = Response.status(Status.OK).entity(jsonBuilder.toString())
-                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"; charset=UTF-8" )
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                    .build();
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "; charset=UTF-8")
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .build();
             }
         } catch (NoSuchElementException nseExp) {
             LOGGER.error("Could not get an engine from the pool within configured time. Sending service unavailable.", nseExp);
@@ -68,7 +67,6 @@ System.out.println(jsonBuilder.toString());
             }
             response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(message).build();
         }
-        LOGGER.debug(methodLogOut());
         return response;
     }
 

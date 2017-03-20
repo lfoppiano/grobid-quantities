@@ -1,11 +1,13 @@
 package org.grobid.core.engines;
 
 import org.grobid.core.data.UnitBlock;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -212,5 +214,63 @@ public class UnitParserIntegrationTest {
         assertThat(output.get(1).getBase(), is("s"));
         assertThat(output.get(1).getPrefix(), is(""));
         assertThat(output.get(1).getPow(), is("-1"));
+    }
+
+    @Test
+    public void resultExtraction_kgmm2_liters() throws Exception {
+        String result = "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
+                "g\t0\t0\t0\t0\tNOPUNCT\t0\tI-<base>\n" +
+                "/\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>\n" +
+                "m\t1\t0\t0\t0\tSLASH\t0\tI-<prefix>\n" +
+                "m\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n"+
+                "2\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>";
+
+        List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("kg/mm2"));
+        assertThat(blocks.size(), is(2));
+        assertThat(blocks.get(0).getPrefix(), is("k"));
+        assertThat(blocks.get(0).getBase(), is("g"));
+        assertThat(blocks.get(1).getPrefix(), is("m"));
+        assertThat(blocks.get(1).getBase(), is("m"));
+        assertThat(blocks.get(1).getPow(), is("-2"));
+    }
+
+    @Test
+    public void resultExtraction_mol_divided_liters() throws Exception {
+        String result = "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+                "o\t0\t0\t0\t0\tNOPUNCT\t0\t<base>\n" +
+                "l\t0\t0\t1\t0\tNOPUNCT\t0\t<base>\n" +
+                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+                "l\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>";
+
+        List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("mol/l"));
+        assertThat(blocks.size(), is(2));
+        assertThat(blocks.get(0).getBase(), is("mol"));
+        assertThat(blocks.get(1).getBase(), is("l"));
+        assertThat(blocks.get(1).getPow(), is("-1"));
+    }
+
+    @Test
+    public void resultExtraction_C_divided_hours() throws Exception {
+        String result = "°\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+                "C\t0\t0\t0\t0\tNOPUNCT\t0\t<base>\n" +
+                "/\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>\n" +
+                "h\t1\t0\t0\t0\tSLASH\t0\tI-<base>";
+
+        List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("°C/h"));
+        assertThat(blocks.size(), is(2));
+        assertThat(blocks.get(0).getBase(), is("°C"));
+        assertThat(blocks.get(1).getBase(), is("h"));
+        assertThat(blocks.get(1).getPow(), is("-1"));
+    }
+
+    public static List<LayoutToken> generateTokenisation(String input) {
+        List<LayoutToken> tokenisation = new ArrayList<>();
+
+        final char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            tokenisation.add(new LayoutToken(String.valueOf(chars[i])));
+        }
+
+        return tokenisation;
     }
 }

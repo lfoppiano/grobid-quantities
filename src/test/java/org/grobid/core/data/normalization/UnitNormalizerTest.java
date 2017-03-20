@@ -161,5 +161,4 @@ public class UnitNormalizerTest {
 
         assertThat(reformatted, is(expected));
     }
-
 }
