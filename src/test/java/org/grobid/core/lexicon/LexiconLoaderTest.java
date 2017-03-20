@@ -1,11 +1,13 @@
 package org.grobid.core.lexicon;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import org.apache.commons.collections4.Closure;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by lfoppiano on 12/04/16.
@@ -20,12 +22,25 @@ public class LexiconLoaderTest {
     }
 
     @Test
-    public void test1() {
-        target.readJsonFile(this.getClass().getResourceAsStream("/sample.unit.json"), "units", input -> {
+    public void testLoadJsonFile() throws Exception {
 
-            System.out.println(input.toString());
+        List<String> outputs = new ArrayList<>();
 
-        });
+        target.readJsonFile(this.getClass().getResourceAsStream("/sample.unit.json"), "units",
+                input -> outputs.add(input.toString()));
+
+        assertThat(outputs, hasSize(2));
+    }
+
+    @Test
+    public void testLoadCsvFile() throws Exception {
+
+        List<String> outputs = new ArrayList<>();
+
+        target.readCsvFile(this.getClass().getResourceAsStream("/sample.unit.csv"),
+                input -> outputs.add(input.toString()));
+
+        assertThat(outputs, hasSize(3));
     }
 
 

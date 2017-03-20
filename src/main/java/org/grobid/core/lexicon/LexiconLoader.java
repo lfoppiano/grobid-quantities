@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections4.Closure;
 import org.apache.commons.collections4.map.HashedMap;
+import org.apache.commons.io.IOUtils;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.exceptions.GrobidResourceException;
 
@@ -17,6 +18,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.PatternSyntaxException;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Created by lfoppiano on 22/03/16.
@@ -40,17 +43,15 @@ public class LexiconLoader {
         } catch (IOException e) {
             throw new GrobidException("An exception occurred while running GROBID.", e);
         } finally {
-            closeStreams(ist, null, null);
+            IOUtils.closeQuietly(ist);
         }
-
-
     }
 
     public static void readCsvFile(InputStream ist, Closure<String> onLine) {
         InputStreamReader isr = null;
         BufferedReader dis = null;
         try {
-            isr = new InputStreamReader(ist, "UTF8");
+            isr = new InputStreamReader(ist, UTF_8);
             dis = new BufferedReader(isr);
 
             String l = null;
@@ -66,23 +67,9 @@ public class LexiconLoader {
             throw new GrobidException("An exception occurred while running GROBID.", e);
 
         } finally {
-            closeStreams(ist, isr, dis);
+            IOUtils.closeQuietly(ist, isr, dis);
         }
     }
-
-    private static void closeStreams(InputStream ist, InputStreamReader isr, BufferedReader dis) {
-        try {
-            if (ist != null)
-                ist.close();
-            if (isr != null)
-                isr.close();
-            if (dis != null)
-                dis.close();
-        } catch (Exception e) {
-            throw new GrobidResourceException("Cannot close all streams.", e);
-        }
-    }
-
 
     public static Map<String, String> loadPrefixes(InputStream is) {
         Map<String, String> prefixes = new HashedMap<>();
