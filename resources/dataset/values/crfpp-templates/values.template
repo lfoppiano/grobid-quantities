@@ -1,0 +1,81 @@
+# Features:
+# e.g: c 0 0 1 1 NOPUNCT <prefix>
+# - character
+# - isUpperCase
+# - isDigit
+# - isKnownUnitToken
+# - isKnownPrefixToken
+# - punctType
+# - hasRightAttachment
+
+
+# Unigram
+U00:%x[-4,0]
+U01:%x[-3,0]
+U02:%x[-2,0]
+U03:%x[-1,0]
+U04:%x[0,0]
+U05:%x[1,0]
+U06:%x[2,0]
+U07:%x[3,0]
+U08:%x[4,0]
+U09:%x[-1,0]/%x[0,0]
+U0A:%x[0,0]/%x[1,0]
+U0B:%x[1,0]/%x[2,0]
+U0C:%x[-2,0]/%x[-1,0]
+U0D:%x[-2,0]/%x[-1,0]/%x[0,0]
+U0E:%x[0,0]/%x[1,0]/%x[2,0]
+
+# isUpperCase
+U10:%x[-2,1]
+U11:%x[-1,1]
+U12:%x[0,1]
+U13:%x[1,1]
+U14:%x[2,1]
+
+# isDigit
+U20:%x[-2,2]
+U21:%x[-1,2]
+U22:%x[0,2]
+U23:%x[1,2]
+U24:%x[2,2]
+
+# isKnownUnit
+U30:%x[-2,3]
+U31:%x[-1,3]
+U32:%x[0,3]
+U33:%x[1,3]
+U34:%x[2,3]
+U35:%x[-1,3]/%x[0,3]
+U36:%x[0,3]/%x[1,3]
+U37:%x[1,3]/%x[2,3]
+
+# isKnownPrefix
+U40:%x[-2,4]
+U41:%x[-1,4]
+U42:%x[0,4]
+U43:%x[1,4]
+U44:%x[2,4]
+U45:%x[-1,4]/%x[0,4]
+U46:%x[0,4]/%x[1,4]
+U47:%x[1,4]/%x[2,4]
+
+# punctType
+U50:%x[-2,5]
+U51:%x[-1,5]
+U52:%x[0,5]
+U53:%x[1,5]
+U54:%x[2,5]
+U55:%x[-1,5]/%x[0,5]
+U56:%x[0,5]/%x[1,5]
+U57:%x[1,5]/%x[2,5]
+
+# hasRightAttachment
+#U60:%x[-2,6]
+#U61:%x[-1,6]
+U62:%x[0,6]
+#U63:%x[1,6]
+#U64:%x[2,6]
+
+# Output
+#B

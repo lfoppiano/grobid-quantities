@@ -172,7 +172,7 @@ public class UnitParser extends AbstractParser {
             previousTag = clusterLabel;
         }
         units.add(unitBlock);
-        LOGGER.debug("]");
+        LOGGER.debug("--");
 
         return units;
     }
@@ -186,7 +186,9 @@ public class UnitParser extends AbstractParser {
         try {
             for (String character : characters) {
                 FeaturesVectorUnit featuresVector =
-                        FeaturesVectorUnit.addFeaturesUnit(character, null, quantityLexicon.inUnitDictionary(character),
+                        FeaturesVectorUnit.addFeaturesUnit(character,
+                                null,
+                                quantityLexicon.inUnitDictionary(character),
                                 quantityLexicon.inPrefixDictionary(character), isUnitLeft);
 
                 result.append(featuresVector.printVector())

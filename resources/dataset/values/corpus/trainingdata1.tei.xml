@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<values>
+    <value>
+        <value>2</value>
+        <operation>x</operation>
+        <base>10</base>
+        <exponent>3</exponent>
+    </value>
+    <value>
+        <value>0.2</value>
+        <base>E</base>
+        <exponent>-3</exponent>
+    </value>
+    <value>
+        <value>0.002</value>
+        <base>e</base>
+        <exponent>-30</exponent>
+    </value>
+    <value>
+        <value>0.002</value>
+    </value>
+    <value>
+        <value>2</value>
+    </value>
+    <value>
+        <value>twentytwo</value>
+    </value>
+    <value>
+        <value>twenty-two</value>
+    </value>
+    <value>
+        <base>10</base>
+        <exponent>-1</exponent>
+    </value>
+</values>
+

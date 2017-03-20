@@ -11,7 +11,7 @@ public interface QuantityPaths {
      * path extension for Nerd service.
      */
     String PATH_QUANTITY = "/";
-    
+
     /**
      * path extension for extracting quantities from a text.
      */
@@ -31,7 +31,7 @@ public interface QuantityPaths {
     /**
      * path extension for parsing quantities from a non or partially structured measure.
      */
-    public static final String PATH_PARSE_MEASURE = "parseMeasure";
+    String PATH_PARSE_MEASURE = "parseMeasure";
 
     /**
 	 * path extension for is alive request.

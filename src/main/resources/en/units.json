@@ -1535,6 +1535,23 @@
     {
       "notations": [
         {
+          "raw": "mmHg"
+        }
+      ],
+      "type": "PRESSURE",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "millimeter of mercury",
+          "inflections": [
+            "millimeters of mercury"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "%"
         }
       ],
