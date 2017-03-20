@@ -139,7 +139,11 @@ public class QuantityNormalizer {
             normalizedQuantity.setRawValue(unit.getSymbol());
             normalizedQuantity.setUnit(new Unit(unit.getSymbol()));
             try {
-                normalizedQuantity.setValue(new BigDecimal(quantity.getRawValue()));
+                if (quantity.getParsedValue() != null) {
+                    normalizedQuantity.setValue(quantity.getParsedValue());
+                } else {
+                    normalizedQuantity.setValue(new BigDecimal(quantity.getRawValue()));
+                }
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.");
