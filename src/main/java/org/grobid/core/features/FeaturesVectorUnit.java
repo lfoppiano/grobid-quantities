@@ -10,15 +10,15 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
  */
 public class FeaturesVectorUnit {
 
-    public String value;            // lexical feature
+    public String value;                        // lexical feature
     public boolean isUpperCase = false;
     public boolean isDigit = false;
     public boolean isKnownUnitToken = false;
     public boolean isKnownPrefixToken = false;
-    public boolean hasRightAttachment = false; // the unit has the quantity attached on the right (e.g. pH)
-    public String label = null;             // label if known
+    public boolean hasRightAttachment = false;  // the unit has the quantity attached on the right (e.g. pH)
+    public String label = null;                 // label if known
 
-    // one of NOPUNCT, OPENBRACKET, ENDBRACKET, DOT, COMMA, HYPHEN, QUOTE, PUNCT (default)
+    // one of NOPUNCT, OPENBRACKET, ENDBRACKET, DOT, COMMA, HYPHEN, QUOTE, ASTERISK, PUNCT (default)
     public String punctType = null;
 
     public String printVector() {
