@@ -329,7 +329,7 @@ public class QuantityParser extends AbstractParser {
         return texts;
     }
 
-    private List<Measurement> normalizeMeasurements(List<Measurement> measurements) {
+    public List<Measurement> normalizeMeasurements(List<Measurement> measurements) {
         for (Measurement measurement : measurements) {
             if (measurement.getType() == null)
                 continue;
