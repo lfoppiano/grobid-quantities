@@ -36,24 +36,29 @@ public class DefaultValueParser extends ValueParser {
         parseValue(quantity, Locale.ENGLISH);
     }
 
-    public void parseValue(Quantity quantity, Locale local) {
+    public void parseValue(Quantity quantity, Locale locale) {
         String raw = quantity.getRawValue();
+
+        // bad quick and dirty workaround!
+        if(raw.startsWith("~")){
+            raw = raw.substring(1);
+        }
 
         // if we have alphabetical characters, we use the word to number parser
         Pattern pattern = Pattern.compile("[a-zA-Z]");
         Matcher matcher = pattern.matcher(raw);
         if (matcher.find()) {
             WordsToNumber w2n = WordsToNumber.getInstance();
-            quantity.setParsedValue(w2n.normalize(raw, local));
+            quantity.setParsedValue(w2n.normalize(raw, locale));
         } else {
             // remove possible trailing punctuations (due to noisy PDF)
             raw = raw.replaceAll("[^\\d]+$", "");
-            NumberFormat format = NumberFormat.getInstance(local);
+            NumberFormat format = NumberFormat.getInstance(locale);
             try {
                 Number number = format.parse(raw);
                 quantity.setParsedValue(new BigDecimal(number.toString()));
             } catch (ParseException pe) {
-                logger.error("Invalid value expression: " + raw + " , for LOCALE: " + local);
+                logger.error("Invalid value expression: " + raw + " , for LOCALE: " + locale);
             }
         }
     }
