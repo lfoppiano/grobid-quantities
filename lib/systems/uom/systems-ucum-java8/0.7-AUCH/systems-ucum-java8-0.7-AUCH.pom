@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>systems.uom</groupId>
+		<artifactId>systems-parent</artifactId>
+		<version>0.7-AUCH</version>
+	</parent>
+	<artifactId>systems-ucum-java8</artifactId>
+	<name>Units of Measurement UCUM System</name>
+	<description>Unit System supporting the Unified Code for Units of Measure (UCUM) on Java SE 8</description>
+	<developers>
+		<developer>
+			<name>Werner Keilw</name>
+			<organization>Creative Arts &amp; Technologies</organization>
+			<organizationUrl>http://www.catmedia.site/</organizationUrl>
+		</developer>
+		<developer>
+			<name>Magno N. A. Cruz</name>
+			<organization>GlobalMentor, Inc.</organization>
+			<organizationUrl>http://www.globalmentor.com/</organizationUrl>
+		</developer>
+	</developers>
+	<!-- ======================================================= -->
+	<!-- Build Settings -->
+	<!-- ======================================================= -->
+	<properties>
+		<jdkVersion>1.8</jdkVersion>
+		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
+		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
+		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>tec.uom</groupId>
+				<artifactId>uom-se</artifactId>
+				<version>${se.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>systems.uom</groupId>
+				<artifactId>systems-quantity</artifactId>
+				<version>${quantity.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>systems.uom</groupId>
+				<artifactId>systems-common</artifactId>
+				<version>${project.version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>tec.uom</groupId>
+			<artifactId>uom-se</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>si.uom</groupId>
+			<artifactId>si-quantity</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>si.uom</groupId>
+			<artifactId>si-units-java8</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>systems.uom</groupId>
+			<artifactId>systems-quantity</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- ======================================================= -->
+			<!-- Source Attachment -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+
+			<!-- ======================================================= -->
+			<!-- JavaDoc Attachment -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
