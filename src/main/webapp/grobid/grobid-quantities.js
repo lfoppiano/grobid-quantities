@@ -546,7 +546,7 @@ var grobid = (function ($) {
 
         var measurements = json.measurements;
         if (measurements) {
-            // hey bro, this must be asynchronous to avoid blocking the brother ;)
+            // hey bro, this must be asynchronous to avoid blocking the brothers
             measurements.forEach(function(measurement, n) {
                 var measurementType = measurement.type;
                 var quantities = [];

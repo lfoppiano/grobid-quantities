@@ -214,8 +214,9 @@ public class QuantityParser extends AbstractParser {
                     //Iterate and exclude figures and tables
                     for (TaggingTokenCluster cluster : Iterables.filter(clusteror.cluster(),
                             new TaggingTokenClusteror
-                                    .LabelTypeExcludePredicate(TaggingLabels.FIGURE, TaggingLabels.TABLE,
-                                    TaggingLabels.EQUATION))) {
+                                    .LabelTypeExcludePredicate(TaggingLabels.FIGURE, TaggingLabels.TABLE, 
+                                    TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER, 
+                                    TaggingLabels.FIGURE_MARKER, TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL))) {
 
                         final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
 
