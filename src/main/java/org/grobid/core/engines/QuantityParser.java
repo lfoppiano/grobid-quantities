@@ -19,7 +19,7 @@ import org.grobid.core.document.DocumentSource;
 import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
-import org.grobid.core.engines.label.SegmentationLabel;
+import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.exceptions.GrobidException;
@@ -162,7 +162,7 @@ public class QuantityParser extends AbstractParser {
             // the corresponding model to further filter by structure types 
 
             // from the header, we are interested in title, abstract and keywords
-            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabel.HEADER);
+            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
                 String header = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
                 List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
@@ -196,7 +196,7 @@ public class QuantityParser extends AbstractParser {
 
             // we can process all the body, in the future figure and table could be the 
             // object of more refined processing
-            documentParts = doc.getDocumentPart(SegmentationLabel.BODY);
+            documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
             if (documentParts != null) {
                 Pair<String, LayoutTokenization> featSeg = parsers.getFullTextParser().getBodyTextFeatured(doc, documentParts);
 
@@ -237,7 +237,7 @@ public class QuantityParser extends AbstractParser {
             // acknowledgement? 
 
             // we can process annexes
-            documentParts = doc.getDocumentPart(SegmentationLabel.ANNEX);
+            documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
             if (documentParts != null) {
                 processDocumentPart(documentParts, doc, measurements);
             }
