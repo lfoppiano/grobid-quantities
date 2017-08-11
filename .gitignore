@@ -6,3 +6,4 @@ grobid.log*
 quantities.log*
 *.iml
 *.old
+doc/_build

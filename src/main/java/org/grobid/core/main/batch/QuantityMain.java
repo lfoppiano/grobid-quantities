@@ -156,8 +156,7 @@ public class QuantityMain {
     /**
      * Starts Grobid from command line using the following parameters:
      * 
-     * @param args
-     *            The arguments
+     * @param args The arguments
      */
     public static void main(final String[] args) throws Exception {
         gbdArgs = new GrobidMainArgs();
