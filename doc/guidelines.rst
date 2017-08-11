@@ -1,7 +1,7 @@
 .. topic:: Annotation guidelines
 
-Annotation guidelines for grobid-quantities
-===========================================
+Annotation guidelines
+=====================
 
 Generating training data
 ------------------------

@@ -1,3 +1,5 @@
+.. topic:: Getting started, build, install
+
 Getting started
 ===============
 
