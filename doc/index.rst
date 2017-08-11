@@ -9,5 +9,7 @@ Welcome to Grobid-quantities's documentation!
 .. toctree::
   :maxdepth: 2
 
+  gettingStarted.rst
   guidelines.rst
+  trainingData.rst
 
