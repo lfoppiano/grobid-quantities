@@ -11,5 +11,3 @@ Welcome to Grobid-quantities's documentation!
 
   guidelines.rst
 
-
-* :ref:`search`
