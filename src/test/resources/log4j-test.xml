@@ -8,7 +8,7 @@
     </appender>
 
     <root>
-        <priority value="DEBUG"></priority>
+        <priority value="WARN"></priority>
         <appender-ref ref="CONSOLE"/>
     </root>
 </log4j:configuration>

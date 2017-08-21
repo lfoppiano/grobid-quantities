@@ -1,6 +1,6 @@
 package org.grobid.trainer;
 
-import org.grobid.core.GrobidModels;
+import org.apache.commons.io.IOUtils;
 import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorQuantities;
@@ -17,6 +17,8 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Patrice Lopez
@@ -41,25 +43,38 @@ public class QuantityTrainer extends AbstractTrainer {
                                final File trainingOutputPath,
                                final File evalOutputPath,
                                double splitRatio) {
-        //
-        return 0;
-    }
-
-    /**
-     * Add the selected features to the model training for bio entities
-     */
-    public int createCRFPPData(File sourcePathLabel,
-                               File outputPath) {
         int totalExamples = 0;
-        try {
-            System.out.println("sourcePathLabel: " + sourcePathLabel);
-            System.out.println("outputPath: " + outputPath);
+        Writer trainingOutputWriter = null;
+        Writer evaluationOutputWriter = null;
 
-            File input = new File(sourcePathLabel.getAbsolutePath() + "/xml/final");
+        try {
+
+            File adaptedCorpusDir = new File(corpusDir.getAbsolutePath() + "/xml/final");
+            LOGGER.info("sourcePathLabel: " + adaptedCorpusDir);
+            if (trainingOutputPath != null)
+                LOGGER.info("outputPath for training data: " + trainingOutputPath);
+            if (evalOutputPath != null)
+                LOGGER.info("outputPath for evaluation data: " + evalOutputPath);
+
+            // the file for writing the training data
+            OutputStream os2 = null;
+
+            if (trainingOutputPath != null) {
+                os2 = new FileOutputStream(trainingOutputPath);
+                trainingOutputWriter = new OutputStreamWriter(os2, UTF_8);
+            }
+
+            // the file for writing the evaluation data
+            OutputStream os3 = null;
+
+            if (evalOutputPath != null) {
+                os3 = new FileOutputStream(evalOutputPath);
+                evaluationOutputWriter = new OutputStreamWriter(os3, UTF_8);
+            }
 
             // then we convert the tei files into the usual CRF label format
             // we process all tei files in the output directory
-            File[] refFiles = input.listFiles(new FilenameFilter() {
+            File[] refFiles = adaptedCorpusDir.listFiles(new FilenameFilter() {
                 public boolean accept(File dir, String name) {
                     return name.toLowerCase().endsWith(".tei") || name.toLowerCase().endsWith(".tei.xml");
                 }
@@ -69,10 +84,7 @@ public class QuantityTrainer extends AbstractTrainer {
                 return 0;
             }
 
-            System.out.println(refFiles.length + " files");
-
-            // the file for writing the training data
-            Writer writer = new OutputStreamWriter(new FileOutputStream(outputPath), "UTF8");
+            LOGGER.info(refFiles.length + " files");
 
             // get a factory for SAX parser
             SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -81,7 +93,9 @@ public class QuantityTrainer extends AbstractTrainer {
             for (int n = 0; n < refFiles.length; n++) {
                 File thefile = refFiles[n];
                 name = thefile.getName();
-                System.out.println(name);
+                LOGGER.info(name);
+                
+                Writer writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
 
                 MeasureAnnotationSaxHandler handler = new MeasureAnnotationSaxHandler();
 
@@ -117,12 +131,22 @@ public class QuantityTrainer extends AbstractTrainer {
                 }
                 writer.write("\n");
             }
-
-            writer.close();
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
+        }    finally {
+            IOUtils.closeQuietly(evaluationOutputWriter, trainingOutputWriter);
         }
         return totalExamples;
+    }
+
+    /**
+     * Add the selected features to the model training for bio entities
+     */
+    public int createCRFPPData(File sourcePathLabel,
+                               File outputPath) {
+
+        return createCRFPPData(sourcePathLabel, outputPath, null, 1.0);
+
     }
 
     @SuppressWarnings({"UnusedParameters"})
@@ -180,16 +204,22 @@ public class QuantityTrainer extends AbstractTrainer {
     }
 
     /**
-     * Standard evaluation via the the usual Grobid evaluation framework.
+     * Dispatch the example to the training or test data, based on the split ration and the drawing of
+     * a random number
      */
-    public String evaluate() {
-        File evalDataF = GrobidProperties.getInstance().getEvalCorpusPath(
-                new File(new File("resources").getAbsolutePath()), model);
-
-        File tmpEvalPath = getTempEvaluationDataPath();
-        createCRFPPData(evalDataF, tmpEvalPath);
-
-        return EvaluationUtilities.evaluateStandard(tmpEvalPath.getAbsolutePath(), getTagger());
+    private Writer dispatchExample(Writer writerTraining, Writer writerEvaluation, double splitRatio) {
+        Writer writer = null;
+        if ((writerTraining == null) && (writerEvaluation != null)) {
+            writer = writerEvaluation;
+        } else if ((writerTraining != null) && (writerEvaluation == null)) {
+            writer = writerTraining;
+        } else {
+            if (Math.random() <= splitRatio)
+                writer = writerTraining;
+            else
+                writer = writerEvaluation;
+        }
+        return writer;
     }
 
     /**
@@ -206,8 +236,7 @@ public class QuantityTrainer extends AbstractTrainer {
             GrobidProperties.getInstance();
 
             Trainer trainer = new QuantityTrainer();
-            AbstractTrainer.runTraining(trainer);
-            AbstractTrainer.runEvaluation(trainer);
+            AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
