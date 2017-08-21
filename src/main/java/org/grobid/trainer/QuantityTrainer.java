@@ -55,9 +55,11 @@ public class QuantityTrainer extends AbstractTrainer {
             System.out.println("sourcePathLabel: " + sourcePathLabel);
             System.out.println("outputPath: " + outputPath);
 
+            File input = new File(sourcePathLabel.getAbsolutePath() + "/xml/final");
+
             // then we convert the tei files into the usual CRF label format
             // we process all tei files in the output directory
-            File[] refFiles = sourcePathLabel.listFiles(new FilenameFilter() {
+            File[] refFiles = input.listFiles(new FilenameFilter() {
                 public boolean accept(File dir, String name) {
                     return name.toLowerCase().endsWith(".tei") || name.toLowerCase().endsWith(".tei.xml");
                 }

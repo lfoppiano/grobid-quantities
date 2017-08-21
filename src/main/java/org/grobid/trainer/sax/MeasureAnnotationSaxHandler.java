@@ -2,7 +2,6 @@ package org.grobid.trainer.sax;
 
 
 import org.grobid.core.analyzers.QuantityAnalyzer;
-import org.grobid.core.engines.UnitParser;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.UnitUtilities;

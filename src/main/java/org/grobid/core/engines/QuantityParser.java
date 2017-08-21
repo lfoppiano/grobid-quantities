@@ -53,6 +53,7 @@ import java.util.SortedSet;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
@@ -476,7 +477,7 @@ public class QuantityParser extends AbstractParser {
         if (root != null) {
             //System.out.println(XmlBuilderUtils.toXml(root));
             try {
-                FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root));
+                FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root), UTF_8);
             } catch (IOException e) {
                 throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
             }
@@ -484,7 +485,7 @@ public class QuantityParser extends AbstractParser {
     }
 
     private Element createTrainingText(File file, Element root) throws IOException {
-        String text = FileUtils.readFileToString(file);
+        String text = FileUtils.readFileToString(file, UTF_8);
 
         Element textNode = teiElement("text");
         // for the moment we suppose we have english only...
