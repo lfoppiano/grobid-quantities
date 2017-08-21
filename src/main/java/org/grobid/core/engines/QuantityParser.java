@@ -216,8 +216,8 @@ public class QuantityParser extends AbstractParser {
                     //Iterate and exclude figures and tables
                     for (TaggingTokenCluster cluster : Iterables.filter(clusteror.cluster(),
                             new TaggingTokenClusteror
-                                    .LabelTypeExcludePredicate(TaggingLabels.FIGURE, TaggingLabels.TABLE, 
-                                    TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER, 
+                                    .LabelTypeExcludePredicate(TaggingLabels.FIGURE, TaggingLabels.TABLE,
+                                    TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER,
                                     TaggingLabels.FIGURE_MARKER, TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL))) {
 
                         final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
@@ -533,7 +533,7 @@ public class QuantityParser extends AbstractParser {
                 measurements = extractMeasurement(text, res, tokens);
                 measurements = measurementOperations.resolveMeasurement(measurements);
 
-                textNode.appendChild(trainingExtraction(measurements, text, tokens));
+                textNode.appendChild(trainingExtraction(measurements, text));
                 paragraph = new StringBuilder();
             }
         }
@@ -602,7 +602,7 @@ public class QuantityParser extends AbstractParser {
                     System.out.println("\n");
                 }
 
-                textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
+                textNode.appendChild(trainingExtraction(measurements, text));
             }
             root.appendChild(textNode);
         } catch (Exception e) {
@@ -682,7 +682,7 @@ public class QuantityParser extends AbstractParser {
                 measurements = extractMeasurement(text, res, tokenizations);
                 measurements = measurementOperations.resolveMeasurement(measurements);
 
-                textNode.appendChild(trainingExtraction(measurements, text, tokenizations));
+                textNode.appendChild(trainingExtraction(measurements, text));
             }
             root.appendChild(textNode);
         } catch (Exception e) {
@@ -721,7 +721,7 @@ public class QuantityParser extends AbstractParser {
             if (refFiles == null)
                 return 0;
 
-            System.out.println(refFiles.length + " files to be processed.");
+            LOGGER.info(refFiles.length + " files to be processed.");
 
             int n = 0;
             if (ind == -1) {
@@ -1100,7 +1100,7 @@ public class QuantityParser extends AbstractParser {
         );
     }
 
-    private Element trainingExtraction(List<Measurement> measurements, String text, List<LayoutToken> tokenizations) {
+    protected Element trainingExtraction(List<Measurement> measurements, String text) {
         Element p = teiElement("p");
 
         int pos = 0;
@@ -1125,6 +1125,8 @@ public class QuantityParser extends AbstractParser {
                 Element unitElement = null;
                 if (unit != null) {
                     unitElement = unitToElement(text, unit);
+                    startU = unit.getOffsetStart();
+                    endU = unit.getOffsetEnd();
                 }
 
                 int initPos = pos;
@@ -1181,6 +1183,8 @@ public class QuantityParser extends AbstractParser {
                 Element unitElement = null;
                 if (unitL != null) {
                     unitElement = unitToElement(text, unitL);
+                    startUL = unitL.getOffsetStart();
+                    endUL = unitL.getOffsetEnd();
                 }
 
                 int startQM = quantityMost.getOffsetStart();
@@ -1199,6 +1203,8 @@ public class QuantityParser extends AbstractParser {
                 Element unitElementM = null;
                 if (unitM != null) {
                     unitElementM = unitToElement(text, unitM);
+                    startUM = unitM.getOffsetStart();
+                    endUM = unitM.getOffsetEnd();
                 }
 
                 int initPos = pos;
@@ -1261,6 +1267,8 @@ public class QuantityParser extends AbstractParser {
                     Element unitNode = null;
                     if (unit != null) {
                         unitNode = unitToElement(text, unit);
+                        startU = unit.getOffsetStart();
+                        endU = unit.getOffsetEnd();
                     }
 
                     int initPos = pos;

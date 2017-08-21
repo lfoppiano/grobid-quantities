@@ -10,6 +10,7 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.InputStream;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -59,7 +60,7 @@ public class UnitAnnotationSaxHandlerTest {
     @Test
     public void testParser_doubleBaseName() throws Exception {
         String input = "<units><unit left=\"true\"><base>Hz</base></unit></units>";
-        InputStream is = IOUtils.toInputStream(input);
+        InputStream is = IOUtils.toInputStream(input, UTF_8);
 
         SAXParser p = spf.newSAXParser();
         p.parse(is, target);
