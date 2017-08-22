@@ -9,7 +9,7 @@ Generation of training data
 
 Training data generation works the same as in GROBID, with executable name ``createTrainingQuantities``, for example:
 ::
-   java -jar target/grobid-quantities-0.4.0-SNAPSHOT.one-jar.jar -gH ../grobid-home/ -gP ../grobid-home/config/grobid.properties
+   java -jar target/grobid-quantities-{version}-jar-with-dependencies.one-jar.jar -gH ../grobid-home/ -gP ../grobid-home/config/grobid.properties
    -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/ -exe createTrainingQuantities
 
 The input directory can contain PDF (.pdf, scientific articles only), XML/TEI (.xml or .tei, for patents and scientific articles) and text files (.txt).
@@ -20,7 +20,7 @@ For the unit model the training data cannot be generated automatically from PDF.
 
 To generate the data:
 ::
-  java -jar target/grobid-quantities-0.4.0-SNAPSHOT.one-jar.jar -gH ../grobid-home/ -gP ../grobid-home/config/grobid.properties
+  java -jar target/grobid-quantities-{version}-jar-with-dependencies.jar -gH ../grobid-home/ -gP ../grobid-home/config/grobid.properties
   -dIn input/resources -dOut /tmp/ -exe generateTrainingUnits
 
 The input directory should be the directory containing prefixes.txt and units.json (normally by language) (e.g. of input/resources /~/grobid-quantities/src/main/resources/en)
