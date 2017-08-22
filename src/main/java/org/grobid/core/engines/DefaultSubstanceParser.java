@@ -1,9 +1,6 @@
 package org.grobid.core.engines;
 
-import org.grobid.core.data.Measurement;
-import org.grobid.core.data.QuantifiedObject;
-import org.grobid.core.data.Quantity;
-import org.grobid.core.data.Unit;
+import org.grobid.core.data.*;
 import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
@@ -27,12 +24,12 @@ public class DefaultSubstanceParser extends SubstanceParser {
             return null;
         try {
             TextParser textParser = TextParser.getInstance();
-            List<ProcessedSentence> parsedSentences = textParser.parseText(text);
+            List<Sentence> parsedSentences = textParser.parseText(text);
             int indexMeasurement = 0;
             int offset = 0;
 
             // this part is for identifying for each sentence, the measurements belonging to the sentence 
-            for (ProcessedSentence processedSentence : parsedSentences) {
+            for (Sentence processedSentence : parsedSentences) {
                 // list of measureemnts for the current sentence
                 List<Measurement> sentenceMeasurements = new ArrayList<Measurement>();
                 List<Integer> positionMeasurements = new ArrayList<Integer>();
@@ -123,7 +120,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
     }
 
 
-    private void setHeads(ProcessedSentence processedSentence,
+    private void setHeads(Sentence processedSentence,
                           List<Measurement> measurements,
                           List<Integer> positionMeasurements,
                           List<String> indexMeasurementTokens) {
@@ -132,11 +129,11 @@ public class DefaultSubstanceParser extends SubstanceParser {
 
         int startSentencePosition = processedSentence.getOffsetStart();
 
-        List<Parse> parses = processedSentence.getParses();
+        List<SentenceParse> parses = processedSentence.getParses();
         // we're just considering the first best parse
         if ((parses == null) || (parses.size() == 0))
             return;
-        Parse parse = parses.get(0);
+        SentenceParse parse = parses.get(0);
         int p = 0;
         for (Measurement measurement : measurements) {
             int position = positionMeasurements.get(p);
@@ -272,7 +269,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
 
 
     private OffsetPosition getFullPhrase(OffsetPosition offsetPosition,
-                                         Parse parse,
+                                         SentenceParse parse,
                                          List<String> indexMeasurementTokens,
                                          boolean strictExpansion) {
         if (offsetPosition == null)
@@ -391,16 +388,16 @@ public class DefaultSubstanceParser extends SubstanceParser {
 
 
     private List<String> getIndexMeasurementTokens(List<Measurement> measurements,
-                                                   ProcessedSentence processedSentence) {
+                                                   Sentence processedSentence) {
         if ((measurements == null) || (measurements.size() == 0))
             return null;
         List<String> result = new ArrayList<String>();
         int startSentencePosition = processedSentence.getOffsetStart();
-        List<Parse> parses = processedSentence.getParses();
+        List<SentenceParse> parses = processedSentence.getParses();
         // we're just considering the first best parse
         if ((parses == null) || (parses.size() == 0))
             return null;
-        Parse parse = parses.get(0);
+        SentenceParse parse = parses.get(0);
 
         for (Measurement measurement : measurements) {
             UnitUtilities.Measurement_Type type = measurement.getType();
@@ -470,7 +467,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
         return result;
     }
 
-    private List<String> addTokenIndex(int position, int length, Parse parse, List<String> result) {
+    private List<String> addTokenIndex(int position, int length, SentenceParse parse, List<String> result) {
         String tokenStruct = parse.getTokenStructureByPosition(position);
         if (tokenStruct != null) {
             String[] pieces = tokenStruct.split("\t");
@@ -501,7 +498,7 @@ public class DefaultSubstanceParser extends SubstanceParser {
         return result;
     }
 
-    private String getNextStruct(int position, List<String> indexMeasurementTokens, int sentenceLength, Parse parse) {
+    private String getNextStruct(int position, List<String> indexMeasurementTokens, int sentenceLength, SentenceParse parse) {
         String childStruct = null;
         int j = 0;
         String currentIndex = null;

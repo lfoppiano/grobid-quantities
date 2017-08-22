@@ -1,7 +1,8 @@
 package org.grobid.core.utilities;
 
+import org.grobid.core.data.Sentence;
+import org.grobid.core.data.SentenceParse;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.utilities.OffsetPosition;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import java.io.*;
 import java.util.*;
   
 import com.googlecode.clearnlp.component.srl.CRolesetClassifier;
-import com.googlecode.clearnlp.dependency.DEPParser;
 import com.googlecode.clearnlp.dependency.AbstractDEPParser;
 import com.googlecode.clearnlp.predicate.AbstractPredIdentifier;
 import com.googlecode.clearnlp.dependency.srl.AbstractSRLabeler;
@@ -70,9 +70,6 @@ public class TextParser {
         return instance;
     }
 
-    /**
-     * Creates a new instance.
-     */
     private static synchronized void getNewInstance() throws Exception {
         logger.debug("Get new instance of TextParser");
         instance = new TextParser();
@@ -144,7 +141,7 @@ public class TextParser {
      *         as the n-best list of Parse object. If the CLEAR_PARSER is selected, only the 
      *         best parse is provided.  
      */
-    public ProcessedSentence parse(String sentence) throws GrobidException {
+    public Sentence parse(String sentence) throws GrobidException {
         if (sentence == null) {
             throw new GrobidException("Sentence to be parsed is null.");
         }
@@ -152,19 +149,19 @@ public class TextParser {
             throw new GrobidException("Sentence to be parsed has a length of 0.");
         }
         
-        ProcessedSentence result = null;
+        Sentence result = null;
         
         DEPTree tree = EngineProcess.getDEPTree(tokenizer, taggers, 
             //analyzer, parser, predicater, labeler, sentence);  
             analyzer, parser, sentence);
         EngineProcess.predictSRL(predicater, roleClassifier, labeler, tree);                        
         // we only have the top parse with the ClearParser, no n-best ! and no score.
-        Parse parse = new Parse();
+        SentenceParse parse = new SentenceParse();
         parse.setParseRepresentation(tree.toStringSRL());
         parse.createMap(sentence);
-        List<Parse> theResult = new ArrayList<Parse>();
+        List<SentenceParse> theResult = new ArrayList<SentenceParse>();
         theResult.add(parse);
-        result = new ProcessedSentence(sentence, theResult, new OffsetPosition(0,sentence.length())); 
+        result = new Sentence(sentence, theResult, new OffsetPosition(0,sentence.length()));
         
         return result;  
     }
@@ -179,7 +176,7 @@ public class TextParser {
      *         semantic role labeling) as the n-best list of Parse object. If the CLEAR_PARSER is 
      *         selected, only the best parse is provided in the list.
      */
-    public List<ProcessedSentence> parseText(String text) throws GrobidException {
+    public List<Sentence> parseText(String text) throws GrobidException {
         if (text == null) {
             throw new GrobidException("Cannot parse the sentence, because it is null.");
         }
@@ -189,7 +186,7 @@ public class TextParser {
             return null;
         }
         
-        List<ProcessedSentence> results = null;
+        List<Sentence> results = null;
         
         AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
         
@@ -203,24 +200,24 @@ public class TextParser {
         if ( (sentences == null) || (sentences.size() == 0) ) {
             // there is some text but not in a state so that a sentence at least can be
             // identified by the sentence segmenter, so we parse it as a single sentence
-            ProcessedSentence pack = parse(text);
+            Sentence pack = parse(text);
             //ProcessedSentence pack = new ProcessedSentence(text, null, null, theResult);
-            results = new ArrayList<ProcessedSentence>(); 
+            results = new ArrayList<Sentence>();
             results.add(pack);
             return results; 
         }
         
-        results = new ArrayList<ProcessedSentence>();
+        results = new ArrayList<Sentence>();
         int position = 0;
         for (List<String> tokens : sentences) {
             //DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, predicater, labeler, tokens);                  
             DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, tokens);                     
             EngineProcess.predictSRL(predicater, roleClassifier, labeler, tree);                
             // we only have the top parse with the ClearParser, no n-best !
-            Parse parse = new Parse();
+            SentenceParse parse = new SentenceParse();
             parse.setParseRepresentation(tree.toStringSRL());    
 //System.out.println(tree.toStringSRL());
-            List<Parse> parses = new ArrayList<Parse>();
+            List<SentenceParse> parses = new ArrayList<SentenceParse>();
             parses.add(parse); 
             // To be reviewed! we want offsets, not the modified sentence provided by clearnlp
             int endPosition = position;
@@ -237,7 +234,7 @@ public class TextParser {
                 }
             }
             parse.createMap(text.substring(position, endPosition));
-            ProcessedSentence pack = new ProcessedSentence(text.substring(position, endPosition), parses, new OffsetPosition(position, endPosition));
+            Sentence pack = new Sentence(text.substring(position, endPosition), parses, new OffsetPosition(position, endPosition));
             position = endPosition;
             results.add(pack);
         }
@@ -254,25 +251,25 @@ public class TextParser {
      *         the list of parses - one per sentence - in the ClearNLP Semantic role format  
      * (http://code.google.com/p/clearnlp/wiki/DataFormat#Semantic_role_format_(srl)).
      */
-    public List<ProcessedSentence> parse(BufferedReader reader) throws GrobidException {
-        List<ProcessedSentence> results = null;
+    public List<Sentence> parse(BufferedReader reader) throws GrobidException {
+        List<Sentence> results = null;
         
         AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
         List<List<String>> sentences = segmenter.getSentences(reader);
     
-        results = new ArrayList<ProcessedSentence>();
+        results = new ArrayList<Sentence>();
         for (List<String> tokens : sentences) {         
             //DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, predicater, labeler, tokens);
             DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, tokens);                     
             EngineProcess.predictSRL(predicater, roleClassifier, labeler, tree);
             // we only have the top parse with the ClearParser, no n-best !
-            Parse parse = new Parse();
+            SentenceParse parse = new SentenceParse();
             parse.setParseRepresentation(tree.toStringSRL());
             parse.createMap(StringUtils.join(tokens," "));
-            List<Parse> parses = new ArrayList<Parse>();
+            List<SentenceParse> parses = new ArrayList<SentenceParse>();
             parses.add(parse); 
             // To be reviewed! this is not exactly the original sentence, but not so important for the moment
-            ProcessedSentence pack = new ProcessedSentence(StringUtils.join(tokens," "), parses, null);
+            Sentence pack = new Sentence(StringUtils.join(tokens," "), parses, null);
             results.add(pack);
         }
     
@@ -288,7 +285,7 @@ public class TextParser {
      *         the list of parses - one per sentence - in the ClearNLP Semantic role format  
      * (http://code.google.com/p/clearnlp/wiki/DataFormat#Semantic_role_format_(srl)).
      */
-    public List<ProcessedSentence> parseFile(String inputFile) throws GrobidException { 
+    public List<Sentence> parseFile(String inputFile) throws GrobidException {
         return parse(UTInput.createBufferedFileReader(inputFile));
     }
 }

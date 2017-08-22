@@ -1,7 +1,8 @@
-package org.grobid.core.utilities;    
+package org.grobid.core.data;
 
 import org.grobid.core.utilities.OffsetPosition;
-import java.util.*; 
+
+import java.util.List;
 
 /**
  *  Representation for a sentence processed by multiple components with associated list of structures 
@@ -10,15 +11,15 @@ import java.util.*;
  *  @author Patrice Lopez
  *
  */
-public class ProcessedSentence {
+public class Sentence {
 
     private final String sentence;
-    private final List<Parse> parses;
+    private final List<SentenceParse> parses;
     private OffsetPosition offset;
  
-    public ProcessedSentence(String theSentence, 
-                       List<Parse> theParses, 
-                       OffsetPosition theOffset) {
+    public Sentence(String theSentence,
+                    List<SentenceParse> theParses,
+                    OffsetPosition theOffset) {
         this.sentence = theSentence;
         this.parses = theParses;
         this.offset = theOffset;
@@ -28,7 +29,7 @@ public class ProcessedSentence {
         return sentence; 
     }     
 
-    public List<Parse> getParses() { 
+    public List<SentenceParse> getParses() {
         return parses; 
     }
 

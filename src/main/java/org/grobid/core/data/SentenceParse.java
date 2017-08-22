@@ -1,27 +1,29 @@
-package org.grobid.core.utilities;
+package org.grobid.core.data;
 
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.analyzers.QuantityAnalyzer;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.*;
-import java.util.*;
-
-import com.googlecode.clearnlp.conversion.AbstractC2DConverter;
-import com.googlecode.clearnlp.conversion.EnglishC2DConverter;
 import com.googlecode.clearnlp.constituent.CTLibEn;
 import com.googlecode.clearnlp.constituent.CTReader;
 import com.googlecode.clearnlp.constituent.CTTree;
+import com.googlecode.clearnlp.conversion.AbstractC2DConverter;
+import com.googlecode.clearnlp.conversion.EnglishC2DConverter;
+import com.googlecode.clearnlp.dependency.DEPFeat;
+import com.googlecode.clearnlp.dependency.DEPNode;
 import com.googlecode.clearnlp.dependency.DEPTree;
 import com.googlecode.clearnlp.headrule.HeadRuleMap;
 import com.googlecode.clearnlp.morphology.AbstractMPAnalyzer;
 import com.googlecode.clearnlp.morphology.EnglishMPAnalyzer;
 import com.googlecode.clearnlp.util.UTInput;
-import com.googlecode.clearnlp.util.UTOutput;
-import com.googlecode.clearnlp.dependency.DEPFeat;
-import com.googlecode.clearnlp.dependency.DEPNode;
+import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *  Class for representing a complete sentence parse. The representation covers a single parse  
@@ -43,8 +45,8 @@ import com.googlecode.clearnlp.dependency.DEPNode;
  * * @author Patrice Lopez
  */
 
-public class Parse {
-    private static final Logger logger = LoggerFactory.getLogger(Parse.class);
+public class SentenceParse {
+    private static final Logger logger = LoggerFactory.getLogger(SentenceParse.class);
     
     private double scoreLogInside = 0.0;
     private double scoreLogInsideOutside = 0.0;
@@ -69,13 +71,13 @@ public class Parse {
     // map an index to the end offset of its corresponding token
     private Map<String, Integer> index2OffsetEnd = null;
 
-    public Parse() {}
+    public SentenceParse() {}
     
     /**
      *  String representation given here must be according to the ClearNLP Semantic 
      *  role format (http://code.google.com/p/clearnlp/wiki/DataFormat#Semantic_role_format_(srl))
      */
-    public Parse(String rep, double score1, double score2) {
+    public SentenceParse(String rep, double score1, double score2) {
         tabulatedRep = rep;
         scoreLogInside = score1;
         scoreLogInsideOutside = score2;
