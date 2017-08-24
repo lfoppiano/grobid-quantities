@@ -89,7 +89,7 @@ Note that an interval can be introduced by only one boundary value:
   A rotor shaft according to any one of the preceding claims having a diameter of at least <measure type="interval"><num
   atLeast="1">1</num><measure type="LENGTH" unit="m">m</measure></measure>
 
-  [..]sky positions lie within a <measure type="value"><num atMost="7">7</num> <measure type="ANGLE" unit="°">°</measure>
+  [..]sky positions lie within a <measure type="interval"><num atMost="7">7</num> <measure type="ANGLE" unit="°">°</measure>
   </measure> radius of other planets[..]
 
 
@@ -145,7 +145,7 @@ The encoding is then straightforward for atomic values (with attribute ``@when``
   <date when="2014-10-19">October 19, 2014</date></measure>.
 
   The arrival time of these particles spans a <measure type="interval"><num type="range">20</num>-<measure type="TIME"
-  unit="minute">minute</measure> time interval centered at <date when="2014-10-19T20:09">October 19, 2014 at 20:09 TDB</date></measure>
+  unit="minute">minute</measure> time interval centered at <date type="base" when="2014-10-19T20:09">October 19, 2014 at 20:09 TDB</date></measure>
 
 
   Observations took place from <measure type="interval"><date from-iso="2014-10-19">October 19, 2014</date> to
