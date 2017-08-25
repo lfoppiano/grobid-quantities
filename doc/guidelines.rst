@@ -55,7 +55,7 @@ Example 2:
 
 A percentage (and similar expression per mil and per ten thousand) has a unit type **Unit_Type.FRACTION**:
 ::
-   <measure type="value"><num>5</num> <measure type="FRACTION" unit="percentage">%</measure></measure> of fat mass...
+   <measure type="value"><num>5</num> <measure type="FRACTION" unit="%">%</measure></measure> of fat mass...
 
 
 Atomic value without unit
@@ -109,7 +109,7 @@ Similarly as in the previous interval case, an attribute in element ``<num>``, h
   <measure type="interval"><num type="base">30</num> ± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>,
   <measure type="interval"><num type="base">176</num> ± <num type="range">7</num><measure type="LENGTH" unit="cm">cm</measure></measure>,
   <measure type="interval"><num type="base">70</num> ± <num type="range">9</num> <measure type="MASS" unit="kg">kg</measure></measure>,
-  <measure type="interval"><num type="base">15</num> ± <num type="range">5</num> <measure type="FRACTION" unit="percentage">%</measure></measure> of fat mass
+  <measure type="interval"><num type="base">15</num> ± <num type="range">5</num> <measure type="FRACTION" unit="%">%</measure></measure> of fat mass
 
 
 If the quantity is expressed only in term of range (without base) it can be implicitly assumed that the base=0, see example ± 10 years
@@ -145,7 +145,7 @@ The encoding is then straightforward for atomic values (with attribute ``@when``
   <date when="2014-10-19">October 19, 2014</date></measure>.
 
   The arrival time of these particles spans a <measure type="interval"><num type="range">20</num>-<measure type="TIME"
-  unit="minute">minute</measure> time interval centered at <date type="base" when="2014-10-19T20:09">October 19, 2014 at 20:09 TDB</date></measure>
+  unit="min">minute</measure> time interval centered at <date type="base" when="2014-10-19T20:09">October 19, 2014 at 20:09 TDB</date></measure>
 
 
   Observations took place from <measure type="interval"><date from-iso="2014-10-19">October 19, 2014</date> to
