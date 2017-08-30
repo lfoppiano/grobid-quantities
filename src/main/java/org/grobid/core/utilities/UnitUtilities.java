@@ -92,7 +92,8 @@ public class UnitUtilities {
         VO2_MAX("VO2 max"),
         COUNT("count"),
         ACCELERATION("acceleration"),
-        DEGREE("angle");
+        DEGREE("angle"),
+        DIFFUSION_FlUX("diffusion flux");
 
         private String name;
 
