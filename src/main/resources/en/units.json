@@ -2024,6 +2024,88 @@
           ]
         }
       ]
-    }
+    },
+    {
+      "notations": [
+        {
+          "raw": "mol m^-2 s^-1",
+          "product": [
+            { "base": "mol"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "mol/(m2*s)",
+          "product": [
+            { "base": "mol"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "DIFFUSION_FLUX",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "mol per squared metre per second",
+        },
+{
+      "notations": [
+        {
+          "raw": "molecules m^-2 s^-1",
+          "product": [
+            { "base": "molecules"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "molecules/(m2*s)",
+          "product": [
+            { "base": "molecules"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "DIFFUSION_FLUX",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "molecules per squared metre per second",
+        }
+      ]
+    }  
   ]
 }
