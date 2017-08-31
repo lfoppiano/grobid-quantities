@@ -173,7 +173,8 @@ Units without values
 **Case where it's not annotated**: 
 When we refer to the units as such, to express something about the units, we are not using the units to quantify something with a value:
 ::
-  where A is the Bond albedo of the dust at the phase angle of observation, f is the filling factor of the dust grains within the aperture, &#x3C1; is the aperture size in cm, &#x2206; and r H are the geocentric and heliocentric distances in cm and AU, respectively, and F comet and F &#x2299; are the flux from the comet and the Solar flux
+  and r H are the geocentric and heliocentric distances in cm and AU, respectively, and F comet and F
+Like here for the units: ``cm`` and ``AU``.
 
 **Case where it's annotated**: 
 We could have units expressed without values, when the value is implicit:
