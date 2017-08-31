@@ -162,23 +162,35 @@ It can be considered as 20 °C (293 Kelvin), although not defined in a standard 
 ::
   <measure type="value"><measure type="TEMPERATURE">Raumtemperatur</measure></measure>
 
+
+
+Miscellaneous
+~~~~~~~~~~~~~
+
 Units without values
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 
-**Case where it's not annotated**
-
+**Case where it's not annotated**: 
 When we refer to the units as such, to express something about the units, we are not using the units to quantify something with a value:
 ::
   where A is the Bond albedo of the dust at the phase angle of observation, f is the filling factor of the dust grains within the aperture, &#x3C1; is the aperture size in cm, &#x2206; and r H are the geocentric and heliocentric distances in cm and AU, respectively, and F comet and F &#x2299; are the flux from the comet and the Solar flux
 
-**Case where it's annotated**
-
+**Case where it's annotated**: 
 We could have units expressed without values, when the value is implicit:
 ::
   that can extend <measure type="interval"><measure type="LENGTH" unit="mm">millimeters</measure></measure> or even <measure type="interval"><measure type="LENGTH" unit="cm">centimeters</measure></measure> from the cell body 
 
 here the value of millimeters and centimeters is unspecified (e.g. equivalent to ``several``), but we have a quantity and more precisely an interval.
 See issue `#31 <https://github.com/kermitt2/grobid-quantities/issues/31>`_ 
+
+Unprecise quantifiers
+^^^^^^^^^^^^^^^^^^^^^
+
+When used with units, quantifers like ``few``, ``several``, ``a couple``, ``a large amount of`` is annotated, and whatever quantifies even imprecisely :
+::
+  the reference solution becomes distinct from the ballistic solution only a <measure type="value"><num>couple</num> of <measure type="TIME" unit="week">weeks</measure></measure> before the encounter. 
+
+Determiners is leaved outside (``couple`` as value and ``weeks`` as unit for ``a couple of weeks``). See issue `#34 <https://github.com/kermitt2/grobid-quantities/issues/34>`_
 
 Quantified substance
 ~~~~~~~~~~~~~~~~~~~~
