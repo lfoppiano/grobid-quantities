@@ -75,7 +75,7 @@ Intervals
 
 An interval introduces a range of values. We can distinguish two kinds of interval expressions:
 
-Bounded value
+1. Bounded value
 ^^^^^^^^^^^^^
 
 Interval defined by a lower bound value and an upper bound value:
@@ -93,7 +93,7 @@ Note that an interval can be introduced by only one boundary value:
   </measure> radius of other planets[..]
 
 
-Base and differential value
+2. Base and differential value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Take the example
 ::
@@ -116,6 +116,14 @@ If the quantity is expressed only in term of range (without base) it can be impl
 ::
   <measure type="interval">± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>
 
+Interval markers
+^^^^^^^^^^^^^^^^
+
+Interval markers such as ``more than``, ``less than``, and so on, are left outside the annotation when it's possible.
+::
+  more than <measure type="interval"> <num atLeast="2">2</num> </measure> 
+
+See issue `#35 <https://github.com/kermitt2/grobid-quantities/issues/35>`_ 
 
 Lists
 ~~~~~
