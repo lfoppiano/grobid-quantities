@@ -205,6 +205,18 @@ Constants
 
 Precise number (for example ``c`` , the speed of light in vacuum) and imprecise numbers (for example ``π`` which has an infinite number of decimals) are annotated. See issue `#37 <https://github.com/kermitt2/grobid-quantities/issues/37>`_ 
 
+Exponents for powers of ten
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Exponents might be rewritten in documents, for example 10 power -6 in pdf becomes ``10 &#x2212;6``.
+The exponents for power of ten is written in the attribute when there is one, 10 power -6 will be written ``10^-6``.
+Example in interval:
+::
+  <measure type="interval"><num atMost="10^-6">10 −6</num></measure>
+
+See issue `#38 <https://github.com/kermitt2/grobid-quantities/issues/38>`_ 
+
+
 Out of scope
 ~~~~~~~~~~~~
 
