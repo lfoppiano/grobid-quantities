@@ -201,6 +201,32 @@ When used with units, quantifers like ``few``, ``several``, ``a couple``, ``a la
 
 Determiners is leaved outside (``couple`` as value and ``weeks`` as unit for ``a couple of weeks``). See issue `#34 <https://github.com/kermitt2/grobid-quantities/issues/34>`_
 
+
+Out of scope
+~~~~~~~~~~~~
+
+Only **expressions of quantities** is annotated, which can use numbers or alphabetical words.
+
+Some numbers are also used for other stuff like markers, call-out, section number, identifiers, index, reference expressions, formula parameters, etc. and all these cases are out of scope. See issue `#36 <https://github.com/kermitt2/grobid-quantities/issues/36>`_
+
+Some sequences not annotated
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reference markers:
+::
+  lower than those derived by Vaubaillon et al. (2014) and Moorhead et al. (2014) computing the corresponding impact probabilities (Milani et al. 2005)
+
+Figure/table titles, and other numbers who don't quantify anything:
+::
+    Figure 1 shows the residuals of C/2013 A1's observations
+    [Figure 1 about here.]
+    Table 1 contains the orbital elements of the computed solution.
+    our new orbit solution (JPL solution 46)
+
+Inline formulas, like:
+::
+    a minimum point of ∆v 2 = |∆v| 2 under the constraint that the particle reaches Mars, i.e., (ξ, ζ)(r, β, ∆v) = (0, 0).
+
 Quantified substance
 ~~~~~~~~~~~~~~~~~~~~
 
