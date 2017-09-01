@@ -171,7 +171,7 @@ Time tag (and difference with Date tag)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Even if only the part of a date is expressed (for example the time of a day), a complete date is implicit and the context can make it being fully quantified.
-For example `` 20:10 UTC `` will be annotated:
+For example ``20:10 UTC`` will be annotated:
 ::
   <measure type="value"><date when="2014-10-19T20:10Z">20:10 UTC</date></measure>
 With UTC inside the annotation which is important to know exactly the "time" measure.
