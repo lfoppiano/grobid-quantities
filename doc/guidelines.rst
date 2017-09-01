@@ -169,8 +169,7 @@ Special cases
 It can be considered as 20 °C (293 Kelvin), although not defined in a standard manner (https://de.wikipedia.org/wiki/Raumtemperatur).
 ::
   <measure type="value"><measure type="TEMPERATURE">Raumtemperatur</measure></measure>
-
-
+  
 
 Miscellaneous
 ~~~~~~~~~~~~~
@@ -201,6 +200,10 @@ When used with units, quantifers like ``few``, ``several``, ``a couple``, ``a la
 
 Determiners is leaved outside (``couple`` as value and ``weeks`` as unit for ``a couple of weeks``). See issue `#34 <https://github.com/kermitt2/grobid-quantities/issues/34>`_
 
+Constants
+^^^^^^^^^
+
+Precise number (for example ``c`` , the speed of light in vacuum) and imprecise numbers (for example ``π`` which has an infinite number of decimals) are annotated. See issue `#37 <https://github.com/kermitt2/grobid-quantities/issues/37>`_ 
 
 Out of scope
 ~~~~~~~~~~~~
