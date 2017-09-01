@@ -116,14 +116,19 @@ If the quantity is expressed only in term of range (without base) it can be impl
 ::
   <measure type="interval">± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>
 
-Interval markers
-^^^^^^^^^^^^^^^^
+Notes about intervals
+^^^^^^^^^^^^^^^^^^^^^
 
-Interval markers such as ``more than``, ``less than``, and so on, are left outside the annotation when it's possible.
+• Interval markers such as ``more than``, ``less than``, and so on, are left outside the annotation when it's possible (see issue `#35 <https://github.com/kermitt2/grobid-quantities/issues/35>`_).
+Example:
 ::
   more than <measure type="interval"> <num atLeast="2">2</num> </measure> 
 
-See issue `#35 <https://github.com/kermitt2/grobid-quantities/issues/35>`_ 
+• An interval can be bounded with quantities expressed in different unit multiples (see issue `#45 <https://github.com/kermitt2/grobid-quantities/issues/45>`_).
+For the sentence ``radii between 10 µm and 1 cm`` the result will be:
+::
+  grains with radii between <measure type="interval"><num atLeast="10">10</num> <measure type="LENGTH" unit="µm">µm</measure> and <num atMost="1">1</num> <measure type="LENGTH" unit="cm">cm</measure></measure>
+
 
 Lists
 ~~~~~
