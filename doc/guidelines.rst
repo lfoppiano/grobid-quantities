@@ -167,6 +167,17 @@ The encoding is then straightforward for atomic values (with attribute ``@when``
   Observations were performed on <measure type="list"><date when="2013-10-29">October 29, 2013</date>, on
   <date when="2014-01-21">Jan 21, 2014</date>, and on <date when="2014-03-11">March 11, 2014</date></measure>.
 
+Time tag (and difference with Date tag)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Even if only the part of a date is expressed (for example the time of a day), a complete date is implicit and the context can make it being fully quantified.
+For example `` 20:10 UTC `` will be annotated:
+::
+  <measure type="value"><date when="2014-10-19T20:10Z">20:10 UTC</date></measure>
+With UTC inside the annotation which is important to know exactly the "time" measure.
+
+For the time expression not linked to a date, like the expression of an "hour", is annotated with the tag ``<time>`` is then appropriate to distinguish from the ``<date>`` case (see issue `#48 <https://github.com/kermitt2/grobid-quantities/issues/48>`_).
+
 Special cases
 ^^^^^^^^^^^^^
 
