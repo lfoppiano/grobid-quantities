@@ -93,7 +93,7 @@ public class UnitUtilities {
         COUNT("count"),
         ACCELERATION("acceleration"),
         DEGREE("angle"),
-        DIFFUSION_FlUX("diffusion flux");
+        DIFFUSION_FLUX("diffusion flux");
 
         private String name;
 

@@ -2030,7 +2030,8 @@
         {
           "raw": "mol m^-2 s^-1",
           "product": [
-            { "base": "mol"
+            {
+              "base": "mol"
             },
             {
               "base": "m",
@@ -2045,7 +2046,8 @@
         {
           "raw": "mol/(m2*s)",
           "product": [
-            { "base": "mol"
+            {
+              "base": "mol"
             },
             {
               "base": "m",
@@ -2063,14 +2065,17 @@
       "supportsPrefixes": false,
       "names": [
         {
-          "lemma": "mol per squared metre per second",
-        },
-{
+          "lemma": "mol per squared metre per second"
+        }
+      ]
+    },
+    {
       "notations": [
         {
           "raw": "molecules m^-2 s^-1",
           "product": [
-            { "base": "molecules"
+            {
+              "base": "molecules"
             },
             {
               "base": "m",
@@ -2085,7 +2090,8 @@
         {
           "raw": "molecules/(m2*s)",
           "product": [
-            { "base": "molecules"
+            {
+              "base": "molecules"
             },
             {
               "base": "m",
@@ -2103,9 +2109,9 @@
       "supportsPrefixes": false,
       "names": [
         {
-          "lemma": "molecules per squared metre per second",
+          "lemma": "molecules per squared metre per second"
         }
       ]
-    }  
+    }
   ]
 }
