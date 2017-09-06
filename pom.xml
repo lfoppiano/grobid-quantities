@@ -6,14 +6,14 @@
     <parent>
         <groupId>org.grobid</groupId>
         <artifactId>grobid-parent</artifactId>
-        <version>0.4.2-SNAPSHOT</version>
+        <version>0.4.3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.grobid</groupId>
     <artifactId>grobid-quantities</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.4.2-SNAPSHOT</version>
+    <version>0.4.3-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
@@ -194,11 +194,6 @@
         </dependency>
 
         <!-- XML & JSON processing -->
-        <!--dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.8.5</version>
-        </dependency-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -236,11 +231,6 @@
             <artifactId>jersey-multipart</artifactId>
             <version>${jersey.version}</version>
         </dependency>
-        <!--       <dependency>
-                   <groupId>com.sun.jersey</groupId>
-                   <artifactId>jersey-bundle</artifactId>
-                   <version>${jersey.version}</version>
-               </dependency>-->
 
         <dependency>
             <groupId>org.jvnet</groupId>
@@ -284,6 +274,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
                 <configuration>
                     <archive>
                         <manifest>
