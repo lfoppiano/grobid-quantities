@@ -120,16 +120,16 @@ public class QuantityParser extends AbstractParser {
             }
 
             String ress = null;
-            List<String> texts = new ArrayList<>();
+            /*List<String> texts = new ArrayList<>();
             for (LayoutToken token : tokens) {
                 if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
                     texts.add(token.getText());
                 }
-            }
+            }*/
 
             // to store unit term positions
-            List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
-            ress = addFeatures(texts, unitTokenPositions);
+            List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokens);
+            ress = addFeatures(tokens, unitTokenPositions);
             String res;
             try {
                 res = label(ress);
@@ -281,16 +281,17 @@ public class QuantityParser extends AbstractParser {
         tokenizationParts = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(tokenizationParts);
 
         // list of textual tokens of the selected segment
-        List<String> texts = getTexts(tokenizationParts);
+        //List<String> texts = getTexts(tokenizationParts);
 
-        if ((texts == null) || (texts.size() == 0))
+        //if ((texts == null) || (texts.size() == 0))
+        if ((tokenizationParts == null) || (tokenizationParts.size() == 0))
             return measurements;
 
         // positions for lexical match
-        List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
+        List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokenizationParts);
 
         // string representation of the feature matrix for CRF lib
-        String ress = addFeatures(texts, unitTokenPositions);
+        String ress = addFeatures(tokenizationParts, unitTokenPositions);
 
         if ((ress == null) || (ress.trim().length() == 0))
             return measurements;
@@ -318,7 +319,7 @@ public class QuantityParser extends AbstractParser {
     /**
      * Give the list of textual tokens from a list of LayoutToken
      */
-    private static List<String> getTexts(List<LayoutToken> tokenizations) {
+    /*private static List<String> getTexts(List<LayoutToken> tokenizations) {
         List<String> texts = new ArrayList<>();
         for (LayoutToken token : tokenizations) {
             if (isNotEmpty(trim(token.getText())) &&
@@ -331,7 +332,7 @@ public class QuantityParser extends AbstractParser {
             }
         }
         return texts;
-    }
+    }*/
 
     public List<Measurement> normalizeMeasurements(List<Measurement> measurements) {
         for (Measurement measurement : measurements) {
@@ -516,16 +517,16 @@ public class QuantityParser extends AbstractParser {
                     continue;
 
                 String ress = null;
-                List<String> texts = new ArrayList<>();
+                /*List<String> texts = new ArrayList<>();
                 for (LayoutToken token : tokens) {
                     if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
                         texts.add(token.getText());
                     }
-                }
+                }*/
 
                 // to store unit term positions
-                List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
-                ress = addFeatures(texts, unitTokenPositions);
+                List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokens);
+                ress = addFeatures(tokens, unitTokenPositions);
                 String res = null;
                 try {
                     res = label(ress);
@@ -577,17 +578,17 @@ public class QuantityParser extends AbstractParser {
                     continue;
 
                 String ress = null;
-                List<String> texts = new ArrayList<String>();
+                /*List<String> texts = new ArrayList<String>();
                 for (LayoutToken token : tokenizations) {
                     if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
                         texts.add(token.getText());
                     }
-                }
+                }*/
 
                 // to store unit term positions
                 List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
-                unitTokenPositions = quantityLexicon.inUnitNames(texts);
-                ress = addFeatures(texts, unitTokenPositions);
+                unitTokenPositions = quantityLexicon.inUnitNames(tokenizations);
+                ress = addFeatures(tokenizations, unitTokenPositions);
                 String res = null;
                 try {
                     res = label(ress);
@@ -665,16 +666,16 @@ public class QuantityParser extends AbstractParser {
                     continue;
 
                 String ress = null;
-                List<String> texts = new ArrayList<String>();
+                /*List<String> texts = new ArrayList<String>();
                 for (LayoutToken token : tokenizations) {
                     if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
                         texts.add(token.getText());
                     }
-                }
+                }*/
 
                 // to store unit term positions
-                List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(texts);
-                ress = addFeatures(texts, unitTokenPositions);
+                List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokenizations);
+                ress = addFeatures(tokenizations, unitTokenPositions);
                 String res = null;
                 try {
                     res = label(ress);
@@ -749,18 +750,29 @@ public class QuantityParser extends AbstractParser {
     }
 
     @SuppressWarnings({"UnusedParameters"})
-    private String addFeatures(List<String> texts,
+    private String addFeatures(List<LayoutToken> tokens,
                                List<OffsetPosition> unitTokenPositions) {
-        int totalLine = texts.size();
+        int totalLine = tokens.size();
         int posit = 0;
         int currentQuantityIndex = 0;
         List<OffsetPosition> localPositions = unitTokenPositions;
         boolean isUnitPattern = false;
         StringBuilder result = new StringBuilder();
         try {
-            for (String token : texts) {
-                if (token.trim().equals("@newline")) {
+            for (LayoutToken token : tokens) {
+                if (token.getText().trim().equals("@newline")) {
                     result.append("\n");
+                    continue;
+                }
+
+                String text = token.getText();
+                if (text.equals(" ") || text.equals("\n")) {
+                    continue;
+                }
+
+                // parano normalisation
+                text = UnicodeUtil.normaliseTextAndRemoveSpaces(text);
+                if (text.trim().length() == 0 ) {
                     continue;
                 }
 
@@ -783,9 +795,9 @@ public class QuantityParser extends AbstractParser {
                 }
 
                 FeaturesVectorQuantities featuresVector =
-                        FeaturesVectorQuantities.addFeaturesQuantities(token, null,
-                                quantityLexicon.inUnitDictionary(token), isUnitPattern,
-                                quantityLexicon.isNumberToken(token));
+                        FeaturesVectorQuantities.addFeaturesQuantities(text, null,
+                                quantityLexicon.inUnitDictionary(text), isUnitPattern,
+                                quantityLexicon.isNumberToken(text));
                 result.append(featuresVector.printVector());
                 result.append("\n");
                 posit++;

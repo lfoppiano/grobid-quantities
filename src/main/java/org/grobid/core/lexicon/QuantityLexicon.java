@@ -7,6 +7,7 @@ import org.grobid.core.data.RegexValueHolder;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.utilities.*;
+import org.grobid.core.layout.LayoutToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -403,15 +404,15 @@ public class QuantityLexicon {
         if (unitPattern == null) {
             init();
         }
-        List<OffsetPosition> results = unitPattern.matcher(s);
+        List<OffsetPosition> results = unitPattern.matchToken(s);
         return results;
     }
 
-    public List<OffsetPosition> inUnitNames(List<String> s) {
+    public List<OffsetPosition> inUnitNames(List<LayoutToken> s) {
         if (unitPattern == null) {
             init();
         }
-        List<OffsetPosition> results = unitPattern.matcher(s);
+        List<OffsetPosition> results = unitPattern.matchLayoutToken(s);
         return results;
     }
 
