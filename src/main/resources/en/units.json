@@ -2112,6 +2112,21 @@
           "lemma": "molecules per squared metre per second"
         }
       ]
-    }
+    },
+    {
+      "notations": [
+        {
+          "raw": "Jy"
+        }
+      ],
+      "type": "SPECTRAL_FLUX_DENSITY",
+      "system": "NON_SI",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "Jansky"
+        }
+      ]
+    },
   ]
 }

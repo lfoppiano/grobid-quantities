@@ -71,6 +71,7 @@ public class UnitUtilities {
         SPECTRAL_RESPONSITIVY("spectral responsivity"),
         SPECTRAL_TRANSMITTANCE("regular spectral transmittance"),
         SPECTRAL_REFLECTANCE("diffuse spectral reflectance"),
+        SPECTRAL_FLUX_DENSITY("spectral flux density"),
         REFLECTANCE("reflectance"),
         DETECTOR_PASSBAND("detector passband"),
         THERMAL_CONDUCTIVITY("thermal conductivity"),
