@@ -17,17 +17,18 @@ To see the different evaluation options, see GROBID documentation on `training a
 Annotations
 -----------
 
-There are three types of measurements supported by grobid-quantities. Measur
-ement corresponding to single value (or *atomic* value), to an interval (or range of values) or to a list.
+There are three types of measurements supported by grobid-quantities. Measurement corresponding to single value (or *atomic* value), to an interval (or range of values) or to a list.
 We do not distinguish conjunctive and disjunctive lists at the present time.
 
 List of unit types
 ~~~~~~~~~~~~~~~~~~
 
-For the training annotation, the list of unit types (temperature, pressure, lenght, etc.) is controled and based on SI definitions. This control is normally exhaustive and contains currently 50 types. The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. 
+For the training annotation, the list of unit types (temperature, pressure, length, etc.) is controled and based on SI definitions. This control is normally exhaustive and contains currently 50 types. The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. 
 The given names of the unit types has to be used when annotating measurement. 
 
-The list of units is however not controlled and GROBID supports units never seen before. 
+In the future, the list of units should however not be controlled and GROBID should support units never seen before.
+
+For now it is admitted to annotate with ``UNKNOWN`` in case of doubt about the type (see for example ``rad.m^-2``, in issue `#51 <https://github.com/kermitt2/grobid-quantities/issues/51>`_).
 
 Atomic values
 ~~~~~~~~~~~~~
