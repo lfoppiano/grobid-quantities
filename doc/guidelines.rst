@@ -42,19 +42,25 @@ The indicate of the unit name by the attribute ```@unit``` is optional: if prese
 A global ```<measure>``` element encodes the complete measurement (composed by the numeric value and the unit) associated with the measurement type given by the attribute ```@type``` ```value```.
 
 Example 1:
-::
+
+.. code-block:: xml
+
    We monitored nutritional behaviour of amateur ski-mountaineering athletes during <measure type="value"><num>4</num>
    <measure type="TIME" unit="day">days</measure></measure> prior to a major competition to compare it with official
    recommendations and with the athletes' beliefs.
 
 Example 2:
-::
+
+.. code-block:: xml
+
    ... more than <measure type="value"><num>20</num> <measure type="ENERGY" unit="MJ">MJ</measure></measure> (<measure
    type="value"><num>4,800</num> <measure type="ENERGY" unit="kcal">kcal</measure></measure>) for the shorter race route...
 
 
 A percentage (and similar expression per mil and per ten thousand) has a unit type **Unit_Type.FRACTION**:
-::
+
+.. code-block:: xml
+
    <measure type="value"><num>5</num> <measure type="FRACTION" unit="%">%</measure></measure> of fat mass...
 
 
@@ -64,7 +70,9 @@ Atomic value without unit
 They corresponding to a count (implicit **Unit_Type.COUNT**). The numeric value is encoded with element ``<num>`` and the global ``<measure>`` element indicating the measurement type is added.
 
 For example: 
-::
+
+.. code-block:: xml
+
    consists of <measure type="value"><num>two</num></measure> different race routes
 
 The implicit **Unit_Type.COUNT** type will be infer by this particular encoding. Not that this encoding is only relevant to countable quantities.
@@ -79,13 +87,17 @@ An interval introduces a range of values. We can distinguish two kinds of interv
 ^^^^^^^^^^^^^
 
 Interval defined by a lower bound value and an upper bound value:
-::
+
+.. code-block:: xml
+
    team races that can last from <measure type="interval"><num atLeast="4">4</num> to more than <num atMost="12">12</num>
    <measure type="TIME" unit="hour">h</measure></measure>
 
 
 Note that an interval can be introduced by only one boundary value: 
-::
+
+.. code-block:: xml
+
   A rotor shaft according to any one of the preceding claims having a diameter of at least <measure type="interval"><num
   atLeast="1">1</num><measure type="LENGTH" unit="m">m</measure></measure>
 
@@ -96,16 +108,22 @@ Note that an interval can be introduced by only one boundary value:
 2. Base and differential value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Take the example
-::
+
+.. code-block:: xml
+
    4 women and 15 men, 30± 10 years, 176±7 cm, 70±9 kg, 15±5 % of fat mass, VO2max: 50±8 ml·kg−1·min−1 and 21 of race A
 
 after two "counts", four measurements express intervals following this form.
-::
+
+.. code-block:: xml
+
   <measure type="value"><num>4</num></measure> women and <measure type="value"><num>15</num></measure> men,
 
 Similarly as in the previous interval case, an attribute in element ``<num>``, here ``@type``, characterizes the
 *base* value and the *differential/range* value.
-::
+
+.. code-block:: xml
+
   <measure type="interval"><num type="base">30</num> ± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>,
   <measure type="interval"><num type="base">176</num> ± <num type="range">7</num><measure type="LENGTH" unit="cm">cm</measure></measure>,
   <measure type="interval"><num type="base">70</num> ± <num type="range">9</num> <measure type="MASS" unit="kg">kg</measure></measure>,
@@ -113,21 +131,27 @@ Similarly as in the previous interval case, an attribute in element ``<num>``, h
 
 
 If the quantity is expressed only in term of range (without base) it can be implicitly assumed that the base=0, see example ± 10 years
-::
+
+.. code-block:: xml
+
   <measure type="interval">± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>
 
 Notes about intervals
 ^^^^^^^^^^^^^^^^^^^^^
 
 • Interval markers such as ``more than``, ``less than``, and so on, are left outside the annotation when it's possible (see issue `#35 <https://github.com/kermitt2/grobid-quantities/issues/35>`_).
-Example:
-::
-  more than <measure type="interval"> <num atLeast="2">2</num> </measure> 
+  Example:
+
+  .. code-block:: xml
+
+    more than <measure type="interval"> <num atLeast="2">2</num> </measure> 
 
 • An interval can be bounded with quantities expressed in different unit multiples (see issue `#45 <https://github.com/kermitt2/grobid-quantities/issues/45>`_).
-For the sentence ``radii between 10 µm and 1 cm`` the result will be:
-::
-  grains with radii between <measure type="interval"><num atLeast="10">10</num> <measure type="LENGTH" unit="µm">µm</measure> and <num atMost="1">1</num> <measure type="LENGTH" unit="cm">cm</measure></measure>
+  For the sentence ``radii between 10 µm and 1 cm`` the result will be:
+
+  .. code-block:: xml
+
+    grains with radii between <measure type="interval"><num atLeast="10">10</num> <measure type="LENGTH" unit="µm">µm</measure> and <num atMost="1">1</num> <measure type="LENGTH" unit="cm">cm</measure></measure>
 
 
 Lists
@@ -135,14 +159,18 @@ Lists
 
 Lists introduce series of values. The unit can be expressed per value or for several values at the same time.
 A ``<measure>`` element encloses the whole list of values including their units:
-::
+
+.. code-block:: xml
+
    <measure type="list"><measure type="ENERGY" unit="cm^-1">cm-1</measure>: <num>3440</num>(br), <num>1662</num>,
    <num>1632</num>, <num>1575</num>, <num>1536</num>, <num>1498</num>, <num>1411</num>, <num>1370</num>, <num>1212</num>,
    <num>1006</num>, <num>826</num>, <num>751</num></measure>
 
 
 List can be disjunctive or conjunctive, we do not distinguish the two kinds of list at the present time:
-::
+
+.. code-block:: xml
+
   batches of <measure type="list"><num>three</num> or <num>four</num></measure> observations
 
 Additional items
@@ -153,7 +181,9 @@ Dates
 Dates are time measurements, they are thus also encoded in the training data as a complement to the other _TIME_ expressions involving time units.
 In TEI P5, the dates are marked with a specific element ``<date>`` which can be contained in an element ``<measure>``.
 The encoding is then straightforward for atomic values (with attribute ``@when``), intervals (with attribute ``@from-iso`` and ``@to-iso`` in case on min-max intervals) and lists:
-::
+
+.. code-block:: xml
+
   Comet C/2013 A1 (Siding Spring) will have a close encounter with Mars on <measure type="value">
   <date when="2014-10-19">October 19, 2014</date></measure>.
 
@@ -172,7 +202,9 @@ Time tag (and difference with Date tag)
 
 Even if only the part of a date is expressed (for example the time of a day), a complete date is implicit and the context can make it being fully quantified.
 For example ``20:10 UTC`` will be annotated:
-::
+
+.. code-block:: xml
+
   <measure type="value"><date when="2014-10-19T20:10Z">20:10 UTC</date></measure>
 With UTC inside the annotation which is important to know exactly the "time" measure.
 
@@ -181,11 +213,23 @@ For the time expression not linked to a date, like the expression of an "hour", 
 Special cases
 ^^^^^^^^^^^^^
 
-**Room temperature** (Raumtemperatur, température ambiante, ...) is used very frequently in chemistry and related fields.
-It can be considered as 20 °C (293 Kelvin), although not defined in a standard manner (https://de.wikipedia.org/wiki/Raumtemperatur).
-::
-  <measure type="value"><measure type="TEMPERATURE">Raumtemperatur</measure></measure>
-  
+**Frozen quantity expressions like** *decade* **or** *Room temperature* 
+
+
+- **Room temperature**
+  (Raumtemperatur, température ambiante, ...) is used very frequently in chemistry and related fields. It can be considered as 20 °C (293 Kelvin), although not defined in a standard manner (https://de.wikipedia.org/wiki/Raumtemperatur).
+
+  .. code-block:: xml
+
+    <measure type="value"><measure type="TEMPERATURE">Raumtemperatur</measure></measure>
+
+- **Decade** (issue `#52 <https://github.com/kermitt2/grobid-quantities/issues/52>`_ )
+
+  .. code-block:: xml
+
+    over  <measure type="interval"><num atLeast="2">two</num> <measure type="TIME" >decades</measure></measure>
+
+    
 
 Miscellaneous
 ~~~~~~~~~~~~~
@@ -195,13 +239,17 @@ Units without values
 
 **Case where it's not annotated**: 
 When we refer to the units as such, to express something about the units, we are not using the units to quantify something with a value:
-::
+
+.. code-block:: xml
+
   and r H are the geocentric and heliocentric distances in cm and AU, respectively, and F comet and F
 Like here for the units: ``cm`` and ``AU``.
 
 **Case where it's annotated**: 
 We could have units expressed without values, when the value is implicit:
-::
+
+.. code-block:: xml
+
   that can extend <measure type="interval"><measure type="LENGTH" unit="mm">millimeters</measure></measure> or even <measure type="interval"><measure type="LENGTH" unit="cm">centimeters</measure></measure> from the cell body 
 
 here the value of millimeters and centimeters is unspecified (e.g. equivalent to ``several``), but we have a quantity and more precisely an interval.
@@ -211,7 +259,9 @@ Unprecise quantifiers
 ^^^^^^^^^^^^^^^^^^^^^
 
 When used with units, quantifers like ``few``, ``several``, ``a couple``, ``a large amount of`` is annotated, and whatever quantifies even imprecisely :
-::
+
+.. code-block:: xml
+
   the reference solution becomes distinct from the ballistic solution only a <measure type="value"><num>couple</num> of <measure type="TIME" unit="week">weeks</measure></measure> before the encounter. 
 
 Determiners is leaved outside (``couple`` as value and ``weeks`` as unit for ``a couple of weeks``). See issue `#34 <https://github.com/kermitt2/grobid-quantities/issues/34>`_
@@ -227,7 +277,9 @@ Exponents for powers of ten
 Exponents might be rewritten in documents, for example 10 power -6 in pdf becomes ``10 &#x2212;6``.
 The exponents for power of ten is written in the attribute when there is one, 10 power -6 will be written ``10^-6``.
 Example in interval:
-::
+
+.. code-block:: xml
+
   <measure type="interval"><num atMost="10^-6">10 −6</num></measure>
 
 See issue `#38 <https://github.com/kermitt2/grobid-quantities/issues/38>`_ 
@@ -244,18 +296,24 @@ Some sequences not annotated
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Reference markers:
-::
+
+.. code-block:: xml
+
   lower than those derived by Vaubaillon et al. (2014) and Moorhead et al. (2014) computing the corresponding impact probabilities (Milani et al. 2005)
 
 Figure/table titles, and other numbers who don't quantify anything:
-::
+
+.. code-block:: xml
+
     Figure 1 shows the residuals of C/2013 A1's observations
     [Figure 1 about here.]
     Table 1 contains the orbital elements of the computed solution.
     our new orbit solution (JPL solution 46)
 
 Inline formulas, like:
-::
+
+.. code-block:: xml
+
     a minimum point of ∆v 2 = |∆v| 2 under the constraint that the particle reaches Mars, i.e., (ξ, ζ)(r, β, ∆v) = (0, 0).
 
 Quantified substance
@@ -270,17 +328,23 @@ Case not yet supported
 The following cases are not annotated at this stage. The sentence when these cases occur should be put in comments for the moment.  
 
 **Sigma estimation**
-::
+
+.. code-block:: xml
+
   We selected the A 1 uncertainty so that its range would span from 0 au/d 2 to twice the nominal value at 3&#x3C3;.
 
 **Intervals embedded in intervals**
-::
+
+.. code-block:: xml
+
   [..]only Mars is near enough that the orbital motion can extend a single viewing window from 45 days to as much as 60 to 90 days.
 
   For the wide scenario the uncertainty goes from 45 min down to 1–2 min.
 
 Note: one possibility is to only mark the external boundaries of the interval.
-::
+
+.. code-block:: xml
+
   [..]only Mars is near enough that the orbital motion can extend a single viewing window from <measure type="interval">
   <num atLeast="45">45</num><measure type="TIME" unit="day">days</measure> to as much as 60 to <num atMost="90">90</num>
   <measure type="TIME" unit="day">days</measure></measure>.
@@ -291,9 +355,13 @@ Note: one possibility is to only mark the external boundaries of the interval.
 **Discontinuous cases**
 
 Quantities expressed by a power of ten multiplication (see issue `#42 <https://github.com/kermitt2/grobid-quantities/issues/42>`_):
-::
+
+.. code-block:: xml
+
   A1 (Siding Spring) will pass Mars with a close approach distance of 1.35 ± 0.05 × 10 5 km
 or like:
-::
+
+.. code-block:: xml
+
   The gas production rates, Q(CO 2 ) = (3.52> ± 0.03) × 10 26 molecules s −1
 
