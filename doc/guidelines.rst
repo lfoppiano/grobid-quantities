@@ -351,7 +351,11 @@ Note: one possibility is to only mark the external boundaries of the interval.
 
   For the wide scenario the uncertainty goes from <measure type="interval"><num atLeast="45">45</num>
   <measure type="TIME" unit="days">min</measure> down to 1–<num atMost="2">2</num> <measure type="TIME" unit="min">min</measure></measure>.
-  
+
+**Unit embedded in numerical value**
+
+For example ``92°.5`` wich would require to embed ``<measure>`` in ``<num>`` (issue `#49 <https://github.com/kermitt2/grobid-quantities/issues/49>`_)
+
 **Discontinuous cases**
 
 Quantities expressed by a power of ten multiplication (see issue `#42 <https://github.com/kermitt2/grobid-quantities/issues/42>`_):
