@@ -28,7 +28,7 @@ The given names of the unit types has to be used when annotating measurement.
 
 In the future, the list of units should however not be controlled and GROBID should support units never seen before.
 
-For now it is admitted to annotate with ``UNKNOWN`` in case of doubt about the type (see for example ``rad.m^-2``, in issue `#51 <https://github.com/kermitt2/grobid-quantities/issues/51>`_).
+For now it is admitted to annotate with ``UNKNOWN`` in case of doubt about the type (see for example ``rad.m^-2``, in issue `#51 <https://github.com/kermitt2/grobid-quantities/issues/51>`_ and others in issue `#53 <https://github.com/kermitt2/grobid-quantities/issues/53>`_).
 
 Atomic values
 ~~~~~~~~~~~~~
