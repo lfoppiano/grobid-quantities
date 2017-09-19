@@ -22,39 +22,27 @@ public class UnitTrainingDataGenerator {
     private static final Logger LOGGER = LoggerFactory.getLogger(UnitTrainingDataGenerator.class);
 
     private List<UnitUtilities.Unit_Type> exclusions
-            = Arrays.asList(new UnitUtilities.Unit_Type[]{
+            = Arrays.asList(
             UnitUtilities.Unit_Type.VO2_MAX,
             UnitUtilities.Unit_Type.TEMPERATURE,
             UnitUtilities.Unit_Type.DENSITY
-    });
+    );
 
-    private String XML_PREFIX = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
-
-    private String XML_UNITS_START = "<units>";
-    private String XML_UNITS_END = "</units>";
-
-    private String XML_UNIT_START = "<unit>";
-    private String XML_UNIT_END = "</unit>";
-
-    private String XML_POW_START = "<pow>";
-    private String XML_POW_END = "</pow>";
-
-    private String XML_BASE_START = "<base>";
-    private String XML_BASE_END = "</base>";
-
-    private String XML_PREFIX_START = "<prefix>";
-    private String XML_PREFIX_END = "</prefix>";
+    private final static String XML_PREFIX = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
+    private final static String XML_UNITS_START = "<units>";
+    private final static String XML_UNITS_END = "</units>";
+    private final static String XML_UNIT_START = "<unit>";
+    private final static String XML_UNIT_END = "</unit>";
+    private final static String XML_POW_START = "<pow>";
+    private final static String XML_POW_END = "</pow>";
+    private final static String XML_BASE_START = "<base>";
+    private final static String XML_BASE_END = "</base>";
+    private final static String XML_PREFIX_START = "<prefix>";
+    private final static String XML_PREFIX_END = "</prefix>";
 
     protected Pair<String, String> separateBaseAndPow(String value) {
 
-        List<Character> powChars = Arrays.asList(new Character[]{
-                new Character('^'),
-                new Character('⁻'),
-                new Character('¹'),
-                new Character('²'),
-                new Character('³'),
-                new Character('-')
-        });
+        List<Character> powChars = Arrays.asList('^', '⁻', '¹', '²', '³', '-');
 
         String base = "";
         String pow = "";

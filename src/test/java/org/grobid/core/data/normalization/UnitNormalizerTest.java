@@ -22,10 +22,7 @@ public class UnitNormalizerTest {
     private UnitNormalizer target;
     private UnitParser mockUnitParser;
     private QuantityLexicon mockQuantityLexicon;
-
-    /**
-     * We shall run the test without this...
-     */
+    
     @BeforeClass
     public static void setUpClass() throws Exception {
         LibraryLoader.load();
