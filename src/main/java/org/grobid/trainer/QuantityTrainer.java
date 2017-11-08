@@ -5,11 +5,9 @@ import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorQuantities;
 import org.grobid.core.lexicon.QuantityLexicon;
-import org.grobid.core.mock.MockContext;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
-import org.grobid.trainer.evaluation.EvaluationUtilities;
 import org.grobid.trainer.sax.MeasureAnnotationSaxHandler;
 
 import javax.xml.parsers.SAXParser;
@@ -229,22 +227,16 @@ public class QuantityTrainer extends AbstractTrainer {
      */
     public static void main(String[] args) {
         try {
-            String pGrobidHome = "../grobid-home";
+            /*String pGrobidHome = "../grobid-home";
             String pGrobidProperties = "../grobid-home/config/grobid.properties";
 
-            MockContext.setInitialContext(pGrobidHome, pGrobidProperties);
+            MockContext.setInitialContext(pGrobidHome, pGrobidProperties);*/
             GrobidProperties.getInstance();
 
             Trainer trainer = new QuantityTrainer();
             AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                MockContext.destroyInitialContext();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        } 
     }
 }

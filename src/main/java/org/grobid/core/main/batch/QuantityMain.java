@@ -1,8 +1,10 @@
 package org.grobid.core.main.batch;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.grobid.core.engines.QuantityParser;
 import org.grobid.core.main.LibraryLoader;
-import org.grobid.core.mock.MockContext;
+import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.UnitTrainingDataGenerator;
 
@@ -39,7 +41,7 @@ public class QuantityMain {
     /**
      * Infer some parameters not given in arguments.
      */
-    protected static void inferParamsNotSet() {
+    /*protected static void inferParamsNotSet() {
         String tmpFilePath;
         if (gbdArgs.getPath2grobidHome() == null) {
             tmpFilePath = new File("grobid-home").getAbsolutePath();
@@ -47,19 +49,28 @@ public class QuantityMain {
             gbdArgs.setPath2grobidHome(tmpFilePath);
             gbdArgs.setPath2grobidProperty(new File("grobid.properties").getAbsolutePath());
         }
-    }
+    }*/
 
     /**
      * Initialize the batch.
      */
     protected static void initProcess() {
         try {
-            MockContext.setInitialContext(gbdArgs.getPath2grobidHome(), gbdArgs.getPath2grobidProperty());
+            GrobidProperties.getInstance();
             LibraryLoader.load();
         } catch (final Exception exp) {
             System.err.println("Grobid initialisation failed: " + exp);
         }
-        GrobidProperties.getInstance();
+    }
+
+    protected static void initProcess(String grobidHome) {
+        try{
+            GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(grobidHome));
+            GrobidProperties.getInstance(grobidHomeFinder);
+            LibraryLoader.load();
+        } catch (final Exception exp){
+            System.err.println("Grobid initialisation failed: " + exp);
+        }
     }
 
     /**
@@ -162,8 +173,13 @@ public class QuantityMain {
         gbdArgs = new GrobidMainArgs();
 
         if (processArgs(args) && (gbdArgs.getProcessMethodName() != null)) {
-            inferParamsNotSet();
-            initProcess();
+            
+            if (StringUtils.isEmpty(gbdArgs.getPath2grobidHome())){
+                initProcess();
+            } else {
+                initProcess(gbdArgs.getPath2grobidHome());
+            }
+
             int nb = 0;
             QuantityParser quantityParser = QuantityParser.getInstance();
             
@@ -176,10 +192,11 @@ public class QuantityMain {
             } else if(gbdArgs.getProcessMethodName().equals("generateTrainingUnits")){
                 UnitTrainingDataGenerator unitTrainingDataGenerator = new UnitTrainingDataGenerator();
                 unitTrainingDataGenerator.generateData(gbdArgs.getPath2Input(), gbdArgs.getPath2Output());
+            } else {
+                getHelp();
             }
             System.out.println(nb + " files processed in " + (System.currentTimeMillis() - time) + " milliseconds");
         }
-
     }
 
 }

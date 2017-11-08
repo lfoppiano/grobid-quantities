@@ -3,17 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <parent>
+    <!--parent>
         <groupId>org.grobid</groupId>
         <artifactId>grobid-parent</artifactId>
-        <version>0.4.3-SNAPSHOT</version>
+        <version>0.5.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
-    </parent>
+    </parent-->
 
     <groupId>org.grobid</groupId>
     <artifactId>grobid-quantities</artifactId>
     <name>${project.artifactId}</name>
-    <version>0.4.3-SNAPSHOT</version>
+    <version>0.5.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
@@ -21,7 +21,6 @@
         <assemblies.name>src/main/assembly/assembly.xml</assemblies.name>
         <package.file>${project.groupId}.${project.artifactId}_${project.version}.war</package.file>
         <license.file>${basedir}/LICENSE</license.file>
-        <!-- <notice.file>${basedir}/NOTICE</notice.file> -->
         <jersey.version>1.8</jersey.version>
         <jackson.version>2.9.0.pr3</jackson.version>
     </properties>
@@ -78,12 +77,12 @@
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-core</artifactId>
-            <version>0.4.3-SNAPSHOT</version>
+            <version>0.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.grobid</groupId>
             <artifactId>grobid-trainer</artifactId>
-            <version>0.4.3-SNAPSHOT</version>
+            <version>0.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>net.arnx</groupId>
