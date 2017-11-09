@@ -36,14 +36,8 @@ public class QuantityRestService implements QuantityPaths {
         LOGGER.info("Init lexicon and KB resources.");
         try {
             InitialContext intialContext = new javax.naming.InitialContext();
-            /*String path2grobidHome = (String) intialContext.lookup("java:comp/env/org.grobid.home");
-            String path2grobidProperty = (String) intialContext.lookup("java:comp/env/org.grobid.property");
-
-            System.out.println(path2grobidHome);
-            System.out.println(path2grobidProperty);*/
-
-            GrobidProperties.getInstance();
             LibraryLoader.load();
+            GrobidProperties.getInstance();
             QuantityLexicon.getInstance();
         } catch (final Exception exp) {
             System.err.println("GROBID Quantities initialisation failed: " + exp);

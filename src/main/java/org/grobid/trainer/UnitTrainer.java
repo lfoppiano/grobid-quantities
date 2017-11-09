@@ -195,16 +195,12 @@ public class UnitTrainer extends AbstractTrainer {
      */
     public static void main(String[] args) {
         try {
-            //String pGrobidHome = "../grobid-home";
-            //String pGrobidProperties = "../grobid-home/config/grobid.properties";
-
-            //MockContext.setInitialContext(pGrobidHome, pGrobidProperties);
             GrobidProperties.getInstance();
 
             Trainer trainer = new UnitTrainer();
             AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        }
     }
 }
