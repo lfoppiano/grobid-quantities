@@ -27,9 +27,9 @@ public class QuantityTrainer extends AbstractTrainer {
 
     public QuantityTrainer() {
         super(QuantitiesModels.QUANTITIES);
-		// adjusting CRF training parameters for this model
-		epsilon = 0.000001;
-		window = 20;
+        // adjusting CRF training parameters for this model
+        epsilon = 0.000001;
+        window = 20;
 
         quantityLexicon = QuantityLexicon.getInstance();
     }
@@ -92,7 +92,7 @@ public class QuantityTrainer extends AbstractTrainer {
                 File thefile = refFiles[n];
                 name = thefile.getName();
                 LOGGER.info(name);
-                
+
                 Writer writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
 
                 MeasureAnnotationSaxHandler handler = new MeasureAnnotationSaxHandler();
@@ -131,7 +131,7 @@ public class QuantityTrainer extends AbstractTrainer {
             }
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
-        }    finally {
+        } finally {
             IOUtils.closeQuietly(evaluationOutputWriter, trainingOutputWriter);
         }
         return totalExamples;
@@ -221,18 +221,14 @@ public class QuantityTrainer extends AbstractTrainer {
     }
 
     /**
-     * Command line execution.
+     * Command line execution. Assuming grobid-home is in ../grobid-home.
      *
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        try {
-            GrobidProperties.getInstance();
+        GrobidProperties.getInstance();
 
-            Trainer trainer = new QuantityTrainer();
-            AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Trainer trainer = new QuantityTrainer();
+        AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
     }
 }

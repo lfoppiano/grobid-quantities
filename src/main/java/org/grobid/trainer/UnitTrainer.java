@@ -189,18 +189,14 @@ public class UnitTrainer extends AbstractTrainer {
     }
 
     /**
-     * Command line execution.
+     * Command line execution. Assuming grobid-home is in ../grobid-home
      *
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        try {
-            GrobidProperties.getInstance();
+        GrobidProperties.getInstance();
 
-            Trainer trainer = new UnitTrainer();
-            AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Trainer trainer = new UnitTrainer();
+        AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
     }
 }
