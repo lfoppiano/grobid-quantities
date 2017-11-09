@@ -8,7 +8,7 @@
     <artifactId>grobid-quantities</artifactId>
     <name>${project.artifactId}</name>
     <version>0.5.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -244,26 +244,31 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>org.grobid.core.main.batch.QuantityMain</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <id>make-a-jar</id>
+                        <phase>compile</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.jolira</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.4</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>org.grobid.core.main.batch.QuantityMain</mainClass>
+                            <onejarVersion>0.97</onejarVersion>
+                            <attachToBuild>true</attachToBuild>
+                            <classifier>onejar</classifier>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -293,9 +298,6 @@
                     <systemPropertyVariables>
                         <log4j.configuration>log4j-test.xml</log4j.configuration>
                     </systemPropertyVariables>
-                    <!--argLine>-Djava.library.path=${basedir}/lib/</argLine> <systemProperties>
-                        <property> <name>java.library.path</name> <value>lib/</value> </property>
-                        </systemProperties -->
                 </configuration>
             </plugin>
 
@@ -307,25 +309,19 @@
                     <webResources>
                         <resource>
                             <directory>src/main/webapp/WEB-INF</directory>
-                            <!--excludes>
-                                <exclude>src/main/resources/</exclude>
-                            </excludes-->
-                            <!--includes>
-                                <include>web.xml</include>
-                            </includes-->
-                            <!--filtering>true</filtering-->
                             <targetPath>WEB-INF</targetPath>
                         </resource>
-                        <!--resource>
-                            <directory>doc</directory>
-                            <targetPath>doc</targetPath>
-                        </resource-->
-                        <!--resource>
-                            <directory>lib</directory>
-                            <targetPath>WEB-INF/lib</targetPath>
-                        </resource-->
                     </webResources>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>war-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
