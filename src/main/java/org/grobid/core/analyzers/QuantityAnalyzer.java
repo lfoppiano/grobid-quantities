@@ -1,6 +1,7 @@
 package org.grobid.core.analyzers;
 
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.lang.Language;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,10 @@ public class QuantityAnalyzer implements Analyzer {
         }
 
         return result;
+    }
+
+    public List<String> tokenize(String text, Language lang) {
+        return tokenize(text);
     }
 
     public List<LayoutToken> tokenizeWithLayoutToken(String text) {

@@ -226,7 +226,7 @@ public class QuantityLexicon {
                 for (String derivation : derivations) {
                     unitDefinition.addName(derivation);
                     try {
-                        unitPattern.loadTerm(derivation);
+                        unitPattern.loadTerm(derivation, QuantityAnalyzer.getInstance());
                     } catch (Exception e) {
                         LOGGER.error("invalid unit term: " + derivation);
                     }
@@ -244,7 +244,7 @@ public class QuantityLexicon {
             } else {
                 unitDefinition.addName(inflectedForm);
                 try {
-                    unitPattern.loadTerm(inflectedForm);
+                    unitPattern.loadTerm(inflectedForm, QuantityAnalyzer.getInstance());
                 } catch (Exception e) {
                     LOGGER.error("invalid unit term: " + inflectedForm);
                 }
@@ -265,7 +265,7 @@ public class QuantityLexicon {
         List<String> derivations = derivationalMorphologyExpansion(subPiece, true);
         for (String derivation : derivations) {
             try {
-                unitPattern.loadTerm(derivation);
+                unitPattern.loadTerm(derivation, QuantityAnalyzer.getInstance());
             } catch (Exception e) {
                 LOGGER.error("Invalid unit term: " + derivation);
             }
