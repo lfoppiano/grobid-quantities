@@ -38,7 +38,7 @@ We can distinguish two kinds of atomic values expressions:
 Atomic values with units
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Following TEI, the numeric value is identify with the element ```<num>``` and the unit with the element ```<measure>``` where the unit type is given by the attribute ```@type```.
+Following TEI, the numeric value is identified with the element ```<num>``` and the unit with the element ```<measure>``` where the unit type is given by the attribute ```@type```.
 The indicate of the unit name by the attribute ```@unit``` is optional: if present it might be used to augment the unit lexicon if not yet represented in the lexicon.
 A global ```<measure>``` element encodes the complete measurement (composed by the numeric value and the unit) associated with the measurement type given by the attribute ```@type``` ```value```.
 
@@ -54,7 +54,7 @@ Example 2:
 
 .. code-block:: xml
 
-   ... more than <measure type="value"><num>20</num> <measure type="ENERGY" unit="MJ">MJ</measure></measure> (<measure
+   ... <measure type="value"><num>20</num> <measure type="ENERGY" unit="MJ">MJ</measure></measure> (<measure
    type="value"><num>4,800</num> <measure type="ENERGY" unit="kcal">kcal</measure></measure>) for the shorter race route...
 
 
@@ -68,7 +68,7 @@ A percentage (and similar expression per mil and per ten thousand) has a unit ty
 Atomic value without unit
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-They corresponding to a count (implicit **Unit_Type.COUNT**). The numeric value is encoded with element ``<num>`` and the global ``<measure>`` element indicating the measurement type is added.
+They correspond to a count (implicit **Unit_Type.COUNT**). The numeric value is encoded with element ``<num>`` and the global ``<measure>`` element indicating the measurement type is added.
 
 For example: 
 
@@ -201,7 +201,7 @@ The encoding is then straightforward for atomic values (with attribute ``@when``
 Time tag (and difference with Date tag)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Even if only the part of a date is expressed (for example the time of a day), a complete date is implicit and the context can make it being fully quantified.
+• if only the part of a date is expressed (for example the time of a day), but we can infer the date, a complete date is implicit and the context can make it being fully quantified.
 For example ``20:10 UTC`` will be annotated:
 
 .. code-block:: xml
@@ -209,7 +209,7 @@ For example ``20:10 UTC`` will be annotated:
   <measure type="value"><date when="2014-10-19T20:10Z">20:10 UTC</date></measure>
 With UTC inside the annotation which is important to know exactly the "time" measure.
 
-For the time expression not linked to a date, like the expression of an "hour", is annotated with the tag ``<time>`` is then appropriate to distinguish from the ``<date>`` case (see issue `#48 <https://github.com/kermitt2/grobid-quantities/issues/48>`_).
+• for a time expression not linked to a date, like the expression of an "hour", it's appropriate to annotate with the tag ``<time>``, to distinguish from the ``<date>`` case (see issue `#48 <https://github.com/kermitt2/grobid-quantities/issues/48>`_).
 
 Special cases
 ^^^^^^^^^^^^^
@@ -265,7 +265,7 @@ When used with units, quantifers like ``few``, ``several``, ``a couple``, ``a la
 
   the reference solution becomes distinct from the ballistic solution only a <measure type="value"><num>couple</num> of <measure type="TIME" unit="week">weeks</measure></measure> before the encounter. 
 
-Determiners is leaved outside (``couple`` as value and ``weeks`` as unit for ``a couple of weeks``). See issue `#34 <https://github.com/kermitt2/grobid-quantities/issues/34>`_
+Determiners are left outside (`a <measure type="value"><num>couple</num> of <measure type="TIME" unit="week">weeks</measure></measure>`). See issue `#34 <https://github.com/kermitt2/grobid-quantities/issues/34>`_
 
 Constants
 ^^^^^^^^^
@@ -275,8 +275,8 @@ Precise number (for example ``c`` , the speed of light in vacuum) and imprecise 
 Exponents for powers of ten
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Exponents might be rewritten in documents, for example 10 power -6 in pdf becomes ``10 &#x2212;6``.
-The exponents for power of ten is written in the attribute when there is one, 10 power -6 will be written ``10^-6``.
+Exponents notation might be lost in documents, for example 10 power -6 in pdf becomes ``10 −6``.
+The correct exponents are written in the attribute when there is one, 10 power -6 will be written ``10^-6``.
 Example in interval:
 
 .. code-block:: xml
@@ -289,7 +289,7 @@ See issue `#38 <https://github.com/kermitt2/grobid-quantities/issues/38>`_
 Out of scope
 ~~~~~~~~~~~~
 
-Only **expressions of quantities** is annotated, which can use numbers or alphabetical words.
+Only **expressions of quantities** are annotated, which can use numbers or alphabetical words.
 
 Some numbers are also used for other stuff like markers, call-out, section number, identifiers, index, reference expressions, formula parameters, etc. and all these cases are out of scope. See issue `#36 <https://github.com/kermitt2/grobid-quantities/issues/36>`_
 
@@ -320,13 +320,13 @@ Inline formulas, like:
 Quantified substance
 ~~~~~~~~~~~~~~~~~~~~
 
-The quantified substance is the substanced for which the measurement is expressed.  
+The quantified substance is the substance for which the measurement is expressed. For example *A mixture of 10kg of silicon nitride powder*. Cf. issue `#19 <https://github.com/kermitt2/grobid-quantities/issues/19>`_
 
 
 Case not yet supported
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The following cases are not annotated at this stage. The sentence when these cases occur should be put in comments for the moment.  
+The following cases are not annotated at this stage. **The sentence when these cases occur should be put in comments** for the moment.  
 
 **Sigma estimation**
 
@@ -342,7 +342,7 @@ The following cases are not annotated at this stage. The sentence when these cas
 
   For the wide scenario the uncertainty goes from 45 min down to 1–2 min.
 
-Note: one possibility is to only mark the external boundaries of the interval.
+Note: one possibility would be to only mark the external boundaries of the interval.
 
 .. code-block:: xml
 
