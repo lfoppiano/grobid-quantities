@@ -1,1 +1,15 @@
-<tei xmlns="http://www.tei-c.org/ns/1.0"><teiHeader><fileDesc xml:id="_1" /><encodingDesc><appInfo><application version="0.4.5-dummy" ident="GROBID" when="2017-08-22T14:33+0000"><ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref></application></appInfo></encodingDesc></teiHeader><text xml:lang="en"><p>To cite this version: M.P. Fontana, N. Kirov. Molecular flexibility in nematic phases : direct determination of separate molecular core and alkyl tail rotational relaxation times.</p></text></tei>
+<tei xmlns="http://www.tei-c.org/ns/1.0">
+	<teiHeader>
+		<fileDesc xml:id="_1" />
+		<encodingDesc>
+			<appInfo>
+				<application version="0.4.5-dummy" ident="GROBID" when="2017-08-22T14:33+0000">
+					<ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref>
+				</application>
+			</appInfo>
+		</encodingDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<p>To cite this version: M.P. Fontana, N. Kirov. Molecular flexibility in nematic phases : direct determination of separate molecular core and alkyl tail rotational relaxation times.</p>
+	</text>
+</tei>
