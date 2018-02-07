@@ -359,7 +359,7 @@ For example ``92°.5`` wich would require to embed ``<measure>`` in ``<num>`` (i
 
 **Discontinuous cases**
 
-Quantities expressed by a power of ten multiplication (see issue `#42 <https://github.com/kermitt2/grobid-quantities/issues/42>`_):
+Interval quantities whith base and range multiplied as a whole by a power of ten (see issue `#42 <https://github.com/kermitt2/grobid-quantities/issues/42>`_):
 
 .. code-block:: xml
 
