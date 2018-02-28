@@ -433,7 +433,7 @@ Note: one possibility would be to only mark the external boundaries of the inter
 
 **Unit embedded in numerical value**
 
-For example ``92°.5`` wich would require to embed ``<measure>`` in ``<num>`` (issue `#49 <https://github.com/kermitt2/grobid-quantities/issues/49>`_)
+For example ``92°.5`` wich would require to embed ``<measure>`` in ``<num>`` (issue `#49 <https://github.com/kermitt2/grobid-quantities/issues/49>`_). Or also ``126 withdrawals out of 162 riders``.
 
 **Discontinuous cases**
 
