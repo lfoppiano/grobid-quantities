@@ -23,12 +23,21 @@ We do not distinguish conjunctive and disjunctive lists at the present time.
 List of unit types
 ~~~~~~~~~~~~~~~~~~
 
-For the training annotation, the list of unit types (temperature, pressure, length, etc.) is controled and based on SI definitions. This control is normally exhaustive and contains currently 50 types. The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. 
+For the training annotation, the list of unit types (temperature, pressure, length, etc.) is controled and based on SI definitions. This control is normally exhaustive and contains currently 50 types. The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. They are used to get the right transformation.
 The given names of the unit types has to be used when annotating measurement. 
 
 In the future, the list of units should however not be controlled and GROBID should support units never seen before.
 
-For now it is admitted to annotate with ``UNKNOWN`` in case of doubt about the type (see for example ``rad.m^-2``, in issue `#51 <https://github.com/kermitt2/grobid-quantities/issues/51>`_ and others in issue `#53 <https://github.com/kermitt2/grobid-quantities/issues/53>`_).
+For now it is admitted to annotate with ``UNKNOWN`` in case of doubt about the type. Examples:
+
+• ``m^2/kg`` (`specific surface area <https://en.wikipedia.org/wiki/Specific_surface_area>`_)
+
+• ``kD`` (`dissociation constant <https://en.wikipedia.org/wiki/Dissociation_constant>`_)
+
+• ``rad.m^-2``, in issue `#51 <https://github.com/kermitt2/grobid-quantities/issues/51>`_
+
+• others in issue `#53 <https://github.com/kermitt2/grobid-quantities/issues/53>`_
+
 
 Atomic values
 ~~~~~~~~~~~~~
@@ -154,6 +163,12 @@ Notes about intervals
 
     grains with radii between <measure type="interval"><num atLeast="10">10</num> <measure type="LENGTH" unit="µm">µm</measure> and <num atMost="1">1</num> <measure type="LENGTH" unit="cm">cm</measure></measure>
 
+• The ``From ... to`` markers are **not necessarily introducing an interval**, example:
+
+  .. code-block:: xml
+
+    the rate was reduced from <measure type="value"><num>1.87</num></measure> to <measure type="value"><num>0.82</num></measure>
+
 
 Lists
 ~~~~~
@@ -167,12 +182,21 @@ A ``<measure>`` element encloses the whole list of values including their units:
    <num>1632</num>, <num>1575</num>, <num>1536</num>, <num>1498</num>, <num>1411</num>, <num>1370</num>, <num>1212</num>,
    <num>1006</num>, <num>826</num>, <num>751</num></measure>
 
+   <measure type="list"><num>1.27</num> <measure type="LENGTH" unit="Å">Å</measure> for 1H5Y, <num>1.52</num> 
+   <measure type="LENGTH" unit="Å">Å</measure> for 1KA9, and <num>1.69</num> <measure type="LENGTH" unit="Å">Å</measure>
+   </measure> for 1THF
 
-List can be disjunctive or conjunctive, we do not distinguish the two kinds of list at the present time:
+
+List can be disjunctive, conjunctive, or a combination. We do not distinguish the different kinds of list at the present time:
 
 .. code-block:: xml
 
   batches of <measure type="list"><num>three</num> or <num>four</num></measure> observations
+
+  for flexural samples the size is <measure type="list"><num>100</num> <measure type="LENGTH" unit="mm">mm</measure>
+   x <num>100</num> <measure type="LENGTH" unit="mm">mm</measure> x <num>400</num> <measure type="LENGTH" unit="mm">mm
+   </measure></measure>
+
 
 Additional items
 ~~~~~~~~~~~~~~~~
@@ -185,18 +209,26 @@ The encoding is then straightforward for atomic values (with attribute ``@when``
 
 .. code-block:: xml
 
-  Comet C/2013 A1 (Siding Spring) will have a close encounter with Mars on <measure type="value">
-  <date when="2014-10-19">October 19, 2014</date></measure>.
+    Comet C/2013 A1 (Siding Spring) will have a close encounter with Mars on <measure type="value"><date when=
+    "2014-10-19">October 19, 2014</date></measure>.
 
-  The arrival time of these particles spans a <measure type="interval"><num type="range">20</num>-<measure type="TIME"
-  unit="min">minute</measure> time interval centered at <date type="base" when="2014-10-19T20:09">October 19, 2014 at 20:09 TDB</date></measure>
+    The arrival time of these particles spans a <measure type="interval"><num type="range">20</num>-<measure 
+    type="TIME" unit="min">minute</measure> time interval centered at <date type="base" when="2014-10-19T20:09">
+    October 19, 2014 at 20:09 TDB</date></measure>
 
 
-  Observations took place from <measure type="interval"><date from-iso="2014-10-19">October 19, 2014</date> to
-  <date to-iso="2014-10-25">October 25, 2014</date></measure>.
+    Observations took place from <measure type="interval"><date from-iso="2014-10-19">October 19, 2014</date> to 
+    <date to-iso="2014-10-25">October 25, 2014</date></measure>.
 
-  Observations were performed on <measure type="list"><date when="2013-10-29">October 29, 2013</date>, on
-  <date when="2014-01-21">Jan 21, 2014</date>, and on <date when="2014-03-11">March 11, 2014</date></measure>.
+    the emergence of this sport in the <measure type="interval"><date from-iso="1980" to-iso="1989">1980 s</date>
+    </measure>
+
+
+    Observations were performed on <measure type="list"><date when="2013-10-29">October 29, 2013</date>, on <date 
+    when="2014-01-21">Jan 21, 2014</date>, and on <date when="2014-03-11">March 11, 2014</date></measure>.
+
+
+
 
 Time tag (and difference with Date tag)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -230,7 +262,8 @@ Special cases
 
     over  <measure type="interval"><num atLeast="2">two</num> <measure type="TIME" >decades</measure></measure>
 
-    
+
+
 
 Miscellaneous
 ~~~~~~~~~~~~~
@@ -272,6 +305,12 @@ Constants
 
 Precise number (for example ``c`` , the speed of light in vacuum) and imprecise numbers (for example ``π`` which has an infinite number of decimals) are annotated. See issue `#37 <https://github.com/kermitt2/grobid-quantities/issues/37>`_ 
 
+Example:
+
+.. code-block:: xml
+
+  `decelerating from <num>5</num><measure type="VELOCITY" unit="% c">% c</measure>`
+
 Exponents for powers of ten
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -285,16 +324,35 @@ Example in interval:
 
 See issue `#38 <https://github.com/kermitt2/grobid-quantities/issues/38>`_ 
 
+Numbers which seems to be only tags but are in fact quantifying
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For example expressions like `at day 21` or `between day 56 and day 91`, which are really quantifying and for which range queries can be expressed.
+
+
+OCR errors 
+^^^^^^^^^^
+
+OCR errors are annotated as if they were the correct sequences, since they are realistic noise. For example:
+
+.. code-block:: xml
+
+  20 aC -> <measure type="value"><num>20</num> <measure type="TEMPERATURE" unit="°C">°C</measure></measure>
+  2.5 • -> <measure type="value"><num>2.5</num><measure type="ANGLE" unit="°">°</measure></measure>
+
 
 Out of scope
 ~~~~~~~~~~~~
 
 Only **expressions of quantities** are annotated, which can use numbers or alphabetical words.
 
-Some numbers are also used for other stuff like markers, call-out, section number, identifiers, index, reference expressions, formula parameters, etc. and all these cases are out of scope. See issue `#36 <https://github.com/kermitt2/grobid-quantities/issues/36>`_
+Some numbers are also used for other stuff like markers, call-out, section number, identifiers, index, reference expressions, formula parameters, ill-encoded characters, etc. and all these cases are out of scope. See issue `#36 <https://github.com/kermitt2/grobid-quantities/issues/36>`_
 
-Some sequences not annotated
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Some sequences not annotated (not commented)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`Markers, call-out, section number, numerical bullet points, identifiers, index, reference expressions, formula parameters`
+
+Examples:
 
 Reference markers:
 
@@ -316,6 +374,19 @@ Inline formulas, like:
 .. code-block:: xml
 
     a minimum point of ∆v 2 = |∆v| 2 under the constraint that the particle reaches Mars, i.e., (ξ, ζ)(r, β, ∆v) = (0, 0).
+
+Some sequences to be commented out
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`Ill-encoded characters`
+
+Examples:
+
+Sequence that would be usually annotated but contain encoding problems / characters in the free unicode range, like:
+
+.. code-block:: xml
+    
+    񮽙񮽙   
+
 
 Quantified substance
 ~~~~~~~~~~~~~~~~~~~~
@@ -352,6 +423,13 @@ Note: one possibility would be to only mark the external boundaries of the inter
 
   For the wide scenario the uncertainty goes from <measure type="interval"><num atLeast="45">45</num>
   <measure type="TIME" unit="days">min</measure> down to 1–<num atMost="2">2</num> <measure type="TIME" unit="min">min</measure></measure>.
+
+**List of intervals**
+
+.. code-block:: xml
+
+  No significant difference in running and total times was observed between the age groups 25 to 34 and 35 to 44 years
+
 
 **Unit embedded in numerical value**
 
