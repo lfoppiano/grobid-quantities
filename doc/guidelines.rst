@@ -464,5 +464,7 @@ or like:
 
 .. code-block:: xml
 
+**Other cases**
+
   This process takes place between t = 30[ 12 h] and t = 140[ 12 h]
 
