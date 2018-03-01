@@ -462,9 +462,10 @@ or like:
 
   The gas production rates, Q(CO 2 ) = (3.52> ± 0.03) × 10 26 molecules s −1
 
-.. code-block:: xml
 
 **Other cases**
+
+.. code-block:: xml
 
   This process takes place between t = 30[ 12 h] and t = 140[ 12 h]
 
