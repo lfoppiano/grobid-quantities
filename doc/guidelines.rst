@@ -265,8 +265,8 @@ Special cases
 
 
 
-Miscellaneous
-~~~~~~~~~~~~~
+Miscellaneous / Examples
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Units without values
 ^^^^^^^^^^^^^^^^^^^^
@@ -299,6 +299,20 @@ When used with units, quantifers like ``few``, ``several``, ``a couple``, ``a la
   the reference solution becomes distinct from the ballistic solution only a <measure type="value"><num>couple</num> of <measure type="TIME" unit="week">weeks</measure></measure> before the encounter. 
 
 Determiners are left outside (`a <measure type="value"><num>couple</num> of <measure type="TIME" unit="week">weeks</measure></measure>`). See issue `#34 <https://github.com/kermitt2/grobid-quantities/issues/34>`_
+
+
+X-fold
+^^^^^^
+
+Quantifiers like ``two-fold``, ``sevenfold`` meaning "two times/part", "seven times/part" are annotated, to capture the full expression of quantity including this notion of "part":
+
+.. code-block:: xml
+
+  allowing a <measure type="value"><num>sevenfold</num></measure> compaction of the length
+
+  LUCA-HisF displays a clear <measure type="value"><num>two-fold</num></measure> symmetry
+
+
 
 Constants
 ^^^^^^^^^
@@ -447,4 +461,8 @@ or like:
 .. code-block:: xml
 
   The gas production rates, Q(CO 2 ) = (3.52> ± 0.03) × 10 26 molecules s −1
+
+.. code-block:: xml
+
+  This process takes place between t = 30[ 12 h] and t = 140[ 12 h]
 
