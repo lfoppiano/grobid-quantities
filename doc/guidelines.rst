@@ -103,6 +103,11 @@ Interval defined by a lower bound value and an upper bound value:
    team races that can last from <measure type="interval"><num atLeast="4">4</num> to more than <num atMost="12">12</num>
    <measure type="TIME" unit="hour">h</measure></measure>
 
+If the unit is mentioned twice, both units are annotated, example for ``3 AU ≤ rh <~ 5 AU``:
+
+.. code-block:: xml
+  
+  <measure type="interval"><num atLeast="3">3</num> <measure type="LENGTH" unit="AU">AU</measure> ≤ r h <num atMost="5">5</num> <measure type="LENGTH" unit="AU">AU</measure></measure>
 
 Note that an interval can be introduced by only one boundary value: 
 
@@ -169,6 +174,11 @@ Notes about intervals
 
     the rate was reduced from <measure type="value"><num>1.87</num></measure> to <measure type="value"><num>0.82</num></measure>
 
+• When interval boundaries are given alphabetically, the <num> attribute must be converted in numbers:
+
+  .. code-block:: xml
+
+  between <measure type="interval"><num atLeast="1">one</num> and <num atMost="10">ten</num></me
 
 Lists
 ~~~~~
@@ -443,6 +453,17 @@ Note: one possibility would be to only mark the external boundaries of the inter
 .. code-block:: xml
 
   No significant difference in running and total times was observed between the age groups 25 to 34 and 35 to 44 years
+
+**Atomic value expressed with different values and units**
+
+.. code-block:: xml
+
+  The current Hawaii Ironman triathlon record is 8:54:202 for females
+
+.. code-block:: xml
+
+  [a] male athlete was able to finish [an] ultra-marathon in a time of 19 h 44 min
+
 
 
 **Unit embedded in numerical value**
