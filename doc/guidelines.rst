@@ -278,6 +278,16 @@ Special cases
 Miscellaneous / Examples
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+Plus (+) and minus (-) signs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The + and - signs must be put **inside** the ``<num>`` tag. Examples:
+
+.. code-block:: xml
+
+  a recent study [...] showed that cycling efficiency was lower (<measure type="value"><num>−11</num><measure type="FRACTION" unit="%">%</measure></measure>) and energy cost of running was greater (<measure type="value"><num>+11</num><measure type="FRACTION" unit="%">%</measure></measure>) in the master compared with young triathletes
+  
+
 Units without values
 ^^^^^^^^^^^^^^^^^^^^
 
