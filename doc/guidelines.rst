@@ -151,6 +151,12 @@ If the quantity is expressed only in term of range (without base) it can be impl
 
   <measure type="interval">± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>
 
+If the interval has a base without a range, it's annotated with only the base (issue `#64 <https://github.com/kermitt2/grobid-quantities/issues/64>`):
+
+.. code-block:: xml
+
+  a certain temperature interval1 around <measure type="interval"><num type="base">4 0</num> <measure type="TEMPERATURE" unit="°C">°C</measure></measure>
+
 Notes about intervals
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -178,7 +184,13 @@ Notes about intervals
 
   .. code-block:: xml
 
-  between <measure type="interval"><num atLeast="1">one</num> and <num atMost="10">ten</num></me
+    between <measure type="interval"><num atLeast="1">one</num> and <num atMost="10">ten</num></measure>
+
+• Rational numbers are writter with a slash (/) (issue `#66 <https://github.com/kermitt2/grobid-quantities/issues/66>`)
+
+  .. code-block:: xml
+
+    at least <measure type="interval"><num atLeast="2/3">two-thirds</num></measure> of wins for their favourite team
 
 Lists
 ~~~~~
@@ -207,6 +219,17 @@ List can be disjunctive, conjunctive, or a combination. We do not distinguish th
    x <num>100</num> <measure type="LENGTH" unit="mm">mm</measure> x <num>400</num> <measure type="LENGTH" unit="mm">mm
    </measure></measure>
 
+
+If there are no intermediary values, it's an argument for deciding to annotate an element as a list, for example this ranked list (issue `#65 <https://github.com/kermitt2/grobid-quantities/issues/65>`):
+
+.. code-block:: xml
+
+  for every lower position in the general classification the prize money was more or less halved between
+   the first <measure type="value"><num>seven</num></measure> ranked riders: from <measure type="list">
+   <measure type="CURRENCY" unit="euro">€</measure> <num>450,000</num> for the winner over <measure type=
+   "CURRENCY" unit="euro">€</measure> <num>200,000</num> for the runner-up to <measure type="CURRENCY" 
+   unit="euro">€</measure> <num>100,000</num> for the third ranked rider, and so on to 
+   <measure type="CURRENCY" unit="euro">€</measure> <num>11,500</num></measure> for the rider ranked in seventh place.
 
 Additional items
 ~~~~~~~~~~~~~~~~
@@ -251,7 +274,15 @@ For example ``20:10 UTC`` will be annotated:
   <measure type="value"><date when="2014-10-19T20:10Z">20:10 UTC</date></measure>
 With UTC inside the annotation which is important to know exactly the "time" measure.
 
-• for a time expression not linked to a date, like the expression of an "hour", it's appropriate to annotate with the tag ``<time>``, to distinguish from the ``<date>`` case (see issue `#48 <https://github.com/kermitt2/grobid-quantities/issues/48>`_).
+• for a time expression not linked to a date, like the expression of an "hour", it's appropriate to annotate with the tag ``<time>``, to distinguish from the ``<date>`` case (see issue `#48 <https://github.com/kermitt2/grobid-quantities/issues/48>`_):
+
+.. code-block:: xml
+
+    To sleep well, relax everyday at <measure type="value"><time when="21:00:00">21:00</time></measure>
+
+.. code-block:: xml
+
+    It consists of infusing the [...] drugs in the following order: leucovorin between <measure type="interval"><time from-iso="10:30:00">10 h 30</time> and <time to-iso="21:20:00">21 h 20</time></measure> [...]
 
 Special cases
 ^^^^^^^^^^^^^
@@ -286,7 +317,7 @@ The + and - signs must be put **inside** the ``<num>`` tag. Examples:
 .. code-block:: xml
 
   a recent study [...] showed that cycling efficiency was lower (<measure type="value"><num>−11</num><measure type="FRACTION" unit="%">%</measure></measure>) and energy cost of running was greater (<measure type="value"><num>+11</num><measure type="FRACTION" unit="%">%</measure></measure>) in the master compared with young triathletes
-  
+
 
 Units without values
 ^^^^^^^^^^^^^^^^^^^^
