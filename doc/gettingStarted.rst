@@ -31,6 +31,8 @@ Run some test:
 Training
 ~~~~~~~~
 
+The models will be saved under ``grobid-home/models/quantities`` and ``grobid-home/models/units`` respectively, make sure those directories exist.
+
 For training the quantity model:
 ::
   cd PATH-TO-GROBID/grobid/grobid-quantities
@@ -45,8 +47,6 @@ For the moment, the default training stop criteria are used. So, the training ca
 the training and save the model produced in the latest iteration. 1000 iterations are largely enough.
 
 Otherwise, the training will continue beyond several thousand iterations before stopping.
-
-The models will be saved under ``grobid-home/models/quantities`` and ``grobid-home/models/units`` respectively.
 
 
 Start the service
