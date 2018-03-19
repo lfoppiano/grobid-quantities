@@ -531,3 +531,11 @@ or like:
 
   This process takes place between t = 30[ 12 h] and t = 140[ 12 h]
 
+Various examples
+~~~~~~~~~~~~~~~~
+
+.. code-block:: xml
+
+  Note that only <measure type="value"><num>47 out of the 76</num></measure> patients experienced a first accident.
+
+  ...
