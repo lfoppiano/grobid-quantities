@@ -534,8 +534,14 @@ or like:
 Various examples
 ~~~~~~~~~~~~~~~~
 
+XML examples (ended with the name of the file between brackets)
+
 .. code-block:: xml
 
-  Note that only <measure type="value"><num>47 out of the 76</num></measure> patients experienced a first accident.
+  Note that only <measure type="value"><num>47 out of the 76</num></measure> patients experienced a first accident.[hal-00643787.training.tei.xml]
 
-  ...
+  Branson Sonifier W-250D, <measure type="value"><num>2 x 2</num> <measure type="TIME" unit="min">min</measure></measure> in <measure type="value"><num>15</num> <measure type="TIME" unit="s">sec</measure></measure> intervals. [hal-00924047.training.tei.xml]
+
+  ranging from <measure type="interval"><num atLeast="1.14">1.14</num> <measure type="LENGTH" unit="Å">Å</measure> to <num atMost="1.43">1.43</num> <measure type="LENGTH" unit="Å">Å</measure></measure>.[hal-00924047.training.tei.xml]
+
+  the emission maxima shifted from <measure type="value"><num>345</num> <measure type="LENGTH" unit="nm">nm</measure></measure> to <measure type="value"><num>325</num> <measure type="LENGTH" unit="nm">nm</measure></measure>
