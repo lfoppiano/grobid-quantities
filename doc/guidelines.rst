@@ -544,4 +544,8 @@ XML examples (ended with the name of the file between brackets)
 
   ranging from <measure type="interval"><num atLeast="1.14">1.14</num> <measure type="LENGTH" unit="Å">Å</measure> to <num atMost="1.43">1.43</num> <measure type="LENGTH" unit="Å">Å</measure></measure>.[hal-00924047.training.tei.xml]
 
-  the emission maxima shifted from <measure type="value"><num>345</num> <measure type="LENGTH" unit="nm">nm</measure></measure> to <measure type="value"><num>325</num> <measure type="LENGTH" unit="nm">nm</measure></measure>
+  the emission maxima shifted from <measure type="value"><num>345</num> <measure type="LENGTH" unit="nm">nm</measure></measure> to <measure type="value"><num>325</num> <measure type="LENGTH" unit="nm">nm</measure></measure> [hal-00924047.training.tei.xml]
+
+  [...] (<measure type="list"><num>72</num> for compressive test and <num>72</num></measure> for flexural test) [hal-00962359]
+
+  Patients with SS have a <measure type="interval"><num atLeast="20">20</num>-<num atMost="40">40 fold</num></measure> increased risk of developing lymphoma [hal-00987664]
