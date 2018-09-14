@@ -40,8 +40,8 @@ public class QuantityLexicon {
     private static final String COMPOSED_UNIT_REGEX = "[^/*]";
     private static final String COMPOSED_UNIT_REGEX_WITH_DELIMITER = String.format("((?<=%1$s)|(?=%1$s))", "[/*]{1}");
 
-    Pattern composedUnitPattern = Pattern.compile(COMPOSED_UNIT_REGEX);
-    Pattern composedUnitPatternWithDelimiter = Pattern.compile(COMPOSED_UNIT_REGEX_WITH_DELIMITER);
+    private Pattern composedUnitPattern = Pattern.compile(COMPOSED_UNIT_REGEX);
+    private Pattern composedUnitPatternWithDelimiter = Pattern.compile(COMPOSED_UNIT_REGEX_WITH_DELIMITER);
 
     // lexical information - for feature generations
     private FastMatcher unitPattern = null;

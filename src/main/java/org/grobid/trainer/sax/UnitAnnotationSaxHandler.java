@@ -96,18 +96,18 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
                     continue;
 
                 if (token.equals("+L+")) {
-                    currentUnit.addLabel(new Pair("@newline", null));
+                    currentUnit.addLabel(new Pair<>("@newline", null));
                 } else if (token.equals("+PAGE+")) {
-                    currentUnit.addLabel(new Pair("@newpage", null));
+                    currentUnit.addLabel(new Pair<>("@newpage", null));
                 } else {
                     String content = token;
                     int i = 0;
                     if (content.length() > 0) {
                         if (begin && !currentTag.equals("<other>")) {
-                            currentUnit.addLabel(new Pair(content, "I-" + currentTag));
+                            currentUnit.addLabel(new Pair<>(content, "I-" + currentTag));
                             begin = false;
                         } else {
-                            currentUnit.addLabel(new Pair(content, currentTag));
+                            currentUnit.addLabel(new Pair<>(content, currentTag));
                         }
                     }
                 }
