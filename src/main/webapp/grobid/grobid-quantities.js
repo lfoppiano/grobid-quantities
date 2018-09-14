@@ -22,7 +22,7 @@ var grobid = (function ($) {
     }
 
     function setBaseUrl(ext) {
-        var baseUrl = defineBaseURL(ext);
+        var baseUrl = defineBaseURL('service' + '/' + ext);
         $('#gbdForm').attr('action', baseUrl);
     }
 
