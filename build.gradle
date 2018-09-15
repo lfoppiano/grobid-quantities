@@ -68,9 +68,9 @@ dependencies {
 
     // measurements
     compile group: 'tec.uom', name: 'uom-se', version: '1.0.9'
-    compile group: 'systems.uom', name: 'systems-ucum-java8', version: '0.9'
     compile group: 'si.uom', name: 'si-quantity', version: '0.9'
     compile group: 'si.uom', name: 'si-units-java8', version: '0.9'
+    compile group: 'systems.uom', name: 'systems-ucum-java8', version: '0.9'
     compile group: 'systems.uom', name: 'systems-quantity', version: '0.9'
 
     //Web interface
