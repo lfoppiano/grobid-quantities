@@ -1,20 +1,9 @@
 package org.grobid.core.engines;
 
-import org.grobid.core.GrobidModels;
-import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.tokenization.TaggingTokenCluster;
-import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.WordsToNumber;
 import org.grobid.core.data.Quantity;
-import org.grobid.core.data.Measurement;
+import org.grobid.core.utilities.WordsToNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -36,6 +25,7 @@ public class DefaultValueParser extends ValueParser {
         parseValue(quantity, Locale.ENGLISH);
     }
 
+    @Override
     public void parseValue(Quantity quantity, Locale locale) {
         String raw = quantity.getRawValue();
 
@@ -58,7 +48,8 @@ public class DefaultValueParser extends ValueParser {
                 Number number = format.parse(raw);
                 quantity.setParsedValue(new BigDecimal(number.toString()));
             } catch (ParseException pe) {
-                logger.error("Invalid value expression: " + raw + " , for LOCALE: " + locale);
+                logger.warn("Invalid value expression: " + raw + " , for LOCALE: " + locale + ". Trying with CRF.");
+                super.parseValue(quantity, locale);
             }
         }
     }

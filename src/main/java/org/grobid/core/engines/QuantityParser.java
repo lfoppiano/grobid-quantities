@@ -222,6 +222,14 @@ public class QuantityParser extends AbstractParser {
                                     TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER,
                                     TaggingLabels.FIGURE_MARKER, TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL))) {
 
+//                        if(cluster.getTaggingLabel().equals(TaggingLabels.FIGURE)) {
+//                            parsers.getFigureParser().processing(cluster.get);
+//                            //apply the figure model
+//                        } else if(cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
+//                            parsers.getTableParser().processing();
+//                            //apply the table model
+//                        }
+
                         final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
 
                         // extract all the layout tokens from the cluster as a list

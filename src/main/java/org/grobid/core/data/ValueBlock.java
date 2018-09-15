@@ -5,36 +5,28 @@ import java.util.List;
 /**
  * Created by lfoppiano on 08.03.16.
  */
-public class UnitBlock {
-    private String prefix = "";
+public class ValueBlock {
+    private String value = "";
+    private String operation = "";
     private String base = "";
     private String pow = "";
 
 
-    public UnitBlock(String prefix, String base, String pow) {
-        setPrefix(prefix);
+    public ValueBlock(String value, String operation, String base, String pow) {
+        setValue(value);
+        setOperation(operation);
         setBase(base);
         setPow(pow);
     }
 
-    public UnitBlock(String base) {
-        setBase(base);
+    public ValueBlock(String value) {
+        setBase(value);
     }
 
-    public UnitBlock() {
+    public ValueBlock() {
 
     }
 
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        if (prefix != null) {
-            this.prefix = prefix;
-        }
-    }
 
     public String getBase() {
         return base;
@@ -46,32 +38,28 @@ public class UnitBlock {
         }
     }
 
-    public String getPow() {
-        return pow;
-    }
-
-    public void setPow(String pow) {
-        if (pow != null) {
-            this.pow = pow;
-        }
-    }
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getPrefix());
-        sb.append(getBase());
-        if (!getPow().equals("")) {
+        sb.append(getValue());
+        if(!getOperation().equals("")){
+            sb.append("x");
+        }
+
+        if (!getBase().equals("") && !getPow().equals("")) {
+            sb.append(getBase());
             sb.append("^");
             sb.append(getPow());
+        } else {
+            System.out.println("something wrong with value, giving base: "+getBase()+ " and pow: " + getPow());
         }
 
         return sb.toString();
     }
 
-    public static String asProduct(List<UnitBlock> unitBlockList) {
+    public static String asProduct(List<ValueBlock> unitBlockList) {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
-        for (UnitBlock ub : unitBlockList) {
+        for (ValueBlock ub : unitBlockList) {
             if (!first) {
                 sb.append("·");
             } else {
@@ -83,13 +71,13 @@ public class UnitBlock {
         return sb.toString();
     }
 
-    public static String asString(List<UnitBlock> unitBlockList) {
+    public static String asString(List<ValueBlock> unitBlockList) {
         StringBuilder numerator = new StringBuilder();
         StringBuilder denominator = new StringBuilder();
         boolean firstNumerator = true;
         boolean firstDenominator = true;
         boolean fraction = false;
-        for (UnitBlock ub : unitBlockList) {
+        for (ValueBlock ub : unitBlockList) {
             if (!ub.getPow().equals("0")) {
                 if (ub.getPow().contains("-")) {
                     fraction = true;
@@ -121,5 +109,29 @@ public class UnitBlock {
         } else {
             return numerator.toString();
         }
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getPow() {
+        return pow;
+    }
+
+    public void setPow(String pow) {
+        this.pow = pow;
     }
 }

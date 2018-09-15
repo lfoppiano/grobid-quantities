@@ -25,6 +25,11 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
     private static final String UNIT_VALUE_PREFIX_LABEL = "<prefix>";
     private static final String UNIT_OTHER_LABEL = QUANTITY_OTHER_LABEL;
 
+    private static final String VALUE_VALUE_VALUE_LABEL = "<value>";
+    private static final String VALUE_VALUE_OPERATION_LABEL = "<operation>";
+    private static final String VALUE_VALUE_BASE_LABEL = "<base>";
+    private static final String VALUE_VALUE_POW_LABEL = "<pow>";
+    private static final String VALUE_OTHER_LABEL = QUANTITY_OTHER_LABEL;
 
     public static final TaggingLabel QUANTITY_VALUE_ATOMIC = new TaggingLabelImpl(QuantitiesModels.QUANTITIES, QUANTITY_VALUE_ATOMIC_LABEL);
     public static final TaggingLabel QUANTITY_VALUE_LEAST = new TaggingLabelImpl(QuantitiesModels.QUANTITIES, QUANTITY_VALUE_LEAST_LABEL);
@@ -40,6 +45,12 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
     public static final TaggingLabel UNIT_VALUE_POW = new TaggingLabelImpl(QuantitiesModels.UNITS, UNIT_VALUE_POW_LABEL);
     public static final TaggingLabel UNIT_VALUE_PREFIX = new TaggingLabelImpl(QuantitiesModels.UNITS, UNIT_VALUE_PREFIX_LABEL);
     public static final TaggingLabel UNIT_VALUE_OTHER = new TaggingLabelImpl(QuantitiesModels.UNITS, UNIT_OTHER_LABEL);
+
+    public static final TaggingLabel VALUE_VALUE_VALUE = new TaggingLabelImpl(QuantitiesModels.VALUE, VALUE_VALUE_VALUE_LABEL);
+    public static final TaggingLabel VALUE_VALUE_OPERATION = new TaggingLabelImpl(QuantitiesModels.VALUE, VALUE_VALUE_OPERATION_LABEL);
+    public static final TaggingLabel VALUE_VALUE_BASE = new TaggingLabelImpl(QuantitiesModels.VALUE, VALUE_VALUE_BASE_LABEL);
+    public static final TaggingLabel VALUE_VALUE_POW = new TaggingLabelImpl(QuantitiesModels.VALUE, VALUE_VALUE_POW_LABEL);
+    public static final TaggingLabel VALUE_VALUE_OTHER = new TaggingLabelImpl(QuantitiesModels.VALUE, VALUE_OTHER_LABEL);
 
     static {
         //Quantity
@@ -58,6 +69,13 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
         register(UNIT_VALUE_POW);
         register(UNIT_VALUE_PREFIX);
         register(UNIT_VALUE_OTHER);
+
+        //value
+        register(VALUE_VALUE_VALUE);
+        register(VALUE_VALUE_OPERATION);
+        register(VALUE_VALUE_BASE);
+        register(VALUE_VALUE_POW);
+        register(VALUE_VALUE_OTHER);
 
     }
 }
