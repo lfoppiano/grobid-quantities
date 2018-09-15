@@ -25,7 +25,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MeasureAnnotationSaxHandler.class);
 
-    StringBuffer accumulator = new StringBuffer(); // Accumulate parsed text
+    private StringBuffer accumulator = new StringBuffer(); // Accumulate parsed text
 
     private boolean ignore = false;
     private boolean openList = false;
@@ -96,7 +96,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
             } */
             else if (qName.equals("p") || qName.equals("paragraph")) {
                 // let's consider a new CRF input per paragraph too
-                labeled.add(new Pair("\n", null));
+                labeled.add(new Pair<>("\n", null));
                 openList = false;
                 openInterval = false;
                 numEncountered = false;
@@ -296,21 +296,21 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     continue;
 
                 if (tok.equals("+L+")) {
-                    labeled.add(new Pair("@newline", null));
+                    labeled.add(new Pair<>("@newline", null));
                 } else if (tok.equals("+PAGE+")) {
                     // page break should be a distinct feature
-                    labeled.add(new Pair("@newpage", null));
+                    labeled.add(new Pair<>("@newpage", null));
                 } else {
                     String content = tok;
                     int i = 0;
                     if (content.length() > 0) {
                         if (begin && (!currentTag.equals("<other>")) && (!rangeBaseEncountered || !beginRangeBaseEncountered) ) {
-                            labeled.add(new Pair(content, "I-" + currentTag));
+                            labeled.add(new Pair<>(content, "I-" + currentTag));
                             if (rangeBaseEncountered)
                                 beginRangeBaseEncountered = true;
                             begin = false;
                         } else {
-                            labeled.add(new Pair(content, currentTag));
+                            labeled.add(new Pair<>(content, currentTag));
                         }
                     }
                 }

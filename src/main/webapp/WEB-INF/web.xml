@@ -1,46 +1,30 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
 
 <web-app>
-  <display-name>GROBID Quantities web service - RESTful services for quantity and measurement extraction and analysis</display-name>
+    <display-name>GROBID Quantities web service - RESTful services for quantity and measurement extraction and
+        analysis
+    </display-name>
     <servlet>
         <servlet-name>grobid-service</servlet-name>
-        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+
         <init-param>
-            <param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
-            <param-value>com.sun.jersey.api.core.PackagesResourceConfig</param-value>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>org.grobid.service</param-value>
         </init-param>
         <init-param>
-          <param-name>com.sun.jersey.config.property.packages</param-name>
-          <param-value>org.grobid.service</param-value>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-<servlet-mapping>
-        <servlet-name>grobid-service</servlet-name>
-        <url-pattern>/isalive</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>grobid-service</servlet-name>
-        <url-pattern>/processQuantityText</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>grobid-service</servlet-name>
-        <url-pattern>/processQuantityXML</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>grobid-service</servlet-name>
-        <url-pattern>/processQuantityPDF</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>grobid-service</servlet-name>
-        <url-pattern>/annotateQuantityPDF</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>grobid-service</servlet-name>
-        <url-pattern>/parseMeasure</url-pattern>
-    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>defaultStatic</servlet-name>
+        <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>grobid-service</servlet-name>
         <url-pattern>/service/*</url-pattern>
@@ -53,21 +37,21 @@
 
     <!-- Path to properties files and GROBID_HOME -->
     <env-entry>
-      <env-entry-name>org.grobid.property</env-entry-name>
-      <env-entry-value>../grobid-home/config/grobid.properties</env-entry-value>
-      <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-name>org.grobid.property</env-entry-name>
+        <env-entry-value>../grobid-home/config/grobid.properties</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
-    
+
     <!--env-entry>
       <env-entry-name>org.grobid.property.service</env-entry-name>
       <env-entry-value>${_GROBID_SERVICE_PROPERTY}</env-entry-value>
       <env-entry-type>java.lang.String</env-entry-type>
     </env-entry-->
-    
+
     <env-entry>
-      <env-entry-name>org.grobid.home</env-entry-name>
-      <env-entry-value>../grobid-home</env-entry-value>
-      <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-name>org.grobid.home</env-entry-name>
+        <env-entry-value>../grobid-home</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
 
     <context-param>

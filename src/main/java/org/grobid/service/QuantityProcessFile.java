@@ -1,39 +1,24 @@
 package org.grobid.service;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.HttpHeaders; 
-
+import org.grobid.core.data.Measurement;
+import org.grobid.core.document.Document;
+import org.grobid.core.engines.Engine;
+import org.grobid.core.engines.QuantityParser;
+import org.grobid.core.engines.config.GrobidAnalysisConfig;
+import org.grobid.core.factory.GrobidFactory;
+import org.grobid.core.layout.Page;
+import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.utilities.IOUtilities;
+import org.grobid.core.utilities.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.core.io.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.annotation.*;
-
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.*;
-import java.nio.charset.Charset;
-import java.util.*;
-import java.io.*;
-
-import org.apache.commons.lang3.StringUtils;
-
-import org.grobid.core.layout.Page;
-import org.grobid.core.data.Measurement;
-import org.grobid.core.engines.QuantityParser;
-import org.grobid.core.document.Document;
-import org.grobid.core.engines.Engine;
-import org.grobid.core.main.LibraryLoader;
-import org.grobid.core.factory.GrobidFactory;
-import org.grobid.core.engines.config.GrobidAnalysisConfig;
-import org.grobid.core.factory.GrobidPoolingFactory;
-import org.grobid.core.utilities.GrobidProperties;
-import org.grobid.core.utilities.IOUtilities;
-import org.grobid.core.utilities.KeyGen;
-import org.grobid.core.utilities.Pair;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import java.io.File;
+import java.io.InputStream;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * 
@@ -42,9 +27,6 @@ import org.grobid.core.utilities.Pair;
  */
 public class QuantityProcessFile {
 
-    /**
-     * The class Logger.
-     */
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityProcessFile.class);
 
 
