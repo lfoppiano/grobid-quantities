@@ -25,7 +25,7 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
     private static final String UNIT_VALUE_PREFIX_LABEL = "<prefix>";
     private static final String UNIT_OTHER_LABEL = QUANTITY_OTHER_LABEL;
 
-    private static final String VALUE_VALUE_VALUE_LABEL = "<value>";
+    private static final String VALUE_VALUE_VALUE_LABEL = "<val>";
     private static final String VALUE_VALUE_OPERATION_LABEL = "<operation>";
     private static final String VALUE_VALUE_BASE_LABEL = "<base>";
     private static final String VALUE_VALUE_POW_LABEL = "<pow>";

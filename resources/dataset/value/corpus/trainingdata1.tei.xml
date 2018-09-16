@@ -32,5 +32,12 @@
         <base>10</base>
         <pow>-1</pow>
     </value>
+    <value>
+        <base>e</base>
+        <pow>-1</pow>
+    </value>
+    <value>
+        <val>10</val>
+    </value>
 </values>
 

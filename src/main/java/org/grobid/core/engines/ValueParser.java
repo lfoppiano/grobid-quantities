@@ -14,7 +14,6 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -153,7 +152,7 @@ public class ValueParser extends AbstractParser {
         try {
             for (String character : characters) {
                 FeaturesVectorValue featuresVector =
-                        FeaturesVectorValue.addFeaturesUnit(character, null);
+                        FeaturesVectorValue.addFeatures(character, null);
 
                 result.append(featuresVector.printVector())
                         .append("\n");

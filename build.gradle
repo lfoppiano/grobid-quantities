@@ -114,6 +114,7 @@ def trainerTasks = [
         //Training models
         "train_units"     : "org.grobid.trainer.UnitTrainer",
         "train_quantities": "org.grobid.trainer.QuantityTrainer",
+        "train_values": "org.grobid.trainer.ValueTrainer",
 ]
 
 trainerTasks.each { taskName, mainClassName ->

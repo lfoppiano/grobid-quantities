@@ -33,6 +33,9 @@ public class FeaturesVectorValue {
             res.append(" ").append(0);
         }
 
+        // punctuation information (1)
+        res.append(" " + punctType); // in case the token is a punctuation (NO otherwise)
+
 //        if (isKnownOperationToken) {
 //            res.append(" ").append(1);
 //        } else {
@@ -49,7 +52,7 @@ public class FeaturesVectorValue {
     /**
      * Add the features for the chemical entity extraction model.
      */
-    public static FeaturesVectorValue addFeaturesUnit(String character, String label) {
+    public static FeaturesVectorValue addFeatures(String character, String label) {
 
         FeatureFactory featureFactory = FeatureFactory.getInstance();
 
