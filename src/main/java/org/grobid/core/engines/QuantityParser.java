@@ -878,7 +878,10 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
-                valueParser.parseValue(currentQuantity);
+                final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
+                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                    currentQuantity.setParsedValue(parsedValue);
+                }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
                 currentMeasurement.setType(UnitUtilities.Measurement_Type.VALUE);
@@ -906,7 +909,10 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
-                valueParser.parseValue(currentQuantity);
+                final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
+                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                    currentQuantity.setParsedValue(parsedValue);
+                }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
                 if (currentUnit.getRawName() != null) {
@@ -927,7 +933,10 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
-                valueParser.parseValue(currentQuantity);
+                final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
+                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                    currentQuantity.setParsedValue(parsedValue);
+                }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
                 if (currentUnit.getRawName() != null) {
@@ -948,7 +957,10 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
-                valueParser.parseValue(currentQuantity);
+                final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
+                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                    currentQuantity.setParsedValue(parsedValue);
+                }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
                 if (currentUnit.getRawName() != null) {
@@ -969,7 +981,10 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
-                valueParser.parseValue(currentQuantity);
+                final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
+                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                    currentQuantity.setParsedValue(parsedValue);
+                }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
                 if (currentUnit.getRawName() != null) {
@@ -990,7 +1005,10 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
-                valueParser.parseValue(currentQuantity);
+                final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
+                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                    currentQuantity.setParsedValue(parsedValue);
+                }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
 

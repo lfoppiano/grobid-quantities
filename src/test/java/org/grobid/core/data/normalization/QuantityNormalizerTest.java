@@ -49,7 +49,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_simpleUnitWithNormalization_kmToMeters() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km");
         input.setRawUnit(raw);
@@ -82,7 +82,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_wordsValue_simpleUnitWithNormalization_kmToMeters() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("twenty two");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km");
         input.setRawUnit(raw);
@@ -106,7 +106,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_simpleUnitWithNormalization_CelsiusToKelvin() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("10");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("°C");
         input.setRawUnit(raw);
@@ -136,7 +136,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_kmHourToMetersSecond() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km/h");
         input.setRawUnit(raw);
@@ -160,7 +160,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity2_3composedUnits() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2000");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km*g/h");
         input.setRawUnit(raw);
@@ -184,7 +184,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity3_2composedUnits() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2000");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km*kg/h");
         input.setRawUnit(raw);
@@ -210,7 +210,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_simpleUnitWithoutNormalization_meters() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("m");
         input.setRawUnit(raw);

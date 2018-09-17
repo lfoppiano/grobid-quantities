@@ -2,6 +2,8 @@ package org.grobid.core.data;
 
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 /**
  * Created by lfoppiano on 08.03.16.
  */
@@ -133,5 +135,9 @@ public class ValueBlock {
 
     public void setPow(String pow) {
         this.pow = pow;
+    }
+
+    public boolean hasBaseAndPow() {
+        return isNotEmpty(getPow()) && (isNotEmpty(getBase()));
     }
 }

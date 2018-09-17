@@ -13,43 +13,52 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Basic implementation of value parser without CRF. Thi could be used in the future to 
- * bootstrap a more efficient ML model. 
+ * Basic implementation of value parser without CRF. Thi could be used in the future to
+ * bootstrap a more efficient ML model.
  */
 public class DefaultValueParser extends ValueParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultValueParser.class);
 
     @Override
-    public void parseValue(Quantity quantity) {
+    public BigDecimal parseValue(String rawValue) {
         // default locale is English
-        parseValue(quantity, Locale.ENGLISH);
+        return parseValue(rawValue, Locale.ENGLISH);
     }
 
     @Override
-    public void parseValue(Quantity quantity, Locale locale) {
-        String raw = quantity.getRawValue();
+    public BigDecimal parseValue(String rawValue, Locale locale) {
 
         // bad quick and dirty workaround!
-        if(raw.startsWith("~")){
-            raw = raw.substring(1);
+        if (rawValue.startsWith("~")) {
+            rawValue = rawValue.substring(1);
         }
 
         // if we have alphabetical characters, we use the word to number parser
-        Pattern pattern = Pattern.compile("[a-zA-Z]");
-        Matcher matcher = pattern.matcher(raw);
+        Pattern pattern = Pattern.compile("[a-zA-Z]{3,}");
+        Matcher matcher = pattern.matcher(rawValue);
         if (matcher.find()) {
             WordsToNumber w2n = WordsToNumber.getInstance();
-            quantity.setParsedValue(w2n.normalize(raw, locale));
+            return w2n.normalize(rawValue, locale);
         } else {
             // remove possible trailing punctuations (due to noisy PDF)
-            raw = raw.replaceAll("[^\\d]+$", "");
-            NumberFormat format = NumberFormat.getInstance(locale);
-            try {
-                Number number = format.parse(raw);
-                quantity.setParsedValue(new BigDecimal(number.toString()));
-            } catch (ParseException pe) {
-                logger.warn("Invalid value expression: " + raw + " , for LOCALE: " + locale + ". Trying with CRF.");
-                super.parseValue(quantity, locale);
+            rawValue = rawValue.replaceAll("[^\\d]+$", "");
+
+            //check if there is any non-digit character
+            pattern = Pattern.compile("[a-zA-Z]");
+            matcher = pattern.matcher(rawValue);
+
+            if (!matcher.find()) {
+                try {
+                    NumberFormat format = NumberFormat.getInstance(locale);
+                    Number number = format.parse(rawValue);
+                    return new BigDecimal(number.toString());
+                } catch (ParseException pe) {
+                    logger.warn("Invalid value expression: " + rawValue + " , for LOCALE: " + locale + ". Trying with CRF.");
+                    return super.parseValue(rawValue, locale);
+                }
+            } else {
+                //CRF
+                return super.parseValue(rawValue, locale);
             }
         }
     }
