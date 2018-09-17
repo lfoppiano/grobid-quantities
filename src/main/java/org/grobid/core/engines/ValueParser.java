@@ -1,6 +1,5 @@
 package org.grobid.core.engines;
 
-import org.grobid.core.data.Quantity;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
@@ -14,10 +13,15 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 
@@ -46,17 +50,52 @@ public class ValueParser extends AbstractParser {
         super(QuantitiesModels.VALUE);
     }
 
-    public void parseValue(Quantity quantity) {
-        parseValue(quantity, Locale.ENGLISH);
+    public BigDecimal parseValue(String rawValue) {
+        return parseValue(rawValue, Locale.ENGLISH);
     }
 
-    public void parseValue(Quantity quantity, Locale locale) {
-        List<ValueBlock> value = tagValue(quantity.getRawValue());
+    public BigDecimal parseValue(String rawValue, Locale locale) {
+        NumberFormat format = NumberFormat.getInstance(locale);
+        List<ValueBlock> values = tagValue(rawValue);
 
-//        Number number = format.parse(raw);
-//        quantity.setParsedValue(new BigDecimal(number.toString()));
+        ValueBlock block = values.get(0);
+        final String value1 = block.getValue();
+        Number number = null;
+        BigDecimal result = null;
+        try {
+            number = format.parse(value1);
+            result = new BigDecimal(number.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        System.out.println(value.get(0));
+        if (block.hasBaseAndPow() && result != null) {
+            try {
+                BigDecimal baseBd = BigDecimal.ZERO;
+                if (equalsIgnoreCase(block.getBase(), "e")) {
+                    baseBd = new BigDecimal(Math.E);
+                } else {
+                    Number base = format.parse(block.getBase());
+                    baseBd = new BigDecimal(base.toString());
+                }
+
+                final Number pow = format.parse(block.getPow());
+                final int intPower = pow.intValue();
+                BigDecimal secondPart = BigDecimal.ONE;
+                if(intPower < 0) {
+                    final BigDecimal powBd = baseBd.pow(-intPower);
+                    secondPart = BigDecimal.ONE.divide(powBd, 10, RoundingMode.HALF_UP);
+                } else {
+                    secondPart = baseBd.pow(intPower);
+                }
+
+                return result.multiply(secondPart);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
     }
 
     public List<ValueBlock> tagValue(String text) {
