@@ -37,9 +37,9 @@ public class ValueParserIntegrationTest {
         output = target.parseValue(input);
         System.out.println(input + " -> " + output);
 
-        input = "4 10 -10";
-        output = target.parseValue(input);
-        System.out.println(input + " -> " + output);
+//        input = "4 10 -10";
+//        output = target.parseValue(input);
+//        System.out.println(input + " -> " + output);
     }
 
 }

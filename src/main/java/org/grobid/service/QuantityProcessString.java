@@ -27,7 +27,7 @@ public class QuantityProcessString {
             LOGGER.debug(text);
             long start = System.currentTimeMillis();
             QuantityParser quantityParser = QuantityParser.getInstance();
-            List<Measurement> measurements = quantityParser.extractQuantities(text);
+            List<Measurement> measurements = quantityParser.process(text);
             long end = System.currentTimeMillis();
 
             StringBuilder jsonBuilder = null;

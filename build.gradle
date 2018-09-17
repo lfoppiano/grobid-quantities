@@ -100,6 +100,14 @@ configurations.all {
     }
 }
 
+test {
+    exclude '**IntegrationTest**'
+}
+
+//integration (type: Test){
+//    include '**'
+//}
+
 // Gretty configuration
 
 gretty {

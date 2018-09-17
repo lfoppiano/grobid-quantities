@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import nu.xom.Attribute;
 import nu.xom.Element;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;
@@ -41,20 +42,18 @@ import org.xml.sax.InputSource;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 
@@ -88,6 +87,8 @@ public class QuantityParser extends AbstractParser {
     private QuantityLexicon quantityLexicon = null;
     private MeasurementOperations measurementOperations = null;
     private QuantityTrainingFormatter quantityTrainingFormatter = null;
+    private UnitTrainingFormatter unitTrainingFormatter = null;
+    private ValueTrainingFormatter valueTrainingFormatter = null;
 
     private QuantityParser() {
         super(QuantitiesModels.QUANTITIES);
@@ -95,56 +96,84 @@ public class QuantityParser extends AbstractParser {
         measurementOperations = new MeasurementOperations();
         parsers = new EngineParsers();
         quantityTrainingFormatter = new QuantityTrainingFormatter();
+        unitTrainingFormatter = new UnitTrainingFormatter();
+        valueTrainingFormatter = new ValueTrainingFormatter();
     }
 
-    /**
-     * Extract all occurrences of measurement/quantities from a simple piece of text.
-     */
-    public List<Measurement> extractQuantities(String text) throws Exception {
-        if (isBlank(text)) {
-            return null;
-        }
+    public List<Measurement> process(List<LayoutToken> layoutTokens) {
+
         List<Measurement> measurements = new ArrayList<>();
+
+        // List<LayoutToken> for the selected segment
+        List<LayoutToken> tokens = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
+
+        // list of textual tokens of the selected segment
+        //List<String> texts = getTexts(tokenizationParts);
+
+        if (isEmpty(tokens))
+            return measurements;
+
         try {
-            text = text.replace("\n", " ");
-            text = text.replace("\t", " ");
-            List<LayoutToken> tokens = null;
-            try {
-                tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
-            } catch (Exception e) {
-                LOGGER.error("fail to tokenize:, " + text, e);
-            }
-
-            if ((tokens == null) || (tokens.size() == 0)) {
-                return null;
-            }
-
-            String ress = null;
-            /*List<String> texts = new ArrayList<>();
-            for (LayoutToken token : tokens) {
-                if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
-                    texts.add(token.getText());
-                }
-            }*/
-
-            // to store unit term positions
+            // positions for lexical match
             List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokens);
-            ress = addFeatures(tokens, unitTokenPositions);
-            String res;
+
+            // string representation of the feature matrix for CRF lib
+            String ress = addFeatures(tokens, unitTokenPositions);
+
+            if (StringUtils.isEmpty(ress))
+                return measurements;
+
+            // labeled result from CRF lib
+            String res = null;
             try {
                 res = label(ress);
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
 
-            measurements = extractMeasurement(text, res, tokens);
-            measurements = normalizeMeasurements(measurements);
-            measurements = substanceParser.parseSubstance(text, measurements);
+            List<Measurement> localMeasurements = extractMeasurement(tokens, res);
+            if (isEmpty(localMeasurements))
+                return measurements;
+
+            localMeasurements = measurementOperations.resolveMeasurement(localMeasurements);
+            try {
+                localMeasurements = normalizeMeasurements(localMeasurements);
+            } catch (Exception e) {
+                LOGGER.error("Normalisation failed. Skipping it for the time being. ", e);
+            }
+            localMeasurements = substanceParser.parseSubstance(tokens, localMeasurements);
+
+            measurements.addAll(localMeasurements);
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         }
 
         return measurements;
+    }
+
+    /**
+     * Extract all occurrences of measurement/quantities from a simple piece of text.
+     */
+    public List<Measurement> process(String text) {
+        if (isBlank(text)) {
+            return null;
+        }
+
+        text = text.replace("\r", " ");
+        text = text.replace("\n", " ");
+        text = text.replace("\t", " ");
+
+        List<LayoutToken> tokens = null;
+        try {
+            tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
+        } catch (Exception e) {
+            LOGGER.error("fail to tokenize:, " + text, e);
+        }
+
+        if ((tokens == null) || (tokens.size() == 0)) {
+            return null;
+        }
+        return process(tokens);
     }
 
     public Pair<List<Measurement>, Document> extractQuantitiesPDF(File file) throws IOException {
@@ -161,8 +190,8 @@ public class QuantityParser extends AbstractParser {
             // In the following, we process the relevant textual content of the document
 
             // for refining the process based on structures, we need to filter
-            // segment of interest (e.g. header, body, annex) and possibly apply 
-            // the corresponding model to further filter by structure types 
+            // segment of interest (e.g. header, body, annex) and possibly apply
+            // the corresponding model to further filter by structure types
 
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
@@ -180,24 +209,24 @@ public class QuantityParser extends AbstractParser {
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                     if (titleTokens != null) {
-                        processLayoutTokenSequence(titleTokens, measurements);
+                        measurements.addAll(process(titleTokens));
                     }
 
                     // abstract
                     List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                     if (abstractTokens != null) {
-                        processLayoutTokenSequence(abstractTokens, measurements);
+                        measurements.addAll(process(abstractTokens));
                     }
 
                     // keywords
                     List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                     if (keywordTokens != null) {
-                        processLayoutTokenSequence(keywordTokens, measurements);
+                        measurements.addAll(process(keywordTokens));
                     }
                 }
             }
 
-            // we can process all the body, in the future figure and table could be the 
+            // we can process all the body, in the future figure and table could be the
             // object of more refined processing
             documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
             if (documentParts != null) {
@@ -238,19 +267,19 @@ public class QuantityParser extends AbstractParser {
                                 .flatMap(List::stream)
                                 .collect(Collectors.toList());
 
-                        processLayoutTokenSequence(tokens, measurements);
+                        measurements.addAll(process(tokens));
 
                     }
                 }
             }
 
             // we don't process references (although reference titles could be relevant)
-            // acknowledgement? 
+            // acknowledgement?
 
             // we can process annexes
             documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
             if (documentParts != null) {
-                processDocumentPart(documentParts, doc, measurements);
+                measurements.addAll(processDocumentPart(documentParts, doc));
             }
 
         } catch (Exception e) {
@@ -259,69 +288,18 @@ public class QuantityParser extends AbstractParser {
 
         // for next line, comparable measurement needs to be implemented
         //Collections.sort(measurements);
-        return new Pair<List<Measurement>, Document>(measurements, doc);
+        return new Pair<>(measurements, doc);
     }
 
     /**
      * Process with the quantity model a segment coming from the segmentation model
      */
     private List<Measurement> processDocumentPart(SortedSet<DocumentPiece> documentParts,
-                                                  Document doc,
-                                                  List<Measurement> measurements) {
+                                                  Document doc) {
         // List<LayoutToken> for the selected segment
-        List<LayoutToken> tokenizationParts = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-        return processLayoutTokenSequence(tokenizationParts, measurements);
-    }
-
-    /**
-     * Process with the quantity model an arbitrary sequence of LayoutToken objects
-     */
-    private List<Measurement> processLayoutTokenSequence(List<LayoutToken> layoutTokens,
-                                                         List<Measurement> measurements) {
-        // List<LayoutToken> for the selected segment
-        List<LayoutToken> tokenizationParts = layoutTokens;
-
-        // text of the selected segment
-        String text = LayoutTokensUtil.toText(layoutTokens);
-
-        // we need to retokenize according to the QuantityAnalyzer (which tokenize
-        // more than the default grobid-core analyzer)
-        tokenizationParts = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(tokenizationParts);
-
-        // list of textual tokens of the selected segment
-        //List<String> texts = getTexts(tokenizationParts);
-
-        //if ((texts == null) || (texts.size() == 0))
-        if ((tokenizationParts == null) || (tokenizationParts.size() == 0))
-            return measurements;
-
-        // positions for lexical match
-        List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokenizationParts);
-
-        // string representation of the feature matrix for CRF lib
-        String ress = addFeatures(tokenizationParts, unitTokenPositions);
-
-        if ((ress == null) || (ress.trim().length() == 0))
-            return measurements;
-
-        // labeled result from CRF lib
-        String res = null;
-        try {
-            res = label(ress);
-        } catch (Exception e) {
-            throw new GrobidException("CRF labeling for quantity parsing failed.", e);
-        }
-
-        List<Measurement> localMeasurements = extractMeasurement(text, res, tokenizationParts);
-        if ((localMeasurements == null) || (localMeasurements.size() == 0))
-            return measurements;
-
-        localMeasurements = normalizeMeasurements(localMeasurements);
-        localMeasurements = substanceParser.parseSubstance(text, localMeasurements);
-
-        measurements.addAll(localMeasurements);
-
-        return measurements;
+        List<LayoutToken> layoutTokens
+                = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+        return process(layoutTokens);
     }
 
     /**
@@ -341,8 +319,8 @@ public class QuantityParser extends AbstractParser {
         }
         return texts;
     }*/
-
     public List<Measurement> normalizeMeasurements(List<Measurement> measurements) {
+
         for (Measurement measurement : measurements) {
             if (measurement.getType() == null)
                 continue;
@@ -460,47 +438,39 @@ public class QuantityParser extends AbstractParser {
     /**
      * Process the content of the specified input file and format the result as training data.
      * <p>
-     * Input file can be (i) xml (.xml or .tei extennsion) and it is assumed that we have a patent
-     * document, (ii) PDF (.pdf) and it is assumed that we have a scientific article which will
-     * be processed by GROBID full text first, (iii) some text (.txt extension).
+     * Input file can be
+     * (i) xml (.xml or .tei extension) and it is assumed that we have a patent document,
+     * (ii) PDF (.pdf) and it is assumed that we have a scientific article which will be processed by GROBID fulltext first,
+     * (iii) some text (.txt extension)
      *
-     * @param inputFile input file
-     * @param pathTEI   path to TEI with annotated training data
-     * @param id        id
+     * @param inputFile       input file
+     * @param outputDirectory path to TEI with annotated training data
+     * @param id              id
      */
-    public void createTraining(String inputFile,
-                               String pathTEI,
-                               int id) throws Exception {
+    public void createTraining(String inputFile, String outputDirectory, int id) throws Exception {
         File file = new File(inputFile);
         if (!file.exists()) {
             throw new GrobidException("Cannot create training data because input file can not be accessed: " + inputFile);
         }
 
-        Element root = getTEIHeader(id);
         if (inputFile.endsWith(".txt") || inputFile.endsWith(".TXT")) {
-            root = createTrainingText(file, root);
+            createTrainingText(file, outputDirectory, id);
         } else if (inputFile.endsWith(".xml") || inputFile.endsWith(".XML") || inputFile.endsWith(".tei") || inputFile.endsWith(".TEI")) {
-            root = createTrainingXML(file, root);
+            createTrainingXML(file, outputDirectory, id);
         } else if (inputFile.endsWith(".pdf") || inputFile.endsWith(".PDF")) {
-            root = createTrainingPDF(file, root);
-        }
-
-        if (root != null) {
-            //System.out.println(XmlBuilderUtils.toXml(root));
-            try {
-                FileUtils.writeStringToFile(new File(pathTEI), XmlBuilderUtils.toXml(root), UTF_8);
-            } catch (IOException e) {
-                throw new GrobidException("Cannot create training data because output file can not be accessed: " + pathTEI);
-            }
+            createTrainingPDF(file, outputDirectory, id);
         }
     }
 
-    private Element createTrainingText(File file, Element root) throws IOException {
+    private void createTrainingText(File file, String outputDirectory, int id) throws IOException {
         String text = FileUtils.readFileToString(file, UTF_8);
 
-        Element textNode = teiElement("text");
+        Element quantityNode = teiElement("text");
+        Element unitNode = teiElement("units");
+        Element valueNode = teiElement("values");
+
         // for the moment we suppose we have english only...
-        textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
 
         // we process the text paragraph by paragraph
         String lines[] = text.split("\n");
@@ -512,53 +482,59 @@ public class QuantityParser extends AbstractParser {
                 paragraph.append(line).append("\n");
             }
             if (((line.length() == 0) || (i == lines.length - 1)) && (paragraph.length() > 0)) {
-                // we have a new paragraph
-                text = paragraph.toString().replace("\n", " ").replace("\r", " ").replace("\t", " ");
-                List<LayoutToken> tokens = null;
-                try {
-                    tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
-                } catch (Exception e) {
-                    LOGGER.error("fail to tokenize:, " + text, e);
-                }
 
-                if ((tokens == null) || (tokens.size() == 0))
-                    continue;
+                measurements = process(text);
+                quantityNode.appendChild(quantityTrainingFormatter.trainingExtraction(measurements, text));
 
-                String ress = null;
-                /*List<String> texts = new ArrayList<>();
-                for (LayoutToken token : tokens) {
-                    if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
-                        texts.add(token.getText());
-                    }
-                }*/
+                unitTrainingFormatter.trainingExtraction(measurements, unitNode);
+                valueTrainingFormatter.trainingExtraction(measurements, valueNode);
 
-                // to store unit term positions
-                List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokens);
-                ress = addFeatures(tokens, unitTokenPositions);
-                String res = null;
-                try {
-                    res = label(ress);
-                } catch (Exception e) {
-                    throw new GrobidException("CRF labeling for quantity parsing failed.", e);
-                }
-                measurements = extractMeasurement(text, res, tokens);
-                measurements = measurementOperations.resolveMeasurement(measurements);
-
-                textNode.appendChild(quantityTrainingFormatter.trainingExtraction(measurements, text));
                 paragraph = new StringBuilder();
             }
         }
-        root.appendChild(textNode);
-
-        return root;
+        writeOutput(file, outputDirectory, id, quantityNode, unitNode, valueNode);
     }
 
-    private Element createTrainingXML(File file, Element root) throws IOException {
+    private void writeOutput(File file, String outputDirectory, int id, Element quantityNode, Element unitNode, Element valueNode) {
+        Element quantityDocumentRoot = TeiUtils.getQuantitiesTEIHeader(id);
+        quantityDocumentRoot.appendChild(quantityNode);
+
+        //Write the output for quantities model
+        String outputFileQuantity = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".quantity.xml");
+        try {
+            FileUtils.writeStringToFile(new File(outputFileQuantity), XmlBuilderUtils.toXml(quantityDocumentRoot), UTF_8);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileQuantity);
+        }
+
+        //We don't have TEI header, so we need one less annoying step :-) 
+
+        //Write the output for unit model
+        String outputFileUnit = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".unit.xml");
+        try {
+            FileUtils.writeStringToFile(new File(outputFileUnit), XmlBuilderUtils.toXml(unitNode), UTF_8);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileUnit);
+        }
+
+        //Write the output for unit model
+        String outputFileValue = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".value.xml");
+        try {
+            FileUtils.writeStringToFile(new File(outputFileValue), XmlBuilderUtils.toXml(valueNode), UTF_8);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileValue);
+        }
+    }
+
+    private void createTrainingXML(File input, String outputDirectory, int id) {
         List<Measurement> measurements = null;
 
-        Element textNode = teiElement("text");
+        Element quantityNode = teiElement("text");
+        Element unitNode = teiElement("units");
+        Element valueNode = teiElement("values");
+
         // for the moment we suppose we have english only...
-        textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
 
         try {
             // get a factory for SAX parser
@@ -568,43 +544,12 @@ public class QuantityParser extends AbstractParser {
 
             //get a new instance of parser
             SAXParser p = spf.newSAXParser();
-            p.parse(file, handler);
+            p.parse(input, handler);
 
             List<String> chunks = handler.getChunks();
             for (String text : chunks) {
-                //text = text.replace("\n", " ").replace("\t", " ");
-                if (text.trim().length() == 0)
-                    continue;
-                List<LayoutToken> tokenizations = null;
-                try {
-                    tokenizations = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
-                } catch (Exception e) {
-                    LOGGER.error("fail to tokenize:, " + text, e);
-                }
+                measurements = process(text);
 
-                if ((tokenizations == null) || (tokenizations.size() == 0))
-                    continue;
-
-                String ress = null;
-                /*List<String> texts = new ArrayList<String>();
-                for (LayoutToken token : tokenizations) {
-                    if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
-                        texts.add(token.getText());
-                    }
-                }*/
-
-                // to store unit term positions
-                List<OffsetPosition> unitTokenPositions = new ArrayList<OffsetPosition>();
-                unitTokenPositions = quantityLexicon.inUnitNames(tokenizations);
-                ress = addFeatures(tokenizations, unitTokenPositions);
-                String res = null;
-                try {
-                    res = label(ress);
-                } catch (Exception e) {
-                    throw new GrobidException("CRF labeling for quantity parsing failed.", e);
-                }
-                measurements = extractMeasurement(text, res, tokenizations);
-                measurements = measurementOperations.resolveMeasurement(measurements);
                 if (measurements != null) {
                     System.out.println("\n");
                     for (Measurement measurement : measurements) {
@@ -613,17 +558,21 @@ public class QuantityParser extends AbstractParser {
                     System.out.println("\n");
                 }
 
-                textNode.appendChild(quantityTrainingFormatter.trainingExtraction(measurements, text));
+                quantityNode.appendChild(quantityTrainingFormatter.trainingExtraction(measurements, text));
+                // I need to change the way it's done because we might have more than one unit/value
+                unitTrainingFormatter.trainingExtraction(measurements, unitNode);
+                valueTrainingFormatter.trainingExtraction(measurements, valueNode);
             }
-            root.appendChild(textNode);
-        } catch (Exception e) {
-            throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath(), e);
-        }
+            Element quantityRoot = TeiUtils.getQuantitiesTEIHeader(id);
+            quantityRoot.appendChild(quantityNode);
 
-        return root;
+            writeOutput(input, outputDirectory, id, quantityNode, unitNode, valueNode);
+        } catch (Exception e) {
+            throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + input.getPath(), e);
+        }
     }
 
-    private Element createTrainingPDF(File file, Element root) throws IOException {
+    private void createTrainingPDF(File file, String outputDirectory, int id) {
         // first we apply GROBID fulltext model on the PDF to get the full text TEI
         Document teiDoc = null;
         try {
@@ -635,18 +584,20 @@ public class QuantityParser extends AbstractParser {
             throw new GrobidException("Cannot create training data because GROBIL full text model failed on the PDF: " + file.getPath(), e);
         }
         if (teiDoc == null) {
-            return null;
+            return;
         }
 
         String teiXML = teiDoc.getTei();
 
         // we parse this TEI string similarly as for createTrainingXML
 
-        List<Measurement> measurements = null;
+        List<Measurement> measurements;
 
-        Element textNode = teiElement("text");
+        Element quantityNode = teiElement("text");
+        Element unitNode = teiElement("units");
+        Element valueNode = teiElement("values");
         // for the moment we suppose we have english only...
-        textNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
 
         try {
             // get a factory for SAX parser
@@ -660,53 +611,30 @@ public class QuantityParser extends AbstractParser {
 
             List<String> chunks = handler.getChunks();
             for (String text : chunks) {
-                text = text.toString().replace("\n", " ").replace("\r", " ").replace("\t", " ");
-                // the last one is a special "large" space missed by the regex "\\p{Space}+" used on the SAX parser
-                if (text.trim().length() == 0)
-                    continue;
-                List<LayoutToken> tokenizations = null;
-                try {
-                    tokenizations = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
-                } catch (Exception e) {
-                    LOGGER.error("fail to tokenize:, " + text, e);
+                measurements = process(text);
+
+                if (isNotEmpty(measurements)) {
+                    quantityNode.appendChild(quantityTrainingFormatter.trainingExtraction(measurements, text));
+
+                    // I need to change the way it's done because we might have more than one unit/value
+                    unitTrainingFormatter.trainingExtraction(measurements, unitNode);
+                    valueTrainingFormatter.trainingExtraction(measurements, valueNode);
                 }
-                if ((tokenizations == null) || (tokenizations.size() == 0))
-                    continue;
 
-                String ress = null;
-                /*List<String> texts = new ArrayList<String>();
-                for (LayoutToken token : tokenizations) {
-                    if (!token.getText().equals(" ") && !token.getText().equals("\t") && !token.getText().equals("\u00A0")) {
-                        texts.add(token.getText());
-                    }
-                }*/
-
-                // to store unit term positions
-                List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokenizations);
-                ress = addFeatures(tokenizations, unitTokenPositions);
-                String res = null;
-                try {
-                    res = label(ress);
-                } catch (Exception e) {
-                    throw new GrobidException("CRF labeling for quantity parsing failed.", e);
-                }
-                measurements = extractMeasurement(text, res, tokenizations);
-                measurements = measurementOperations.resolveMeasurement(measurements);
-
-                textNode.appendChild(quantityTrainingFormatter.trainingExtraction(measurements, text));
             }
-            root.appendChild(textNode);
+            writeOutput(file, outputDirectory, id, quantityNode, unitNode, valueNode);
         } catch (Exception e) {
             throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath(), e);
         }
-
-        return root;
     }
 
+    /**
+     * Create training data for a list of pdf/text/xml-tei files
+     */
     @SuppressWarnings({"UnusedParameters"})
     public int createTrainingBatch(String inputDirectory,
                                    String outputDirectory,
-                                   int ind) throws IOException {
+                                   int ind) {
         try {
             File path = new File(inputDirectory);
             if (!path.exists()) {
@@ -715,24 +643,18 @@ public class QuantityParser extends AbstractParser {
 
             File pathOut = new File(outputDirectory);
             if (!pathOut.exists()) {
-                throw new GrobidException("Cannot create training data because ouput directory can not be accessed: " + outputDirectory);
+                throw new GrobidException("Cannot create training data because output directory can not be accessed: " + outputDirectory);
             }
 
             // we process all pdf files in the directory
-            File[] refFiles = path.listFiles(new FilenameFilter() {
-                public boolean accept(File dir, String name) {
-                    System.out.println(name);
-                    return name.endsWith(".pdf") || name.endsWith(".PDF") ||
-                            name.endsWith(".txt") || name.endsWith(".TXT") ||
-                            name.endsWith(".xml") || name.endsWith(".tei") ||
-                            name.endsWith(".XML") || name.endsWith(".TEI");
-                }
-            });
+            List<File> refFiles = Arrays.stream(Objects.requireNonNull(path.listFiles())).filter(
+                    file -> file.getName().endsWith(".pdf") || file.getName().endsWith(".PDF") ||
+                            file.getName().endsWith(".txt") || file.getName().endsWith(".TXT") ||
+                            file.getName().endsWith(".xml") || file.getName().endsWith(".tei") ||
+                            file.getName().endsWith(".XML") || file.getName().endsWith(".TEI")
+            ).collect(Collectors.toList());
 
-            if (refFiles == null)
-                return 0;
-
-            LOGGER.info(refFiles.length + " files to be processed.");
+            LOGGER.info(refFiles.size() + " files to be processed.");
 
             int n = 0;
             if (ind == -1) {
@@ -741,17 +663,16 @@ public class QuantityParser extends AbstractParser {
             }
             for (final File file : refFiles) {
                 try {
-                    String pathTEI = outputDirectory + "/" + file.getName().substring(0, file.getName().length() - 4) + ".training.tei.xml";
-                    createTraining(file.getAbsolutePath(), pathTEI, n);
+                    createTraining(file.getAbsolutePath(), outputDirectory, n);
                 } catch (final Exception exp) {
                     LOGGER.error("An error occured while processing the following pdf: "
-                            + file.getPath() + ": " + exp);
+                            + file.getPath(), exp);
                 }
                 if (ind != -1)
                     n++;
             }
 
-            return refFiles.length;
+            return refFiles.size();
         } catch (final Exception exp) {
             throw new GrobidException("An exception occured while running Grobid batch.", exp);
         }
@@ -780,7 +701,7 @@ public class QuantityParser extends AbstractParser {
 
                 // parano normalisation
                 text = UnicodeUtil.normaliseTextAndRemoveSpaces(text);
-                if (text.trim().length() == 0 ) {
+                if (text.trim().length() == 0) {
                     continue;
                 }
 
@@ -818,14 +739,12 @@ public class QuantityParser extends AbstractParser {
     }
 
     /**
-     * Extract identified quantities from a labelled text.
+     * Extract identified quantities from a labeled text.
      */
-    public List<Measurement> extractMeasurement(String text,
-                                                String result,
-                                                List<LayoutToken> tokenizations) {
+    public List<Measurement> extractMeasurement(List<LayoutToken> tokens, String result) {
         List<Measurement> measurements = new ArrayList<>();
 
-        TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.QUANTITIES, result, tokenizations);
+        TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.QUANTITIES, result, tokens);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
         Unit currentUnit = new Unit();
@@ -847,6 +766,7 @@ public class QuantityParser extends AbstractParser {
             if (!clusterLabel.equals(QUANTITY_OTHER))
                 boundingBoxes = BoundingBoxCalculator.calculate(cluster.concatTokens());
 
+            String text = LayoutTokensUtil.toText(tokens);
             if ((pos < text.length() - 1) && (text.charAt(pos) == ' '))
                 pos += 1;
             int endPos = pos;
@@ -879,7 +799,7 @@ public class QuantityParser extends AbstractParser {
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
                 final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
-                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                if (parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
                     currentQuantity.setParsedValue(parsedValue);
                 }
                 currentQuantity.setOffsetStart(pos);
@@ -910,7 +830,7 @@ public class QuantityParser extends AbstractParser {
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
                 final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
-                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                if (parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
                     currentQuantity.setParsedValue(parsedValue);
                 }
                 currentQuantity.setOffsetStart(pos);
@@ -934,7 +854,7 @@ public class QuantityParser extends AbstractParser {
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
                 final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
-                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                if (parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
                     currentQuantity.setParsedValue(parsedValue);
                 }
                 currentQuantity.setOffsetStart(pos);
@@ -958,7 +878,7 @@ public class QuantityParser extends AbstractParser {
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
                 final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
-                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                if (parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
                     currentQuantity.setParsedValue(parsedValue);
                 }
                 currentQuantity.setOffsetStart(pos);
@@ -982,7 +902,7 @@ public class QuantityParser extends AbstractParser {
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
                 final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
-                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                if (parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
                     currentQuantity.setParsedValue(parsedValue);
                 }
                 currentQuantity.setOffsetStart(pos);
@@ -1006,7 +926,7 @@ public class QuantityParser extends AbstractParser {
                 currentQuantity = new Quantity();
                 currentQuantity.setRawValue(clusterContent);
                 final BigDecimal parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
-                if(parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
+                if (parsedValue != null && BigDecimal.ZERO.compareTo(parsedValue) < 0) {
                     currentQuantity.setParsedValue(parsedValue);
                 }
                 currentQuantity.setOffsetStart(pos);
@@ -1138,44 +1058,5 @@ public class QuantityParser extends AbstractParser {
                         ((currentMeasurement.getQuantityBase() != null) || (currentMeasurement.getQuantityRange() != null))
         )
         );
-    }
-
-
-
-    private Element getTEIHeader(int id) {
-        Element tei = teiElement("tei");
-        Element teiHeader = teiElement("teiHeader");
-
-        if (id != -1) {
-            Element fileDesc = teiElement("fileDesc");
-            fileDesc.addAttribute(new Attribute("xml:id", "http://www.w3.org/XML/1998/namespace", "_" + id));
-            teiHeader.appendChild(fileDesc);
-        }
-
-        Element encodingDesc = teiElement("encodingDesc");
-
-        Element appInfo = teiElement("appInfo");
-
-        TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
-        df.setTimeZone(tz);
-        String dateISOString = df.format(new java.util.Date());
-
-        Element application = teiElement("application");
-        application.addAttribute(new Attribute("version", GrobidProperties.getVersion()));
-        application.addAttribute(new Attribute("ident", "GROBID"));
-        application.addAttribute(new Attribute("when", dateISOString));
-
-        Element ref = teiElement("ref");
-        ref.addAttribute(new Attribute("target", "https://github.com/kermitt2/grobid"));
-        ref.appendChild("A machine learning software for extracting information from scholarly documents");
-
-        application.appendChild(ref);
-        appInfo.appendChild(application);
-        encodingDesc.appendChild(appInfo);
-        teiHeader.appendChild(encodingDesc);
-        tei.appendChild(teiHeader);
-
-        return tei;
     }
 }

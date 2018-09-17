@@ -66,7 +66,8 @@ public class ValueParser extends AbstractParser {
             number = format.parse(value1);
             result = new BigDecimal(number.toString());
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.warn("Cannot parse value. Returning null.", e);
+            return null;
         }
 
         if (block.hasBaseAndPow() && result != null) {
@@ -91,7 +92,8 @@ public class ValueParser extends AbstractParser {
 
                 return result.multiply(secondPart);
             } catch (ParseException e) {
-                e.printStackTrace();
+                LOGGER.warn("Cannot parse value. Returning null.", e);
+                return null;
             }
         }
 

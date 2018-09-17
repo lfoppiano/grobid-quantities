@@ -40,8 +40,7 @@ public class QuantityRestService implements QuantityPaths {
             GrobidProperties.getInstance();
             QuantityLexicon.getInstance();
         } catch (final Exception exp) {
-            System.err.println("GROBID Quantities initialisation failed: " + exp);
-            exp.printStackTrace();
+            LOGGER.error("GROBID Quantities initialisation failed: ", exp);
         }
 
         LOGGER.info("Init of Servlet QuantityRestService finished.");

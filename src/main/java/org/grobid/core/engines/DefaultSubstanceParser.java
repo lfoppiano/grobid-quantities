@@ -2,6 +2,7 @@ package org.grobid.core.engines;
 
 import org.grobid.core.data.*;
 import org.grobid.core.features.FeatureFactory;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +20,11 @@ public class DefaultSubstanceParser extends SubstanceParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultSubstanceParser.class);
 
     @Override
-    public List<Measurement> parseSubstance(String text, List<Measurement> measurements) {
+    public List<Measurement> parseSubstance(List<LayoutToken> tokens, List<Measurement> measurements) {
         if (isEmpty(measurements))
             return null;
         try {
+            String text = LayoutTokensUtil.toText(tokens);
             TextParser textParser = TextParser.getInstance();
             List<Sentence> parsedSentences = textParser.parseText(text);
             int indexMeasurement = 0;
@@ -425,7 +427,6 @@ public class DefaultSubstanceParser extends SubstanceParser {
                 if (quantityLeast != null) {
                     int position = quantityLeast.getOffsetStart();
                     addTokenIndex(position - startSentencePosition, quantityLeast.getOffsetEnd() - quantityLeast.getOffsetStart(), parse, result);
-
 
                     // unit position
                     Unit rawUnit = quantityLeast.getRawUnit();
