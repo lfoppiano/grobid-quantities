@@ -41,7 +41,7 @@ public class QuantitiesRestProcessGeneric {
 			}
 			response = Response.status(Status.OK).entity(retVal).build();
 		} catch (Exception e) {
-			LOGGER.error("" + e);
+			LOGGER.error("", e);
 			response = Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		return response;

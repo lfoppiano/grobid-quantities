@@ -737,7 +737,7 @@ public class QuantityParser extends AbstractParser {
                     createTraining(file.getAbsolutePath(), pathTEI, n);
                 } catch (final Exception exp) {
                     LOGGER.error("An error occured while processing the following pdf: "
-                            + file.getPath() + ": " + exp);
+                            + file.getPath() + ": ", exp);
                 }
                 if (ind != -1)
                     n++;

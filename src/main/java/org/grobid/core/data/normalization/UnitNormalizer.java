@@ -63,6 +63,8 @@ public class UnitNormalizer {
                     "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
         } catch (Exception e) {
             throw new NormalizationException("Unexpected normalization error for the unit " + unitName, e);
+        } catch (systems.uom.ucum.internal.format.TokenMgrError e) {
+            throw new NormalizationException("Crazy normalization error for the unit " + unitName);
         }
 
         return parsedUnit.toString();

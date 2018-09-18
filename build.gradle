@@ -106,6 +106,7 @@ gretty {
     httpPort = 8060
     contextPath = '/'
 //    servletContainer = "jetty9.4"
+    webInfIncludeJarPattern = ''
 }
 
 // Training configuration
