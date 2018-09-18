@@ -103,7 +103,7 @@ configurations.all {
 // Gretty configuration
 
 gretty {
-    //httpPort = 8081
+    httpPort = 8060
     contextPath = '/'
 //    servletContainer = "jetty9.4"
 }
