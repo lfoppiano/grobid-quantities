@@ -507,7 +507,7 @@ public class QuantityParser extends AbstractParser {
             throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileQuantity);
         }
 
-        //We don't have TEI header, so we need one less annoying step :-) 
+        //We don't have TEI header, so we need one less annoying step :-)
 
         //Write the output for unit model
         String outputFileUnit = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".unit.xml");

@@ -1,0 +1,40 @@
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<unitLeft>           99.7         97.31        88.81        92.87  
+<unitRight>          99.92        85.71        31.03        45.57  
+<valueAtomic>        98.23        58.67        75.9         66.18  
+<valueBase>          99.98        100          71.05        83.08  
+<valueLeast>         99.15        82.48        43.34        56.82  
+<valueList>          99.73        35.19        32.76        33.93  
+<valueMost>          98.99        75.68        51.86        61.55  
+<valueRange>         99.99        90.62        96.67        93.55  
+
+all fields           99.46        74.67        67.73        71.03   (micro average)
+                     99.46        78.21        61.43        66.69   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<unitLeft>           96.81        94.67        86.99        90.67  
+<unitRight>          99.17        85.71        31.58        46.15  
+<valueAtomic>        90.14        66.99        76.23        71.31  
+<valueBase>          99.94        100          75           85.71  
+<valueLeast>         95.58        79.6         46.78        58.93  
+<valueList>          97.94        22.58        20           21.21  
+<valueMost>          95.41        77.27        51.37        61.72  
+<valueRange>         99.92        83.33        83.33        83.33  
+
+all fields           96.86        78.32        70.05        73.96   (micro average)
+                     96.86        76.27        58.91        64.88   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   487
+Correct instances:          272
+Instance-level recall:      55.85
+
+Split, training and evaluation for org.grobid.core.GrobidModels$1@40e6dfe1 model is realized in 11606256 ms

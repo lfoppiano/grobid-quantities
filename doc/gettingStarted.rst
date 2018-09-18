@@ -14,11 +14,17 @@ Copy the module quantities as sibling sub-project to grobid-core, grobid-trainer
 ::
    cp -r grobid-quantities grobid/
 
+*Recent change*: Copy the updated models from `grobid-quantities/resources/models/` to `grobid-home/models`:
+::
+   cp -r grobid-quantities/resources/models/* ../grobid-home/models
+
+You should have the directories of the models `quantities` and `units`
+
 Try compiling everything with:
 ::
    cd PATH-TO-GROBID/grobid/
 
-   ./gradlew clean install -x test
+   ./gradlew clean install
 
 Run some test:
 ::

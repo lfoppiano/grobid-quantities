@@ -111,9 +111,10 @@ test {
 // Gretty configuration
 
 gretty {
-    //httpPort = 8081
+    httpPort = 8060
     contextPath = '/'
 //    servletContainer = "jetty9.4"
+    webInfIncludeJarPattern = ''
 }
 
 // Training configuration
@@ -142,11 +143,6 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 task mainJar(type: ShadowJar, group: 'test') {
     zip64 true
     from sourceSets.main.output
-    from {
-//        project.configurations.compile.collect {
-//            it.isDirectory() ? [] : localLibs.contains(it.getName()) ? zipTree(it) : []
-//        }
-    }
 }
 
 shadowJar {
@@ -164,14 +160,17 @@ jar {
 
 artifacts {
     archives shadowJar
-    archives mainJar
 }
 
-tasks.withType(JavaCompile) {
-    options.compilerArgs << "-Xlint:deprecation"
-    options.compilerArgs << "-Xlint:unchecked"
-}
+//tasks.withType(JavaCompile) {
+//    options.compilerArgs << "-Xlint:deprecation"
+//    options.compilerArgs << "-Xlint:unchecked"
+//}
 
+
+wrapper {
+    gradleVersion "4.2.1"
+}
 
 
 
