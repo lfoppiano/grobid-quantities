@@ -121,7 +121,7 @@ public class QuantityNormalizer {
             TransformedUnit transformedUnit = (TransformedUnit) unit;
             normalizedQuantity.setUnit(new Unit(transformedUnit.getParentUnit().toString()));
             try {
-                normalizedQuantity.setValue(new BigDecimal(transformedUnit.getConverter().convert(quantity.getParsedValue()).toString()));
+                normalizedQuantity.setValue(new BigDecimal(transformedUnit.getConverter().convert(quantity.getParsedValue().getNumeric()).toString()));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
@@ -136,7 +136,7 @@ public class QuantityNormalizer {
 
             quantity.setNormalizedQuantity(normalizedQuantity);
             try {
-                normalizedQuantity.setValue(new BigDecimal(productUnit.getSystemConverter().convert(quantity.getParsedValue()).toString()));
+                normalizedQuantity.setValue(new BigDecimal(productUnit.getSystemConverter().convert(quantity.getParsedValue().getNumeric()).toString()));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.");
@@ -147,7 +147,7 @@ public class QuantityNormalizer {
             normalizedQuantity.setUnit(new Unit(unit.getSymbol()));
             try {
                 if (quantity.getParsedValue() != null) {
-                    normalizedQuantity.setValue(quantity.getParsedValue());
+                    normalizedQuantity.setValue(quantity.getParsedValue().getNumeric());
                 } else {
                     normalizedQuantity.setValue(new BigDecimal(quantity.getRawValue()));
                 }

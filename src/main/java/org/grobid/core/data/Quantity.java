@@ -4,16 +4,10 @@ import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
-import org.grobid.core.utilities.WordsToNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-/*import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;*/
 
 /**
  * Class for managing a quantity representation.
@@ -24,12 +18,12 @@ import java.util.regex.Pattern;*/
  * @author Patrice Lopez
  */
 public class Quantity implements Comparable<Quantity> {
-    private static final Logger logger = LoggerFactory.getLogger(Quantity.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Quantity.class);
 
     private Unit rawUnit = null;
     private Unit parsedUnit = null;
     private String rawValue = null;
-    private BigDecimal parsedValue = null;
+    private Value parsedValue = null;
 
     private Quantity.Normalized normalizedQuantity = null;
 
@@ -84,40 +78,11 @@ public class Quantity implements Comparable<Quantity> {
         this.rawValue = raw;
     }
 
-    /**
-     * Set the value of the quantity and the parsedVavlue.
-     * TODO: I don't know whether is better to manage the failure should be managed by who
-     * is setting the value or just ignored.
-     *
-     * @param raw
-     * @param local LOCALE (default is ENGLISH)
-     * @throws NumberFormatException
-     */
-    /*public void setValue(String raw, Locale local) {
-        this.rawValue = raw;
-
-        // if we have alphabetical characters, we use the word to number parser
-        Pattern pattern = Pattern.compile("[a-zA-Z]");
-        Matcher matcher = pattern.matcher(raw);
-        if (matcher.find()) {
-            WordsToNumber w2n = WordsToNumber.getInstance();
-            this.parsedValue = w2n.normalize(raw, local);
-        } else {
-            NumberFormat format = NumberFormat.getInstance(local);
-            try {
-                Number number = format.parse(raw);
-                this.parsedValue = new BigDecimal(number.toString());
-            } catch (ParseException pe) {
-                logger.error("Invalid value expression: " + raw + " , for LOCALE: " + local);
-            }
-        }
-    }*/
-
-    public BigDecimal getParsedValue() {
+    public Value getParsedValue() {
         return parsedValue;
     }
 
-    public void setParsedValue(BigDecimal parsedValue) {
+    public void setParsedValue(Value parsedValue) {
         this.parsedValue = parsedValue;
     }
 
@@ -254,7 +219,7 @@ public class Quantity implements Comparable<Quantity> {
             } else {
                 json.append(", ");
             }
-            json.append("\"parsedValue\" : " + parsedValue);
+            json.append("\"parsedValue\" : " + parsedValue.toJson());
         }
 
         /*if (parsedUnit != null) {

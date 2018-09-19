@@ -14,7 +14,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 /**
  * Created by lfoppiano on 04.03.16.
  */
-@Ignore
 public class QuantityParserIntegrationTests {
 
     @BeforeClass
@@ -157,11 +156,13 @@ public class QuantityParserIntegrationTests {
         }
     }
 
+/*
     @Test
     public void testCreateTrainingDataFromText() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
         parser.createTraining("./src/test/resources/test1.txt",
                 "./src/test/resources/test1.training.tei.xml", 0);
     }
+*/
 
 }

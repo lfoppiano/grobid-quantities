@@ -291,4 +291,11 @@ public class Measurement {
     public int compareTo(Measurement theMeasurement) {
         // TBD, based on position of measurement quantities
     }*/
+
+    public boolean isValid() {
+        return this.getType() != null && (isNotEmpty(this.getQuantityList()) || (this.getQuantityAtomic() != null) ||
+                        (this.getQuantityLeast() != null || this.getQuantityMost() != null) ||
+                        (this.getQuantityBase() != null && this.getQuantityRange() != null)
+        );
+    }
 }

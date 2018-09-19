@@ -1,43 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <values>
-    <value>
-        <val>2</val>
-        <operation>x</operation>
-        <base>10</base>
-        <pow>3</pow>
-    </value>
-    <value>
-        <val>0.2</val>
-        <base>E</base>
-        <pow>-3</pow>
-    </value>
-    <value>
-        <val>0.002</val>
-        <base>e</base>
-        <pow>-30</pow>
-    </value>
-    <value>
-        <val>0.002</val>
-    </value>
-    <value>
-        <val>2</val>
-    </value>
-    <value>
-        <val>twentytwo</val>
-    </value>
-    <value>
-        <val>twenty-two</val>
-    </value>
-    <value>
-        <base>10</base>
-        <pow>-1</pow>
-    </value>
-    <value>
-        <base>e</base>
-        <pow>-1</pow>
-    </value>
-    <value>
-        <val>10</val>
-    </value>
+    <value><number>2</number> x <base>10</base> <pow>3</pow></value>
+    <value><number>0.2</number> E <exp>-3</exp></value>
+    <value><val>0.002</val><base>e</base><pow>-30</pow></value>
+    <value><val>0.002</val></value>
+    <value><val>2</val></value>
+    <value><alhpa>twentytwo</alhpa></value>
+    <value><alpha>twenty-two</alpha></value>
+    <value><base>10</base><pow>-1</pow></value>
+    <value>e<exp>-1</exp></value>
+    <value><number>10</number></value>
 </values>
 

@@ -1,34 +1,38 @@
 package org.grobid.core.data;
 
-import java.util.List;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
- * Created by lfoppiano on 08.03.16.
+ * This class is responsible to hold the structured representation of a value expressed in
+ * the form:
+ * - number x base^pow
+ * - alphanumeric number
+ * - time expression (date, time)
+ * - exponential formulas e^exp
  */
 public class ValueBlock {
-    private String value = "";
-    private String operation = "";
+    private String number = "";
     private String base = "";
     private String pow = "";
-
-
-    public ValueBlock(String value, String operation, String base, String pow) {
-        setValue(value);
-        setOperation(operation);
-        setBase(base);
-        setPow(pow);
-    }
-
-    public ValueBlock(String value) {
-        setBase(value);
-    }
+    private String exp = "";
+    private String time = "";
+    private String alpha = "";
 
     public ValueBlock() {
-
     }
 
+    public ValueBlock(String number, String base, String pow) {
+        this.number = number;
+        this.base = base;
+        this.pow = pow;
+    }
+
+    public ValueBlock(String number, String exp) {
+        this.number = number;
+        this.exp = exp;
+    }
 
     public String getBase() {
         return base;
@@ -40,93 +44,73 @@ public class ValueBlock {
         }
     }
 
+    public Type getType() {
+        if (isNotEmpty(number)) {
+            if (isNotEmpty(base) && isNotEmpty(pow)) {
+                return Type.NUMBER;
+            } else if (isNotEmpty(exp)) {
+                return Type.EXPONENT;
+            }
+            return Type.NUMBER;
+        } else if (isNotEmpty(time)) {
+            return Type.NUMBER;
+        } else if (isNotEmpty(alpha)) {
+            return Type.ALPHANUMERIC;
+        } else {
+            if (isNotEmpty(base) && isNotEmpty(pow)) {
+                return Type.NUMBER;
+            } else if (isNotEmpty(exp)) {
+                return Type.EXPONENT;
+            }
+        }
+
+        return Type.UNKNOWN;
+
+    }
+
+
+    @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getValue());
-        if(!getOperation().equals("")){
-            sb.append("x");
-        }
+        switch (getType()) {
+            case ALPHANUMERIC:
+                return getAlpha();
+            case TIME:
+                return getTime();
+            case EXPONENT:
+                StringBuilder sb = new StringBuilder();
 
-        if (!getBase().equals("") && !getPow().equals("")) {
-            sb.append(getBase());
-            sb.append("^");
-            sb.append(getPow());
-        } else {
-            System.out.println("something wrong with value, giving base: "+getBase()+ " and pow: " + getPow());
-        }
-
-        return sb.toString();
-    }
-
-    public static String asProduct(List<ValueBlock> unitBlockList) {
-        StringBuilder sb = new StringBuilder();
-        boolean first = true;
-        for (ValueBlock ub : unitBlockList) {
-            if (!first) {
-                sb.append("·");
-            } else {
-                first = false;
-            }
-            sb.append(ub.toString());
-        }
-
-        return sb.toString();
-    }
-
-    public static String asString(List<ValueBlock> unitBlockList) {
-        StringBuilder numerator = new StringBuilder();
-        StringBuilder denominator = new StringBuilder();
-        boolean firstNumerator = true;
-        boolean firstDenominator = true;
-        boolean fraction = false;
-        for (ValueBlock ub : unitBlockList) {
-            if (!ub.getPow().equals("0")) {
-                if (ub.getPow().contains("-")) {
-                    fraction = true;
-                    String den = ub.toString().replace("-", "");
-                    if (den.endsWith("^1")) {
-                        den = den.replace("^1", "");
-                    }
-
-                    if (!firstDenominator) {
-                        denominator.append("·");
-                    } else {
-                        firstDenominator = false;
-                    }
-                    denominator.append(den);
-                } else {
-                    if (!firstNumerator) {
-                        numerator.append("·");
-                    } else {
-                        firstNumerator = false;
-                    }
-
-                    numerator.append(ub.toString());
+                if (number != null) {
+                    sb.append(number);
                 }
-            }
+                if (getPow() != null && getBase() != null) {
+                    sb.append(getBase() + "^" + getPow());
+                }
+
+                return sb.toString();
+            case NUMBER:
+                sb = new StringBuilder();
+
+                if (number != null) {
+                    sb.append(number);
+                }
+
+                if (getExp() != null) {
+                    sb.append("e^" + getExp());
+                }
+                return sb.toString();
+            case UNKNOWN:
+                break;
+
         }
-
-        if (fraction) {
-            return numerator.append("/").append(denominator.toString()).toString();
-        } else {
-            return numerator.toString();
-        }
+        return null;
     }
 
-    public String getValue() {
-        return value;
+    public String getNumber() {
+        return number;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getPow() {
@@ -137,7 +121,107 @@ public class ValueBlock {
         this.pow = pow;
     }
 
-    public boolean hasBaseAndPow() {
-        return isNotEmpty(getPow()) && (isNotEmpty(getBase()));
+    public String toJson() {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        StringBuilder json = new StringBuilder();
+        boolean started = false;
+        json.append("{ ");
+        if (isNotEmpty(number)) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(number);
+            String outputRawName = new String(encodedRawName);
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"number\" : \"" + outputRawName + "\"");
+        }
+
+        if (isNotEmpty(base)) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(base);
+            String outputRawName = new String(encodedRawName);
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"base\" : \"" + outputRawName + "\"");
+        }
+
+        if (isNotEmpty(pow)) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(pow);
+            String outputRawName = new String(encodedRawName);
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+
+            json.append("\"pow\" : \"" + outputRawName + "\"");
+        }
+
+        if (isNotEmpty(exp)) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(exp);
+            String outputRawName = new String(encodedRawName);
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"exp\" : \"" + outputRawName + "\"");
+        }
+
+        if (isNotEmpty(alpha)) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(alpha);
+            String outputRawName = new String(encodedRawName);
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"alpha\" : \"" + outputRawName + "\"");
+        }
+
+        if (isNotEmpty(time)) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(time);
+            String outputRawName = new String(encodedRawName);
+            if (!started) {
+                started = true;
+            } else
+                json.append(", ");
+            json.append("\"time\" : \"" + outputRawName + "\"");
+        }
+
+        json.append(" }");
+        return json.toString();
+    }
+
+    public String getExp() {
+        return exp;
+    }
+
+    public void setExp(String exp) {
+        this.exp = exp;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(String alpha) {
+        this.alpha = alpha;
+    }
+
+    public enum Type {
+        NUMBER,
+        ALPHANUMERIC,
+        EXPONENT,
+        TIME,
+        UNKNOWN
     }
 }
+
+

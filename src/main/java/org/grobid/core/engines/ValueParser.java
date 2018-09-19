@@ -1,5 +1,6 @@
 package org.grobid.core.engines;
 
+import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
@@ -10,6 +11,7 @@ import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.LayoutTokensUtil;
 import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.WordsToNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +25,7 @@ import java.util.Locale;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 
 /**
@@ -43,62 +46,110 @@ public class ValueParser extends AbstractParser {
     }
 
     private static synchronized void getNewInstance() {
-        instance = new DefaultValueParser();
+        instance = new ValueParser();
     }
 
     protected ValueParser() {
         super(QuantitiesModels.VALUE);
     }
 
-    public BigDecimal parseValue(String rawValue) {
+    public Value parseValue(String rawValue) {
         return parseValue(rawValue, Locale.ENGLISH);
     }
 
-    public BigDecimal parseValue(String rawValue, Locale locale) {
-        NumberFormat format = NumberFormat.getInstance(locale);
+    public Value parseValue(String rawValue, Locale locale) {
+
         List<ValueBlock> values = tagValue(rawValue);
 
         ValueBlock block = values.get(0);
-        final String value1 = block.getValue();
-        Number number = null;
-        BigDecimal result = null;
-        try {
-            number = format.parse(value1);
-            result = new BigDecimal(number.toString());
-        } catch (ParseException e) {
-            LOGGER.warn("Cannot parse value. Returning null.", e);
-            return null;
-        }
 
-        if (block.hasBaseAndPow() && result != null) {
-            try {
-                BigDecimal baseBd = BigDecimal.ZERO;
-                if (equalsIgnoreCase(block.getBase(), "e")) {
-                    baseBd = new BigDecimal(Math.E);
-                } else {
-                    Number base = format.parse(block.getBase());
-                    baseBd = new BigDecimal(base.toString());
+        BigDecimal numeric = parseValueBlock(block, locale);
+        final Value resultValue = new Value();
+        resultValue.setNumeric(numeric);
+        resultValue.setStructure(block);
+
+        return resultValue;
+    }
+
+    private BigDecimal parseValueBlock(ValueBlock block, Locale locale) {
+        NumberFormat format = NumberFormat.getInstance(locale);
+
+        switch (block.getType()) {
+            case NUMBER:
+                try {
+                    BigDecimal secondPart = null;
+                    if (isNotEmpty(block.getPow()) && isNotEmpty(block.getBase())) {
+                        final Number pow = format.parse(block.getPow());
+                        final BigDecimal baseBd = new BigDecimal(format.parse(block.getBase()).toString());
+                        final int intPower = pow.intValue();
+
+                        if (intPower < 0) {
+                            final BigDecimal powBd = baseBd.pow(-intPower);
+                            secondPart = BigDecimal.ONE.divide(powBd, 10, RoundingMode.HALF_UP);
+                        } else {
+                            secondPart = baseBd.pow(intPower);
+                        }
+                    }
+
+                    if (isNotEmpty(block.getNumber())) {
+                        final BigDecimal number = new BigDecimal(format.parse(block.getNumber()).toString());
+                        if (secondPart != null) {
+                            return number.multiply(secondPart);
+                        }
+                    } else {
+                        return secondPart;
+                    }
+
+                } catch (ParseException e) {
+                    LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
                 }
 
-                final Number pow = format.parse(block.getPow());
-                final int intPower = pow.intValue();
-                BigDecimal secondPart = BigDecimal.ONE;
-                if(intPower < 0) {
-                    final BigDecimal powBd = baseBd.pow(-intPower);
-                    secondPart = BigDecimal.ONE.divide(powBd, 10, RoundingMode.HALF_UP);
-                } else {
-                    secondPart = baseBd.pow(intPower);
+                break;
+            case EXPONENT:
+                try {
+                    BigDecimal secondPart = null;
+                    if (isNotEmpty(block.getExp())) {
+                        final Number exp = format.parse(block.getExp());
+                        final int intPower = exp.intValue();
+                        final BigDecimal exponentialBase = new BigDecimal(Math.E);
+
+                        if (intPower < 0) {
+                            final BigDecimal powBd = exponentialBase.pow(-intPower);
+                            secondPart = BigDecimal.ONE.divide(powBd, 10, RoundingMode.HALF_UP);
+                        } else {
+                            secondPart = exponentialBase.pow(intPower);
+                        }
+                    }
+
+                    if (isNotEmpty(block.getNumber())) {
+                        final BigDecimal number = new BigDecimal(format.parse(block.getNumber()).toString());
+                        if (secondPart != null) {
+                            return number.multiply(secondPart);
+                        }
+                    } else {
+                        return secondPart;
+                    }
+
+                } catch (ParseException e) {
+                    LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
                 }
 
-                return result.multiply(secondPart);
-            } catch (ParseException e) {
-                LOGGER.warn("Cannot parse value. Returning null.", e);
-                return null;
-            }
+                break;
+
+            case ALPHANUMERIC:
+                WordsToNumber w2n = WordsToNumber.getInstance();
+                return w2n.normalize(block.getAlpha(), locale);
+
+            case TIME:
+                //we do not parse it for the moment
+                break;
+
         }
 
         return null;
+
     }
+
 
     public List<ValueBlock> tagValue(String text) {
         if (isBlank(text)) {
@@ -162,8 +213,8 @@ public class ValueParser extends AbstractParser {
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens());
 
-            if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_VALUE)) {
-                valueBlock.setValue(clusterContent);
+            if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_NUMBER)) {
+                valueBlock.setNumber(clusterContent);
                 LOGGER.debug(clusterContent + "(V)");
             } else if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_BASE)) {
                 valueBlock.setBase(clusterContent);
@@ -173,7 +224,7 @@ public class ValueParser extends AbstractParser {
             } else if (clusterLabel.equals(VALUE_VALUE_POW)) {
                 valueBlock.setPow(clusterContent);
                 LOGGER.debug(clusterContent + "(P)");
-            } else if (clusterLabel.equals(VALUE_VALUE_OPERATION)) {
+            } else if (clusterLabel.equals(VALUE_VALUE_EXP)) {
                 valueBlock.setPow(clusterContent);
                 LOGGER.debug(clusterContent + "(Op)");
             }

@@ -11,6 +11,10 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.trim;
+
 /**
  * SAX handler for TEI-style annotations. should work for patent PDM and our usual scientific paper encoding.
  * Measures are inline quantities annotations.
@@ -43,6 +47,16 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
 
         if (isValueTag(qName)) {
             currentValue = new ValueLabeled();
+        } else {
+            // we have to write first what has been accumulated yet with the upper-level tag
+            String text = getText();
+            if (text != null) {
+                if (isNotEmpty(text)) {
+                    currentTag = "<other>";
+                    writeData("other");
+                }
+            }
+            accumulator.setLength(0);
         }
 
     }
@@ -77,9 +91,9 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
 
             boolean begin = true;
             for (String token : tokens) {
-                token = token.trim();
+                token = trim(token);
 
-                if (token.length() == 0)
+                if (isEmpty(token))
                     continue;
 
                 if (token.equals("+L+")) {
@@ -87,15 +101,11 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
                 } else if (token.equals("+PAGE+")) {
                     currentValue.addLabel(new Pair<>("@newpage", null));
                 } else {
-                    String content = token;
-                    int i = 0;
-                    if (content.length() > 0) {
-                        if (begin && !currentTag.equals("<other>")) {
-                            currentValue.addLabel(new Pair<>(content, "I-" + currentTag));
-                            begin = false;
-                        } else {
-                            currentValue.addLabel(new Pair<>(content, currentTag));
-                        }
+                    if (begin && !currentTag.equals("<other>")) {
+                        currentValue.addLabel(new Pair<>(token, "I-" + currentTag));
+                        begin = false;
+                    } else {
+                        currentValue.addLabel(new Pair<>(token, currentTag));
                     }
                 }
                 begin = false;
@@ -118,8 +128,10 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
     private boolean isRelevantTag(String qName) {
         if ("pow".equals(qName)
                 || "base".equals(qName)
-                || "val".equals(qName)
-                || "operation".equals(qName)
+                || "number".equals(qName)
+                || "exp".equals(qName)
+                || "alpha".equals(qName)
+                || "time".equals(qName)
                 || "other".equals(qName)) {
             return true;
         }

@@ -879,7 +879,7 @@ console.log(quantityMap);
             }
 
             if (parsedValue && (parsedValue != rawValue)) {
-                string += "<p>parsed value: <b>" + parsedValue + "</b></p>";
+                string += "<p>parsed value: <b>" + parsedValue.parsed + "</b></p>";
             }
 
             if (rawUnitName) {

@@ -101,7 +101,7 @@ configurations.all {
 }
 
 test {
-    exclude '**IntegrationTest**'
+    exclude '**/**IntegrationTest**'
 }
 
 //integration (type: Test){
@@ -113,8 +113,9 @@ test {
 gretty {
     httpPort = 8060
     contextPath = '/'
-//    servletContainer = "jetty9.4"
+    servletContainer = "jetty9.4"
     webInfIncludeJarPattern = ''
+    reloadOnClassChange = false
 }
 
 // Training configuration
@@ -123,7 +124,7 @@ def trainerTasks = [
         //Training models
         "train_units"     : "org.grobid.trainer.UnitTrainer",
         "train_quantities": "org.grobid.trainer.QuantityTrainer",
-        "train_values": "org.grobid.trainer.ValueTrainer",
+        "train_values"    : "org.grobid.trainer.ValueTrainer",
 ]
 
 trainerTasks.each { taskName, mainClassName ->
@@ -145,6 +146,13 @@ task mainJar(type: ShadowJar, group: 'test') {
     from sourceSets.main.output
 }
 
+//include project classes as jar into war's WEB-INF/lib
+//task mainWar(type: War, group: 'test') {
+//    zip64 true
+//    classifier = 'war'
+//    classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+//}
+
 shadowJar {
     classifier = 'onejar'
     zip64 true
@@ -157,9 +165,15 @@ jar {
     dependsOn mainJar
     enabled false
 }
+//war {
+//    dependsOn mainWar
+//    enabled false
+//}
 
 artifacts {
     archives shadowJar
+//    archives jar
+//    archives mainWar
 }
 
 //tasks.withType(JavaCompile) {
@@ -169,7 +183,7 @@ artifacts {
 
 
 wrapper {
-    gradleVersion "4.2.1"
+    gradleVersion "4.6"
 }
 
 
