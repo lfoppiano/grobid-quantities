@@ -17,7 +17,7 @@ public class ValueBlockTest {
 
     @Test
     public void testGetType_exponent() throws Exception {
-        target = new ValueBlock("10", "-3");
+        target = new ValueBlock(new Block("10"), new Block("-3"));
 
         assertThat(target.getType(), is(ValueBlock.Type.EXPONENT));
     }
@@ -32,21 +32,21 @@ public class ValueBlockTest {
 
     @Test
     public void testGetType_number() throws Exception {
-        target = new ValueBlock("3", "10", "-3");
+        target = new ValueBlock(new Block("3"), new Block("10"), new Block("-3"));
 
         assertThat(target.getType(), is(ValueBlock.Type.NUMBER));
     }
 
     @Test
     public void testGetType_number_onlyBaseAndPow() throws Exception {
-        target = new ValueBlock(null, "10", "-3");
+        target = new ValueBlock(null, new Block("10"), new Block("-3"));
 
         assertThat(target.getType(), is(ValueBlock.Type.NUMBER));
     }
 
     @Test
     public void toJson() {
-        target = new ValueBlock("1", "10", "20");
+        target = new ValueBlock(new Block("1"), new Block("10"), new Block("20"));
 
         assertThat( target.toJson(), is("{ \"number\" : \"1\", \"base\" : \"10\", \"pow\" : \"20\" }"));
     }

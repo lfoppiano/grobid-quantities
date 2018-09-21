@@ -139,7 +139,7 @@ public class QuantityParserTrainingData {
         //Write the output for unit model
         String outputFileUnit = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".unit.xml");
         try {
-            FileUtils.writeStringToFile(new File(outputFileUnit), XmlBuilderUtils.toPrettyXml(unitNode), UTF_8);
+            FileUtils.writeStringToFile(new File(outputFileUnit), XmlBuilderUtils.toXml(unitNode), UTF_8);
         } catch (IOException e) {
             throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileUnit);
         }
@@ -147,7 +147,7 @@ public class QuantityParserTrainingData {
         //Write the output for unit model
         String outputFileValue = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".value.xml");
         try {
-            FileUtils.writeStringToFile(new File(outputFileValue), XmlBuilderUtils.toPrettyXml(valueNode), UTF_8);
+            FileUtils.writeStringToFile(new File(outputFileValue), XmlBuilderUtils.toXml(valueNode), UTF_8);
         } catch (IOException e) {
             throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileValue);
         }

@@ -23,9 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 
 /**
@@ -59,9 +57,7 @@ public class ValueParser extends AbstractParser {
 
     public Value parseValue(String rawValue, Locale locale) {
 
-        List<ValueBlock> values = tagValue(rawValue);
-
-        ValueBlock block = values.get(0);
+        ValueBlock block = tagValue(rawValue);
 
         BigDecimal numeric = parseValueBlock(block, locale);
         final Value resultValue = new Value();
@@ -78,9 +74,9 @@ public class ValueParser extends AbstractParser {
             case NUMBER:
                 try {
                     BigDecimal secondPart = null;
-                    if (isNotEmpty(block.getPow()) && isNotEmpty(block.getBase())) {
-                        final Number pow = format.parse(block.getPow());
-                        final BigDecimal baseBd = new BigDecimal(format.parse(block.getBase()).toString());
+                    if (block.getPow() != null && block.getBase() != null) {
+                        final Number pow = format.parse(block.getPowAsString());
+                        final BigDecimal baseBd = new BigDecimal(format.parse(block.getBaseAsString()).toString());
                         final int intPower = pow.intValue();
 
                         if (intPower < 0) {
@@ -91,8 +87,8 @@ public class ValueParser extends AbstractParser {
                         }
                     }
 
-                    if (isNotEmpty(block.getNumber())) {
-                        final BigDecimal number = new BigDecimal(format.parse(block.getNumber()).toString());
+                    if (block.getNumber() != null) {
+                        final BigDecimal number = new BigDecimal(format.parse(block.getNumberAsString()).toString());
                         if (secondPart != null) {
                             return number.multiply(secondPart);
                         }
@@ -108,8 +104,8 @@ public class ValueParser extends AbstractParser {
             case EXPONENT:
                 try {
                     BigDecimal secondPart = null;
-                    if (isNotEmpty(block.getExp())) {
-                        final Number exp = format.parse(block.getExp());
+                    if (block.getExp() != null) {
+                        final Number exp = format.parse(block.getExpAsString());
                         final int intPower = exp.intValue();
                         final BigDecimal exponentialBase = new BigDecimal(Math.E);
 
@@ -121,8 +117,8 @@ public class ValueParser extends AbstractParser {
                         }
                     }
 
-                    if (isNotEmpty(block.getNumber())) {
-                        final BigDecimal number = new BigDecimal(format.parse(block.getNumber()).toString());
+                    if (isNotEmpty(block.getNumberAsString())) {
+                        final BigDecimal number = new BigDecimal(format.parse(block.getNumberAsString()).toString());
                         if (secondPart != null) {
                             return number.multiply(secondPart);
                         }
@@ -138,7 +134,7 @@ public class ValueParser extends AbstractParser {
 
             case ALPHANUMERIC:
                 WordsToNumber w2n = WordsToNumber.getInstance();
-                return w2n.normalize(block.getAlpha(), locale);
+                return w2n.normalize(block.getAlphaAsString(), locale);
 
             case TIME:
                 //we do not parse it for the moment
@@ -151,14 +147,12 @@ public class ValueParser extends AbstractParser {
     }
 
 
-    public List<ValueBlock> tagValue(String text) {
+    public ValueBlock tagValue(String text) {
         if (isBlank(text)) {
             return null;
         }
-
-        //Remove spaces. It's a workaround (to be check whether it is working) because spaces are causing troubles
-        text = text.replaceAll(" ", "");
-        List<ValueBlock> values = new ArrayList<>();
+        
+        ValueBlock parsedValue = null;
 
         try {
             text = text.replace("\n", "");
@@ -182,28 +176,30 @@ public class ValueParser extends AbstractParser {
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
-            values = resultExtraction(res, tokenizations);
+            parsedValue = resultExtraction(res, tokenizations);
         } catch (Exception e) {
             throw new GrobidException("An exception occurred while running Grobid.", e);
         }
 
-        return values;
+        return parsedValue;
     }
 
     /**
      * Extract identified quantities from a labelled text.
      */
-    public List<ValueBlock> resultExtraction(String result, List<LayoutToken> tokenizations) {
+    public ValueBlock resultExtraction(String result, List<LayoutToken> tokenizations) {
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.VALUE, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
-        boolean denominator = false;
-        int currentPow = 1;
-        boolean startUnit = false;
-        TaggingLabel previousTag = null;
+        String rawValue = LayoutTokensUtil.toText(tokenizations);
 
-        List<ValueBlock> values = new ArrayList<>();
         ValueBlock valueBlock = new ValueBlock();
+        valueBlock.setRawValue(rawValue);
+
+        int start = 0;
+        int end = 0;
+
+        StringBuilder rawTaggedValue = new StringBuilder();
 
         for (TaggingTokenCluster cluster : clusters) {
             if (cluster == null) {
@@ -212,28 +208,50 @@ public class ValueParser extends AbstractParser {
 
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens());
+            end = start + clusterContent.length();
+            OffsetPosition offsets = new OffsetPosition(start, end);
+
+            if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
+                rawTaggedValue.append(clusterLabel.getLabel());
+            }
+            rawTaggedValue.append(clusterContent);
+            if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
+                rawTaggedValue.append(clusterLabel.getLabel().replace("<", "</"));
+            }
 
             if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_NUMBER)) {
                 valueBlock.setNumber(clusterContent);
-                LOGGER.debug(clusterContent + "(V)");
+                valueBlock.getNumber().setOffsets(offsets);
+                LOGGER.debug(clusterContent + "(N)");
             } else if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_BASE)) {
                 valueBlock.setBase(clusterContent);
+                valueBlock.getBase().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(B)");
             } else if (clusterLabel.equals(VALUE_VALUE_OTHER)) {
                 LOGGER.debug(clusterContent + "(O)");
             } else if (clusterLabel.equals(VALUE_VALUE_POW)) {
                 valueBlock.setPow(clusterContent);
+                valueBlock.getPow().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(P)");
             } else if (clusterLabel.equals(VALUE_VALUE_EXP)) {
-                valueBlock.setPow(clusterContent);
-                LOGGER.debug(clusterContent + "(Op)");
+                valueBlock.setExp(clusterContent);
+                valueBlock.getExp().setOffsets(offsets);
+                LOGGER.debug(clusterContent + "(E)");
+            } else if (clusterLabel.equals(VALUE_VALUE_TIME)) {
+                valueBlock.setTime(clusterContent);
+                valueBlock.getTime().setOffsets(offsets);
+                LOGGER.debug(clusterContent + "(T)");
+            } else if (clusterLabel.equals(VALUE_VALUE_ALPHA)) {
+                valueBlock.setAlpha(clusterContent);
+                valueBlock.getAlpha().setOffsets(offsets);
+                LOGGER.debug(clusterContent + "(A)");
             }
-            previousTag = clusterLabel;
+            start = end;
         }
-        values.add(valueBlock);
-        LOGGER.debug("--");
 
-        return values;
+        valueBlock.setRawTaggedValue(rawTaggedValue.toString());
+
+        return valueBlock;
     }
 
 
@@ -243,8 +261,12 @@ public class ValueParser extends AbstractParser {
         StringBuilder result = new StringBuilder();
         try {
             for (String character : characters) {
+                if (isBlank(character)) {
+                    continue;
+                }
+
                 FeaturesVectorValue featuresVector =
-                        FeaturesVectorValue.addFeatures(character, null);
+                        FeaturesVectorValue.addFeatures(trim(character), null);
 
                 result.append(featuresVector.printVector())
                         .append("\n");

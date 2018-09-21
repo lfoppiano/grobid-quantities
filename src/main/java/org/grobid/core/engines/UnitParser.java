@@ -20,6 +20,7 @@ import java.util.List;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_OTHER;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_POW;
+import static org.grobid.core.engines.label.QuantitiesTaggingLabels.VALUE_VALUE_OTHER;
 
 /**
  * Created by lfoppiano on 20.02.16.
@@ -61,7 +62,7 @@ public class UnitParser extends AbstractParser {
         }
 
         //Remove spaces. It's a workaround (to be check whether it is working) because spaces are causing troubles
-        text = text.replaceAll(" ", "");
+//        text = text.replaceAll(" ", "");
         List<UnitBlock> units = new ArrayList<>();
 
         try {
@@ -83,7 +84,7 @@ public class UnitParser extends AbstractParser {
                 unitTokenPositions.add(position);
             }
 
-            ress = addFeatures(characters, unitTokenPositions, isUnitLeft);           
+            ress = addFeatures(characters, unitTokenPositions, isUnitLeft);
             String res;
             try {
                 res = label(ress);
@@ -116,6 +117,8 @@ public class UnitParser extends AbstractParser {
         List<UnitBlock> units = new ArrayList<>();
         UnitBlock unitBlock = new UnitBlock();
 
+        StringBuilder rawTaggedValue = new StringBuilder();
+
         for (TaggingTokenCluster cluster : clusters) {
             if (cluster == null) {
                 continue;
@@ -124,10 +127,19 @@ public class UnitParser extends AbstractParser {
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens());
 
+            if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
+                rawTaggedValue.append(clusterLabel.getLabel());
+            }
+            rawTaggedValue.append(clusterContent);
+            if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
+                rawTaggedValue.append(clusterLabel.getLabel().replace("<", "</"));
+            }
+
             if (clusterLabel.equals(QuantitiesTaggingLabels.UNIT_VALUE_PREFIX)) {
                 if (!startUnit) {
                     startUnit = true;
                 } else {
+                    unitBlock.setRawTaggedValue(rawTaggedValue.toString());
                     units.add(unitBlock);
                     unitBlock = new UnitBlock();
                 }
@@ -140,6 +152,7 @@ public class UnitParser extends AbstractParser {
                     unitBlock = new UnitBlock();
                 } else {
                     if (!QuantitiesTaggingLabels.UNIT_VALUE_PREFIX.equals(previousTag)) {
+                        unitBlock.setRawTaggedValue(rawTaggedValue.toString());
                         units.add(unitBlock);
                         unitBlock = new UnitBlock();
                     }
@@ -171,8 +184,9 @@ public class UnitParser extends AbstractParser {
             }
             previousTag = clusterLabel;
         }
+
+        unitBlock.setRawTaggedValue(rawTaggedValue.toString());
         units.add(unitBlock);
-        LOGGER.debug("--");
 
         return units;
     }
@@ -183,8 +197,13 @@ public class UnitParser extends AbstractParser {
                                List<OffsetPosition> unitTokenPositions, boolean isUnitLeft) {
 
         StringBuilder result = new StringBuilder();
+        
         try {
             for (String character : characters) {
+                if (isBlank(character)) {
+                    continue;
+                }
+
                 FeaturesVectorUnit featuresVector =
                         FeaturesVectorUnit.addFeaturesUnit(character,
                                 null,

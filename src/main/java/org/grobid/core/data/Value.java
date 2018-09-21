@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class Value {
-    private String rawName = "";
+    private String rawValue = "";
     private OffsetPosition offsets = new OffsetPosition();
     private ValueBlock structure = null;
     private BigDecimal numeric = null;
@@ -21,12 +21,12 @@ public class Value {
     public Value() {
     }
 
-    public String getRawName() {
-        return rawName;
+    public String getRawValue() {
+        return rawValue;
     }
 
-    public void setRawName(String rawName) {
-        this.rawName = rawName;
+    public void setRawValue(String rawValue) {
+        this.rawValue = rawValue;
     }
 
     public void setOffsetStart(int start) {
@@ -82,7 +82,7 @@ public class Value {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("rawName", rawName)
+                .add("rawValue", rawValue)
                 .add("structure", structure)
                 .add("numeric", numeric)
                 .toString();
@@ -93,8 +93,8 @@ public class Value {
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");
-        if (isNotEmpty(rawName)) {
-            byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
+        if (isNotEmpty(rawValue)) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(rawValue);
             String outputRawName = new String(encodedRawName);
             if (!started) {
                 started = true;

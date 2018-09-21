@@ -11,6 +11,7 @@ public class UnitBlock {
     private String prefix = "";
     private String base = "";
     private String pow = "";
+    private String rawTaggedValue;
 
 
     public UnitBlock(String prefix, String base, String pow) {
@@ -139,5 +140,13 @@ public class UnitBlock {
         } else {
             return numerator.toString();
         }
+    }
+
+    public void setRawTaggedValue(String rawTaggedValue) {
+        this.rawTaggedValue = rawTaggedValue;
+    }
+
+    public String getRawTaggedValue() {
+        return rawTaggedValue;
     }
 }
