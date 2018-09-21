@@ -100,13 +100,18 @@ configurations.all {
     }
 }
 
+test {
+    exclude '**/**IntegrationTest**'
+}
+
 // Gretty configuration
 
 gretty {
     httpPort = 8060
     contextPath = '/'
-//    servletContainer = "jetty9.4"
+    servletContainer = "jetty9.4"
     webInfIncludeJarPattern = ''
+    reloadOnClassChange = false
 }
 
 // Training configuration
@@ -153,12 +158,6 @@ artifacts {
     archives shadowJar
 }
 
-task copyModels(type: Copy) {
-    from "${rootDir}/resources/models"
-    include "**/*.wapiti"
-    into "${rootDir}/../grobid-home/models/"
-}
-
 //tasks.withType(JavaCompile) {
 //    options.compilerArgs << "-Xlint:deprecation"
 //    options.compilerArgs << "-Xlint:unchecked"
@@ -166,7 +165,7 @@ task copyModels(type: Copy) {
 
 
 wrapper {
-    gradleVersion "4.2.1"
+    gradleVersion "4.6"
 }
 
 
