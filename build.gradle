@@ -153,6 +153,12 @@ artifacts {
     archives shadowJar
 }
 
+task copyModels(type: Copy) {
+    from "${rootDir}/resources/models"
+    include "**/*.wapiti"
+    into "${rootDir}/../grobid-home/models/"
+}
+
 //tasks.withType(JavaCompile) {
 //    options.compilerArgs << "-Xlint:deprecation"
 //    options.compilerArgs << "-Xlint:unchecked"
