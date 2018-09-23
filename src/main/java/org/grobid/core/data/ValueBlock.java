@@ -67,31 +67,6 @@ public class ValueBlock {
 
     }
 
-    /*public Type getType() {
-        if (isNotEmpty(number)) {
-            if (isNotEmpty(base) && isNotEmpty(pow)) {
-                return Type.NUMBER;
-            } else if (isNotEmpty(exp)) {
-                return Type.EXPONENT;
-            }
-            return Type.NUMBER;
-        } else if (isNotEmpty(time)) {
-            return Type.NUMBER;
-        } else if (isNotEmpty(alpha)) {
-            return Type.ALPHANUMERIC;
-        } else {
-            if (isNotEmpty(base) && isNotEmpty(pow)) {
-                return Type.NUMBER;
-            } else if (isNotEmpty(exp)) {
-                return Type.EXPONENT;
-            }
-        }
-
-        return Type.UNKNOWN;
-
-    }*/
-
-
     @Override
     public String toString() {
         switch (getType()) {
@@ -119,6 +94,10 @@ public class ValueBlock {
 
                 if (getExp() != null) {
                     sb.append("e^" + getExp());
+                } else {
+                    if (getPow() != null && getBase() != null) {
+                        sb.append(" x " + getBase() + "^" + getPow());
+                    }
                 }
                 return sb.toString();
             case UNKNOWN:
@@ -224,67 +203,22 @@ public class ValueBlock {
         JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder json = new StringBuilder();
         boolean started = false;
+
         json.append("{ ");
-//        if (isNotEmpty(number)) {
-//            byte[] encodedRawName = encoder.quoteAsUTF8(number);
-//            String outputRawName = new String(encodedRawName);
-//            if (!started) {
-//                started = true;
-//            } else
-//                json.append(", ");
-//            json.append("\"number\" : \"" + outputRawName + "\"");
-//        }
-//
-//        if (isNotEmpty(base)) {
-//            byte[] encodedRawName = encoder.quoteAsUTF8(base);
-//            String outputRawName = new String(encodedRawName);
-//            if (!started) {
-//                started = true;
-//            } else
-//                json.append(", ");
-//            json.append("\"base\" : \"" + outputRawName + "\"");
-//        }
-//
-//        if (isNotEmpty(pow)) {
-//            byte[] encodedRawName = encoder.quoteAsUTF8(pow);
-//            String outputRawName = new String(encodedRawName);
-//            if (!started) {
-//                started = true;
-//            } else
-//                json.append(", ");
-//
-//            json.append("\"pow\" : \"" + outputRawName + "\"");
-//        }
-//
-//        if (isNotEmpty(exp)) {
-//            byte[] encodedRawName = encoder.quoteAsUTF8(exp);
-//            String outputRawName = new String(encodedRawName);
-//            if (!started) {
-//                started = true;
-//            } else
-//                json.append(", ");
-//            json.append("\"exp\" : \"" + outputRawName + "\"");
-//        }
-//
-//        if (isNotEmpty(alpha)) {
-//            byte[] encodedRawName = encoder.quoteAsUTF8(alpha);
-//            String outputRawName = new String(encodedRawName);
-//            if (!started) {
-//                started = true;
-//            } else
-//                json.append(", ");
-//            json.append("\"alpha\" : \"" + outputRawName + "\"");
-//        }
-//
-//        if (isNotEmpty(time)) {
-//            byte[] encodedRawName = encoder.quoteAsUTF8(time);
-//            String outputRawName = new String(encodedRawName);
-//            if (!started) {
-//                started = true;
-//            } else
-//                json.append(", ");
-//            json.append("\"time\" : \"" + outputRawName + "\"");
-//        }
+        json.append("\"type\" : \"" + getType() + "\"");
+        if (!started) {
+            started = true;
+        } else
+            json.append(", ");
+
+
+        byte[] encodedRawName = encoder.quoteAsUTF8(toString());
+        String outputRawName = new String(encodedRawName);
+        if (!started) {
+            started = true;
+        } else
+            json.append(", ");
+        json.append("\"formatted\" : \"" + outputRawName + "\"");
 
         json.append(" }");
         return json.toString();

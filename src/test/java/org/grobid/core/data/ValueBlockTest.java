@@ -48,7 +48,7 @@ public class ValueBlockTest {
     public void toJson() {
         target = new ValueBlock(new Block("1"), new Block("10"), new Block("20"));
 
-        assertThat( target.toJson(), is("{ \"number\" : \"1\", \"base\" : \"10\", \"pow\" : \"20\" }"));
+        assertThat(target.toJson(), is("{ \"type\" : \"NUMBER\", \"number\" : \"1 x 10^20\" }"));
     }
 
     @Test
@@ -56,6 +56,6 @@ public class ValueBlockTest {
         target = new ValueBlock();
         target.setNumber("1");
         target.setExp("-5");
-        assertThat( target.toJson(), is("{ \"number\" : \"1\", \"exp\" : \"-5\" }"));
+        assertThat(target.toJson(), is("{ \"type\" : \"EXPONENT\", \"number\" : \"1\" }"));
     }
 }
