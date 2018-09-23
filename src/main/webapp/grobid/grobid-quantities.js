@@ -841,7 +841,7 @@ var grobid = (function ($) {
             var rawValue = quantity.rawValue;
             var unit = quantity.rawUnit;
 
-            var parsedValue = quantity.parsedValue.parsed;
+            var parsedValue = quantity.parsedValue;
             var parsedValueStructure = quantity.parsedValue.structure;
             // var parsedUnit = quantity.parsedUnit;
 
@@ -879,16 +879,17 @@ var grobid = (function ($) {
                 string += "<p>raw value: <b>" + rawValue + "</b></p>";
             }
 
-            if (parsedValue && (parsedValue != rawValue)) {
-                string += "<p>parsed value: <b>" + parsedValue.parsed + "</b></p>";
+            if (parsedValue) {
+                if (parsedValue.numeric && parsedValue.numeric !== rawValue) {
+                    string += "<p>parsed value: <b>" + parsedValue.numeric + "</b></p>";
+                } else if (parsedValue.parsed && parsedValue.parsed !== rawValue) {
+                    string += "<p>parsed value: <b>" + parsedValue.parsed + "</b></p>";
+                }
             }
 
             if (parsedValueStructure) {
-                string += "<p>&nbsp;&nbsp;value type: <b>" + parsedValueStructure.type + "</b>"
-                string += "<p>>&nbsp;&nbsp;formatted value: <b>" + parsedValueStructure.formatted + "</b>"
-                if(parsedValueStructure.parsed != rawValue) {
-                    string += "<p>>&nbsp;&nbsp;parsed value: <b>" + parsedValueStructure.parsed + "</b>"
-                }
+                string += "<p>&nbsp;&nbsp;value type: <b>" + parsedValueStructure.type + "</b>";
+                string += "<p>&nbsp;&nbsp;formatted value: <b>" + parsedValueStructure.formatted + "</b>";
             }
 
 
