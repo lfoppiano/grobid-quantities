@@ -68,7 +68,7 @@
 	<value><number>13</number></value>
 	<value><base>10</base> <pow>−4</pow></value>
 	<value><number>3</number></value>
-    <value><number>5.7</number> × <base>10 </base><exp>−4</exp></value>
+    <value><number>5.7</number> × <base>10</base> <exp>−4</exp></value>
 	<value><number>0.001</number></value>
 	<value><alpha>one</alpha></value>
 	<value><alpha>two</alpha></value>
