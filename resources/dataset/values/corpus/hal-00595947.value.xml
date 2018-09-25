@@ -1,6 +1,6 @@
 <values xmlns="http://www.tei-c.org/ns/1.0">
-    <value><time>zero</time></value>
-	<value><time>zero</time></value>
+    <value><alpha>zero</alpha></value>
+	<value><alpha>zero</alpha></value>
 	<value><number>1</number></value>
 	<value><number>1</number></value>
 	<value><alpha>two</alpha></value>

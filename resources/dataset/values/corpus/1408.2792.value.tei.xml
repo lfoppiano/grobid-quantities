@@ -15,7 +15,7 @@
 	<value><base>10</base> <pow>9</pow></value>
 	<value><alpha>four</alpha></value>
 	<value><alpha>two</alpha></value>
-	<value><time>zero</time></value>
+	<value><alpha>zero</alpha></value>
 	<value><number>100</number></value>
 	<value><number>1.008</number></value>
 	<value><base>10</base> <pow>9</pow></value>
@@ -80,7 +80,7 @@
 	<value><number>3</number></value>
 	<value><number>1</number> × <base>10</base> <pow>−7</pow></value>
 	<value><time>19:57</time></value>
-	<value><number>2</number><time>0:17 UTC</time></value>
+	<value><time>20:17 UTC</time></value>
 	<value><number>5</number></value>
 	<value><number>4</number></value>
 	<value><number>1</number></value>
@@ -112,7 +112,7 @@
 	<value><number>2</number> × <base>10</base> <pow>−6</pow></value>
 	<value><number>5</number></value>
 	<value><number>1</number></value>
-	<value>0.002<time>1</time></value>
+	<value><time>0.0021</time></value>
 	<value><number>0.1</number></value>
 	<value><number>3.1</number></value>
 	<value><number>56</number></value>
