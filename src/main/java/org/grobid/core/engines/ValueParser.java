@@ -48,7 +48,7 @@ public class ValueParser extends AbstractParser {
     }
 
     protected ValueParser() {
-        super(QuantitiesModels.VALUE);
+        super(QuantitiesModels.VALUES);
     }
 
     public Value parseValue(String rawValue) {
@@ -188,7 +188,7 @@ public class ValueParser extends AbstractParser {
      * Extract identified quantities from a labelled text.
      */
     public ValueBlock resultExtraction(String result, List<LayoutToken> tokenizations) {
-        TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.VALUE, result, tokenizations);
+        TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.VALUES, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
         String rawValue = LayoutTokensUtil.toText(tokenizations);

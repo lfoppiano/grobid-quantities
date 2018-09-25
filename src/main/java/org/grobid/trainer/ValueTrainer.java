@@ -7,7 +7,6 @@ import org.grobid.core.features.FeaturesVectorValue;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
-import org.grobid.trainer.sax.UnitAnnotationSaxHandler;
 import org.grobid.trainer.sax.ValueAnnotationSaxHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,7 @@ public class ValueTrainer extends AbstractTrainer {
     private static final Logger LOGGER = LoggerFactory.getLogger(ValueTrainer.class);
 
     public ValueTrainer() {
-        super(QuantitiesModels.VALUE);
+        super(QuantitiesModels.VALUES);
         epsilon = 0.0000001;
         window = 20;
     }

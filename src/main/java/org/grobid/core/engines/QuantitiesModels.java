@@ -10,6 +10,6 @@ public class QuantitiesModels {
 
     public static final GrobidModel QUANTITIES = GrobidModels.modelFor("quantities");
     public static final GrobidModel UNITS = GrobidModels.modelFor("units");
-    public static final GrobidModel VALUE = GrobidModels.modelFor("values");
+    public static final GrobidModel VALUES = GrobidModels.modelFor("values");
 
 }

@@ -62,7 +62,7 @@ public class MeasurementOperations {
                 if ((quantityLeast == null) && (quantityMost == null))
                     continue;
                 /*if (((quantityLeast != null) && (quantityMost == null)) || ((quantityLeast == null) && (quantityMost != null))) {
-                    Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
+                    Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUES);
                     Quantity quantity = null;
                     if (quantityLeast != null) {
                         quantity = quantityLeast;

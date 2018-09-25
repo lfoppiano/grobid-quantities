@@ -28,7 +28,7 @@ public class SubstanceParser {
     }
 
     protected SubstanceParser() {
-        //super(GrobidModels.VALUE);
+        //super(GrobidModels.VALUES);
     }
 
     /** do nothing for the moment, use DefaultSubstanceParser ;) */
