@@ -104,9 +104,11 @@ test {
     exclude '**/**IntegrationTest**'
 }
 
+
 //integration (type: Test){
 //    include '**'
 //}
+
 
 // Gretty configuration
 
@@ -174,6 +176,12 @@ artifacts {
     archives shadowJar
 //    archives jar
 //    archives mainWar
+}
+
+task copyModels(type: Copy) {
+    from "${rootDir}/resources/models"
+    include "**/*.wapiti"
+    into "${rootDir}/../grobid-home/models/"
 }
 
 //tasks.withType(JavaCompile) {
