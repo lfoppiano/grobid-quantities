@@ -888,8 +888,8 @@ var grobid = (function ($) {
             }
 
             if (parsedValueStructure) {
-                string += "<p>&nbsp;&nbsp;value type: <b>" + parsedValueStructure.type + "</b>";
-                string += "<p>&nbsp;&nbsp;formatted value: <b>" + parsedValueStructure.formatted + "</b>";
+                string += "<p>&nbsp;&nbsp; - type: <b>" + parsedValueStructure.type + "</b></p>";
+                string += "<p>&nbsp;&nbsp; - formatted: <b>" + parsedValueStructure.formatted + "</b></p>";
             }
 
 
