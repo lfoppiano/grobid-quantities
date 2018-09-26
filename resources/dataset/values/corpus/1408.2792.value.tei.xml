@@ -1,0 +1,137 @@
+<values xmlns="http://www.tei-c.org/ns/1.0">
+    <value><time>October 2014</time></value>
+	<value><number>10</number></value>
+	<value><base>10</base> <pow>−7</pow></value>
+	<value><number>100</number></value>
+	<value><number>1.35</number></value>
+	<value><number>0.05</number></value>
+	<value><base>10</base> <pow>5</pow></value>
+	<value><number>55.96</number></value>
+	<!--<value><time>2014 Oct 19 at 18:29</time></value>-->
+	<!--<value>:<number>03</number></value>-->
+	<value><number>2.7</number> × <base>10</base> <pow>4</pow></value>
+	<value><time>20:10 UTC</time></value>
+	<value><alpha>two</alpha></value>
+	<value><base>10</base> <pow>9</pow></value>
+	<value><alpha>four</alpha></value>
+	<value><alpha>two</alpha></value>
+	<value><alpha>zero</alpha></value>
+	<value><number>100</number></value>
+	<value><number>1.008</number></value>
+	<value><base>10</base> <pow>9</pow></value>
+	<value><number>0</number></value>
+	<value><number>4</number></value>
+	<value><number>13</number></value>
+	<value><number>0</number></value>
+	<value><number>1.9</number></value>
+	<value><number>1</number></value>
+	<value><number>5</number></value>
+	<value><number>10</number></value>
+	<value><base>10</base> <pow>4</pow></value>
+	<value><number>1</number></value>
+	<value><number>1</number></value>
+	<value><number>4.6</number></value>
+	<value><number>3.8</number></value>
+	<value><number>3.3</number></value>
+	<value><number>40</number></value>
+	<value><number>100</number></value>
+	<value><number>0.42</number></value>
+	<value><number>3.3</number></value>
+	<value><number>4.6</number></value>
+	<value><number>1</number></value>
+	<value><number>0.76</number></value>
+	<value><number>2.0</number></value>
+	<value><base>10</base> <pow>9</pow></value>
+	<value><number>1.9</number></value>
+	<value><base>10</base> <pow>5</pow></value>
+	<value><number>29.8</number></value>
+	<value><number>10</number></value>
+	<value><number>3</number></value>
+	<value><number>5</number></value>
+	<value><number>4471</number></value>
+	<value><number>−1722</number></value>
+	<value><number>3.52</number></value>
+	<value><number>0.03</number></value>
+	<value><number>10</number></value>
+	<value><number>26</number></value>
+	<value><number>3.1</number></value>
+	<value><number>10</number></value>
+	<value><number>27</number></value>
+	<value><number>2.5</number></value>
+	<value><alpha>two</alpha></value>
+	<value><number>3.1</number></value>
+	<value><number>1.4</number></value>
+	<value><number>0.07</number></value>
+	<value><number>10,000</number></value>
+	<value><number>9400</number></value>
+	<value><number>6000</number></value>
+	<value><number>5000</number></value>
+	<value><number>3.1</number></value>
+	<value><number>25.7</number></value>
+	<value><number>23,000</number></value>
+	<value><number>48,000</number></value>
+	<value><number>5</number></value>
+	<value><alpha>few</alpha></value>
+	<value><number>0.7</number></value>
+	<value><number>3.6</number></value>
+	<value><number>1.5</number></value>
+	<value><number>3</number></value>
+	<value><alpha>two</alpha></value>
+	<value><number>3</number></value>
+	<value><number>1</number> × <base>10</base> <pow>−7</pow></value>
+	<value><time>19:57</time></value>
+	<value><time>20:17 UTC</time></value>
+	<value><number>5</number></value>
+	<value><number>4</number></value>
+	<value><number>1</number></value>
+	<value><number>3</number></value>
+	<value><number>25</number></value>
+	<value><number>2</number></value>
+	<value><number>0.3</number></value>
+	<value><number>0.34</number></value>
+	<value><alpha>two</alpha></value>
+	<value><number>0.5</number></value>
+	<value><number>2.0</number></value>
+	<value><number>100</number></value>
+	<value><number>14</number></value>
+	<value><number>8</number></value>
+	<value><number>0.5</number></value>
+	<value><number>2.0</number></value>
+	<value><number>2</number></value>
+	<value><number>10,000</number></value>
+	<value><number>1</number></value>
+	<value><number>3</number></value>
+	<value><number>100</number></value>
+	<value><number>100</number></value>
+	<value><number>2.5</number></value>
+	<value><number>0.3</number></value>
+	<value><number>0.1</number></value>
+	<value><number>2.6</number> × <base>10</base> <pow>−6</pow></value>
+	<value><number>10</number></value>
+	<value><number>1.0</number></value>
+	<value><number>2</number> × <base>10</base> <pow>−6</pow></value>
+	<value><number>5</number></value>
+	<value><number>1</number></value>
+	<value><time>0.0021</time></value>
+	<value><number>0.1</number></value>
+	<value><number>3.1</number></value>
+	<value><number>56</number></value>
+	<value><number>293</number></value>
+	<value><number>5</number></value>
+	<value><number>10</number></value>
+	<value><number>1</number></value>
+	<value><number>1.0</number></value>
+	<value><number>4</number></value>
+	<value><number>13</number></value>
+	<value><time>Otober 2014</time></value>
+	<value><base>10</base> <pow>−7</pow></value>
+	<value><number>1</number></value>
+	<value><number>3</number></value>
+	<value><time>19:52</time></value>
+	<value><time>20:17 UTC</time></value>
+	<value><base>10</base> <pow>7</pow></value>
+	<value><number>100</number></value>
+	<value><number>600</number></value>
+	<value><number>3</number></value>
+	<value><base>10</base> <pow>12</pow></value>
+</values>

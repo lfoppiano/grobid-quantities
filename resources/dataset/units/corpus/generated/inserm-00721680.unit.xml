@@ -1,0 +1,17 @@
+<units xmlns="http://www.tei-c.org/ns/1.0"><unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit></units>

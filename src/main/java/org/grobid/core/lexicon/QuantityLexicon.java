@@ -383,6 +383,7 @@ public class QuantityLexicon {
         return decomposition;
     }
 
+    @SuppressWarnings("deprecated")
     @Deprecated
     public static List<RegexValueHolder> decomposeComplexUnitWithDelimiter(String unitTerm) {
         List<RegexValueHolder> decomposition = new ArrayList<>();

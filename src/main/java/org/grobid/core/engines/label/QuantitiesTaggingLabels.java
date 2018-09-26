@@ -25,6 +25,13 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
     private static final String UNIT_VALUE_PREFIX_LABEL = "<prefix>";
     private static final String UNIT_OTHER_LABEL = QUANTITY_OTHER_LABEL;
 
+    private static final String VALUE_VALUE_NUMBER_LABEL = "<number>";
+    private static final String VALUE_VALUE_ALPHA_LABEL = "<alpha>";
+    private static final String VALUE_VALUE_TIME_LABEL = "<time>";
+    private static final String VALUE_VALUE_EXP_LABEL = "<exp>";
+    private static final String VALUE_VALUE_BASE_LABEL = "<base>";
+    private static final String VALUE_VALUE_POW_LABEL = "<pow>";
+    private static final String VALUE_OTHER_LABEL = QUANTITY_OTHER_LABEL;
 
     public static final TaggingLabel QUANTITY_VALUE_ATOMIC = new TaggingLabelImpl(QuantitiesModels.QUANTITIES, QUANTITY_VALUE_ATOMIC_LABEL);
     public static final TaggingLabel QUANTITY_VALUE_LEAST = new TaggingLabelImpl(QuantitiesModels.QUANTITIES, QUANTITY_VALUE_LEAST_LABEL);
@@ -40,6 +47,14 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
     public static final TaggingLabel UNIT_VALUE_POW = new TaggingLabelImpl(QuantitiesModels.UNITS, UNIT_VALUE_POW_LABEL);
     public static final TaggingLabel UNIT_VALUE_PREFIX = new TaggingLabelImpl(QuantitiesModels.UNITS, UNIT_VALUE_PREFIX_LABEL);
     public static final TaggingLabel UNIT_VALUE_OTHER = new TaggingLabelImpl(QuantitiesModels.UNITS, UNIT_OTHER_LABEL);
+
+    public static final TaggingLabel VALUE_VALUE_NUMBER = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_VALUE_NUMBER_LABEL);
+    public static final TaggingLabel VALUE_VALUE_ALPHA = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_VALUE_ALPHA_LABEL);
+    public static final TaggingLabel VALUE_VALUE_TIME = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_VALUE_TIME_LABEL);
+    public static final TaggingLabel VALUE_VALUE_EXP = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_VALUE_EXP_LABEL);
+    public static final TaggingLabel VALUE_VALUE_BASE = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_VALUE_BASE_LABEL);
+    public static final TaggingLabel VALUE_VALUE_POW = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_VALUE_POW_LABEL);
+    public static final TaggingLabel VALUE_VALUE_OTHER = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_OTHER_LABEL);
 
     static {
         //Quantity
@@ -58,6 +73,15 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
         register(UNIT_VALUE_POW);
         register(UNIT_VALUE_PREFIX);
         register(UNIT_VALUE_OTHER);
+
+        //value
+        register(VALUE_VALUE_NUMBER);
+        register(VALUE_VALUE_ALPHA);
+        register(VALUE_VALUE_TIME);
+        register(VALUE_VALUE_EXP);
+        register(VALUE_VALUE_BASE);
+        register(VALUE_VALUE_POW);
+        register(VALUE_VALUE_OTHER);
 
     }
 }

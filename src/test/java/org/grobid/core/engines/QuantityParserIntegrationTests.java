@@ -14,7 +14,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 /**
  * Created by lfoppiano on 04.03.16.
  */
-@Ignore
 public class QuantityParserIntegrationTests {
 
     @BeforeClass
@@ -26,7 +25,7 @@ public class QuantityParserIntegrationTests {
     public void testNotNormalizedQuantity() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
 
-        List<Measurement> measurements = parser.extractQuantities("10 meters");
+        List<Measurement> measurements = parser.process("10 meters");
 
 
         if (measurements != null) {
@@ -45,7 +44,7 @@ public class QuantityParserIntegrationTests {
     public void testNormalizeableQuantity() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
 
-        List<Measurement> measurements = parser.extractQuantities("10 km");
+        List<Measurement> measurements = parser.process("10 km");
 
 
         if (measurements != null) {
@@ -64,7 +63,7 @@ public class QuantityParserIntegrationTests {
     public void testNormalizeableWordsQuantity() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
 
-        List<Measurement> measurements = parser.extractQuantities("ten km");
+        List<Measurement> measurements = parser.process("ten km");
 
 
         if (measurements != null) {
@@ -83,7 +82,7 @@ public class QuantityParserIntegrationTests {
     public void testNormalizeableQuantity2() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
 
-        List<Measurement> measurements = parser.extractQuantities("10 m^1*s^-1");
+        List<Measurement> measurements = parser.process("10 m^1*s^-1");
 
 
         if (measurements != null) {
@@ -107,7 +106,7 @@ public class QuantityParserIntegrationTests {
 
         QuantityParser parser = QuantityParser.getInstance();
 
-        List<Measurement> measurements = parser.extractQuantities(text);
+        List<Measurement> measurements = parser.process(text);
         if (measurements != null) {
             System.out.println("\n");
             for (Measurement measurement : measurements) {
@@ -127,7 +126,7 @@ public class QuantityParserIntegrationTests {
 
         QuantityParser parser = QuantityParser.getInstance();
 
-        List<Measurement> measurements = parser.extractQuantities(text);
+        List<Measurement> measurements = parser.process(text);
         if (measurements != null) {
             System.out.println("\n");
             for (Measurement measurement : measurements) {
@@ -146,7 +145,7 @@ public class QuantityParserIntegrationTests {
 
         QuantityParser parser = QuantityParser.getInstance();
 
-        List<Measurement> measurements = parser.extractQuantities(text);
+        List<Measurement> measurements = parser.process(text);
         if (measurements != null) {
             System.out.println("\n");
             for (Measurement measurement : measurements) {
@@ -157,11 +156,13 @@ public class QuantityParserIntegrationTests {
         }
     }
 
+/*
     @Test
     public void testCreateTrainingDataFromText() throws Exception {
         QuantityParser parser = QuantityParser.getInstance();
         parser.createTraining("./src/test/resources/test1.txt",
                 "./src/test/resources/test1.training.tei.xml", 0);
     }
+*/
 
 }

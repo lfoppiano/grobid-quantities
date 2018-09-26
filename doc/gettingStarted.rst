@@ -14,6 +14,7 @@ Copy the module quantities as sibling sub-project to grobid-core, grobid-trainer
 ::
    cp -r grobid-quantities grobid/
 
+
 Try compiling everything with:
 ::
    cd PATH-TO-GROBID/grobid/
@@ -27,8 +28,6 @@ Run some test:
    cd PATH-TO-GROBID/grobid/grobid-quantities
 
    ./gradlew test
-
-**The models have to be trained before running the tests!**
 
 Training
 ~~~~~~~~

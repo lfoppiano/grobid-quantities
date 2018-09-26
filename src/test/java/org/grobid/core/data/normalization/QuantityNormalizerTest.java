@@ -1,9 +1,9 @@
 package org.grobid.core.data.normalization;
 
 import org.grobid.core.data.Quantity;
-import org.grobid.core.engines.ValueParser;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
+import org.grobid.core.engines.ValueParser;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
@@ -49,7 +49,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_simpleUnitWithNormalization_kmToMeters() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km");
         input.setRawUnit(raw);
@@ -82,7 +82,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_wordsValue_simpleUnitWithNormalization_kmToMeters() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("twenty two");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km");
         input.setRawUnit(raw);
@@ -106,7 +106,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_simpleUnitWithNormalization_CelsiusToKelvin() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("10");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("°C");
         input.setRawUnit(raw);
@@ -136,7 +136,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_kmHourToMetersSecond() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km/h");
         input.setRawUnit(raw);
@@ -160,7 +160,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity2_3composedUnits() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2000");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km*g/h");
         input.setRawUnit(raw);
@@ -184,7 +184,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity3_2composedUnits() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2000");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("km*kg/h");
         input.setRawUnit(raw);
@@ -210,7 +210,7 @@ public class QuantityNormalizerTest {
     public void testNormalizeQuantity_simpleUnitWithoutNormalization_meters() throws Exception {
         Quantity input = new Quantity();
         input.setRawValue("2");
-        valueParser.parseValue(input);
+        input.setParsedValue(valueParser.parseValue(input.getRawValue()));
         Unit raw = new Unit();
         raw.setRawName("m");
         input.setRawUnit(raw);
@@ -264,6 +264,28 @@ public class QuantityNormalizerTest {
         assertThat(output.get("km"), is(1));
         assertThat(output.get("kg"), is(-1));
     }*/
+
+    @Test
+    public void testExtractProduct_productOfSeveralTransformedUnits() throws Exception {
+//        final Quantity quantity = new Quantity("20", new Unit("km/h*kg"));
+        final String rawUnit = "m/hours";
+        final String rawValue = "20";
+        final Unit rawUnitObj = new Unit(rawUnit);
+        final Unit parsedUnit = new Unit("m");
+        final Quantity quantity = new Quantity(rawValue, rawUnitObj);
+
+        final Quantity.Normalized normalized = target.normalizeQuantity(quantity);
+
+//        expect(mockUnitNormalizer.parseUnit(rawUnitObj)).andReturn();
+//        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(new UnitDefinition());
+
+
+//        Map<String, Integer> output = target.extractProduct(productUnit);
+//        assertThat(output.size(), is(3));
+//        assertThat(output.get("h"), is(-1));
+//        assertThat(output.get("km"), is(1));
+//        assertThat(output.get("kg"), is(-1));
+    }
 
     @Test
     public void testCheckPrecision() throws Exception {

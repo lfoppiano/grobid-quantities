@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <units>
-    <unit left="true">
-        <prefix>c</prefix>
-        <base>m</base>
-        <pow>2</pow>
-        <pow>/</pow>
-        <base>s</base>
-    </unit>
+    <unit left="true"><prefix>c</prefix><base>m</base><pow>2</pow><pow>/</pow><base>s</base></unit>
     <unit>
         <prefix>k</prefix>
         <base>m</base>

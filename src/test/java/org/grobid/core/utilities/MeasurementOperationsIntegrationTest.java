@@ -38,5 +38,4 @@ public class MeasurementOperationsIntegrationTest {
         System.out.println(target.resolveMeasurement(measurementList));
     }
 
-
 }

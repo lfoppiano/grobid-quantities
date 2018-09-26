@@ -306,7 +306,7 @@ public class QuantityTrainingFormatter {
             }
             p.appendChild(measure);
         }
-        p.appendChild(text.substring(pos, text.length()));
+        p.appendChild(text.substring(pos));
 
         return p;
     }

@@ -1,0 +1,33 @@
+<units xmlns="http://www.tei-c.org/ns/1.0"><unit><base>%</base></unit>
+	<unit><base>year</base></unit>
+	<unit><base>year</base></unit>
+	<unit><base>year</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>A</base><base>m </base><pow>-2</pow></unit>
+	<unit><prefix>k</prefix><base>g</base><base>m </base><pow>-3</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
+	<unit><base>K</base></unit>
+	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>g</base><base>m</base><pow>-1</pow></unit>
+	<unit><base>W</base><prefix>k</prefix><base>g</base><pow>-1</pow></unit>
+	<unit><base>year</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>year</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>year</base></unit>
+	<unit><base>year</base></unit>
+	<unit><base>year</base></unit>
+	<unit><base>year</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>year</base></unit>
+	<unit><base>year</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit></units>

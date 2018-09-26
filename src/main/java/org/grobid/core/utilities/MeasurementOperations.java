@@ -62,7 +62,7 @@ public class MeasurementOperations {
                 if ((quantityLeast == null) && (quantityMost == null))
                     continue;
                 /*if (((quantityLeast != null) && (quantityMost == null)) || ((quantityLeast == null) && (quantityMost != null))) {
-                    Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);
+                    Measurement newMeasurement = new Measurement(UnitUtilities.Measurement_Type.VALUES);
                     Quantity quantity = null;
                     if (quantityLeast != null) {
                         quantity = quantityLeast;
@@ -181,7 +181,7 @@ public class MeasurementOperations {
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
                 updateQuantity(measurement.getQuantityBase());
                 updateQuantity(measurement.getQuantityRange());
-                // the two quantities bellow are normally not yet set-up
+                // the two quantities below are normally not yet set-up
                 //updateQuantity(measurement.getQuantityLeast());
                 //updateQuantity(measurement.getQuantityMost());
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {

@@ -8,10 +8,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.easymock.EasyMock.*;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -22,7 +25,7 @@ public class UnitNormalizerTest {
     private UnitNormalizer target;
     private UnitParser mockUnitParser;
     private QuantityLexicon mockQuantityLexicon;
-    
+
     @BeforeClass
     public static void setUpClass() throws Exception {
         LibraryLoader.load();
@@ -158,4 +161,26 @@ public class UnitNormalizerTest {
 
         assertThat(reformatted, is(expected));
     }
+
+    @Test
+    public void testDecompositionOfBlocks_shouldReturnTheNotation() throws Exception {
+        List<UnitBlock> blocks = new ArrayList<>();
+
+        blocks.add(new UnitBlock("k", "m", null));
+        blocks.add(new UnitBlock(null, "hours", "-1"));
+        
+        expect(mockQuantityLexicon.getNameByInflection("hours")).andReturn("h");
+
+        replay(mockQuantityLexicon);
+
+        final List<UnitBlock> result = target.decomposeBlocks(blocks);
+        assertThat(result, hasSize(2));
+        assertThat(result.get(0).getBase(), is("m"));
+        assertThat(result.get(0).getPrefix(), is("k"));
+        assertThat(result.get(1).getBase(), is("h"));
+
+        verify(mockQuantityLexicon);
+    }
+
+
 }

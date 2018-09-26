@@ -71,6 +71,7 @@ dependencies {
     compile group: 'si.uom', name: 'si-quantity', version: '0.9'
     compile group: 'si.uom', name: 'si-units-java8', version: '0.9'
     compile group: 'systems.uom', name: 'systems-ucum-java8', version: '0.9'
+    compile group: 'systems.uom', name: 'systems-unicode-java8', version: '0.9'
     compile group: 'systems.uom', name: 'systems-quantity', version: '0.9'
 
     //Web interface
@@ -104,6 +105,12 @@ test {
     exclude '**/**IntegrationTest**'
 }
 
+
+//integration (type: Test){
+//    include '**'
+//}
+
+
 // Gretty configuration
 
 gretty {
@@ -120,6 +127,7 @@ def trainerTasks = [
         //Training models
         "train_units"     : "org.grobid.trainer.UnitTrainer",
         "train_quantities": "org.grobid.trainer.QuantityTrainer",
+        "train_values"    : "org.grobid.trainer.ValueTrainer",
 ]
 
 trainerTasks.each { taskName, mainClassName ->
@@ -141,6 +149,13 @@ task mainJar(type: ShadowJar, group: 'test') {
     from sourceSets.main.output
 }
 
+//include project classes as jar into war's WEB-INF/lib
+//task mainWar(type: War, group: 'test') {
+//    zip64 true
+//    classifier = 'war'
+//    classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+//}
+
 shadowJar {
     classifier = 'onejar'
     zip64 true
@@ -153,9 +168,15 @@ jar {
     dependsOn mainJar
     enabled false
 }
+//war {
+//    dependsOn mainWar
+//    enabled false
+//}
 
 artifacts {
     archives shadowJar
+//    archives jar
+//    archives mainWar
 }
 
 task copyModels(type: Copy) {

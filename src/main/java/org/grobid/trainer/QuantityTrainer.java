@@ -35,7 +35,7 @@ public class QuantityTrainer extends AbstractTrainer {
     }
 
     /**
-     * Add the selected features to the model training for bio entities
+     * Add the selected features to the model training
      */
     public int createCRFPPData(final File corpusDir,
                                final File trainingOutputPath,

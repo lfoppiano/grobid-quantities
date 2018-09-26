@@ -2,6 +2,8 @@ package org.grobid.core.data;
 
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 /**
  * Created by lfoppiano on 08.03.16.
  */
@@ -9,6 +11,7 @@ public class UnitBlock {
     private String prefix = "";
     private String base = "";
     private String pow = "";
+    private String rawTaggedValue;
 
 
     public UnitBlock(String prefix, String base, String pow) {
@@ -60,9 +63,25 @@ public class UnitBlock {
         StringBuilder sb = new StringBuilder();
         sb.append(getPrefix());
         sb.append(getBase());
-        if (getPow() != "") {
+        if (!getPow().equals("")) {
             sb.append("^");
             sb.append(getPow());
+        }
+
+        return sb.toString();
+    }
+
+    public String toXml() {
+        StringBuilder sb = new StringBuilder();
+
+        if(isNotEmpty(getPrefix())) {
+            sb.append("<prefix>" + getPrefix() + "</prefix>");
+        }
+        if(isNotEmpty(getBase())) {
+            sb.append("<base>" + getBase() + "</base>");
+        }
+        if(isNotEmpty(getPow())) {
+            sb.append("<pow>" + getPow() + "</pow>");
         }
 
         return sb.toString();
@@ -121,5 +140,13 @@ public class UnitBlock {
         } else {
             return numerator.toString();
         }
+    }
+
+    public void setRawTaggedValue(String rawTaggedValue) {
+        this.rawTaggedValue = rawTaggedValue;
+    }
+
+    public String getRawTaggedValue() {
+        return rawTaggedValue;
     }
 }
