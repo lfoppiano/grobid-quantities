@@ -1,13 +1,12 @@
 package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
-import org.grobid.core.utilities.OffsetPosition;
 
 /**
  * This class is responsible to hold the structured representation of a value expressed in
  * the form:
  * - number x base^pow
- * - alphanumeric number
+ * - alphabetic number
  * - time expression (date, time)
  * - exponential formulas e^exp
  */
@@ -54,7 +53,7 @@ public class ValueBlock {
         } else if (time != null) {
             return Type.NUMBER;
         } else if (alpha != null) {
-            return Type.ALPHANUMERIC;
+            return Type.ALPHABETIC;
         } else {
             if (base != null && pow != null) {
                 return Type.NUMBER;
@@ -70,7 +69,7 @@ public class ValueBlock {
     @Override
     public String toString() {
         switch (getType()) {
-            case ALPHANUMERIC:
+            case ALPHABETIC:
                 return getAlphaAsString();
             case TIME:
                 return getTimeAsString();
@@ -234,7 +233,7 @@ public class ValueBlock {
 
     public enum Type {
         NUMBER,
-        ALPHANUMERIC,
+        ALPHABETIC,
         EXPONENT,
         TIME,
         UNKNOWN

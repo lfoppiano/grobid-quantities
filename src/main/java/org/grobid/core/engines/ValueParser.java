@@ -133,7 +133,7 @@ public class ValueParser extends AbstractParser {
 
                 break;
 
-            case ALPHANUMERIC:
+            case ALPHABETIC:
                 WordsToNumber w2n = WordsToNumber.getInstance();
                 return w2n.normalize(block.getAlphaAsString(), locale);
 
