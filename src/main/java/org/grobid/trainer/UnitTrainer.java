@@ -3,7 +3,7 @@ package org.grobid.trainer;
 import org.apache.commons.io.IOUtils;
 import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.features.FeaturesVectorUnit;
+import org.grobid.core.features.FeaturesVectorUnits;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
@@ -61,8 +61,8 @@ public class UnitTrainer extends AbstractTrainer {
 
                 String label = text.getB();
 
-                FeaturesVectorUnit featuresVector =
-                        FeaturesVectorUnit.addFeaturesUnit(token, label,
+                FeaturesVectorUnits featuresVector =
+                        FeaturesVectorUnits.addFeaturesUnit(token, label,
                                 quantityLexicon.inUnitDictionary(token), quantityLexicon.inPrefixDictionary(token),
                                 isUnitLeft);
 

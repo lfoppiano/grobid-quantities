@@ -1,9 +1,11 @@
 package org.grobid.core.features;
 
+import org.apache.commons.lang3.StringUtils;
+
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
-public class FeaturesVectorValue {
+public class FeaturesVectorValues {
     public String value;                        // lexical feature
     public boolean isUpperCase = false;
     public boolean isDigit = false;
@@ -52,11 +54,11 @@ public class FeaturesVectorValue {
     /**
      * Add the features for the chemical entity extraction model.
      */
-    public static FeaturesVectorValue addFeatures(String character, String label) {
+    public static FeaturesVectorValues addFeatures(String character, String label) {
 
         FeatureFactory featureFactory = FeatureFactory.getInstance();
 
-        FeaturesVectorValue featuresVector = new FeaturesVectorValue();
+        FeaturesVectorValues featuresVector = new FeaturesVectorValues();
 
         featuresVector.value = character;
         featuresVector.label = label;

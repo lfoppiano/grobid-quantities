@@ -8,7 +8,7 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
  * <p>
  * Created by lfoppiano on 20.02.16.
  */
-public class FeaturesVectorUnit {
+public class FeaturesVectorUnits {
 
     public String value;                        // lexical feature
     public boolean isUpperCase = false;
@@ -71,15 +71,15 @@ public class FeaturesVectorUnit {
     /**
      * Add the features for the chemical entity extraction model.
      */
-    public static FeaturesVectorUnit addFeaturesUnit(String character,
-                                                     String label,
-                                                     boolean isKnownUnitToken,
-                                                     boolean isKnownPrefixToken,
-                                                     boolean hasRightAttachment) {
+    public static FeaturesVectorUnits addFeaturesUnit(String character,
+                                                      String label,
+                                                      boolean isKnownUnitToken,
+                                                      boolean isKnownPrefixToken,
+                                                      boolean hasRightAttachment) {
 
         FeatureFactory featureFactory = FeatureFactory.getInstance();
 
-        FeaturesVectorUnit featuresVector = new FeaturesVectorUnit();
+        FeaturesVectorUnits featuresVector = new FeaturesVectorUnits();
 
         featuresVector.value = character;
         featuresVector.label = label;

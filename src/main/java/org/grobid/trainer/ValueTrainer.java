@@ -3,7 +3,7 @@ package org.grobid.trainer;
 import org.apache.commons.io.IOUtils;
 import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.features.FeaturesVectorValue;
+import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
@@ -53,8 +53,8 @@ public class ValueTrainer extends AbstractTrainer {
 
                 String label = text.getB();
 
-                FeaturesVectorValue featuresVector =
-                        FeaturesVectorValue.addFeatures(token, label);
+                FeaturesVectorValues featuresVector =
+                        FeaturesVectorValues.addFeatures(token, label);
 
                 if (featuresVector.label == null) {
                     continue;

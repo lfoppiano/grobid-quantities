@@ -5,7 +5,7 @@ import org.grobid.core.data.ValueBlock;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.features.FeaturesVectorValue;
+import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
@@ -266,8 +266,8 @@ public class ValueParser extends AbstractParser {
                     continue;
                 }
 
-                FeaturesVectorValue featuresVector =
-                        FeaturesVectorValue.addFeatures(trim(character), null);
+                FeaturesVectorValues featuresVector =
+                        FeaturesVectorValues.addFeatures(trim(character), null);
 
                 result.append(featuresVector.printVector())
                         .append("\n");

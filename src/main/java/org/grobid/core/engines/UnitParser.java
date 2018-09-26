@@ -4,7 +4,7 @@ import org.grobid.core.data.UnitBlock;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.features.FeaturesVectorUnit;
+import org.grobid.core.features.FeaturesVectorUnits;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.tokenization.TaggingTokenCluster;
@@ -204,8 +204,8 @@ public class UnitParser extends AbstractParser {
                     continue;
                 }
 
-                FeaturesVectorUnit featuresVector =
-                        FeaturesVectorUnit.addFeaturesUnit(character,
+                FeaturesVectorUnits featuresVector =
+                        FeaturesVectorUnits.addFeaturesUnit(character,
                                 null,
                                 quantityLexicon.inUnitDictionary(character),
                                 quantityLexicon.inPrefixDictionary(character), isUnitLeft);

@@ -19,7 +19,7 @@ public class FeaturesVectorUnitTest {
 
     @Test
     public void testPrintVector_sample1() throws Exception {
-        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("c", "LABEL", false, true, false);
+        FeaturesVectorUnits output = FeaturesVectorUnits.addFeaturesUnit("c", "LABEL", false, true, false);
         String outputString = output.printVector();
 
         assertThat(outputString, is("c 0 0 0 1 NOPUNCT 0 LABEL"));
@@ -27,7 +27,7 @@ public class FeaturesVectorUnitTest {
 
     @Test
     public void testPrintVector_sample2() throws Exception {
-        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("2", "LABEL", false, true, true);
+        FeaturesVectorUnits output = FeaturesVectorUnits.addFeaturesUnit("2", "LABEL", false, true, true);
         String outputString = output.printVector();
 
         assertThat(outputString, is("2 1 1 0 1 NOPUNCT 1 LABEL"));
@@ -35,7 +35,7 @@ public class FeaturesVectorUnitTest {
 
     @Test
     public void testAddFeaturesUnit() throws Exception {
-        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("c", null, false, true, false);
+        FeaturesVectorUnits output = FeaturesVectorUnits.addFeaturesUnit("c", null, false, true, false);
 
         assertNotNull(output.isDigit);
         assertNotNull(output.isKnownUnitToken);
@@ -47,7 +47,7 @@ public class FeaturesVectorUnitTest {
 
     @Test
     public void testAddFeaturesUnit_prefix1() throws Exception {
-        FeaturesVectorUnit output = FeaturesVectorUnit.addFeaturesUnit("G", null, false, true, true);
+        FeaturesVectorUnits output = FeaturesVectorUnits.addFeaturesUnit("G", null, false, true, true);
 
         assertNotNull(output.isDigit);
         assertNotNull(output.isKnownUnitToken);
