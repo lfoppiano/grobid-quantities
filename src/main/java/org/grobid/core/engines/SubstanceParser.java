@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Parser for identifying and attaching the quantified "substance".
  */
-//public class ValueParser extends AbstractParser {
 public class SubstanceParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubstanceParser.class);
 

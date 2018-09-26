@@ -1,9 +1,9 @@
 package org.grobid.core.data.normalization;
 
 import org.grobid.core.data.Quantity;
-import org.grobid.core.engines.ValueParser;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
+import org.grobid.core.engines.ValueParser;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
@@ -264,6 +264,28 @@ public class QuantityNormalizerTest {
         assertThat(output.get("km"), is(1));
         assertThat(output.get("kg"), is(-1));
     }*/
+
+    @Test
+    public void testExtractProduct_productOfSeveralTransformedUnits() throws Exception {
+//        final Quantity quantity = new Quantity("20", new Unit("km/h*kg"));
+        final String rawUnit = "m/hours";
+        final String rawValue = "20";
+        final Unit rawUnitObj = new Unit(rawUnit);
+        final Unit parsedUnit = new Unit("m");
+        final Quantity quantity = new Quantity(rawValue, rawUnitObj);
+
+        final Quantity.Normalized normalized = target.normalizeQuantity(quantity);
+
+//        expect(mockUnitNormalizer.parseUnit(rawUnitObj)).andReturn();
+//        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(new UnitDefinition());
+
+
+//        Map<String, Integer> output = target.extractProduct(productUnit);
+//        assertThat(output.size(), is(3));
+//        assertThat(output.get("h"), is(-1));
+//        assertThat(output.get("km"), is(1));
+//        assertThat(output.get("kg"), is(-1));
+    }
 
     @Test
     public void testCheckPrecision() throws Exception {

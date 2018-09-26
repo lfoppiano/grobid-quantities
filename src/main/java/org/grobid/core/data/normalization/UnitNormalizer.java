@@ -10,8 +10,14 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
+import javax.swing.text.html.parser.Parser;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
  * Created by lfoppiano on 23/03/16.
@@ -59,8 +65,14 @@ public class UnitNormalizer {
         try {
             parsedUnit = defaultFormatService.parse(unitName);
         } catch (ParserException pe) {
-            throw new NormalizationException("The unit " + unitName + " cannot be normalized. It is either not a valid unit " +
-                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+
+            try {
+                final List<UnitBlock> unitBlocks = decomposeBlocks(unitBlockList);
+                parsedUnit = defaultFormatService.parse(UnitBlock.asString(unitBlocks));
+            } catch (ParserException pe2) {
+                throw new NormalizationException("The unit " + unitName + " cannot be normalized. It is either not a valid unit " +
+                        "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+            }
         } catch (Exception e) {
             throw new NormalizationException("Unexpected normalization error for the unit " + unitName, e);
         } catch (systems.uom.ucum.internal.format.TokenMgrError e) {
@@ -99,6 +111,22 @@ public class UnitNormalizer {
         }
         parsedUnit.setUnitDefinition(def);
         return parsedUnit;
+    }
+
+    public List<UnitBlock> decomposeBlocks(List<UnitBlock> blocks) {
+        // Try to lookup the single element in the blocks
+
+        return blocks.stream().map(b -> {
+            if (isNotEmpty(b.getBase()) && isEmpty(b.getPrefix())) {
+                String newName = quantityLexicon.getNameByInflection(b.getBase());
+
+                if (isNotEmpty(newName)) {
+                    return new UnitBlock(b.getPrefix(), newName, b.getPow());
+                }
+            }
+            return b;
+        }).collect(Collectors.toList());
+
     }
 
     public UnitDefinition findDefinition(Unit unit) {

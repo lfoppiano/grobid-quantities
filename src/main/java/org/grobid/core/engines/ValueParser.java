@@ -67,7 +67,7 @@ public class ValueParser extends AbstractParser {
         return resultValue;
     }
 
-    private BigDecimal parseValueBlock(ValueBlock block, Locale locale) {
+    protected BigDecimal parseValueBlock(ValueBlock block, Locale locale) {
         NumberFormat format = NumberFormat.getInstance(locale);
 
         switch (block.getType()) {
@@ -92,6 +92,7 @@ public class ValueParser extends AbstractParser {
                         if (secondPart != null) {
                             return number.multiply(secondPart);
                         }
+                        return number;
                     } else {
                         return secondPart;
                     }

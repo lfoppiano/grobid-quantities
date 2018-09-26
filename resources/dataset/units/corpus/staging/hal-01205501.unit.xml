@@ -1,0 +1,12 @@
+<units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>Hz</base></unit>
+	<unit><base>l</base></unit>
+	<unit><base>s</base></unit>
+	<unit><prefix>m</prefix><base>s</base></unit>
+	<unit><prefix>m</prefix><base>s</base></unit>
+	<unit><base>l</base></unit>
+	<unit><base>l</base></unit>
+	<unit><base>l</base></unit>
+</units>

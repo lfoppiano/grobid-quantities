@@ -1,6 +1,7 @@
 package org.grobid.core.lexicon;
 
 import org.grobid.core.data.RegexValueHolder;
+import org.grobid.core.data.Unit;
 import org.grobid.core.utilities.OffsetPosition;
 import org.junit.Before;
 import org.junit.Ignore;

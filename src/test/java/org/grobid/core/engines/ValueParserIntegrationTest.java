@@ -7,7 +7,12 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.util.Locale;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 public class ValueParserIntegrationTest {
@@ -52,6 +57,39 @@ public class ValueParserIntegrationTest {
 
         assertThat(output.getStructure().getNumber(), is("10"));
         assertThat(output.getStructure().getExp(), is("-1"));
+    }
+
+    @Test
+    public void testParseValueBlock_simpleNumeric() throws Exception {
+        ValueBlock block = new ValueBlock();
+        block.setNumber("20");
+        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
+
+        assertThat(bigDecimal, is(not(nullValue())));
+        assertThat(bigDecimal, is(new BigDecimal("20")));
+    }
+
+    @Test
+    public void testParseValueBlock_simpleNumericWithBaseAndPow() throws Exception {
+        ValueBlock block = new ValueBlock();
+        block.setNumber("20");
+        block.setPow("-1");
+        block.setBase("10");
+        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
+
+        assertThat(bigDecimal, is(not(nullValue())));
+        assertThat(bigDecimal.intValue(), is(2));
+    }
+
+    @Test
+    public void testParseValueBlock_simpleNumericWithBase() throws Exception {
+        ValueBlock block = new ValueBlock();
+        block.setNumber("20");
+        block.setBase("10");
+        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
+
+        assertThat(bigDecimal, is(not(nullValue())));
+        assertThat(bigDecimal.intValue(), is(200));
     }
 
 }

@@ -181,7 +181,7 @@ public class MeasurementOperations {
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
                 updateQuantity(measurement.getQuantityBase());
                 updateQuantity(measurement.getQuantityRange());
-                // the two quantities bellow are normally not yet set-up
+                // the two quantities below are normally not yet set-up
                 //updateQuantity(measurement.getQuantityLeast());
                 //updateQuantity(measurement.getQuantityMost());
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
