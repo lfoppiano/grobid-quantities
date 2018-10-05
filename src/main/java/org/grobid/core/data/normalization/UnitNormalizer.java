@@ -58,36 +58,6 @@ public class UnitNormalizer {
         return unitBlockList;
     }
 
-    public String reformat(List<UnitBlock> unitBlockList) throws NormalizationException {
-        javax.measure.Unit parsedUnit = null;
-        String unitName = UnitBlock.asString(unitBlockList);
-
-        try {
-            parsedUnit = defaultFormatService.parse(unitName);
-        } catch (ParserException pe) {
-
-            try {
-                final List<UnitBlock> unitBlocks = decomposeBlocks(unitBlockList);
-                parsedUnit = defaultFormatService.parse(UnitBlock.asString(unitBlocks));
-            } catch (ParserException pe2) {
-                throw new NormalizationException("The unit " + unitName + " cannot be normalized. It is either not a valid unit " +
-                        "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
-            }
-        } catch (Exception e) {
-            throw new NormalizationException("Unexpected normalization error for the unit " + unitName, e);
-        } catch (systems.uom.ucum.internal.format.TokenMgrError e) {
-            throw new NormalizationException("Crazy normalization error for the unit " + unitName);
-        }
-
-        return parsedUnit.toString();
-    }
-
-    public String parseAndReformat(String rawUnit, boolean isUnitLeft) throws NormalizationException {
-        final List<UnitBlock> unitBlockList = parseToProduct(rawUnit, isUnitLeft);
-        return reformat(unitBlockList);
-
-    }
-
     /**
      * Unit parsing:
      * - infer the name (name + decomposition) from the written
@@ -101,7 +71,8 @@ public class UnitNormalizer {
         parsedUnit.setOffsetStart(rawUnit.getOffsetStart());
         parsedUnit.setOffsetEnd(rawUnit.getOffsetEnd());
         parsedUnit.setProductBlocks(blocks);
-        final String reformatted = reformat(blocks);
+        final List<UnitBlock> decomposedBlocks = decomposeBlocks(blocks);
+        final String reformatted = UnitBlock.asString(decomposedBlocks);
         parsedUnit.setRawName(reformatted);
         parsedUnit.setUnitRightAttachment(rawUnit.hasUnitRightAttachment());
 
@@ -113,6 +84,9 @@ public class UnitNormalizer {
         return parsedUnit;
     }
 
+    /**
+     * Try to find the notation of each blocks
+     */
     public List<UnitBlock> decomposeBlocks(List<UnitBlock> blocks) {
         // Try to lookup the single element in the blocks
 

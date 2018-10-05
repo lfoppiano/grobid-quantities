@@ -67,12 +67,18 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.0'
 
     // measurements
-    compile group: 'tec.uom', name: 'uom-se', version: '1.0.9'
-    compile group: 'si.uom', name: 'si-quantity', version: '0.9'
+    compile group: 'javax.measure', name: 'unit-api', version: '2.0-EDR'
     compile group: 'si.uom', name: 'si-units-java8', version: '0.9'
+    compile group: 'si.uom', name: 'si-quantity', version: '0.9'
+//    compile group: 'si.uom', name: 'si-units', version: '0.9'
+    compile group: 'tec.uom', name: 'uom-se', version: '1.0.9'
+
     compile group: 'systems.uom', name: 'systems-ucum-java8', version: '0.9'
     compile group: 'systems.uom', name: 'systems-unicode-java8', version: '0.9'
     compile group: 'systems.uom', name: 'systems-quantity', version: '0.9'
+    compile group: 'systems.uom', name: 'systems-common', version: '0.9'
+    compile group: 'systems.uom', name: 'systems-unicode', version: '0.9'
+    compile group: 'systems.uom', name: 'systems-ucum', version: '0.9'
 
     //Web interface
     compile 'org.glassfish.jersey.media:jersey-media-multipart:2.27'
