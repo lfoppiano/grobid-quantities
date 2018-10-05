@@ -144,7 +144,7 @@ ext.getArg = { propName, defaultVal ->
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-task mainJar(type: ShadowJar, group: 'test') {
+task mainJar(type: ShadowJar, group: 'jar') {
     zip64 true
     from sourceSets.main.output
 }
@@ -174,7 +174,7 @@ jar {
 //}
 
 artifacts {
-    archives shadowJar
+    archives mainJar
 //    archives jar
 //    archives mainWar
 }
