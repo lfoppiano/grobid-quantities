@@ -67,7 +67,6 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.0'
 
     // measurements
-    compile group: 'javax.measure', name: 'unit-api', version: '2.0-EDR'
     compile group: 'si.uom', name: 'si-units-java8', version: '0.9'
     compile group: 'si.uom', name: 'si-quantity', version: '0.9'
 //    compile group: 'si.uom', name: 'si-units', version: '0.9'
@@ -155,13 +154,6 @@ task mainJar(type: ShadowJar, group: 'test') {
     from sourceSets.main.output
 }
 
-//include project classes as jar into war's WEB-INF/lib
-//task mainWar(type: War, group: 'test') {
-//    zip64 true
-//    classifier = 'war'
-//    classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
-//}
-
 shadowJar {
     classifier = 'onejar'
     zip64 true
@@ -174,15 +166,17 @@ jar {
     dependsOn mainJar
     enabled false
 }
-//war {
+
+war {
+    classifier = 'war'
 //    dependsOn mainWar
-//    enabled false
-//}
+    enabled true
+}
 
 artifacts {
     archives shadowJar
-//    archives jar
-//    archives mainWar
+    archives mainJar
+    archives war
 }
 
 task copyModels(type: Copy) {
