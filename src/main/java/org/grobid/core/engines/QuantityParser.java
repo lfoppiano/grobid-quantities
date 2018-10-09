@@ -63,6 +63,7 @@ public class QuantityParser extends AbstractParser {
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
     private SubstanceParser substanceParser = SubstanceParser.getInstance();
+    private QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
     private EngineParsers parsers;
 
     public static QuantityParser getInstance() {
@@ -125,7 +126,7 @@ public class QuantityParser extends AbstractParser {
             try {
                 localMeasurements = normalizeMeasurements(localMeasurements);
             } catch (Exception e) {
-                LOGGER.error("Normalisation failed. Skipping it for the time being. ", e);
+                LOGGER.error("Normalisation failed. Skipping it. ", e);
             }
             localMeasurements = substanceParser.parseSubstance(tokens, localMeasurements);
 
@@ -351,7 +352,6 @@ public class QuantityParser extends AbstractParser {
     }
 
     private void normalizeQuantity(Quantity quantity) {
-        QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
         if (quantity == null)
             return;
         if (quantity.isNormalized())

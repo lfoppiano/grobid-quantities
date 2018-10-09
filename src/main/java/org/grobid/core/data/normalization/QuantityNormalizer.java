@@ -1,5 +1,6 @@
 package org.grobid.core.data.normalization;
 
+import com.google.common.collect.ImmutableList;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
@@ -7,7 +8,6 @@ import org.grobid.core.utilities.MeasurementOperations;
 import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import systems.uom.ucum.format.UCUMFormat;
 import systems.uom.ucum.internal.format.TokenException;
 import systems.uom.ucum.internal.format.TokenMgrError;
 import tec.uom.se.unit.ProductUnit;
@@ -18,11 +18,9 @@ import javax.measure.format.UnitFormat;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static systems.uom.ucum.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 
 /**
  * This class is responsible for the normalization of the quantity.
@@ -35,7 +33,8 @@ import static systems.uom.ucum.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 public class QuantityNormalizer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityNormalizer.class);
-    //    private final UnitFormat ucumFormatService = UCUMFormat.getInstance(UCUMFormat.Variant.CASE_SENSITIVE);
+    private UnitFormat indyriaDefaultService;
+    private UnitFormat commonService;
     private UnitFormat ucumFormatService;
     private UnitFormat defaultFormatService;
     private UnitFormat unicodeFormatService;
@@ -48,26 +47,32 @@ public class QuantityNormalizer {
         ServiceProvider defaultProvider = ServiceProvider.current(); // just a fallback to avoid uninitialized variable
         for (ServiceProvider provider : ServiceProvider.available()) {
             UnitFormatService formatService = provider.getUnitFormatService();
-            switch (provider.getClass().getSimpleName()) {
-                case "DefaultServiceProvider":
+            switch (provider.getClass().getName()) {
+                case "tec.uom.se.spi.DefaultServiceProvider":
                     this.defaultFormatService = formatService.getUnitFormat();
                     break;
 
-                case "UCUMServiceProvider":
+                case "systems.uom.ucum.internal.UCUMServiceProvider":
                     this.ucumFormatService = formatService.getUnitFormat();
                     break;
 
-                case "UnicodeServiceProvider":
+                case "systems.uom.unicode.internal.UnicodeServiceProvider":
                     this.unicodeFormatService = formatService.getUnitFormat();
                     break;
 
-                case "SIServiceProvider":
+                case "si.uom.impl.SIServiceProvider":
                     this.siFormatService = formatService.getUnitFormat();
                     break;
 
+                case "systems.uom.common.internal.CommonServiceProvider":
+                    this.commonService = formatService.getUnitFormat();
+                    break;
+
+                case "tec.units.indriya.spi.DefaultServiceProvider":
+                    this.indyriaDefaultService = formatService.getUnitFormat();
+                    break;
             }
         }
-
 
         measurementOperations = new MeasurementOperations();
 
@@ -86,46 +91,29 @@ public class QuantityNormalizer {
         //The unit cannot be found between the known units - we should try to decompose it
         if (parsedUnit.getUnitDefinition() == null) {
             //not sure this is working
-            return normalizeNonSIQuantities(quantity);
+            return normalizeUnknownUnitQuantity(quantity);
         } else if (((parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) ||
                 (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED))) {
 
-            //I normalize with the simpleUnitFormat only SI and SI_DERIVED units...
+            //I normalize SI and SI_DERIVED units
             return normalizeSIQuantities(quantity);
         } else {
             return normalizeNonSIQuantities(quantity);
         }
     }
 
-//    private Quantity.Normalized normalizeObscureQuantity(Quantity quantity) {
-//        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
-//        Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
-//
-//        javax.measure.Unit unit = defaultFormatService.parse(quantity.getParsedUnit().getRawName());
-//
-//        composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
-//
-//        if (quantity.isNormalized()) {
-//            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
-//            if (definition != null) {
-//                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
-//            }
-//        }
-//
-//        return normalizedQuantity;
-//    }
-
-    protected Quantity.Normalized normalizeNonSIQuantities(Quantity quantity) throws NormalizationException {
+    private Quantity.Normalized normalizeUnknownUnitQuantity(Quantity quantity) throws NormalizationException {
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
+        final String unitRawName = quantity.getParsedUnit().getRawName();
 
-        javax.measure.Unit unit = null;
-        try {
-            unit = ucumFormatService.parse(quantity.getParsedUnit().getRawName());
-        } catch (TokenException te) {
-            throw new NormalizationException("Cannot normalise " + quantity.getParsedUnit().getRawName(), te);
-        } catch (TokenMgrError error) {
-            throw new NormalizationException("Cannot normalise " + quantity.getParsedUnit().getRawName());
+        List<UnitFormat> formatServices = ImmutableList.of(unicodeFormatService);
+
+        javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
+
+        if (unit == null) {
+            throw new NormalizationException("Cannot parse " + unitRawName + " using "
+                    + Arrays.toString(formatServices.toArray()));
         }
 
         composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
@@ -140,13 +128,65 @@ public class QuantityNormalizer {
         return normalizedQuantity;
     }
 
+    protected Quantity.Normalized normalizeNonSIQuantities(Quantity quantity) throws NormalizationException {
+        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
+        Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
+        final String unitRawName = quantity.getParsedUnit().getRawName();
+
+        List<UnitFormat> formatServices = Arrays.asList(ucumFormatService, commonService, indyriaDefaultService);
+
+        javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
+
+        if (unit == null) {
+            throw new NormalizationException("Cannot parse " + unitRawName + " using "
+                    + Arrays.toString(formatServices.toArray()));
+        }
+
+        composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
+
+        if (quantity.isNormalized()) {
+            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
+            if (definition != null) {
+                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
+            }
+        }
+
+        return normalizedQuantity;
+    }
+
+    private javax.measure.Unit tryParsing(String unitRawName, List<UnitFormat> formatServices) {
+        javax.measure.Unit unit = null;
+        for (UnitFormat formatService : formatServices) {
+            try {
+                unit = formatService.parse(unitRawName);
+                break;
+            } catch (Throwable tr) {
+                LOGGER.warn("Cannot parse " + unitRawName + " with " + formatService.getClass().getName(), tr);
+            }
+        }
+        return unit;
+    }
+
+
+    /**
+     * Normalise SI quantities. It tries with the SI parser and if it's failing it's backing off
+     * using the default format service.
+     */
     protected Quantity.Normalized normalizeSIQuantities(Quantity quantity) throws NormalizationException {
         Map<String, Integer> wrappedUnitProducts = new HashMap<>();
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
-        javax.measure.Unit unit = defaultFormatService.parse(quantity.getParsedUnit().getRawName());
+        final String unitRawName = quantity.getParsedUnit().getRawName();
 
+        List<UnitFormat> formatServices = Arrays.asList(siFormatService, defaultFormatService);
+
+        javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
+
+        if (unit == null) {
+            throw new NormalizationException("Cannot parse " + unitRawName + " using "
+                    + Arrays.toString(formatServices.toArray()));
+        }
         composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
 
         if (quantity.isNormalized()) {

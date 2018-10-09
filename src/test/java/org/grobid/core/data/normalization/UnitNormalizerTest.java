@@ -41,7 +41,7 @@ public class UnitNormalizerTest {
         target.setQuantityLexicon(mockQuantityLexicon);
     }
 
-    @Test
+    /*@Test
     public void testParseAndReformat_baseUnit_noPow() throws Exception {
         String unitSymbol = "m";
 
@@ -160,7 +160,7 @@ public class UnitNormalizerTest {
         String expected = "m/s²";
 
         assertThat(reformatted, is(expected));
-    }
+    }*/
 
     @Test
     public void testDecompositionOfBlocks_shouldReturnTheNotation() throws Exception {
