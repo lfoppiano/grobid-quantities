@@ -67,12 +67,17 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.0'
 
     // measurements
-    compile group: 'tec.uom', name: 'uom-se', version: '1.0.9'
-    compile group: 'si.uom', name: 'si-quantity', version: '0.9'
     compile group: 'si.uom', name: 'si-units-java8', version: '0.9'
+    compile group: 'si.uom', name: 'si-quantity', version: '0.9'
+//    compile group: 'si.uom', name: 'si-units', version: '0.9'
+    compile group: 'tec.uom', name: 'uom-se', version: '1.0.9'
+
     compile group: 'systems.uom', name: 'systems-ucum-java8', version: '0.9'
     compile group: 'systems.uom', name: 'systems-unicode-java8', version: '0.9'
     compile group: 'systems.uom', name: 'systems-quantity', version: '0.9'
+    compile group: 'systems.uom', name: 'systems-common', version: '0.9'
+    compile group: 'systems.uom', name: 'systems-unicode', version: '0.9'
+    compile group: 'systems.uom', name: 'systems-ucum', version: '0.9'
 
     //Web interface
     compile 'org.glassfish.jersey.media:jersey-media-multipart:2.27'
@@ -144,17 +149,10 @@ ext.getArg = { propName, defaultVal ->
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-task mainJar(type: ShadowJar, group: 'jar') {
+task mainJar(type: ShadowJar, group: 'test') {
     zip64 true
     from sourceSets.main.output
 }
-
-//include project classes as jar into war's WEB-INF/lib
-//task mainWar(type: War, group: 'test') {
-//    zip64 true
-//    classifier = 'war'
-//    classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
-//}
 
 shadowJar {
     classifier = 'onejar'
@@ -168,15 +166,17 @@ jar {
     dependsOn mainJar
     enabled false
 }
-//war {
+
+war {
+    classifier = 'war'
 //    dependsOn mainWar
-//    enabled false
-//}
+    enabled true
+}
 
 artifacts {
+    archives shadowJar
     archives mainJar
-//    archives jar
-//    archives mainWar
+    archives war
 }
 
 task copyModels(type: Copy) {
