@@ -29,27 +29,6 @@ Run some test:
 
    ./gradlew test
 
-Training
-~~~~~~~~
-
-The models will be saved under ``grobid-home/models/quantities`` and ``grobid-home/models/units`` respectively, make sure those directories exist.
-
-For training the quantity model:
-::
-  cd PATH-TO-GROBID/grobid/grobid-quantities
-
-  ./gradlew train_quantities
-
-For training the unit model:
-::
-  ./gradlew train_units
-
-For the moment, the default training stop criteria are used. So, the training can be stopped manually after 1000 iterations, simply do a "control-C" to stop
-the training and save the model produced in the latest iteration. 1000 iterations are largely enough.
-
-Otherwise, the training will continue beyond several thousand iterations before stopping.
-
-
 Start the service
 ~~~~~~~~~~~~~~~~~
 
@@ -70,3 +49,33 @@ It means that, for the moment, the expected input to the parser is a paragraph o
 In case you have a long textual document, it is better either to exploit existing structures (e.g. XML/HTML elements) to segment it
 initially into paragraphs or sentences, or to apply an automatic paragraph/sentence segmentation, and then send separately to
 grobid-quantities the equivalent of a paragraph-size texts to be processed.
+
+Training
+~~~~~~~~
+
+.. The models will be saved under ``grobid-home/models/quantities`` and ``grobid-home/models/units`` respectively, make sure those directories exist.
+
+To run the training:
+
+- quantity model
+
+::
+  cd PATH-TO-GROBID/grobid/grobid-quantities
+
+  ./gradlew train_quantities
+
+
+- unit model
+
+::
+  ./gradlew train_units
+
+- value model
+
+::
+   ./gradlew train_values
+
+.. For the moment, the default training stop criteria are used. So, the training can be stopped manually after 1000 iterations, simply do a "control-C" to stop
+the training and save the model produced in the latest iteration. 1000 iterations are largely enough.
+
+.. Otherwise, the training will continue beyond several thousand iterations before stopping.

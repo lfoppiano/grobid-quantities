@@ -8,17 +8,20 @@ import org.grobid.core.utilities.MeasurementOperations;
 import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import systems.uom.ucum.internal.format.TokenException;
-import systems.uom.ucum.internal.format.TokenMgrError;
+import tech.uom.seshat.ConventionalUnit;
 import tec.uom.se.unit.ProductUnit;
 import tec.uom.se.unit.TransformedUnit;
 
+import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -33,6 +36,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class QuantityNormalizer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityNormalizer.class);
+    private UnitFormat seshatUnitServices;
     private UnitFormat indyriaDefaultService;
     private UnitFormat commonService;
     private UnitFormat ucumFormatService;
@@ -71,6 +75,10 @@ public class QuantityNormalizer {
                 case "tec.units.indriya.spi.DefaultServiceProvider":
                     this.indyriaDefaultService = formatService.getUnitFormat();
                     break;
+
+                case "tech.uom.seshat.UnitServices":
+                    this.seshatUnitServices = formatService.getUnitFormat();
+                    break;
             }
         }
 
@@ -103,11 +111,11 @@ public class QuantityNormalizer {
     }
 
     private Quantity.Normalized normalizeUnknownUnitQuantity(Quantity quantity) throws NormalizationException {
-        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
+//        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
         final String unitRawName = quantity.getParsedUnit().getRawName();
 
-        List<UnitFormat> formatServices = ImmutableList.of(unicodeFormatService);
+        List<UnitFormat> formatServices = ImmutableList.of(unicodeFormatService, seshatUnitServices);
 
         javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
 
@@ -116,7 +124,7 @@ public class QuantityNormalizer {
                     + Arrays.toString(formatServices.toArray()));
         }
 
-        composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
+        composeUnit(quantity, normalizedQuantity, unit);
 
         if (quantity.isNormalized()) {
             UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
@@ -129,7 +137,7 @@ public class QuantityNormalizer {
     }
 
     protected Quantity.Normalized normalizeNonSIQuantities(Quantity quantity) throws NormalizationException {
-        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
+//        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         final String unitRawName = quantity.getParsedUnit().getRawName();
@@ -143,7 +151,7 @@ public class QuantityNormalizer {
                     + Arrays.toString(formatServices.toArray()));
         }
 
-        composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
+        composeUnit(quantity, normalizedQuantity, unit);
 
         if (quantity.isNormalized()) {
             UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
@@ -174,7 +182,7 @@ public class QuantityNormalizer {
      * using the default format service.
      */
     protected Quantity.Normalized normalizeSIQuantities(Quantity quantity) throws NormalizationException {
-        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
+//        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         final String unitRawName = quantity.getParsedUnit().getRawName();
@@ -187,7 +195,7 @@ public class QuantityNormalizer {
             throw new NormalizationException("Cannot parse " + unitRawName + " using "
                     + Arrays.toString(formatServices.toArray()));
         }
-        composeUnit(quantity, wrappedUnitProducts, normalizedQuantity, unit);
+        composeUnit(quantity, normalizedQuantity, unit);
 
         if (quantity.isNormalized()) {
             UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
@@ -199,18 +207,31 @@ public class QuantityNormalizer {
         return normalizedQuantity;
     }
 
-    private void composeUnit(Quantity quantity, Map<String, Integer> wrappedUnitProducts, Quantity.Normalized normalizedQuantity, javax.measure.Unit unit) throws NormalizationException {
-        if (unit instanceof TransformedUnit) {
+    
+
+    private void composeUnit(Quantity quantity, Quantity.Normalized normalizedQuantity, javax.measure.Unit unit) throws NormalizationException {
+
+        normalizedQuantity.setUnit(new Unit(unit.getSystemUnit().toString()));
+        try {
+            BigDecimal converted = new BigDecimal(unit.getConverterTo(unit.getSystemUnit()).convert(quantity.getParsedValue().getNumeric()).toString());
+            normalizedQuantity.setValue(converted);
+        } catch (Exception e) {
+            throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
+                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+        }
+        quantity.setNormalizedQuantity(normalizedQuantity);
+
+        /*if (unit instanceof TransformedUnit) {
             TransformedUnit transformedUnit = (TransformedUnit) unit;
             normalizedQuantity.setUnit(new Unit(transformedUnit.getParentUnit().toString()));
             try {
-                normalizedQuantity.setValue(new BigDecimal(transformedUnit.getConverter().convert(quantity.getParsedValue().getNumeric()).toString()));
+                normalizedQuantity.setValue(new BigDecimal(transformedUnit.getSystemConverter().convert(quantity.getParsedValue().getNumeric()).toString()));
             } catch (Exception e) {
                 throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
                         "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
             }
             quantity.setNormalizedQuantity(normalizedQuantity);
-            wrappedUnitProducts.put(transformedUnit.getSymbol(), 1);
+//            wrappedUnitProducts.put(transformedUnit.getSymbol(), 1);
 
         } else if (unit instanceof ProductUnit) {
             ProductUnit productUnit = (ProductUnit) unit;
@@ -225,6 +246,23 @@ public class QuantityNormalizer {
                         "or it is not recognized from the available parsers.");
             }
 
+        } else if (unit instanceof ConventionalUnit) {
+            normalizedQuantity.setRawValue(unit.getSystemUnit().toString());
+            normalizedQuantity.setUnit(new Unit(unit.getSystemUnit().toString()));
+            
+            try {
+                if (quantity.getParsedValue() != null) {
+                    final BigDecimal normalisedValue = new BigDecimal(unit.getConverterTo(unit.getSystemUnit())
+                            .convert(quantity.getParsedValue().getNumeric()).toString());
+                    normalizedQuantity.setValue(normalisedValue);
+                } else {
+                    normalizedQuantity.setValue(new BigDecimal(quantity.getRawValue()));
+                }
+            } catch (Exception e) {
+                throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
+                        "or it is not recognized from the available parsers.");
+            }
+            quantity.setNormalizedQuantity(normalizedQuantity);
         } else {
             normalizedQuantity.setRawValue(unit.getSymbol());
             normalizedQuantity.setUnit(new Unit(unit.getSymbol()));
@@ -239,7 +277,7 @@ public class QuantityNormalizer {
                         "or it is not recognized from the available parsers.");
             }
             quantity.setNormalizedQuantity(normalizedQuantity);
-        }
+        }*/
     }
 
     protected Map<String, Integer> extractProduct(ProductUnit productUnit) {

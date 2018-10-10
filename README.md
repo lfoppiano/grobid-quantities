@@ -14,7 +14,7 @@ We focus our work on technical and scientific articles (text, XML and PDF input)
 
 As part of this task we support the recognition of the different value representation: numerical, alphabetical, exponential and date/time expressions. 
 
-![Grobid Quantity Demo](doc/img/Screenshot6.png)
+![Grobid Quantity Demo](doc/img/Screenshot7.png)
 
 Finally we support the identification of the "quantified" substance related to the measure, e.g. _silicon nitride powder_ in 
 
