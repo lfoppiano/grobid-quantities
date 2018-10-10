@@ -7,15 +7,21 @@
 
 __Work in progress.__
 
-The goal of this GROBID module is to recognize in textual documents any expressions of measurements (e.g. _pressure_, _temperature_, etc.), to parse and normalization them, and finally to convert these measurements into SI units. We focus our work on technical and scientific articles (text, XML and PDF input) and patents (text and XML input). 
+The goal of this GROBID module is to recognize in textual documents any expressions of measurements (e.g. _pressure_, _temperature_, etc.), to parse and normalization them, and finally to convert these measurements into SI units. 
+We focus our work on technical and scientific articles (text, XML and PDF input) and patents (text and XML input). 
 
 ![GROBID Quantity Demo](doc/img/Screenshot2.png)
 
-One additional goal is also to identify and attached to the measurements the "quantified" substance, e.g. _silicon nitride powder_ in 
+As part of this task we support the recognition of the different value representation: numerical, alphabetical, exponential and date/time expressions. 
+
+![Grobid Quantity Demo](doc/img/Screenshot6.png)
+
+Finally we support the identification of the "quantified" substance related to the measure, e.g. _silicon nitride powder_ in 
 
 ![GROBID Quantity Demo](doc/img/Screenshot5.png)
 
 As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
+The normalisation is handled by the java library [Units of measurement](http://unitsofmeasurement.github.io/).  
 
 ## Documentation
 

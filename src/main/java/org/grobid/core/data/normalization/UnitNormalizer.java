@@ -24,22 +24,10 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
  */
 public class UnitNormalizer {
 
-    private final UnitFormat defaultFormatService;
-
     private UnitParser unitParser;
     private QuantityLexicon quantityLexicon;
 
     public UnitNormalizer() {
-        ServiceProvider defaultProvider = ServiceProvider.current(); // just a fallback to avoid uninitialized variable
-        for (ServiceProvider provider : ServiceProvider.available()) {
-            if ("DefaultServiceProvider".equals(provider.getClass().getSimpleName())) {
-                defaultProvider = provider;
-                break;
-            }
-        }
-        UnitFormatService formatService = defaultProvider.getUnitFormatService();
-        defaultFormatService = formatService.getUnitFormat();
-
         unitParser = UnitParser.getInstance();
         quantityLexicon = QuantityLexicon.getInstance();
     }
