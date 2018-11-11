@@ -237,11 +237,11 @@ public class QuantityParser extends AbstractParser {
                                     .LabelTypeExcludePredicate(TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER,
                                     TaggingLabels.FIGURE_MARKER, TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL))) {
 
-                        if(cluster.getTaggingLabel().equals(TaggingLabels.FIGURE)) {
+                        if (cluster.getTaggingLabel().equals(TaggingLabels.FIGURE)) {
                             //apply the figure model to only get the caption
                             final Figure processedFigure = parsers.getFigureParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
                             measurements.addAll(process(processedFigure.getCaptionLayoutTokens()));
-                        } else if(cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
+                        } else if (cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
                             //apply the table model to only get the caption/description 
                             final Table processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
                             measurements.addAll(process(processedTable.getFullDescriptionTokens()));
@@ -565,7 +565,8 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_LEAST)) {
                 LOGGER.debug("value least: " + clusterContent);
-                if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
+                if (((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX))
+                        || currentMeasurement.getQuantityLeast() != null) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
                         currentMeasurement = new Measurement();
@@ -589,7 +590,8 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_MOST)) {
                 LOGGER.debug("value most: " + clusterContent);
-                if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
+                if (((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX))
+                        || currentMeasurement.getQuantityMost() != null) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
                         currentMeasurement = new Measurement();
@@ -613,7 +615,8 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_BASE)) {
                 LOGGER.debug("base value: " + clusterContent);
-                if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                if (((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE))
+                        || currentMeasurement.getQuantityBase() != null) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
                         currentMeasurement = new Measurement();
@@ -637,7 +640,8 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_RANGE)) {
                 LOGGER.debug("range value: " + clusterContent);
-                if ((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                if (((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE))
+                        || currentMeasurement.getQuantityRange() != null) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
                         currentMeasurement = new Measurement();
