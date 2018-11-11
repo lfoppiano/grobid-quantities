@@ -41,13 +41,10 @@ public class QuantityProcessFile {
         Response response = null;
         File originFile = null;
         QuantityParser parser = QuantityParser.getInstance();
-        Engine engine = null;
 
         try {
             LibraryLoader.load();
-            engine = GrobidFactory.getInstance().getEngine();
             originFile = IOUtilities.writeInputFile(inputStream);
-            GrobidAnalysisConfig config = new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder().build();
 
             if (originFile == null) {
                 response = Response.status(Status.INTERNAL_SERVER_ERROR).build();

@@ -234,27 +234,28 @@ public class QuantityParser extends AbstractParser {
                     //Iterate and exclude figures and tables
                     for (TaggingTokenCluster cluster : Iterables.filter(clusteror.cluster(),
                             new TaggingTokenClusteror
-                                    .LabelTypeExcludePredicate(TaggingLabels.FIGURE, TaggingLabels.TABLE,
-                                    TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER,
+                                    .LabelTypeExcludePredicate(TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER,
                                     TaggingLabels.FIGURE_MARKER, TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL))) {
 
-//                        if(cluster.getTaggingLabel().equals(TaggingLabels.FIGURE)) {
-//                            parsers.getFigureParser().processing(cluster.get);
-//                            //apply the figure model
-//                        } else if(cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
-//                            parsers.getTableParser().processing();
-//                            //apply the table model
-//                        }
+                        if(cluster.getTaggingLabel().equals(TaggingLabels.FIGURE)) {
+                            //apply the figure model to only get the caption
+                            final Figure processedFigure = parsers.getFigureParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
+                            measurements.addAll(process(processedFigure.getCaptionLayoutTokens()));
+                        } else if(cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
+                            //apply the table model to only get the caption/description 
+                            final Table processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
+                            measurements.addAll(process(processedTable.getFullDescriptionTokens()));
+                        } else {
+                            final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
 
-                        final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
+                            // extract all the layout tokens from the cluster as a list
+                            List<LayoutToken> tokens = labeledTokensContainers.stream()
+                                    .map(LabeledTokensContainer::getLayoutTokens)
+                                    .flatMap(List::stream)
+                                    .collect(Collectors.toList());
 
-                        // extract all the layout tokens from the cluster as a list
-                        List<LayoutToken> tokens = labeledTokensContainers.stream()
-                                .map(LabeledTokensContainer::getLayoutTokens)
-                                .flatMap(List::stream)
-                                .collect(Collectors.toList());
-
-                        measurements.addAll(process(tokens));
+                            measurements.addAll(process(tokens));
+                        }
 
                     }
                 }
