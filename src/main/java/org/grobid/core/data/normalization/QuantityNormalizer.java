@@ -8,20 +8,15 @@ import org.grobid.core.utilities.MeasurementOperations;
 import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.uom.seshat.ConventionalUnit;
-import tec.uom.se.unit.ProductUnit;
-import tec.uom.se.unit.TransformedUnit;
+import systems.uom.common.USCustomary;
+import tec.uom.se.format.SimpleUnitFormat;
 
-import javax.measure.UnitConverter;
-import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -36,56 +31,35 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class QuantityNormalizer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityNormalizer.class);
-    private UnitFormat seshatUnitServices;
-    private UnitFormat indyriaDefaultService;
-    private UnitFormat commonService;
-    private UnitFormat ucumFormatService;
-    private UnitFormat defaultFormatService;
-    private UnitFormat unicodeFormatService;
-    private UnitFormat siFormatService;
+    private final String UOM_DEFAULT_PROVIDER = "tec.uom.se.spi.DefaultServiceProvider";
+    private final String UCUM_PROVIDER = "systems.uom.ucum.internal.UCUMServiceProvider";
+    private final String UNICODE_PROVIDER = "systems.uom.unicode.internal.UnicodeServiceProvider";
+    private final String SI_PROVIDER = "si.uom.impl.SIServiceProvider";
+    private final String COMMON_PROVIDER = "systems.uom.common.internal.CommonServiceProvider";
+    private final String INDYRIA_PROVIDER = "tech.units.indriya.internal.DefaultServiceProvider";
+    private final String SESHAT_PROVIDER = "tech.uom.seshat.UnitServices";
+
+    Map<String, UnitFormat> unitFormats = new HashMap<>();
 
     private MeasurementOperations measurementOperations;
     private UnitNormalizer unitNormalizer;
 
     public QuantityNormalizer() {
-        ServiceProvider defaultProvider = ServiceProvider.current(); // just a fallback to avoid uninitialized variable
         for (ServiceProvider provider : ServiceProvider.available()) {
             UnitFormatService formatService = provider.getUnitFormatService();
-            switch (provider.getClass().getName()) {
-                case "tec.uom.se.spi.DefaultServiceProvider":
-                    this.defaultFormatService = formatService.getUnitFormat();
-                    break;
 
-                case "systems.uom.ucum.internal.UCUMServiceProvider":
-                    this.ucumFormatService = formatService.getUnitFormat();
-                    break;
+            final String providerName = provider.getClass().getName();
+            unitFormats.put(providerName, formatService.getUnitFormat());
 
-                case "systems.uom.unicode.internal.UnicodeServiceProvider":
-                    this.unicodeFormatService = formatService.getUnitFormat();
-                    break;
-
-                case "si.uom.impl.SIServiceProvider":
-                    this.siFormatService = formatService.getUnitFormat();
-                    break;
-
-                case "systems.uom.common.internal.CommonServiceProvider":
-                    this.commonService = formatService.getUnitFormat();
-                    break;
-
-                case "tec.units.indriya.spi.DefaultServiceProvider":
-                    this.indyriaDefaultService = formatService.getUnitFormat();
-                    break;
-
-                case "tech.uom.seshat.UnitServices":
-                    this.seshatUnitServices = formatService.getUnitFormat();
-                    break;
+            if (providerName.equals(COMMON_PROVIDER)) {
+                SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mile");
+                SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mi");
+                SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "miles");
             }
         }
 
         measurementOperations = new MeasurementOperations();
-
         unitNormalizer = new UnitNormalizer();
-
     }
 
     public Quantity.Normalized normalizeQuantity(Quantity quantity) throws NormalizationException {
@@ -98,13 +72,16 @@ public class QuantityNormalizer {
 
         //The unit cannot be found between the known units - we should try to decompose it
         if (parsedUnit.getUnitDefinition() == null) {
-            //not sure this is working
             return normalizeUnknownUnitQuantity(quantity);
-        } else if (((parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) ||
-                (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED))) {
+        } else if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) {
 
-            //I normalize SI and SI_DERIVED units
+            //I normalize SI units
             return normalizeSIQuantities(quantity);
+        } else if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED) {
+
+            //I normalize SI derived units
+            return normalizeSIDerivedQuantities(quantity);
+
         } else {
             return normalizeNonSIQuantities(quantity);
         }
@@ -115,7 +92,7 @@ public class QuantityNormalizer {
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
         final String unitRawName = quantity.getParsedUnit().getRawName();
 
-        List<UnitFormat> formatServices = ImmutableList.of(unicodeFormatService, seshatUnitServices);
+        List<UnitFormat> formatServices = Arrays.asList(unitFormats.get(UNICODE_PROVIDER), unitFormats.get(SESHAT_PROVIDER));
 
         javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
 
@@ -142,7 +119,7 @@ public class QuantityNormalizer {
 
         final String unitRawName = quantity.getParsedUnit().getRawName();
 
-        List<UnitFormat> formatServices = Arrays.asList(ucumFormatService, commonService, indyriaDefaultService);
+        List<UnitFormat> formatServices = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(COMMON_PROVIDER), unitFormats.get(INDYRIA_PROVIDER));
 
         javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
 
@@ -165,7 +142,7 @@ public class QuantityNormalizer {
 
     private javax.measure.Unit tryParsing(String unitRawName, List<UnitFormat> formatServices) {
         javax.measure.Unit unit = null;
-        for (UnitFormat formatService : formatServices) {
+        for (UnitFormat formatService : formatServices.stream().filter(Objects::nonNull).collect(Collectors.toList())) {
             try {
                 unit = formatService.parse(unitRawName);
                 break;
@@ -187,7 +164,7 @@ public class QuantityNormalizer {
 
         final String unitRawName = quantity.getParsedUnit().getRawName();
 
-        List<UnitFormat> formatServices = Arrays.asList(siFormatService, defaultFormatService);
+        List<UnitFormat> formatServices = Arrays.asList(unitFormats.get(SI_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER));
 
         javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
 
@@ -207,17 +184,49 @@ public class QuantityNormalizer {
         return normalizedQuantity;
     }
 
-    
+    /**
+     * Normalise SI derived quantities
+     */
+    protected Quantity.Normalized normalizeSIDerivedQuantities(Quantity quantity) throws NormalizationException {
+        Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
+
+        final String unitRawName = quantity.getParsedUnit().getRawName();
+
+        List<UnitFormat> formatServices = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER));
+
+        javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
+
+        if (unit == null) {
+            throw new NormalizationException("Cannot parse " + unitRawName + " using "
+                    + Arrays.toString(formatServices.toArray()));
+        }
+        composeUnit(quantity, normalizedQuantity, unit);
+
+        if (quantity.isNormalized()) {
+            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
+            if (definition != null) {
+                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
+            }
+        }
+
+        return normalizedQuantity;
+    }
+
 
     private void composeUnit(Quantity quantity, Quantity.Normalized normalizedQuantity, javax.measure.Unit unit) throws NormalizationException {
 
+        normalizedQuantity.setRawValue(quantity.getRawValue());
         normalizedQuantity.setUnit(new Unit(unit.getSystemUnit().toString()));
         try {
-            BigDecimal converted = new BigDecimal(unit.getConverterTo(unit.getSystemUnit()).convert(quantity.getParsedValue().getNumeric()).toString());
-            normalizedQuantity.setValue(converted);
+            if (quantity.getParsedValue() != null) {
+                BigDecimal converted = new BigDecimal(unit.getConverterTo(unit.getSystemUnit()).convert(quantity.getParsedValue().getNumeric()).toString());
+                normalizedQuantity.setValue(converted);
+            } else {
+                normalizedQuantity.setValue(new BigDecimal(quantity.getRawValue()));
+            }
         } catch (Exception e) {
             throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
-                    "or it is not recognized from the available parsers.", new ParserException(new RuntimeException()));
+                    "or it is not recognized from the available parsers.", e);
         }
         quantity.setNormalizedQuantity(normalizedQuantity);
 
@@ -280,20 +289,6 @@ public class QuantityNormalizer {
         }*/
     }
 
-    protected Map<String, Integer> extractProduct(ProductUnit productUnit) {
-        Map<javax.measure.Unit, Integer> products = productUnit.getBaseUnits();
-        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
-
-        for (Map.Entry<javax.measure.Unit, Integer> productFactor : products.entrySet()) {
-            if (productFactor.getKey().getSymbol() != null) {
-                wrappedUnitProducts.put(productFactor.getKey().getSymbol(), productFactor.getValue());
-            } else {
-                String unitName = this.defaultFormatService.format(productFactor.getKey());
-                wrappedUnitProducts.put(unitName, productFactor.getValue());
-            }
-        }
-        return wrappedUnitProducts;
-    }
 
     public void setUnitNormalizer(UnitNormalizer unitNormalizer) {
         this.unitNormalizer = unitNormalizer;

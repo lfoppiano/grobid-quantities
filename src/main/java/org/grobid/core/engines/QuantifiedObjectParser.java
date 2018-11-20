@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Parser for identifying and attaching the quantified "substance".
  */
-public class SubstanceParser {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SubstanceParser.class);
+public class QuantifiedObjectParser {
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuantifiedObjectParser.class);
 
-    private static volatile SubstanceParser instance;
+    private static volatile QuantifiedObjectParser instance;
 
-    public static SubstanceParser getInstance() {
+    public static QuantifiedObjectParser getInstance() {
         if (instance == null) {
             getNewInstance();
         }
@@ -23,10 +23,10 @@ public class SubstanceParser {
     }
 
     private static synchronized void getNewInstance() {
-        instance = new DefaultSubstanceParser();
+        instance = new DefaultQuantifiedObjectParser();
     }
 
-    protected SubstanceParser() {
+    protected QuantifiedObjectParser() {
         //super(GrobidModels.VALUES);
     }
 

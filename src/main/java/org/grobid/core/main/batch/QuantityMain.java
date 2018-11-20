@@ -2,7 +2,7 @@ package org.grobid.core.main.batch;
 
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.engines.QuantityParser;
-import org.grobid.core.engines.QuantityParserTrainingData;
+import org.grobid.core.engines.training.QuantityParserTrainingData;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidProperties;

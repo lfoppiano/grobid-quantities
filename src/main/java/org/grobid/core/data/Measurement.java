@@ -1,15 +1,14 @@
 package org.grobid.core.data;
 
+import com.fasterxml.jackson.core.util.BufferRecyclers;
 import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.core.layout.BoundingBox;
-import org.grobid.core.layout.LayoutToken;
 
 import java.util.List;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.core.io.*;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 /**
@@ -30,7 +29,7 @@ public class Measurement {
     private Quantity quantityBase = null;
     private Quantity quantityRange = null;
     private List<Quantity> quantityList = null;
-    private QuantifiedObject substance = null; // what is quantified, as extracted from the text
+    private QuantifiedObject quantifiedObject = null; // what is quantified, as extracted from the text
 
     // optional bounding box in the source document
     private List<BoundingBox> boundingBoxes = null;
@@ -50,13 +49,13 @@ public class Measurement {
         this.type = type;
     }
 
-    public void addQuantityList(Quantity quantity) {
+    public void addQuantityToList(Quantity quantity) {
         if (quantityList == null)
             quantityList = new ArrayList<>();
         quantityList.add(quantity);
     }
 
-    public void setQuantityList(List<Quantity> quantities) {
+    public void setQuantityList(List<Quantity> quantityList) {
         this.quantityList = quantityList;
     }
 
@@ -105,11 +104,11 @@ public class Measurement {
     }
 
     public void setQuantifiedObject(QuantifiedObject substance) {
-        this.substance = substance;
+        this.quantifiedObject = substance;
     }
 
     public QuantifiedObject getQuantifiedObject() {
-        return substance;
+        return quantifiedObject;
     }
 
     public List<BoundingBox> getBoundingBoxes() {
@@ -160,15 +159,15 @@ public class Measurement {
             }
         }
 
-        if (substance != null) {
-            builder.append(", quantified : " + substance.toString());
+        if (quantifiedObject != null) {
+            builder.append(", quantified : " + quantifiedObject.toString());
         }
 
         return builder.toString();
     }
 
     public String toJson() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");
@@ -266,8 +265,8 @@ public class Measurement {
             }
         }
 
-        if (substance != null) {
-            json.append(", \"quantified\" : " + substance.toJson());
+        if (quantifiedObject != null) {
+            json.append(", \"quantified\" : " + quantifiedObject.toJson());
         }
 
         if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {

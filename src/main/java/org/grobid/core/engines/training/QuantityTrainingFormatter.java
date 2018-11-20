@@ -1,4 +1,4 @@
-package org.grobid.core.engines;
+package org.grobid.core.engines.training;
 
 import nu.xom.Attribute;
 import nu.xom.Element;
@@ -255,6 +255,7 @@ public class QuantityTrainingFormatter {
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                 measure.addAttribute(new Attribute("type", "list"));
                 List<Quantity> quantities = measurement.getQuantityList();
+                int initPos = pos;
                 for (Quantity quantity : quantities) {
                     int startQ = quantity.getOffsetStart();
                     int endQ = quantity.getOffsetEnd();
@@ -272,9 +273,11 @@ public class QuantityTrainingFormatter {
                         endU = unit.getOffsetEnd();
                     }
 
-                    int initPos = pos;
                     int firstPos = pos;
                     while (pos < text.length()) {
+                        if(pos > endQ && pos < startU) {
+                            break;
+                        }
                         if (pos == startQ) {
                             if (initPos == firstPos) {
                                 p.appendChild(text.substring(firstPos, startQ));
@@ -283,7 +286,7 @@ public class QuantityTrainingFormatter {
                             }
                             measure.appendChild(numNode);
                             pos = endQ;
-                            initPos = pos;
+                            initPos = endQ;
                         }
 
                         if (pos == startU) {
@@ -294,12 +297,13 @@ public class QuantityTrainingFormatter {
                             }
                             measure.appendChild(unitNode);
                             pos = endU;
-                            initPos = pos;
+                            initPos = endU;
                         }
 
                         if ((pos >= endQ) && (pos >= endU)) {
                             break;
                         }
+
                         pos++;
                     }
                 }

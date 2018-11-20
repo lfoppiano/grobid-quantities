@@ -1,4 +1,4 @@
-package org.grobid.core.engines;
+package org.grobid.core.engines.training;
 
 import nu.xom.Element;
 import org.grobid.core.data.Measurement;

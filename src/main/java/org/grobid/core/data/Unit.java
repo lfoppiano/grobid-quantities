@@ -26,6 +26,11 @@ public class Unit {
         this.rawName = rawName;
     }
 
+    public Unit(String rawName, OffsetPosition offsetPosition) {
+        this(rawName);
+        this.offsets = offsetPosition;
+    }
+
     public String getRawName() {
         return rawName;
     }

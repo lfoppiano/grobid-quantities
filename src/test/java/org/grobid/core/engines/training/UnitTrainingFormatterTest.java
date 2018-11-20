@@ -1,9 +1,10 @@
-package org.grobid.core.engines;
+package org.grobid.core.engines.training;
 
 import nu.xom.Element;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.engines.training.UnitTrainingFormatter;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.Test;

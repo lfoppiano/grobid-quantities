@@ -1,10 +1,6 @@
 package org.grobid.core.engines;
 
 import com.google.common.collect.Iterables;
-import nu.xom.Attribute;
-import nu.xom.Element;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;
@@ -14,40 +10,31 @@ import org.grobid.core.data.normalization.QuantityNormalizer;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
 import org.grobid.core.document.DocumentSource;
-import org.grobid.core.document.xml.XmlBuilderUtils;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.factory.GrobidFactory;
 import org.grobid.core.features.FeaturesVectorQuantities;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.lexicon.QuantityLexicon;
-import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.InputSource;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
@@ -62,7 +49,7 @@ public class QuantityParser extends AbstractParser {
 
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
-    private SubstanceParser substanceParser = SubstanceParser.getInstance();
+    private QuantifiedObjectParser substanceParser = QuantifiedObjectParser.getInstance();
     private QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
     private EngineParsers parsers;
 
@@ -684,7 +671,7 @@ public class QuantityParser extends AbstractParser {
                 if (currentUnit.getRawName() != null) {
                     currentQuantity.setRawUnit(currentUnit);
                 }
-                currentMeasurement.addQuantityList(currentQuantity);
+                currentMeasurement.addQuantityToList(currentQuantity);
                 currentMeasurement.setType(UnitUtilities.Measurement_Type.CONJUNCTION);
                 openMeasurement = UnitUtilities.Measurement_Type.CONJUNCTION;
                 currentMeasurement.addBoundingBoxes(boundingBoxes);

@@ -16,8 +16,8 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
  * Basic implementation of substance parser without CRF. The goal here is to be able to bootstrap
  * training data for a next cleaner ML model.
  */
-public class DefaultSubstanceParser extends SubstanceParser {
-    private static final Logger logger = LoggerFactory.getLogger(DefaultSubstanceParser.class);
+public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
+    private static final Logger logger = LoggerFactory.getLogger(DefaultQuantifiedObjectParser.class);
 
     @Override
     public List<Measurement> parseSubstance(List<LayoutToken> tokens, List<Measurement> measurements) {

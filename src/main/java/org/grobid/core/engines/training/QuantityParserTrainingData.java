@@ -1,4 +1,4 @@
-package org.grobid.core.engines;
+package org.grobid.core.engines.training;
 
 import nu.xom.Attribute;
 import nu.xom.Element;
@@ -7,6 +7,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.xml.XmlBuilderUtils;
+import org.grobid.core.engines.QuantityParser;
 import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.factory.GrobidFactory;
@@ -36,21 +37,19 @@ public class QuantityParserTrainingData {
     private QuantityTrainingFormatter quantityTrainingFormatter = null;
     private UnitTrainingFormatter unitTrainingFormatter = null;
     private ValueTrainingFormatter valueTrainingFormatter = null;
+    private QuantifiedObjectTrainingFormatter substanceTrainingFormatter = null;
 
     private QuantityParser quantityParser;
 
     public QuantityParserTrainingData() {
-        quantityTrainingFormatter = new QuantityTrainingFormatter();
-        unitTrainingFormatter = new UnitTrainingFormatter();
-        valueTrainingFormatter = new ValueTrainingFormatter();
-
-        quantityParser = QuantityParser.getInstance();
+        this(QuantityParser.getInstance());
     }
 
     public QuantityParserTrainingData(QuantityParser parser) {
         quantityTrainingFormatter = new QuantityTrainingFormatter();
         unitTrainingFormatter = new UnitTrainingFormatter();
         valueTrainingFormatter = new ValueTrainingFormatter();
+        substanceTrainingFormatter = new QuantifiedObjectTrainingFormatter();
 
         quantityParser = parser;
     }
@@ -82,12 +81,13 @@ public class QuantityParserTrainingData {
         }
     }
 
-    private void createTrainingText(File file, String outputDirectory, int id) throws IOException {
+    void createTrainingText(File file, String outputDirectory, int id) throws IOException {
         String text = FileUtils.readFileToString(file, UTF_8);
 
         Element quantityNode = teiElement("text");
         Element unitNode = teiElement("units");
         Element valueNode = teiElement("values");
+        Element quantifiedObjectNode = teiElement("text");
 
         // for the moment we suppose we have english only...
         quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
@@ -108,21 +108,29 @@ public class QuantityParserTrainingData {
 
                 unitTrainingFormatter.trainingExtraction(measurements)
                         .stream()
-                        .filter(a-> a.getChildElements().size() != 0)
+                        .filter(a -> a.getChildElements().size() != 0)
                         .forEach(unitNode::appendChild);
 
                 valueTrainingFormatter.trainingExtraction(measurements)
                         .stream()
-                        .filter(a-> a.getChildElements().size() != 0)
+                        .filter(a -> a.getChildElements().size() != 0)
                         .forEach(valueNode::appendChild);
+
+                quantifiedObjectNode.appendChild(substanceTrainingFormatter.trainingExtraction(measurements, text));
 
                 paragraph = new StringBuilder();
             }
         }
-        writeOutput(file, outputDirectory, id, quantityNode, unitNode, valueNode);
+        writeOutput(file, outputDirectory, id, quantityNode, unitNode, valueNode, quantifiedObjectNode, text);
     }
 
-    private void writeOutput(File file, String outputDirectory, int id, Element quantityNode, Element unitNode, Element valueNode) {
+    private void writeOutput(File file,
+                             String outputDirectory, int id,
+                             Element quantityNode,
+                             Element unitNode,
+                             Element valueNode,
+                             Element quantifiedObjectNode,
+                             String plainText) {
         Element quantityDocumentRoot = TeiUtils.getQuantitiesTEIHeader(id);
         quantityDocumentRoot.appendChild(quantityNode);
 
@@ -151,6 +159,23 @@ public class QuantityParserTrainingData {
         } catch (IOException e) {
             throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileValue);
         }
+
+        //Write the output for quantifiedObject model
+        String outputFileQuantifiedObject = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".quantifiedObject.xml");
+        try {
+            FileUtils.writeStringToFile(new File(outputFileQuantifiedObject), XmlBuilderUtils.toXml(quantifiedObjectNode), UTF_8);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileValue);
+        }
+
+        //Write the output for plain text
+        String outputFilePlainText = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".txt");
+        try {
+            FileUtils.writeStringToFile(new File(outputFilePlainText), plainText, UTF_8);
+        } catch (IOException e) {
+            throw new GrobidException("Cannot create training data because output file can not be accessed: " + outputFileValue);
+        }
+
     }
 
     private void createTrainingXML(File input, String outputDirectory, int id) {
@@ -159,6 +184,7 @@ public class QuantityParserTrainingData {
         Element quantityNode = teiElement("text");
         Element unitNode = teiElement("units");
         Element valueNode = teiElement("values");
+        Element quantifiedObjectNode = teiElement("text");
 
         // for the moment we suppose we have english only...
         quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
@@ -174,7 +200,10 @@ public class QuantityParserTrainingData {
             p.parse(input, handler);
 
             List<String> chunks = handler.getChunks();
+            StringBuilder sb = new StringBuilder();
             for (String text : chunks) {
+
+                sb.append(text);
                 measurements = quantityParser.process(text);
 
                 if (measurements != null) {
@@ -189,18 +218,21 @@ public class QuantityParserTrainingData {
 
                 unitTrainingFormatter.trainingExtraction(measurements)
                         .stream()
-                        .filter(a-> a.getChildElements().size() != 0)
+                        .filter(a -> a.getChildElements().size() != 0)
                         .forEach(unitNode::appendChild);
 
                 valueTrainingFormatter.trainingExtraction(measurements)
                         .stream()
-                        .filter(a-> a.getChildElements().size() != 0)
+                        .filter(a -> a.getChildElements().size() != 0)
                         .forEach(valueNode::appendChild);
+
+                quantifiedObjectNode.appendChild(substanceTrainingFormatter.trainingExtraction(measurements, text));
+
             }
             Element quantityRoot = TeiUtils.getQuantitiesTEIHeader(id);
             quantityRoot.appendChild(quantityNode);
 
-            writeOutput(input, outputDirectory, id, quantityNode, unitNode, valueNode);
+            writeOutput(input, outputDirectory, id, quantityNode, unitNode, valueNode, quantifiedObjectNode, sb.toString());
         } catch (Exception e) {
             throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + input.getPath(), e);
         }
@@ -230,6 +262,8 @@ public class QuantityParserTrainingData {
         Element quantityNode = teiElement("text");
         Element unitNode = teiElement("units");
         Element valueNode = teiElement("values");
+        Element quantifiedObjectNode = teiElement("text");
+        
         // for the moment we suppose we have english only...
         quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
 
@@ -244,7 +278,10 @@ public class QuantityParserTrainingData {
             p.parse(new InputSource(new StringReader(teiXML)), handler);
 
             List<String> chunks = handler.getChunks();
+
+            StringBuilder sb = new StringBuilder();
             for (String text : chunks) {
+                sb.append(text);
                 measurements = quantityParser.process(text);
 
                 if (isNotEmpty(measurements)) {
@@ -252,17 +289,19 @@ public class QuantityParserTrainingData {
 
                     unitTrainingFormatter.trainingExtraction(measurements)
                             .stream()
-                            .filter(a-> a.getChildElements().size() != 0)
+                            .filter(a -> a.getChildElements().size() != 0)
                             .forEach(unitNode::appendChild);
 
                     valueTrainingFormatter.trainingExtraction(measurements)
                             .stream()
-                            .filter(a-> a.getChildElements().size() != 0)
+                            .filter(a -> a.getChildElements().size() != 0)
                             .forEach(valueNode::appendChild);
+
+                    quantifiedObjectNode.appendChild(substanceTrainingFormatter.trainingExtraction(measurements, text));
                 }
 
             }
-            writeOutput(file, outputDirectory, id, quantityNode, unitNode, valueNode);
+            writeOutput(file, outputDirectory, id, quantityNode, unitNode, valueNode, quantifiedObjectNode, sb.toString());
         } catch (Exception e) {
             throw new GrobidException("Cannot create training data because input XML file can not be parsed: " + file.getPath(), e);
         }

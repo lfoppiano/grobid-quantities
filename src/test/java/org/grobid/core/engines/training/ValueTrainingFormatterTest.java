@@ -1,7 +1,8 @@
-package org.grobid.core.engines;
+package org.grobid.core.engines.training;
 
 import nu.xom.Element;
 import org.grobid.core.data.*;
+import org.grobid.core.engines.training.ValueTrainingFormatter;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
