@@ -226,7 +226,8 @@ public class QuantityParser extends AbstractParser {
 
                         if (cluster.getTaggingLabel().equals(TaggingLabels.FIGURE)) {
                             //apply the figure model to only get the caption
-                            final Figure processedFigure = parsers.getFigureParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
+                            final Figure processedFigure = parsers.getFigureParser()
+                                    .processing(cluster.concatTokens(), cluster.getFeatureBlock());
                             measurements.addAll(process(processedFigure.getCaptionLayoutTokens()));
                         } else if (cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
                             //apply the table model to only get the caption/description 

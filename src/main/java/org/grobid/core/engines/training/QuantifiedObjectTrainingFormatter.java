@@ -2,6 +2,8 @@ package org.grobid.core.engines.training;
 
 import nu.xom.Attribute;
 import nu.xom.Element;
+import org.apache.commons.codec.digest.Md5Crypt;
+import org.apache.commons.codec.digest.Sha2Crypt;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.QuantifiedObject;
 import org.grobid.core.data.Quantity;
@@ -9,7 +11,9 @@ import org.grobid.core.data.Unit;
 import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.List;
+import java.util.UUID;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 
 public class QuantifiedObjectTrainingFormatter {
@@ -25,11 +29,15 @@ public class QuantifiedObjectTrainingFormatter {
             int endO = -1;
             final QuantifiedObject quantifiedObject = measurement.getQuantifiedObject();
             Element quantifiedObjectElement = teiElement("quantifiedObject");
+            String quantifiedObjectID = null;
             if (quantifiedObject != null) {
                 startO = quantifiedObject.getOffsetStart();
                 endO = quantifiedObject.getOffsetEnd();
 
-                quantifiedObjectElement.appendChild(text.substring(startO, endO));
+                final String textObject = text.substring(startO, endO);
+                quantifiedObjectID = UUID.randomUUID().toString();
+                quantifiedObjectElement.appendChild(textObject);
+                quantifiedObjectElement.addAttribute(new Attribute("id", quantifiedObjectID));
             }
 
             if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
@@ -57,6 +65,10 @@ public class QuantifiedObjectTrainingFormatter {
                     if (pos == startQ) {
                         p.appendChild(text.substring(initPos, startQ));
                         measure.appendChild(text.substring(startQ, endQ));
+                        if (quantifiedObject != null) {
+                            measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                            markPosition(measure, quantifiedObject, startQ);
+                        }
                         p.appendChild(measure);
                         pos = endQ;
                         initPos = pos;
@@ -91,8 +103,8 @@ public class QuantifiedObjectTrainingFormatter {
                 int startUL = -1;
                 int endUL = -1;
 
-                if(quantityLeast != null) {
-                    startQL= quantityLeast.getOffsetStart();
+                if (quantityLeast != null) {
+                    startQL = quantityLeast.getOffsetStart();
                     endQL = quantityLeast.getOffsetEnd();
 
                     Unit unitL = quantityLeast.getRawUnit();
@@ -100,16 +112,14 @@ public class QuantifiedObjectTrainingFormatter {
                         startUL = unitL.getOffsetStart();
                         endUL = unitL.getOffsetEnd();
                     }
-
                 }
-
 
                 int startQM = -1;
                 int endQM = -1;
                 int startUM = -1;
                 int endUM = -1;
 
-                if(quantityMost != null) {
+                if (quantityMost != null) {
                     startQM = quantityMost.getOffsetStart();
                     endQM = quantityMost.getOffsetEnd();
 
@@ -126,13 +136,23 @@ public class QuantifiedObjectTrainingFormatter {
                     if (pos == startQL) {
                         p.appendChild(text.substring(initPos, startQL));
                         measure.appendChild(text.substring(startQL, endQL));
-                        p.appendChild(measure);
-                        addedMeasure = true;
+                        if (!addedMeasure) {
+                            if (quantifiedObject != null) {
+                                measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                                markPosition(measure, quantifiedObject, startQL);
+                            }
+                            p.appendChild(measure);
+                            addedMeasure = true;
+                        }
                         pos = endQL;
                         initPos = pos;
                     }
                     if (pos == startQM) {
                         if (!addedMeasure) {
+                            if (quantifiedObject != null) {
+                                measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                                markPosition(measure, quantifiedObject, startQM);
+                            }
                             p.appendChild(text.substring(initPos, startQM));
                             p.appendChild(measure);
                             addedMeasure = true;
@@ -179,10 +199,10 @@ public class QuantifiedObjectTrainingFormatter {
                 int endQB = -1;
                 int startUB = -1;
                 int endUB = -1;
-                
-                if(quantityBase != null) {
-                    startQB= quantityBase.getOffsetStart();
-                    endQB  = quantityBase.getOffsetEnd();
+
+                if (quantityBase != null) {
+                    startQB = quantityBase.getOffsetStart();
+                    endQB = quantityBase.getOffsetEnd();
                     Unit unitL = quantityBase.getRawUnit();
 
                     if (unitL != null) {
@@ -217,6 +237,10 @@ public class QuantifiedObjectTrainingFormatter {
                     if (pos == startQR) {
                         if (!addedMeasure) {
                             p.appendChild(text.substring(initPos, startQR));
+                            if (quantifiedObject != null) {
+                                measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                                markPosition(measure, quantifiedObject, startQR);
+                            }
                             p.appendChild(measure);
                         } else {
                             measure.appendChild(text.substring(initPos, startQR));
@@ -253,7 +277,7 @@ public class QuantifiedObjectTrainingFormatter {
                 measure.addAttribute(new Attribute("type", "list"));
                 List<Quantity> quantities = measurement.getQuantityList();
                 int initPos = pos;
-                
+
                 boolean measureAdded = false;
                 for (Quantity quantity : quantities) {
                     int startQ = quantity.getOffsetStart();
@@ -272,6 +296,10 @@ public class QuantifiedObjectTrainingFormatter {
                             p.appendChild(text.substring(initPos, startQ));
                             measure.appendChild(text.substring(startQ, endQ));
                             if (!measureAdded) {
+                                if (quantifiedObject != null) {
+                                    measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                                    markPosition(measure, quantifiedObject, startQ);
+                                }
                                 p.appendChild(measure);
                                 measureAdded = true;
                             }
@@ -303,5 +331,13 @@ public class QuantifiedObjectTrainingFormatter {
         p.appendChild(text.substring(pos));
 
         return p;
+    }
+
+    private void markPosition(Element measure, QuantifiedObject quantifiedObject, int startQL) {
+        if (quantifiedObject.getOffsetStart() > -1 && quantifiedObject.getOffsetStart() > startQL) {
+            measure.addAttribute(new Attribute("pos", "left"));
+        } else {
+            measure.addAttribute(new Attribute("pos", "right"));
+        }
     }
 }
