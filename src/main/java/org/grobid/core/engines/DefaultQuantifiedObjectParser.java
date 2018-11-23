@@ -240,7 +240,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                                 (funct.equals("appos") && pos.startsWith("NN")) ||
                                 (funct.equals("pobj") && pos.startsWith("NN")) ||
                                 (previousFunct.equals("num") && pos.startsWith("NN"))
-                        ) {
+                ) {
                     if (FeatureFactory.test_digit(pieces[1]))
                         substance = new QuantifiedObject(pieces[1], pieces[1]);
                     else
