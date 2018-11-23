@@ -67,7 +67,7 @@ public class QuantifiedObjectTrainingFormatter {
                         measure.appendChild(text.substring(startQ, endQ));
                         if (quantifiedObject != null) {
                             measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
-                            markPosition(measure, quantifiedObject, startQ);
+//                            markPosition(measure, quantifiedObject, startQ);
                         }
                         p.appendChild(measure);
                         pos = endQ;
@@ -139,7 +139,7 @@ public class QuantifiedObjectTrainingFormatter {
                         if (!addedMeasure) {
                             if (quantifiedObject != null) {
                                 measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
-                                markPosition(measure, quantifiedObject, startQL);
+//                                markPosition(measure, quantifiedObject, startQL);
                             }
                             p.appendChild(measure);
                             addedMeasure = true;
@@ -151,7 +151,7 @@ public class QuantifiedObjectTrainingFormatter {
                         if (!addedMeasure) {
                             if (quantifiedObject != null) {
                                 measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
-                                markPosition(measure, quantifiedObject, startQM);
+//                                markPosition(measure, quantifiedObject, startQM);
                             }
                             p.appendChild(text.substring(initPos, startQM));
                             p.appendChild(measure);
@@ -239,7 +239,7 @@ public class QuantifiedObjectTrainingFormatter {
                             p.appendChild(text.substring(initPos, startQR));
                             if (quantifiedObject != null) {
                                 measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
-                                markPosition(measure, quantifiedObject, startQR);
+//                                markPosition(measure, quantifiedObject, startQR);
                             }
                             p.appendChild(measure);
                         } else {
@@ -298,7 +298,7 @@ public class QuantifiedObjectTrainingFormatter {
                             if (!measureAdded) {
                                 if (quantifiedObject != null) {
                                     measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
-                                    markPosition(measure, quantifiedObject, startQ);
+//                                    markPosition(measure, quantifiedObject, startQ);
                                 }
                                 p.appendChild(measure);
                                 measureAdded = true;
