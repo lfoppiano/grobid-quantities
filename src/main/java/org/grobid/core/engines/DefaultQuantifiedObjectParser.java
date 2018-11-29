@@ -32,9 +32,10 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
 
             // this part is for identifying for each sentence, the measurements belonging to the sentence 
             for (Sentence processedSentence : parsedSentences) {
-                // list of measureemnts for the current sentence
-                List<Measurement> sentenceMeasurements = new ArrayList<Measurement>();
-                List<Integer> positionMeasurements = new ArrayList<Integer>();
+                // list of measurements for the current sentence
+                List<Measurement> sentenceMeasurements = new ArrayList<>();
+                // Positions of measurements
+                List<Integer> positionMeasurements = new ArrayList<>();
                 while (indexMeasurement < measurements.size()) {
                     Measurement measurement = measurements.get(indexMeasurement);
                     int position = -1;
@@ -105,7 +106,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                     // if we arrive here, this measurement is in the current sentence
 
                     sentenceMeasurements.add(measurement);
-                    positionMeasurements.add(new Integer(position));
+                    positionMeasurements.add(position);
                     indexMeasurement++;
                 }
 

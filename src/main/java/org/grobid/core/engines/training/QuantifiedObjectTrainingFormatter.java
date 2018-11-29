@@ -293,7 +293,11 @@ public class QuantifiedObjectTrainingFormatter {
 
                     while (pos < text.length()) {
                         if (pos == startQ) {
-                            p.appendChild(text.substring(initPos, startQ));
+                            if(!measureAdded) {
+                                p.appendChild(text.substring(initPos, startQ));
+                            } else {
+                                measure.appendChild(text.substring(initPos, startQ));
+                            }
                             measure.appendChild(text.substring(startQ, endQ));
                             if (!measureAdded) {
                                 if (quantifiedObject != null) {
