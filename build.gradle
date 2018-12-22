@@ -51,8 +51,8 @@ dependencies {
     testCompile group: 'org.easymock', name: 'easymock', version: '3.4'
 
     //GROBID
-    compile 'org.grobid:grobid-core:0.5.3-SNAPSHOT'
-    compile 'org.grobid:grobid-trainer:0.5.3-SNAPSHOT'
+    compile 'org.grobid:grobid-core:0.5.3'
+    compile 'org.grobid:grobid-trainer:0.5.3'
 
     //Apache commons
     compile 'org.apache.commons:commons-collections4:4.1'
