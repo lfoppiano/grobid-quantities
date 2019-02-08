@@ -9,14 +9,23 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.easymock.PowerMock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
+import static org.easymock.EasyMock.expect;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.powermock.api.easymock.PowerMock.*;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(QuantifiedObjectTrainingFormatter.class)
 public class QuantifiedObjectTrainingFormatterTest {
     QuantifiedObjectTrainingFormatter target;
 
@@ -44,12 +53,20 @@ public class QuantifiedObjectTrainingFormatterTest {
         potatoes.setOffsetEnd(28);
         measurement.setQuantifiedObject(potatoes);
 
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
         String text = "We need 10 grams of potatoes";
 
         measurementList.add(measurement);
 
         Element out = target.trainingExtraction(measurementList, text);
-        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"value\">10 grams</measure> of <quantifiedObject>potatoes</quantifiedObject></p>"));
+
+        verify(UUID.class);
+
+        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"value\" ptr=\"#" + expectedID.toString() + "\">10 grams</measure> of <quantifiedObject id=\"" + expectedID.toString() + "\">potatoes</quantifiedObject></p>"));
     }
 
     @Test
@@ -80,8 +97,15 @@ public class QuantifiedObjectTrainingFormatterTest {
 
         measurementList.add(measurement);
 
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
         Element out = target.trainingExtraction(measurementList, text);
-        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\">10 to 2 grams</measure> of <quantifiedObject>potatoes</quantifiedObject></p>"));
+
+        verify(UUID.class);
+        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">10 to 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
     @Test
@@ -107,8 +131,16 @@ public class QuantifiedObjectTrainingFormatterTest {
 
         measurementList.add(measurement);
 
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
         Element out = target.trainingExtraction(measurementList, text);
-        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\">&lt; 2 grams</measure> of <quantifiedObject>potatoes</quantifiedObject></p>"));
+
+        verify(UUID.class);
+
+        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">&lt; 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
     @Test
@@ -134,8 +166,15 @@ public class QuantifiedObjectTrainingFormatterTest {
 
         measurementList.add(measurement);
 
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
         Element out = target.trainingExtraction(measurementList, text);
-        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\">&gt; 2 grams</measure> of <quantifiedObject>potatoes</quantifiedObject></p>"));
+
+        verify(UUID.class);
+        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">&gt; 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
     @Test
@@ -166,8 +205,15 @@ public class QuantifiedObjectTrainingFormatterTest {
 
         measurementList.add(measurement);
 
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
         Element out = target.trainingExtraction(measurementList, text);
-        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\">10 +- 2 grams</measure> of <quantifiedObject>potatoes</quantifiedObject></p>"));
+
+        verify(UUID.class);
+        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\">10 +- 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
     @Test
@@ -193,8 +239,15 @@ public class QuantifiedObjectTrainingFormatterTest {
 
         measurementList.add(measurement);
 
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
         Element out = target.trainingExtraction(measurementList, text);
-        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\">+- 2 grams</measure> of <quantifiedObject>potatoes</quantifiedObject></p>"));
+
+        verify(UUID.class);
+        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">+- 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
     @Test
@@ -234,8 +287,15 @@ public class QuantifiedObjectTrainingFormatterTest {
 
         measurementList.add(measurement);
 
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
         Element out = target.trainingExtraction(measurementList, text);
-        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"list\">1, 5 and 12 grams</measure> of <quantifiedObject>potatoes</quantifiedObject></p>"));
+
+        verify(UUID.class);
+        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"list\" ptr=\"#" + expectedID + "\">1, 5 and 12 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
 
@@ -299,11 +359,17 @@ public class QuantifiedObjectTrainingFormatterTest {
 
         measurement3.setAtomicQuantity(quantityOfMeasurement3);
 
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
         final Element element = target.trainingExtraction(Arrays.asList(measurement1, measurement2, measurement3), text);
 
+        verify(UUID.class);
         assertThat(element.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">In this letter we present the discovery of a very light planetary companion to the star µ Ara (HD 160691). " +
                 "The planet orbits its host once every <measure type=\"value\">9.5 days</measure>, and induces a sinusoidal radial velocity signal " +
-                "with <quantifiedObject>a semi-amplitude of</quantifiedObject> <measure type=\"value\">4.1 m s −1</measure> , " +
+                "with <quantifiedObject id=\"" + expectedID + "\">a semi-amplitude of</quantifiedObject> <measure type=\"value\" ptr=\"#" + expectedID + "\">4.1 m s −1</measure> , " +
                 "the smallest Doppler amplitude detected so far. These values imply a mass of m2 sin i=<measure type=\"value\">14 M⊕</measure> (earth-masses). " +
                 "This detection represents the discovery of a planet with a mass slightly smaller than that of Uranus, the smallest \"ice giant\" in our Solar System. " +
                 "Whether this planet can be considered an ice giant or a super-earth planet is discussed in the context of the core-accretion and migration models.</p>"));

@@ -215,17 +215,17 @@ public class ValueParser extends AbstractParser {
             if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
                 rawTaggedValue.append(clusterLabel.getLabel());
             }
-            rawTaggedValue.append(clusterContent);
+            rawTaggedValue.append(trim(clusterContent));
             if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
                 rawTaggedValue.append(clusterLabel.getLabel().replace("<", "</"));
             }
 
             if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_NUMBER)) {
-                valueBlock.setNumber(clusterContent);
+                valueBlock.setNumber(trim(clusterContent));
                 valueBlock.getNumber().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(N)");
             } else if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_BASE)) {
-                valueBlock.setBase(clusterContent);
+                valueBlock.setBase(trim(clusterContent));
                 valueBlock.getBase().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(B)");
             } else if (clusterLabel.equals(VALUE_VALUE_OTHER)) {
@@ -239,11 +239,11 @@ public class ValueParser extends AbstractParser {
                 valueBlock.getExp().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(E)");
             } else if (clusterLabel.equals(VALUE_VALUE_TIME)) {
-                valueBlock.setTime(clusterContent);
+                valueBlock.setTime(trim(clusterContent));
                 valueBlock.getTime().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(T)");
             } else if (clusterLabel.equals(VALUE_VALUE_ALPHA)) {
-                valueBlock.setAlpha(clusterContent);
+                valueBlock.setAlpha(trim(clusterContent));
                 valueBlock.getAlpha().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(A)");
             }

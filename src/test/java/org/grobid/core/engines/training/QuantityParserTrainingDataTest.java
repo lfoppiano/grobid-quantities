@@ -5,6 +5,7 @@ import org.apache.commons.io.IOUtils;
 import org.grobid.core.engines.QuantityParser;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -22,12 +23,15 @@ public class QuantityParserTrainingDataTest {
 
     }
 
+    @Ignore("nonsense")
     @Test
     public void test() throws Exception {
         target.createTraining("/Users/lfoppiano/development/inria/grobid-resources/grobid-quantities/in/hal-00082280.pdf","/Users/lfoppiano/development/inria/grobid-resources/grobid-quantities/out", 1);
     }
 
 
+
+    @Ignore("Nonsense as well with the hardcoded path... ")
     @Test
     public void test2() throws Exception {
 //        String input = IOUtils.(this.getClass().getResourceAsStream("text.example.txt"))

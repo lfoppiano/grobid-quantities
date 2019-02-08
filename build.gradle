@@ -53,6 +53,8 @@ dependencies {
     testCompile 'org.easymock:easymock:3.4'
     testCompile 'org.hamcrest:hamcrest-all:1.3'
     testCompile group: 'org.easymock', name: 'easymock', version: '3.4'
+    testCompile 'org.powermock:powermock-module-junit3:1.7.1'
+    testCompile 'org.powermock:powermock-api-easymock:1.7.1'
 
     //GROBID
     compile 'org.grobid:grobid-core:0.5.3'
