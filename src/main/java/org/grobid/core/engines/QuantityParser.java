@@ -31,12 +31,13 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 
 /**
@@ -170,8 +171,9 @@ public class QuantityParser extends AbstractParser {
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
-                String header = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
-                List<LayoutToken> tokenizationHeader = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                org.apache.commons.lang3.tuple.Pair<String, List<LayoutToken>> headerStruct = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                List<LayoutToken> tokenizationHeader = headerStruct.getRight();//doc.getTokenizationParts(documentParts, doc.getTokenizations());
+                String header = headerStruct.getLeft();
                 String labeledResult = null;
                 if ((header != null) && (header.trim().length() > 0)) {
                     labeledResult = parsers.getHeaderParser().label(header);
@@ -204,12 +206,12 @@ public class QuantityParser extends AbstractParser {
             // object of more refined processing
             documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
             if (documentParts != null) {
-                Pair<String, LayoutTokenization> featSeg = parsers.getFullTextParser().getBodyTextFeatured(doc, documentParts);
+                org.apache.commons.lang3.tuple.Pair<String, LayoutTokenization> featSeg = parsers.getFullTextParser().getBodyTextFeatured(doc, documentParts);
 
                 String fulltextTaggedRawResult = null;
                 if (featSeg != null) {
-                    String featureText = featSeg.getA();
-                    LayoutTokenization layoutTokenization = featSeg.getB();
+                    String featureText = featSeg.getLeft();
+                    LayoutTokenization layoutTokenization = featSeg.getRight();
 
                     if (StringUtils.isNotEmpty(featureText)) {
                         fulltextTaggedRawResult = parsers.getFullTextParser().label(featureText);

@@ -326,6 +326,10 @@ public class QuantityParserTrainingData {
             }
 
             // we process all pdf files in the directory
+            if(!path.isDirectory()) {
+                throw new GrobidException("The input path should be a directory.");
+            }
+
             List<File> refFiles = Arrays.stream(Objects.requireNonNull(path.listFiles())).filter(
                     file -> file.getName().endsWith(".pdf") || file.getName().endsWith(".PDF") ||
                             file.getName().endsWith(".txt") || file.getName().endsWith(".TXT") ||
