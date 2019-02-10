@@ -3,10 +3,11 @@
 Annotation guidelines
 =====================
 
-Generating training data
+Getting started
 ------------------------
 
 The first step of the annotation process is to generate training data from unlabeled documents based on the current models.
+The procedure is explained in details in :ref:`training_data`
 GROBID will create the training data corresponding to these documents in the right TEI format and with pre-annotations.
 The annotation work then consists of manually checking the produced annotations and adding the missing one.
 It is very important not to modify the text content in these generated files, not adding spaces or other characters, but only adding or moving XML tags.
@@ -23,7 +24,9 @@ We do not distinguish conjunctive and disjunctive lists at the present time.
 List of unit types
 ~~~~~~~~~~~~~~~~~~
 
-For the training annotation, the list of unit types (temperature, pressure, length, etc.) is controled and based on SI definitions. This control is normally exhaustive and contains currently 50 types. The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. They are used to get the right transformation.
+For the training annotation, the list of unit types (temperature, pressure, length, etc.) is controled and based on SI definitions.
+This control is normally exhaustive and contains currently 50 types.
+The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. They are used to get the right transformation.
 The given names of the unit types has to be used when annotating measurement. 
 
 In the future, the list of units should however not be controlled and GROBID should support units never seen before.
