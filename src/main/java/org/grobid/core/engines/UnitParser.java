@@ -11,6 +11,7 @@ import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.LayoutTokensUtil;
 import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.UnicodeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_OTHER;
-import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_POW;
-import static org.grobid.core.engines.label.QuantitiesTaggingLabels.VALUE_VALUE_OTHER;
+import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 
 /**
  * Created by lfoppiano on 20.02.16.
@@ -60,6 +59,7 @@ public class UnitParser extends AbstractParser {
         if (isBlank(text)) {
             return null;
         }
+
 
         //Remove spaces. It's a workaround (to be check whether it is working) because spaces are causing troubles
 //        text = text.replaceAll(" ", "");
@@ -197,7 +197,7 @@ public class UnitParser extends AbstractParser {
                                List<OffsetPosition> unitTokenPositions, boolean isUnitLeft) {
 
         StringBuilder result = new StringBuilder();
-        
+
         try {
             for (String character : characters) {
                 if (isBlank(character)) {

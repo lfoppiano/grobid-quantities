@@ -1,13 +1,12 @@
 package org.grobid.core.data;
 
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.util.BufferRecyclers;
-import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.utilities.UnitUtilities;
 
-import java.util.List;
 import java.util.ArrayList;
-
-import com.fasterxml.jackson.core.io.*;
+import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
@@ -125,16 +124,16 @@ public class Measurement {
         if (this.boundingBoxes == null)
             this.boundingBoxes = new ArrayList<BoundingBox>();
         this.boundingBoxes.add(boundingBox);
-    }    
+    }
 
     public void addBoundingBoxes(List<BoundingBox> boundingBoxes) {
         if (boundingBoxes == null)
             return;
         if (this.boundingBoxes == null)
             this.boundingBoxes = new ArrayList<BoundingBox>();
-        for(BoundingBox box : boundingBoxes) 
+        for (BoundingBox box : boundingBoxes)
             this.boundingBoxes.add(box);
-    }    
+    }
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -174,7 +173,7 @@ public class Measurement {
         byte[] encodedName = null;
         if (type != null) {
             if ((type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                    (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE))
+                (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE))
                 encodedName = encoder.quoteAsUTF8("interval");
             else
                 encodedName = encoder.quoteAsUTF8(type.getName());
@@ -269,7 +268,7 @@ public class Measurement {
             json.append(", \"quantified\" : " + quantifiedObject.toJson());
         }
 
-        if ( (boundingBoxes != null) && (boundingBoxes.size() > 0) ) {
+        if ((boundingBoxes != null) && (boundingBoxes.size() > 0)) {
             json.append(", \"boundingBoxes\" : [");
             boolean first = true;
             for (BoundingBox box : boundingBoxes) {
@@ -293,8 +292,8 @@ public class Measurement {
 
     public boolean isValid() {
         return this.getType() != null && (isNotEmpty(this.getQuantityList()) || (this.getQuantityAtomic() != null) ||
-                        (this.getQuantityLeast() != null || this.getQuantityMost() != null) ||
-                        (this.getQuantityBase() != null && this.getQuantityRange() != null)
+            (this.getQuantityLeast() != null || this.getQuantityMost() != null) ||
+            (this.getQuantityBase() != null && this.getQuantityRange() != null)
         );
     }
 }

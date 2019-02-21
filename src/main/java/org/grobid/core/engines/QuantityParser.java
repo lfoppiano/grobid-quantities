@@ -495,11 +495,11 @@ public class QuantityParser extends AbstractParser {
 
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
             List<LayoutToken> theTokens = cluster.concatTokens();
-            String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens()).trim();
+            String clusterContent = LayoutTokensUtil.toText(theTokens).trim();
             List<BoundingBox> boundingBoxes = null;
 
             if (!clusterLabel.equals(QUANTITY_OTHER))
-                boundingBoxes = BoundingBoxCalculator.calculate(cluster.concatTokens());
+                boundingBoxes = BoundingBoxCalculator.calculate(theTokens);
 
             String text = LayoutTokensUtil.toText(tokens);
             if ((pos < text.length() - 1) && (text.charAt(pos) == ' '))
@@ -539,6 +539,7 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
+                currentQuantity.setLayoutTokens(theTokens);
                 currentMeasurement.setType(UnitUtilities.Measurement_Type.VALUE);
                 if (currentUnit.getRawName() != null) {
                     currentQuantity.setRawUnit(currentUnit);
@@ -571,6 +572,7 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
+                currentQuantity.setLayoutTokens(theTokens);
                 if (currentUnit.getRawName() != null) {
                     currentQuantity.setRawUnit(currentUnit);
                 }
@@ -596,6 +598,7 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
+                currentQuantity.setLayoutTokens(theTokens);
                 if (currentUnit.getRawName() != null) {
                     currentQuantity.setRawUnit(currentUnit);
                 }
@@ -621,6 +624,7 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
+                currentQuantity.setLayoutTokens(theTokens);
                 if (currentUnit.getRawName() != null) {
                     currentQuantity.setRawUnit(currentUnit);
                 }
@@ -646,6 +650,7 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
+                currentQuantity.setLayoutTokens(theTokens);
                 if (currentUnit.getRawName() != null) {
                     currentQuantity.setRawUnit(currentUnit);
                 }
@@ -670,6 +675,7 @@ public class QuantityParser extends AbstractParser {
                 }
                 currentQuantity.setOffsetStart(pos);
                 currentQuantity.setOffsetEnd(endPos);
+                currentQuantity.setLayoutTokens(theTokens);
 
                 if (currentUnit.getRawName() != null) {
                     currentQuantity.setRawUnit(currentUnit);
@@ -684,6 +690,7 @@ public class QuantityParser extends AbstractParser {
                 currentUnit.setRawName(clusterContent);
                 currentUnit.setOffsetStart(pos);
                 currentUnit.setOffsetEnd(endPos);
+                currentUnit.setLayoutTokens(theTokens);
 
                 if (openMeasurement == UnitUtilities.Measurement_Type.VALUE) {
                     if (currentMeasurement.getQuantityAtomic() != null) {
@@ -770,6 +777,7 @@ public class QuantityParser extends AbstractParser {
                 currentUnit.setRawName(clusterContent);
                 currentUnit.setOffsetStart(pos);
                 currentUnit.setOffsetEnd(endPos);
+                currentUnit.setLayoutTokens(theTokens);
                 currentUnit.setUnitRightAttachment(true);
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_OTHER)) {

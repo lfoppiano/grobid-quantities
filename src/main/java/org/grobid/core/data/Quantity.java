@@ -1,13 +1,17 @@
 package org.grobid.core.data;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for managing a quantity representation.
@@ -24,6 +28,7 @@ public class Quantity implements Comparable<Quantity> {
     private Unit parsedUnit = null;
     private String rawValue = null;
     private Value parsedValue = null;
+    private List<LayoutToken> layoutTokens = new ArrayList<>();
 
     private Quantity.Normalized normalizedQuantity = null;
 
@@ -273,6 +278,15 @@ public class Quantity implements Comparable<Quantity> {
         this.parsedUnit = parsedUnit;
     }
 
+    public List<LayoutToken> getLayoutTokens() {
+        return layoutTokens;
+    }
+
+    public void setLayoutTokens(List<LayoutToken> layoutTokens) {
+        this.layoutTokens = layoutTokens;
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public class Normalized {
         private String rawValue = null;
         private BigDecimal value = null;
@@ -364,10 +378,10 @@ public class Quantity implements Comparable<Quantity> {
     public int compareTo(Quantity theQuantity) {
         int start = theQuantity.getOffsetStart();
         int end = theQuantity.getOffsetEnd();
-        
-        if (offsets.start != start) 
+
+        if (offsets.start != start)
             return offsets.start - start;
-        else 
+        else
             return offsets.end - end;
     }
 }

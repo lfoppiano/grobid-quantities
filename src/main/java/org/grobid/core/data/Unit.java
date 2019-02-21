@@ -1,6 +1,7 @@
 package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Unit {
     private OffsetPosition offsets = null;
     private UnitDefinition unitDefinition = null;
     private boolean hasRightAttachment = false;
+    private List<LayoutToken> layoutTokens = new ArrayList<>();
 
     private List<UnitBlock> productBlock = null;
 
@@ -168,5 +170,13 @@ public class Unit {
 
     public void setUnitRightAttachment(boolean hasRightAttachment) {
         this.hasRightAttachment = hasRightAttachment;
+    }
+
+    public List<LayoutToken> getLayoutTokens() {
+        return layoutTokens;
+    }
+
+    public void setLayoutTokens(List<LayoutToken> layoutTokens) {
+        this.layoutTokens = layoutTokens;
     }
 }
