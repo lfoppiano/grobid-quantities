@@ -8,6 +8,7 @@ import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.trainer.sax.MeasureAnnotationSaxHandler;
 
 import javax.xml.parsers.SAXParser;
@@ -165,6 +166,10 @@ public class QuantityTrainer extends AbstractTrainer {
                 }
 
                 String label = lineP.getB();
+
+                //Unicode normalisation
+                token = UnicodeUtil.normaliseTextAndRemoveSpaces(token);
+
                 /*if (label != null) {
                     isUnitPattern = true;
                 }*/

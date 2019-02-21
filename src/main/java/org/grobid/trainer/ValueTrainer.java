@@ -7,6 +7,7 @@ import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.trainer.sax.ValueAnnotationSaxHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,9 @@ public class ValueTrainer extends AbstractTrainer {
                     writer.write("\n");
                     writer.flush();
                 }
+
+                //Unicode normalisation
+                token = UnicodeUtil.normaliseTextAndRemoveSpaces(token);
 
                 String label = text.getB();
 

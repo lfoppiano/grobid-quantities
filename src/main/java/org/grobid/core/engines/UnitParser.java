@@ -78,7 +78,7 @@ public class UnitParser extends AbstractParser {
                 OffsetPosition position = new OffsetPosition();
                 position.start = text.indexOf(character);
                 position.end = text.indexOf(character) + 1;
-                LayoutToken lt = new LayoutToken(String.valueOf(character));
+                LayoutToken lt = new LayoutToken(UnicodeUtil.normaliseTextAndRemoveSpaces(String.valueOf(character)));
                 tokenizations.add(lt);
 
                 unitTokenPositions.add(position);

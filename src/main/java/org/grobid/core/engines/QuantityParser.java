@@ -79,6 +79,14 @@ public class QuantityParser extends AbstractParser {
 
         List<Measurement> measurements = new ArrayList<>();
 
+        //Normalisation
+        layoutTokens.stream().map(layoutToken -> {
+                    layoutToken.setText(UnicodeUtil.normaliseTextAndRemoveSpaces(layoutToken.getText()));
+
+                    return layoutToken;
+                }
+        );
+
         // List<LayoutToken> for the selected segment
         List<LayoutToken> tokens = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
@@ -431,12 +439,6 @@ public class QuantityParser extends AbstractParser {
 
                 String text = token.getText();
                 if (text.equals(" ") || text.equals("\n")) {
-                    continue;
-                }
-
-                // parano normalisation
-                text = UnicodeUtil.normaliseTextAndRemoveSpaces(text);
-                if (text.trim().length() == 0) {
                     continue;
                 }
 

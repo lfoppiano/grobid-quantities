@@ -8,6 +8,7 @@ import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
+import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.trainer.sax.UnitAnnotationSaxHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +55,10 @@ public class UnitTrainer extends AbstractTrainer {
         try {
             for (Pair<String, String> text : texts) {
                 String token = text.getA();
+
+                //Unicode normalisation
+                token = UnicodeUtil.normaliseTextAndRemoveSpaces(token);
+
                 if (token.trim().equals("@newline")) {
                     writer.write("\n");
                     writer.flush();
