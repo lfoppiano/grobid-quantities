@@ -4,6 +4,7 @@ import nu.xom.Attribute;
 import nu.xom.Element;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.xml.XmlBuilderUtils;
@@ -22,6 +23,9 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -263,7 +267,7 @@ public class QuantityParserTrainingData {
         Element unitNode = teiElement("units");
         Element valueNode = teiElement("values");
         Element quantifiedObjectNode = teiElement("text");
-        
+
         // for the moment we suppose we have english only...
         quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
 
@@ -315,8 +319,9 @@ public class QuantityParserTrainingData {
                                    String outputDirectory,
                                    int ind) {
         try {
-            File path = new File(inputDirectory);
-            if (!path.exists()) {
+            Path inputDirectoryPath = Paths.get(inputDirectory);
+
+            if (!Files.exists(inputDirectoryPath)) {
                 throw new GrobidException("Cannot create training data because input directory can not be accessed: " + inputDirectory);
             }
 
@@ -326,16 +331,18 @@ public class QuantityParserTrainingData {
             }
 
             // we process all pdf files in the directory
-            if(!path.isDirectory()) {
+            if (!Files.isDirectory(inputDirectoryPath)) {
                 throw new GrobidException("The input path should be a directory.");
             }
 
-            List<File> refFiles = Arrays.stream(Objects.requireNonNull(path.listFiles())).filter(
-                    file -> file.getName().endsWith(".pdf") || file.getName().endsWith(".PDF") ||
-                            file.getName().endsWith(".txt") || file.getName().endsWith(".TXT") ||
-                            file.getName().endsWith(".xml") || file.getName().endsWith(".tei") ||
-                            file.getName().endsWith(".XML") || file.getName().endsWith(".TEI")
-            ).collect(Collectors.toList());
+            List<File> refFiles = Files.walk(inputDirectoryPath)
+                    .filter(path -> Files.isRegularFile(path)
+                            && (StringUtils.endsWithIgnoreCase(path.getFileName().toString(), ".pdf")
+                            || StringUtils.endsWithIgnoreCase(path.getFileName().toString(), ".txt")
+                            || StringUtils.endsWithIgnoreCase(path.getFileName().toString(), ".xml")
+                            || StringUtils.endsWithIgnoreCase(path.getFileName().toString(), ".XML")))
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
 
             LOGGER.info(refFiles.size() + " files to be processed.");
 
