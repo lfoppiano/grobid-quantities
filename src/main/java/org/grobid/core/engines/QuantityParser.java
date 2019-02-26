@@ -50,19 +50,35 @@ public class QuantityParser extends AbstractParser {
 
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
-    private QuantifiedObjectParser substanceParser = QuantifiedObjectParser.getInstance();
+    private QuantifiedObjectParser substanceParser;
     private QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
     private EngineParsers parsers;
+    private boolean disableSubstanceParser = false;
 
-    public static QuantityParser getInstance() {
+    public static QuantityParser getInstance(boolean disableSubstance) {
         if (instance == null) {
-            getNewInstance();
+            instance = getNewInstance(disableSubstance);
         }
         return instance;
     }
 
-    private static synchronized void getNewInstance() {
-        instance = new QuantityParser();
+    public static QuantityParser getInstance() {
+        if (instance == null) {
+            instance = getNewInstance(false);
+        }
+        return instance;
+    }
+
+    private static synchronized QuantityParser getNewInstance(boolean disableSubstanceParser) {
+        QuantityParser instance = new QuantityParser();
+
+        if (!disableSubstanceParser) {
+            QuantifiedObjectParser substanceParser = QuantifiedObjectParser.getInstance();
+            instance.setSubstanceParser(substanceParser);
+        }
+        instance.setDisableSubstanceParser(disableSubstanceParser);
+
+        return instance;
     }
 
     private QuantityLexicon quantityLexicon = null;
@@ -124,7 +140,12 @@ public class QuantityParser extends AbstractParser {
             } catch (Exception e) {
                 LOGGER.error("Normalisation failed. Skipping it. ", e);
             }
-            localMeasurements = substanceParser.parseSubstance(tokens, localMeasurements);
+
+            if (!disableSubstanceParser) {
+                localMeasurements = substanceParser.parseSubstance(tokens, localMeasurements);
+            } else {
+                LOGGER.warn("Substance parser disabled, skpping it. ");
+            }
 
             measurements.addAll(localMeasurements);
         } catch (Exception e) {
@@ -796,5 +817,13 @@ public class QuantityParser extends AbstractParser {
 
         measurements = MeasurementOperations.postCorrection(measurements);
         return measurements;
+    }
+
+    public void setDisableSubstanceParser(boolean disableSubstanceParser) {
+        this.disableSubstanceParser = disableSubstanceParser;
+    }
+
+    public void setSubstanceParser(QuantifiedObjectParser substanceParser) {
+        this.substanceParser = substanceParser;
     }
 }
