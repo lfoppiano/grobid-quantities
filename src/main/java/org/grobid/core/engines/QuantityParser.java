@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -95,29 +96,29 @@ public class QuantityParser extends AbstractParser {
 
         List<Measurement> measurements = new ArrayList<>();
 
+        // List<LayoutToken> for the selected segment
+        List<LayoutToken> tokens = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
+
         //Normalisation
-        layoutTokens.stream().map(layoutToken -> {
-                    layoutToken.setText(UnicodeUtil.normaliseTextAndRemoveSpaces(layoutToken.getText()));
+        List<LayoutToken> layoutTokenNormalised = layoutTokens.stream().map(layoutToken -> {
+                    layoutToken.setText(UnicodeUtil.normaliseText(layoutToken.getText()));
 
                     return layoutToken;
                 }
-        );
-
-        // List<LayoutToken> for the selected segment
-        List<LayoutToken> tokens = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
+        ).collect(Collectors.toList());
 
         // list of textual tokens of the selected segment
         //List<String> texts = getTexts(tokenizationParts);
 
-        if (isEmpty(tokens))
+        if (isEmpty(layoutTokenNormalised))
             return measurements;
 
         try {
             // positions for lexical match
-            List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(tokens);
+            List<OffsetPosition> unitTokenPositions = quantityLexicon.inUnitNames(layoutTokenNormalised);
 
             // string representation of the feature matrix for CRF lib
-            String ress = addFeatures(tokens, unitTokenPositions);
+            String ress = addFeatures(layoutTokenNormalised, unitTokenPositions);
 
             if (StringUtils.isEmpty(ress))
                 return measurements;
@@ -130,7 +131,7 @@ public class QuantityParser extends AbstractParser {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
 
-            List<Measurement> localMeasurements = extractMeasurement(tokens, res);
+            List<Measurement> localMeasurements = extractMeasurement(layoutTokenNormalised, res);
             if (isEmpty(localMeasurements))
                 return measurements;
 
@@ -142,7 +143,7 @@ public class QuantityParser extends AbstractParser {
             }
 
             if (!disableSubstanceParser) {
-                localMeasurements = substanceParser.parseSubstance(tokens, localMeasurements);
+                localMeasurements = substanceParser.parseSubstance(layoutTokenNormalised, localMeasurements);
             } else {
                 LOGGER.warn("Substance parser disabled, skpping it. ");
             }
