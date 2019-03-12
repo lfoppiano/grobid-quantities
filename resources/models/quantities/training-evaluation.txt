@@ -1,40 +1,292 @@
+11 Mar 2019 11:16.17 [INFO ] AbstractTrainer           - 35 files
+11 Mar 2019 11:16.17 [INFO ] AbstractTrainer           - 1001.4731.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - 12970_2015_Article_108.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - 1404.4640.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - 1404.7168.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - 1408.2792.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - 1412.2117.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - EP-0505058-B1.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - EP-0505067-B1.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - EP-0505085-B2.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - hal-00082280.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - hal-00398330.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - hal-00535466.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - hal-00595947.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - hal-00643787.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - hal-00720564.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - hal-00915599.training.tei.xml
+11 Mar 2019 11:16.18 [INFO ] AbstractTrainer           - hal-00924047.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-00962359.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-00987664.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-01078051.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-01205501.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-01223150.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-01252076.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-01269917.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-01278907.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-01321536.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - hal-01429870-CC-BY.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - halshs-01279855.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - inserm-00508113.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - inserm-00676663.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - inserm-00721680.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - inserm-00752141.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - inserm-00851058.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - inserm-01196815.training.tei.xml
+11 Mar 2019 11:16.19 [INFO ] AbstractTrainer           - jpa-00251546.training.tei.xml
+	epsilon: 1.0E-6
+	window: 20
+	nb max iterations: 2000
+	nb threads: 12
+* Load patterns
+* Load training data
+   1000 sequences loaded
+* Initialize the model
+* Summary
+    nb train:    1175
+    nb labels:   16
+    nb blocks:   477881
+    nb features: 7646336
+* Train the model with l-bfgs
+* Save the model
+* Done
+11 Mar 2019 12:20.29 [INFO ] WapitiModel               - Loading model: /data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti (size: 9446007)
+[Wapiti] Loading model: "/data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti"
+Model path: /data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti
+Labeling took: 1452 ms
+
 ===== Token-level results =====
 
 
 label                accuracy     precision    recall       f1     
 
-<unitLeft>           99.7         97.31        88.81        92.87  
-<unitRight>          99.92        85.71        31.03        45.57  
-<valueAtomic>        98.23        58.67        75.9         66.18  
-<valueBase>          99.98        100          71.05        83.08  
-<valueLeast>         99.15        82.48        43.34        56.82  
-<valueList>          99.73        35.19        32.76        33.93  
-<valueMost>          98.99        75.68        51.86        61.55  
-<valueRange>         99.99        90.62        96.67        93.55  
+<unitLeft>           99.78        92.28        92.73        92.51  
+<unitRight>          99.98        91.3         65.62        76.36  
+<valueAtomic>        99.14        79.23        85.28        82.15  
+<valueBase>          99.95        100          30           46.15  
+<valueLeast>         99.73        53.85        51.53        52.66  
+<valueList>          99.75        75.64        33.15        46.09  
+<valueMost>          99.75        59.88        56.4         58.08  
+<valueRange>         99.99        97.14        94.44        95.77  
 
-all fields           99.46        74.67        67.73        71.03   (micro average)
-                     99.46        78.21        61.43        66.69   (macro average)
+all fields           99.76        80.89        79.32        80.1    (micro average)
+                     99.76        81.17        63.64        68.72   (macro average)
 
 ===== Field-level results =====
 
 label                accuracy     precision    recall       f1     
 
-<unitLeft>           96.81        94.67        86.99        90.67  
-<unitRight>          99.17        85.71        31.58        46.15  
-<valueAtomic>        90.14        66.99        76.23        71.31  
-<valueBase>          99.94        100          75           85.71  
-<valueLeast>         95.58        79.6         46.78        58.93  
-<valueList>          97.94        22.58        20           21.21  
-<valueMost>          95.41        77.27        51.37        61.72  
-<valueRange>         99.92        83.33        83.33        83.33  
+<unitLeft>           97.94        95.39        92.77        94.07  
+<unitRight>          99.67        91.3         65.62        76.36  
+<valueAtomic>        91.51        80.52        84.18        82.31  
+<valueBase>          99.75        100          28.57        44.44  
+<valueLeast>         97.89        71.58        54.84        62.1   
+<valueList>          97.08        51.72        12.93        20.69  
+<valueMost>          97.94        69.57        54.7         61.24  
+<valueRange>         99.9         88.24        88.24        88.24  
 
-all fields           96.86        78.32        70.05        73.96   (micro average)
-                     96.86        76.27        58.91        64.88   (macro average)
+all fields           97.71        84.62        78.92        81.67   (micro average)
+                     97.71        81.04        60.23        66.18   (macro average)
 
 ===== Instance-level results =====
 
-Total expected instances:   487
-Correct instances:          272
-Instance-level recall:      55.85
+Total expected instances:   357
+Correct instances:          219
+Instance-level recall:      61.34
 
-Split, training and evaluation for org.grobid.core.GrobidModels$1@40e6dfe1 model is realized in 11606256 ms
+Split, training and evaluation for org.grobid.core.GrobidModels$1@534df152 model is realized in 3853743 ms
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - 35 files
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - 1001.4731.training.tei.xml
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - 12970_2015_Article_108.training.tei.xml
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - 1404.4640.training.tei.xml
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - 1404.7168.training.tei.xml
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - 1408.2792.training.tei.xml
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - 1412.2117.training.tei.xml
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - EP-0505058-B1.tei.xml
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - EP-0505067-B1.training.tei.xml
+11 Mar 2019 19:04.53 [INFO ] AbstractTrainer           - EP-0505085-B2.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00082280.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00398330.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00535466.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00595947.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00643787.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00720564.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00915599.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00924047.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00962359.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-00987664.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-01078051.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-01205501.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-01223150.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-01252076.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-01269917.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-01278907.training.tei.xml
+11 Mar 2019 19:04.54 [INFO ] AbstractTrainer           - hal-01321536.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - hal-01429870-CC-BY.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - halshs-01279855.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - inserm-00508113.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - inserm-00676663.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - inserm-00721680.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - inserm-00752141.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - inserm-00851058.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - inserm-01196815.training.tei.xml
+11 Mar 2019 19:04.55 [INFO ] AbstractTrainer           - jpa-00251546.training.tei.xml
+	epsilon: 1.0E-6
+	window: 20
+	nb max iterations: 2000
+	nb threads: 12
+* Load patterns
+* Load training data
+   1000 sequences loaded
+* Initialize the model
+* Summary
+    nb train:    1283
+    nb labels:   17
+    nb blocks:   558434
+    nb features: 9493650
+* Train the model with l-bfgs
+* Save the model
+* Done
+11 Mar 2019 20:28.01 [INFO ] WapitiModel               - Loading model: /data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti (size: 11132274)
+[Wapiti] Loading model: "/data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti"
+Model path: /data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti
+Labeling took: 862 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<unitLeft>           99.69        99.71        91.39        95.37  
+<unitRight>          99.95        57.14        25           34.78  
+<valueAtomic>        98.35        69.82        78.5         73.91  
+<valueBase>          99.71        31.71        82.98        45.88  
+<valueLeast>         98.77        80.81        53.35        64.27  
+<valueList>          99.8         16.13        43.48        23.53  
+<valueMost>          98.67        88.77        61.51        72.67  
+<valueRange>         99.99        100          91.89        95.77  
+
+all fields           99.37        81.75        73.49        77.4    (micro average)
+                     99.37        68.01        66.01        63.27   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<unitLeft>           97.95        97.7         91.15        94.31  
+<unitRight>          99.62        25           7.14         11.11  
+<valueAtomic>        91.61        66.62        76.86        71.37  
+<valueBase>          99.76        71.43        78.95        75     
+<valueLeast>         95.51        83.19        55.94        66.9   
+<valueList>          98.9         13.64        40           20.34  
+<valueMost>          95.23        86.59        59.01        70.19  
+<valueRange>         99.93        100          84.21        91.43  
+
+all fields           97.31        81.84        74.81        78.17   (micro average)
+                     97.31        68.02        61.66        62.58   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   249
+Correct instances:          109
+Instance-level recall:      43.78
+
+Split, training and evaluation for org.grobid.core.GrobidModels$1@534df152 model is realized in 4989890 ms
+
+12 Mar 2019 12:55.10 [INFO ] AbstractTrainer           - 35 files
+12 Mar 2019 12:55.10 [INFO ] AbstractTrainer           - 1001.4731.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - 12970_2015_Article_108.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - 1404.4640.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - 1404.7168.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - 1408.2792.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - 1412.2117.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - EP-0505058-B1.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - EP-0505067-B1.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - EP-0505085-B2.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - hal-00082280.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - hal-00398330.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - hal-00535466.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - hal-00595947.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - hal-00643787.training.tei.xml
+12 Mar 2019 12:55.11 [INFO ] AbstractTrainer           - hal-00720564.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-00915599.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-00924047.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-00962359.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-00987664.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-01078051.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-01205501.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-01223150.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-01252076.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-01269917.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-01278907.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-01321536.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - hal-01429870-CC-BY.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - halshs-01279855.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - inserm-00508113.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - inserm-00676663.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - inserm-00721680.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - inserm-00752141.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - inserm-00851058.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - inserm-01196815.training.tei.xml
+12 Mar 2019 12:55.12 [INFO ] AbstractTrainer           - jpa-00251546.training.tei.xml
+	epsilon: 1.0E-6
+	window: 20
+	nb max iterations: 2000
+	nb threads: 12
+* Load patterns
+* Load training data
+   1000 sequences loaded
+* Initialize the model
+* Summary
+    nb train:    1416
+    nb labels:   17
+    nb blocks:   602525
+    nb features: 10243197
+* Train the model with l-bfgs
+* Save the model
+* Done
+12 Mar 2019 13:55.02 [INFO ] WapitiModel               - Loading model: /data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti (size: 12043638)
+[Wapiti] Loading model: "/data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti"
+Model path: /data/workspace/services/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti
+Labeling took: 376 ms
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<unitLeft>           99.52        98.51        76.25        85.96  
+<unitRight>          99.74        20           16.67        18.18  
+<valueAtomic>        98.43        74.83        75.18        75     
+<valueBase>          99.91        87.5         70           77.78  
+<valueLeast>         99.84        83.87        60.47        70.27  
+<valueList>          99.88        40           42.86        41.38  
+<valueMost>          99.76        60.61        50           54.79  
+<valueRange>         99.99        95.45        95.45        95.45  
+
+all fields           99.63        79.64        71.78        75.5    (micro average)
+                     99.63        70.1         60.86        64.85   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<unitLeft>           96.22        94.37        79.29        86.17  
+<unitRight>          97.1         23.53        16.67        19.51  
+<valueAtomic>        88.76        73.11        77.2         75.1   
+<valueBase>          99.82        87.5         87.5         87.5   
+<valueLeast>         98.42        77.78        63.64        70     
+<valueList>          99.03        28.57        25           26.67  
+<valueMost>          98.24        60           50           54.55  
+<valueRange>         99.82        87.5         87.5         87.5   
+
+all fields           97.18        77.08        72.52        74.73   (micro average)
+                     97.18        66.54        60.85        63.37   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   116
+Correct instances:          60
+Instance-level recall:      51.72
+
+Split, training and evaluation for org.grobid.core.GrobidModels$1@534df152 model is realized in 3592781 ms
