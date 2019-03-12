@@ -1,37 +1,196 @@
 
+Round 1
+
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - 8 files
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - 1001.4731.value.tei.xml
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - 12970_2015_Article_108.value.tei.xml
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - 1404.4640.value.tei.xml
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - 1404.7168.value.tei.xml
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - 1408.2792.value.tei.xml
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - 1412.2117.value.tei.xml
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - EP-0505085-B2.value.tei.xml
+12 Mar 2019 14:23.47 [INFO ] ValueTrainer              - trainingdata1.tei.xml
+	epsilon: 1.0E-7
+	window: 20
+	nb max iterations: 2000
+	nb threads: 12
+* Load patterns
+* Load training data
+   1000 sequences loaded
+* Initialize the model
+* Summary
+    nb train:    1174
+    nb labels:   13
+    nb blocks:   3208
+    nb features: 41704
+* Train the model with l-bfgs
+* Save the model
+* Done
+
 ===== Token-level results =====
 
 
 label                accuracy     precision    recall       f1     
 
-<alpha>              98.77        87.18        98.84        92.64  
-<base>               99.22        81.63        83.33        82.47  
-<exp>                99.73        0            0            0      
-<number>             97.67        97.95        98.67        98.31  
-<pow>                99.45        85           85           85     
-<time>               98.27        91.41        95.34        93.33  
+<alpha>              100          100          100          100    
+<base>               99.49        78.57        91.67        84.62  
+<exp>                99.87        0            0            0      
+<number>             98.66        99.61        98.75        99.18  
+<pow>                99.55        72           100          83.72  
+<time>               99.49        96.71        98           97.35  
 
-all fields           98.85        95.41        97.32        96.35   (micro average)
-                     98.85        73.86        76.86        75.29   (macro average)
+all fields           99.51        98.51        98.51        98.51   (micro average)
+                     99.51        74.48        81.4         77.48   (macro average)
 
 ===== Field-level results =====
 
 label                accuracy     precision    recall       f1     
 
-<alpha>              98.63        81.4         94.59        87.5   
-<base>               98.36        73.08        79.17        76     
-<exp>                99.59        0            0            0      
-<number>             94.67        95.28        97.58        96.42  
-<pow>                98.77        76           86.36        80.85  
-<time>               95.77        37.5         71.43        49.18  
+<alpha>              100          100          100          100    
+<base>               98.52        62.5         83.33        71.43  
+<exp>                99.82        0            0            0      
+<number>             95.93        97.36        97.79        97.58  
+<pow>                98.89        64.71        100          78.57  
+<time>               98.71        64.71        91.67        75.86  
 
-all fields           97.63        89.49        95.04        92.18   (micro average)
-                     97.63        60.54        71.52        64.99   (macro average)
+all fields           98.64        94.24        97.23        95.71   (micro average)
+                     98.64        64.88        78.8         70.57   (macro average)
 
 ===== Instance-level results =====
 
-Total expected instances:   614
-Correct instances:          584
-Instance-level recall:      95.11
+Total expected instances:   487
+Correct instances:          473
+Instance-level recall:      97.13
 
-Split, training and evaluation for org.grobid.core.GrobidModels$1@62ee68d8 model is realized in 4429 ms
+Split, training and evaluation for org.grobid.core.GrobidModels$1@100fc185 model is realized in 7221 ms
+
+
+
+Round 2
+
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - 8 files
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - 1001.4731.value.tei.xml
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - 12970_2015_Article_108.value.tei.xml
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - 1404.4640.value.tei.xml
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - 1404.7168.value.tei.xml
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - 1408.2792.value.tei.xml
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - 1412.2117.value.tei.xml
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - EP-0505085-B2.value.tei.xml
+12 Mar 2019 14:24.02 [INFO ] ValueTrainer              - trainingdata1.tei.xml
+	epsilon: 1.0E-7
+	window: 20
+	nb max iterations: 2000
+	nb threads: 12
+* Load patterns
+* Load training data
+   1000 sequences loaded
+* Initialize the model
+* Summary
+    nb train:    1528
+    nb labels:   13
+    nb blocks:   3372
+    nb features: 43836
+* Train the model with l-bfgs
+* Save the model
+* Done
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<alpha>              100          100          100          100    
+<base>               96.22        86.67        46.43        60.47  
+<number>             93.11        91.75        97.45        94.51  
+<pow>                98.22        92.86        65           76.47  
+<time>               96.89        89.83        86.89        88.33  
+
+all fields           96.89        91.85        90.95        91.4    (micro average)
+                     96.89        92.22        79.15        83.96   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<alpha>              100          100          100          100    
+<base>               93.82        66.67        42.86        52.17  
+<number>             92.13        90.43        97.2         93.69  
+<pow>                94.94        77.78        50           60.87  
+<time>               96.07        54.55        75           63.16  
+
+all fields           95.39        86.18        86.75        86.47   (micro average)
+                     95.39        77.88        73.01        73.98   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   133
+Correct instances:          120
+Instance-level recall:      90.23
+
+Split, training and evaluation for org.grobid.core.GrobidModels$1@100fc185 model is realized in 8559 ms
+
+
+
+Round 3
+
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - 8 files
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - 1001.4731.value.tei.xml
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - 12970_2015_Article_108.value.tei.xml
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - 1404.4640.value.tei.xml
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - 1404.7168.value.tei.xml
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - 1408.2792.value.tei.xml
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - 1412.2117.value.tei.xml
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - EP-0505085-B2.value.tei.xml
+12 Mar 2019 14:24.16 [INFO ] ValueTrainer              - trainingdata1.tei.xml
+	epsilon: 1.0E-7
+	window: 20
+	nb max iterations: 2000
+	nb threads: 12
+* Load patterns
+* Load training data
+   1000 sequences loaded
+* Initialize the model
+* Summary
+    nb train:    1543
+    nb labels:   13
+    nb blocks:   3211
+    nb features: 41743
+* Train the model with l-bfgs
+* Save the model
+* Done
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1     
+
+<alpha>              96.99        87.39        97.98        92.38  
+<base>               99.06        88.89        84.21        86.49  
+<number>             98.12        98.13        97.22        97.67  
+<pow>                99.81        94.12        100          96.97  
+<time>               96.42        90.44        95.35        92.83  
+
+all fields           98.08        93.15        96.45        94.77   (micro average)
+                     98.08        91.79        94.95        93.27   (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1     
+
+<alpha>              94.84        73.08        95           82.61  
+<base>               98.71        88.89        88.89        88.89  
+<number>             95.48        95.18        96.34        95.76  
+<pow>                99.35        88.89        100          94.12  
+<time>               92.26        41.18        77.78        53.85  
+
+all fields           96.13        84.03        94.53        88.97   (micro average)
+                     96.13        77.44        91.6         83.04   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   118
+Correct instances:          111
+Instance-level recall:      94.07
+
+Split, training and evaluation for org.grobid.core.GrobidModels$1@100fc185 model is realized in 3183 ms
+
