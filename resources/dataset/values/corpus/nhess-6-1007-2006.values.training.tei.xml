@@ -86,6 +86,6 @@
 	<value><number>20</number></value>
 	<value><alpha>five</alpha></value>
 	<value><alpha>four</alpha></value>
-	<value><time>2005</number></value>
+	<!--<value><time>2005</number></value>-->
 	<value><alpha>ten</alpha></value>
 </values>
