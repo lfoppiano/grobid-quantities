@@ -58,7 +58,6 @@ Training
 To run the training:
 
 - quantity model
-
 ::
   cd PATH-TO-GROBID/grobid/grobid-quantities
 
@@ -66,12 +65,10 @@ To run the training:
 
 
 - unit model
-
 ::
   ./gradlew train_units
 
 - value model
-
 ::
    ./gradlew train_values
 
