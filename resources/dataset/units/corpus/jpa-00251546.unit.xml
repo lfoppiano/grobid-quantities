@@ -1,4 +1,5 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><prefix>n</prefix><base>s</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><prefix>n</prefix><base>s</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -19,4 +20,5 @@
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit></units>
+	<unit><base>%</base></unit>
+</units>

@@ -3,8 +3,8 @@
 	<unit><base>year</base></unit>
 	<unit><base>year</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
-	<unit><base>A</base><base>m </base><pow>-2</pow></unit>
-	<unit><prefix>k</prefix><base>g</base><base>m </base><pow>-3</pow></unit>
+	<unit><base>A</base><base>m</base> <pow>-2</pow></unit>
+	<unit><prefix>k</prefix><base>g</base><base>m</base> <pow>-3</pow></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
@@ -30,4 +30,5 @@
 	<unit><base>year</base></unit>
 	<unit><base>year</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit></units>
+	<unit><base>%</base></unit>
+</units>

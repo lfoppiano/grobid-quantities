@@ -2,12 +2,12 @@
 	<unit><base>%</base></unit>
 	<unit><base>s</base></unit>
 	<unit><base>day</base></unit>
-	<unit><base>km</base></unit>
-	<unit><base>km</base></unit>
-	<unit><base>km</base></unit>
-	<unit><base>km</base></unit>
-	<unit><base>km</base></unit>
-	<unit><base>km</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>s</base></unit>
 	<unit><base>h</base></unit>
 	<unit><base>h</base></unit>
@@ -54,4 +54,5 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>year</base></unit></units>
+	<unit><base>year</base></unit>
+</units>

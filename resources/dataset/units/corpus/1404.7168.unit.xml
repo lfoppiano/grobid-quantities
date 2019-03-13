@@ -1,8 +1,8 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
     <unit><base>min</base></unit>
 	<unit><base>min</base></unit>
-	<unit><base>mm</base></unit>
-	<unit><base>mm</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
 	<unit><base>min</base></unit>
@@ -21,8 +21,8 @@
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><base>m</base><base>s</base><pow>-1</pow></unit>
 	<unit><base>m</base><base>s</base><pow>-1</pow></unit>
-	<unit><base>km</base></unit>
-	<unit><base>km</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><base>m</base><base>s</base><pow>-1</pow></unit>
 	<unit><base>m</base><base>s</base><pow>-1</pow></unit>

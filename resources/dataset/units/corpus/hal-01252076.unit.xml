@@ -7,7 +7,7 @@
 	<unit><base>%</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>day</base></unit>
-	<unit><prefix>m</prefix><base>g</base><base>m </base><pow>-2</pow></unit>
+	<unit><prefix>m</prefix><base>g</base><base>m</base> <pow>-2</pow></unit>
 	<unit><base>%</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>day</base></unit>
@@ -32,4 +32,5 @@
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><base>year</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit></units>
+	<unit><base>%</base></unit>
+</units>

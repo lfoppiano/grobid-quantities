@@ -1,4 +1,5 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><prefix>k</prefix><base>m</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>h</base></unit>
@@ -134,4 +135,5 @@
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>year</base></unit>
-	<unit><base>year</base></unit></units>
+	<unit><base>year</base></unit>
+</units>

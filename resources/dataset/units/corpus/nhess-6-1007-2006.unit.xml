@@ -1,4 +1,5 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><base>year</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>year</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>week</base></unit>
@@ -22,4 +23,5 @@
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
-	<unit><base>year</base></unit></units>
+	<unit><base>year</base></unit>
+</units>

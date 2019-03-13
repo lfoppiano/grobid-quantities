@@ -16,8 +16,8 @@
 	<unit><base>h</base></unit>
 	<unit><base>h</base></unit>
 	<unit><base>day</base></unit>
-	<unit><prefix>m</prefix><base>g</base><base>m </base><pow>-2 </pow><base>h</base><pow>-1</pow></unit>
-	<unit><prefix>m</prefix><base>g</base><base>m </base><pow>-2 </pow><base>h</base><pow>-1</pow></unit>
+	<unit><prefix>m</prefix><base>g</base><base>m</base> <pow>-2</pow> <base>h</base><pow>-1</pow></unit>
+	<unit><prefix>m</prefix><base>g</base><base>m</base> <pow>-2</pow> <base>h</base><pow>-1</pow></unit>
 	<unit><base>min</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>h</base></unit>
@@ -40,4 +40,5 @@
 	<unit><base>h</base></unit>
 	<unit><base>h</base></unit>
 	<unit><base>day</base></unit>
-	<unit><base>%</base></unit></units>
+	<unit><base>%</base></unit>
+</units>

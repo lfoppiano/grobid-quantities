@@ -1,13 +1,4 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
@@ -17,4 +8,15 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit></units>
+	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+</units>
