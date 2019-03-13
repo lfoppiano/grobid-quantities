@@ -14,6 +14,7 @@ public class UnitUtilities {
         SI_DERIVED("SI derived"),
         IMPERIAL("imperial"),
         US("us"),
+        CGS("centimetre–gram–second"),
         NON_SI("non SI");
 
         private String name;
@@ -94,7 +95,8 @@ public class UnitUtilities {
         COUNT("count"),
         ACCELERATION("acceleration"),
         DEGREE("angle"),
-        DIFFUSION_FLUX("diffusion flux");
+        DIFFUSION_FLUX("diffusion flux"),
+        MAGNETIC_MOMENT("magnetic moment");
 
         private String name;
 

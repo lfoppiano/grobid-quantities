@@ -2127,6 +2127,36 @@
           "lemma": "Jansky"
         }
       ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "μB"
+        }
+      ],
+      "type": "MAGNETIC_MOMENT",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "Bohr magneton"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Oe"
+        }
+      ],
+      "type": "MAGNETIC_FIELD_STRENGTH",
+      "system": "CGS",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "Oersted"
+        }
+      ]
     }
   ]
 }
