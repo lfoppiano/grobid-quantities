@@ -40,9 +40,9 @@ Demo/console web app is then accessible at ``http://localhost:8060``
 
 Using ``curl`` POST/GET requests:
 ::
-  curl -X POST -d "text=I've lost one minute." localhost:8060/service/processQuantityText
+  curl -X POST -d "text=I've lost two minutes." localhost:8060/service/processQuantityText
 
-  curl -GET --data-urlencode "text=I've lost one minute." localhost:8060/service/processQuantityText
+  curl -GET --data-urlencode "text=I've lost two minutes." localhost:8060/service/processQuantityText
 
 Note that the model is designed and trained to work at *paragraph level*.
 It means that, for the moment, the expected input to the parser is a paragraph or a text segment of similar size, not a complete document.
