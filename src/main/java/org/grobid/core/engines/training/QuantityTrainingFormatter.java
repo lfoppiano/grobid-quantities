@@ -75,49 +75,63 @@ public class QuantityTrainingFormatter {
                 Quantity quantityLeast = measurement.getQuantityLeast();
                 Quantity quantityMost = measurement.getQuantityMost();
 
-                if ((quantityLeast == null) || (quantityMost == null))
+                if ((quantityLeast == null) && (quantityMost == null))
                     continue;
 
-                int startQL = quantityLeast.getOffsetStart();
-                int endQL = quantityLeast.getOffsetEnd();
-
-                Element numNodeL = teiElement("num");
-
-                if (quantityLeast.getRawValue() != null)
-                    numNodeL.addAttribute(new Attribute("atLeast", quantityLeast.getRawValue().trim()));
-                else
-                    numNodeL.addAttribute(new Attribute("atLeast", "?"));
-                numNodeL.appendChild(text.substring(startQL, endQL));
-
-                Unit unitL = quantityLeast.getRawUnit();
+                int startQL = -1;
+                int endQL = -1;
                 int startUL = -1;
                 int endUL = -1;
-
                 Element unitElement = null;
-                if (unitL != null) {
-                    unitElement = unitToElement(text, unitL);
-                    startUL = unitL.getOffsetStart();
-                    endUL = unitL.getOffsetEnd();
+                Element numNodeL = null;
+                Unit unitL = null;
+
+                if (quantityLeast != null) {
+                    startQL = quantityLeast.getOffsetStart();
+                    endQL = quantityLeast.getOffsetEnd();
+
+                    numNodeL = teiElement("num");
+
+                    if (quantityLeast.getRawValue() != null)
+                        numNodeL.addAttribute(new Attribute("atLeast", quantityLeast.getRawValue().trim()));
+                    else
+                        numNodeL.addAttribute(new Attribute("atLeast", "?"));
+                    numNodeL.appendChild(text.substring(startQL, endQL));
+
+                    unitL = quantityLeast.getRawUnit();
+                    if (unitL != null) {
+                        unitElement = unitToElement(text, unitL);
+                        startUL = unitL.getOffsetStart();
+                        endUL = unitL.getOffsetEnd();
+                    }
                 }
 
-                int startQM = quantityMost.getOffsetStart();
-                int endQM = quantityMost.getOffsetEnd();
-                Unit unitM = quantityMost.getRawUnit();
-
-                Element numNodeM = teiElement("num");
-                if (quantityMost.getRawValue() != null)
-                    numNodeM.addAttribute(new Attribute("atMost", quantityMost.getRawValue().trim()));
-                else
-                    numNodeM.addAttribute(new Attribute("atMost", "?"));
-                numNodeM.appendChild(text.substring(startQM, endQM));
-
+                int startQM = -1;
+                int endQM = -1;
                 int startUM = -1;
                 int endUM = -1;
                 Element unitElementM = null;
-                if (unitM != null) {
-                    unitElementM = unitToElement(text, unitM);
-                    startUM = unitM.getOffsetStart();
-                    endUM = unitM.getOffsetEnd();
+                Element numNodeM = null;
+                Unit unitM = null;
+
+                if (quantityMost != null) {
+                    startQM = quantityMost.getOffsetStart();
+                    endQM = quantityMost.getOffsetEnd();
+
+                    unitM = quantityMost.getRawUnit();
+
+                    numNodeM = teiElement("num");
+                    if (quantityMost.getRawValue() != null)
+                        numNodeM.addAttribute(new Attribute("atMost", quantityMost.getRawValue().trim()));
+                    else
+                        numNodeM.addAttribute(new Attribute("atMost", "?"));
+                    numNodeM.appendChild(text.substring(startQM, endQM));
+
+                    if (unitM != null) {
+                        unitElementM = unitToElement(text, unitM);
+                        startUM = unitM.getOffsetStart();
+                        endUM = unitM.getOffsetEnd();
+                    }
                 }
 
                 int initPos = pos;
@@ -256,6 +270,7 @@ public class QuantityTrainingFormatter {
                 measure.addAttribute(new Attribute("type", "list"));
                 List<Quantity> quantities = measurement.getQuantityList();
                 int initPos = pos;
+                boolean firstQ = true;
                 for (Quantity quantity : quantities) {
                     int startQ = quantity.getOffsetStart();
                     int endQ = quantity.getOffsetEnd();
@@ -275,12 +290,16 @@ public class QuantityTrainingFormatter {
 
                     int firstPos = pos;
                     while (pos < text.length()) {
-                        if(pos > endQ && pos < startU) {
+                        if (pos > endQ && pos < startU) {
                             break;
                         }
                         if (pos == startQ) {
                             if (initPos == firstPos) {
-                                p.appendChild(text.substring(firstPos, startQ));
+                                if (firstQ) {
+                                    p.appendChild(text.substring(firstPos, startQ));
+                                } else {
+                                    measure.appendChild(text.substring(firstPos, startQ));
+                                }
                             } else {
                                 measure.appendChild(text.substring(initPos, startQ));
                             }
@@ -305,6 +324,10 @@ public class QuantityTrainingFormatter {
                         }
 
                         pos++;
+                    }
+
+                    if (firstQ) {
+                        firstQ = false;
                     }
                 }
             }

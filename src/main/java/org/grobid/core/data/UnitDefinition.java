@@ -13,6 +13,13 @@ import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
  * Created by lfoppiano on 18.02.16.
  */
 public class UnitDefinition {
+
+    public UnitDefinition() {}
+
+    public UnitDefinition(UnitUtilities.Unit_Type type, UnitUtilities.System_Type system) {
+        this.type = type;
+        this.system = system;
+    }
     // usual full names for the unit, e.g. metre, meter
     private List<String> names = null;
 

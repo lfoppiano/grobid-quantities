@@ -33,6 +33,15 @@ public class Unit {
         this.offsets = offsetPosition;
     }
 
+    public Unit(String rawName, int offsetStart, int offsetEnd) {
+        this(rawName, new OffsetPosition(offsetStart, offsetEnd));
+    }
+
+    public Unit(String rawName, int offsetStart, int offsetEnd, UnitDefinition unitDefinition) {
+        this(rawName, new OffsetPosition(offsetStart, offsetEnd));
+        this.unitDefinition = unitDefinition;
+    }
+
     public String getRawName() {
         return rawName;
     }

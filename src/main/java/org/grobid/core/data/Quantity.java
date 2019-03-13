@@ -45,6 +45,16 @@ public class Quantity implements Comparable<Quantity> {
         this.rawUnit = rawUnit;
     }
 
+    public Quantity(String rawValue, Unit rawUnit, OffsetPosition offsetPosition) {
+        this(rawValue, rawUnit);
+        this.offsets = offsetPosition;
+    }
+
+    public Quantity(String rawValue, Unit rawUnit, int offsetStart, int offsetEnd) {
+        this(rawValue, rawUnit, new OffsetPosition(offsetStart, offsetEnd));
+    }
+
+
     public UnitUtilities.Unit_Type getType() {
         if (isNormalized()) {
             return getNormalizedQuantity().getType();
