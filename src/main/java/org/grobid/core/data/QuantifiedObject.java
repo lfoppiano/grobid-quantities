@@ -3,19 +3,17 @@ package org.grobid.core.data;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import org.grobid.core.utilities.OffsetPosition;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Class for representing the quantitfied object/substance. For  given measurement, the 
- * quantitfied object/substance is the entity which is measured. 
+ * Class for representing the quantified object/substance. For  given measurement, the
+ * quantified object/substance is the entity which is measured.
  * The quantified object is described with a raw string - the surface form of its mention
- * in the text, a normalized form and optionally an entity object resulting from the 
- * disambiguation against a knowledge base - usually Wikipedia/Wikidata.  
+ * in the text, a normalized form and optionally an entity object resulting from the
+ * disambiguation against a knowledge base - usually Wikipedia/Wikidata.
  *
  * @author Patrice Lopez
  */
 public class QuantifiedObject {
+    private String id = null;
     private String rawName = null;
     private String normalizedName = null;
     private OffsetPosition offsets = null;
@@ -29,8 +27,13 @@ public class QuantifiedObject {
     }
 
     public QuantifiedObject(String rawName, String normalizedName) {
-        this.rawName = rawName;
+        this(rawName);
         this.normalizedName = normalizedName;
+    }
+
+    public QuantifiedObject(String rawName, String normalisedName, String id) {
+        this(rawName, normalisedName);
+        this.id = id;
     }
 
     public String getRawName() {
@@ -127,5 +130,13 @@ public class QuantifiedObject {
 
         json.append(" }");
         return json.toString();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

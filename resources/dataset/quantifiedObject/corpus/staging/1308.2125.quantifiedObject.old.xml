@@ -1,11 +1,11 @@
 <text xmlns="http://www.tei-c.org/ns/1.0">
     <!--
-     Conmments:
+     Comments:
         - Sentences like:
             o "The shifts are plotted as percentages in Figs. 1(b)−1(d) for the 20%, 40%, and 62.5% H-doped samples, respectively."
             o "One can find the largest shift for the 40% H-doped samples which mark the optimal Tc."
 
-            is H-doped the quantified object? here we refer perhaps on the % of doping of the H ... for now is not annotated...ß
+            is H-doped the quantified object? here we refer perhaps on the % of doping of the H ... for now is not annotated...
 
 
     -->

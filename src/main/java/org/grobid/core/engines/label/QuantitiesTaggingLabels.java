@@ -33,6 +33,10 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
     private static final String VALUE_VALUE_POW_LABEL = "<pow>";
     private static final String VALUE_OTHER_LABEL = QUANTITY_OTHER_LABEL;
 
+    private static final String QUANTIFIED_OBJECT_LEFT_LABEL = "<quantifiedObject_left>";
+    private static final String QUANTIFIED_OBJECT_RIGHT_LABEL = "<quantifiedObject_right>";
+    private static final String QUANTIFIED_OBJECT_OTHER_LABEL = QUANTITY_OTHER_LABEL;
+
     public static final TaggingLabel QUANTITY_VALUE_ATOMIC = new TaggingLabelImpl(QuantitiesModels.QUANTITIES, QUANTITY_VALUE_ATOMIC_LABEL);
     public static final TaggingLabel QUANTITY_VALUE_LEAST = new TaggingLabelImpl(QuantitiesModels.QUANTITIES, QUANTITY_VALUE_LEAST_LABEL);
     public static final TaggingLabel QUANTITY_VALUE_MOST = new TaggingLabelImpl(QuantitiesModels.QUANTITIES, QUANTITY_VALUE_MOST_LABEL);
@@ -55,6 +59,10 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
     public static final TaggingLabel VALUE_VALUE_BASE = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_VALUE_BASE_LABEL);
     public static final TaggingLabel VALUE_VALUE_POW = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_VALUE_POW_LABEL);
     public static final TaggingLabel VALUE_VALUE_OTHER = new TaggingLabelImpl(QuantitiesModels.VALUES, VALUE_OTHER_LABEL);
+
+    public static final TaggingLabel QUANTIFIED_OBJECT_LEFT = new TaggingLabelImpl(QuantitiesModels.QUANTIFIED_OBJECT, QUANTIFIED_OBJECT_LEFT_LABEL);
+    public static final TaggingLabel QUANTIFIED_OBJECT_RIGHT = new TaggingLabelImpl(QuantitiesModels.QUANTIFIED_OBJECT, QUANTIFIED_OBJECT_RIGHT_LABEL);
+    public static final TaggingLabel QUANTIFIED_OBJECT_OTHER = new TaggingLabelImpl(QuantitiesModels.QUANTIFIED_OBJECT, QUANTIFIED_OBJECT_OTHER_LABEL);
 
     static {
         //Quantity
@@ -83,5 +91,9 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
         register(VALUE_VALUE_POW);
         register(VALUE_VALUE_OTHER);
 
+        //quantified object
+        register(QUANTIFIED_OBJECT_LEFT);
+        register(QUANTIFIED_OBJECT_RIGHT);
+        register(QUANTIFIED_OBJECT_OTHER);
     }
 }

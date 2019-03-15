@@ -301,17 +301,14 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     // page break should be a distinct feature
                     labeled.add(new Pair<>("@newpage", null));
                 } else {
-                    String content = tok;
                     int i = 0;
-                    if (content.length() > 0) {
-                        if (begin && (!currentTag.equals("<other>")) && (!rangeBaseEncountered || !beginRangeBaseEncountered) ) {
-                            labeled.add(new Pair<>(content, "I-" + currentTag));
-                            if (rangeBaseEncountered)
-                                beginRangeBaseEncountered = true;
-                            begin = false;
-                        } else {
-                            labeled.add(new Pair<>(content, currentTag));
-                        }
+                    if (begin && (!currentTag.equals("<other>")) && (!rangeBaseEncountered || !beginRangeBaseEncountered) ) {
+                        labeled.add(new Pair<>(tok, "I-" + currentTag));
+                        if (rangeBaseEncountered)
+                            beginRangeBaseEncountered = true;
+                        begin = false;
+                    } else {
+                        labeled.add(new Pair<>(tok, currentTag));
                     }
                 }
                 begin = false;

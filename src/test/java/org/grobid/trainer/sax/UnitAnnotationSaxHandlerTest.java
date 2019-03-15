@@ -15,9 +15,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 
-/**
- * Created by lfoppiano on 21.02.16.
- */
 public class UnitAnnotationSaxHandlerTest {
 
     private UnitAnnotationSaxHandler target;
@@ -30,7 +27,7 @@ public class UnitAnnotationSaxHandlerTest {
 
     @Test
     public void testHandler1() throws Exception {
-        InputStream is = this.getClass().getResourceAsStream("/xml/trainingdata1.xml");
+        InputStream is = this.getClass().getResourceAsStream("trainingdata.sample.units.1.xml");
 
         SAXParser p = spf.newSAXParser();
         p.parse(is, target);
@@ -45,7 +42,7 @@ public class UnitAnnotationSaxHandlerTest {
 
     @Test
     public void testHandler2() throws Exception {
-        InputStream is = this.getClass().getResourceAsStream("/xml/trainingdata2.xml");
+        InputStream is = this.getClass().getResourceAsStream("trainingdata.sample.units.2.xml");
 
         SAXParser p = spf.newSAXParser();
         p.parse(is, target);
