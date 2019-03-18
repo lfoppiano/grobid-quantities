@@ -1,5 +1,6 @@
 package org.grobid.core.analyzers;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lang.Language;
 
@@ -77,6 +78,7 @@ public class QuantityAnalyzer implements Analyzer {
     public List<LayoutToken> tokenizeWithLayoutToken(String text) {
         List<LayoutToken> result = new ArrayList<>();
         StringTokenizer st = new StringTokenizer(text, DELIMITERS, true);
+        int offset = 0;
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
             // in addition we split "letter" characters and digits
@@ -84,6 +86,8 @@ public class QuantityAnalyzer implements Analyzer {
             for (int i = 0; i < subtokens.length; i++) {
                 LayoutToken layoutToken = new LayoutToken();
                 layoutToken.setText(subtokens[i]);
+                layoutToken.setOffset(offset);
+                offset += subtokens[i].length();
                 result.add(layoutToken);
             }
         }
@@ -102,12 +106,12 @@ public class QuantityAnalyzer implements Analyzer {
     public List<LayoutToken> retokenizeLayoutTokens(List<LayoutToken> tokens) {
         List<LayoutToken> result = new ArrayList<>();
         for (LayoutToken token : tokens) {
-            result.addAll(tokenize(token));
+            result.addAll(tokenize(token, token.getOffset()));
         }
         return result;
     }
 
-    public List<LayoutToken> tokenize(LayoutToken chunk) {
+    public List<LayoutToken> tokenize(LayoutToken chunk, int startingIndex) {
         List<LayoutToken> result = new ArrayList<>();
         String text = chunk.getText();
         StringTokenizer st = new StringTokenizer(text, DELIMITERS, true);
@@ -119,6 +123,8 @@ public class QuantityAnalyzer implements Analyzer {
                 LayoutToken theChunk = new LayoutToken(chunk); // deep copy
                 theChunk.setText(subtokens[i]);
                 result.add(theChunk);
+                theChunk.setOffset(startingIndex);
+                startingIndex+= StringUtils.length(theChunk.getText());
             }
         }
         return result;

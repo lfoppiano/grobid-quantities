@@ -2,7 +2,7 @@ package org.grobid.core.main.batch;
 
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.engines.QuantityParser;
-import org.grobid.core.engines.training.QuantityParserTrainingData;
+import org.grobid.core.engines.training.QuantityTrainingData;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidProperties;
@@ -168,14 +168,14 @@ public class QuantityMain {
 
             int nb = 0;
             QuantityParser quantityParser = QuantityParser.getInstance();
-            QuantityParserTrainingData quantityParserTrainingData = new QuantityParserTrainingData(quantityParser);
+            QuantityTrainingData quantityTrainingData = new QuantityTrainingData(quantityParser);
             
             long time = System.currentTimeMillis();
 
             if (gbdArgs.getProcessMethodName().equals("processQuantities")) {
                 nb = quantityParser.batchProcess(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), gbdArgs.isRecursive());
             } else if (gbdArgs.getProcessMethodName().equals("createTrainingQuantities")) {
-                nb = quantityParserTrainingData.createTrainingBatch(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), -1);
+                nb = quantityTrainingData.createTrainingBatch(gbdArgs.getPath2Input(), gbdArgs.getPath2Output(), -1);
             } else if(gbdArgs.getProcessMethodName().equals("generateTrainingUnits")){
                 UnitTrainingDataGenerator unitTrainingDataGenerator = new UnitTrainingDataGenerator();
                 unitTrainingDataGenerator.generateData(gbdArgs.getPath2Input(), gbdArgs.getPath2Output());

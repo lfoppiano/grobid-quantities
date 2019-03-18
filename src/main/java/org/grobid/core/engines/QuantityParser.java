@@ -100,7 +100,7 @@ public class QuantityParser extends AbstractParser {
         List<LayoutToken> tokens = QuantityAnalyzer.getInstance().retokenizeLayoutTokens(layoutTokens);
 
         //Normalisation
-        List<LayoutToken> layoutTokenNormalised = layoutTokens.stream().map(layoutToken -> {
+        List<LayoutToken> layoutTokenNormalised = tokens.stream().map(layoutToken -> {
                     layoutToken.setText(UnicodeUtil.normaliseText(layoutToken.getText()));
 
                     return layoutToken;

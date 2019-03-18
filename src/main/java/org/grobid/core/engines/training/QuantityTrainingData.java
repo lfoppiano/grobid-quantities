@@ -26,17 +26,15 @@ import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 
-public class QuantityParserTrainingData {
-    private static final Logger LOGGER = LoggerFactory.getLogger(QuantityParserTrainingData.class);
+public class QuantityTrainingData {
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuantityTrainingData.class);
 
     private QuantityTrainingFormatter quantityTrainingFormatter = null;
     private UnitTrainingFormatter unitTrainingFormatter = null;
@@ -45,11 +43,11 @@ public class QuantityParserTrainingData {
 
     private QuantityParser quantityParser;
 
-    public QuantityParserTrainingData() {
+    public QuantityTrainingData() {
         this(QuantityParser.getInstance());
     }
 
-    public QuantityParserTrainingData(QuantityParser parser) {
+    public QuantityTrainingData(QuantityParser parser) {
         quantityTrainingFormatter = new QuantityTrainingFormatter();
         unitTrainingFormatter = new UnitTrainingFormatter();
         valueTrainingFormatter = new ValueTrainingFormatter();

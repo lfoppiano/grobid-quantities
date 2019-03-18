@@ -1,7 +1,5 @@
 package org.grobid.core.engines.training;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.grobid.core.engines.QuantityParser;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
@@ -10,16 +8,14 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
+public class QuantityTrainingDataTest {
 
-public class QuantityParserTrainingDataTest {
-
-    private QuantityParserTrainingData target;
+    private QuantityTrainingData target;
 
     @Before
     public void setUp() throws Exception {
         LibraryLoader.load();
-        target = new QuantityParserTrainingData(QuantityParser.getInstance());
+        target = new QuantityTrainingData(QuantityParser.getInstance());
 
     }
 
