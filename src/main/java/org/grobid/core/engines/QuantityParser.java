@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -143,7 +142,7 @@ public class QuantityParser extends AbstractParser {
             }
 
             if (!disableSubstanceParser) {
-                localMeasurements = substanceParser.parseSubstance(layoutTokenNormalised, localMeasurements);
+                localMeasurements = substanceParser.process(layoutTokenNormalised, localMeasurements);
             } else {
                 LOGGER.warn("Substance parser disabled, skpping it. ");
             }

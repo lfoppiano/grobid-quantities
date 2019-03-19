@@ -1,7 +1,13 @@
 package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.sun.scenario.effect.Offset;
+import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for representing the quantified object/substance. For  given measurement, the
@@ -17,7 +23,10 @@ public class QuantifiedObject {
     private String rawName = null;
     private String normalizedName = null;
     private OffsetPosition offsets = null;
-    //private NerdEntity = null;
+    private List<LayoutToken> layoutTokens = new ArrayList<>();
+    private List<BoundingBox> boundingBoxes = new ArrayList<>();
+    private Attachment attachment;
+
 
     public QuantifiedObject() {
     }
@@ -30,6 +39,21 @@ public class QuantifiedObject {
         this(rawName);
         this.normalizedName = normalizedName;
     }
+
+    public QuantifiedObject(String rawName, String normalizedName, OffsetPosition offsets) {
+        this(rawName, normalizedName);
+        this.offsets = offsets;
+    }
+
+    public QuantifiedObject(String rawName, String normalizedName, int offsetStart, int offsetEnd) {
+        this(rawName, normalizedName, new OffsetPosition(offsetStart, offsetEnd));
+    }
+
+    public QuantifiedObject(String rawName, String normalizedName, int offsetStart, int offsetEnd, Attachment attachment) {
+        this(rawName, normalizedName, new OffsetPosition(offsetStart, offsetEnd));
+        this.attachment = attachment;
+    }
+
 
     public QuantifiedObject(String rawName, String normalisedName, String id) {
         this(rawName, normalisedName);
@@ -138,5 +162,34 @@ public class QuantifiedObject {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public List<LayoutToken> getLayoutTokens() {
+        return layoutTokens;
+    }
+
+    public void setLayoutTokens(List<LayoutToken> layoutTokens) {
+        this.layoutTokens = layoutTokens;
+    }
+
+    public List<BoundingBox> getBoundingBoxes() {
+        return boundingBoxes;
+    }
+
+    public void setBoundingBoxes(List<BoundingBox> boundingBoxes) {
+        this.boundingBoxes = boundingBoxes;
+    }
+
+    public Attachment getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
+
+    public enum Attachment {
+        LEFT,
+        RIGHT
     }
 }

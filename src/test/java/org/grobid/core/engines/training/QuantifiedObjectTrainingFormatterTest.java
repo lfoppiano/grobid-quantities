@@ -79,14 +79,10 @@ public class QuantifiedObjectTrainingFormatterTest {
         unit.setOffsetStart(16);
         unit.setOffsetEnd(21);
 
-        final Quantity quantityBase = new Quantity("10", unit);
-        quantityBase.setOffsetStart(8);
-        quantityBase.setOffsetEnd(10);
+        final Quantity quantityBase = new Quantity("10", unit, 8, 10);
         measurement.setQuantityLeast(quantityBase);
 
-        final Quantity quantityRange = new Quantity("2", unit);
-        quantityRange.setOffsetStart(14);
-        quantityRange.setOffsetEnd(15);
+        final Quantity quantityRange = new Quantity("2", unit, 14, 15);
         measurement.setQuantityMost(quantityRange);
 
         final QuantifiedObject potatoes = new QuantifiedObject("potatoes");
@@ -256,21 +252,11 @@ public class QuantifiedObjectTrainingFormatterTest {
         List<Measurement> measurementList = new ArrayList<>();
         Measurement measurement = new Measurement();
         measurement.setType(UnitUtilities.Measurement_Type.CONJUNCTION);
-        final Unit unit = new Unit("grams");
-        unit.setOffsetStart(20);
-        unit.setOffsetEnd(25);
+        final Unit unit = new Unit("grams", 20, 25);
 
-        final Quantity quantity1 = new Quantity("1", unit);
-        quantity1.setOffsetStart(8);
-        quantity1.setOffsetEnd(9);
-
-        final Quantity quantity2 = new Quantity("5", unit);
-        quantity2.setOffsetStart(11);
-        quantity2.setOffsetEnd(12);
-
-        final Quantity quantity3 = new Quantity("12", unit);
-        quantity3.setOffsetStart(17);
-        quantity3.setOffsetEnd(19);
+        final Quantity quantity1 = new Quantity("1", unit, 8, 9);
+        final Quantity quantity2 = new Quantity("5", unit, 11, 12);
+        final Quantity quantity3 = new Quantity("12", unit, 17, 19);
 
         List<Quantity> quantityList = new ArrayList<>();
         quantityList.add(quantity1);

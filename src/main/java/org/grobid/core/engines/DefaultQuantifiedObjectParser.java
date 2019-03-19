@@ -20,7 +20,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultQuantifiedObjectParser.class);
 
     @Override
-    public List<Measurement> parseSubstance(List<LayoutToken> tokens, List<Measurement> measurements) {
+    public List<Measurement> process(List<LayoutToken> tokens, List<Measurement> measurements) {
         if (isEmpty(measurements))
             return null;
         try {

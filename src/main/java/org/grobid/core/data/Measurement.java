@@ -2,6 +2,8 @@ package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.util.BufferRecyclers;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.utilities.UnitUtilities;
 
@@ -284,6 +286,19 @@ public class Measurement {
         json.append(" }");
         return json.toString();
     }
+
+//    /**
+//     * @return the measurement as a list of offsets ordered in ascending values. This is calculated from the
+//     * raw values of quantity and units.
+//     */
+//    public List<Pair<Integer, Integer>> getRawValuesOffsetList() {
+//        List<Pair<Integer, Integer>> list = new ArrayList<>();
+//
+//        if(UnitUtilities.Measurement_Type.VALUE.equals(type)) {
+//            list.addAll(new ImmutablePair<>(quantityAtomic.getOffsetStart(), quantityAtomic.getOffsetEnd()));
+//        }
+//
+//    }
 
     /*@Override
     public int compareTo(Measurement theMeasurement) {
