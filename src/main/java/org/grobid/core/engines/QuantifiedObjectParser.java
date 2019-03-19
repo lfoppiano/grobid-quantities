@@ -104,6 +104,9 @@ public class QuantifiedObjectParser extends AbstractParser {
     }
 
     public List<Measurement> attachQuantifiedObjects(List<QuantifiedObject> quantifiedObjects, List<Measurement> measurements) {
+        if(isEmpty(quantifiedObjects))
+            return measurements;
+
         int indexQuantifiedObject = 0;
         QuantifiedObject currentQuantifiedObject = quantifiedObjects.get(indexQuantifiedObject);
 
@@ -181,10 +184,10 @@ public class QuantifiedObjectParser extends AbstractParser {
 
                 quantifiedObjects.add(quantifiedObject);
 
-//            } else if (clusterLabel.equals(QUANTIFIED_OBJECT_OTHER)) {
+            } else if (clusterLabel.equals(QUANTIFIED_OBJECT_OTHER)) {
 
             } else {
-                LOGGER.error("Warning: unexpected label in quantified object parser: " + clusterLabel.getLabel() + " for " + clusterContent);
+                LOGGER.error("Unexpected label in quantified object parser: " + clusterLabel.getLabel() + " for " + clusterContent);
             }
         }
 

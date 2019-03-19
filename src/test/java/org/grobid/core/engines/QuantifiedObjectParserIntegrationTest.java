@@ -10,6 +10,7 @@ import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -30,6 +31,23 @@ public class QuantifiedObjectParserIntegrationTest {
 
         target = new QuantifiedObjectParser();
     }
+
+    @Ignore("Not a unit test ;-) ")
+    @Test
+    public void testParser() throws Exception {
+//        List<LayoutToken> tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken("A 20kg ingot is made in a high frequency induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C.");
+        List<LayoutToken> tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken("In all three cases, the superconducting transition temp- erature (TC) is found to be around T c ∼ 23 K. For x = 12.3 we have a y = 23.");
+
+        List<Measurement> measurements = QuantityParser.getInstance(true).process(tokens);
+
+        List<Measurement> measurementList = target.process(tokens, measurements);
+
+//        measurementList.stream().forEach(System.out::println);
+
+
+        measurementList.stream().filter(m -> m.getQuantifiedObject() != null).forEach(System.out::println);
+    }
+
 
     @Test
     public void testAttachQuantifiedObjects() throws Exception {
