@@ -1,6 +1,8 @@
 package org.grobid.trainer.stax;
 
 import com.ctc.wstx.stax.WstxInputFactory;
+import com.google.common.collect.Iterables;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.codehaus.stax2.XMLStreamReader2;
 import org.grobid.core.exceptions.GrobidException;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -111,6 +114,26 @@ public class QuantifiedObjectAnnotationStaxHandlerTest {
         assertThat(quantifiedObjects.count(), is(60L));
         assertThat(measures.count(), is(102L));
 
+    }
+
+    @Test
+    public void testHandler_handleCorrectlyClosingP() throws Exception {
+        InputStream is = this.getClass().getResourceAsStream("trainingdata.sample.quantifiedObjects.7.xml");
+
+        XMLStreamReader2 reader = (XMLStreamReader2) inputFactory.createXMLStreamReader(is);
+
+        StaxUtils.traverse(reader, target);
+
+        List<Pair<String, String>> labeled = target.getLabeled();
+
+        labeled.stream().map(Pair::toString).forEach(System.out::println);
+
+        assertThat(labeled.stream().filter(p -> StringUtils.equals("\n", p.getLeft())).count(), is(2L));
+        assertThat(labeled.get(26).getLeft(), is("\n"));
+        assertThat(labeled.get(26).getRight(), is(nullValue()));
+
+        assertThat(Iterables.getLast(labeled).getLeft(), is("\n"));
+        assertThat(Iterables.getLast(labeled).getRight(), is(nullValue()));
     }
 
     @Test

@@ -155,6 +155,7 @@ public class QuantifiedObjectAnnotationStaxHandler implements StaxParserContentH
 
             insideQuantifiedObject = false;
         } else if("p".equals(localName)) {
+            writeData();
             labeled.add(new ImmutablePair<>("\n", null));
         }
     }

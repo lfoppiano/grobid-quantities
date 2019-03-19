@@ -38,50 +38,6 @@ public class QuantifiedObjectTrainer extends AbstractTrainer {
         return createCRFPPData(sourcePathLabel, outputPath, null, 1.0);
     }
 
-    @SuppressWarnings({"UnusedParameters"})
-    private void addFeatures(List<Pair<String, String>> texts, Writer writer) {
-
-        int posit = 0;
-        // PL: to be reviewed, unitTokenPositions not used !
-        try {
-            for (Pair<String, String> text : texts) {
-                String token = text.getKey();
-
-                //Unicode normalisation
-                token = UnicodeUtil.normaliseTextAndRemoveSpaces(token);
-
-                String label = text.getValue();
-                if (token.trim().equals("@newline") || isBlank(label)) {
-                    writer.write("\n");
-                    writer.flush();
-                    continue;
-                }
-
-                // If there is a measure, we use the information as additional feature
-                boolean measure = false;
-                if (label.contains("measure")) {
-                    label = "<other>";
-                    measure = true;
-                }
-
-                FeaturesVectorQuantifiedObjects featuresVector =
-                        FeaturesVectorQuantifiedObjects.addFeatures(token, label, measure);
-
-                if (featuresVector.label == null) {
-                    continue;
-                }
-
-                writer.write(featuresVector.printVector());
-                writer.write("\n");
-                writer.flush();
-
-                posit++;
-            }
-        } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
-        }
-    }
-
     @Override
     public int createCRFPPData(File corpusDir, File trainingOutputPath, File evalOutputPath, double splitRatio) {
         int totalExamples = 0;
@@ -123,14 +79,10 @@ public class QuantifiedObjectTrainer extends AbstractTrainer {
 
             LOGGER.info(refFiles.length + " files");
 
-            // get a factory for SAX parser
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-
             String name;
 
+            Writer writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
             for (int n = 0; n < refFiles.length; n++) {
-                Writer writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
-
                 File inputFile = refFiles[n];
                 name = inputFile.getName();
                 LOGGER.info(name);
@@ -142,8 +94,40 @@ public class QuantifiedObjectTrainer extends AbstractTrainer {
 
                 List<Pair<String, String>> labels = parser.getLabeled();
 
-                addFeatures(labels, writer);
+                for (Pair<String, String> text : labels) {
+                    String token = text.getKey();
+
+                    token = UnicodeUtil.normaliseTextAndRemoveSpaces(token);
+
+                    String label = text.getValue();
+                    if (token.trim().equals("@newline") || isBlank(label)) {
+                        writer.write("\n");
+                        writer.flush();
+                        writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
+                        continue;
+                    }
+
+                    // If there is a measure, we use the information as additional feature
+                    boolean measure = false;
+                    if (label.contains("measure")) {
+                        label = "<other>";
+                        measure = true;
+                    }
+
+                    FeaturesVectorQuantifiedObjects featuresVector =
+                            FeaturesVectorQuantifiedObjects.addFeatures(token, label, measure);
+
+                    if (featuresVector.label == null) {
+                        continue;
+                    }
+
+                    writer.write(featuresVector.printVector());
+                    writer.write("\n");
+                    writer.flush();
+
+                }
                 writer.write("\n");
+                totalExamples++;
             }
 
 
