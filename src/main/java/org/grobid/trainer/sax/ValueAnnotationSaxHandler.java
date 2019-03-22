@@ -2,7 +2,6 @@ package org.grobid.trainer.sax;
 
 
 import org.grobid.core.utilities.Pair;
-import org.grobid.trainer.UnitLabeled;
 import org.grobid.trainer.ValueLabeled;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -11,9 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.trim;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * SAX handler for TEI-style annotations. should work for patent PDM and our usual scientific paper encoding.

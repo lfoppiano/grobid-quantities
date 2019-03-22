@@ -92,7 +92,7 @@ public class QuantityTrainingData {
         Element quantifiedObjectNode = teiElement("text");
 
         // for the moment we suppose we have english only...
-        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "lexicon/en"));
 
         // we process the text paragraph by paragraph
         String lines[] = text.split("\n");
@@ -189,7 +189,7 @@ public class QuantityTrainingData {
         Element quantifiedObjectNode = teiElement("text");
 
         // for the moment we suppose we have english only...
-        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "lexicon/en"));
 
         try {
             // get a factory for SAX parser
@@ -267,7 +267,7 @@ public class QuantityTrainingData {
         Element quantifiedObjectNode = teiElement("text");
 
         // for the moment we suppose we have english only...
-        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "en"));
+        quantityNode.addAttribute(new Attribute("xml:lang", "http://www.w3.org/XML/1998/namespace", "lexicon/en"));
 
         try {
             // get a factory for SAX parser
@@ -312,6 +312,12 @@ public class QuantityTrainingData {
     /**
      * Create training data for a list of pdf/text/xml-tei files
      */
+    public int createTrainingBatch(String inputDirectory,
+                                   String outputDirectory) {
+        return createTrainingBatch(inputDirectory, outputDirectory, -1);
+
+    }
+
     @SuppressWarnings({"UnusedParameters"})
     public int createTrainingBatch(String inputDirectory,
                                    String outputDirectory,

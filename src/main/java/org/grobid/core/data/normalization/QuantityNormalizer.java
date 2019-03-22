@@ -1,6 +1,5 @@
 package org.grobid.core.data.normalization;
 
-import com.google.common.collect.ImmutableList;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;

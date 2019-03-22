@@ -1,35 +1,33 @@
 package org.grobid.core.utilities;
 
-import org.grobid.core.data.Sentence;
-import org.grobid.core.data.SentenceParse;
-import org.grobid.core.exceptions.GrobidException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.*;
-import java.util.*;
-
 import com.googlecode.clearnlp.component.srl.CRolesetClassifier;
 import com.googlecode.clearnlp.dependency.AbstractDEPParser;
-import com.googlecode.clearnlp.predicate.AbstractPredIdentifier;
-import com.googlecode.clearnlp.dependency.srl.AbstractSRLabeler;
 import com.googlecode.clearnlp.dependency.DEPTree;
+import com.googlecode.clearnlp.dependency.srl.AbstractSRLabeler;
 import com.googlecode.clearnlp.engine.EngineGetter;
 import com.googlecode.clearnlp.engine.EngineProcess;
 import com.googlecode.clearnlp.morphology.AbstractMPAnalyzer;
+import com.googlecode.clearnlp.nlp.NLPLib;
 import com.googlecode.clearnlp.pos.POSTagger;
+import com.googlecode.clearnlp.predicate.AbstractPredIdentifier;
 import com.googlecode.clearnlp.reader.AbstractReader;
+import com.googlecode.clearnlp.reader.DEPReader;
 import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
 import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
 import com.googlecode.clearnlp.util.UTInput;
 import com.googlecode.clearnlp.util.pair.Pair;
-import com.googlecode.clearnlp.reader.DEPReader;
-
 import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.data.Sentence;
+import org.grobid.core.data.SentenceParse;
+import org.grobid.core.exceptions.GrobidException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // this is for version 1.3.0 of ClearNLP
-import com.googlecode.clearnlp.nlp.NLPLib;
 
 /**
  * Text parsing with ClearNPL, only the first best parse is provided.

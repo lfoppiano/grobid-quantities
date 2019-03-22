@@ -6,12 +6,6 @@ import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.engines.UnitParser;
 import org.grobid.core.lexicon.QuantityLexicon;
 
-import javax.measure.format.ParserException;
-import javax.measure.format.UnitFormat;
-import javax.measure.spi.ServiceProvider;
-import javax.measure.spi.UnitFormatService;
-import javax.swing.text.html.parser.Parser;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

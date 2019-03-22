@@ -1,4 +1,4 @@
 <text xmlns="http://www.tei-c.org/ns/1.0">
     <p>The <quantifiedObject id="car1">artificial robot</quantifiedObject> is weighting <measure type="value" ptr="#car1">20kg</measure>.</p>
-    <p>The <measure type="value" ptr="#rope1">20m</measure> <quantifiedObject id="rope1">rope</quantifiedObject> was tight around a <quantifiedObject id="weight1">weight</quantifiedObject> of <measure type="value" ptr="#weidht1">50kg</measure>.</p>
+    <p>The <measure type="value" ptr="#rope1">20m</measure> <quantifiedObject id="rope1">rope</quantifiedObject> was tight around a <quantifiedObject id="weight1">weight</quantifiedObject> of <measure type="value" ptr="#weight1">50kg</measure>.</p>
 </text>

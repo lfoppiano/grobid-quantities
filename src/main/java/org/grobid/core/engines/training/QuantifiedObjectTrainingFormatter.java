@@ -2,8 +2,6 @@ package org.grobid.core.engines.training;
 
 import nu.xom.Attribute;
 import nu.xom.Element;
-import org.apache.commons.codec.digest.Md5Crypt;
-import org.apache.commons.codec.digest.Sha2Crypt;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.QuantifiedObject;
 import org.grobid.core.data.Quantity;
@@ -13,7 +11,6 @@ import org.grobid.core.utilities.UnitUtilities;
 import java.util.List;
 import java.util.UUID;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 
 public class QuantifiedObjectTrainingFormatter {
