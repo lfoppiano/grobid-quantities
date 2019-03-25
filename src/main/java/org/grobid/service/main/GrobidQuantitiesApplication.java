@@ -1,4 +1,4 @@
-package org.grobid.core.main;
+package org.grobid.service.main;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Module;
@@ -10,7 +10,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.service.QuantitiesServiceModule;
-import org.grobid.service.command.BatchProcessingCommand;
 import org.grobid.service.command.TrainingGenerationCommand;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.slf4j.Logger;

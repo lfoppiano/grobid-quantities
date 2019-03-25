@@ -184,7 +184,7 @@ task mainJar(type: ShadowJar, group: 'onejar') {
 }
 
 shadowJar {
-    mainClassName = 'org.grobid.service.GrobidQuantitiesApplication'
+    mainClassName = 'org.grobid.service.main.GrobidQuantitiesApplication'
     classifier = 'onejar'
     mergeServiceFiles()
     zip64 true
