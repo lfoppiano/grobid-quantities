@@ -70,7 +70,7 @@ public class AnnotationController {
     @Path(PATH_QUANTITY_TEXT)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public String processTextSuperconductors(@FormDataParam("text") String text) {
+    public String processText(@FormDataParam("text") String text) {
 
         MeasurementsResponse response = pdfProcessor.processText(text);
 

@@ -297,11 +297,11 @@ var grobid = (function ($) {
                         });
                     }
                 });
-            }
+            };
             reader.readAsArrayBuffer(document.getElementById("input").files[0]);
 
             xhr.onreadystatechange = function (e) {
-                if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.readyState === 4 && xhr.status === 200) {
                     var response = e.target.response;
                     //var response = JSON.parse(xhr.responseText);
                     //console.log(response);
