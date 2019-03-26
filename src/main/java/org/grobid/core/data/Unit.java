@@ -1,6 +1,7 @@
 package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.util.BufferRecyclers;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
 
@@ -103,7 +104,7 @@ public class Unit {
     }*/
 
     public String toJson() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");

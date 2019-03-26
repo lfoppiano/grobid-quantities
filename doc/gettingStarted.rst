@@ -32,17 +32,20 @@ Run some test:
 Start the service
 ~~~~~~~~~~~~~~~~~
 
-Grobid quantities can be run as a service using jetty:
+Grobid quantities can be run as a service:
 ::
-  ./gradlew appRun
+  ./gradlew run
+
+
+or:
+::
+  java -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
 
 Demo/console web app is then accessible at ``http://localhost:8060``
 
 Using ``curl`` POST/GET requests:
 ::
-  curl -X POST -d "text=I've lost two minutes." localhost:8060/service/processQuantityText
-
-  curl -GET --data-urlencode "text=I've lost two minutes." localhost:8060/service/processQuantityText
+  curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuantityText
 
 Note that the model is designed and trained to work at *paragraph level*.
 It means that, for the moment, the expected input to the parser is a paragraph or a text segment of similar size, not a complete document.
@@ -68,9 +71,11 @@ To run the training:
 ::
   ./gradlew train_units
 
+
 - value model
 ::
    ./gradlew train_values
+
 
 .. For the moment, the default training stop criteria are used. So, the training can be stopped manually after 1000 iterations, simply do a "control-C" to stop
 the training and save the model produced in the latest iteration. 1000 iterations are largely enough.

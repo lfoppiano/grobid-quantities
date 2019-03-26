@@ -1,7 +1,7 @@
 package org.grobid.core.data;
 
-import com.fasterxml.jackson.core.io.*;
-
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.util.BufferRecyclers;
 import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.ArrayList;
@@ -103,7 +103,7 @@ public class UnitDefinition {
     }
 
     public String toJson() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         if (type != null) {
@@ -128,7 +128,7 @@ public class UnitDefinition {
     }
 
     public String toJsonComplete() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");

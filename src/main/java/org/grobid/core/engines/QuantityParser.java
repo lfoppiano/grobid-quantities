@@ -1,39 +1,31 @@
 package org.grobid.core.engines;
 
-import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.StringUtils;
-import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;
-import org.grobid.core.data.*;
+import org.grobid.core.data.Measurement;
+import org.grobid.core.data.Quantity;
+import org.grobid.core.data.Unit;
+import org.grobid.core.data.Value;
 import org.grobid.core.data.normalization.NormalizationException;
 import org.grobid.core.data.normalization.QuantityNormalizer;
-import org.grobid.core.document.Document;
-import org.grobid.core.document.DocumentPiece;
-import org.grobid.core.document.DocumentSource;
-import org.grobid.core.engines.config.GrobidAnalysisConfig;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
-import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabel;
-import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorQuantities;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.lexicon.QuantityLexicon;
-import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
@@ -52,7 +44,6 @@ public class QuantityParser extends AbstractParser {
     private ValueParser valueParser = ValueParser.getInstance();
     private QuantifiedObjectParser substanceParser;
     private QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
-    private EngineParsers parsers;
     private boolean disableSubstanceParser = false;
 
     public static QuantityParser getInstance(boolean disableSubstance) {
@@ -84,11 +75,18 @@ public class QuantityParser extends AbstractParser {
     private QuantityLexicon quantityLexicon = null;
     private MeasurementOperations measurementOperations = null;
 
-    private QuantityParser() {
+    @Inject
+    public QuantityParser() {
         super(QuantitiesModels.QUANTITIES);
         quantityLexicon = QuantityLexicon.getInstance();
         measurementOperations = new MeasurementOperations();
-        parsers = new EngineParsers();
+        instance = this;
+    }
+
+    /** For tests only **/
+    QuantityParser(boolean test) {
+        super(QuantitiesModels.QUANTITIES);
+        measurementOperations = new MeasurementOperations();
     }
 
     public List<Measurement> process(List<LayoutToken> layoutTokens) {
@@ -163,13 +161,13 @@ public class QuantityParser extends AbstractParser {
             return null;
         }
 
-        text = text.replace("\r", " ");
-        text = text.replace("\n", " ");
-        text = text.replace("\t", " ");
+        String textReplaced = text.replace("\r\n", " ");
+        textReplaced = textReplaced.replace("\n", " ");
+        textReplaced = textReplaced.replace("\t", " ");
 
         List<LayoutToken> tokens = null;
         try {
-            tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
+            tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(textReplaced);
         } catch (Exception e) {
             LOGGER.error("fail to tokenize:, " + text, e);
         }
@@ -180,152 +178,6 @@ public class QuantityParser extends AbstractParser {
         return process(tokens);
     }
 
-    public Pair<List<Measurement>, Document> extractQuantitiesPDF(File file) throws IOException {
-        List<Measurement> measurements = new ArrayList<>();
-        Document doc = null;
-        try {
-            GrobidAnalysisConfig config =
-                    new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
-                            .build();
-            DocumentSource documentSource =
-                    DocumentSource.fromPdf(file, config.getStartPage(), config.getEndPage());
-            doc = parsers.getSegmentationParser().processing(documentSource, config);
-
-            // In the following, we process the relevant textual content of the document
-
-            // for refining the process based on structures, we need to filter
-            // segment of interest (e.g. header, body, annex) and possibly apply
-            // the corresponding model to further filter by structure types
-
-            // from the header, we are interested in title, abstract and keywords
-            SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
-            if (documentParts != null) {
-                org.apache.commons.lang3.tuple.Pair<String, List<LayoutToken>> headerStruct = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
-                List<LayoutToken> tokenizationHeader = headerStruct.getRight();//doc.getTokenizationParts(documentParts, doc.getTokenizations());
-                String header = headerStruct.getLeft();
-                String labeledResult = null;
-                if ((header != null) && (header.trim().length() > 0)) {
-                    labeledResult = parsers.getHeaderParser().label(header);
-
-                    BiblioItem resHeader = new BiblioItem();
-                    //parsers.getHeaderParser().processingHeaderSection(false, doc, resHeader);
-                    resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
-
-                    // title
-                    List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
-                    if (titleTokens != null) {
-                        measurements.addAll(process(titleTokens));
-                    }
-
-                    // abstract
-                    List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
-                    if (abstractTokens != null) {
-                        measurements.addAll(process(abstractTokens));
-                    }
-
-                    // keywords
-                    List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
-                    if (keywordTokens != null) {
-                        measurements.addAll(process(keywordTokens));
-                    }
-                }
-            }
-
-            // we can process all the body, in the future figure and table could be the
-            // object of more refined processing
-            documentParts = doc.getDocumentPart(SegmentationLabels.BODY);
-            if (documentParts != null) {
-                org.apache.commons.lang3.tuple.Pair<String, LayoutTokenization> featSeg = parsers.getFullTextParser().getBodyTextFeatured(doc, documentParts);
-
-                String fulltextTaggedRawResult = null;
-                if (featSeg != null) {
-                    String featureText = featSeg.getLeft();
-                    LayoutTokenization layoutTokenization = featSeg.getRight();
-
-                    if (StringUtils.isNotEmpty(featureText)) {
-                        fulltextTaggedRawResult = parsers.getFullTextParser().label(featureText);
-                    }
-
-                    TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, fulltextTaggedRawResult,
-                            layoutTokenization.getTokenization(), true);
-
-                    //Iterate and exclude figures and tables
-                    for (TaggingTokenCluster cluster : Iterables.filter(clusteror.cluster(),
-                            new TaggingTokenClusteror
-                                    .LabelTypeExcludePredicate(TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER,
-                                    TaggingLabels.FIGURE_MARKER, TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL))) {
-
-                        if (cluster.getTaggingLabel().equals(TaggingLabels.FIGURE)) {
-                            //apply the figure model to only get the caption
-                            final Figure processedFigure = parsers.getFigureParser()
-                                    .processing(cluster.concatTokens(), cluster.getFeatureBlock());
-                            measurements.addAll(process(processedFigure.getCaptionLayoutTokens()));
-                        } else if (cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
-                            //apply the table model to only get the caption/description 
-                            final Table processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
-                            measurements.addAll(process(processedTable.getFullDescriptionTokens()));
-                        } else {
-                            final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
-
-                            // extract all the layout tokens from the cluster as a list
-                            List<LayoutToken> tokens = labeledTokensContainers.stream()
-                                    .map(LabeledTokensContainer::getLayoutTokens)
-                                    .flatMap(List::stream)
-                                    .collect(Collectors.toList());
-
-                            measurements.addAll(process(tokens));
-                        }
-
-                    }
-                }
-            }
-
-            // we don't process references (although reference titles could be relevant)
-            // acknowledgement?
-
-            // we can process annexes
-            documentParts = doc.getDocumentPart(SegmentationLabels.ANNEX);
-            if (documentParts != null) {
-                measurements.addAll(processDocumentPart(documentParts, doc));
-            }
-
-        } catch (Exception e) {
-            throw new GrobidException("Cannot process pdf file: " + file.getPath(), e);
-        }
-
-        // for next line, comparable measurement needs to be implemented
-        //Collections.sort(measurements);
-        return new Pair<>(measurements, doc);
-    }
-
-    /**
-     * Process with the quantity model a segment coming from the segmentation model
-     */
-    private List<Measurement> processDocumentPart(SortedSet<DocumentPiece> documentParts,
-                                                  Document doc) {
-        // List<LayoutToken> for the selected segment
-        List<LayoutToken> layoutTokens
-                = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-        return process(layoutTokens);
-    }
-
-    /**
-     * Give the list of textual tokens from a list of LayoutToken
-     */
-    /*private static List<String> getTexts(List<LayoutToken> tokenizations) {
-        List<String> texts = new ArrayList<>();
-        for (LayoutToken token : tokenizations) {
-            if (isNotEmpty(trim(token.getText())) &&
-                    !token.getText().equals(" ") &&
-                    !token.getText().equals("\n") &&
-                    !token.getText().equals("\r") &&
-                    !token.getText().equals("\t") &&
-                    !token.getText().equals("\u00A0")) {
-                texts.add(token.getText());
-            }
-        }
-        return texts;
-    }*/
     public List<Measurement> normalizeMeasurements(List<Measurement> measurements) {
 
         for (Measurement measurement : measurements) {
@@ -434,13 +286,6 @@ public class QuantityParser extends AbstractParser {
         quantityMost.setOffsetEnd(quantityRange.getOffsetEnd());
         return quantityMost;
     }
-
-    public int batchProcess(String inputDirectory,
-                            String outputDirectory,
-                            boolean isRecursive) throws IOException {
-        return 0;
-    }
-
 
     @SuppressWarnings({"UnusedParameters"})
     private String addFeatures(List<LayoutToken> tokens,

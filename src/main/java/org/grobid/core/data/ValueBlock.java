@@ -1,6 +1,7 @@
 package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.util.BufferRecyclers;
 
 /**
  * This class is responsible to hold the structured representation of a value expressed in
@@ -199,7 +200,7 @@ public class ValueBlock {
     }
 
     public String toJson() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
         StringBuilder json = new StringBuilder();
         boolean started = false;
 

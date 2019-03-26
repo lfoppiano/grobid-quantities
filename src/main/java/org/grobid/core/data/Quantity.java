@@ -2,6 +2,7 @@ package org.grobid.core.data;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.util.BufferRecyclers;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
@@ -193,7 +194,7 @@ public class Quantity implements Comparable<Quantity> {
     }
 
     public String toJson() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");
@@ -334,7 +335,6 @@ public class Quantity implements Comparable<Quantity> {
         }
 
         public String toJson() {
-            JsonStringEncoder encoder = JsonStringEncoder.getInstance();
             StringBuilder json = new StringBuilder();
             boolean started = false;
             json.append("{ ");

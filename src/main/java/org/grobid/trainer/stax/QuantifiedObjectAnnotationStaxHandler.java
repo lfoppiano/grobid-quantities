@@ -17,10 +17,7 @@ import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.trim;
@@ -156,7 +153,7 @@ public class QuantifiedObjectAnnotationStaxHandler implements StaxParserContentH
             insideQuantifiedObject = false;
         } else if("p".equals(localName)) {
             writeData();
-            labeled.add(new ImmutablePair<>("\n", null));
+            labeled.add(new ImmutablePair<>("\n", ""));
         }
     }
 

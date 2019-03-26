@@ -62,4 +62,15 @@ public class QuantityAnalyzerTest {
         assertThat(tokens.get(15).getOffset(), is(30));
     }
 
+    @Test
+    public void testSpecialCharacters() throws Exception {
+        String inputText = "was maintained at 8.0±0.02, for which the DIC";
+
+        List<LayoutToken> tokens = target.tokenizeWithLayoutToken(inputText);
+
+        tokens.stream().forEach(System.out::println);
+        assertThat(tokens, hasSize(22));
+
+    }
+
 }

@@ -1,6 +1,7 @@
 package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.core.util.BufferRecyclers;
 import com.google.common.base.MoreObjects;
 import org.grobid.core.utilities.OffsetPosition;
 
@@ -8,6 +9,9 @@ import java.math.BigDecimal;
 
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
+/**
+ * This class represent the parsed value
+ */
 public class Value {
     private String rawValue = "";
     private OffsetPosition offsets = new OffsetPosition();
@@ -89,7 +93,7 @@ public class Value {
     }
 
     public String toJson() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");

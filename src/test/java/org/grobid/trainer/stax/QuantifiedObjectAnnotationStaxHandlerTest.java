@@ -40,7 +40,7 @@ public class QuantifiedObjectAnnotationStaxHandlerTest {
 
 //        labeled.stream().map(Pair::toString).forEach(System.out::println);
 
-        assertThat(target.getLabeled(), hasSize(23));
+        assertThat(target.getLabeled(), hasSize(25));
 
         assertThat(target.getLabeled().get(1).getKey(), is("car"));
         assertThat(target.getLabeled().get(1).getValue(), is("I-<quantifiedObject_right>"));
@@ -130,10 +130,10 @@ public class QuantifiedObjectAnnotationStaxHandlerTest {
 
         assertThat(labeled.stream().filter(p -> StringUtils.equals("\n", p.getLeft())).count(), is(2L));
         assertThat(labeled.get(26).getLeft(), is("\n"));
-        assertThat(labeled.get(26).getRight(), is(nullValue()));
+        assertThat(labeled.get(26).getRight(), is(""));
 
         assertThat(Iterables.getLast(labeled).getLeft(), is("\n"));
-        assertThat(Iterables.getLast(labeled).getRight(), is(nullValue()));
+        assertThat(Iterables.getLast(labeled).getRight(), is(""));
     }
 
     @Test

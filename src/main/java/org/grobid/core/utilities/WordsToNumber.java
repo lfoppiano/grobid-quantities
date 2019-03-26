@@ -1,18 +1,15 @@
 package org.grobid.core.utilities;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
-import java.util.*;
-import java.io.*;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.io.*;
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.*;
 
 /**
  * Convert a number expressed with alphabetical characters into a normalized numerical value.
@@ -25,7 +22,7 @@ public class WordsToNumber {
 
     private static volatile WordsToNumber instance;
 
-    private final String VALUES_PATH = "en/values.json";
+    private final String VALUES_PATH = "lexicon/en/values.json";
 
     private static List<String> bases = null; 
     private static List<String> tens = null; 
