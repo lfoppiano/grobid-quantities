@@ -33,11 +33,7 @@ Start the service
 ~~~~~~~~~~~~~~~~~
 
 Grobid quantities can be run as a service:
-::
-  ./gradlew run
 
-
-or:
 ::
   java -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
 
