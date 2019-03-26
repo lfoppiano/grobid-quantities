@@ -79,7 +79,7 @@ public class QuantitiesEngine {
             }
             GrobidAnalysisConfig config =
                     new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
-                            .analyzer(QuantityAnalyzer.getInstance())
+                            .analyzer(GrobidAnalyzer.getInstance())
                             .build();
             DocumentSource documentSource =
                     DocumentSource.fromPdf(file, config.getStartPage(), config.getEndPage());

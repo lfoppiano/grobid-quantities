@@ -68,9 +68,12 @@ public class QuantityAnalyzerTest {
 
         List<LayoutToken> tokens = target.tokenizeWithLayoutToken(inputText);
 
-        tokens.stream().forEach(System.out::println);
+//        tokens.stream().forEach(System.out::println);
         assertThat(tokens, hasSize(22));
 
+        assertThat(tokens.get(8).getText(), is("0"));
+        assertThat(tokens.get(9).getText(), is("±"));
+        assertThat(tokens.get(10).getText(), is("0"));
     }
 
 }
