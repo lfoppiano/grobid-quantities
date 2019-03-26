@@ -52,29 +52,6 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
     }
 
     public static void main(String[] args) throws Exception {
-        if (ArrayUtils.getLength(args) < 2) {
-            LOGGER.warn("Expected 2 arguments: [0]-server, [1]-<path to config.yaml>. Trying inferring configuration");
-
-            String foundConf = null;
-            for (String p : DEFAULT_CONF_LOCATIONS) {
-                File confLocation = new File(p).getAbsoluteFile();
-                if (confLocation.exists()) {
-                    foundConf = confLocation.getAbsolutePath();
-                    LOGGER.info("Found conf path: " + foundConf);
-                    break;
-                }
-            }
-
-            if (foundConf != null) {
-                LOGGER.warn("Running with default arguments: \"server\" \"" + foundConf + "\"");
-                args = new String[]{"server", foundConf};
-            } else {
-                throw new RuntimeException("No explicit config provided and cannot find in one of the default locations: "
-                        + Arrays.toString(DEFAULT_CONF_LOCATIONS));
-            }
-        }
-
-        LOGGER.info("Configuration file: {}", new File(args[1]).getAbsolutePath());
         new GrobidQuantitiesApplication().run(args);
     }
 }

@@ -131,16 +131,18 @@ public class QuantifiedObjectTrainingFormatter {
                 int initPos = pos;
                 while (pos < text.length()) {
                     if (pos == startQL) {
-                        p.appendChild(text.substring(initPos, startQL));
-                        measure.appendChild(text.substring(startQL, endQL));
                         if (!addedMeasure) {
                             if (quantifiedObject != null) {
                                 measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
 //                                markPosition(measure, quantifiedObject, startQL);
                             }
+                            p.appendChild(text.substring(initPos, startQL));
                             p.appendChild(measure);
                             addedMeasure = true;
+                        } else {
+                            measure.appendChild(text.substring(initPos, startQL));
                         }
+                        measure.appendChild(text.substring(startQL, endQL));
                         pos = endQL;
                         initPos = pos;
                     }

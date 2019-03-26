@@ -5,6 +5,8 @@ import org.grobid.core.data.Measurement;
 import org.grobid.core.data.QuantifiedObject;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.engines.QuantityParser;
+import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
@@ -358,7 +360,36 @@ public class QuantifiedObjectTrainingFormatterTest {
                 "the smallest Doppler amplitude detected so far. These values imply a mass of m2 sin i=<measure type=\"value\">14 M⊕</measure> (earth-masses). " +
                 "This detection represents the discovery of a planet with a mass slightly smaller than that of Uranus, the smallest \"ice giant\" in our Solar System. " +
                 "Whether this planet can be considered an ice giant or a super-earth planet is discussed in the context of the core-accretion and migration models.</p>"));
-        System.out.println(element.toXML());
     }
 
+    @Test
+    public void testTrainingExtraction2() throws Exception {
+        String text = "Before the 1920s the number of stages was usually 15 at most and the riders enjoyed at least one day of rest after each stage.";
+
+        List<Measurement> measurements = new ArrayList<>();
+
+        Measurement measurement1 = new Measurement(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
+        measurement1.setQuantityMost(new Quantity("1920s", null, 11, 16));
+        measurements.add(measurement1);
+
+        Measurement measurement2 = new Measurement(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
+        measurement2.setQuantityLeast(new Quantity("one", new Unit("day", 97, 100), 93, 96));
+        measurement2.setQuantityMost(new Quantity("15", new Unit("day", 97, 100), 50, 52));
+        measurement2.setQuantifiedObject(new QuantifiedObject("rest", "rest", 104, 108));
+        measurements.add(measurement2);
+
+        UUID expectedID = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID);
+        replay(UUID.class);
+
+        final Element element = target.trainingExtraction(measurements, text);
+
+        verify(UUID.class);
+        assertThat(element.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">Before the <measure type=\"interval\">1920s</measure> " +
+                "the number of stages was usually <measure type=\"interval\" ptr=\"#" + expectedID + "\">15 at most and the riders " +
+                "enjoyed at least one day</measure> of <quantifiedObject id=\"" + expectedID + "\">rest</quantifiedObject> " +
+                "after each stage.</p>"));
+
+    }
 }

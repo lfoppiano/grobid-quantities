@@ -249,7 +249,7 @@ public class QuantityTrainingData {
                             .build();
             teiDoc = GrobidFactory.getInstance().createEngine().fullTextToTEIDoc(file, config);
         } catch (Exception e) {
-            throw new GrobidException("Cannot create training data because GROBIL full text model failed on the PDF: " + file.getPath(), e);
+            throw new GrobidException("Cannot create training data because GROBID full text model failed on the PDF: " + file.getPath(), e);
         }
         if (teiDoc == null) {
             return;

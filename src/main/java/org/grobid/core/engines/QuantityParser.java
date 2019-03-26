@@ -83,12 +83,6 @@ public class QuantityParser extends AbstractParser {
         instance = this;
     }
 
-    /** For tests only **/
-    QuantityParser(boolean test) {
-        super(QuantitiesModels.QUANTITIES);
-        measurementOperations = new MeasurementOperations();
-    }
-
     public List<Measurement> process(List<LayoutToken> layoutTokens) {
 
         List<Measurement> measurements = new ArrayList<>();
