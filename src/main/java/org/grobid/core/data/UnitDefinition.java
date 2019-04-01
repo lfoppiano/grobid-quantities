@@ -28,6 +28,9 @@ public class UnitDefinition {
 
     private boolean hasPrefixes = false;
 
+    // If this unit doesn't have any transformation (e.g. pH intended as acidity)
+    private boolean skipNormalisation = false;
+
     private UnitUtilities.Unit_Type type;               // type of measurement
 
     private UnitUtilities.System_Type system;           // type of system of unit
@@ -160,5 +163,13 @@ public class UnitDefinition {
 
         json.append(" }");
         return json.toString();
+    }
+
+    public boolean isSkipNormalisation() {
+        return skipNormalisation;
+    }
+
+    public void setSkipNormalisation(boolean skipNormalisation) {
+        this.skipNormalisation = skipNormalisation;
     }
 }

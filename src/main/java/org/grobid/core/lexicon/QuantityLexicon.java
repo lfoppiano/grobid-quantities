@@ -106,6 +106,11 @@ public class QuantityLexicon {
         unitDefinition.setSystem(system);
         unitDefinition.setType(type);
 
+        JsonNode skipNormalisationNode = node.get("skipNormalisation");
+        if(skipNormalisationNode != null) {
+            unitDefinition.setSkipNormalisation(skipNormalisationNode.asBoolean());
+        }
+
         String defaultRawNotation = "";
         if (node.has("notations")) {
             JsonNode notations = node.get("notations");
@@ -237,7 +242,7 @@ public class QuantityLexicon {
                         for (String word : subSubPieces) {
                             addToUnitTokens(word);
                         }
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         LOGGER.error("fail to tokenize:, " + derivation, e);
                     }
                 }
@@ -254,7 +259,7 @@ public class QuantityLexicon {
                     for (String word : subsubpieces) {
                         addToUnitTokens(word);
                     }
-                } catch(Exception e) {
+                } catch (Exception e) {
                     LOGGER.error("fail to tokenize:, " + inflectedForm, e);
                 }
             }
@@ -277,7 +282,7 @@ public class QuantityLexicon {
                 for (String word : subSubPieces) {
                     addToUnitTokens(word);
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 LOGGER.error("fail to tokenize:, " + derivation, e);
             }
         }

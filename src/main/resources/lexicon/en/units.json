@@ -1948,6 +1948,7 @@
       ],
       "type": "ACIDITY",
       "system": "NON_SI",
+      "skipNormalisation": true,
       "names": [
         {
           "lemma": "power of hydrogen",

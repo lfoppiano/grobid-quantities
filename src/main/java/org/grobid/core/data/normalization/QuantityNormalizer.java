@@ -72,18 +72,25 @@ public class QuantityNormalizer {
         //The unit cannot be found between the known units - we should try to decompose it
         if (parsedUnit.getUnitDefinition() == null) {
             return normalizeUnknownUnitQuantity(quantity);
-        } else if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) {
-
-            //I normalize SI units
-            return normalizeSIQuantities(quantity);
-        } else if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED) {
-
-            //I normalize SI derived units
-            return normalizeSIDerivedQuantities(quantity);
-
         } else {
-            return normalizeNonSIQuantities(quantity);
+            if (!parsedUnit.getUnitDefinition().isSkipNormalisation()) {
+                if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) {
+
+                    //I normalize SI units
+                    return normalizeSIQuantities(quantity);
+                } else if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED) {
+
+                    //I normalize SI derived units
+                    return normalizeSIDerivedQuantities(quantity);
+
+                } else {
+                    return normalizeNonSIQuantities(quantity);
+                }
+            }
         }
+
+        //Bad!
+        return null;
     }
 
     private Quantity.Normalized normalizeUnknownUnitQuantity(Quantity quantity) throws NormalizationException {
