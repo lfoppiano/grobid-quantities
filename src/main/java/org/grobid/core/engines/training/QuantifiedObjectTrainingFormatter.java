@@ -55,26 +55,45 @@ public class QuantifiedObjectTrainingFormatter {
                     endU = unit.getOffsetEnd();
                 }
 
+                boolean addedMeasure = false;
                 int initPos = pos;
 
                 while (pos < text.length()) {
 
                     if (pos == startQ) {
-                        p.appendChild(text.substring(initPos, startQ));
-                        measure.appendChild(text.substring(startQ, endQ));
-                        if (quantifiedObject != null) {
-                            measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
-//                            markPosition(measure, quantifiedObject, startQ);
+                        if (!addedMeasure) {
+                            if (quantifiedObject != null) {
+                                measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                            }
+                            p.appendChild(text.substring(initPos, startQ));
+                            p.appendChild(measure);
+                            addedMeasure = true;
+                        } else {
+                            measure.appendChild(text.substring(initPos, startQ));
                         }
-                        p.appendChild(measure);
+                        measure.appendChild(text.substring(startQ, endQ));
                         pos = endQ;
                         initPos = pos;
                     }
                     if (pos == startU) {
-                        measure.appendChild(text.substring(initPos, startU));
+                        if (!addedMeasure) {
+                            if (quantifiedObject != null) {
+                                measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                            }
+                            p.appendChild(text.substring(initPos, startU));
+                            p.appendChild(measure);
+                            addedMeasure = true;
+                        } else {
+                            measure.appendChild(text.substring(initPos, startU));
+                        }
                         measure.appendChild(text.substring(startU, endU));
                         pos = endU;
                         initPos = pos;
+
+//                        measure.appendChild(text.substring(initPos, startU));
+//                        measure.appendChild(text.substring(startU, endU));
+//                        pos = endU;
+//                        initPos = pos;
                     }
                     if (pos == startO) {
                         p.appendChild(text.substring(initPos, startO));
