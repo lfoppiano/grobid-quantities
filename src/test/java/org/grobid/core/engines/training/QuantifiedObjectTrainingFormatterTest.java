@@ -210,7 +210,7 @@ public class QuantifiedObjectTrainingFormatterTest {
         Element out = target.trainingExtraction(measurementList, text);
 
         verify(UUID.class);
-        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\">10 +- 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
+        assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">10 +- 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
     @Test
@@ -392,4 +392,33 @@ public class QuantifiedObjectTrainingFormatterTest {
                 "after each stage.</p>"));
 
     }
+
+    @Test
+    public void testTrainingExtraction3() throws Exception {
+        String text = "In recent years, there has been an increased interest in investigating the effect of aging on endurance running performances [1][2][3][4][5][6]. Over the last decades, the participation of master athletes (>40 years old) has increased, especially in the longer run distances such as half marathons [2,3], marathons [1][2][3] and ultra-marathons [7][8][9][10]. ";
+
+        List<Measurement> measurements = new ArrayList<>();
+        Measurement measurement1 = new Measurement(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
+        measurement1.setQuantityLeast(new Quantity("40", new Unit("decades", 159, 166), 210, 215));
+        measurement1.setQuantifiedObject(new QuantifiedObject("years", "year", 210, 215));
+        measurements.add(measurement1);
+
+        Measurement measurement2 = new Measurement(UnitUtilities.Measurement_Type.VALUE);
+        measurement2.setAtomicQuantity(new Quantity("half", null, 283, 287));
+        measurement2.setQuantifiedObject(new QuantifiedObject("marathons", "marathon", 288, 297));
+        measurements.add(measurement2);
+
+        UUID expectedID1 = UUID.randomUUID();
+        UUID expectedID2 = UUID.randomUUID();
+        mockStatic(UUID.class);
+        expect(UUID.randomUUID()).andReturn(expectedID1);
+        expect(UUID.randomUUID()).andReturn(expectedID2);
+        replay(UUID.class);
+
+        final Element element = target.trainingExtraction(measurements, text);
+
+        assertThat(element.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">In recent years, there has been an increased interest in investigating the effect of aging on endurance running performances [1][2][3][4][5][6]. Over the last <measure type=\"interval\" ptr=\"#" + expectedID1 + "\">decades, the participation of master athletes (&gt;40 years</measure> old) has increased, especially in the longer run distances such as <measure type=\"value\" ptr=\"#" + expectedID2 + "\">half</measure> <quantifiedObject id=\"" + expectedID2 + "\">marathons</quantifiedObject> [2,3], marathons [1][2][3] and ultra-marathons [7][8][9][10]. </p>"));
+
+    }
+
 }

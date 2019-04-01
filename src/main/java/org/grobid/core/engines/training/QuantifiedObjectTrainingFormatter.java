@@ -87,10 +87,17 @@ public class QuantifiedObjectTrainingFormatter {
                         break;
                     pos++;
                 }
-            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
+            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX ||
+                    measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
                 measure.addAttribute(new Attribute("type", "interval"));
+
                 Quantity quantityLeast = measurement.getQuantityLeast();
                 Quantity quantityMost = measurement.getQuantityMost();
+
+                if(measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
+                    quantityLeast = measurement.getQuantityBase();
+                    quantityMost = measurement.getQuantityRange();
+                }
 
                 if (quantityLeast == null && quantityMost == null)
                     continue;
@@ -163,13 +170,41 @@ public class QuantifiedObjectTrainingFormatter {
                         initPos = pos;
                     }
                     if (pos == startUL) {
-                        measure.appendChild(text.substring(initPos, endUL));
+//                            measure.appendChild(text.substring(initPos, endUL));
+//
+//                            pos = endUL;
+//                            initPos = pos;
 
+                        if (!addedMeasure) {
+                            if (quantifiedObject != null) {
+                                measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                            }
+                            p.appendChild(text.substring(initPos, startUL));
+                            p.appendChild(measure);
+                            addedMeasure = true;
+                        } else {
+                            measure.appendChild(text.substring(initPos, startUL));
+                        }
+                        measure.appendChild(text.substring(startUL, endUL));
                         pos = endUL;
                         initPos = pos;
                     }
                     if ((pos == startUM) && (startUM != startUL)) {
-                        measure.appendChild(text.substring(initPos, endUM));
+//                        measure.appendChild(text.substring(initPos, endUM));
+//                        pos = endUM;
+//                        initPos = pos;
+
+                        if (!addedMeasure) {
+                            if (quantifiedObject != null) {
+                                measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
+                            }
+                            p.appendChild(text.substring(initPos, startUM));
+                            p.appendChild(measure);
+                            addedMeasure = true;
+                        } else {
+                            measure.appendChild(text.substring(initPos, startUM));
+                        }
+                        measure.appendChild(text.substring(startUM, endUM));
                         pos = endUM;
                         initPos = pos;
                     }
@@ -183,92 +218,6 @@ public class QuantifiedObjectTrainingFormatter {
                     if ((pos >= endQL) && (pos >= endQM)
                             && (pos >= endUL) && (pos >= endUM)
                             && (pos >= endO))
-                        break;
-                    pos++;
-                }
-            } else if (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
-                measure.addAttribute(new Attribute("type", "interval"));
-                Quantity quantityBase = measurement.getQuantityBase();
-                Quantity quantityRange = measurement.getQuantityRange();
-
-                if (quantityRange == null)
-                    continue;
-
-                int startQB = -1;
-                int endQB = -1;
-                int startUB = -1;
-                int endUB = -1;
-
-                if (quantityBase != null) {
-                    startQB = quantityBase.getOffsetStart();
-                    endQB = quantityBase.getOffsetEnd();
-                    Unit unitL = quantityBase.getRawUnit();
-
-                    if (unitL != null) {
-                        startUB = unitL.getOffsetStart();
-                        endUB = unitL.getOffsetEnd();
-                    }
-                }
-
-                int startQR = quantityRange.getOffsetStart();
-                int endQR = quantityRange.getOffsetEnd();
-
-                Unit unitR = quantityRange.getRawUnit();
-
-                int startUR = -1;
-                int endUR = -1;
-                if (unitR != null) {
-                    startUR = unitR.getOffsetStart();
-                    endUR = unitR.getOffsetEnd();
-                }
-
-                boolean addedMeasure = false;
-                int initPos = pos;
-                while (pos < text.length()) {
-                    if (pos == startQB) {
-                        p.appendChild(text.substring(initPos, startQB));
-                        measure.appendChild(text.substring(startQB, endQB));
-                        p.appendChild(measure);
-                        addedMeasure = true;
-                        pos = endQB;
-                        initPos = pos;
-                    }
-                    if (pos == startQR) {
-                        if (!addedMeasure) {
-                            p.appendChild(text.substring(initPos, startQR));
-                            if (quantifiedObject != null) {
-                                measure.addAttribute(new Attribute("ptr", "#" + quantifiedObjectID));
-//                                markPosition(measure, quantifiedObject, startQR);
-                            }
-                            p.appendChild(measure);
-                        } else {
-                            measure.appendChild(text.substring(initPos, startQR));
-                        }
-                        measure.appendChild(text.substring(startQR, endQR));
-
-                        pos = endQR;
-                        initPos = pos;
-                    }
-                    if (pos == startUB) {
-                        measure.appendChild(text.substring(initPos, endUB));
-                        pos = endUB;
-                        initPos = pos;
-                    }
-                    if ((pos == startUR) && (startUR != startUB)) {
-                        measure.appendChild(text.substring(initPos, endUR));
-                        pos = endUR;
-                        initPos = pos;
-                    }
-                    if (pos == startO) {
-                        p.appendChild(text.substring(initPos, startO));
-                        p.appendChild(quantifiedObjectElement);
-                        pos = endO;
-                        initPos = pos;
-                    }
-
-                    if ((pos >= endQB) && (pos >= endQR)
-                            && (pos >= endUB) && (pos >= endUR)
-                            && pos >= endO)
                         break;
                     pos++;
                 }
@@ -292,7 +241,7 @@ public class QuantifiedObjectTrainingFormatter {
 
                     while (pos < text.length()) {
                         if (pos == startQ) {
-                            if(!measureAdded) {
+                            if (!measureAdded) {
                                 p.appendChild(text.substring(initPos, startQ));
                             } else {
                                 measure.appendChild(text.substring(initPos, startQ));
