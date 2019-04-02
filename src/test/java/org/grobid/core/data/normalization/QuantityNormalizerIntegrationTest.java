@@ -21,11 +21,9 @@ import static org.easymock.EasyMock.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by lfoppiano on 14.02.16.
- */
+
 @Ignore("we should mock also uom-se .. but for now is better to leave it out so that we can spot other errors")
-public class QuantityNormalizerTest {
+public class QuantityNormalizerIntegrationTest {
 
     private QuantityNormalizer target;
     private UnitNormalizer mockUnitNormalizer;

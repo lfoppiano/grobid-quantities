@@ -17,10 +17,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by lfoppiano on 24/03/16.
- */
-public class UnitNormalizerTest {
+public class UnitNormalizerIntegrationTest {
 
     private UnitNormalizer target;
     private UnitParser mockUnitParser;

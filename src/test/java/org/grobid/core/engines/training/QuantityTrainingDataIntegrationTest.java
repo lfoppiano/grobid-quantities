@@ -8,7 +8,8 @@ import org.junit.Test;
 
 import java.io.File;
 
-public class QuantityTrainingDataTest {
+@Ignore("Not a test")
+public class QuantityTrainingDataIntegrationTest {
 
     private QuantityTrainingData target;
 

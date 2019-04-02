@@ -1,20 +1,29 @@
 package org.grobid.core.features;
 
-import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.easymock.PowerMock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.regex.Pattern;
+
+import static org.easymock.EasyMock.expect;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.powermock.api.easymock.PowerMock.*;
 
-/**
- * Created by lfoppiano on 10.02.16.
- */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(FeatureFactory.class)
 public class FeaturesVectorQuantitiesTest {
+
+    FeatureFactory featureFactoryMock;
 
     @Before
     public void setUp() throws Exception {
-        LibraryLoader.load();
+        featureFactoryMock = PowerMock.createMock(FeatureFactory.class);
+        featureFactoryMock.isPunct = Pattern.compile("^[\\,\\:;\\?\\.]+$");
     }
 
     @Test
@@ -22,8 +31,17 @@ public class FeaturesVectorQuantitiesTest {
         String word = "Colorado";
         String label = "CITY";
 
+        mockStatic(FeatureFactory.class);
+        expect(FeatureFactory.getInstance()).andReturn(featureFactoryMock);
+        expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
+        expect(featureFactoryMock.test_first_capital(word)).andReturn(true);
+        expect(featureFactoryMock.test_number(word)).andReturn(false);
+        expect(FeatureFactory.test_digit(word)).andReturn(false);
+        replay(FeatureFactory.class, featureFactoryMock);
+
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
+        verify(FeatureFactory.class, featureFactoryMock);
         assertThat(target.printVector(), is("Colorado colorado C Co Col Colo o do ado rado INITCAP NODIGIT 0 NOPUNCT Xxxx Xx 1 0 CITY"));
     }
 
@@ -32,8 +50,17 @@ public class FeaturesVectorQuantitiesTest {
         String word = "The";
         String label = "OTHER";
 
+        mockStatic(FeatureFactory.class);
+        expect(FeatureFactory.getInstance()).andReturn(featureFactoryMock);
+        expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
+        expect(featureFactoryMock.test_first_capital(word)).andReturn(true);
+        expect(featureFactoryMock.test_number(word)).andReturn(false);
+        expect(FeatureFactory.test_digit(word)).andReturn(false);
+        replay(FeatureFactory.class, featureFactoryMock);
+
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
+        verify(FeatureFactory.class, featureFactoryMock);
         assertThat(target.printVector(), is("The the T Th The The e he The The INITCAP NODIGIT 0 NOPUNCT Xxx Xx 1 0 OTHER"));
     }
 
@@ -42,8 +69,17 @@ public class FeaturesVectorQuantitiesTest {
         String word = "a";
         String label = "OTHER";
 
+        mockStatic(FeatureFactory.class);
+        expect(FeatureFactory.getInstance()).andReturn(featureFactoryMock);
+        expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
+        expect(featureFactoryMock.test_first_capital(word)).andReturn(false);
+        expect(featureFactoryMock.test_number(word)).andReturn(false);
+        expect(FeatureFactory.test_digit(word)).andReturn(false);
+        replay(FeatureFactory.class, featureFactoryMock);
+
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
+        verify(FeatureFactory.class, featureFactoryMock);
         assertThat(target.printVector(), is("a a a a a a a a a a NOCAPS NODIGIT 1 NOPUNCT x x 1 0 OTHER"));
     }
 }
