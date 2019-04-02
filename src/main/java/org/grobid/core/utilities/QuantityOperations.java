@@ -1,16 +1,16 @@
 package org.grobid.core.utilities;
 
 import com.google.common.collect.Iterables;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 public class QuantityOperations {
 
@@ -39,17 +39,14 @@ public class QuantityOperations {
 
     public static List<Quantity> intervalToList(Quantity quantityL, Quantity quantityM) {
         List<Quantity> out = new ArrayList<>();
-        if(quantityL != null) {
-            out.add(quantityL);
-        }
 
-        if(quantityM != null) {
-            out.add(quantityM);
-        }
+        CollectionUtils.addIgnoreNull(out, quantityL);
+        CollectionUtils.addIgnoreNull(out, quantityM);
+
         return out;
     }
 
-    public static List<Pair<Integer, Integer>> getOffsetList(Measurement measurement) {
+    public static List<Pair<Integer, Integer>> getOffset(Measurement measurement) {
         return toQuantityList(measurement)
                 .stream()
                 .flatMap(q -> getOffsets(q).stream())
@@ -57,8 +54,11 @@ public class QuantityOperations {
                 .collect(Collectors.toList());
     }
 
-    public static List<Pair<Integer, Integer>> getOffsetList(List<Measurement> measurements) {
-        // transform measurement to intervals
+    /**
+     * transform a list measurement into a list of measurement ordered by the lower offset
+     */
+    public static List<Pair<Integer, Integer>> getOffset(List<Measurement> measurements) {
+
         return measurements
                 .stream()
                 .flatMap(m -> toQuantityList(m).stream().flatMap(q -> getOffsets(q).stream()))
@@ -66,16 +66,21 @@ public class QuantityOperations {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Return the list of all offsets in a quantity, from rawValue and rawUnit (if present).
+     */
     public static List<Pair<Integer, Integer>> getOffsets(Quantity quantity) {
 
         List<Pair<Integer, Integer>> offsets = new ArrayList<>();
 
-        if (quantity != null) {
-            offsets.add(new ImmutablePair<>(quantity.getOffsetStart(), quantity.getOffsetEnd()));
-            if (quantity.getRawUnit() != null) {
-                offsets.add(new ImmutablePair<>(quantity.getRawUnit().getOffsetStart(),
-                        quantity.getRawUnit().getOffsetEnd()));
-            }
+        if (quantity == null) {
+            return offsets;
+        }
+
+        offsets.add(new ImmutablePair<>(quantity.getOffsetStart(), quantity.getOffsetEnd()));
+        if (quantity.getRawUnit() != null) {
+            offsets.add(new ImmutablePair<>(quantity.getRawUnit().getOffsetStart(),
+                    quantity.getRawUnit().getOffsetEnd()));
         }
 
         return offsets.stream()
@@ -84,14 +89,48 @@ public class QuantityOperations {
 
     }
 
+    public static List<Pair<Integer, Integer>> getOffsets(List<Quantity> quantities) {
 
-    public static Pair<Integer, Integer> toContainingOffset(List<Pair<Integer, Integer>> offsetList) {
+        List<Pair<Integer, Integer>> offsets = new ArrayList<>();
+
+        if (isEmpty(quantities)) {
+            return offsets;
+        }
+        offsets = quantities.stream().flatMap(q -> {
+            List<ImmutablePair<Integer, Integer>> output = new ArrayList<>();
+            output.add(new ImmutablePair<>(q.getOffsetStart(), q.getOffsetEnd()));
+            if (q.getRawUnit() != null) {
+                output.add(new ImmutablePair<>(q.getRawUnit().getOffsetStart(),
+                        q.getRawUnit().getOffsetEnd()));
+            }
+
+            return output.stream();
+        }).collect(Collectors.toList());
+
+
+        return offsets.stream()
+                .sorted(Comparator.comparing(Pair::getRight))
+                .collect(Collectors.toList());
+
+    }
+
+    /**
+     * Given a list of offsets returns the boundaries these offsets cover
+     */
+    public static Pair<Integer, Integer> getContainingOffset(List<Pair<Integer, Integer>> offsetList) {
         List<Pair<Integer, Integer>> sorted = offsetList
                 .stream()
                 .sorted(Comparator.comparing(Pair::getRight))
                 .collect(Collectors.toList());
 
         return new ImmutablePair<>(sorted.get(0).getLeft(), Iterables.getLast(sorted).getRight());
+    }
+
+    /**
+     * Given a quantity compute the offsets
+     */
+    public static Pair<Integer, Integer> getContainingOffset(Quantity quantity) {
+        return getContainingOffset(getOffsets(quantity));
     }
 
 }

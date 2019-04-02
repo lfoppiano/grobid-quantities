@@ -11,6 +11,6 @@ addons:
       - oracle-java8-installer
 
 
-script: ./gradlew clean build -x test
-#after_success:
-#  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+script: ./gradlew clean unitTest build -x test
+after_success:
+  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report

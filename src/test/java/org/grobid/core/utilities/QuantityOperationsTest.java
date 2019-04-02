@@ -44,7 +44,7 @@ public class QuantityOperationsTest {
         measurement4.setQuantityMost(new Quantity("90", null, 150, 155));
         measurementList.add(measurement4);
 
-        List<Pair<Integer, Integer>> offsetList = QuantityOperations.getOffsetList(measurementList);
+        List<Pair<Integer, Integer>> offsetList = QuantityOperations.getOffset(measurementList);
 
         assertThat(offsetList, hasSize(7));
 
@@ -80,7 +80,7 @@ public class QuantityOperationsTest {
     }
 
     @Test
-    public void testToQuantityList_interval2() throws Exception {
+    public void testToQuantity_interval2() throws Exception {
         Measurement measurement3 = new Measurement();
         measurement3.setType(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
         measurement3.setQuantityMost(new Quantity("90", new Unit("mm", 120, 123), 125, 127));
@@ -89,6 +89,29 @@ public class QuantityOperationsTest {
         List<Quantity> quantities = QuantityOperations.toQuantityList(measurement3);
 
         assertThat(quantities, hasSize(2));
+    }
+
+    @Test
+    public void testToQuantity_range1() throws Exception {
+        Measurement measurement3 = new Measurement();
+        measurement3.setType(UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE);
+        measurement3.setQuantityBase(new Quantity("90", new Unit("mm", 120, 123), 125, 127));
+        measurement3.setQuantityRange(new Quantity("1", null, 150, 155));
+
+        List<Quantity> quantities = QuantityOperations.toQuantityList(measurement3);
+
+        assertThat(quantities, hasSize(2));
+    }
+
+    @Test
+    public void testToQuantity_range2() throws Exception {
+        Measurement measurement3 = new Measurement();
+        measurement3.setType(UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE);
+        measurement3.setQuantityBase(new Quantity("90", new Unit("mm", 120, 123), 125, 127));
+
+        List<Quantity> quantities = QuantityOperations.toQuantityList(measurement3);
+
+        assertThat(quantities, hasSize(1));
     }
 
     @Test
@@ -102,8 +125,7 @@ public class QuantityOperationsTest {
     }
 
     @Test
-    public void testGetOffsetList_sorting() throws Exception {
-
+    public void testGetOffset_sorting() throws Exception {
         Measurement measurement1 = new Measurement();
         measurement1.setType(UnitUtilities.Measurement_Type.VALUE);
         final Unit unit = new Unit("kg", 10, 12);
@@ -114,11 +136,33 @@ public class QuantityOperationsTest {
         measurement3.setQuantityMost(new Quantity("90", new Unit("mm", 120, 123), 125, 127));
         measurement3.setQuantityLeast(new Quantity("90", null, 150, 155));
 
-        List<Pair<Integer, Integer>> offsets = QuantityOperations.getOffsetList(Arrays.asList(measurement3, measurement1));
+        List<Pair<Integer, Integer>> offsets = QuantityOperations.getOffset(Arrays.asList(measurement3, measurement1));
 
         assertThat(offsets, hasSize(5));
         assertThat(offsets.get(0).getRight(), is(lessThan(offsets.get(1).getRight())));
         assertThat(offsets.get(0).getLeft(), is(lessThan(offsets.get(1).getLeft())));
+    }
+
+    @Test
+    public void testGetOffset_list() throws Exception {
+        List<Quantity> list = Arrays.asList(
+                new Quantity("bao", null, 3, 110),
+                new Quantity("miao", new Unit("seconds", 2, 24), 22, 150)
+        );
+
+        List<Pair<Integer, Integer>> offsets = QuantityOperations.getOffsets(list);
+
+        assertThat(offsets, hasSize(3));
+    }
+
+
+    @Test
+    public void testGetContainingOffset() throws Exception {
+        Pair<Integer, Integer> offsets = QuantityOperations.getContainingOffset(
+                        new Quantity("miao", new Unit("seconds", 2, 24), 22, 150));
+
+        assertThat(offsets.getLeft(), is(2));
+        assertThat(offsets.getRight(), is(150));
     }
 
 }

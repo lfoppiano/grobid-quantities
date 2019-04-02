@@ -422,11 +422,11 @@ public class QuantifiedObjectTrainingFormatterTest {
     }
 
     @Test
-    public void testTriningExtraction4() throws Exception {
+    public void testTrainingExtraction4() throws Exception {
         String text = "Because furosemide-midazolam incompatibility is pH-dependent, the impact of furosemide concentration is predictable. Furosemide in 10 mg/mL of saline is an alkaline solution (pH = 8.77). ";
 
-        LibraryLoader.load();
-        List<Measurement> measurements = QuantityParser.getInstance().process(text);
+//        LibraryLoader.load();
+//        List<Measurement> measurements = QuantityParser.getInstance().process(text);
 //       final Element element = target.trainingExtraction(measurements, text);
 
         Measurement measurement = new Measurement(UnitUtilities.Measurement_Type.VALUE);

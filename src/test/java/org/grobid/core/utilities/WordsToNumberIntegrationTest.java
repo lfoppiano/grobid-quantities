@@ -16,10 +16,7 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * 
- */
-public class WordsToNumberTest {
+public class WordsToNumberIntegrationTest {
 
     private WordsToNumber wordsToNumber = WordsToNumber.getInstance();
 

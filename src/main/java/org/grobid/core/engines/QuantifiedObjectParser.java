@@ -76,7 +76,7 @@ public class QuantifiedObjectParser extends AbstractParser {
             return measurements;
 
         try {
-            List<Pair<Integer, Integer>> offsetList = QuantityOperations.getOffsetList(measurements);
+            List<Pair<Integer, Integer>> offsetList = QuantityOperations.getOffset(measurements);
 
             List<Boolean> measurementFlags = synchroniseLayoutTokensWithOffsets(layoutTokenNormalised, offsetList);
 
@@ -111,8 +111,8 @@ public class QuantifiedObjectParser extends AbstractParser {
         QuantifiedObject currentQuantifiedObject = quantifiedObjects.get(indexQuantifiedObject);
 
         for (Measurement measurement : measurements) {
-            List<Pair<Integer, Integer>> offsetList1 = QuantityOperations.getOffsetList(measurement);
-            Pair<Integer, Integer> offsetMeasurement = QuantityOperations.toContainingOffset(offsetList1);
+            List<Pair<Integer, Integer>> offsetList1 = QuantityOperations.getOffset(measurement);
+            Pair<Integer, Integer> offsetMeasurement = QuantityOperations.getContainingOffset(offsetList1);
 
             if(currentQuantifiedObject.getAttachment() == null) {
                 indexQuantifiedObject++;

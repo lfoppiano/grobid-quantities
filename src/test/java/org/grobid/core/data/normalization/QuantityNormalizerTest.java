@@ -24,10 +24,9 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by lfoppiano on 14.02.16.
  */
-@Ignore
+@Ignore("we should mock also uom-se .. but for now is better to leave it out so that we can spot other errors")
 public class QuantityNormalizerTest {
 
-    //TODO: we should mock also uom-se .. but for now is better to leave it out so that we can spot other errors
     private QuantityNormalizer target;
     private UnitNormalizer mockUnitNormalizer;
 
