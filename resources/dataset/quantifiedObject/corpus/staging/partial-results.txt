@@ -1,0 +1,49 @@
+10:34:42.841 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - sourcePathLabel: /Users/lfoppiano/development/nims/projects/grobid/grobid-quantities/resources/dataset/quantifiedObject/corpus/staging
+10:34:42.841 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - outputPath for training data: /Users/lfoppiano/development/nims/projects/grobid/grobid-home/tmp/quantifiedObject1745238985975244971.train
+10:34:42.841 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - outputPath for evaluation data: /Users/lfoppiano/development/nims/projects/grobid/grobid-home/tmp/quantifiedObject697495880800708028.test
+10:34:42.881 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 5 files
+10:34:42.881 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - inserm-00752141.quantifiedObject.tei.xml
+10:34:43.172 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1308.2125.quantifiedObject.tei.xml
+10:34:43.282 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1609.04957.quantifiedObject.tei.xml
+10:34:43.377 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - halshs-01279855.quantifiedObject.tei.xml
+10:34:43.517 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1404.7168.quantifiedObject.tei.xml
+	epsilon: 1.0E-7
+	window: 20
+	nb max iterations: 2000
+	nb threads: 12
+* Load patterns
+* Load training data
+* Initialize the model
+* Summary
+    nb train:    63
+    nb labels:   5
+    nb blocks:   76384
+    nb features: 381940
+
+
+===== Token-level results =====
+
+
+label                accuracy     precision    recall       f1
+
+<quantifiedObject_left> 98.78        80           50           61.54
+<quantifiedObject_right> 99.11        80           33.73        47.46
+
+all fields           98.94        80           43.84        56.64   (micro average)
+                     98.94        80           41.87        54.5    (macro average)
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1
+
+<quantifiedObject_left> 84.69        81.25        50.65        62.4
+<quantifiedObject_right> 89.9         86.67        49.06        62.65
+
+all fields           87.3         83.33        50           62.5    (micro average)
+                     87.3         83.96        49.85        62.53   (macro average)
+
+===== Instance-level results =====
+
+Total expected instances:   30
+Correct instances:          3
+Instance-level recall:      10

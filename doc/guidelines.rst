@@ -24,7 +24,7 @@ We do not distinguish conjunctive and disjunctive lists at the present time.
 List of unit types
 ~~~~~~~~~~~~~~~~~~
 
-For the training annotation, the list of unit types (temperature, pressure, length, etc.) is controled and based on SI definitions.
+For the training annotation, the list of unit types (temperature, pressure, length, etc.) is controlled and based on SI definitions.
 This control is normally exhaustive and contains currently 50 types.
 The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. They are used to get the right transformation.
 The given names of the unit types has to be used when annotating measurement. 
@@ -456,10 +456,39 @@ Sequence that would be usually annotated but contain encoding problems / charact
     񮽙񮽙   
 
 
-Quantified substance
-~~~~~~~~~~~~~~~~~~~~
+Quantified object
+~~~~~~~~~~~~~~~~~
+*Currently work in progress*
+The quantified object (or substance) is the object for which the measurement is expressed. For example *A mixture of 10kg of silicon nitride powder*.
+The object is the `silicon nitride powder` which is attached to the measurement of 10 with unit Kg.
 
-The quantified substance is the substance for which the measurement is expressed. For example *A mixture of 10kg of silicon nitride powder*. Cf. issue `#19 <https://github.com/kermitt2/grobid-quantities/issues/19>`_
+Cf. issue `#19 <https://github.com/kermitt2/grobid-quantities/issues/19>`_
+
+The quantified object model currently rely on a simplistic approach that involve the dependency parsing of the sentence and
+the identification of the head in the phrase with some heuristic.
+
+In this section we discuss the guidelines for annotating training data used for a CRF model to replace the current implementation.
+
+In the training data are identified the measurement (and their type) and the quantified object.
+
+For example:
+::
+   <p>A mixture of 10kg of silicon nitride powder.</p>
+
+can be annotated as:
+::
+   <p>A mixtured of <measure type="value" ptr="#1235324324321">10kg</measure> of <quantifiedObject id="1235324324321">silicon nitride powder</quantified Object>.</p>
+
+The quantified object is identified by its ID  and linked to the measure via the attribute `ptr="#ID"`.
+
+*NOTE* This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities are not supported.
+
+
+*How to annotate?*
+
+Annotating the quantifiedObject is a complicated task, because it requires a clear definition to avoid miunderstanding.
+Firstly the question each annotator should ask is "What is being measured?".
+
 
 
 Case not yet supported
