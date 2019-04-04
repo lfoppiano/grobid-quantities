@@ -69,81 +69,28 @@ public class QuantityNormalizer {
         Unit parsedUnit = unitNormalizer.parseUnit(quantity.getRawUnit());
         quantity.setParsedUnit(parsedUnit);
 
+        List<UnitFormat> parsers = new ArrayList<>();
         //The unit cannot be found between the known units - we should try to decompose it
         if (parsedUnit.getUnitDefinition() == null) {
-            return normalizeUnknownUnitQuantity(quantity);
+            parsers = Arrays.asList(unitFormats.get(UNICODE_PROVIDER), unitFormats.get(SESHAT_PROVIDER));
         } else {
             if (!parsedUnit.getUnitDefinition().isSkipNormalisation()) {
                 if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) {
 
                     //I normalize SI units
-                    return normalizeSIQuantities(quantity);
+                    parsers = Arrays.asList(unitFormats.get(SI_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER));
                 } else if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED) {
 
                     //I normalize SI derived units
-                    return normalizeSIDerivedQuantities(quantity);
+                    parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER));
 
                 } else {
-                    return normalizeNonSIQuantities(quantity);
+                    parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(COMMON_PROVIDER), unitFormats.get(INDYRIA_PROVIDER));
                 }
             }
         }
 
-        //Bad!
-        return null;
-    }
-
-    private Quantity.Normalized normalizeUnknownUnitQuantity(Quantity quantity) throws NormalizationException {
-//        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
-        Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
-        final String unitRawName = quantity.getParsedUnit().getRawName();
-
-        List<UnitFormat> formatServices = Arrays.asList(unitFormats.get(UNICODE_PROVIDER), unitFormats.get(SESHAT_PROVIDER));
-
-        javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
-
-        if (unit == null) {
-            throw new NormalizationException("Cannot parse " + unitRawName + " using "
-                    + Arrays.toString(formatServices.toArray()));
-        }
-
-        composeUnit(quantity, normalizedQuantity, unit);
-
-        if (quantity.isNormalized()) {
-            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
-            if (definition != null) {
-                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
-            }
-        }
-
-        return normalizedQuantity;
-    }
-
-    protected Quantity.Normalized normalizeNonSIQuantities(Quantity quantity) throws NormalizationException {
-//        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
-        Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
-
-        final String unitRawName = quantity.getParsedUnit().getRawName();
-
-        List<UnitFormat> formatServices = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(COMMON_PROVIDER), unitFormats.get(INDYRIA_PROVIDER));
-
-        javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
-
-        if (unit == null) {
-            throw new NormalizationException("Cannot parse " + unitRawName + " using "
-                    + Arrays.toString(formatServices.toArray()));
-        }
-
-        composeUnit(quantity, normalizedQuantity, unit);
-
-        if (quantity.isNormalized()) {
-            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
-            if (definition != null) {
-                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
-            }
-        }
-
-        return normalizedQuantity;
+        return normalizeQuantities(quantity, parsers);
     }
 
     private javax.measure.Unit tryParsing(String unitRawName, List<UnitFormat> formatServices) {
@@ -164,41 +111,10 @@ public class QuantityNormalizer {
      * Normalise SI quantities. It tries with the SI parser and if it's failing it's backing off
      * using the default format service.
      */
-    protected Quantity.Normalized normalizeSIQuantities(Quantity quantity) throws NormalizationException {
-//        Map<String, Integer> wrappedUnitProducts = new HashMap<>();
+    protected Quantity.Normalized normalizeQuantities(Quantity quantity, List<UnitFormat> formatServices) throws NormalizationException {
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         final String unitRawName = quantity.getParsedUnit().getRawName();
-
-        List<UnitFormat> formatServices = Arrays.asList(unitFormats.get(SI_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER));
-
-        javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
-
-        if (unit == null) {
-            throw new NormalizationException("Cannot parse " + unitRawName + " using "
-                    + Arrays.toString(formatServices.toArray()));
-        }
-        composeUnit(quantity, normalizedQuantity, unit);
-
-        if (quantity.isNormalized()) {
-            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
-            if (definition != null) {
-                quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
-            }
-        }
-
-        return normalizedQuantity;
-    }
-
-    /**
-     * Normalise SI derived quantities
-     */
-    protected Quantity.Normalized normalizeSIDerivedQuantities(Quantity quantity) throws NormalizationException {
-        Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
-
-        final String unitRawName = quantity.getParsedUnit().getRawName();
-
-        List<UnitFormat> formatServices = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER));
 
         javax.measure.Unit unit = tryParsing(unitRawName, formatServices);
 
