@@ -1,5 +1,6 @@
 package org.grobid.core.engines;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
@@ -229,6 +230,7 @@ public class QuantitiesEngine {
     public List<Measurement> parseMeasurement(String json) {
 
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
         JsonNode jsonAnnotation = null;
         try {
             jsonAnnotation = mapper.readTree(json);
@@ -306,7 +308,7 @@ public class QuantitiesEngine {
             long start = System.currentTimeMillis();
             List<Measurement> measurements = parseMeasurement(json);
             measurements = quantityParser.normalizeMeasurements(measurements);
-            long end = start - System.currentTimeMillis();
+            long end = System.currentTimeMillis();
             MeasurementsResponse response = new MeasurementsResponse(measurements);
             response.setRuntime(end - start);
 
@@ -323,7 +325,7 @@ public class QuantitiesEngine {
         try {
             long start = System.currentTimeMillis();
             MeasurementsResponse response = new MeasurementsResponse(quantityParser.process(text));
-            long end = start - System.currentTimeMillis();
+            long end = System.currentTimeMillis();
             response.setRuntime(end - start);
 
             return response;
