@@ -3,9 +3,7 @@ package org.grobid.core.engines;
 import edu.emory.mathcs.nlp.component.tokenizer.EnglishTokenizer;
 import edu.emory.mathcs.nlp.component.tokenizer.token.Token;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.assertj.core.data.Offset;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
@@ -27,14 +25,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 
@@ -48,7 +44,7 @@ public class QuantityParser extends AbstractParser {
 
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
-    private QuantifiedObjectParser substanceParser;
+    private QuantifiedObjectParser quantifiedObjectParser;
     private QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
     private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
@@ -72,7 +68,7 @@ public class QuantityParser extends AbstractParser {
 
         if (!disableSubstanceParser) {
             QuantifiedObjectParser substanceParser = QuantifiedObjectParser.getInstance();
-            instance.setSubstanceParser(substanceParser);
+            instance.setQuantifiedObjectParser(substanceParser);
         }
         instance.setDisableSubstanceParser(disableSubstanceParser);
 
@@ -130,7 +126,7 @@ public class QuantityParser extends AbstractParser {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
 
-            List<OffsetPosition> sentences = getSentencesOffsets(tokens);
+            List<OffsetPosition> sentences = getSentencesOffsets(layoutTokenNormalised);
 
             List<Measurement> localMeasurements = extractMeasurement(layoutTokenNormalised, res, sentences);
             if (isEmpty(localMeasurements))
@@ -144,7 +140,7 @@ public class QuantityParser extends AbstractParser {
             }
 
             if (!disableSubstanceParser) {
-                localMeasurements = substanceParser.process(layoutTokenNormalised, localMeasurements);
+                localMeasurements = quantifiedObjectParser.process(layoutTokenNormalised, localMeasurements);
             } else {
                 LOGGER.warn("Substance parser disabled, skpping it. ");
             }
@@ -376,7 +372,7 @@ public class QuantityParser extends AbstractParser {
         UnitUtilities.Measurement_Type openMeasurement = null;
 
         int currentSentenceIndex = 0;
-        OffsetPosition currentSentence = sentences.get(currentSentenceIndex);
+//        OffsetPosition currentSentence = sentences.get(currentSentenceIndex);
 
         int pos = 0; // position in term of characters for creating the offsets
 
@@ -393,28 +389,31 @@ public class QuantityParser extends AbstractParser {
             if (!clusterLabel.equals(QUANTITY_OTHER))
                 boundingBoxes = BoundingBoxCalculator.calculate(theTokens);
 
-            String text = LayoutTokensUtil.toText(tokens);
-            if ((pos < text.length() - 1) && (text.charAt(pos) == ' '))
-                pos += 1;
-            int endPos = pos;
-            boolean start = true;
-            for (LayoutToken token : theTokens) {
-                if (token.getText() != null) {
-                    if (start && token.getText().equals(" ")) {
-                        pos++;
-                        endPos++;
-                        continue;
-                    }
-                    if (start)
-                        start = false;
-                    endPos += token.getText().length();
-                }
-            }
-
-            if ((endPos > 0) && (endPos <= text.length()) && (text.charAt(endPos - 1) == ' '))
-                endPos--;
+//            String text = LayoutTokensUtil.toText(tokens);
+//            if ((pos < text.length() - 1) && (text.charAt(pos) == ' '))
+//                pos += 1;
+//            int endPos = pos;
+//            boolean start = true;
+//            for (LayoutToken token : theTokens) {
+//                if (token.getText() != null) {
+//                    if (start && token.getText().equals(" ")) {
+//                        pos++;
+//                        endPos++;
+//                        continue;
+//                    }
+//                    if (start)
+//                        start = false;
+//                    endPos += token.getText().length();
+//                }
+//            }
+//
+//            if ((endPos > 0) && (endPos <= text.length()) && (text.charAt(endPos - 1) == ' '))
+//                endPos--;
 
             Quantity currentQuantity = null;
+
+            int startPos = theTokens.get(0).getOffset();
+            int endPos = theTokens.get(theTokens.size() - 1).getOffset() + theTokens.get(theTokens.size() - 1).getText().length();
 
             if (clusterLabel.equals(QuantitiesTaggingLabels.QUANTITY_VALUE_ATOMIC)) {
                 LOGGER.debug("atomic value: " + clusterContent);
@@ -423,7 +422,7 @@ public class QuantityParser extends AbstractParser {
                     currentMeasurement = new Measurement();
                     currentUnit = new Unit();
                 }
-                currentQuantity = new Quantity(clusterContent, null, pos, endPos);
+                currentQuantity = new Quantity(clusterContent, null, startPos, endPos);
                 final Value parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
                 if (parsedValue != null) {
                     currentQuantity.setParsedValue(parsedValue);
@@ -452,8 +451,8 @@ public class QuantityParser extends AbstractParser {
                 // 4) the mostQuantity not in the same sentence
                 if ((openMeasurement != null &&
                         (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX ||
-                                currentMeasurement.getQuantityLeast() != null ||
-                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))))
+                                currentMeasurement.getQuantityLeast() != null /*||
+                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))*/))
                 ) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
@@ -462,7 +461,7 @@ public class QuantityParser extends AbstractParser {
                     }
                 }
 
-                currentQuantity = new Quantity(clusterContent, null, pos, endPos);
+                currentQuantity = new Quantity(clusterContent, null, startPos, endPos);
                 final Value parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
                 if (parsedValue != null) {
                     currentQuantity.setParsedValue(parsedValue);
@@ -479,8 +478,8 @@ public class QuantityParser extends AbstractParser {
                 LOGGER.debug("value most: " + clusterContent);
                 if (openMeasurement != null &&
                         (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX ||
-                                currentMeasurement.getQuantityMost() != null ||
-                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement)))
+                                currentMeasurement.getQuantityMost() != null /*||
+                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))*/)
                 ) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
@@ -488,7 +487,7 @@ public class QuantityParser extends AbstractParser {
                         currentUnit = new Unit();
                     }
                 }
-                currentQuantity = new Quantity(clusterContent, null, pos, endPos);
+                currentQuantity = new Quantity(clusterContent, null, startPos, endPos);
                 final Value parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
                 if (parsedValue != null) {
                     currentQuantity.setParsedValue(parsedValue);
@@ -505,18 +504,16 @@ public class QuantityParser extends AbstractParser {
                 LOGGER.debug("base value: " + clusterContent);
                 if (openMeasurement != null &&
                         (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE ||
-                                currentMeasurement.getQuantityBase() != null ||
-                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement)))
+                                currentMeasurement.getQuantityBase() != null /*||
+                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))*/)
                 ) {
-//                if (((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE))
-//                        || currentMeasurement.getQuantityBase() != null) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
                         currentMeasurement = new Measurement();
                         currentUnit = new Unit();
                     }
                 }
-                currentQuantity = new Quantity(clusterContent, null, pos, endPos);
+                currentQuantity = new Quantity(clusterContent, null, startPos, endPos);
                 final Value parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
                 if (parsedValue != null) {
                     currentQuantity.setParsedValue(parsedValue);
@@ -531,12 +528,10 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_RANGE)) {
                 LOGGER.debug("range value: " + clusterContent);
-//                if (((openMeasurement != null) && (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE))
-//                        || currentMeasurement.getQuantityRange() != null) {
                 if (openMeasurement != null &&
                         (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE ||
-                                currentMeasurement.getQuantityRange() != null ||
-                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement)))
+                                currentMeasurement.getQuantityRange() != null /*||
+                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))*/)
                 ) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
@@ -544,14 +539,11 @@ public class QuantityParser extends AbstractParser {
                         currentUnit = new Unit();
                     }
                 }
-                currentQuantity = new Quantity();
-                currentQuantity.setRawValue(clusterContent);
+                currentQuantity = new Quantity(clusterContent, null, startPos, endPos);
                 final Value parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
                 if (parsedValue != null) {
                     currentQuantity.setParsedValue(parsedValue);
                 }
-                currentQuantity.setOffsetStart(pos);
-                currentQuantity.setOffsetEnd(endPos);
                 currentQuantity.setLayoutTokens(theTokens);
                 if (currentUnit.getRawName() != null) {
                     currentQuantity.setRawUnit(currentUnit);
@@ -569,14 +561,11 @@ public class QuantityParser extends AbstractParser {
                         //currentUnit = new Unit();
                     }
                 }
-                currentQuantity = new Quantity();
-                currentQuantity.setRawValue(clusterContent);
+                currentQuantity = new Quantity(clusterContent, null, startPos, endPos);
                 final Value parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
                 if (parsedValue != null) {
                     currentQuantity.setParsedValue(parsedValue);
                 }
-                currentQuantity.setOffsetStart(pos);
-                currentQuantity.setOffsetEnd(endPos);
                 currentQuantity.setLayoutTokens(theTokens);
 
                 if (currentUnit.getRawName() != null) {
@@ -588,10 +577,7 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_UNIT_LEFT)) {
                 LOGGER.debug("unit (left attachment): " + clusterContent);
-                currentUnit = new Unit();
-                currentUnit.setRawName(clusterContent);
-                currentUnit.setOffsetStart(pos);
-                currentUnit.setOffsetEnd(endPos);
+                currentUnit = new Unit(clusterContent, startPos, endPos);
                 currentUnit.setLayoutTokens(theTokens);
 
                 if (openMeasurement == UnitUtilities.Measurement_Type.VALUE) {
@@ -671,11 +657,10 @@ public class QuantityParser extends AbstractParser {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
                         currentMeasurement = new Measurement();
-                        //currentUnit = new Unit();
                         openMeasurement = null;
                     }
                 }
-                currentUnit = new Unit(clusterContent, pos, endPos);
+                currentUnit = new Unit(clusterContent, startPos, endPos);
                 currentUnit.setLayoutTokens(theTokens);
                 currentUnit.setUnitRightAttachment(true);
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
@@ -685,10 +670,10 @@ public class QuantityParser extends AbstractParser {
             }
 
             pos = endPos;
-            while (pos > currentSentence.end) {
-                currentSentenceIndex++;
-                currentSentence = sentences.get(currentSentenceIndex);
-            }
+//            while (pos > currentSentence.end) {
+//                currentSentenceIndex++;
+//                currentSentence = sentences.get(currentSentenceIndex);
+//            }
         }
 
         if (currentMeasurement.isValid()) {
@@ -714,7 +699,7 @@ public class QuantityParser extends AbstractParser {
         this.disableSubstanceParser = disableSubstanceParser;
     }
 
-    public void setSubstanceParser(QuantifiedObjectParser substanceParser) {
-        this.substanceParser = substanceParser;
+    public void setQuantifiedObjectParser(QuantifiedObjectParser quantifiedObjectParser) {
+        this.quantifiedObjectParser = quantifiedObjectParser;
     }
 }

@@ -94,6 +94,8 @@ public class QuantifiedObjectParser extends AbstractParser {
 
             List<QuantifiedObject> quantifiedObjects = extractOutput(res, layoutTokenNormalised);
 
+            LOGGER.info("Found " + quantifiedObjects.size() + " quantified objects!");
+
             measurements = attachQuantifiedObjects(quantifiedObjects, measurements);
 
             return measurements;
@@ -104,7 +106,7 @@ public class QuantifiedObjectParser extends AbstractParser {
     }
 
     public List<Measurement> attachQuantifiedObjects(List<QuantifiedObject> quantifiedObjects, List<Measurement> measurements) {
-        if(isEmpty(quantifiedObjects))
+        if (isEmpty(quantifiedObjects))
             return measurements;
 
         int indexQuantifiedObject = 0;
@@ -114,7 +116,7 @@ public class QuantifiedObjectParser extends AbstractParser {
             List<Pair<Integer, Integer>> offsetList1 = QuantityOperations.getOffset(measurement);
             Pair<Integer, Integer> offsetMeasurement = QuantityOperations.getContainingOffset(offsetList1);
 
-            if(currentQuantifiedObject.getAttachment() == null) {
+            if (currentQuantifiedObject.getAttachment() == null) {
                 indexQuantifiedObject++;
                 currentQuantifiedObject = quantifiedObjects.get(indexQuantifiedObject);
             }
@@ -134,7 +136,7 @@ public class QuantifiedObjectParser extends AbstractParser {
             }
 
             indexQuantifiedObject++;
-            if(indexQuantifiedObject < quantifiedObjects.size()) {
+            if (indexQuantifiedObject < quantifiedObjects.size()) {
                 currentQuantifiedObject = quantifiedObjects.get(indexQuantifiedObject);
             } else {
                 break;
