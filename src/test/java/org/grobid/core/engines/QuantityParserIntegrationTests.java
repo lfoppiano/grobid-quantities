@@ -266,6 +266,7 @@ public class QuantityParserIntegrationTests {
     }
 
     @Test
+    @Ignore("To be plugged in when we re-enable the sentence parser.")
     public void testReconstructionWithSentenceTokenizer() throws Exception {
 
         String text = "Before the 1920s the number of stages was usually 15 at most. The riders enjoyed at least one day of rest after each stage.";
