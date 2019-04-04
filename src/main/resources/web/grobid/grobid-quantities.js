@@ -131,14 +131,21 @@ var grobid = (function ($) {
         return true;
     }
 
-    function AjaxError(jqXHR, textStatus, errorThrown) {
+    function showError(jqXHR, textStatus, errorThrown) {
         $('#requestResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + jqXHR.responseText + "</font>");
         responseJson = null;
     }
 
-    function AjaxError2(message) {
+    function showError(statusCode, message) {
+        message = "Error: " + statusCode + ", " + message + " - The PDF document cannot be annotated. Please check the server logs.";
+        $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + message + "</font>");
+        responseJson = null;
+        return true;
+    }
+
+    function showError(message) {
         if (!message)
-            message = "";
+            message = "Error: ";
         message += " - The PDF document cannot be annotated. Please check the server logs.";
         $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + message + "</font>");
         responseJson = null;
@@ -167,12 +174,11 @@ var grobid = (function ($) {
                 url: urlLocal,
                 data: formData,
                 success: SubmitSuccesful,
-                error: AjaxError,
+                error: showError,
                 contentType: false,
                 processData: false
             });
-        }
-        else if (selected === 'annotateQuantityPDF') {
+        } else if (selected === 'annotateQuantityPDF') {
             // we will have JSON annotations to be layered on the PDF
 
             // request for the annotation information
@@ -186,7 +192,7 @@ var grobid = (function ($) {
             var nbPages = -1;
 
             // display the local PDF
-            if ((document.getElementById("input").files[0].type == 'application/pdf') ||
+            if ((document.getElementById("input").files[0].type === 'application/pdf') ||
                 (document.getElementById("input").files[0].name.endsWith(".pdf")) ||
                 (document.getElementById("input").files[0].name.endsWith(".PDF")))
                 var reader = new FileReader();
@@ -306,8 +312,8 @@ var grobid = (function ($) {
                     //var response = JSON.parse(xhr.responseText);
                     //console.log(response);
                     setupAnnotations(response);
-                } else if (xhr.status != 200) {
-                    AjaxError2("Response " + xhr.status + ": ");
+                } else if (xhr.status !== 200) {
+                    showError(statusCode=xhr.status, message=xhr.statusText);
                 }
             };
             xhr.send(formData);
@@ -317,13 +323,11 @@ var grobid = (function ($) {
     function SubmitSuccesful(responseText, statusText) {
         var selected = $('#selectedService option:selected').attr('value');
 
-        if (selected == 'processQuantityText') {
+        if (selected === 'processQuantityText') {
             SubmitSuccesfulText(responseText, statusText);
-        }
-        else if (selected == 'processQuantityXML') {
+        } else if (selected === 'processQuantityXML') {
             SubmitSuccessfulXML(responseText, statusText);
-        }
-        else if (selected == 'annotateQuantityPDF') {
+        } else if (selected === 'annotateQuantityPDF') {
             SubmitSuccessfulPDF(responseText, statusText);
         }
 
@@ -375,8 +379,7 @@ var grobid = (function ($) {
                     if (quantity) {
                         quantities.push(quantity)
                     }
-                }
-                else if (measurementType == "interval") {
+                } else if (measurementType == "interval") {
                     var quantityLeast = measurement.quantityLeast;
                     if (quantityLeast) {
                         quantities.push(quantityLeast);
@@ -395,8 +398,7 @@ var grobid = (function ($) {
                             quantities.push(quantityRange);
                         }
                     }
-                }
-                else {
+                } else {
                     quantities = measurement.quantities;
                 }
 
@@ -432,8 +434,7 @@ var grobid = (function ($) {
                             // the server response is not compatible with the present client 
                             console.log("Sorting of quantities as present in the server's response not valid for this client.");
                             // note: this should never happen?
-                        }
-                        else {
+                        } else {
                             newString += string.substring(pos, start)
                                 + ' <span id="annot-' + currentMeasurementIndex + '-' + currentQuantityIndex + '" rel="popover" data-color="' + quantityType + '">'
                                 + '<span class="label ' + quantityType + '" style="cursor:hand;cursor:pointer;" >'
@@ -489,8 +490,7 @@ var grobid = (function ($) {
                     var quantity = measurement.quantity;
                     if (quantity)
                         quantities.push(quantity)
-                }
-                else if (measurementType == "interval") {
+                } else if (measurementType == "interval") {
                     var quantityLeast = measurement.quantityLeast;
                     if (quantityLeast)
                         quantities.push(quantityLeast);
@@ -506,8 +506,7 @@ var grobid = (function ($) {
                         if (quantityRange)
                             quantities.push(quantityRange);
                     }
-                }
-                else {
+                } else {
                     quantities = measurement.quantities;
                 }
 
@@ -559,8 +558,7 @@ var grobid = (function ($) {
                     var quantity = measurement.quantity;
                     if (quantity)
                         quantities.push(quantity)
-                }
-                else if (measurementType == "interval") {
+                } else if (measurementType == "interval") {
                     var quantityLeast = measurement.quantityLeast;
                     if (quantityLeast)
                         quantities.push(quantityLeast);
@@ -576,8 +574,7 @@ var grobid = (function ($) {
                         if (quantityRange)
                             quantities.push(quantityRange);
                     }
-                }
-                else {
+                } else {
                     quantities = measurement.quantities;
                 }
 
@@ -942,13 +939,11 @@ var grobid = (function ($) {
             createInputTextArea();
             //$('#consolidateBlock').show();
             setBaseUrl('processQuantityText');
-        }
-        else if (selected == 'processQuantityXML') {
+        } else if (selected == 'processQuantityXML') {
             createInputFile(selected)
             //$('#consolidateBlock').show();
             setBaseUrl('processQuantityXML');
-        }
-        else if (selected == 'annotateQuantityPDF') {
+        } else if (selected == 'annotateQuantityPDF') {
             createInputFile(selected);
             //$('#consolidateBlock').hide();
             setBaseUrl('annotateQuantityPDF');
