@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.length;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
+import static org.grobid.core.utilities.QuantityOperations.synchroniseLayoutTokensWithOffsets;
 
 /**
  * Parser for identifying and attaching the quantified "substance".
@@ -194,66 +195,6 @@ public class QuantifiedObjectParser extends AbstractParser {
         }
 
         return quantifiedObjects;
-    }
-
-    /**
-     * This method takes in input a list of tokens and a list of offsets representing special entities and
-     *
-     * @return a list of booleans of the same size of the initial layout token, flagging all the
-     * tokens within the offsets
-     */
-    protected static List<Boolean> synchroniseLayoutTokensWithOffsets(List<LayoutToken> tokens,
-                                                                      List<Pair<Integer, Integer>> offsets) {
-
-        List<Boolean> isMeasure = new ArrayList<>();
-
-        if (CollectionUtils.isEmpty(offsets)) {
-            tokens.stream().forEach(t -> isMeasure.add(Boolean.FALSE));
-
-            return isMeasure;
-        }
-
-        int globalOffset = 0;
-        if (CollectionUtils.isNotEmpty(tokens)) {
-            globalOffset = tokens.get(0).getOffset();
-        }
-
-        int mentionId = 0;
-        Pair<Integer, Integer> offset = offsets.get(mentionId);
-
-        for (LayoutToken token : tokens) {
-            //normalise the offsets
-            int mentionStart = globalOffset + offset.getLeft();
-            int mentionEnd = globalOffset + offset.getRight();
-
-            if (token.getOffset() < mentionStart) {
-                isMeasure.add(Boolean.FALSE);
-                continue;
-            } else {
-                if (token.getOffset() >= mentionStart
-                        && token.getOffset() + length(token.getText()) <= mentionEnd) {
-                    isMeasure.add(Boolean.TRUE);
-                    continue;
-                }
-
-                if (mentionId == offsets.size() - 1) {
-                    isMeasure.add(Boolean.FALSE);
-                    break;
-                } else {
-                    isMeasure.add(Boolean.FALSE);
-                    mentionId++;
-                    offset = offsets.get(mentionId);
-                }
-            }
-        }
-        if (tokens.size() > isMeasure.size()) {
-
-            for (int counter = isMeasure.size(); counter < tokens.size(); counter++) {
-                isMeasure.add(Boolean.FALSE);
-            }
-        }
-
-        return isMeasure;
     }
 
     private String addFeatures(List<LayoutToken> tokens, List<Boolean> isMeasurement) {

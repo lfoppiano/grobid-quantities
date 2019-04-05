@@ -6,11 +6,13 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
+import org.grobid.core.layout.LayoutToken;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.length;
 
 public class QuantityOperations {
 
@@ -63,6 +65,7 @@ public class QuantityOperations {
                 .stream()
                 .flatMap(m -> toQuantityList(m).stream().flatMap(q -> getOffsets(q).stream()))
                 .sorted(Comparator.comparing(Pair::getRight))
+                .distinct()
                 .collect(Collectors.toList());
     }
 
@@ -131,6 +134,68 @@ public class QuantityOperations {
      */
     public static Pair<Integer, Integer> getContainingOffset(Quantity quantity) {
         return getContainingOffset(getOffsets(quantity));
+    }
+
+    /**
+     * This method takes in input a list of tokens and a list of offsets representing special entities and
+     *
+     * @return a list of booleans of the same size of the initial layout token, flagging all the
+     * tokens within the offsets
+     */
+    public static List<Boolean> synchroniseLayoutTokensWithOffsets(List<LayoutToken> tokens,
+                                                                   List<Pair<Integer, Integer>> offsets) {
+
+        List<Boolean> isMeasure = new ArrayList<>();
+
+        if (CollectionUtils.isEmpty(offsets)) {
+            tokens.stream().forEach(t -> isMeasure.add(Boolean.FALSE));
+
+            return isMeasure;
+        }
+
+        int globalOffset = 0;
+        if (CollectionUtils.isNotEmpty(tokens)) {
+            globalOffset = tokens.get(0).getOffset();
+        }
+
+        int mentionId = 0;
+        Pair<Integer, Integer> offset = offsets.get(mentionId);
+
+        for (LayoutToken token : tokens) {
+            //normalise the offsets
+            int mentionStart = globalOffset + offset.getLeft();
+            int mentionEnd = globalOffset + offset.getRight();
+
+            if (token.getOffset() < mentionStart) {
+                isMeasure.add(Boolean.FALSE);
+                continue;
+            } else {
+                int tokenOffsetEnd = token.getOffset() + length(token.getText());
+                if (token.getOffset() >= mentionStart
+                        && tokenOffsetEnd <= mentionEnd) {
+                    isMeasure.add(Boolean.TRUE);
+                } else {
+                    isMeasure.add(Boolean.FALSE);
+                }
+
+                if (mentionId == offsets.size() - 1) {
+                    break;
+                } else {
+                    if (tokenOffsetEnd >= mentionEnd) {
+                        mentionId++;
+                        offset = offsets.get(mentionId);
+                    }
+                }
+            }
+        }
+        if (tokens.size() > isMeasure.size()) {
+
+            for (int counter = isMeasure.size(); counter < tokens.size(); counter++) {
+                isMeasure.add(Boolean.FALSE);
+            }
+        }
+
+        return isMeasure;
     }
 
 }

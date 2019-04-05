@@ -1,18 +1,24 @@
 package org.grobid.core.utilities;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.layout.LayoutToken;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.junit.Assert.assertThat;
 
 public class QuantityOperationsTest {
@@ -155,14 +161,71 @@ public class QuantityOperationsTest {
         assertThat(offsets, hasSize(3));
     }
 
-
     @Test
     public void testGetContainingOffset() throws Exception {
         Pair<Integer, Integer> offsets = QuantityOperations.getContainingOffset(
-                        new Quantity("miao", new Unit("seconds", 2, 24), 22, 150));
+                new Quantity("miao", new Unit("seconds", 2, 24), 22, 150));
 
         assertThat(offsets.getLeft(), is(2));
         assertThat(offsets.getRight(), is(150));
+    }
+
+    @Test
+    public void testSynchroniseLayoutTokenWithMentions_longMention() {
+        List<LayoutToken> tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken("A 20kg ingot is made in a " +
+                "high frequency induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C.");
+
+        List<Pair<Integer, Integer>> offsetList = Arrays.asList(
+                new ImmutablePair<>(2, 50),
+                new ImmutablePair<>(103, 134)
+        );
+
+        List<Boolean> booleans = QuantityOperations.synchroniseLayoutTokensWithOffsets(tokens, offsetList);
+
+        assertThat(booleans, hasSize(tokens.size()));
+
+        assertThat(booleans.get(2), is(true));
+        assertThat(booleans.get(3), is(true));
+        assertThat(booleans.get(4), is(true));
+        assertThat(booleans.get(5), is(true));
+        assertThat(booleans.get(6), is(true));
+        assertThat(booleans.get(7), is(true));
+        assertThat(booleans.get(8), is(true));
+        assertThat(booleans.get(9), is(true));
+        assertThat(booleans.get(10), is(true));
+        assertThat(booleans.get(11), is(true));
+        assertThat(booleans.get(12), is(true));
+        assertThat(booleans.get(13), is(true));
+        assertThat(booleans.get(14), is(true));
+    }
+
+    @Test
+    public void testSynchroniseLayoutTokenWithMentions_consecutives() {
+
+        List<LayoutToken> tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken("A 20kg ingot is made in a " +
+                "high frequency induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C.");
+
+        List<Pair<Integer, Integer>> offsetList = Arrays.asList(
+                new ImmutablePair<>(2, 4),
+                new ImmutablePair<>(4, 6),
+                new ImmutablePair<>(81, 83),
+                new ImmutablePair<>(83, 85),
+                new ImmutablePair<>(103, 105),
+                new ImmutablePair<>(105, 107),
+                new ImmutablePair<>(120, 123),
+                new ImmutablePair<>(127, 132),
+                new ImmutablePair<>(132, 134)
+        );
+
+        List<Boolean> booleans = QuantityOperations.synchroniseLayoutTokensWithOffsets(tokens, offsetList);
+
+        assertThat(booleans, hasSize(tokens.size()));
+
+        assertThat(booleans.stream().filter(b-> b).count(), is(greaterThan(0L)));
+
+        assertThat(booleans.get(2), is(true));
+        assertThat(booleans.get(3), is(true));
+        assertThat(booleans.get(4), is(false));
     }
 
 }
