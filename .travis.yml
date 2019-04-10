@@ -11,7 +11,7 @@ addons:
       - oracle-java8-installer
 
 
-script: ./gradlew clean unitTest build -x test
+script: ./gradlew clean unitTest build -x test  --no-daemon
 
 after_success:
-  - ./gradlew unitTest cobertura coveralls -x test
+  - ./gradlew unitTest cobertura coveralls -x test  --no-daemon
