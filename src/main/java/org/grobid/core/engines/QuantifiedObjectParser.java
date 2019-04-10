@@ -55,6 +55,11 @@ public class QuantifiedObjectParser extends AbstractParser {
         super(QuantitiesModels.QUANTIFIED_OBJECT);
     }
 
+    /** Workaround to maintain the compatibility for the time being **/
+    protected QuantifiedObjectParser(boolean test) {
+        super(QuantitiesModels.QUANTITIES);
+    }
+
     public List<Measurement> process(List<LayoutToken> layoutTokens, List<Measurement> measurements) {
 
         List<Measurement> newMeasurements = new ArrayList<>();

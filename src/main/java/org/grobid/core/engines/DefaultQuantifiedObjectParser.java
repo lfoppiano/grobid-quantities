@@ -22,6 +22,10 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultQuantifiedObjectParser.class);
 
+    public DefaultQuantifiedObjectParser() {
+        super(false);
+    }
+
     @Override
     public List<Measurement> process(List<LayoutToken> tokens, List<Measurement> measurements) {
         if (isEmpty(measurements))
