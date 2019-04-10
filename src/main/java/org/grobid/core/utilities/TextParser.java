@@ -52,6 +52,7 @@ public class TextParser {
     private AbstractPredIdentifier predicater = null;
     private AbstractSRLabeler labeler = null;
     private DEPReader depReader = null;
+    private AbstractSegmenter segmenter;
 
     // this is for version 1.3.0 of ClearNLP
     private CRolesetClassifier roleClassifier = null;
@@ -101,11 +102,10 @@ public class TextParser {
         roleClassifier = (CRolesetClassifier) EngineGetter.getComponent(is, AbstractReader.LANG_EN, NLPLib.MODE_ROLE);
 
         depReader = new DEPReader(0, 1, 2, 3, 4, 5, 6);
+
+        segmenter = EngineGetter.getSegmenter(language, tokenizer);
     }
 
-    /**
-     * Hidden constructor
-     */
     private TextParser(String dictionaryFile, String posModelFile, String depModelFile,
                        String predModelFile, String labelModelFile, String roleClassifierModelFile)
             throws Exception {
@@ -121,6 +121,8 @@ public class TextParser {
         roleClassifier = (CRolesetClassifier) EngineGetter.getComponent(is, AbstractReader.LANG_EN, NLPLib.MODE_ROLE);
 
         depReader = new DEPReader(0, 1, 2, 3, 4, 5, 6);
+
+        segmenter = EngineGetter.getSegmenter(language, tokenizer);
     }
 
     /**
@@ -131,7 +133,7 @@ public class TextParser {
      * as the n-best list of Parse object. If the CLEAR_PARSER is selected, only the
      * best parse is provided.
      */
-    public Sentence parse(String sentence) throws GrobidException {
+    public synchronized Sentence parse(String sentence) throws GrobidException {
         if (sentence == null) {
             throw new GrobidException("Sentence to be parsed is null.");
         } else if (sentence.length() == 0) {
@@ -163,7 +165,7 @@ public class TextParser {
      * semantic role labeling) as the n-best list of Parse object. If the CLEAR_PARSER is
      * selected, only the best parse is provided in the list.
      */
-    public List<Sentence> parseText(String text) throws GrobidException {
+    public synchronized List<Sentence> parseText(String text) throws GrobidException {
         if (text == null) {
             throw new GrobidException("Cannot parse the sentence, because it is null.");
         } else if (text.length() == 0) {
@@ -173,8 +175,6 @@ public class TextParser {
         }
 
         List<Sentence> results = null;
-
-        AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
 
         // convert String into InputStream
         InputStream is = new ByteArrayInputStream(text.getBytes());
@@ -237,7 +237,6 @@ public class TextParser {
     public List<Sentence> parse(BufferedReader reader) throws GrobidException {
         List<Sentence> results = null;
 
-        AbstractSegmenter segmenter = EngineGetter.getSegmenter(language, tokenizer);
         List<List<String>> sentences = segmenter.getSentences(reader);
 
         results = new ArrayList<Sentence>();
