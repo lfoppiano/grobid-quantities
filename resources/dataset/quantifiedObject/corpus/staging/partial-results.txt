@@ -2,13 +2,15 @@
 10:37:28.079 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - outputPath for training data: /Users/lfoppiano/development/nims/projects/grobid/grobid-home/tmp/quantifiedObject219671642991963522.train
 10:37:28.080 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - outputPath for evaluation data: /Users/lfoppiano/development/nims/projects/grobid/grobid-home/tmp/quantifiedObject3437539608015498620.test
 10:37:28.163 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 7 files
-10:37:28.163 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - inserm-00752141.quantifiedObject.tei.xml
-10:37:28.355 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1308.2125.quantifiedObject.tei.xml
-10:37:28.448 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1609.04957.quantifiedObject.tei.xml
-10:37:28.521 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - halshs-01279855.quantifiedObject.tei.xml
-10:37:28.610 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1903.10344.quantifiedObject.tei.xml
-10:37:28.674 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1404.7168.quantifiedObject.tei.xml
-10:37:28.736 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1903.10612.quantifiedObject.tei.xml
+14:41:56.155 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - inserm-00752141.quantifiedObject.tei.xml
+14:41:56.333 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1308.2125.quantifiedObject.tei.xml
+14:41:56.418 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1903.07791.quantifiedObject.tei.xml
+14:41:56.482 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1609.04957.quantifiedObject.tei.xml
+14:41:56.533 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - halshs-01279855.quantifiedObject.tei.xml
+14:41:56.655 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1903.10344.quantifiedObject.tei.xml
+14:41:56.704 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1404.7168.quantifiedObject.tei.xml
+14:41:56.760 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1903.10612.quantifiedObject.tei.xml
+14:41:56.898 [main] INFO org.grobid.trainer.QuantifiedObjectTrainer - 1903.06952.quantifiedObject.tei.xml
 	epsilon: 1.0E-7
 	window: 20
 	nb max iterations: 2000
@@ -28,24 +30,25 @@
 
 label                accuracy     precision    recall       f1
 
-<quantifiedObject_left> 99.21        84.52        43.56        57.49
-<quantifiedObject_right> 98.6         47.93        32.22        38.54
+<quantifiedObject_left> 99.32        78.85        29.71        43.16
+<quantifiedObject_right> 98.71        58.4         32.02        41.36
 
-all fields           98.9         62.93        37.61        47.08   (micro average)
-                     98.9         66.23        37.89        48.01   (macro average)
+all fields           99.02        64.41        31.15        41.99   (micro average)
+                     99.02        68.62        30.86        42.26   (macro average)
 
 ===== Field-level results =====
 
 label                accuracy     precision    recall       f1
 
-<quantifiedObject_left> 86.81        76           43.18        55.07
-<quantifiedObject_right> 83.83        66.67        41.67        51.28
+<quantifiedObject_left> 87.23        63.89        31.08        41.82
+<quantifiedObject_right> 80.84        77.14        40.3         52.94
 
-all fields           85.32        70.91        42.39        53.06   (micro average)
-                     85.32        71.33        42.42        53.18   (macro average)
+all fields           84.03        72.64        37.02        49.04   (micro average)
+                     84.03        70.52        35.69        47.38   (macro average)
 
 ===== Instance-level results =====
 
-Total expected instances:   52
-Correct instances:          14
-Instance-level recall:      26.92
+Total expected instances:   66
+Correct instances:          20
+Instance-level recall:      30.3
+
