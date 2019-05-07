@@ -172,10 +172,13 @@ public class QuantifiedObjectParser extends AbstractParser {
             if (!clusterLabel.equals(QUANTIFIED_OBJECT_OTHER))
                 boundingBoxes = BoundingBoxCalculator.calculate(theTokens);
 
+            int offsetStart = theTokens.get(0).getOffset();
+            int offsetEnd = offsetStart + clusterContent.length();
+
             if (clusterLabel.equals(QUANTIFIED_OBJECT_LEFT)) {
                 QuantifiedObject quantifiedObject = new QuantifiedObject(clusterContent);
-                quantifiedObject.setOffsetStart(theTokens.get(0).getOffset());
-                quantifiedObject.setOffsetEnd(Iterables.getLast(theTokens).getOffset() + Iterables.getLast(theTokens).getText().length());
+                quantifiedObject.setOffsetStart(offsetStart);
+                quantifiedObject.setOffsetEnd(offsetEnd);
                 quantifiedObject.setLayoutTokens(theTokens);
                 quantifiedObject.setBoundingBoxes(boundingBoxes);
                 quantifiedObject.setAttachment(QuantifiedObject.Attachment.LEFT);
@@ -184,8 +187,8 @@ public class QuantifiedObjectParser extends AbstractParser {
 
             } else if (clusterLabel.equals(QUANTIFIED_OBJECT_RIGHT)) {
                 QuantifiedObject quantifiedObject = new QuantifiedObject(clusterContent);
-                quantifiedObject.setOffsetStart(theTokens.get(0).getOffset());
-                quantifiedObject.setOffsetEnd(Iterables.getLast(theTokens).getOffset() + Iterables.getLast(theTokens).getText().length());
+                quantifiedObject.setOffsetStart(offsetStart);
+                quantifiedObject.setOffsetEnd(offsetEnd);
                 quantifiedObject.setLayoutTokens(theTokens);
                 quantifiedObject.setBoundingBoxes(boundingBoxes);
                 quantifiedObject.setAttachment(QuantifiedObject.Attachment.RIGHT);

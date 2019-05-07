@@ -126,9 +126,9 @@ public class QuantityParser extends AbstractParser {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
 
-            List<OffsetPosition> sentences = getSentencesOffsets(layoutTokenNormalised);
+//            List<OffsetPosition> sentences = getSentencesOffsets(layoutTokenNormalised);
 
-            List<Measurement> localMeasurements = extractMeasurement(layoutTokenNormalised, res, sentences);
+            List<Measurement> localMeasurements = extractMeasurement(layoutTokenNormalised, res);
             if (isEmpty(localMeasurements))
                 return measurements;
 
@@ -361,7 +361,7 @@ public class QuantityParser extends AbstractParser {
     /**
      * Extract identified quantities from a labeled text.
      */
-    public List<Measurement> extractMeasurement(List<LayoutToken> tokens, String result, List<OffsetPosition> sentences) {
+    public List<Measurement> extractMeasurement(List<LayoutToken> tokens, String result) {
         List<Measurement> measurements = new ArrayList<>();
 
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.QUANTITIES, result, tokens);
@@ -371,7 +371,7 @@ public class QuantityParser extends AbstractParser {
         Measurement currentMeasurement = new Measurement();
         UnitUtilities.Measurement_Type openMeasurement = null;
 
-        int currentSentenceIndex = 0;
+//        int currentSentenceIndex = 0;
 //        OffsetPosition currentSentence = sentences.get(currentSentenceIndex);
 
         int pos = 0; // position in term of characters for creating the offsets
@@ -413,7 +413,7 @@ public class QuantityParser extends AbstractParser {
             Quantity currentQuantity = null;
 
             int startPos = theTokens.get(0).getOffset();
-            int endPos = theTokens.get(theTokens.size() - 1).getOffset() + theTokens.get(theTokens.size() - 1).getText().length();
+            int endPos = startPos + clusterContent.length();
 
             if (clusterLabel.equals(QuantitiesTaggingLabels.QUANTITY_VALUE_ATOMIC)) {
                 LOGGER.debug("atomic value: " + clusterContent);
