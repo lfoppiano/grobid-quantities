@@ -38,8 +38,8 @@ Start the service
 ~~~~~~~~~~~~~~~~~
 
 Grobid quantities can be run as a service:
-
 ::
+
   java -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
 
 Demo/console web app is then accessible at ``http://localhost:8060``
