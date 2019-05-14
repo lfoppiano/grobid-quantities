@@ -12,22 +12,27 @@ First install the latest development version of GROBID as explained by the `docu
 
 Copy the module quantities as sibling sub-project to grobid-core, grobid-trainer, etc.:
 ::
+
    cp -r grobid-quantities grobid/
 
 
 Try compiling everything with:
 ::
+
    cd PATH-TO-GROBID/grobid/
 
    ./gradlew clean install copyModels
+
 
 You should have the directories of the models `quantities` and `units` inside `../grobid-home/models`
 
 Run some test:
 ::
+
    cd PATH-TO-GROBID/grobid/grobid-quantities
 
    ./gradlew test
+
 
 Start the service
 ~~~~~~~~~~~~~~~~~
@@ -41,7 +46,9 @@ Demo/console web app is then accessible at ``http://localhost:8060``
 
 Using ``curl`` POST/GET requests:
 ::
+
   curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuantityText
+
 
 Note that the model is designed and trained to work at *paragraph level*.
 It means that, for the moment, the expected input to the parser is a paragraph or a text segment of similar size, not a complete document.
@@ -58,19 +65,25 @@ To run the training:
 
 - quantity model
 ::
+
   cd PATH-TO-GROBID/grobid/grobid-quantities
 
   ./gradlew train_quantities
 
 
+
 - unit model
 ::
+
   ./gradlew train_units
+
 
 
 - value model
 ::
+
    ./gradlew train_values
+
 
 
 .. For the moment, the default training stop criteria are used. So, the training can be stopped manually after 1000 iterations, simply do a "control-C" to stop
