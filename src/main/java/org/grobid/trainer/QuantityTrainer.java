@@ -127,6 +127,8 @@ public class QuantityTrainer extends AbstractTrainer {
 
                     addFeatures(bufferLabeled, writer, unitTokenPositions);
                     writer.write("\n");
+                    writer.flush();
+                    writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
                 }
                 writer.write("\n");
             }
