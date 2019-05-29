@@ -1,6 +1,7 @@
 package org.grobid.service.controller;
 
 import com.codahale.metrics.annotation.Timed;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.grobid.core.data.MeasurementsResponse;
 import org.grobid.core.engines.QuantitiesEngine;
@@ -26,14 +27,12 @@ public class AnnotationController {
     private static final String PATH_PARSE_MEASURE = "parseMeasure";
 
 
-    //private QuantityParser parser;
     private QuantitiesEngine engine;
 
     @Inject
     public AnnotationController(GrobidQuantitiesConfiguration configuration,
                                 QuantityParser parser,
                                 QuantitiesEngine engine) {
-        //this.parser = parser;
         this.engine = engine;
     }
 
@@ -62,8 +61,9 @@ public class AnnotationController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public String processPDF(final InputStream inputStream) {
-        MeasurementsResponse response = engine.processPdf(inputStream);
+    public String processPDF(@FormDataParam("input") InputStream uploadedInputStream,
+                             @FormDataParam("input") FormDataContentDisposition fileDetail) {
+        MeasurementsResponse response = engine.processPdf(uploadedInputStream);
         return response.toJson();
     }
 

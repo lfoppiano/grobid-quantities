@@ -2,10 +2,12 @@ package org.grobid.core.utilities;
 
 import org.grobid.core.data.Sentence;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+@Ignore
 public class TextParserIntegrationTest {
 
     TextParser target;
