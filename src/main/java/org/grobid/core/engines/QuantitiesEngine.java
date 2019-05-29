@@ -24,6 +24,8 @@ import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.UnitUtilities;
+import org.grobid.core.utilities.GrobidProperties;
+
 import org.grobid.service.exceptions.GrobidServiceException;
 
 import javax.inject.Inject;
@@ -51,6 +53,7 @@ public class QuantitiesEngine {
 
     @Inject
     public QuantitiesEngine() {
+        GrobidProperties.getInstance();
         this.quantityParser = QuantityParser.getInstance();
         this.parsers = new EngineParsers();
         instance = this;
@@ -72,18 +75,23 @@ public class QuantitiesEngine {
 
         List<Measurement> measurements = new ArrayList<>();
         Document doc = null;
-        File file = null;
+        File originFile = null;
         try {
-            file = IOUtilities.writeInputFile(inputStream);
-            if (file == null) {
+            originFile = IOUtilities.writeInputFile(inputStream);
+            if (originFile == null) {
                 throw new GrobidServiceException("Input file is empty or null", Response.Status.BAD_REQUEST);
             }
             GrobidAnalysisConfig config =
                     new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
                             .analyzer(GrobidAnalyzer.getInstance())
+                            .consolidateHeader(0)
+                            .consolidateCitations(0)
                             .build();
+            System.out.println("before documentSource: " + originFile.getPath());
             DocumentSource documentSource =
-                    DocumentSource.fromPdf(file, config.getStartPage(), config.getEndPage());
+                    DocumentSource.fromPdf(originFile);
+
+            System.out.println("after documentSource");        
             doc = parsers.getSegmentationParser().processing(documentSource, config);
 
             // In the following, we process the relevant textual content of the document
@@ -186,7 +194,7 @@ public class QuantitiesEngine {
         } catch (NoSuchElementException nseExp) {
             throw new GrobidServiceException("Could not get an instance of parser. ", Response.Status.SERVICE_UNAVAILABLE);
         } finally {
-            IOUtilities.removeTempFile(file);
+            IOUtilities.removeTempFile(originFile);
         }
 
         // for next line, comparable measurement needs to be implemented
@@ -210,23 +218,6 @@ public class QuantitiesEngine {
         return quantityParser.process(layoutTokens);
     }
 
-    /**
-     * Give the list of textual tokens from a list of LayoutToken
-     */
-    /*private static List<String> getTexts(List<LayoutToken> tokenizations) {
-        List<String> texts = new ArrayList<>();
-        for (LayoutToken token : tokenizations) {
-            if (isNotEmpty(trim(token.getText())) &&
-                    !token.getText().equals(" ") &&
-                    !token.getText().equals("\n") &&
-                    !token.getText().equals("\r") &&
-                    !token.getText().equals("\t") &&
-                    !token.getText().equals("\u00A0")) {
-                texts.add(token.getText());
-            }
-        }
-        return texts;
-    }*/
     public List<Measurement> parseMeasurement(String json) {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -241,7 +232,6 @@ public class QuantitiesEngine {
         if ((jsonAnnotation == null) || (jsonAnnotation.isMissingNode())) {
             throw new GrobidServiceException("The request is invalid or malformed.", Response.Status.BAD_REQUEST);
         }
-
 
         String fromValue = null;
         String toValue = null;

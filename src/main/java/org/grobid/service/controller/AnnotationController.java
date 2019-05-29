@@ -26,15 +26,15 @@ public class AnnotationController {
     private static final String PATH_PARSE_MEASURE = "parseMeasure";
 
 
-    private QuantityParser parser;
-    private QuantitiesEngine pdfProcessor;
+    //private QuantityParser parser;
+    private QuantitiesEngine engine;
 
     @Inject
     public AnnotationController(GrobidQuantitiesConfiguration configuration,
                                 QuantityParser parser,
-                                QuantitiesEngine pdfProcessor) {
-        this.parser = parser;
-        this.pdfProcessor = pdfProcessor;
+                                QuantitiesEngine engine) {
+        //this.parser = parser;
+        this.engine = engine;
     }
 
     @Path(PATH_IS_ALIVE)
@@ -63,7 +63,7 @@ public class AnnotationController {
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public String processPDF(final InputStream inputStream) {
-        MeasurementsResponse response = pdfProcessor.processPdf(inputStream);
+        MeasurementsResponse response = engine.processPdf(inputStream);
         return response.toJson();
     }
 
@@ -72,7 +72,7 @@ public class AnnotationController {
     @POST
     public String processText(@FormDataParam("text") String text) {
 
-        MeasurementsResponse response = pdfProcessor.processText(text);
+        MeasurementsResponse response = engine.processText(text);
 
         return response.toJson();
     }
@@ -81,7 +81,7 @@ public class AnnotationController {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @POST
     public String parseMeasure_post(String json) {
-        MeasurementsResponse response = pdfProcessor.processJson(json);
+        MeasurementsResponse response = engine.processJson(json);
 
         return response.toJson();
     }
