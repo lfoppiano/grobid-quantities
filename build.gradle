@@ -226,7 +226,7 @@ task copyModels(type: Copy) {
 }
 
 wrapper {
-    gradleVersion "4.10"
+    gradleVersion "5.4.1"
 }
 
 //Cobertura
