@@ -178,13 +178,13 @@ public class QuantityParser extends AbstractParser {
             return null;
         }
 
-        String textReplaced = text.replace("\r\n", " ");
-        textReplaced = textReplaced.replace("\n", " ");
-        textReplaced = textReplaced.replace("\t", " ");
+        String textPreprocessed = text.replace("\r\n", " ");
+//        textReplaced = textReplaced.replace("\n", " ");
+//        textReplaced = textReplaced.replace("\t", " ");
 
         List<LayoutToken> tokens = null;
         try {
-            tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(textReplaced);
+            tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(textPreprocessed);
         } catch (Exception e) {
             LOGGER.error("fail to tokenize:, " + text, e);
         }

@@ -52,7 +52,7 @@ public class ValueBlock {
             }
             return Type.NUMBER;
         } else if (time != null) {
-            return Type.NUMBER;
+            return Type.TIME;
         } else if (alpha != null) {
             return Type.ALPHABETIC;
         } else {
@@ -96,7 +96,10 @@ public class ValueBlock {
                     sb.append("e^" + getExp());
                 } else {
                     if (getPow() != null && getBase() != null) {
-                        sb.append(" x " + getBase() + "^" + getPow());
+                        if(number != null) {
+                            sb.append(" x ");
+                        }
+                        sb.append(getBase() + "^" + getPow());
                     }
                 }
                 return sb.toString();

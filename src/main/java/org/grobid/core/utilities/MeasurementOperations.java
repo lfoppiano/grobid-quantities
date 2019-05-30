@@ -125,10 +125,12 @@ public class MeasurementOperations {
                             newMeasurements.add(newMeasurement);
                         }
 
-                    } else
+                    } else {
                         newMeasurements.add(measurement);
-                } else
+                    }
+                } else {
                     newMeasurements.add(measurement);
+                }
             } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                 // list must be consistent in unit type, and avoid too large chunk
                 List<Quantity> quantities = measurement.getQuantityList();
