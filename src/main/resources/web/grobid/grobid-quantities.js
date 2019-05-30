@@ -75,6 +75,7 @@ var grobid = (function ($) {
             $("#divRestI").hide();
             $("#divDoc").hide();
             $("#divDemo").hide();
+            $('#requestResult').hide();
             return false;
         });
         $("#rest").click(function () {
@@ -106,21 +107,7 @@ var grobid = (function ($) {
             $("#divAbout").hide();
             $("#divRestI").hide();
             $("#divDemo").hide();
-            return false;
-        });
-        $("#demo").click(function () {
-            $("#demo").attr('class', 'section-active');
-            $("#rest").attr('class', 'section-not-active');
-            $("#about").attr('class', 'section-not-active');
-            $("#doc").attr('class', 'section-not-active');
-
-            $("#subTitle").html("Demo");
-            $("#subTitle").show();
-
-            $("#divDemo").show();
-            $("#divDoc").hide();
-            $("#divAbout").hide();
-            $("#divRestI").hide();
+            $('#requestResult').hide();
             return false;
         });
     });
@@ -190,6 +177,7 @@ var grobid = (function ($) {
             xhr.open('POST', url, true);
 
             var nbPages = -1;
+            $('#requestResult').show();
 
             // display the local PDF
             if ((document.getElementById("input").files[0].type === 'application/pdf') ||
@@ -937,16 +925,16 @@ var grobid = (function ($) {
 
         if (selected == 'processQuantityText') {
             createInputTextArea();
-            //$('#consolidateBlock').show();
             setBaseUrl('processQuantityText');
+            $('#requestResult').hide();
         } else if (selected == 'processQuantityXML') {
             createInputFile(selected)
-            //$('#consolidateBlock').show();
             setBaseUrl('processQuantityXML');
+            $('#requestResult').hide();
         } else if (selected == 'annotateQuantityPDF') {
             createInputFile(selected);
-            //$('#consolidateBlock').hide();
             setBaseUrl('annotateQuantityPDF');
+            $('#requestResult').hide();
         }
     }
 
@@ -993,7 +981,7 @@ var grobid = (function ($) {
     }
 
     var examples = ["A 20kg ingot is made in a high frequency induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C. Specimens No.2 to 4, 6 and 15 are materials embodying the invention. Others are for comparison. No.1 is a material equivalent to ASTM standard A469-88 class 8 for generator rotor shaft material. No. 5 is a material containing relatively high Al content. \n\n\
-These specimens underwent heat treatment by simulating the conditions for the large size rotor shaft centre of a large capacity generator. First, it was heated to 840°C to form austenite structure and cooled at the speed of 100°C/hour to harden. Then, the specimen was heated and held at 575 to 590°C for 32 hours and cooled at a speed of 15°C/hour. Tempering was done at such a temperature to secure tensile strength in the range of 100 to 105kg/mm2 for each specimen.",
+These specimens underwent heat treatment by simulating the conditions for the large size rotor shaft centre of a large capacity generator. First, it was heated to 840°C to form austenite structure and cooled at the speed of 100°C/hour to harden. Then, the specimen was heated and held at 575 to 590°C for 32 hours and cooled at a speed of 15°C/hour. Tempering was done at such a temperature to secure tensile strength in the range of 100 to 106kg/mm2 for each specimen.",
         "The cells were washed three times with RPMI1640  medium (Nissui Pharmaceutical Co.). The cells (1 x107) were incubated in RPMI-1640 medium containing 10% calf fetal serum (Gibco Co.), 50 µg/ml streptomycin, 50 IU/ml of penicillin, 2-mercaptoethanol (5 x 10-5 M), sheep red blood cells (5 x 106 cells) and a test compound dissolved in dimethyl sulfoxide supplied on a microculture plate (NUNC Co., 24 wells) in a carbon dioxide gas incubator (TABAI ESPEC CORP) at 37°C for 5 days.\n\n\
         A solution of 1.18 g (4.00 mmols) of the Compound a obtained in Reference Example 1, 0.39 g (4.13 mmols) of 4-aminopyridine and 20 ml of toluene was heated to reflux for 2 hours. After cooling, the reaction mixture was poured into 1 N sodium hydroxide aqueous solution, and washed twice with chloroform. 2 N Hydrochloric acid aqueous solution was added to the aqueous layer and the precipitated white crystals were filtered and dried to give 0.73 g (yield: 53%) of Compound 3.",
         "Fifty-three journals were collected: 13 were eliminated from analysis, because they were incomplete, unclear or unreadable. 40 journals were analysed: 19 were journals of subjects of race Z (4 women and 15 men, 30 ± 10 years, 176 ± 7 cm, 70 ± 9 kg, 15 ± 5 % of fat mass, VO 2max : 50 ± 8 ml · kg −1 · min −1 and 21 of race A (6 women and 15 men, 40 ± 7 years, 176 ± 7 cm, 72 ± 10 kg, 18 ± 8 % fat mass, VO 2max : 58 ± 8 ml · kg −1 · min −1 ). Energy, macronutrients (CHO, fat and proteins) and liquid intakes were analysed.",
