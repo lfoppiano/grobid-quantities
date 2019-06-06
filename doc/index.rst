@@ -6,10 +6,15 @@
 Welcome to Grobid-quantities's documentation!
 =============================================
 
+Grobid-quantities is a ML-based application for identification, parsing and normalisation of any expressions of measurements (e.g. pressure, temperature, etc.) from text. This work focuses on technical and scientific articles and supports input data from raw text, PDF and XML. Extracted measurements normalised toward the International System of Units (SI).
+
+
 .. toctree::
   :maxdepth: 2
 
+  introduction.rst
   gettingStarted.rst
   guidelines.rst
-  trainingData.rst
+  training.rst
+  references.rst
 

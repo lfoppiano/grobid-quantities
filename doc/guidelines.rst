@@ -3,29 +3,38 @@
 Annotation guidelines
 =====================
 
-Getting started
-------------------------
-
 The first step of the annotation process is to generate training data from unlabeled documents based on the current models.
-The procedure is explained in details in :ref:`training_data`
-GROBID will create the training data corresponding to these documents in the right TEI format and with pre-annotations.
-The annotation work then consists of manually checking the produced annotations and adding the missing one.
-It is very important not to modify the text content in these generated files, not adding spaces or other characters, but only adding or moving XML tags.
+The procedure is explained in details in :ref:`training_data`. GROBID will create the training data corresponding to these documents in the right TEI format and with pre-annotations.
+The annotation work then consists of manually checking the produced annotations and adding the missing ones.
+**It is very important not to modify the text content in these generated files, not adding spaces or other characters, but only adding or moving XML tags.**
 
-When the training data has been manually corrected, move the file under the repository ``resouces/dataset/quantities/corpus/`` for retraining, or under ``resouces/dataset/quantities/evaluation/`` is the annotated data should be used for evalutation only.
+When the training data has been manually corrected, move the file under the repository ``resouces/dataset/${model}/corpus/`` for retraining, or under ``resouces/dataset/${model}/evaluation/`` is the annotated data should be used for evalutation only.
 To see the different evaluation options, see GROBID documentation on `training and evaluating <http://grobid.readthedocs.org/en/latest/Training-the-models-of-Grobid>`_.
 
-Annotations
------------
+**NOTE**: the exact directory where the data is picked up could be also a ``final`` under ``corpus``. Please check the description under each model definition, below.
 
-There are three types of measurements supported by grobid-quantities. Measurement corresponding to single value (or *atomic* value), to an interval (or range of values) or to a list.
-We do not distinguish conjunctive and disjunctive lists at the present time.
 
-List of unit types
-~~~~~~~~~~~~~~~~~~
+In this document we describe the annotation guidelines for the following models:
+ - :ref:`Quantities CRF model` - STABLE
+ - :ref:`Units CRF model` - STABLE
+ - :ref:`Values CRF model` - STABLE
+ - :ref:`Quantified objects CRF model` / substance CRF model - WIP
 
-For the training annotation, the list of unit types (temperature, pressure, length, etc.) is controlled and based on SI definitions.
-This control is normally exhaustive and contains currently 50 types.
+
+.. _Quantities CRF model:
+
+Quantities CRF model
+--------------------
+The Quantities CRF models is the first model of the chain and segment text into units and values.
+This model pick up the training data from ``resouces/dataset/${model}/corpus/final``.
+
+Currently it supports three types of measurements: single value (or *atomic* value), continuous values in intervals (or range of values) or lists of discrete values.
+At the present time we do not distinguish between conjunctive and disjunctive lists.
+
+Unit type vocabulary
+~~~~~~~~~~~~~~~~~~~~
+
+The list of unit types (temperature, pressure, length, etc.) is controlled and based on SI definition. This controlled vocabulary contains currently 50 types.
 The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. They are used to get the right transformation.
 The given names of the unit types has to be used when annotating measurement. 
 
@@ -453,42 +462,7 @@ Sequence that would be usually annotated but contain encoding problems / charact
 
 .. code-block:: xml
     
-    񮽙񮽙   
-
-
-Quantified object
-~~~~~~~~~~~~~~~~~
-*Currently work in progress*
-The quantified object (or substance) is the object for which the measurement is expressed. For example *A mixture of 10kg of silicon nitride powder*.
-The object is the `silicon nitride powder` which is attached to the measurement of 10 with unit Kg.
-
-Cf. issue `#19 <https://github.com/kermitt2/grobid-quantities/issues/19>`_
-
-The quantified object model currently rely on a simplistic approach that involve the dependency parsing of the sentence and
-the identification of the head in the phrase with some heuristic.
-
-In this section we discuss the guidelines for annotating training data used for a CRF model to replace the current implementation.
-
-In the training data are identified the measurement (and their type) and the quantified object.
-
-For example:
-::
-   <p>A mixture of 10kg of silicon nitride powder.</p>
-
-can be annotated as:
-::
-   <p>A mixtured of <measure type="value" ptr="#1235324324321">10kg</measure> of <quantifiedObject id="1235324324321">silicon nitride powder</quantified Object>.</p>
-
-The quantified object is identified by its ID  and linked to the measure via the attribute `ptr="#ID"`.
-
-*NOTE* This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities are not supported.
-
-
-*How to annotate?*
-
-Annotating the quantifiedObject is a complicated task, because it requires a clear definition to avoid miunderstanding.
-Firstly the question each annotator should ask is "What is being measured?".
-
+    񮽙񮽙  
 
 
 Case not yet supported
@@ -581,3 +555,141 @@ XML examples (ended with the name of the file between brackets)
   [...] (<measure type="list"><num>72</num> for compressive test and <num>72</num></measure> for flexural test) [hal-00962359]
 
   Patients with SS have a <measure type="interval"><num atLeast="20">20</num>-<num atMost="40">40 fold</num></measure> increased risk of developing lymphoma [hal-00987664]
+
+
+.. _Units CRF model:
+
+Units CRF model
+---------------
+
+The Units model is used to parse chunks of text recognised as units from the Quantity CRF model. The data handled as unit is modelled based on the SI representation of unit, which models any unit as a triple: prefix, base and pow. For example ``m^2`` can be represented as ``[-, m, 2]``. Complex units are naturally supported: ``m^3/kg*s`` can be rewritten as ``[(-, m, 3)(k, g, -1)(-, s, -1)]``.
+
+There are 3 labels for this model:
+ - ``<prefix>`` represent the unit prefix, for example ``k`` for ``kilo``, ``G`` for ``giga`` and so on and so forth. The definition of these prefix is in the prefix dictionary under ``resources/lexicon/${lang}/prefix.txt``.
+ - ``<base>`` carry out the unit base information. For NON-SI units the entire unit should be contained as ``<base>``.
+ - ``<pow>`` contains information about the exponents and divisions. It's used to correctly assign exponent values and to revert the sign to blocks in the denominator.
+
+
+The training data follows a simple structure, see an example on how ``cm`` is represented:
+::
+
+  <units>
+    <unit><prefix>c</prefix><base>m</base></unit>
+  </units>
+
+
+General principles:
+
+- in complex units the division mark should be labelled as ``<pow>``, for example:
+  ::
+    <unit><base>m</base><pow>/</pow><base>s</base></unit>
+
+- the indication of a power, like ``^`` should be taken out of the ``<pow>`` label, for example ``m/s^4`` should be annotated as:
+  ::
+    <unit><base>m</base><pow>/</pow><base>s</base>^<pow>4</pow></unit>
+
+- non-SI units are added in the ``<base>`` as anticipated above:
+  ::
+    <unit><base>miles</base></unit>
+
+- denominator written with subsequent ``division marks``, like ``cal/kg/m/days``, which means ``cal/(kg*m*days)`` should be annotated considering only the first ``/``:
+  ::
+    <unit><base>cal</base><pow>/</pow><base>kg</base>/<base>m</base>/<base>days</base></unit>
+
+- in general  ``numerator / den1 den2 den3 is equivalent`` to ``numerator/(den1*den2*den3)``. Groups by parenthesis are not supported.
+
+
+.. _Values CRF model:
+
+Values CRF model
+--------------------
+The Values model is used to parse chunks of text recognised as values from the Quantity CRF model.
+
+.. Issue about the value parser:
+.. _#13: https://github.com/kermitt2/grobid-quantities/issues/13
+
+.. Issue about the base-10 expressions
+.. _#7: https://github.com/kermitt2/grobid-quantities/issues/7
+
+.. Issue about the exponents expressions
+.. _#8: https://github.com/kermitt2/grobid-quantities/issues/8
+
+.. Issue about the date/time expressions
+.. _#12: https://github.com/kermitt2/grobid-quantities/issues/12
+
+
+The Values model uses the following labels:
+ - ``<number>`` identify numeric values
+ - ``<exp>`` identify the exponent in the base-E expressions (written as e and corresponding to the constant ``Euler's number`` 2.71828)
+ - ``<base>`` identify the base of the base-N representation
+ - ``<pow>`` identify the exponent for base-N or base-E expressions
+ - ``<time>`` represent date and time expressions
+ - ``<alpha>`` identify values expressed in alphabetic
+
+This labels are combined to recognise this type of values:
+
+- numeric value:
+  ::
+    <value><number>2</number></value>
+
+- alphabetic value:
+  ::
+    <value><alpha>two</number></value>
+
+- power with base-10 expression, discussed in `#7`_. Example:
+  ::
+    <value><base>10</base>^<pow>-5</pow></value>
+
+  The ``<base>`` and ``<pow>`` should contains only values. Additional markers (like ``x``, ``^``, ``x``) should be left out. The ``<base>`` label should contains expression of the "base", usually ``10`` but could be set to different values.
+
+  For example:
+  ::
+    <value><number>1</number> × <base>10</base> <pow>−7</pow></value>
+
+- Euler's number based expressions, discussed in: `#8`_. Example:
+  ::
+    <value><number>1.2</number>e^<exp>-5</exp></value>
+
+  ``e`` or ``E`` should be left out, because is a constant and does not have variability.
+
+- time and date expressions, discussed in `#12`_
+  ::
+    <value><time>2001 August</time></value>
+
+
+.. _Quantified objects CRF model:
+
+Quantified objects CRF model
+----------------------------
+
+**Currently work in progress**
+The quantified object (or substance) is the object for which the measurement is expressed. For example *A mixture of 10kg of silicon nitride powder*.
+The object is the `silicon nitride powder` which is attached to the measurement of 10 with unit Kg.
+
+Cf. issue `#19 <https://github.com/kermitt2/grobid-quantities/issues/19>`_
+
+The quantified object model currently rely on a simplistic approach that involve the dependency parsing of the sentence and
+the identification of the head in the phrase with some heuristic.
+
+In this section we discuss the guidelines for annotating training data used for a CRF model to replace the current implementation.
+
+In the training data are identified the measurement (and their type) and the quantified object.
+
+For example:
+::
+   <p>A mixture of 10kg of silicon nitride powder.</p>
+
+can be annotated as:
+::
+   <p>A mixtured of <measure type="value" ptr="#1235324324321">10kg</measure> of <quantifiedObject id="1235324324321">silicon nitride powder</quantified Object>.</p>
+
+The quantified object is identified by its ID  and linked to the measure via the attribute `ptr="#ID"`.
+
+*NOTE* This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities are not supported.
+
+
+*How to annotate?*
+
+Annotating the quantifiedObject is a complicated task, because it requires a clear definition to avoid misunderstanding.
+Firstly the question each annotator should ask is "What is being measured?".
+

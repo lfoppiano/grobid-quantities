@@ -3,90 +3,54 @@
 Getting started
 ===============
 
-Building grobid-quantities and *JDK 1.8* (it ships Gradle wrapper out of the box).
+Grobid-quantities requires *JDK 1.8* and Grobid to be installed.
 
-Build and install
+Install and build
 ~~~~~~~~~~~~~~~~~
 
 First install the latest development version of GROBID as explained by the `documentation <http://grobid.readthedocs.org>`_.
 
-Copy the module quantities as sibling sub-project to grobid-core, grobid-trainer, etc.:
+Grobid-quantities root directory needs to be placed as sibling sub-project inside Grobid directory:
 ::
 
    cp -r grobid-quantities grobid/
 
+The easier is to clone directly within the Grobid directory.
 
-Try compiling everything with:
+Then, build everything with:
 ::
 
-   cd PATH-TO-GROBID/grobid/
+   cd PATH-TO-GROBID/grobid-quantities/
 
-   ./gradlew clean install copyModels
+   ./gradlew copyModels
+   ./gradlew clean install
 
 
-You should have the directories of the models `quantities` and `units` inside `../grobid-home/models`
+You should have the directories of the models ``quantities``, ``units`` and ``values`` inside ``../grobid-home/models``
 
 Run some test:
 ::
 
-   cd PATH-TO-GROBID/grobid/grobid-quantities
+   cd PATH-TO-GROBID/grobid-quantities
 
    ./gradlew test
 
 
-Start the service
-~~~~~~~~~~~~~~~~~
+Start and use the service
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Grobid quantities can be run as a service:
+Grobid-quantities can be run with the following command:
 ::
 
   java -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
 
-Demo/console web app is then accessible at ``http://localhost:8060``
 
-Using ``curl`` POST/GET requests:
+There is a GUI interface demo accessible at ``http://localhost:8060``, and a REST API under ``http://localhost:8060/service``.
+
+For example, run a simple text using ``curl``:
 ::
 
   curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuantityText
 
 
-Note that the model is designed and trained to work at *paragraph level*.
-It means that, for the moment, the expected input to the parser is a paragraph or a text segment of similar size, not a complete document.
-In case you have a long textual document, it is better either to exploit existing structures (e.g. XML/HTML elements) to segment it
-initially into paragraphs or sentences, or to apply an automatic paragraph/sentence segmentation, and then send separately to
-grobid-quantities the equivalent of a paragraph-size texts to be processed.
-
-Training
-~~~~~~~~
-
-.. The models will be saved under ``grobid-home/models/quantities`` and ``grobid-home/models/units`` respectively, make sure those directories exist.
-
-To run the training:
-
-- quantity model
-::
-
-  cd PATH-TO-GROBID/grobid/grobid-quantities
-
-  ./gradlew train_quantities
-
-
-
-- unit model
-::
-
-  ./gradlew train_units
-
-
-
-- value model
-::
-
-   ./gradlew train_values
-
-
-
-.. For the moment, the default training stop criteria are used. So, the training can be stopped manually after 1000 iterations, simply do a "control-C" to stop
-the training and save the model produced in the latest iteration. 1000 iterations are largely enough.
-
-.. Otherwise, the training will continue beyond several thousand iterations before stopping.
+**Note**: The model is designed and trained to work at *paragraph level*. The expected text input to the parser is a paragraph or a text segment of similar size, not a complete document. In case you have a long textual document, it is better either to exploit existing structures (e.g. XML/HTML ``<p>`` elements) to initially segment it into paragraphs or sentences, or to apply an automatic paragraph/sentence segmentation. Then send them separately to grobid-quantities to be processed.

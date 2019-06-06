@@ -48,7 +48,7 @@ master_doc = 'index'
 # General information about the project.
 project = 'Grobid-quantities'
 copyright = '2017, Patrice Lopez <patrice.lopez@science-miner.com>, Luca Foppiano <luca.foppiano@inria.fr>'
-author = 'Patrice Lopez <patrice.lopez@science-miner.com>, Luca Foppiano <luca.foppiano@inria.fr>'
+author = 'Patrice Lopez <patrice.lopez@science-miner.com>, Luca Foppiano <luca@foppiano.org>'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -64,7 +64,7 @@ release = '0.4.2'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -97,6 +97,9 @@ html_theme = 'default'
 html_static_path = ['_static']
 
 
+html_sidebars = { '**': ['globaltoc.html', 'searchbox.html'] }
+
+
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
@@ -108,7 +111,7 @@ htmlhelp_basename = 'Grobid-quantitiesdoc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
+    'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
