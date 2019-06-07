@@ -84,7 +84,7 @@ public class QuantitiesEngine {
         long start = System.currentTimeMillis();
 
         List<Measurement> measurements = new ArrayList<>();
-        Document doc = null;
+        Document doc;
         File originFile = null;
         try {
             originFile = IOUtilities.writeInputFile(inputStream);

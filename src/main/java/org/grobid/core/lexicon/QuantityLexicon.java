@@ -429,6 +429,13 @@ public class QuantityLexicon {
         return results;
     }
 
+    /**
+     * Lookup the unit name by inflection, for example
+     *   meter -> m
+     *   kilogram -> kg
+     *   picohenry -> pH
+     *   mile per hours -> mile/h
+     */
     public String getNameByInflection(String inflection) {
         return inflection2name.get(inflection);
     }
@@ -465,6 +472,9 @@ public class QuantityLexicon {
 
     /**
      * Return a unit object based on an unit notation.
+     * for example:
+     *    getUnitByNotation("cm") would return meter (LENGTH, SI)
+     *    getUnitByNotation("cm3") would return m3 (VOLUME, SI)
      */
     public UnitDefinition getUnitByNotation(String notation) {
         if (notation == null) {

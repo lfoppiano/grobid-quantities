@@ -52,7 +52,7 @@ public class QuantityLexiconIntegrationTest {
     @Test
     public void testInUnitDictionary_pressure() throws Exception {
         String input = "pa";
-        boolean test = target.inUnitDictionary(input);
+        boolean test = target.inUnitDictionaryCaseInsensitive(input);
         assertThat(test, is(true));
     }
 

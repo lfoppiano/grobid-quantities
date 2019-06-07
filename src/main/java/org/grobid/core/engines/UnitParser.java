@@ -67,7 +67,7 @@ public class UnitParser extends AbstractParser {
         try {
             String textPreprocessed = text.replace("\r\n", " ");
             textPreprocessed = UnicodeUtil.normaliseText(textPreprocessed);
-            List<LayoutToken> tokenizations = new ArrayList<>();
+            List<LayoutToken> tokens = new ArrayList<>();
 
             String ress = null;
             List<String> characters = new ArrayList<>();
@@ -78,7 +78,7 @@ public class UnitParser extends AbstractParser {
                 position.start = textPreprocessed.indexOf(character);
                 position.end = textPreprocessed.indexOf(character) + 1;
                 LayoutToken lt = new LayoutToken(String.valueOf(character));
-                tokenizations.add(lt);
+                tokens.add(lt);
 
                 unitTokenPositions.add(position);
             }
@@ -90,7 +90,7 @@ public class UnitParser extends AbstractParser {
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
-            units = resultExtraction(res, tokenizations);
+            units = resultExtraction(res, tokens);
         } catch (Exception e) {
             throw new GrobidException("An exception occurred while running Grobid.", e);
         }

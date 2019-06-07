@@ -24,19 +24,19 @@ The basic JSON structure is the following
 
 
 constituted by the following components:
- - *type* describes the measurement nature, in particular it can be ``value``, ``interval`` or ``list``. The ``quantity*`` attribute name follows the table below.
  - *quantity* represents the raw quantity
+ - *type* describes the measurement nature, in particular it can be ``value``, ``interval`` or ``list``. Depending on it, the property related to the quantity will change according to the table below.
  - *quantified* contains the quantified object/substance in both raw and normalised expression
  - *pages* provides the list of pages when processing a PDF document
 
 
-============  ==============================
-type            quantity attributes
-============  ==============================
-value           quantity
-interval        quantityLeast, quantityMost
-list            quantities
-============  ==============================
+=================  ==============================  ==============================
+Measuremen type       Quantity property name(s)      Object type
+=================  ==============================  ==============================
+value               quantity                        quantity object
+interval            quantityLeast, quantityMost     quantity objects (2)
+list                quantities                      list of quantity objects
+=================  ==============================  ==============================
 
 **Note**: ranges (``10+-3``) are represented directly as intervals (``7 to 13``) in JSON.
 
@@ -98,6 +98,71 @@ By processing our classical example ``I've lost two minutes``, it will returns a
                 },
                 "offsetStart": 7,
                 "offsetEnd": 10
+            }
+        }
+    ]
+  }
+
+Another example of a quantity of type interval looks as below:
+::
+  {
+    "runtime": 3,
+    "measurements": [
+        {
+            "type": "interval",
+            "quantityLeast": {
+                "type": "time",
+                "rawValue": "1",
+                "rawUnit": {
+                    "name": "minutes",
+                    "type": "time",
+                    "system": "non SI",
+                    "offsetStart": 26,
+                    "offsetEnd": 33
+                },
+                "parsedValue": {
+                    "numeric": 1,
+                    "structure": {
+                        "type": "NUMBER",
+                        "formatted": "1"
+                    },
+                    "parsed": "1"
+                },
+                "normalizedQuantity": 60,
+                "normalizedUnit": {
+                    "name": "s",
+                    "type": "time",
+                    "system": "SI base"
+                },
+                "offsetStart": 18,
+                "offsetEnd": 19
+            },
+            "quantityMost": {
+                "type": "time",
+                "rawValue": "2",
+                "rawUnit": {
+                    "name": "minutes",
+                    "type": "time",
+                    "system": "non SI",
+                    "offsetStart": 26,
+                    "offsetEnd": 33
+                },
+                "parsedValue": {
+                    "numeric": 2,
+                    "structure": {
+                        "type": "NUMBER",
+                        "formatted": "2"
+                    },
+                    "parsed": "2"
+                },
+                "normalizedQuantity": 120,
+                "normalizedUnit": {
+                    "name": "s",
+                    "type": "time",
+                    "system": "SI base"
+                },
+                "offsetStart": 24,
+                "offsetEnd": 25
             }
         }
     ]
