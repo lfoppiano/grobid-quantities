@@ -1,73 +1,45 @@
-Run 1
-
-12 Mar 2019 14:13.08 [INFO ] UnitTrainer               - 9 files
-12 Mar 2019 14:13.08 [INFO ] UnitTrainer               - 1001.4731.units.training.tei.xml
-12 Mar 2019 14:13.08 [INFO ] UnitTrainer               - 1404.4640.units.training.tei.xml
-12 Mar 2019 14:13.08 [INFO ] UnitTrainer               - 1404.7168.units.training.tei.xml
-12 Mar 2019 14:13.08 [INFO ] UnitTrainer               - 1412.2117.units.training.tei.xml
-12 Mar 2019 14:13.08 [INFO ] UnitTrainer               - generated.training.1460634625418.tei.xml
-12 Mar 2019 14:13.09 [INFO ] UnitTrainer               - liters.tei.xml
-12 Mar 2019 14:13.09 [INFO ] UnitTrainer               - trainingdata1.tei.xml
-12 Mar 2019 14:13.09 [INFO ] UnitTrainer               - trainingdata2.tei.xml
-12 Mar 2019 14:13.09 [INFO ] UnitTrainer               - trainingdata4.tei.xml
-	epsilon: 1.0E-7
-	window: 20
-	nb max iterations: 2000
-	nb threads: 12
-* Load patterns
-* Load training data
-* Initialize the model
-* Summary
-    nb train:    773
-    nb labels:   7
-    nb blocks:   2180
-    nb features: 15260
-* Train the model with l-bfgs
-* Save the model
-* Done
-
-===== Token-level results =====
-
-
-label                accuracy     precision    recall       f1     
-
-<base>               91.37        84.53        97.13        90.39  
-<pow>                98.07        94.77        93.13        93.94  
-<prefix>             93.32        98.7         81.15        89.07  
-
-all fields           94.25        90.58        90.56        90.57   (micro average)
-                     94.25        92.67        90.47        91.13   (macro average)
-
-===== Field-level results =====
-
-label                accuracy     precision    recall       f1     
-
-<base>               88.75        79.83        93.75        86.23  
-<pow>                97.14        91.25        91.68        91.47  
-<prefix>             93.61        98.31        83.1         90.07  
-
-all fields           93.17        87.97        89.2         88.58   (micro average)
-                     93.17        89.79        89.51        89.25   (macro average)
-
-===== Instance-level results =====
-
-Total expected instances:   2432
-Correct instances:          1644
-Instance-level recall:      67.6
-
-Split, training and evaluation for org.grobid.core.GrobidModels$1@589b3632 model is realized in 1358 ms
-Round 2
-
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - 9 files
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - 1001.4731.units.training.tei.xml
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - 1404.4640.units.training.tei.xml
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - 1404.7168.units.training.tei.xml
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - 1412.2117.units.training.tei.xml
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - generated.training.1460634625418.tei.xml
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - liters.tei.xml
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - trainingdata1.tei.xml
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - trainingdata2.tei.xml
-12 Mar 2019 14:17.24 [INFO ] UnitTrainer               - trainingdata4.tei.xml
+16:38:26.640 [main] INFO org.grobid.trainer.UnitTrainer - sourcePathLabel: resources/dataset/units/corpus
+16:38:26.640 [main] INFO org.grobid.trainer.UnitTrainer - outputPath for training data: /Users/lfoppiano/development/projects/grobid/grobid-home/tmp/units667241803472690077.train
+16:38:26.640 [main] INFO org.grobid.trainer.UnitTrainer - outputPath for evaluation data: /Users/lfoppiano/development/projects/grobid/grobid-home/tmp/units4813339367036143720.test
+16:38:26.640 [main] INFO org.grobid.trainer.UnitTrainer - 38 files
+16:38:26.641 [main] INFO org.grobid.trainer.UnitTrainer - hal-00924047.units.training.tei.xml
+16:38:26.668 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00851058.units.training.tei.xml
+16:38:26.685 [main] INFO org.grobid.trainer.UnitTrainer - 1404.7168.units.training.tei.xml
+16:38:26.695 [main] INFO org.grobid.trainer.UnitTrainer - 1001.4731.units.training.tei.xml
+16:38:26.697 [main] INFO org.grobid.trainer.UnitTrainer - trainingdata1.training.tei.xml
+16:38:26.704 [main] INFO org.grobid.trainer.UnitTrainer - hal-01429870-CC-BY.units.training.tei.xml
+16:38:26.709 [main] INFO org.grobid.trainer.UnitTrainer - nhess-6-1007-2006.units.training.tei.xml
+16:38:26.712 [main] INFO org.grobid.trainer.UnitTrainer - inserm-01196815.units.training.tei.xml
+16:38:26.713 [main] INFO org.grobid.trainer.UnitTrainer - 1408.2792.units.training.tei.xml
+16:38:26.717 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00721680.units.training.tei.xml
+16:38:26.719 [main] INFO org.grobid.trainer.UnitTrainer - EP-0505085-B2.units.training.tei.xml
+16:38:26.729 [main] INFO org.grobid.trainer.UnitTrainer - 1412.2117.units.training.tei.xml
+16:38:26.731 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00676663.units.training.tei.xml
+16:38:26.733 [main] INFO org.grobid.trainer.UnitTrainer - hal-00720564.units.training.tei.xml
+16:38:26.735 [main] INFO org.grobid.trainer.UnitTrainer - hal-00595947.units.training.tei.xml
+16:38:26.737 [main] INFO org.grobid.trainer.UnitTrainer - hal-00962359.units.training.tei.xml
+16:38:26.739 [main] INFO org.grobid.trainer.UnitTrainer - hal-01252076.units.training.tei.xml
+16:38:26.740 [main] INFO org.grobid.trainer.UnitTrainer - hal-00398330.units.training.tei.xml
+16:38:26.741 [main] INFO org.grobid.trainer.UnitTrainer - trainingdata0.training.tei.xml
+16:38:26.744 [main] INFO org.grobid.trainer.UnitTrainer - hal-01223150.units.training.tei.xml
+16:38:26.745 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00752141.units.training.tei.xml
+16:38:26.750 [main] INFO org.grobid.trainer.UnitTrainer - 1308.2125.units.training.tei.xml
+16:38:26.751 [main] INFO org.grobid.trainer.UnitTrainer - hal-01269917.units.training.tei.xml
+16:38:26.753 [main] INFO org.grobid.trainer.UnitTrainer - hal-00643787.units.training.tei.xml
+16:38:26.754 [main] INFO org.grobid.trainer.UnitTrainer - hal-01078051.units.training.tei.xml
+16:38:26.755 [main] INFO org.grobid.trainer.UnitTrainer - hal-01205501.units.training.tei.xml
+16:38:26.756 [main] INFO org.grobid.trainer.UnitTrainer - hal-01278907.units.training.tei.xml
+16:38:26.758 [main] INFO org.grobid.trainer.UnitTrainer - 1404.4640.units.training.tei.xml
+16:38:26.760 [main] INFO org.grobid.trainer.UnitTrainer - 12970_2015_Article_108.units.training.tei.xml
+16:38:26.762 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00508113.units.training.tei.xml
+16:38:26.764 [main] INFO org.grobid.trainer.UnitTrainer - hal-00915599.units.training.tei.xml
+16:38:26.765 [main] INFO org.grobid.trainer.UnitTrainer - 1609.04957.units.training.tei.xml
+16:38:26.766 [main] INFO org.grobid.trainer.UnitTrainer - hal-00987664.units.training.tei.xml
+16:38:26.767 [main] INFO org.grobid.trainer.UnitTrainer - hal-00082280.units.training.tei.xml
+16:38:26.768 [main] INFO org.grobid.trainer.UnitTrainer - hal-01321536.units.training.tei.xml
+16:38:26.770 [main] INFO org.grobid.trainer.UnitTrainer - hal-00535466.units.training.tei.xml
+16:38:26.771 [main] INFO org.grobid.trainer.UnitTrainer - halshs-01279855.units.training.tei.xml
+16:38:26.773 [main] INFO org.grobid.trainer.UnitTrainer - jpa-00251546.units.training.tei.xml
 	epsilon: 1.0E-7
 	window: 20
 	nb max iterations: 2000
@@ -75,111 +47,45 @@ Round 2
 * Load patterns
 * Load training data
    1000 sequences loaded
-   2000 sequences loaded
-   3000 sequences loaded
 * Initialize the model
 * Summary
-    nb train:    3118
+    nb train:    1578
     nb labels:   7
-    nb blocks:   4726
-    nb features: 33082
+    nb blocks:   1612
+    nb features: 11284
 * Train the model with l-bfgs
 * Save the model
 * Done
+16:38:27.521 [main] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/units/model.wapiti (size: 34449)
+[Wapiti] Loading model: "/Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/units/model.wapiti"
+Model path: /Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/units/model.wapiti
+Labeling took: 7 ms
 
 ===== Token-level results =====
 
 
-label                accuracy     precision    recall       f1     
+label                accuracy     precision    recall       f1
 
-<base>               92.81        97.52        92.49        94.94  
-<pow>                97.95        81.82        90           85.71  
-<prefix>             93.84        62.79        93.1         75     
+<base>               99.65        100          99.57        99.78
+<pow>                100          100          100          100
+<prefix>             99.65        96.77        100          98.36
 
-all fields           94.86        90.64        92.37        91.49   (micro average)
-                     94.86        80.71        91.86        85.22   (macro average)
-
-===== Field-level results =====
-
-label                accuracy     precision    recall       f1     
-
-<base>               77.97        77           82.8         79.79  
-<pow>                96.61        73.33        84.62        78.57  
-<prefix>             92.66        70.27        92.86        80     
-
-all fields           89.08        75           85.07        79.72   (micro average)
-                     89.08        73.53        86.76        79.45   (macro average)
-
-===== Instance-level results =====
-
-Total expected instances:   87
-Correct instances:          74
-Instance-level recall:      85.06
-
-Split, training and evaluation for org.grobid.core.GrobidModels$1@589b3632 model is realized in 3391 ms
-
-
-
-Round 3
-
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - 9 files
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - 1001.4731.units.training.tei.xml
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - 1404.4640.units.training.tei.xml
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - 1404.7168.units.training.tei.xml
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - 1412.2117.units.training.tei.xml
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - generated.training.1460634625418.tei.xml
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - liters.tei.xml
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - trainingdata1.tei.xml
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - trainingdata2.tei.xml
-12 Mar 2019 14:19.47 [INFO ] UnitTrainer               - trainingdata4.tei.xml
-	epsilon: 1.0E-7
-	window: 20
-	nb max iterations: 2000
-	nb threads: 12
-* Load patterns
-* Load training data
-   1000 sequences loaded
-   2000 sequences loaded
-   3000 sequences loaded
-* Initialize the model
-* Summary
-    nb train:    3166
-    nb labels:   7
-    nb blocks:   4646
-    nb features: 32522
-* Train the model with l-bfgs
-* Save the model
-* Done
-
-===== Token-level results =====
-
-
-label                accuracy     precision    recall       f1     
-
-<base>               83.84        81.25        79.27        80.25  
-<pow>                92.42        68.18        96.77        80     
-<prefix>             87.88        44.83        61.9         52     
-
-all fields           88.05        70.59        80.6         75.26   (micro average)
-                     88.05        64.75        79.32        70.75   (macro average)
+all fields           99.77        99.65        99.65        99.65   (micro average)
+                     99.77        98.92        99.86        99.38   (macro average)
 
 ===== Field-level results =====
 
-label                accuracy     precision    recall       f1     
+label                accuracy     precision    recall       f1
 
-<base>               68.24        55.38        59.02        57.14  
-<pow>                94.71        77.14        96.43        85.71  
-<prefix>             85.88        44.83        61.9         52     
+<base>               99.48        100          99.33        99.66
+<pow>                100          100          100          100
+<prefix>             99.48        96.77        100          98.36
 
-all fields           82.94        58.91        69.09        63.6    (micro average)
-                     82.94        59.12        72.45        64.95   (macro average)
+all fields           99.65        99.47        99.47        99.47   (micro average)
+                     99.65        98.92        99.78        99.34   (macro average)
 
 ===== Instance-level results =====
 
-Total expected instances:   39
-Correct instances:          13
-Instance-level recall:      33.33
-
-Split, training and evaluation for org.grobid.core.GrobidModels$1@589b3632 model is realized in 3502 ms
-
-
+Total expected instances:   138
+Correct instances:          137
+Instance-level recall:      99.28

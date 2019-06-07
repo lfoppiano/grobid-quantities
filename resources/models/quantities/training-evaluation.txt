@@ -1,65 +1,65 @@
-16:46:03.026 [main] INFO org.grobid.trainer.AbstractTrainer - sourcePathLabel: /Users/lfoppiano/development/nims/projects/grobid/grobid-quantities/resources/dataset/quantities/corpus/final
-16:46:03.026 [main] INFO org.grobid.trainer.AbstractTrainer - outputPath for training data: /Users/lfoppiano/development/nims/projects/grobid/grobid-home/tmp/quantities3054189596356952507.train
-16:46:03.026 [main] INFO org.grobid.trainer.AbstractTrainer - outputPath for evaluation data: /Users/lfoppiano/development/nims/projects/grobid/grobid-home/tmp/quantities4536229663999826856.test
-16:46:03.027 [main] INFO org.grobid.trainer.AbstractTrainer - 35 files
-16:46:03.027 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00851058.training.tei.xml
-16:46:03.274 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01429870-CC-BY.training.tei.xml
-16:46:03.348 [main] INFO org.grobid.trainer.AbstractTrainer - 12970_2015_Article_108.training.tei.xml
-16:46:03.447 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01269917.training.tei.xml
-16:46:03.576 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00643787.training.tei.xml
-16:46:03.712 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00721680.training.tei.xml
-16:46:03.716 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, ?
-16:46:03.751 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00082280.training.tei.xml
-16:46:03.799 [main] INFO org.grobid.trainer.AbstractTrainer - EP-0505067-B1.training.tei.xml
-16:46:03.858 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01252076.training.tei.xml
-16:46:03.930 [main] INFO org.grobid.trainer.AbstractTrainer - 1412.2117.training.tei.xml
-16:46:03.968 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00508113.training.tei.xml
-16:46:04.033 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00962359.training.tei.xml
-16:46:04.056 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00915599.training.tei.xml
-16:46:04.064 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, INFORMATION
-16:46:04.123 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01078051.training.tei.xml
-16:46:04.308 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00924047.training.tei.xml
-16:46:04.631 [main] INFO org.grobid.trainer.AbstractTrainer - 1404.4640.training.tei.xml
-16:46:04.809 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01278907.training.tei.xml
-16:46:04.920 [main] INFO org.grobid.trainer.AbstractTrainer - 1404.7168.training.tei.xml
-16:46:04.921 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure attribute name, UNIT
-16:46:04.921 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, date
-16:46:05.101 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01321536.training.tei.xml
-16:46:05.300 [main] INFO org.grobid.trainer.AbstractTrainer - 1001.4731.training.tei.xml
-16:46:05.673 [main] INFO org.grobid.trainer.AbstractTrainer - halshs-01279855.training.tei.xml
-16:46:05.679 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, 1960
-16:46:05.679 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.679 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.679 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.679 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.679 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.679 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.679 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.680 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.682 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.682 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.682 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.682 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.682 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.683 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.683 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
-16:46:05.818 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01223150.training.tei.xml
-16:46:05.935 [main] INFO org.grobid.trainer.AbstractTrainer - EP-0505085-B2.training.tei.xml
-16:46:06.076 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00752141.training.tei.xml
-16:46:06.134 [main] INFO org.grobid.trainer.AbstractTrainer - 1408.2792.training.tei.xml
-16:46:06.140 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, RESOLUTION
-16:46:06.140 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, RESOLUTION
-16:46:06.188 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00987664.training.tei.xml
-16:46:06.323 [main] INFO org.grobid.trainer.AbstractTrainer - EP-0505058-B1.training.tei.xml
-16:46:06.528 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00720564.training.tei.xml
-16:46:06.618 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00398330.training.tei.xml
-16:46:06.741 [main] INFO org.grobid.trainer.AbstractTrainer - jpa-00251546.training.tei.xml
-16:46:06.745 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, values
-16:46:06.810 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-01196815.training.tei.xml
-16:46:06.894 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00535466.training.tei.xml
-16:46:07.027 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00595947.training.tei.xml
-16:46:07.170 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00676663.training.tei.xml
-16:46:07.233 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01205501.training.tei.xml
+14:36:40.901 [main] INFO org.grobid.trainer.AbstractTrainer - sourcePathLabel: /Users/lfoppiano/development/projects/grobid/grobid-quantities/resources/dataset/quantities/corpus/final
+14:36:40.901 [main] INFO org.grobid.trainer.AbstractTrainer - outputPath for training data: /Users/lfoppiano/development/projects/grobid/grobid-home/tmp/quantities4640860713211384310.train
+14:36:40.901 [main] INFO org.grobid.trainer.AbstractTrainer - outputPath for evaluation data: /Users/lfoppiano/development/projects/grobid/grobid-home/tmp/quantities529406612433933657.test
+14:36:40.902 [main] INFO org.grobid.trainer.AbstractTrainer - 35 files
+14:36:40.903 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00851058.training.tei.xml
+14:36:41.085 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01429870-CC-BY.training.tei.xml
+14:36:41.150 [main] INFO org.grobid.trainer.AbstractTrainer - 12970_2015_Article_108.training.tei.xml
+14:36:41.234 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01269917.training.tei.xml
+14:36:41.326 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00643787.training.tei.xml
+14:36:41.452 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00721680.training.tei.xml
+14:36:41.455 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, ?
+14:36:41.482 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00082280.training.tei.xml
+14:36:41.521 [main] INFO org.grobid.trainer.AbstractTrainer - EP-0505067-B1.training.tei.xml
+14:36:41.570 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01252076.training.tei.xml
+14:36:41.630 [main] INFO org.grobid.trainer.AbstractTrainer - 1412.2117.training.tei.xml
+14:36:41.660 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00508113.training.tei.xml
+14:36:41.710 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00962359.training.tei.xml
+14:36:41.727 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00915599.training.tei.xml
+14:36:41.733 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, INFORMATION
+14:36:41.774 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01078051.training.tei.xml
+14:36:41.901 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00924047.training.tei.xml
+14:36:42.034 [main] INFO org.grobid.trainer.AbstractTrainer - 1404.4640.training.tei.xml
+14:36:42.129 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01278907.training.tei.xml
+14:36:42.263 [main] INFO org.grobid.trainer.AbstractTrainer - 1404.7168.training.tei.xml
+14:36:42.264 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure attribute name, UNIT
+14:36:42.264 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, date
+14:36:42.305 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01321536.training.tei.xml
+14:36:42.438 [main] INFO org.grobid.trainer.AbstractTrainer - 1001.4731.training.tei.xml
+14:36:42.604 [main] INFO org.grobid.trainer.AbstractTrainer - halshs-01279855.training.tei.xml
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, 1960
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.609 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.611 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.613 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.613 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.613 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.613 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.614 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.614 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, CURRENCY
+14:36:42.708 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01223150.training.tei.xml
+14:36:42.805 [main] INFO org.grobid.trainer.AbstractTrainer - EP-0505085-B2.training.tei.xml
+14:36:42.942 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00752141.training.tei.xml
+14:36:43.010 [main] INFO org.grobid.trainer.AbstractTrainer - 1408.2792.training.tei.xml
+14:36:43.013 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, RESOLUTION
+14:36:43.013 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, RESOLUTION
+14:36:43.055 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00987664.training.tei.xml
+14:36:43.143 [main] INFO org.grobid.trainer.AbstractTrainer - EP-0505058-B1.training.tei.xml
+14:36:43.289 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00720564.training.tei.xml
+14:36:43.369 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00398330.training.tei.xml
+14:36:43.447 [main] INFO org.grobid.trainer.AbstractTrainer - jpa-00251546.training.tei.xml
+14:36:43.450 [main] WARN org.grobid.trainer.sax.MeasureAnnotationSaxHandler - Unknown measure type, values
+14:36:43.491 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-01196815.training.tei.xml
+14:36:43.549 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00535466.training.tei.xml
+14:36:43.658 [main] INFO org.grobid.trainer.AbstractTrainer - hal-00595947.training.tei.xml
+14:36:43.752 [main] INFO org.grobid.trainer.AbstractTrainer - inserm-00676663.training.tei.xml
+14:36:43.794 [main] INFO org.grobid.trainer.AbstractTrainer - hal-01205501.training.tei.xml
 	epsilon: 1.0E-6
 	window: 20
 	nb max iterations: 2000
@@ -69,55 +69,55 @@
    1000 sequences loaded
 * Initialize the model
 * Summary
-    nb train:    1227
+    nb train:    1244
     nb labels:   17
-    nb blocks:   534695
-    nb features: 9090087
+    nb blocks:   544394
+    nb features: 9254970
 * Train the model with l-bfgs
 * Save the model
 * Done
-18:03:34.692 [main] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/lfoppiano/development/nims/projects/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti (size: 10595118)
-[Wapiti] Loading model: "/Users/lfoppiano/development/nims/projects/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti"
-Model path: /Users/lfoppiano/development/nims/projects/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti
-Labeling took: 2377 ms
+16:08:27.583 [main] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti (size: 10805658)
+[Wapiti] Loading model: "/Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti"
+Model path: /Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/quantities/model.wapiti
+Labeling took: 1814 ms
 
 ===== Token-level results =====
 
 
-label                accuracy     precision    recall       f1     
+label                accuracy     precision    recall       f1
 
-<unitLeft>           99.88        98.94        95.23        97.05  
-<unitRight>          99.96        66.67        66.67        66.67  
-<valueAtomic>        99.23        86.63        87.81        87.22  
-<valueBase>          100          95.12        100          97.5   
-<valueLeast>         99.73        82.81        65.43        73.1   
-<valueList>          99.77        77.69        56.63        65.51  
-<valueMost>          99.67        78.05        73.44        75.68  
-<valueRange>         100          96.67        100          98.31  
+<unitLeft>           99.84        98.57        94.29        96.38
+<unitRight>          99.98        100          50           66.67
+<valueAtomic>        99.28        83.55        87.38        85.42
+<valueBase>          99.93        90.16        73.33        80.88
+<valueLeast>         99.79        88.96        86.05        87.48
+<valueList>          99.78        78.95        46.15        58.25
+<valueMost>          99.75        91.52        87.34        89.38
+<valueRange>         99.99        96.55        98.25        97.39
 
-all fields           99.78        88.81        85.08        86.9    (micro average)
-                     99.78        85.32        80.65        82.63   (macro average)
+all fields           99.79        90.25        87.08        88.64   (micro average)
+                     99.79        91.03        77.85        82.73   (macro average)
 
 ===== Field-level results =====
 
-label                accuracy     precision    recall       f1     
+label                accuracy     precision    recall       f1
 
-<unitLeft>           98.7         97.8         95.11        96.43  
-<unitRight>          99.43        59.09        54.17        56.52  
-<valueAtomic>        94.29        87.39        87.17        87.28  
-<valueBase>          99.94        94.12        94.12        94.12  
-<valueLeast>         97.91        81.89        67.1         73.76  
-<valueList>          98.42        76.06        58.06        65.85  
-<valueMost>          97.65        81.68        64.46        72.05  
-<valueRange>         99.94        94.44        94.44        94.44  
+<unitLeft>           98.65        96.97        95.69        96.33
+<unitRight>          99.75        100          38.46        55.56
+<valueAtomic>        94.7         85.09        85.81        85.45
+<valueBase>          99.54        76.67        74.19        75.41
+<valueLeast>         98.38        88.46        83.42        85.87
+<valueList>          98.8         85.71        52.17        64.86
+<valueMost>          97.98        88.79        82.85        85.71
+<valueRange>         99.91        93.75        96.77        95.24
 
-all fields           98.29        89.59        84.6         87.02   (micro average)
-                     98.29        84.06        76.83        80.06   (macro average)
+all fields           98.46        90.15        86.84        88.47   (micro average)
+                     98.46        89.43        76.17        80.55   (macro average)
 
 ===== Instance-level results =====
 
-Total expected instances:   305
-Correct instances:          212
-Instance-level recall:      69.51
+Total expected instances:   288
+Correct instances:          201
+Instance-level recall:      69.79
 
-Split, training and evaluation for org.grobid.core.GrobidModels$1@55a561cf model is realized in 4655698 ms
+Split, training and evaluation for org.grobid.core.GrobidModels$1@55a561cf model is realized in 5509826 ms
