@@ -6,8 +6,6 @@ import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.grobid.core.engines.Engine;
 import org.grobid.core.engines.QuantitiesEngine;
-import org.grobid.core.engines.QuantityParser;
-import org.grobid.core.engines.training.QuantityTrainingData;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidProperties;
@@ -18,15 +16,15 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.Arrays;
 
-public class BatchProcessingCommand extends ConfiguredCommand<GrobidQuantitiesConfiguration> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BatchProcessingCommand.class);
+public class UnitBatchProcessingCommand extends ConfiguredCommand<GrobidQuantitiesConfiguration> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UnitBatchProcessingCommand.class);
     private final static String INPUT_DIRECTORY = "Input directory";
     private final static String OUTPUT_DIRECTORY = "Output directory";
     private final static String RECURSIVE = "recursive";
 
 
-    public BatchProcessingCommand() {
-        super("batch", "Process files in batch");
+    public UnitBatchProcessingCommand() {
+        super("batchUnits", "Process units files in batch");
     }
 
     @Override
@@ -77,9 +75,9 @@ public class BatchProcessingCommand extends ConfiguredCommand<GrobidQuantitiesCo
 
         String inputDirectory = namespace.get(INPUT_DIRECTORY);
         String outputDirectory = namespace.get(OUTPUT_DIRECTORY);
-        boolean isRecursive = namespace.get(OUTPUT_DIRECTORY);
+        boolean isRecursive = namespace.get(RECURSIVE);
 
-        new QuantitiesEngine().batchProcess(inputDirectory, outputDirectory, isRecursive);
+        new QuantitiesEngine().unitBatchProcess(inputDirectory, outputDirectory, isRecursive);
 
     }
 }

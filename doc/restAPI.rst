@@ -1,0 +1,274 @@
+Rest API Documentation
+======================
+
+This page describes the Grobid-quantities REST API.
+
+Response description
+~~~~~~~~~~~~~~~~~~~~
+The response is structured following a simple schema composed two attributes: `runtime` and `measurements` representing the request duration server side (in ms) and the list of extracted measurements, respectively.
+
+
+The basic JSON structure is the following
+::
+  {
+     "runtime": "123
+     "measurements": [
+        {
+            "type": ...
+            "quantity*": ...
+            "quantified": ...
+            "pages": ...
+        }
+     ]
+  }
+
+
+constituted by the following components:
+ - *type* describes the measurement nature, in particular it can be ``value``, ``interval`` or ``list``. The ``quantity*`` attribute name follows the table below.
+ - *quantity* represents the raw quantity
+ - *quantified* contains the quantified object/substance in both raw and normalised expression
+ - *pages* provides the list of pages when processing a PDF document
+
+
+============  ==============================
+type            quantity attributes
+============  ==============================
+value           quantity
+interval        quantityLeast, quantityMost
+list            quantities
+============  ==============================
+
+**Note**: ranges (``10+-3``) are represented directly as intervals (``7 to 13``) in JSON.
+
+The quantity object follow the schema
+::
+  "quantity": {
+    "type": "time",
+    "rawValue": "two",
+    "rawUnit": {...}
+    "parsedValue": {...}
+    "normalizedQuantity": 120
+    "normalizedUnit": {...}
+    "offsetStart": 7,
+    "offsetEnd": 10
+  }
+
+which has three main objects:
+ - rawValue and rawUnit contains information as they appear in input
+ - parsedValue and parsedUnit contains parsed information (note than parsedUnit is ignored when the normalisation is successfully executed)
+ - normalisedQuantity and normalisedUnit contains normalisation information
+
+Process Quantities from Text
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Process text and extract and normalise measurements. The access point can be reach by:
+::
+  POST    /service/processQuantityText
+
+By processing our classical example ``I've lost two minutes``, it will returns a JSON response looking like:
+::
+  {
+    "runtime": 52,
+    "measurements": [
+        {
+            "type": "value",
+            "quantity": {
+                "type": "time",
+                "rawValue": "two",
+                "rawUnit": {
+                    "name": "minutes",
+                    "type": "time",
+                    "system": "non SI",
+                    "offsetStart": 11,
+                    "offsetEnd": 18
+                },
+                "parsedValue": {
+                    "numeric": 2,
+                    "structure": {
+                        "type": "ALPHABETIC",
+                        "formatted": "two"
+                    },
+                    "parsed": "two"
+                },
+                "normalizedQuantity": 120,
+                "normalizedUnit": {
+                    "name": "s",
+                    "type": "time",
+                    "system": "SI base"
+                },
+                "offsetStart": 7,
+                "offsetEnd": 10
+            }
+        }
+    ]
+  }
+
+
+
+Process Quantities from PDF
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Process PDF and generate annotations of measurements. The results are annotations which, by containing coordinate information, can be used to annotate directly a PDF.
+The access point can be reach by:
+::
+   POST    /service/annotateQuantityPDF
+
+and the file can be supplied using the ``input`` FormData parameter.
+
+The result follow the usual schema described above. For this case the resulting JSON contains the list of *pages* and their dimensions. Each measurement provides the coordinate for annotating each part of the entity on the PDF.
+::
+  {
+    "runtime": 32186,
+    "pages": [
+        {
+            "page_height": 792,
+            "page_width": 612
+        },
+        [...]
+    ],
+    "measurements": [
+        {
+            "type": "value",
+            "quantity": {
+                "type": "time",
+                "rawValue": "many",
+                "rawUnit": {
+                    "name": "years",
+                    "type": "time",
+                    "system": "non SI",
+                    "offsetStart": 2730,
+                    "offsetEnd": 2735
+                },
+                "parsedValue": {
+                    "numeric": 0,
+                    "structure": {
+                        "type": "ALPHABETIC",
+                        "formatted": "many"
+                    },
+                    "parsed": "many"
+                },
+                "normalizedQuantity": 0,
+                "normalizedUnit": {
+                    "name": "s",
+                    "type": "time",
+                    "system": "SI base"
+                },
+                "offsetStart": 2725,
+                "offsetEnd": 2729
+            },
+            "boundingBoxes": [
+                {
+                    "p": 2,
+                    "x": 169.346,
+                    "y": 422.195,
+                    "w": 20.9665,
+                    "h": 8.341
+                },
+                {
+                    "p": 2,
+                    "x": 194.178,
+                    "y": 422.195,
+                    "w": 18.453750000000003,
+                    "h": 8.341
+                }
+            ]
+        },
+        [..]
+    ]
+  }
+
+
+Parse measures
+~~~~~~~~~~~~~~
+This function takes in input a partially structured measurement and returns the normalised version.
+
+It can be reached by
+::
+  POST    /service/parseMeasure
+
+with ``raw body`` with the following schema:
+::
+  {
+     "from" : "10",
+     "to" : "20",
+     "type" : "length",
+     "unit": "km"
+   }
+
+
+
+It will returns something like:
+::
+  {
+    "runtime": 2120,
+    "measurements": [
+        {
+            "type": "interval",
+            "quantityLeast": {
+                "type": "length",
+                "rawValue": "10",
+                "rawUnit": {
+                    "name": "km"
+                },
+                "normalizedQuantity": 10,
+                "normalizedUnit": {
+                    "name": "m",
+                    "type": "length",
+                    "system": "SI base"
+                }
+            },
+            "quantityMost": {
+                "type": "length",
+                "rawValue": "20",
+                "rawUnit": {
+                    "name": "km"
+                },
+                "normalizedQuantity": 20,
+                "normalizedUnit": {
+                    "name": "m",
+                    "type": "length",
+                    "system": "SI base"
+                }
+            }
+        }
+    ]
+  }
+
+Parse units from Text
+~~~~~~~~~~~~~~~~~~~~~
+This entry point is used to structure units.
+
+It can be accessed at:
+::
+  POST    /service/processUnitsText
+
+The following text ``cm^2∕W`` with a ``FormParam`` parameter ``text`` will be structured in the following products:
+::
+  [
+    {
+        "prefix": "c",
+        "base": "m",
+        "pow": "^",
+        "rawTaggedValue": "<prefix>c</prefix><base>m</base>^<pow>2</pow>"
+    },
+    {
+        "prefix": "",
+        "base": "∕",
+        "pow": "",
+        "rawTaggedValue": "<base>∕</base>"
+    },
+    {
+        "prefix": "",
+        "base": "W",
+        "pow": "",
+        "rawTaggedValue": "<base>W</base>"
+    }
+  ]
+
+Service checks
+~~~~~~~~~~~~~~
+
+You can check whether the service is up and running by opening the following URL:
+
+- GET ``http://yourhost:8060/service/health`` will return you the result of the health check
+
+- GET ``http://yourhost:8060/service/isalive`` will return true/false whether the service is up and running

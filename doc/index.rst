@@ -14,6 +14,7 @@ Grobid-quantities is a ML-based application for identification, parsing and norm
 
   introduction.rst
   gettingStarted.rst
+  restAPI.rst
   guidelines.rst
   training.rst
   references.rst

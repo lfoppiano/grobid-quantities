@@ -8,15 +8,13 @@ import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.apache.commons.lang3.ArrayUtils;
 import org.grobid.service.QuantitiesServiceModule;
+import org.grobid.service.command.UnitBatchProcessingCommand;
 import org.grobid.service.command.TrainingGenerationCommand;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesConfiguration> {
@@ -43,7 +41,7 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         bootstrap.addBundle(new MultiPartBundle());
         bootstrap.addBundle(new AssetsBundle("/web", "/", "index.html", "assets"));
         bootstrap.addCommand(new TrainingGenerationCommand());
-//        bootstrap.addCommand(new BatchProcessingCommand());
+        bootstrap.addCommand(new UnitBatchProcessingCommand());
     }
 
     @Override

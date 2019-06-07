@@ -7,9 +7,9 @@ import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.pdfbox.io.IOUtils;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.GrobidAnalyzer;
-import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.*;
 import org.grobid.core.document.Document;
 import org.grobid.core.document.DocumentPiece;
@@ -22,23 +22,27 @@ import org.grobid.core.layout.LayoutTokenization;
 import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
+import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.UnitUtilities;
-import org.grobid.core.utilities.GrobidProperties;
-
 import org.grobid.service.exceptions.GrobidServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.Response;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.grobid.trainer.CRFPPGenericTrainer.LOGGER;
 
 /**
  * This class represent the aggregated processing applying multiple parsers or combining PDF extraction
@@ -47,6 +51,7 @@ import java.util.stream.Collectors;
 public class QuantitiesEngine {
 
     private QuantityParser quantityParser;
+    private UnitParser unitParser;
     private EngineParsers parsers;
 
     private static QuantitiesEngine instance;
@@ -55,6 +60,7 @@ public class QuantitiesEngine {
     public QuantitiesEngine() {
         GrobidProperties.getInstance();
         this.quantityParser = QuantityParser.getInstance();
+        this.unitParser = UnitParser.getInstance();
         this.parsers = new EngineParsers();
         instance = this;
     }
@@ -68,6 +74,10 @@ public class QuantitiesEngine {
 
     private static synchronized QuantitiesEngine getNewInstance() {
         return new QuantitiesEngine();
+    }
+
+    public List<UnitBlock> parseUnits(String text) {
+        return unitParser.tagUnit(text);
     }
 
     public MeasurementsResponse processPdf(InputStream inputStream) {
@@ -87,11 +97,9 @@ public class QuantitiesEngine {
                             .consolidateHeader(0)
                             .consolidateCitations(0)
                             .build();
-            System.out.println("before documentSource: " + originFile.getPath());
             DocumentSource documentSource =
                     DocumentSource.fromPdf(originFile);
 
-            System.out.println("after documentSource");        
             doc = parsers.getSegmentationParser().processing(documentSource, config);
 
             // In the following, we process the relevant textual content of the document
@@ -328,5 +336,66 @@ public class QuantitiesEngine {
 
     public void batchProcess(String inputDirectory, String outputDirectory, boolean isRecursive) {
         throw new NotImplementedException("Not yet implemented");
+    }
+
+    /**
+     * Processes a file with units
+     */
+    public void unitBatchProcess(String inputDirectory, String outputDirectory, boolean isRecursive) {
+        Path inputPath = Paths.get(inputDirectory);
+        File[] refFiles = inputPath.toFile().listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.toLowerCase().endsWith(".txt");
+            }
+        });
+
+        if (refFiles == null) {
+            return;
+        }
+
+        LOGGER.info(refFiles.length + " files");
+
+
+        for (File inputFile : refFiles) {
+            Writer outputWriter = null;
+            try {
+                // the file for writing the training data
+                OutputStream os2 = null;
+
+                if (outputDirectory != null) {
+                    os2 = new FileOutputStream(outputDirectory + File.separator + inputFile.getName() + ".xml");
+                    outputWriter = new OutputStreamWriter(os2, UTF_8);
+                } else {
+                    return;
+                }
+
+                outputWriter.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n");
+                outputWriter.write("<units>\n");
+
+                try (Stream<String> stream = Files.lines(Paths.get(inputFile.getAbsolutePath()))) {
+
+                    List<String> processedUnits = stream.map(
+                            s -> unitParser.tagUnit(s).stream().map(UnitBlock::getRawTaggedValue).collect(Collectors.joining())
+                    ).collect(Collectors.toList());
+
+                    for (String processedUnit : processedUnits) {
+                        outputWriter.write("<unit>");
+                        outputWriter.write(processedUnit);
+                        outputWriter.write("</unit>");
+                        outputWriter.write("\n");
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                outputWriter.write("</units>\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                IOUtils.closeQuietly(outputWriter);
+            }
+        }
     }
 }

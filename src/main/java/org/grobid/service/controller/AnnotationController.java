@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.grobid.core.data.MeasurementsResponse;
+import org.grobid.core.data.UnitBlock;
 import org.grobid.core.engines.QuantitiesEngine;
 import org.grobid.core.engines.QuantityParser;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
@@ -14,6 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
+import java.util.List;
 
 @Timed
 @Singleton
@@ -22,6 +24,7 @@ public class AnnotationController {
     private static final String PATH_IS_ALIVE = "isalive";
 
     private static final String PATH_QUANTITY_TEXT = "processQuantityText";
+    private static final String PATH_UNITS_TEXT = "processUnitsText";
     private static final String PATH_QUANTITY_XML = "processQuantityXML";
     private static final String PATH_ANNOTATE_QUANTITY_PDF = "annotateQuantityPDF";
     private static final String PATH_PARSE_MEASURE = "parseMeasure";
@@ -84,5 +87,12 @@ public class AnnotationController {
         MeasurementsResponse response = engine.processJson(json);
 
         return response.toJson();
+    }
+
+    @Path(PATH_UNITS_TEXT)
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    public List<UnitBlock> processUnits(@FormDataParam("text") String text) {
+        return engine.parseUnits(text);
     }
 }
