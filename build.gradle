@@ -11,7 +11,7 @@ buildscript {
         classpath group: 'net.researchgate', name: 'gradle-release', version: '2.6.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.3'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
     }
 }
 
@@ -151,7 +151,7 @@ configurations.all {
 //    exclude '**/**IntegrationTest**'
 //}
 
-task unitTest( type: Test ) {
+task unitTest(type: Test) {
     exclude '**/**IntegrationTest**'
 }
 
@@ -208,16 +208,12 @@ shadowJar {
 
 jar {
     dependsOn mainJar
-    enabled false
 }
 
 artifacts {
-//    archives shadowJar
+    archives shadowJar
     archives mainJar
 }
-
-distZip.classifier = 'application'
-distTar.classifier = 'application'
 
 task copyModels(type: Copy) {
     from "${rootDir}/resources/models"
