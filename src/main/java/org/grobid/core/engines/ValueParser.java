@@ -157,7 +157,7 @@ public class ValueParser extends AbstractParser {
         ValueBlock parsedValue = null;
 
         try {
-            text = text.replace("\n", "");
+            text = text.replace("\n\r", " ");
             List<LayoutToken> tokenizations = new ArrayList<>();
 
             String ress = null;
@@ -167,7 +167,7 @@ public class ValueParser extends AbstractParser {
                 OffsetPosition position = new OffsetPosition();
                 position.start = text.indexOf(character);
                 position.end = text.indexOf(character) + 1;
-                LayoutToken lt = new LayoutToken(UnicodeUtil.normaliseTextAndRemoveSpaces(String.valueOf(character)));
+                LayoutToken lt = new LayoutToken(UnicodeUtil.normaliseText(String.valueOf(character)));
                 tokenizations.add(lt);
             }
 

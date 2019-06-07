@@ -7,7 +7,7 @@ public class FeaturesVectorValues {
     public String value;                        // lexical feature
     public boolean isUpperCase = false;
     public boolean isDigit = false;
-//    public boolean isKnownOperationToken = false;
+    //    public boolean isKnownOperationToken = false;
     public String label = null;                 // label if known
 
     // one of NOPUNCT, OPENBRACKET, ENDBRACKET, DOT, COMMA, HYPHEN, QUOTE, ASTERISK, PUNCT (default)
@@ -41,7 +41,7 @@ public class FeaturesVectorValues {
 //        } else {
 //            res.append(" ").append(0);
 //        }
-        
+
         if (isNotEmpty(label)) {
             res.append(" ").append(label);
         }
@@ -85,7 +85,7 @@ public class FeaturesVectorValues {
             featuresVector.punctType = "EXPONENT";
         } else if (character.equals("*")) {
             featuresVector.punctType = "ASTERISK";
-        }else {
+        } else {
             featuresVector.punctType = "NOPUNCT";
         }
 

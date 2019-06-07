@@ -28,14 +28,32 @@ public class QuantityLexiconIntegrationTest {
     }
 
     @Test
-    public void testInUnitDictionary() throws Exception {
+    public void testInUnitDictionary_meter() throws Exception {
         String input = "meter";
         boolean test = target.inUnitDictionary(input);
-        assertEquals("Problem with inUnitDictionary", test, true);
+        assertThat(test, is(true));
 
         input = "m";
         test = target.inUnitDictionary(input);
-        assertEquals("Problem with inUnitDictionary", test, true);
+        assertThat(test, is(true));
+
+        input = "m";
+        test = target.inUnitDictionary(input);
+        assertThat(test, is(true));
+    }
+
+    @Test
+    public void testInUnitDictionary_weight() throws Exception {
+        String input = "kg";
+        boolean test = target.inUnitDictionary(input);
+        assertThat(test, is(true));
+    }
+
+    @Test
+    public void testInUnitDictionary_pressure() throws Exception {
+        String input = "pa";
+        boolean test = target.inUnitDictionary(input);
+        assertThat(test, is(true));
     }
 
     @Test

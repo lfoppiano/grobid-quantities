@@ -217,6 +217,23 @@ public class UnitParserIntegrationTest {
     }
 
     @Test
+    public void testTagUnit13() throws Exception {
+
+        String input = "mol dm–3";
+        List<UnitBlock> output = target.tagUnit(input, false);
+        System.out.println(input + " -> " + output);
+
+        assertThat(output.size(), is(2));
+        assertThat(output.get(0).getPrefix(), is("f"));
+        assertThat(output.get(0).getBase(), is("m"));
+        assertThat(output.get(0).getPow(), is(""));
+        assertThat(output.get(1).getPrefix(), is(""));
+        assertThat(output.get(1).getBase(), is("g"));
+        assertThat(output.get(1).getPow(), is("-2"));
+    }
+
+
+    @Test
     public void resultExtraction_kgmm2_liters() throws Exception {
         String result = "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
                 "g\t0\t0\t0\t0\tNOPUNCT\t0\tI-<base>\n" +
@@ -261,6 +278,8 @@ public class UnitParserIntegrationTest {
         assertThat(blocks.get(0).getBase(), is("°C"));
         assertThat(blocks.get(1).getBase(), is("h"));
         assertThat(blocks.get(1).getPow(), is("-1"));
+        assertThat(blocks.get(0).getRawTaggedValue(), is("<base>°C</base>"));
+        assertThat(blocks.get(1).getRawTaggedValue(), is("<base>h</base><pow>-1</pow>"));
     }
 
     public static List<LayoutToken> generateTokenisation(String input) {

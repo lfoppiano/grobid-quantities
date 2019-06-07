@@ -15,8 +15,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.upperCase;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.lexicon.LexiconLoader.loadPrefixes;
 import static org.grobid.core.lexicon.LexiconLoader.readJsonFile;
 
@@ -289,10 +288,10 @@ public class QuantityLexicon {
     }
 
     private void addToUnitTokens(String word) {
-        word = word.trim().toLowerCase();
+        word = trim(word);
         if ((word.length() > 0) && !unitTokens.contains(word)) {
             // we don't add pure digit sub-token and token delimiters
-            if ((TextUtilities.countDigit(word) != word.length()) && (QuantityAnalyzer.DELIMITERS.indexOf(word) == -1)) {
+            if ((TextUtilities.countDigit(word) != word.length()) && (!QuantityAnalyzer.DELIMITERS.contains(word))) {
                 unitTokens.add(word);
                 unitTokensLowerCase.add(word.toLowerCase());
             }
@@ -451,7 +450,7 @@ public class QuantityLexicon {
     }
 
     public boolean inUnitDictionaryCaseInsensitive(String s) {
-        return unitTokensLowerCase.contains(s.toLowerCase());
+        return unitTokensLowerCase.contains(lowerCase(s));
     }
 
     /**

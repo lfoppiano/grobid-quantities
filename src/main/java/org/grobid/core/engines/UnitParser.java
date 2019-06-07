@@ -1,5 +1,7 @@
 package org.grobid.core.engines;
 
+import com.google.common.collect.Iterables;
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
@@ -19,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
+import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_OTHER;
+import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_POW;
 
 /**
  * Created by lfoppiano on 20.02.16.
@@ -59,26 +62,22 @@ public class UnitParser extends AbstractParser {
         if (isBlank(text)) {
             return null;
         }
-
-
-        //Remove spaces. It's a workaround (to be check whether it is working) because spaces are causing troubles
-//        text = text.replaceAll(" ", "");
         List<UnitBlock> units = new ArrayList<>();
 
         try {
-            //text = text.replace("\n", " "); // temporary fix... 
-            text = text.replace("\n", "");
+            String textPreprocessed = text.replace("\r\n", " ");
+            textPreprocessed = UnicodeUtil.normaliseText(textPreprocessed);
             List<LayoutToken> tokenizations = new ArrayList<>();
 
             String ress = null;
             List<String> characters = new ArrayList<>();
             List<OffsetPosition> unitTokenPositions = new ArrayList<>();
-            for (char character : text.toCharArray()) {
+            for (char character : textPreprocessed.toCharArray()) {
                 characters.add(String.valueOf(character));
                 OffsetPosition position = new OffsetPosition();
-                position.start = text.indexOf(character);
-                position.end = text.indexOf(character) + 1;
-                LayoutToken lt = new LayoutToken(UnicodeUtil.normaliseTextAndRemoveSpaces(String.valueOf(character)));
+                position.start = textPreprocessed.indexOf(character);
+                position.end = textPreprocessed.indexOf(character) + 1;
+                LayoutToken lt = new LayoutToken(String.valueOf(character));
                 tokenizations.add(lt);
 
                 unitTokenPositions.add(position);
@@ -102,8 +101,7 @@ public class UnitParser extends AbstractParser {
     /**
      * Extract identified quantities from a labelled text.
      */
-    public List<UnitBlock> resultExtraction(String result,
-                                            List<LayoutToken> tokenizations) {
+    public List<UnitBlock> resultExtraction(String result, List<LayoutToken> tokenizations) {
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.UNITS, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
@@ -113,11 +111,13 @@ public class UnitParser extends AbstractParser {
         int currentPow = 1;
         boolean startUnit = false;
         TaggingLabel previousTag = null;
+        List<LayoutToken> previousLayouts = null;
 
         List<UnitBlock> units = new ArrayList<>();
         UnitBlock unitBlock = new UnitBlock();
 
         StringBuilder rawTaggedValue = new StringBuilder();
+
 
         for (TaggingTokenCluster cluster : clusters) {
             if (cluster == null) {
@@ -125,15 +125,8 @@ public class UnitParser extends AbstractParser {
             }
 
             TaggingLabel clusterLabel = cluster.getTaggingLabel();
-            String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens());
-
-            if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
-                rawTaggedValue.append(clusterLabel.getLabel());
-            }
-            rawTaggedValue.append(clusterContent);
-            if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
-                rawTaggedValue.append(clusterLabel.getLabel().replace("<", "</"));
-            }
+            List<LayoutToken> theTokens = cluster.concatTokens();
+            String clusterContent = LayoutTokensUtil.toText(theTokens).trim();
 
             if (clusterLabel.equals(QuantitiesTaggingLabels.UNIT_VALUE_PREFIX)) {
                 if (!startUnit) {
@@ -142,7 +135,9 @@ public class UnitParser extends AbstractParser {
                     unitBlock.setRawTaggedValue(rawTaggedValue.toString());
                     units.add(unitBlock);
                     unitBlock = new UnitBlock();
+                    rawTaggedValue = new StringBuilder();
                 }
+                appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                 unitBlock.setPrefix(clusterContent);
                 LOGGER.debug(clusterContent + "(Pr)");
 
@@ -155,40 +150,63 @@ public class UnitParser extends AbstractParser {
                         unitBlock.setRawTaggedValue(rawTaggedValue.toString());
                         units.add(unitBlock);
                         unitBlock = new UnitBlock();
+                        rawTaggedValue = new StringBuilder();
                     }
 
                     if (denominator) {
                         unitBlock.setPow("-1");
                     }
                 }
+                appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                 unitBlock.setBase(clusterContent);
                 LOGGER.debug(clusterContent + "(B)");
             } else if (clusterLabel.equals(UNIT_VALUE_OTHER)) {
+                rawTaggedValue.append(clusterContent);
                 LOGGER.debug(clusterContent + "(O)");
             } else if (clusterLabel.equals(UNIT_VALUE_POW)) {
                 if (clusterContent.equals("/")) {
                     denominator = true;
                 } else if (clusterContent.endsWith("/")) {
                     denominator = true;
+                    appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                     unitBlock.setPow(clusterContent.replace("/", ""));
                 } else if (clusterContent.equals("*")) {
                     //nothing to do
                 } else {
-                    if (denominator == true) {
+                    if (denominator) {
+                        appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                         unitBlock.setPow("-" + clusterContent);
                     } else {
+                        appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                         unitBlock.setPow(clusterContent);
                     }
                 }
                 LOGGER.debug(clusterContent + "(P)");
             }
             previousTag = clusterLabel;
+            previousLayouts = theTokens;
+        }
+        if (denominator) {
+            appendRawTaggedValue(rawTaggedValue, QuantitiesTaggingLabels.UNIT_VALUE_POW, "-1", addSpace(previousLayouts));
         }
 
         unitBlock.setRawTaggedValue(rawTaggedValue.toString());
         units.add(unitBlock);
 
         return units;
+    }
+
+    private boolean addSpace(List<LayoutToken> theTokens) {
+        return CollectionUtils.isNotEmpty(theTokens) && " ".equals(Iterables.getLast(theTokens).getText());
+    }
+
+    private void appendRawTaggedValue(StringBuilder rawTaggedValue, TaggingLabel clusterLabel, String clusterContent, boolean spaceAfter) {
+        rawTaggedValue.append(clusterLabel.getLabel());
+        rawTaggedValue.append(clusterContent);
+        rawTaggedValue.append(clusterLabel.getLabel().replace("<", "</"));
+        if (spaceAfter) {
+            rawTaggedValue.append(" ");
+        }
     }
 
 
