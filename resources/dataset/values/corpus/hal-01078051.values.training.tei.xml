@@ -16,7 +16,7 @@
 	<value><alpha>one</alpha></value>
 	<value><alpha>two</alpha></value>
 	<value><number>0</number></value>
-	<value><number>1/ √ 2</number></value>
+<!--	<value><number>1/ √ 2</number></value>-->
 	<value><number>0</number></value>
 	<value><number>1</number></value>
 	<value><number>1</number></value>
@@ -25,13 +25,14 @@
 	<value><number>111</number></value>
 	<value><number>1</number></value>
 	<value><number>3750</number></value>
-	<value><number>1.5</number><time>1</time><number>9 </number><time>0.</time><number>500</number></value>
+	<value><number>1.519</number></value>
+	<value><number>0.500</number></value>
 	<value><number>231.65</number></value>
 	<value><number>0.076</number></value>
-	<value><number>20</number><time>4</time><number>.85</number></value>
+	<value><number>204.85</number></value>
 	<value><number>0.084</number></value>
 	<value><number>0.003</number></value>
-	<value><number>79. </number><time>• </time><number>2</number></value>
+<!--	<value><number>79. </number><time>• </time><number>2</number></value>-->
 	<value><alpha>zero</alpha></value>
 	<value><alpha>three</alpha></value>
 	<value><number>1360</number></value>
@@ -58,9 +59,9 @@
 	<value><number>0.8</number></value>
 	<value><alpha>zero</alpha></value>
 	<value><number>0.1</number></value>
-	<value><number>5</number><time>5 ppm</time></value>
-	<value><number>11</number><time>5 ppm</time></value>
-	<value><number>2</number><time>9 ppm</time></value>
+	<value><number>55</number> ppm</value>
+	<value><number>115</number> ppm</value>
+	<value><number>29</number> ppm</value>
 	<value><number>0</number></value>
 	<value><number>3</number></value>
 	<value><number>0</number></value>

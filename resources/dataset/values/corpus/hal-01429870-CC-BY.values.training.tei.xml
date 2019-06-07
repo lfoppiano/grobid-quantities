@@ -80,8 +80,8 @@
 	<value><number>28</number></value>
 	<value><number>60</number></value>
 	<value><number>−11</number></value>
-	<value><number>+11</number></value>
-	<value><number>+22</number></value>
+	<value>+<number>11</number></value>
+	<value>+<number>22</number></value>
 	<value>∼<number>0.7</number></value>
 	<value><number>40</number></value>
 </values>
