@@ -2,6 +2,8 @@ package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.util.BufferRecyclers;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * This class is responsible to hold the structured representation of a value expressed in
@@ -242,6 +244,36 @@ public class ValueBlock {
         TIME,
         UNKNOWN
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ValueBlock that = (ValueBlock) o;
+
+        return new EqualsBuilder()
+                .append(rawValue, that.rawValue)
+                .append(number, that.number)
+                .append(base, that.base)
+                .append(pow, that.pow)
+                .append(exp, that.exp)
+                .append(time, that.time)
+                .append(alpha, that.alpha)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(rawValue)
+                .append(number)
+                .append(base)
+                .append(pow)
+                .append(exp)
+                .append(time)
+                .append(alpha)
+                .toHashCode();
+    }
 }
-
-
