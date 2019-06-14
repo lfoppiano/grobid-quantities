@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 /**
  * Created by lfoppiano on 21.02.16.
@@ -165,7 +166,6 @@ public class UnitTrainer extends AbstractTrainer {
                 }
             }
 
-
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);
         } finally {
@@ -203,5 +203,7 @@ public class UnitTrainer extends AbstractTrainer {
 
         Trainer trainer = new UnitTrainer();
         AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
+//        AbstractTrainer.runTraining(trainer);
+//        AbstractTrainer.runEvaluation(trainer);
     }
 }

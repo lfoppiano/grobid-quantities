@@ -9,7 +9,7 @@ import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.Value;
-import org.grobid.core.data.normalization.NormalizationException;
+import org.grobid.core.data.normalization.NormalisationException;
 import org.grobid.core.data.normalization.QuantityNormalizer;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
@@ -250,7 +250,7 @@ public class QuantityParser extends AbstractParser {
             if (quantity1 != null) {
                 quantity.setNormalizedQuantity(quantity1);
             }
-        } catch (NormalizationException ne) {
+        } catch (NormalisationException ne) {
             final String rawName = quantity.getRawUnit() != null ? quantity.getRawUnit().getRawName() : null;
             LOGGER.warn("Could not normalize the value: '" + quantity.getRawValue()
                     + "' with unit '" + rawName + "'. ", ne.getMessage());

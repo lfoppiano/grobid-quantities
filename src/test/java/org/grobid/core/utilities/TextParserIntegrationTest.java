@@ -17,8 +17,9 @@ public class TextParserIntegrationTest {
         target = TextParser.getInstance();
     }
 
+    /** This test is specific to test a concurrency issue with clear NLP **/
     @Test
-    public void test1() throws Exception {
+    public void testConcurrency_clearNLP() throws Exception {
 
         Runnable thread1 = new FakeThread(target);
         FakeThread thread2 = new FakeThread(target);
