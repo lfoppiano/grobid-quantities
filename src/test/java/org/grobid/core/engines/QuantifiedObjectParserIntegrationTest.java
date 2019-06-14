@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
+@Ignore("This model is not available normally, so this test will fail.")
 public class QuantifiedObjectParserIntegrationTest {
 
     private QuantifiedObjectParser target;

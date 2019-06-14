@@ -2,26 +2,28 @@ package org.grobid.core.engines;
 
 import org.apache.commons.io.IOUtils;
 import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.data.Block;
 import org.grobid.core.data.Measurement;
+import org.grobid.core.data.ValueBlock;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by lfoppiano on 04.03.16.
- */
 public class QuantityParserIntegrationTests {
     QuantityParser target;
 
@@ -37,71 +39,61 @@ public class QuantityParserIntegrationTests {
     }
 
     @Test
-    public void testNotNormalizedQuantity() throws Exception {
-        List<Measurement> measurements = target.process("10 meters");
+    public void testQuantityParsing_sameAsBaseUnit() throws Exception {
+        List<Measurement> measurements = target.process("It measured 10 meters in length.");
 
+        assertThat(measurements, hasSize(1));
+        Measurement measurement = measurements.get(0);
+        assertThat(measurement.getType(), is(UnitUtilities.Measurement_Type.VALUE));
+        assertThat(measurement.getQuantityAtomic().getRawValue(), is("10"));
+        assertThat(measurement.getQuantityAtomic().getNormalizedQuantity().getRawValue(), is("10"));
+        assertThat(measurement.getQuantityAtomic().getNormalizedQuantity().getValue(), is(new BigDecimal("10")));
+    }
 
-        if (measurements != null) {
-            System.out.println("\n");
-            for (Measurement measurement : measurements) {
-                System.out.println(measurement.toString());
-                System.out.println(measurement.toJson());
-            }
-        } else {
-            System.out.println("No measurement found.");
-        }
+    @Test
+    public void testQuantityParsing_differentThanBaseUnit() throws Exception {
+        List<Measurement> measurements = target.process("We measured 10 km distance.");
+
+        assertThat(measurements, hasSize(1));
+        Measurement measurement = measurements.get(0);
+        assertThat(measurement.getType(), is(UnitUtilities.Measurement_Type.VALUE));
+        assertThat(measurement.getQuantityAtomic().getRawValue(), is("10"));
+        assertThat(measurement.getQuantityAtomic().getNormalizedQuantity().getRawValue(), is("10"));
+        assertThat(measurement.getQuantityAtomic().getNormalizedQuantity().getValue(), is(new BigDecimal("10000")));
 
     }
 
     @Test
-    public void testNormalizeableQuantity() throws Exception {
-        List<Measurement> measurements = target.process("10 km");
+    public void testQuantityParsing_differentThanBaseUnit_alfabeticalValue() throws Exception {
+        List<Measurement> measurements = target.process("we have ran about ten km.");
 
+        assertThat(measurements, hasSize(1));
+        Measurement measurement = measurements.get(0);
+        assertThat(measurement.getType(), is(UnitUtilities.Measurement_Type.VALUE));
+        assertThat(measurement.getQuantityAtomic().getRawValue(), is("ten"));
+        assertThat(measurement.getQuantityAtomic().getParsedValue().getNumeric(), is(new BigDecimal("10")));
+        ValueBlock value = new ValueBlock();
+        value.setRawValue("ten");
+        value.setAlpha("ten");
+        //Workaround to overcome the lack of equals() in OffsetPosition
+        value.getAlpha().setOffsets(measurement.getQuantityAtomic().getParsedValue().getStructure().getAlpha().getOffsets());
 
-        if (measurements != null) {
-            System.out.println("\n");
-            for (Measurement measurement : measurements) {
-                System.out.println(measurement.toString());
-                System.out.println(measurement.toJson());
-            }
-        } else {
-            System.out.println("No measurement found.");
-        }
-
+        assertThat(measurement.getQuantityAtomic().getParsedValue().getStructure(), is(value));
+        assertThat(measurement.getQuantityAtomic().getNormalizedQuantity().getRawValue(), is("ten"));
+        assertThat(measurement.getQuantityAtomic().getNormalizedQuantity().getValue(), is(new BigDecimal("10000")));
     }
 
     @Test
-    public void testNormalizeableWordsQuantity() throws Exception {
-        List<Measurement> measurements = target.process("ten km");
+    public void testQuantityParsing_composedUnit() throws Exception {
+        List<Measurement> measurements = target.process("the result was 10 m^1*s^-1 ");
 
 
-        if (measurements != null) {
-            System.out.println("\n");
-            for (Measurement measurement : measurements) {
-                System.out.println(measurement.toString());
-                System.out.println(measurement.toJson());
-            }
-        } else {
-            System.out.println("No measurement found.");
-        }
-
-    }
-
-    @Test
-    public void testNormalizeableQuantity2() throws Exception {
-        List<Measurement> measurements = target.process("10 m^1*s^-1");
-
-
-        if (measurements != null) {
-            System.out.println("\n");
-            for (Measurement measurement : measurements) {
-                System.out.println(measurement.toString());
-                System.out.println(measurement.toJson());
-            }
-        } else {
-            System.out.println("No measurement found.");
-        }
-
+        assertThat(measurements, hasSize(1));
+        Measurement measurement = measurements.get(0);
+        assertThat(measurement.getType(), is(UnitUtilities.Measurement_Type.VALUE));
+        assertThat(measurement.getQuantityAtomic().getRawValue(), is("10"));
+        assertThat(measurement.getQuantityAtomic().getNormalizedQuantity().getRawValue(), is("10"));
+        assertThat(measurement.getQuantityAtomic().getNormalizedQuantity().getValue(), is(new BigDecimal("10")));
     }
 
     @Test
@@ -226,7 +218,7 @@ public class QuantityParserIntegrationTests {
 
     @Test
     @Ignore("Failing test, we should fix the issue ;-) ")
-    public void test1() throws Exception {
+    public void testQuantityParser_particularCaseWhereIntervalsAreMerged() throws Exception {
 
         String text = "Before the 1920s the number of stages was usually 15 at most and the riders enjoyed at least one day of rest after each stage.";
 
