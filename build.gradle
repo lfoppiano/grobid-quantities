@@ -95,6 +95,12 @@ dependencies {
 //    compile 'tech.units:indriya:2.0-SNAPSHOT'
 //    compile group: 'si.uom', name: 'si-units', version: '2.0-SNAPSHOT'
 //    compile group: 'si.uom', name: 'si-quantity', version: '2.0-SNAPSHOT'
+//    compile group: 'systems.uom', name: 'systems-quantity', version: '2.0-SNAPSHOT'
+//    compile group: 'systems.uom', name: 'systems-common', version: '2.0-SNAPSHOT'
+//    compile group: 'systems.uom', name: 'systems-unicode', version: '2.0-SNAPSHOT'
+//    compile group: 'systems.uom', name: 'systems-ucum', version: '2.0-SNAPSHOT'
+//    compile group: 'systems.uom', name: 'systems-ucum-java8', version: '2.0-SNAPSHOT'
+//    compile group: 'systems.uom', name: 'systems-unicode-java8', version: '2.0-SNAPSHOT'
 
     // (2) UOM 1.3
     compile 'tech.units:indriya:1.3'

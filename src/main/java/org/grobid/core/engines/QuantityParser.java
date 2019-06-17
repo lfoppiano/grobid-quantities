@@ -10,7 +10,7 @@ import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.normalization.NormalisationException;
-import org.grobid.core.data.normalization.QuantityNormalizer;
+import org.grobid.core.data.normalization.QuantityNormaliser;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
@@ -45,7 +45,7 @@ public class QuantityParser extends AbstractParser {
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
     private QuantifiedObjectParser quantifiedObjectParser;
-    private QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
+    private QuantityNormaliser quantityNormaliser = new QuantityNormaliser();
     private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
 
@@ -246,7 +246,7 @@ public class QuantityParser extends AbstractParser {
         if (quantity.isNormalized())
             return;
         try {
-            Quantity.Normalized quantity1 = quantityNormalizer.normalizeQuantity(quantity);
+            Quantity.Normalized quantity1 = quantityNormaliser.normalizeQuantity(quantity);
             if (quantity1 != null) {
                 quantity.setNormalizedQuantity(quantity1);
             }

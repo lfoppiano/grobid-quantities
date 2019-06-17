@@ -7,7 +7,7 @@ import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.data.normalization.UnitNormalizer;
+import org.grobid.core.data.normalization.UnitNormaliser;
 import org.grobid.core.layout.LayoutToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,13 +26,13 @@ import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 public class MeasurementOperations {
     private static final Logger logger = LoggerFactory.getLogger(MeasurementOperations.class);
 
-    UnitNormalizer un;
+    UnitNormaliser un;
 
     public MeasurementOperations() {
-        un = new UnitNormalizer();
+        un = new UnitNormaliser();
     }
 
-    public MeasurementOperations(UnitNormalizer un) {
+    public MeasurementOperations(UnitNormaliser un) {
         this.un = un;
     }
 

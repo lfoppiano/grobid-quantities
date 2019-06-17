@@ -16,17 +16,17 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 /**
  * Created by lfoppiano on 23/03/16.
  */
-public class UnitNormalizer {
+public class UnitNormaliser {
 
     private UnitParser unitParser;
     private QuantityLexicon quantityLexicon;
 
-    public UnitNormalizer(UnitParser unitParser, QuantityLexicon quantityLexicon) {
+    public UnitNormaliser(UnitParser unitParser, QuantityLexicon quantityLexicon) {
         this.unitParser = unitParser;
         this.quantityLexicon = quantityLexicon;
     }
 
-    public UnitNormalizer() {
+    public UnitNormaliser() {
         unitParser = UnitParser.getInstance();
         quantityLexicon = QuantityLexicon.getInstance();
     }

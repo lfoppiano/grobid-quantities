@@ -3,6 +3,7 @@ package org.grobid.core.data.normalization;
 import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
+import org.grobid.core.data.UnitBlock;
 import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.utilities.MeasurementOperations;
 import org.grobid.core.utilities.UnitUtilities;
@@ -13,7 +14,6 @@ import tech.units.indriya.format.SimpleUnitFormat;
 
 import javax.measure.format.MeasurementParseException;
 import javax.measure.format.UnitFormat;
-import javax.measure.quantity.Length;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
@@ -31,9 +31,9 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * <p>
  * Created by lfoppiano on 14.02.16.
  */
-public class QuantityNormalizer {
+public class QuantityNormaliser {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(QuantityNormalizer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuantityNormaliser.class);
     protected static final String UOM_DEFAULT_PROVIDER = "tec.uom.se.spi.DefaultServiceProvider";
     protected static final String UCUM_PROVIDER = "systems.uom.ucum.internal.UCUMServiceProvider";
     protected static final String UNICODE_PROVIDER = "systems.uom.unicode.internal.UnicodeServiceProvider";
@@ -46,9 +46,9 @@ public class QuantityNormalizer {
 
     private MeasurementOperations measurementOperations;
 
-    private UnitNormalizer unitNormalizer;
+    private UnitNormaliser unitNormaliser;
 
-    public QuantityNormalizer() {
+    public QuantityNormaliser() {
         for (ServiceProvider provider : ServiceProvider.available()) {
             UnitFormatService formatService = provider.getUnitFormatService();
 
@@ -63,7 +63,7 @@ public class QuantityNormalizer {
         }
 
         measurementOperations = new MeasurementOperations();
-        unitNormalizer = new UnitNormalizer();
+        unitNormaliser = new UnitNormaliser();
     }
 
 
@@ -72,7 +72,7 @@ public class QuantityNormalizer {
             return null;    //or throw new NormalizationException() :-)
         }
 
-        Unit parsedUnit = unitNormalizer.parseUnit(quantity.getRawUnit());
+        Unit parsedUnit = unitNormaliser.parseUnit(quantity.getRawUnit());
         quantity.setParsedUnit(parsedUnit);
 
         javax.measure.Unit unit = tryParsing(parsedUnit);
@@ -97,7 +97,7 @@ public class QuantityNormalizer {
 //        composeUnit(quantity, normalizedQuantity, unit);
 
         if (quantity.isNormalized()) {
-            UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
+            UnitDefinition definition = unitNormaliser.findDefinition(quantity.getNormalizedQuantity().getUnit());
             if (definition != null) {
                 quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
             }
@@ -141,20 +141,44 @@ public class QuantityNormalizer {
                 unit = formatService.parse(parsedUnit.getRawName());
                 break;
             } catch (MeasurementParseException | IllegalArgumentException | UnsupportedOperationException e) {
-//                for (UnitBlock block : parsedUnit.getProductBlocks()) {
-//
-//                }
-
                 LOGGER.warn("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), e);
-
             } catch (Throwable t) {
                 LOGGER.warn("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), t);
             }
         }
 
         if (unit == null) {
-            throw new NormalisationException("Cannot parse " + parsedUnit.getRawName() + " using "
-                    + Arrays.toString(parsers.toArray()));
+            List<javax.measure.Unit> unitList = new ArrayList<>();
+            for (UnitBlock block : parsedUnit.getProductBlocks()) {
+
+                for (UnitFormat formatService : parsers.stream().filter(Objects::nonNull).collect(Collectors.toList())) {
+                    try {
+                        unitList.add(formatService.parse(UnitBlock.asString(block)));
+                        break;
+                    } catch (MeasurementParseException | IllegalArgumentException | UnsupportedOperationException e) {
+                        LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), e);
+                    } catch (Throwable t) {
+                        LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), t);
+                    }
+                }
+            }
+
+            if (CollectionUtils.isEmpty(unitList) || unitList.size() != parsedUnit.getProductBlocks().size()) {
+                throw new NormalisationException("Cannot parse " + parsedUnit.getRawName() + " using "
+                        + Arrays.toString(parsers.toArray()));
+            }
+
+            javax.measure.Unit result = null;
+            for(int i = 0; i < unitList.size(); i++) {
+                if(i == 0) {
+                    result = unitList.get(i);
+                } else {
+                    result = result.multiply(unitList.get(i));
+                }
+            }
+
+            unit = result;
+
         }
 
         return unit;
@@ -237,8 +261,8 @@ public class QuantityNormalizer {
 //    }
 
 
-    public void setUnitNormalizer(UnitNormalizer unitNormalizer) {
-        this.unitNormalizer = unitNormalizer;
+    public void setUnitNormaliser(UnitNormaliser unitNormaliser) {
+        this.unitNormaliser = unitNormaliser;
     }
 
     public Map<String, UnitFormat> getUnitFormats() {

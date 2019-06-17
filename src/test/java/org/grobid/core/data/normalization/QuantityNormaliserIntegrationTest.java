@@ -1,7 +1,6 @@
 package org.grobid.core.data.normalization;
 
 import org.easymock.Capture;
-import org.easymock.EasyMock;
 import org.grobid.core.data.*;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
@@ -11,8 +10,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.measure.format.UnitFormat;
-import javax.measure.spi.ServiceProvider;
-import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,11 +21,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-//@Ignore("we should mock also uom-se .. but for now is better to leave it out so that we can spot other errors")
+@Ignore("we should mock also uom .. but for now is better to leave it out so that we can spot other errors")
 public class QuantityNormaliserIntegrationTest {
 
-    private QuantityNormalizer target;
-    private UnitNormalizer mockUnitNormalizer;
+    private QuantityNormaliser target;
+    private UnitNormaliser mockUnitNormaliser;
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -37,9 +34,9 @@ public class QuantityNormaliserIntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        target = new QuantityNormalizer();
-        mockUnitNormalizer = createMock(UnitNormalizer.class);
-        target.setUnitNormalizer(mockUnitNormalizer);
+        target = new QuantityNormaliser();
+        mockUnitNormaliser = createMock(UnitNormaliser.class);
+        target.setUnitNormaliser(mockUnitNormaliser);
     }
 
     @Test
@@ -52,16 +49,16 @@ public class QuantityNormaliserIntegrationTest {
         input.setRawUnit(raw);
         final Unit parsedUnit = new Unit("km");
         parsedUnit.setUnitDefinition(generateLenghtUnitDefinition());
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
+        expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
         final UnitDefinition fakeDefinition = new UnitDefinition();
         fakeDefinition.setNotations(Arrays.asList(new String[]{"km"}));
         fakeDefinition.setNames(Arrays.asList(new String[]{"kilometer", "kilometers", "kilometres"}));
-        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(fakeDefinition);
+        expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(fakeDefinition);
 
-        replay(mockUnitNormalizer);
+        replay(mockUnitNormaliser);
         Quantity.Normalized output = target.normalizeQuantity(input);
 
-        verify(mockUnitNormalizer);
+        verify(mockUnitNormaliser);
         assertThat(output.getUnit().getRawName(), is("m"));
         assertThat(output.getValue().doubleValue(), is(2000.0));
     }
@@ -85,16 +82,16 @@ public class QuantityNormaliserIntegrationTest {
         input.setRawUnit(raw);
         final Unit parsedUnit = new Unit("km");
         parsedUnit.setUnitDefinition(generateLenghtUnitDefinition());
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
+        expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
         final UnitDefinition fakeDefinition = new UnitDefinition();
         fakeDefinition.setNotations(Arrays.asList(new String[]{"km"}));
         fakeDefinition.setNames(Arrays.asList(new String[]{"kilometer", "kilometers", "kilometres"}));
-        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(fakeDefinition);
+        expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(fakeDefinition);
 
-        replay(mockUnitNormalizer);
+        replay(mockUnitNormaliser);
         Quantity.Normalized output = target.normalizeQuantity(input);
 
-        verify(mockUnitNormalizer);
+        verify(mockUnitNormaliser);
         assertThat(output.getUnit().getRawName(), is("m"));
         assertThat(output.getValue().doubleValue(), is(22000.0));
     }
@@ -109,12 +106,12 @@ public class QuantityNormaliserIntegrationTest {
         input.setRawUnit(raw);
         final Unit parsedUnit = new Unit("°C");
         parsedUnit.setUnitDefinition(generateTemperatureUnitDefinition());
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
-        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(new UnitDefinition());
+        expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
+        expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(new UnitDefinition());
 
-        replay(mockUnitNormalizer);
+        replay(mockUnitNormaliser);
         Quantity.Normalized output = target.normalizeQuantity(input);
-        verify(mockUnitNormalizer);
+        verify(mockUnitNormaliser);
         assertThat(output.getUnit().getRawName(), is("K"));
         assertThat(output.getValue().doubleValue(), is(283.15));
     }
@@ -143,12 +140,12 @@ public class QuantityNormaliserIntegrationTest {
         unitDefinition.setType(UnitUtilities.Unit_Type.VELOCITY);
         parsedUnit.setUnitDefinition(unitDefinition);
 
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
-        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(new UnitDefinition());
+        expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
+        expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(new UnitDefinition());
 
-        replay(mockUnitNormalizer);
+        replay(mockUnitNormaliser);
         Quantity.Normalized output = target.normalizeQuantity(input);
-        verify(mockUnitNormalizer);
+        verify(mockUnitNormaliser);
         assertThat(output.getUnit().getRawName(), is("m/s"));
         assertThat(output.getValue().doubleValue(), is(0.5555555555555556));
     }
@@ -167,13 +164,13 @@ public class QuantityNormaliserIntegrationTest {
 //        unitDefinition.setSystem(UnitUtilities.System_Type.SI_DERIVED);
 //        unitDefinition.setType(UnitUtilities.Unit_Type.VELOCITY);
 //        parsedUnit.setUnitDefinition(unitDefinition);
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
-        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(null);
+        expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
+        expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(null);
 
-        replay(mockUnitNormalizer);
+        replay(mockUnitNormaliser);
 
         Quantity.Normalized output = target.normalizeQuantity(input);
-        verify(mockUnitNormalizer);
+        verify(mockUnitNormaliser);
         assertThat(output.getValue().doubleValue(), is(0.5555555555555556));
         assertThat(output.getUnit().getRawName(), is("m·kg/s"));
     }
@@ -194,14 +191,14 @@ public class QuantityNormaliserIntegrationTest {
 //        unitDefinition.setType(UnitUtilities.Unit_Type.VELOCITY);
 //        parsedUnit.setUnitDefinition(unitDefinition);
 
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
+        expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
 //        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(new UnitDefinition());
-        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(null);
+        expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(null);
 
-        replay(mockUnitNormalizer);
+        replay(mockUnitNormaliser);
 
         Quantity.Normalized output = target.normalizeQuantity(input);
-        verify(mockUnitNormalizer);
+        verify(mockUnitNormaliser);
         assertThat(output.getValue().doubleValue(), is(555.5555555555555));
         assertThat(output.getUnit().getRawName(), is("m·kg/s"));
     }
@@ -217,13 +214,13 @@ public class QuantityNormaliserIntegrationTest {
 
         final Unit parsedUnit = new Unit("m");
         parsedUnit.setUnitDefinition(generateLenghtUnitDefinition());
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
-        expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(new UnitDefinition());
+        expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
+        expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(new UnitDefinition());
 
-        replay(mockUnitNormalizer);
+        replay(mockUnitNormaliser);
         Quantity.Normalized output = target.normalizeQuantity(input);
 
-        verify(mockUnitNormalizer);
+        verify(mockUnitNormaliser);
         assertThat(output.getUnit().getRawName(), is("m"));
         assertThat(output.getValue().doubleValue(), is(2.0));
     }
@@ -243,14 +240,14 @@ public class QuantityNormaliserIntegrationTest {
         parsedUnit.setProductBlocks(blocks);
         input.setParsedUnit(parsedUnit);
 
-        expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
+        expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
         Capture<Unit> unitCapture = newCapture();
-        expect(mockUnitNormalizer.findDefinition(capture(unitCapture))).andReturn(null);
+        expect(mockUnitNormaliser.findDefinition(capture(unitCapture))).andReturn(null);
 
 
-        replay(mockUnitNormalizer);
+        replay(mockUnitNormaliser);
         Quantity.Normalized normalized = target.normalizeQuantity(input);
-        verify(mockUnitNormalizer);
+        verify(mockUnitNormaliser);
 
         assertThat(unitCapture.getValue().getRawName(), is("m"));
 
