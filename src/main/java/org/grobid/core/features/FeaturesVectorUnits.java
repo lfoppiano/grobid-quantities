@@ -98,7 +98,7 @@ public class FeaturesVectorUnits {
             featuresVector.punctType = "DOT";
         } else if (character.equals(",")) {
             featuresVector.punctType = "COMMA";
-        } else if (character.equals("-")) {
+        } else if (character.equals("-") || character.equals("−")) {
             featuresVector.punctType = "HYPHEN";
         } else if (character.equals("\"") || character.equals("\'") || character.equals("`")) {
             featuresVector.punctType = "QUOTE";

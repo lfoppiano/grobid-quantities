@@ -166,7 +166,7 @@ public class FeaturesVectorQuantities {
             featuresVector.punctType = "DOT";
         } else if (word.equals(",")) {
             featuresVector.punctType = "COMMA";
-        } else if (word.equals("-")) {
+        } else if (word.equals("-") || word.equals("−")) {  // we cover hypen and minus sign 
             featuresVector.punctType = "HYPHEN";
         } else if (word.equals("\"") || word.equals("\'") || word.equals("`")) {
             featuresVector.punctType = "QUOTE";
