@@ -88,10 +88,6 @@ dependencies {
     // measurements
 
     // (1) UOM 2.0-SNAPSHOT
-//    implementation 'com.github.andi-huber:si-units:master-eb47a0f257-1'
-//    implementation 'com.github.andi-huber:indriya:master-eb47a0f257-1'
-//    implementation 'com.github.andi-huber:si-units:master-eb47a0f257-1'
-
 //    compile 'tech.units:indriya:2.0-SNAPSHOT'
 //    compile group: 'si.uom', name: 'si-units', version: '2.0-SNAPSHOT'
 //    compile group: 'si.uom', name: 'si-quantity', version: '2.0-SNAPSHOT'
@@ -99,6 +95,7 @@ dependencies {
 //    compile group: 'systems.uom', name: 'systems-common', version: '2.0-SNAPSHOT'
 //    compile group: 'systems.uom', name: 'systems-unicode', version: '2.0-SNAPSHOT'
 //    compile group: 'systems.uom', name: 'systems-ucum', version: '2.0-SNAPSHOT'
+
 //    compile group: 'systems.uom', name: 'systems-ucum-java8', version: '2.0-SNAPSHOT'
 //    compile group: 'systems.uom', name: 'systems-unicode-java8', version: '2.0-SNAPSHOT'
 
@@ -110,6 +107,7 @@ dependencies {
     compile group: 'systems.uom', name: 'systems-common', version: '1.0'
     compile group: 'systems.uom', name: 'systems-unicode', version: '1.0'
     compile group: 'systems.uom', name: 'systems-ucum', version: '1.0'
+
 //    compile group: 'systems.uom', name: 'systems-ucum-java8', version: '1.0'
 //    compile group: 'systems.uom', name: 'systems-unicode-java8', version: '1.0'
     //    compile group: 'tech.uom', name: 'seshat', version: '1.0'
