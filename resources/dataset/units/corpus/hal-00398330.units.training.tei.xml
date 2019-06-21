@@ -1,26 +1,38 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
-	<unit><base>year</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<!--	<unit><prefix>M</prefix> <base>Jup</base></unit>-->
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>m</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>days</base> <pow>−1</pow></unit>
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
 	<unit><base>%</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>day</base></unit>
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
 	<unit><base>%</base></unit>
-	<unit><base>day</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>days</base> <pow>−1</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>m</prefix> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>AU</base></unit>
 </units>

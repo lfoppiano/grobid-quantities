@@ -1,22 +1,33 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>week</base></unit>
-	<unit><base>day</base></unit>
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<!--	<unit><base>M⊕</base></unit>-->
+	<unit><prefix>m</prefix><base>as</base></unit>
+	<unit><prefix>m</prefix><base>as</base></unit>
 	<unit><base>K</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
+	<unit><base>K</base></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>K</base></unit>
+	<!--	<unit><base>M ⊙</base></unit>-->
+	<!--	<unit><base>M ⊙</base></unit>-->
+	<!--	<unit><base>M ⊙</base></unit>-->
+	<!--	<unit><base>M ⊙</base></unit>-->
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>G</prefix><base>yr</base></unit>
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<!--	<unit><base>M ⊕</base></unit>-->
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>m</base> <base>s</base> <pow>−1</pow></unit>
 	<unit><base>%</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<!--	<unit><base>M ⊕</base></unit>-->
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<!--	<unit><base>M ⊕</base></unit>-->
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
 	<unit><base>%</base></unit>
 </units>
