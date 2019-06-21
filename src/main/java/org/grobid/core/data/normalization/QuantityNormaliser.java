@@ -50,17 +50,22 @@ public class QuantityNormaliser {
 
     public QuantityNormaliser() {
         for (ServiceProvider provider : ServiceProvider.available()) {
-            UnitFormatService formatService = provider.getUnitFormatService();
+            try {
+                UnitFormatService formatService = provider.getUnitFormatService();
 
-            final String providerName = provider.getClass().getName();
-            unitFormats.put(providerName, formatService.getUnitFormat());
+                final String providerName = provider.getClass().getName();
+                unitFormats.put(providerName, formatService.getUnitFormat());
 
-            if (providerName.equals(COMMON_PROVIDER)) {
-                SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mile");
-                SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mi");
-                SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "miles");
+                if (providerName.equals(COMMON_PROVIDER)) {
+                    SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mile");
+                    SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mi");
+                    SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "miles");
+                }
+            } catch (Exception e) {
+                LOGGER.warn("Exception when initialising the quantity normaliser. ", e);
             }
         }
+
 
         measurementOperations = new MeasurementOperations();
         unitNormaliser = new UnitNormaliser();
@@ -169,8 +174,8 @@ public class QuantityNormaliser {
             }
 
             javax.measure.Unit result = null;
-            for(int i = 0; i < unitList.size(); i++) {
-                if(i == 0) {
+            for (int i = 0; i < unitList.size(); i++) {
+                if (i == 0) {
                     result = unitList.get(i);
                 } else {
                     result = result.multiply(unitList.get(i));
