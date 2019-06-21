@@ -1,15 +1,16 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
-	<unit><base>day</base></unit>
+	<unit><prefix>k</prefix><base>cal</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
+	<unit><prefix>k</prefix><base>cal</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
 	<unit><base>min</base></unit>
+	<unit><prefix>k</prefix><base>m</base> · <base>h</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> · <base>h</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> · <base>h</base> <pow>−1</pow></unit>
 	<unit><base>min</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>s</base></unit>
@@ -20,55 +21,93 @@
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>day</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
-	<unit><base>day</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>m</prefix><base>l</base> · <prefix>k</prefix><base>g</base> <pow>−1</pow> · <base>min</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix><base>l</base> · <prefix>k</prefix><base>g</base> <pow>−1</pow> · <base>min</base> <pow>−1</pow></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>m</prefix><base>l</base> · <prefix>k</prefix><base>g</base> <pow>−1</pow> · <base>min</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix><base>l</base> · <prefix>k</prefix><base>g</base> <pow>−1</pow> · <base>min</base> <pow>−1</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>m</prefix><base>l</base> <prefix>k</prefix><base>g</base> <pow>−1</pow> · <base>min</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix><base>l</base> <prefix>k</prefix><base>g</base> <pow>−1</pow> · <base>min</base> <pow>−1</pow></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>m</prefix><base>l</base> · <prefix>k</prefix><base>g</base> <pow>−1</pow> · <base>min</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix><base>l</base> · <prefix>k</prefix><base>g</base> <pow>−1</pow> · <base>min</base> <pow>−1</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>g</base> · <prefix>k</prefix><base>g</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix><base>l</base> · <prefix>k</prefix><base>cal</base> <pow>−1</pow> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><base>g</base> · <prefix>k</prefix><base>g</base> <pow>B</pow><base>W</base> <pow>−1</pow> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>g</base> · <prefix>k</prefix><base>g</base> <pow>B</pow><base>W</base> <pow>−1</pow> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>h</base></unit>
+	<unit><base>h</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>h</base></unit>
+	<unit><base>h</base></unit>
+	<unit><base>g</base> · <prefix>k</prefix><base>g</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>l</base> · <base>day</base> <pow>−1</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 </units>

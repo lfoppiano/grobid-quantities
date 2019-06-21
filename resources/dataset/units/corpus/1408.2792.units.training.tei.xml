@@ -1,40 +1,102 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
-    <unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>grain</base><base>s</base> <base>m</base> <pow>−2</pow></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>yr</base></unit>
+	<unit><base>yr</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><prefix>m</prefix> <base>s</base> <pow>−1</pow></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><base>AU</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><base>g</base> <prefix>c</prefix><base>m</base> <pow>−3</pow></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>mas</base> per <base>pixel</base></unit>
+	<unit><prefix>m</prefix> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>AU</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>min</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><prefix>m</prefix> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>h</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>week</base></unit>
 	<unit><base>m</base><pow>/</pow><base>s</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><base>yr</base></unit>
+	<unit><base>grain</base><base>s</base> <base>m</base> <pow>−2</pow></unit>
 	<unit><base>min</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><base>min</base></unit>
+	<unit><base>g</base> <prefix>c</prefix><base>m</base> <pow>−3</pow></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>g</base> <prefix>c</prefix><base>m</base> <pow>−3</pow></unit>
+	<unit><base>grain</base><base>s</base> <base>m</base> <pow>−2</pow></unit>
+	<unit><prefix>m</prefix> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>grain</base><base>s</base> <base>m</base> <pow>−2</pow></unit>
+	<unit><base>grain</base><base>s</base> <base>m</base> <pow>−2</pow></unit>
+	<unit><base>grain</base><base>s</base> <base>m</base> <pow>−2</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>eV</base></unit>
+	<unit><base>eV</base></unit>
+	<unit><base>m</base> <pow>−2</pow> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>W</base> <base>m</base> <pow>−2</pow></unit>
+	<unit><base>m</base> <pow>−2</pow> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>W</base> <base>m</base> <pow>−2</pow></unit>
+	<unit><base>protons</base> <prefix>c</prefix><base>m</base> <pow>−3</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><base>g</base> <prefix>c</prefix><base>m</base> <pow>−3</pow></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>grain</base><base>s</base> <base>m</base> <pow>−2</pow></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><prefix>c</prefix><base>m</base></unit>
-	<unit><prefix>c</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><prefix>m</prefix><base>m</base></unit>
-	<unit><prefix>m</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>h</base></unit>
+	<unit><base>molecules</base> <base>m</base> <pow>−2</pow> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>molecules</base> <base>m</base> <pow>−2</pow> <base>s</base> <pow>−1</pow></unit>
 </units>
