@@ -5,6 +5,7 @@
 	<unit><base>AU</base></unit>
 	<unit><base>AU</base></unit>
 	<unit><base>AU</base></unit>
+	<unit><base>weeks</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
@@ -62,6 +63,7 @@
 	<unit><base>%</base></unit>
 	<unit><base>AU</base></unit>
 	<unit><base>AU</base></unit>
+	<unit><base>months</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>AU</base></unit>
 </units>

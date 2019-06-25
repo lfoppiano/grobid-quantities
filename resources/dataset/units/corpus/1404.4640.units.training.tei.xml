@@ -1,10 +1,13 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>minute</base></unit>
 	<unit><base>min</base></unit>
 	<unit><base>min</base></unit>
 	<unit><prefix>k</prefix><base>m</base><pow>/</pow><base>s</base></unit>
 	<unit><base>arc</base><base>second</base></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>minutes</base></unit>
 	<unit><base>min</base></unit>
 	<unit><base>min</base></unit>
 	<unit><base>min</base></unit>
@@ -24,6 +27,8 @@
 	<unit><base>min</base></unit>
 	<unit><base>min</base></unit>
 	<unit><base>min</base></unit>
+	<unit><base>days</base></unit>
+	<unit><base>weeks</base></unit>
 	<unit><base>•</base></unit>
 	<unit><base>m</base><pow>/</pow><base>s</base></unit>
 	<unit><base>au</base></unit>

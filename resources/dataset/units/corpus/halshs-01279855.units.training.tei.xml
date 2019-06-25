@@ -1,58 +1,50 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><base>year</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>s</base></unit>
-	<unit><base>day</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>s</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>s</base></unit>
-	<unit><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base><base>h</base><pow>-1</pow></unit>
-	<unit><prefix>k</prefix><base>m</base><base>h</base><pow>-1</pow></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>s</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>s</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
 	<unit><base>week</base></unit>
+	<unit><base>decades</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>s</base></unit>
 	<unit><base>day</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
+	<unit><base>day</base></unit>
+	<unit><base>day</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>kilometers per hour</base> (<prefix>k</prefix><base>m</base><pow>/</pow><base>h</base></unit>
+	<unit><base>kilometers per hour</base> (<prefix>k</prefix><base>m</base><pow>/</pow><base>h</base></unit>
+	<unit><prefix>k</prefix><base>m</base><pow>/</pow><base>h</base></unit>
+	<unit><prefix>k</prefix><base>m</base><pow>/</pow><base>h</base></unit>
+	<unit><prefix>k</prefix><base>m</base><pow>/</pow><base>h</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>weeks</base></unit>
+	<unit><base>days</base></unit>
+	<unit><base>s</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>min</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>min</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
+	<unit><base>s</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>€</base></unit>
+	<unit><base>€</base></unit>
+	<unit><base>€</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
 </units>

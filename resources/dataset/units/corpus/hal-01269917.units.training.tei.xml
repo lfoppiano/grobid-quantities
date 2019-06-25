@@ -1,21 +1,28 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>day</base></unit>
+	<unit><base>month</base></unit>
+	<unit><base>months</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>days</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>months</base></unit>
+	<unit><base>month</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>month</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
+	<unit><base>months</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>

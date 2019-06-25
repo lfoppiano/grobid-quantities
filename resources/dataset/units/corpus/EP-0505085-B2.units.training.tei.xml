@@ -1,5 +1,6 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
 	<unit><prefix>M</prefix><base>W</base></unit>
+	<unit><base>tonnes</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -109,6 +110,8 @@
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
@@ -154,18 +157,26 @@
 	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2</pow></unit>
 	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2</pow></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base><pow>/</pow><base>h</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -266,12 +277,15 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>ton</base></unit>
 	<unit><base>U</base></unit>
 	<unit><base>S</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base><pow>/</pow> <base>hour</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>

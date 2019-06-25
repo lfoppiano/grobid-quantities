@@ -1,17 +1,20 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
 	<unit><base>%</base></unit>
+	<unit><base>mmHg</base></unit>
+	<unit><prefix>μ</prefix><base>m</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
-	<unit><base>h</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>months</base></unit>
 </units>

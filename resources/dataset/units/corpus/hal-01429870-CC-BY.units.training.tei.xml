@@ -1,46 +1,52 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>%</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>decades</base></unit>
+	<unit><base>years</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>years</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>decades</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>decades</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>decades</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>decades</base></unit>
 	<unit><base>year</base></unit>
 	<unit><base>year</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>year</base></unit>
 	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>h</base></unit>
 	<unit><base>h</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>decades</base></unit>
+	<unit><prefix>m</prefix><base>l</base>.<prefix>k</prefix><base>g</base> <pow>−1</pow> .<base>min</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix><base>l</base>.<prefix>k</prefix><base>g</base> <pow>−1</pow> .<base>min</base> <pow>−1</pow></unit>
 	<unit><base>min</base></unit>
+	<unit><base>m</base>.<base>s</base> <pow>−</pow><base>1</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>m</base>.<base>s</base> <pow>−</pow><base>1</base></unit>
 	<unit><base>s</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><prefix>m</prefix><base>l</base>.<prefix>k</prefix><base>g</base> <pow>−1</pow> .<base>min</base> <pow>−1</pow></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>

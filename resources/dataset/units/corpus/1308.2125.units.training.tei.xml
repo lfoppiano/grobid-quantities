@@ -26,13 +26,13 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<!--	<unit><base>µB</base></unit>-->
-	<!--	<unit><base>µB</base></unit>-->
+	<unit><base>µB</base></unit>
+	<unit><base>µB</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<!--	<unit><base>µB</base></unit>-->
-	<!--	<unit><base>µB</base></unit>-->
-	<!--	<unit><base>µB</base></unit>-->
+	<unit><base>µB</base></unit>
+	<unit><base>µB</base></unit>
+	<unit><base>µB</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>

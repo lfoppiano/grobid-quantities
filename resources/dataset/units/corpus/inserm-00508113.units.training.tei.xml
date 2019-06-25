@@ -2,18 +2,24 @@
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>week</base></unit>
+	<unit><base>months</base></unit>
+	<unit><base>weeks</base></unit>
+	<unit><base>months</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><prefix>m</prefix><base>g</base><prefix>k</prefix><base>g</base><pow>-1</pow></unit>
-	<unit><base>week</base></unit>
-	<unit><prefix>m</prefix><base>g</base><prefix>k</prefix><base>g</base><pow>-1</pow></unit>
-	<unit><base>week</base></unit>
-	<unit><base>week</base></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>k</prefix><base>g</base></unit>
+	<unit><base>weeks</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>k</prefix><base>g</base></unit>
+	<unit><base>weeks</base></unit>
+	<unit><base>weeks</base></unit>
+	<unit><base>roomtemperature</base></unit>
+	<unit><base>roomtemperature</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
+	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -21,22 +27,22 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>months</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>m</prefix><base>l</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>year</base></unit>
+	<unit><prefix>m</prefix><base>l</base></unit>
+	<unit><base>years</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
@@ -45,14 +51,17 @@
 	<unit><base>%</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>week</base></unit>
+	<unit><base>weeks</base></unit>
+	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>day</base></unit>
 	<unit><base>day</base></unit>
-	<unit><base>day</base></unit>
+	<unit><prefix>m</prefix><base>l</base></unit>
+	<unit><prefix>m</prefix><base>l</base></unit>
+	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>day</base></unit>
@@ -60,16 +69,17 @@
 	<unit><base>day</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
+	<unit><base>months</base></unit>
+	<unit><base>months</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>week</base></unit>
-	<unit><base>week</base></unit>
+	<unit><base>weeks</base></unit>
+	<unit><base>weeks</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>day</base></unit>
 	<unit><base>day</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>

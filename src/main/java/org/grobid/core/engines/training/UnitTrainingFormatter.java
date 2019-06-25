@@ -2,8 +2,8 @@ package org.grobid.core.engines.training;
 
 import nu.xom.Builder;
 import nu.xom.Element;
-import nu.xom.ParsingException;
 import nu.xom.converters.DOMConverter;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
@@ -15,13 +15,11 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.grobid.core.document.xml.XmlBuilderUtils.TEI_NS;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
@@ -79,8 +77,14 @@ public class UnitTrainingFormatter {
 
         Element unit = teiElement("unit");
         if (parsedUnit != null && isNotEmpty(parsedUnit.getProductBlocks())) {
+            String rawTaggedValue = parsedUnit.getProductBlocks().get(0).getRawTaggedValue();
+            if (StringUtils.isEmpty(rawTaggedValue)) {
+                if (quantity.getRawUnit().getRawName() != null) {
+                    rawTaggedValue = "<base>" + quantity.getRawUnit().getRawName() + "</base>";
+                }
+            }
             String content = "<unit xmlns=\"" + TEI_NS + "\">"
-                    + parsedUnit.getProductBlocks().get(0).getRawTaggedValue() + "</unit>";
+                    + rawTaggedValue + "</unit>";
 
             DocumentBuilderFactory dbf = null;
             DocumentBuilder db = null;
@@ -105,9 +109,7 @@ public class UnitTrainingFormatter {
 //                    element.setNamespaceURI(TEI_NS);
                 return element;
 
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (SAXException | IOException e) {
                 e.printStackTrace();
             }
 
@@ -116,7 +118,7 @@ public class UnitTrainingFormatter {
             // parsed correctly and the process will fail. In this way we avoid forgetting about it.
             final Unit rawUnit = quantity.getRawUnit();
             if (rawUnit != null) {
-                unit.appendChild(rawUnit.getRawName());
+                unit.appendChild(teiElement("base", rawUnit.getRawName()));
             }
         }
 

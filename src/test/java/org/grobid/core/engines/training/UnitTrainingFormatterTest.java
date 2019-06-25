@@ -61,8 +61,8 @@ public class UnitTrainingFormatterTest {
         final List<Element> elements = target.trainingExtraction(measurementList);
 
         assertThat(elements, hasSize(2));
-        assertThat(elements.get(0).toXML(), is("<unit xmlns=\"http://www.tei-c.org/ns/1.0\">grams</unit>"));
-        assertThat(elements.get(1).toXML(), is("<unit xmlns=\"http://www.tei-c.org/ns/1.0\">gr / h</unit>"));
+        assertThat(elements.get(0).toXML(), is("<unit xmlns=\"http://www.tei-c.org/ns/1.0\"><base>grams</base></unit>"));
+        assertThat(elements.get(1).toXML(), is("<unit xmlns=\"http://www.tei-c.org/ns/1.0\"><base>gr / h</base></unit>"));
     }
 
     @Test
