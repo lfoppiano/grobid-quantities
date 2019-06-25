@@ -313,15 +313,16 @@ public class QuantityTrainingData {
      * Create training data for a list of pdf/text/xml-tei files
      */
     public int createTrainingBatch(String inputDirectory,
-                                   String outputDirectory) {
-        return createTrainingBatch(inputDirectory, outputDirectory, -1);
+                                   String outputDirectory,
+                                   Boolean recursive) {
+        return createTrainingBatch(inputDirectory, outputDirectory, recursive, -1);
 
     }
 
     @SuppressWarnings({"UnusedParameters"})
     public int createTrainingBatch(String inputDirectory,
                                    String outputDirectory,
-                                   int ind) {
+                                   boolean recursive, int ind) {
         try {
             Path inputDirectoryPath = Paths.get(inputDirectory);
 
@@ -339,7 +340,9 @@ public class QuantityTrainingData {
                 throw new GrobidException("The input path should be a directory.");
             }
 
-            List<File> refFiles = Files.walk(inputDirectoryPath)
+            int maxDept = recursive ? 1 : 0;
+
+            List<File> refFiles = Files.walk(inputDirectoryPath, maxDept)
                     .filter(path -> Files.isRegularFile(path)
                             && (StringUtils.endsWithIgnoreCase(path.getFileName().toString(), ".pdf")
                             || StringUtils.endsWithIgnoreCase(path.getFileName().toString(), ".txt")
