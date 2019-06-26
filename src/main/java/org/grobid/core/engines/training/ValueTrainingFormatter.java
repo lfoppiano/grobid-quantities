@@ -54,14 +54,12 @@ public class ValueTrainingFormatter extends UnitTrainingFormatter {
 //                    element.setNamespaceURI(TEI_NS);
                     return element;
 
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (SAXException | IOException e) {
                     e.printStackTrace();
                 }
 
             } else if (rawValue != null) {
-                value.appendChild(teiElement("number", rawValue));
+                value.appendChild(teiElement("number", parsedValue.getRawValue()));
             }
         } else if (rawValue != null) {
             value.appendChild(rawValue);

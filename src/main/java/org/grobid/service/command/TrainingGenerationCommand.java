@@ -43,6 +43,13 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
                 .required(true)
                 .help("Output directory");
 
+        subparser.addArgument("-r")
+                .dest(RECURSIVE)
+                .type(Boolean.class)
+                .required(false)
+                .setDefault(false)
+                .help("Process recursively");
+
     }
 
     @Override
@@ -68,8 +75,9 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
 
         String inputDirectory = namespace.get(INPUT_DIRECTORY);
         String outputDirectory = namespace.get(OUTPUT_DIRECTORY);
+        Boolean recursive = namespace.get(RECURSIVE);
 
-        new QuantityTrainingData().createTrainingBatch(inputDirectory, outputDirectory);
+        new QuantityTrainingData().createTrainingBatch(inputDirectory, outputDirectory, recursive);
 
     }
 }
