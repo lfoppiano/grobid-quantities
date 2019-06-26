@@ -42,6 +42,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.grobid.trainer.CRFPPGenericTrainer.LOGGER;
 
 /**
@@ -375,8 +377,15 @@ public class QuantitiesEngine {
                 try (Stream<String> stream = Files.lines(Paths.get(inputFile.getAbsolutePath()))) {
 
                     List<String> processedUnits = stream.map(
-                            s -> unitParser.tagUnit(s).stream().map(UnitBlock::getRawTaggedValue).collect(Collectors.joining())
-                    ).collect(Collectors.toList());
+                            s -> {
+                                List<UnitBlock> unitBlocks = unitParser.tagUnit(s);
+
+                                if (isNotEmpty(unitBlocks)) {
+                                    return unitBlocks.get(0).getRawTaggedValue();
+                                }
+                                return "";
+                            }
+                    ).filter(StringUtils::isNotBlank).collect(Collectors.toList());
 
                     for (String processedUnit : processedUnits) {
                         outputWriter.write("<unit>");
