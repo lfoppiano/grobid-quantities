@@ -2143,6 +2143,23 @@
           "lemma": "Bohr magneton"
         }
       ]
+    },{
+      "notations": [
+        {
+          "raw": "emu"
+        }
+      ],
+      "type": "MAGNETIC_MOMENT",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "electromagnetic unit"
+        },
+        {
+          "lemma": "electromagnetic units"
+        }
+      ]
     },
     {
       "notations": [
