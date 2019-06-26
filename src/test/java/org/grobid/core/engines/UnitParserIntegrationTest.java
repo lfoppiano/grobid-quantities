@@ -153,7 +153,7 @@ public class UnitParserIntegrationTest {
     @Test
     public void testTagUnit9() throws Exception {
 
-        String input = "Dbs";
+        String input = "Db s";
         List<UnitBlock> output = target.tagUnit(input, false);
         System.out.println(input + " -> " + output);
 
@@ -281,6 +281,43 @@ public class UnitParserIntegrationTest {
         assertThat(blocks.get(1).getPow(), is("-1"));
         assertThat(blocks.get(0).getRawTaggedValue(), is("<base>°C</base> <pow>/</pow><base>h</base>"));
         assertThat(blocks.get(1).getRawTaggedValue(), is("<base>°C</base> <pow>/</pow><base>h</base>"));
+    }
+
+    @Test
+    public void resultExtraction_multiple_divisionMarks() throws Exception {
+        String result = "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
+                "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+                "h\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+                "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
+                "l\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n" +
+                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+                "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
+                "c\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+                "a\t0\t0\t1\t1\tNOPUNCT\t0\t<base>\n" +
+                "l\t0\t0\t1\t0\tNOPUNCT\t0\t<base>";
+
+//        target.tagUnit("km/h/ml/kcal");
+
+        List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("km/h/ml/kcal"));
+        assertThat(blocks.size(), is(4));
+        assertThat(blocks.get(0).getPrefix(), is("k"));
+        assertThat(blocks.get(0).getBase(), is("m"));
+
+        assertThat(blocks.get(1).getBase(), is("h"));
+        assertThat(blocks.get(1).getPow(), is("-1"));
+
+        assertThat(blocks.get(2).getPrefix(), is("m"));
+        assertThat(blocks.get(2).getBase(), is("l"));
+        assertThat(blocks.get(2).getPow(), is("-1"));
+
+        assertThat(blocks.get(3).getPrefix(), is("k"));
+        assertThat(blocks.get(3).getBase(), is("cal"));
+        assertThat(blocks.get(3).getPow(), is("-1"));
+
+        assertThat(blocks.get(0).getRawTaggedValue(), is("<prefix>k</prefix><base>m</base><pow>/</pow><base>h</base><pow>/</pow><prefix>m</prefix><base>l</base><pow>/</pow><prefix>k</prefix><base>cal</base>"));
+
     }
 
     public static List<LayoutToken> generateTokenisation(String input) {
