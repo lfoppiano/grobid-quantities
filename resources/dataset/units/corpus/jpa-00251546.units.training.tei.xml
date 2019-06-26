@@ -1,24 +1,47 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
-	<unit><prefix>n</prefix><base>s</base></unit>
+	<unit><base>decades</base> /3</unit>
+	<unit><base>"</base><base>~</base></unit>
+<!--	<unit><base>'</base><base>C</base></unit>-->
+<!--	<unit><prefix>n</prefix><base>s</base></unit>-->
+	<unit><prefix>m</prefix><base>l</base></unit>
+<!--	<unit><base>mjs</base></unit>-->
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>aC</base></unit>
+<!--	<unit><base>'</base><base>C</base></unit>-->
+<!--	<unit><base>'</base><base>C</base></unit>-->
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+<!--	<unit><base>'</base><base>C</base></unit>-->
+	<unit><base>%</base></unit>
+<!--	<unit><base>'</base><base>C</base></unit>-->
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>degrees</base></unit>
+	<unit><base>degrees</base></unit>
+<!--	<unit><prefix>m</prefix><base>Pa.s</base></unit>-->
+<!--	<unit><prefix>m</prefix><base>Pa.s</base></unit>-->
 	<unit><prefix>m</prefix><base>l</base></unit>
 	<unit><base>%</base></unit>
+<!--	<unit><base>'</base><base>C</base></unit>-->
+<!--	<unit><base>'</base><base>C</base></unit>-->
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+<!--	<unit><base>"</base><base>~</base></unit>-->
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
+<!--	<unit><base>'</base><base>C</base></unit>-->
+<!--	<unit><base>'</base><base>C</base></unit>-->
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>%</base></unit>
+<!--	<unit><base>'</base><base>C</base></unit>-->
+<!--	<unit><base>'</base><base>C</base></unit>-->
 	<unit><base>%</base></unit>
 </units>

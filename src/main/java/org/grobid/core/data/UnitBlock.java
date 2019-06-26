@@ -13,6 +13,11 @@ public class UnitBlock {
     private String prefix = "";
     private String base = "";
     private String pow = "";
+
+    /** this value represent the raw tagging of the whole sequence, not only of this unit block
+     * Yes it's a workaround but there is no other way to carry this information further without creating a new object
+     * in replacement of the List<UnitBlock>
+     * **/
     private String rawTaggedValue;
 
 

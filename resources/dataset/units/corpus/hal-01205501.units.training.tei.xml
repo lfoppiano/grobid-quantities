@@ -1,12 +1,15 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>degrees</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
 	<unit><base>Hz</base></unit>
-	<unit><base>l</base></unit>
-	<unit><base>s</base></unit>
+	<unit><base>liter</base></unit>
+	<unit><base>second</base></unit>
 	<unit><prefix>m</prefix><base>s</base></unit>
 	<unit><prefix>m</prefix><base>s</base></unit>
-	<unit><base>l</base></unit>
-	<unit><base>l</base></unit>
-	<unit><base>l</base></unit>
+	<unit><base>liter</base></unit>
+	<unit><base>liters</base></unit>
+	<unit><base>liters</base></unit>
+	<unit><base>•</base></unit>
+	<unit><base>•</base></unit>
 </units>

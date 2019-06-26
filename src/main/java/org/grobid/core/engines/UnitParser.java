@@ -9,6 +9,7 @@ import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorUnits;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.QuantityLexicon;
+import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.LayoutTokensUtil;
@@ -21,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_OTHER;
-import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_POW;
+import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
+import static org.grobid.core.engines.label.QuantitiesTaggingLabels.VALUE_VALUE_OTHER;
 
 /**
  * Created by lfoppiano on 20.02.16.
@@ -102,6 +103,15 @@ public class UnitParser extends AbstractParser {
      * Extract identified quantities from a labelled text.
      */
     public List<UnitBlock> resultExtraction(String result, List<LayoutToken> tokenizations) {
+        return resultExtraction(result, tokenizations, false);
+    }
+
+    /**
+     * Extract identified quantities from a labelled text.
+     *
+     * @param registerCRFTags indicate if to register the result from the CRF. Useful for the training data generation
+     */
+    public List<UnitBlock> resultExtraction(String result, List<LayoutToken> tokenizations, boolean registerCRFTags) {
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.UNITS, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
@@ -128,16 +138,28 @@ public class UnitParser extends AbstractParser {
             List<LayoutToken> theTokens = cluster.concatTokens();
             String clusterContent = LayoutTokensUtil.toText(theTokens).trim();
 
+            if (!clusterLabel.equals(UNIT_VALUE_OTHER)) {
+                rawTaggedValue.append(clusterLabel.getLabel());
+            }
+            rawTaggedValue.append(clusterContent);
+            if (!clusterLabel.equals(UNIT_VALUE_OTHER)) {
+                rawTaggedValue.append(clusterLabel.getLabel().replace("<", "</"));
+            }
+            LabeledTokensContainer last = Iterables.getLast(cluster.getLabeledTokensContainers());
+            if (last.isTrailingSpace()) {
+                rawTaggedValue.append(" ");
+            }
+
+
             if (clusterLabel.equals(QuantitiesTaggingLabels.UNIT_VALUE_PREFIX)) {
                 if (!startUnit) {
                     startUnit = true;
                 } else {
-                    unitBlock.setRawTaggedValue(rawTaggedValue.toString());
                     units.add(unitBlock);
                     unitBlock = new UnitBlock();
-                    rawTaggedValue = new StringBuilder();
+                    //rawTaggedValue = new StringBuilder();
                 }
-                appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
+                //appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                 unitBlock.setPrefix(clusterContent);
                 LOGGER.debug(clusterContent + "(Pr)");
 
@@ -150,48 +172,50 @@ public class UnitParser extends AbstractParser {
                         unitBlock.setRawTaggedValue(rawTaggedValue.toString());
                         units.add(unitBlock);
                         unitBlock = new UnitBlock();
-                        rawTaggedValue = new StringBuilder();
+                        //rawTaggedValue = new StringBuilder();
                     }
 
                     if (denominator) {
                         unitBlock.setPow("-1");
                     }
                 }
-                appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
+                //appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                 unitBlock.setBase(clusterContent);
                 LOGGER.debug(clusterContent + "(B)");
             } else if (clusterLabel.equals(UNIT_VALUE_OTHER)) {
-                rawTaggedValue.append(clusterContent);
+    //            rawTaggedValue.append(clusterContent);
                 LOGGER.debug(clusterContent + "(O)");
             } else if (clusterLabel.equals(UNIT_VALUE_POW)) {
                 if (clusterContent.equals("/")) {
                     denominator = true;
                 } else if (clusterContent.endsWith("/")) {
                     denominator = true;
-                    appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
+                    //appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                     unitBlock.setPow(clusterContent.replace("/", ""));
                 } else if (clusterContent.equals("*")) {
                     //nothing to do
                 } else {
                     if (denominator) {
-                        appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
+                        //appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                         unitBlock.setPow("-" + clusterContent);
                     } else {
-                        appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
+                        //appendRawTaggedValue(rawTaggedValue, clusterLabel, clusterContent, addSpace(theTokens));
                         unitBlock.setPow(clusterContent);
                     }
                 }
                 LOGGER.debug(clusterContent + "(P)");
             }
             previousTag = clusterLabel;
-            previousLayouts = theTokens;
+            //previousLayouts = theTokens;
         }
-        if (denominator) {
-            appendRawTaggedValue(rawTaggedValue, QuantitiesTaggingLabels.UNIT_VALUE_POW, "-1", addSpace(previousLayouts));
-        }
-
-        unitBlock.setRawTaggedValue(rawTaggedValue.toString());
+        //if (denominator) {
+        //appendRawTaggedValue(rawTaggedValue, QuantitiesTaggingLabels.UNIT_VALUE_POW, "-1", addSpace(previousLayouts));
+        //}
         units.add(unitBlock);
+
+        units.stream().forEach(u -> {
+            u.setRawTaggedValue(rawTaggedValue.toString());
+        });
 
         return units;
     }

@@ -291,12 +291,12 @@ public class QuantityTrainingData {
 
                     unitTrainingFormatter.trainingExtraction(measurements)
                             .stream()
-                            .filter(a -> a.getChildElements().size() != 0)
+                            .filter(a -> a.getChildCount() > 0)
                             .forEach(unitNode::appendChild);
 
                     valueTrainingFormatter.trainingExtraction(measurements)
                             .stream()
-                            .filter(a -> a.getChildElements().size() != 0)
+                            .filter(a -> a.getChildCount() > 0)
                             .forEach(valueNode::appendChild);
 
                     quantifiedObjectNode.appendChild(substanceTrainingFormatter.trainingExtraction(measurements, text));

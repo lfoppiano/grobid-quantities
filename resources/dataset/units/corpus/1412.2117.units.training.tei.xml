@@ -1,6 +1,11 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><prefix>µ</prefix><base>m</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
 	<unit><prefix>µ</prefix><base>m</base></unit>
-	<unit><base>week</base></unit>
+	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>weeks</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
@@ -10,26 +15,55 @@
 	<unit><prefix>c</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><base>s</base></unit>
+	<unit><base>′′</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>′</base></unit>
 	<unit><base>s</base></unit>
+	<unit><base>′′</base></unit>
+	<unit><base>′′</base></unit>
+	<unit><base>pixel</base> <pow>−1</pow></unit>
+	<unit><base>′′</base></unit>
+	<unit><base>pixel</base> <pow>−1</pow></unit>
+	<unit><base>′′</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><prefix>µ</prefix><base>Jy</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>′′</base></unit>
+	<unit><base>′′</base></unit>
+	<unit><base>′′</base></unit>
+	<unit><base>′′</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><prefix>c</prefix><base>m</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>µ</prefix><base>m</base></unit>
-	<unit><prefix>µ</prefix><base>m</base></unit>
-	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><base>%</base></unit>
+	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><prefix>µ</prefix><base>m</base></unit>
+	<unit><prefix>µ</prefix><base>m</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>molecules</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>months</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>AU</base></unit>
 </units>

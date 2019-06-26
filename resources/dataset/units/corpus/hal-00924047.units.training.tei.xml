@@ -1,33 +1,56 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><base>year</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>G</prefix><base>yr</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>l</base></unit>
-	<unit><prefix>µ</prefix><base>g</base><prefix>m</prefix><base>l</base><pow>-1</pow></unit>
+	<unit><base>liters</base></unit>
+	<unit><prefix>µ</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>l</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit><base>min</base></unit>
+	<unit><base>rpm</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
+	<unit><base>min</base></unit>
+	<unit><base>sec</base></unit>
+	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>min</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>pH</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>min</base></unit>
+	<unit><base>rpm</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>pH</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
+	<unit><base>M</base></unit>
+	<unit><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>min</base></unit>
+	<unit><base>rpm</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>m</prefix><base>g</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><prefix>µ</prefix><base>g</base><prefix>m</prefix><base>l</base><pow>-1</pow></unit>
-	<unit><base>pH</base></unit>
+	<unit><base>liters</base></unit>
+	<unit><prefix>µ</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>l</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>m</prefix><base>g</base></unit>
 	<unit><base>%</base></unit>
@@ -35,23 +58,38 @@
 	<unit><base>°C</base></unit>
 	<unit><base>min</base></unit>
 	<unit><base>min</base></unit>
+	<unit><base>rpm</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><prefix>m</prefix><base>l</base></unit>
-	<unit><base>pH</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><prefix>m</prefix><base>g</base></unit>
 	<unit><base>K</base></unit>
-	<unit><prefix>m</prefix><base>g</base><prefix>m</prefix><base>l</base><pow>-1</pow></unit>
+	<unit><prefix>n</prefix><base>l</base></unit>
+	<unit><prefix>n</prefix><base>l</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>l</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><prefix>µ</prefix><base>l</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>K</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><base>h</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
@@ -59,39 +97,69 @@
 	<unit><prefix>n</prefix><base>m</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><base>s</base></unit>
-	<unit><base>pH</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><base>seconds</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>pH</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
 	<unit><prefix>µ</prefix><base>l</base></unit>
-	<unit><prefix>m</prefix><base>g</base><prefix>m</prefix><base>l</base><pow>-1</pow></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>kDa</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>l</base></unit>
+	<unit><prefix>m</prefix><base>M</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><base>pH</base></unit>
-	<unit><base>°C</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>Å</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><prefix>k</prefix><base>J</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>pH</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
-	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><base>M</base></unit>
+	<unit><prefix>k</prefix><base>J mo</base><base>l</base> <pow>-1</pow></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>week</base></unit>
+	<unit><prefix>n</prefix><base>M</base></unit>
+	<unit><prefix>µ</prefix><base>M</base></unit>
+	<unit><prefix>n</prefix><base>M</base></unit>
+	<unit><prefix>n</prefix><base>M</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>year</base></unit>
+	<unit><prefix>n</prefix><base>M</base></unit>
+	<unit><base>years</base></unit>
 </units>

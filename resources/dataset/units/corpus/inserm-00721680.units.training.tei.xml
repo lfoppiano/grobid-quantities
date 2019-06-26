@@ -1,13 +1,40 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
-	<unit><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow> <prefix>m</prefix><base>L</base></unit>
+	<unit rightAttachment="true"><base>pH</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>L</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
-	<unit><base>°C</base></unit>
+	<unit><prefix>μ</prefix><base>m</base></unit>
+	<unit><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>L</base><pow>/</pow><base>h</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>L</base><pow>/</pow><base>h</base></unit>
+	<unit><prefix>m</prefix><base>L</base><pow>/</pow><base>h</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>L</base><pow>/</pow><base>h</base></unit>
+	<unit><prefix>m</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>m</prefix><base>L</base><pow>/</pow><base>h</base></unit>
+	<unit><prefix>m</prefix><base>L</base><pow>/</pow><base>h</base></unit>
+	<unit><base>th</base></unit>
+<!--	<unit><base>per m</base><base>L</base></unit>-->
+<!--	<unit><base>per m</base><base>L</base></unit>-->
 	<unit><base>°C</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
 	<unit><prefix>n</prefix><base>m</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><prefix>μ</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>μ</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>μ</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>L</base></unit>
+	<unit><prefix>μ</prefix><base>g</base><pow>/</pow> <prefix>m</prefix><base>L</base></unit>
+<!--	<unit><base>/</base><prefix>m</prefix><base>L</base></unit>-->
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>

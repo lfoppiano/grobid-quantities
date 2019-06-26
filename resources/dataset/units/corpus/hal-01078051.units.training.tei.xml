@@ -1,7 +1,27 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>AU</base></unit>
+	<unit><base>•</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>A U</base></unit>
+	<unit><base>•</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>W</base> <base>m</base> <pow>−2</pow></unit>
+	<unit><base>AU</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>m</base><base>s</base><pow>-1</pow></unit>
 	<unit><base>%</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>m</base><pow>/</pow><base>s</base></unit>
+	<unit><base>A U</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>c</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix><base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>c</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>c</prefix><base>m</base> <base>s</base> <pow>−1</pow></unit>
+	<unit><prefix>μ</prefix><base>as</base></unit>
+	<unit><prefix>μ</prefix><base>as</base></unit>
 </units>
