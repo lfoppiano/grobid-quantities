@@ -1,20 +1,18 @@
 Average over 10 random training evaluation (10 run with 80/20 split)
 
 
-Token-level results	    precision    	    recall       	    f1
-Average	                89.7381818181818	89.8136363636364	89.7736363636364
-Best	                100	                100	                100
-Worst	                95.76	            96.45	            96.93
+Token-level results	    precision    	recall       	f1
+Average	                98.351	        98.49	        98.42
+Best	                99.8	        99.64	        99.69
+Worst	                96.59	        97.01	        97.25
 
 
-Field-level results	    precision    	    recall       	    f1
-Average	                85.333	            85.373	            85.348
-Best	                100	                100	                100
-Worst	                89.73	            87.74	            89.41
+Field-level results	    precision    	recall       	f1
+Average	                94.14	        94.93	        94.49
+Best	                99.15	        99.57	        99.36
+Worst	                89.91	        90.38	        90.26
 
-Instance-level results			Instance-level recall
-Average			                    96.292
-Best			                    100
-Worst			                    89.62
-
-
+Instance-level results			    Instance-level recall
+Average			                    95.62
+Best			                    99.38
+Worst			                    90.48
