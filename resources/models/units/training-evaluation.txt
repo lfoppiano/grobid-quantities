@@ -1,4 +1,4 @@
-10-fold evaluation (10 run with 80/20 split)
+Average over 10 random training evaluation (10 run with 80/20 split)
 
 
 Token-level results	    precision    	    recall       	    f1
