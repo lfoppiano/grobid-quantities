@@ -43,8 +43,8 @@ public class QuantityParser extends AbstractParser {
     private static volatile QuantityParser instance;
     private ValueParser valueParser = ValueParser.getInstance();
     private QuantifiedObjectParser quantifiedObjectParser;
-    private QuantityNormaliser quantityNormaliser = new QuantityNormaliser();
-//    private EnglishTokenizer tokeniser;
+    private QuantityNormaliser quantityNormaliser;
+    //    private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
 
     public static QuantityParser getInstance(boolean disableSubstance) {
@@ -79,10 +79,11 @@ public class QuantityParser extends AbstractParser {
     @Inject
     public QuantityParser() {
         super(QuantitiesModels.QUANTITIES);
-        quantityLexicon = QuantityLexicon.getInstance();
-        measurementOperations = new MeasurementOperations();
-        instance = this;
+        this.quantityLexicon = QuantityLexicon.getInstance();
+        this.measurementOperations = new MeasurementOperations();
 //        this.tokeniser = new EnglishTokenizer();
+        this.quantityNormaliser = new QuantityNormaliser();
+        this.instance = this;
     }
 
     public List<Measurement> process(List<LayoutToken> layoutTokens) {
