@@ -101,7 +101,7 @@ public class QuantityParser extends AbstractParser {
         ).collect(Collectors.toList());
 
         // list of textual tokens of the selected segment
-        //List<String> texts = getTexts(tokenizationParts);
+//        List<String> texts = getTexts(tokenizationParts);
 
         if (isEmpty(layoutTokenNormalised))
             return measurements;
@@ -166,8 +166,8 @@ public class QuantityParser extends AbstractParser {
                 .stream()
                 .map(t -> new OffsetPosition(t.get(0).getStartOffset(), t.get(t.size() - 1).getEndOffset()))
                 .collect(Collectors.toList());
-    }
-*/
+    }*/
+
     /**
      * Extract all occurrences of measurement/quantities from a simple piece of text.
      */

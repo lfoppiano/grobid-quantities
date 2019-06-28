@@ -294,7 +294,7 @@ public class QuantityParserIntegrationTests {
                 "stage\tstage\ts\tst\tsta\tstag\te\tge\tage\ttage\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
                 ".\t.\t.\t.\t.\t.\t.\t.\t.\t.\tALLCAPS\tNODIGIT\t1\tDOT\t.\t.\t0\t0\t<other>";
 
-        List<OffsetPosition> sentences = Arrays.asList(new OffsetPosition(0, 61), new OffsetPosition(61, 123));
+//        List<OffsetPosition> sentences = Arrays.asList(new OffsetPosition(0, 61), new OffsetPosition(61, 123));
 //        List<Measurement> measurementList = target.extractMeasurement(tokens, result, sentences);
         List<Measurement> measurementList = target.extractMeasurement(tokens, result);
 
