@@ -150,6 +150,7 @@ public class ValueTrainer extends AbstractTrainer {
 
                     addFeatures(labels, writer);
                     writer.write("\n");
+                    writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
                     pos++;
                 }
             }

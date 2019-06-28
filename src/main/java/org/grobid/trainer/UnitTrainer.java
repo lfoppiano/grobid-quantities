@@ -162,6 +162,7 @@ public class UnitTrainer extends AbstractTrainer {
 
                     addFeatures(labels, writer, unitTokenPositions, labeledUnit.isUnitLeft());
                     writer.write("\n");
+                    writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
                     pos++;
                 }
             }
