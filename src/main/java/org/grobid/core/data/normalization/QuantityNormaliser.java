@@ -5,7 +5,6 @@ import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.utilities.MeasurementOperations;
 import org.grobid.core.utilities.UnitUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,29 +33,28 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class QuantityNormaliser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityNormaliser.class);
-    protected static final String UOM_DEFAULT_PROVIDER = "tec.uom.se.spi.DefaultServiceProvider";
-    protected static final String UCUM_PROVIDER = "systems.uom.ucum.internal.UCUMServiceProvider";
-    protected static final String UNICODE_PROVIDER = "systems.uom.unicode.internal.UnicodeServiceProvider";
-    protected static final String SI_PROVIDER = "si.uom.impl.SIServiceProvider";
-    protected static final String COMMON_PROVIDER = "systems.uom.common.internal.CommonServiceProvider";
-    protected static final String INDYRIA_PROVIDER = "tech.units.indriya.internal.DefaultServiceProvider";
-    protected static final String SESHAT_PROVIDER = "tech.uom.seshat.UnitServices";
+    protected static final String UOM_DEFAULT_PROVIDER = "DefaultServiceProvider";
+    protected static final String UCUM_PROVIDER = "UCUMServiceProvider";
+    protected static final String UNICODE_PROVIDER = "UnicodeServiceProvider";
+    protected static final String SI_PROVIDER = "SIServiceProvider";
+    protected static final String COMMON_PROVIDER = "CommonServiceProvider";
+    protected static final String INDYRIA_PROVIDER = "DefaultServiceProvider";
+    protected static final String SESHAT_PROVIDER = "UnitServices";
 
     private Map<String, UnitFormat> unitFormats = new HashMap<>();
 
-    private MeasurementOperations measurementOperations;
+//    private MeasurementOperations measurementOperations;
 
     private UnitNormaliser unitNormaliser;
 
     public QuantityNormaliser() {
         for (ServiceProvider provider : ServiceProvider.available()) {
             try {
-                UnitFormatService formatService = provider.getUnitFormatService();
+                UnitFormatService formatService = provider.getFormatService();
 
-                final String providerName = provider.getClass().getName();
-                unitFormats.put(providerName, formatService.getUnitFormat());
+                unitFormats.put(formatService.toString(), formatService.getUnitFormat());
 
-                if (providerName.equals(COMMON_PROVIDER)) {
+                if (formatService.toString().equals(COMMON_PROVIDER)) {
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mile");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mi");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "miles");
@@ -67,7 +65,7 @@ public class QuantityNormaliser {
         }
 
 
-        measurementOperations = new MeasurementOperations();
+//        measurementOperations = new MeasurementOperations();
         unitNormaliser = new UnitNormaliser();
     }
 

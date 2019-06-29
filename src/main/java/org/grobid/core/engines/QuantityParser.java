@@ -1,7 +1,5 @@
 package org.grobid.core.engines;
 
-import edu.emory.mathcs.nlp.component.tokenizer.EnglishTokenizer;
-import edu.emory.mathcs.nlp.component.tokenizer.token.Token;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.analyzers.QuantityAnalyzer;
@@ -46,7 +44,7 @@ public class QuantityParser extends AbstractParser {
     private ValueParser valueParser = ValueParser.getInstance();
     private QuantifiedObjectParser quantifiedObjectParser;
     private QuantityNormaliser quantityNormaliser = new QuantityNormaliser();
-    private EnglishTokenizer tokeniser;
+//    private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
 
     public static QuantityParser getInstance(boolean disableSubstance) {
@@ -84,7 +82,7 @@ public class QuantityParser extends AbstractParser {
         quantityLexicon = QuantityLexicon.getInstance();
         measurementOperations = new MeasurementOperations();
         instance = this;
-        this.tokeniser = new EnglishTokenizer();
+//        this.tokeniser = new EnglishTokenizer();
     }
 
     public List<Measurement> process(List<LayoutToken> layoutTokens) {
@@ -153,7 +151,7 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
-    protected List<OffsetPosition> getSentencesOffsets(List<LayoutToken> tokens) {
+    /*protected List<OffsetPosition> getSentencesOffsets(List<LayoutToken> tokens) {
         List<Token> tokensNlp4j = tokens
                 .stream()
                 .map(token -> {
@@ -169,7 +167,7 @@ public class QuantityParser extends AbstractParser {
                 .map(t -> new OffsetPosition(t.get(0).getStartOffset(), t.get(t.size() - 1).getEndOffset()))
                 .collect(Collectors.toList());
     }
-
+*/
     /**
      * Extract all occurrences of measurement/quantities from a simple piece of text.
      */
