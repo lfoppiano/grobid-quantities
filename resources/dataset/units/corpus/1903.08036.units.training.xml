@@ -1,0 +1,56 @@
+<units xmlns="http://www.tei-c.org/ns/1.0">
+    <unit><base>K</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><prefix>m</prefix><base>m</base><pow>/</pow><base>h</base></unit>
+	<unit><base>days</base></unit>
+	<unit><base>ppm</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>°</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>°</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>eV</base></unit>
+	<unit><base>K</base></unit>
+    <unit><prefix>m</prefix><base>J</base><pow>/</pow><base>mol</base> <base>K</base> 4</unit>
+    <unit><prefix>m</prefix><base>J</base><pow>/</pow><base>mol</base> <base>K</base> 2</unit>
+    <unit><prefix>m</prefix><base>J</base><pow>/</pow><base>mol</base> <base>K</base> 4</unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+    <unit><prefix>m</prefix><base>J</base><pow>/</pow><base>mol</base> <base>K</base> 2</unit>
+    <unit><prefix>m</prefix><base>J</base><pow>/</pow><base>mol</base> <base>K</base> 2</unit>
+	<unit><base>%</base></unit>
+    <unit><prefix>m</prefix><base>J</base><pow>/</pow><base>mol</base> K 2</unit>
+	<unit><prefix>m</prefix><base>J</base><pow>/</pow><base>mol</base> K 2</unit>
+	<unit><base>K</base></unit>
+<!--	<unit><prefix>T</prefix> <base>two</base></unit>-->
+	<unit><base>K</base></unit>
+</units>
