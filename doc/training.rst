@@ -14,7 +14,8 @@ for example:
 ::
    java -jar build/libs/grobid-quantities-{version}-onejar.jar trainingGeneration -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/
 
-by default the generation of training data is performed on the specified directory. To enable recursion over all its subdirectories, use the argument ``-r true``.
+by default the generation of training data is performed on the specified directory.
+The argument ``-r`` will process all files within the subdirectories, recursively.
 
 Help can be invoked with
 ::

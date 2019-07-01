@@ -2,6 +2,7 @@ package org.grobid.service.command;
 
 import io.dropwizard.cli.ConfiguredCommand;
 import io.dropwizard.setup.Bootstrap;
+import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.grobid.core.engines.Engine;
@@ -48,7 +49,8 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
                 .type(Boolean.class)
                 .required(false)
                 .setDefault(false)
-                .help("Process recursively");
+                .help("Process recursively")
+                .action(Arguments.storeTrue());
 
     }
 
