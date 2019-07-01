@@ -340,7 +340,7 @@ public class QuantityTrainingData {
                 throw new GrobidException("The input path should be a directory.");
             }
 
-            int maxDept = recursive ? 1 : 0;
+            int maxDept = recursive ? Integer.MAX_VALUE : 1;
 
             List<File> refFiles = Files.walk(inputDirectoryPath, maxDept)
                     .filter(path -> Files.isRegularFile(path)
