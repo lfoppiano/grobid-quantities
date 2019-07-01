@@ -1,12 +1,12 @@
 package org.grobid.trainer;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.trainer.sax.ValueAnnotationSaxHandler;
 import org.slf4j.Logger;
@@ -46,7 +46,7 @@ public class ValueTrainer extends AbstractTrainer {
 
         try {
             for (Pair<String, String> text : texts) {
-                String token = text.getA();
+                String token = text.getLeft();
                 if (token.trim().equals("@newline")) {
                     writer.write("\n");
                     writer.flush();
@@ -55,7 +55,7 @@ public class ValueTrainer extends AbstractTrainer {
                 //Unicode normalisation
                 token = UnicodeUtil.normaliseTextAndRemoveSpaces(token);
 
-                String label = text.getB();
+                String label = text.getRight();
 
                 FeaturesVectorValues featuresVector =
                         FeaturesVectorValues.addFeatures(token, label);

@@ -72,4 +72,30 @@ public class UnitAnnotationSaxHandlerTest {
         assertThat(labeled.get(0).getLabels().get(1).getA(), is("z"));
         assertThat(labeled.get(0).getLabels().get(1).getB(), is("<base>"));
     }
+
+    @Test
+    public void testParser_dot_sample() throws Exception {
+        String input = "<unit><prefix>k</prefix><base>m</base> · <base>h</base> <pow>−1</pow></unit>";
+        InputStream is = IOUtils.toInputStream(input, UTF_8);
+
+        SAXParser p = spf.newSAXParser();
+        p.parse(is, target);
+
+        List<UnitLabeled> labeled = target.getLabeledResult();
+
+        assertThat(labeled.size(), is(1));
+        assertThat(labeled.get(0).isUnitLeft(), is(false));
+        assertThat(labeled.get(0).getLabels().size(), is(6));
+        assertThat(labeled.get(0).getLabels().get(0).getA(), is("k"));
+        assertThat(labeled.get(0).getLabels().get(0).getB(), is("I-<prefix>"));
+        assertThat(labeled.get(0).getLabels().get(1).getA(), is("m"));
+        assertThat(labeled.get(0).getLabels().get(2).getA(), is("·"));
+        assertThat(labeled.get(0).getLabels().get(2).getB(), is("<other>"));
+        assertThat(labeled.get(0).getLabels().get(3).getA(), is("h"));
+        assertThat(labeled.get(0).getLabels().get(3).getB(), is("I-<base>"));
+        assertThat(labeled.get(0).getLabels().get(4).getA(), is("−"));
+        assertThat(labeled.get(0).getLabels().get(4).getB(), is("I-<pow>"));
+        assertThat(labeled.get(0).getLabels().get(5).getA(), is("1"));
+        assertThat(labeled.get(0).getLabels().get(5).getB(), is("<pow>"));
+    }
 }

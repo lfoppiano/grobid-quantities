@@ -1,91 +1,18 @@
-16:38:26.640 [main] INFO org.grobid.trainer.UnitTrainer - sourcePathLabel: resources/dataset/units/corpus
-16:38:26.640 [main] INFO org.grobid.trainer.UnitTrainer - outputPath for training data: /Users/lfoppiano/development/projects/grobid/grobid-home/tmp/units667241803472690077.train
-16:38:26.640 [main] INFO org.grobid.trainer.UnitTrainer - outputPath for evaluation data: /Users/lfoppiano/development/projects/grobid/grobid-home/tmp/units4813339367036143720.test
-16:38:26.640 [main] INFO org.grobid.trainer.UnitTrainer - 38 files
-16:38:26.641 [main] INFO org.grobid.trainer.UnitTrainer - hal-00924047.units.training.tei.xml
-16:38:26.668 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00851058.units.training.tei.xml
-16:38:26.685 [main] INFO org.grobid.trainer.UnitTrainer - 1404.7168.units.training.tei.xml
-16:38:26.695 [main] INFO org.grobid.trainer.UnitTrainer - 1001.4731.units.training.tei.xml
-16:38:26.697 [main] INFO org.grobid.trainer.UnitTrainer - trainingdata1.training.tei.xml
-16:38:26.704 [main] INFO org.grobid.trainer.UnitTrainer - hal-01429870-CC-BY.units.training.tei.xml
-16:38:26.709 [main] INFO org.grobid.trainer.UnitTrainer - nhess-6-1007-2006.units.training.tei.xml
-16:38:26.712 [main] INFO org.grobid.trainer.UnitTrainer - inserm-01196815.units.training.tei.xml
-16:38:26.713 [main] INFO org.grobid.trainer.UnitTrainer - 1408.2792.units.training.tei.xml
-16:38:26.717 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00721680.units.training.tei.xml
-16:38:26.719 [main] INFO org.grobid.trainer.UnitTrainer - EP-0505085-B2.units.training.tei.xml
-16:38:26.729 [main] INFO org.grobid.trainer.UnitTrainer - 1412.2117.units.training.tei.xml
-16:38:26.731 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00676663.units.training.tei.xml
-16:38:26.733 [main] INFO org.grobid.trainer.UnitTrainer - hal-00720564.units.training.tei.xml
-16:38:26.735 [main] INFO org.grobid.trainer.UnitTrainer - hal-00595947.units.training.tei.xml
-16:38:26.737 [main] INFO org.grobid.trainer.UnitTrainer - hal-00962359.units.training.tei.xml
-16:38:26.739 [main] INFO org.grobid.trainer.UnitTrainer - hal-01252076.units.training.tei.xml
-16:38:26.740 [main] INFO org.grobid.trainer.UnitTrainer - hal-00398330.units.training.tei.xml
-16:38:26.741 [main] INFO org.grobid.trainer.UnitTrainer - trainingdata0.training.tei.xml
-16:38:26.744 [main] INFO org.grobid.trainer.UnitTrainer - hal-01223150.units.training.tei.xml
-16:38:26.745 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00752141.units.training.tei.xml
-16:38:26.750 [main] INFO org.grobid.trainer.UnitTrainer - 1308.2125.units.training.tei.xml
-16:38:26.751 [main] INFO org.grobid.trainer.UnitTrainer - hal-01269917.units.training.tei.xml
-16:38:26.753 [main] INFO org.grobid.trainer.UnitTrainer - hal-00643787.units.training.tei.xml
-16:38:26.754 [main] INFO org.grobid.trainer.UnitTrainer - hal-01078051.units.training.tei.xml
-16:38:26.755 [main] INFO org.grobid.trainer.UnitTrainer - hal-01205501.units.training.tei.xml
-16:38:26.756 [main] INFO org.grobid.trainer.UnitTrainer - hal-01278907.units.training.tei.xml
-16:38:26.758 [main] INFO org.grobid.trainer.UnitTrainer - 1404.4640.units.training.tei.xml
-16:38:26.760 [main] INFO org.grobid.trainer.UnitTrainer - 12970_2015_Article_108.units.training.tei.xml
-16:38:26.762 [main] INFO org.grobid.trainer.UnitTrainer - inserm-00508113.units.training.tei.xml
-16:38:26.764 [main] INFO org.grobid.trainer.UnitTrainer - hal-00915599.units.training.tei.xml
-16:38:26.765 [main] INFO org.grobid.trainer.UnitTrainer - 1609.04957.units.training.tei.xml
-16:38:26.766 [main] INFO org.grobid.trainer.UnitTrainer - hal-00987664.units.training.tei.xml
-16:38:26.767 [main] INFO org.grobid.trainer.UnitTrainer - hal-00082280.units.training.tei.xml
-16:38:26.768 [main] INFO org.grobid.trainer.UnitTrainer - hal-01321536.units.training.tei.xml
-16:38:26.770 [main] INFO org.grobid.trainer.UnitTrainer - hal-00535466.units.training.tei.xml
-16:38:26.771 [main] INFO org.grobid.trainer.UnitTrainer - halshs-01279855.units.training.tei.xml
-16:38:26.773 [main] INFO org.grobid.trainer.UnitTrainer - jpa-00251546.units.training.tei.xml
-	epsilon: 1.0E-7
-	window: 20
-	nb max iterations: 2000
-	nb threads: 12
-* Load patterns
-* Load training data
-   1000 sequences loaded
-* Initialize the model
-* Summary
-    nb train:    1578
-    nb labels:   7
-    nb blocks:   1612
-    nb features: 11284
-* Train the model with l-bfgs
-* Save the model
-* Done
-16:38:27.521 [main] INFO org.grobid.core.jni.WapitiModel - Loading model: /Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/units/model.wapiti (size: 34449)
-[Wapiti] Loading model: "/Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/units/model.wapiti"
-Model path: /Users/lfoppiano/development/projects/grobid/grobid-quantities/../grobid-home/models/units/model.wapiti
-Labeling took: 7 ms
-
-===== Token-level results =====
+Average over 10 random training evaluation (10 run with 80/20 split)
 
 
-label                accuracy     precision    recall       f1
+Token-level results	    precision    	recall       	f1
+Average	                98.351	        98.49	        98.42
+Best	                99.8	        99.64	        99.69
+Worst	                96.59	        97.01	        97.25
 
-<base>               99.65        100          99.57        99.78
-<pow>                100          100          100          100
-<prefix>             99.65        96.77        100          98.36
 
-all fields           99.77        99.65        99.65        99.65   (micro average)
-                     99.77        98.92        99.86        99.38   (macro average)
+Field-level results	    precision    	recall       	f1
+Average	                94.14	        94.93	        94.49
+Best	                99.15	        99.57	        99.36
+Worst	                89.91	        90.38	        90.26
 
-===== Field-level results =====
-
-label                accuracy     precision    recall       f1
-
-<base>               99.48        100          99.33        99.66
-<pow>                100          100          100          100
-<prefix>             99.48        96.77        100          98.36
-
-all fields           99.65        99.47        99.47        99.47   (micro average)
-                     99.65        98.92        99.78        99.34   (macro average)
-
-===== Instance-level results =====
-
-Total expected instances:   138
-Correct instances:          137
-Instance-level recall:      99.28
+Instance-level results			    Instance-level recall
+Average			                    95.62
+Best			                    99.38
+Worst			                    90.48
