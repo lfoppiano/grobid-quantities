@@ -352,7 +352,7 @@ We could have units expressed without values, when the value is implicit:
 here the value of millimeters and centimeters is unspecified (e.g. equivalent to ``several``), but we have a quantity and more precisely an interval.
 See issue `#31 <https://github.com/kermitt2/grobid-quantities/issues/31>`_ 
 
-Unprecise quantifiers
+Imprecise quantifiers
 ^^^^^^^^^^^^^^^^^^^^^
 
 When used with units, quantifers like ``few``, ``several``, ``a couple``, ``a large amount of`` is annotated, and whatever quantifies even imprecisely :
@@ -592,9 +592,9 @@ General principles:
   ::
     <unit><base>miles</base></unit>
 
-- denominator written with subsequent ``division marks``, like ``cal/kg/m/days``, which means ``cal/(kg*m*days)`` should be annotated considering only the first ``/``:
+- denominator written with subsequent ``division marks``, like ``cal/kg/m/days``, which means ``cal/(kg*m*days)``, all the ``/`` should be annotated:
   ::
-    <unit><base>cal</base><pow>/</pow><base>kg</base>/<base>m</base>/<base>days</base></unit>
+    <unit><base>cal</base><pow>/</pow><base>kg</base><pow>/</pow><base>m</base><pow>/</pow><base>days</base></unit>
 
 - in general  ``numerator / den1 den2 den3 is equivalent`` to ``numerator/(den1*den2*den3)``. Groups by parenthesis are not supported.
 
