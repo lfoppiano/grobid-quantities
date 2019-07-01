@@ -85,8 +85,7 @@ public class QuantityParserIntegrationTests {
 
     @Test
     public void testQuantityParsing_composedUnit() throws Exception {
-        List<Measurement> measurements = target.process("the result was 10 m^1*s^-1 ");
-
+        List<Measurement> measurements = target.process("The result was 10 m -1 * s -1.");
 
         assertThat(measurements, hasSize(1));
         Measurement measurement = measurements.get(0);

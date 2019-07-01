@@ -1,6 +1,7 @@
 package org.grobid.core.data.normalization;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitBlock;
@@ -33,12 +34,12 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class QuantityNormaliser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityNormaliser.class);
-    protected static final String UOM_DEFAULT_PROVIDER = "DefaultServiceProvider";
+    protected static final String UOM_DEFAULT_PROVIDER = "Default";
     protected static final String UCUM_PROVIDER = "UCUMServiceProvider";
-    protected static final String UNICODE_PROVIDER = "UnicodeServiceProvider";
-    protected static final String SI_PROVIDER = "SIServiceProvider";
-    protected static final String COMMON_PROVIDER = "CommonServiceProvider";
-    protected static final String INDYRIA_PROVIDER = "DefaultServiceProvider";
+    protected static final String UNICODE_PROVIDER = "Unicode";
+    protected static final String SI_PROVIDER = "SI";
+    protected static final String COMMON_PROVIDER = "Common";
+//    protected static final String INDYRIA_PROVIDER = "DefaultServiceProvider";
     protected static final String SESHAT_PROVIDER = "UnitServices";
 
     private Map<String, UnitFormat> unitFormats = new HashMap<>();
@@ -52,9 +53,9 @@ public class QuantityNormaliser {
             try {
                 UnitFormatService formatService = provider.getFormatService();
 
-                unitFormats.put(formatService.toString(), formatService.getUnitFormat());
+                unitFormats.put(provider.toString(), formatService.getUnitFormat());
 
-                if (formatService.toString().equals(COMMON_PROVIDER)) {
+                if (StringUtils.equals(provider.toString(), COMMON_PROVIDER)) {
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mile");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mi");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "miles");
@@ -126,7 +127,7 @@ public class QuantityNormaliser {
                     parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER), unitFormats.get(UNICODE_PROVIDER));
 
                 } else {
-                    parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(COMMON_PROVIDER), unitFormats.get(INDYRIA_PROVIDER));
+                    parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(COMMON_PROVIDER));
                 }
             }
         }
@@ -139,14 +140,12 @@ public class QuantityNormaliser {
         }
 
         javax.measure.Unit unit = null;
-        for (UnitFormat formatService : parsers.stream().filter(Objects::nonNull).collect(Collectors.toList())) {
+        for (UnitFormat formatService : parsers) {
             try {
                 unit = formatService.parse(parsedUnit.getRawName());
                 break;
-            } catch (MeasurementParseException | IllegalArgumentException | UnsupportedOperationException e) {
+            } catch (Throwable e) {
                 LOGGER.warn("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), e);
-            } catch (Throwable t) {
-                LOGGER.warn("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), t);
             }
         }
 
@@ -154,11 +153,25 @@ public class QuantityNormaliser {
             List<javax.measure.Unit> unitList = new ArrayList<>();
             for (UnitBlock block : parsedUnit.getProductBlocks()) {
 
-                for (UnitFormat formatService : parsers.stream().filter(Objects::nonNull).collect(Collectors.toList())) {
+                for (UnitFormat formatService : parsers) {
                     try {
                         unitList.add(formatService.parse(UnitBlock.asString(block)));
                         break;
-                    } catch (MeasurementParseException | IllegalArgumentException | UnsupportedOperationException e) {
+                    } catch (MeasurementParseException e) {
+
+                        //handling 1/{unit}, processing just the unit
+                        if(StringUtils.equalsAnyIgnoreCase(block.getPow(), "-1", "−1")) {
+                            String onlyUnit = block.getPrefix() + block.getBase();
+                            javax.measure.Unit<?> onlyUnitParsed = null;
+                            try {
+                                onlyUnitParsed = formatService.parse(onlyUnit);
+                            } catch(Throwable e2) {
+                                LOGGER.warn("Trying excluding the negative power. Cannot parse " + onlyUnit + " with " + formatService.getClass().getName(), e2);
+                            }
+                            unitList.add(onlyUnitParsed.pow(-1));
+                            break;
+                        }
+
                         LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), e);
                     } catch (Throwable t) {
                         LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), t);

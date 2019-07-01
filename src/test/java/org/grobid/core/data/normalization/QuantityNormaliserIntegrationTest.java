@@ -21,7 +21,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-@Ignore("we should mock also uom .. but for now is better to leave it out so that we can spot other errors")
+//@Ignore("we should mock also uom .. but for now is better to leave it out so that we can spot other errors")
 public class QuantityNormaliserIntegrationTest {
 
     private QuantityNormaliser target;
@@ -51,8 +51,8 @@ public class QuantityNormaliserIntegrationTest {
         parsedUnit.setUnitDefinition(generateLenghtUnitDefinition());
         expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
         final UnitDefinition fakeDefinition = new UnitDefinition();
-        fakeDefinition.setNotations(Arrays.asList(new String[]{"km"}));
-        fakeDefinition.setNames(Arrays.asList(new String[]{"kilometer", "kilometers", "kilometres"}));
+        fakeDefinition.setNotations(Arrays.asList("km"));
+        fakeDefinition.setNames(Arrays.asList("kilometer", "kilometers", "kilometres"));
         expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(fakeDefinition);
 
         replay(mockUnitNormaliser);
@@ -84,8 +84,8 @@ public class QuantityNormaliserIntegrationTest {
         parsedUnit.setUnitDefinition(generateLenghtUnitDefinition());
         expect(mockUnitNormaliser.parseUnit(raw)).andReturn(parsedUnit);
         final UnitDefinition fakeDefinition = new UnitDefinition();
-        fakeDefinition.setNotations(Arrays.asList(new String[]{"km"}));
-        fakeDefinition.setNames(Arrays.asList(new String[]{"kilometer", "kilometers", "kilometres"}));
+        fakeDefinition.setNotations(Arrays.asList("km"));
+        fakeDefinition.setNames(Arrays.asList("kilometer", "kilometers", "kilometres"));
         expect(mockUnitNormaliser.findDefinition(anyObject())).andReturn(fakeDefinition);
 
         replay(mockUnitNormaliser);
@@ -120,8 +120,8 @@ public class QuantityNormaliserIntegrationTest {
         final UnitDefinition parsedUnitDefinition = new UnitDefinition();
         parsedUnitDefinition.setType(UnitUtilities.Unit_Type.TEMPERATURE);
         parsedUnitDefinition.setSystem(UnitUtilities.System_Type.SI_DERIVED);
-        parsedUnitDefinition.setNotations(Arrays.asList(new String[]{"°C"}));
-        parsedUnitDefinition.setNames(Arrays.asList(new String[]{"celsius", "celcius"}));
+        parsedUnitDefinition.setNotations(Arrays.asList("°C"));
+        parsedUnitDefinition.setNames(Arrays.asList("celsius", "celcius"));
         return parsedUnitDefinition;
 
     }
