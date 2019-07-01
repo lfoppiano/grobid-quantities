@@ -65,9 +65,9 @@ dependencies {
     testCompile 'org.powermock:powermock-api-easymock:1.7.1'
 
     //GROBID
-    compile 'org.grobid:grobid-core:0.5.6-SNAPSHOT'
-    compile 'org.grobid:grobid-trainer:0.5.6-SNAPSHOT'
-    compile('org.grobid:grobid-service:0.5.6-SNAPSHOT') {
+    compile 'org.grobid:grobid-core:0.5.5'
+    compile 'org.grobid:grobid-trainer:0.5.5'
+    compile('org.grobid:grobid-service:0.5.5') {
         transitive = false
     }
 
