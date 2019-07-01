@@ -1966,6 +1966,7 @@
       ],
       "type": "ABSORBED_DOSE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "gray",
@@ -2111,6 +2112,9 @@
       "names": [
         {
           "lemma": "molecules per squared metre per second"
+        },
+        {
+          "lemma": "molecules per squared meter per second"
         }
       ]
     },
@@ -2147,6 +2151,22 @@
     {
       "notations": [
         {
+          "raw": "emu"
+        }
+      ],
+      "type": "MAGNETIC_MOMENT",
+      "system": "CGS",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "electromagnetic unit",
+          "inflection": "electromagnetic units"
+        },
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "Oe"
         }
       ],
@@ -2156,6 +2176,38 @@
       "names": [
         {
           "lemma": "Oersted"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "dyn"
+        }
+      ],
+      "type": "FORCE",
+      "system": "CGS",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "dyne",
+          "inflection": "dynes"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "N"
+        }
+      ],
+      "type": "FORCE",
+      "system": "SI",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "newton",
+          "inflection": "newtons"
         }
       ]
     }
