@@ -51,8 +51,8 @@ repositories {
     mavenCentral()
     jcenter()
     maven { url "https://dl.bintray.com/rookies/maven" }
-    maven { url "http://oss.jfrog.org/artifactory/libs-snapshot"}
-    maven { url "http://oss.jfrog.org/artifactory/libs-release"}
+    maven { url "http://oss.jfrog.org/artifactory/libs-snapshot" }
+    maven { url "http://oss.jfrog.org/artifactory/libs-release" }
 //    maven { url 'https://jitpack.io' }
 //    maven { url "https://dl.bintray.com/unitsofmeasurement/maven" }
 }
@@ -156,17 +156,17 @@ configurations.all {
     }
 }
 
-//test {
-//    exclude '**/**IntegrationTest**'
-//}
-
-task unitTest(type: Test) {
+test {
     exclude '**/**IntegrationTest**'
 }
 
-//integration (type: Test){
-//    include '**'
+//task unitTest(type: Test) {
+//    exclude '**/**IntegrationTest**'
 //}
+
+task integration(type: Test) {
+    include '**'
+}
 
 // Training configuration
 
