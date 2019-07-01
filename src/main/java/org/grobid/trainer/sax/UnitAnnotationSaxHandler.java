@@ -10,12 +10,11 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 /**
  * SAX handler for TEI-style annotations. should work for patent PDM and our usual scientific paper encoding.
- * Measures are inline quantities annotations.
  * The training data for the CRF models are generated during the XML parsing.
- *
- * @author Patrice Lopez
  */
 public class UnitAnnotationSaxHandler extends DefaultHandler {
 
@@ -46,6 +45,16 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
             if (isLeftPosition(attributes)) {
                 currentUnit.setUnitLeft(true);
             }
+        } else {
+            // we have to write first what has been accumulated yet with the upper-level tag
+            String text = getText();
+            if (text != null) {
+                if (isNotEmpty(text)) {
+                    currentTag = "<other>";
+                    writeData("other");
+                }
+            }
+            accumulator.setLength(0);
         }
 
     }
@@ -95,23 +104,14 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
                 if (token.length() == 0)
                     continue;
 
-                if (token.equals("+L+")) {
-                    currentUnit.addLabel(new Pair<>("@newline", null));
-                } else if (token.equals("+PAGE+")) {
-                    currentUnit.addLabel(new Pair<>("@newpage", null));
+                String content = token;
+                int i = 0;
+                if (begin && !currentTag.equals("<other>")) {
+                    currentUnit.addLabel(new Pair<>(content, "I-" + currentTag));
+                    begin = false;
                 } else {
-                    String content = token;
-                    int i = 0;
-                    if (content.length() > 0) {
-                        if (begin && !currentTag.equals("<other>")) {
-                            currentUnit.addLabel(new Pair<>(content, "I-" + currentTag));
-                            begin = false;
-                        } else {
-                            currentUnit.addLabel(new Pair<>(content, currentTag));
-                        }
-                    }
+                    currentUnit.addLabel(new Pair<>(content, currentTag));
                 }
-                begin = false;
             }
             accumulator.setLength(0);
 

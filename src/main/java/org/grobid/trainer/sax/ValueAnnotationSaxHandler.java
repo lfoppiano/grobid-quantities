@@ -1,7 +1,7 @@
 package org.grobid.trainer.sax;
 
 
-import org.grobid.core.utilities.Pair;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.grobid.trainer.ValueLabeled;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -14,10 +14,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * SAX handler for TEI-style annotations. should work for patent PDM and our usual scientific paper encoding.
- * Measures are inline quantities annotations.
  * The training data for the CRF models are generated during the XML parsing.
- *
- * @author Patrice Lopez
  */
 public class ValueAnnotationSaxHandler extends DefaultHandler {
 
@@ -93,19 +90,12 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
                 if (isEmpty(token))
                     continue;
 
-                if (token.equals("+L+")) {
-                    currentValue.addLabel(new Pair<>("@newline", null));
-                } else if (token.equals("+PAGE+")) {
-                    currentValue.addLabel(new Pair<>("@newpage", null));
+                if (begin && !currentTag.equals("<other>")) {
+                    currentValue.addLabel(new ImmutablePair<>(token, "I-" + currentTag));
+                    begin = false;
                 } else {
-                    if (begin && !currentTag.equals("<other>")) {
-                        currentValue.addLabel(new Pair<>(token, "I-" + currentTag));
-                        begin = false;
-                    } else {
-                        currentValue.addLabel(new Pair<>(token, currentTag));
-                    }
+                    currentValue.addLabel(new ImmutablePair<>(token, currentTag));
                 }
-                begin = false;
             }
             accumulator.setLength(0);
 
