@@ -1,27 +1,33 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>years</base></unit>
+	<unit><base>m</base></unit>
+	<unit><base>miles</base></unit>
+	<unit><base>miles</base></unit>
+	<unit><base>m</base></unit>
+	<unit><base>weeks</base></unit>
+	<unit><base>miles</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>m</base></unit>
+	<unit><base>m</base></unit>
+	<unit><base>m</base></unit>
 	<unit><base>year</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>week</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
 	<unit><prefix>c</prefix><base>m</base></unit>
+	<unit><base>feet</base></unit>
+	<unit><base>feet</base></unit>
+	<unit><base>m</base></unit>
+	<unit><base>October</base></unit>
+	<unit><base>feet</base></unit>
+	<unit><base>m</base></unit>
+	<unit><base>month</base></unit>
+	<unit><base>m</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
 </units>

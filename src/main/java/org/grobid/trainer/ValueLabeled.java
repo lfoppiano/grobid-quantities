@@ -1,6 +1,6 @@
 package org.grobid.trainer;
 
-import org.grobid.core.utilities.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;

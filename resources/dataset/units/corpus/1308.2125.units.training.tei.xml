@@ -1,5 +1,7 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
-    <unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -24,7 +26,16 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>µB</base></unit>
+	<unit><base>µB</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-    <unit><base>percent</base></unit>
+	<unit><base>µB</base></unit>
+	<unit><base>µB</base></unit>
+	<unit><base>µB</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>percent</base></unit>
 </units>

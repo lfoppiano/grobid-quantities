@@ -1,61 +1,72 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
-    <unit><base>min</base></unit>
-    <unit><base>min</base></unit>
-    <unit><prefix>m</prefix><base>m</base></unit>
-    <unit><prefix>m</prefix><base>m</base></unit>
+    <unit><base>percent</base></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>millimeter</base></unit>
+	<unit><base>millimeter</base></unit>
+    <unit><base>grain</base><base>s</base><pow>/</pow><base>m</base> <pow>2</pow></unit>
     <unit><prefix>k</prefix><base>m</base></unit>
-    <unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>min</base></unit>
+    <unit><base>•</base></unit>
+    <unit><prefix>k</prefix><base>m</base><pow>/</pow><base>s</base></unit>
+    <unit><base>•</base></unit>
+	<unit><base>minutes</base></unit>
     <unit><prefix>k</prefix><base>m</base></unit>
-    <unit><base>min</base></unit>
+	<unit><base>minutes</base></unit>
     <unit><prefix>k</prefix><base>m</base></unit>
-    <unit><base>min</base></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><prefix>k</prefix><base>g</base><base>s</base><pow>-1</pow></unit>
+    <unit><base>•</base></unit>
+	<unit><base>minute</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>m</base><pow>/</pow><base>s</base></unit>
+    <unit><base>m</base><pow>/</pow><base>s</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>m</base><pow>/</pow><base>s</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>m</base><pow>/</pow><base>s</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><prefix>k</prefix><base>g</base><pow>/</pow><base>s</base></unit>
     <unit><prefix>µ</prefix><base>m</base></unit>
     <unit><prefix>µ</prefix><base>m</base></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><prefix>k</prefix><base>m</base></unit>
-    <unit><prefix>k</prefix><base>m</base></unit>
-    <unit><prefix>m</prefix><base>m</base></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>g</base><prefix>c</prefix><base>m</base> <pow>-3</pow></unit>
-    <unit><base>g</base><prefix>c</prefix><base>m</base> <pow>-3</pow></unit>
-    <unit><base>g</base><prefix>c</prefix><base>m</base> <pow>-3</pow></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>AU</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><base>kilometers</base></unit>
+    <unit><base>AU</base></unit>
+    <unit><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base> <pow>3</pow></unit>
+    <unit><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base> <pow>3</pow></unit>
+    <unit><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base> <pow>3</pow></unit>
     <unit><prefix>c</prefix><base>m</base></unit>
     <unit><prefix>c</prefix><base>m</base></unit>
     <unit><prefix>k</prefix><base>m</base></unit>
+    <unit><base>AU</base></unit>
+	<unit><base>grains</base></unit>
     <unit><prefix>k</prefix><base>m</base></unit>
-    <unit><base>m</base></unit>
-    <unit><base>m</base></unit>
-    <unit><base>m</base></unit>
-    <unit><base>m</base></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>min</base></unit>
-    <unit><base>min</base></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>h</base></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>g</base><prefix>c</prefix><base>m</base> <pow>-3</pow></unit>
-    <unit><base>h</base></unit>
-    <unit><base>week</base></unit>
-    <unit><base>m</base><base>s</base><pow>-1</pow></unit>
-    <unit><base>min</base></unit>
-    <unit><base>min</base></unit>
-    <unit><base>mm</base></unit>
-    <unit><base>mm</base></unit>
-    <unit><base>min</base></unit>
-    <unit><base>min</base></unit>
+	<unit><base>meter</base></unit>
+	<unit><base>meter</base></unit>
+	<unit><base>meter</base></unit>
+	<unit><base>meter</base></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>minutes</base></unit>
+    <unit><base>m</base><pow>/</pow><base>s</base></unit>
+	<unit><base>hour</base></unit>
+	<unit><base>hour</base></unit>
+    <unit><base>percent</base></unit>
+    <unit><base>•</base></unit>
+    <unit><base>m</base> <pow>−2</pow></unit>
+    <unit><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base> <pow>3</pow></unit>
+    <unit><base>m</base> <pow>−2</pow></unit>
+    <unit><base>hours</base></unit>
+    <unit><base>weeks</base></unit>
+    <unit><base>m</base><pow>/</pow><base>s</base></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>minutes</base></unit>
+    <unit><base>percent</base></unit>
+	<unit><base>millimeter</base></unit>
+	<unit><base>millimeter</base></unit>
+    <unit><base>grain</base><base>s</base><pow>/</pow><base>m</base> <pow>2</pow></unit>
+	<unit><base>minutes</base></unit>
+	<unit><base>minutes</base></unit>
 </units>

@@ -1,16 +1,34 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>MRT</base></unit>
+	<unit><base>AU</base></unit>
 	<unit><base>K</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>K</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
 	<unit><base>K</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>K</base></unit>
-	<unit><base>year</base></unit>
-	<unit><prefix>m</prefix><base>m</base><base>s</base> <pow>-2</pow></unit>
-	<unit><prefix>m</prefix><base>m</base><base>s</base> <pow>-2</pow></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>m</prefix><base>m</base><pow>/</pow><base>s</base> <pow>2</pow></unit>
+	<unit><prefix>m</prefix><base>m</base><pow>/</pow><base>s</base> <pow>2</pow></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>m</prefix><base>m</base><pow>/</pow><base>s</base> <pow>2</pow></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>m</prefix><base>m</base><pow>/</pow><base>s</base> <pow>2</pow></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>AU</base></unit>
 </units>

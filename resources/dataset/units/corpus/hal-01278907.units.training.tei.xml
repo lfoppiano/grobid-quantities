@@ -1,34 +1,49 @@
-<units xmlns="http://www.tei-c.org/ns/1.0"><unit><base>%</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+<units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><base>decades</base></unit>
+<!--	<unit><base>% c</base></unit>-->
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
-	<unit><base>A</base><base>m</base> <pow>-2</pow></unit>
-	<unit><prefix>k</prefix><base>g</base><base>m</base> <pow>-3</pow></unit>
+	<unit><base>light years</base></unit>
+	<unit><prefix>c</prefix><base>m</base> <pow>−3</pow></unit>
+	<unit><base>A</base><pow>/</pow><base>m</base> <pow>2</pow></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><base>m</base> <pow>3</pow></unit>
 	<unit><base>%</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
-	<unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
+	<unit><prefix>k</prefix><base>m</base><pow>/</pow><base>s</base></unit>
+	<unit><prefix>k</prefix><base>m</base><pow>/</pow><base>s</base></unit>
 	<unit><base>K</base></unit>
 	<unit><prefix>µ</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>g</base><base>m</base><pow>-1</pow></unit>
-	<unit><base>W</base><prefix>k</prefix><base>g</base><pow>-1</pow></unit>
-	<unit><base>year</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><base>m</base> <pow>3</pow></unit>
+	<unit><base>W</base><pow>/</pow><prefix>k</prefix><base>g</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>light years</base></unit>
+	<unit><base>light years</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
-	<unit><prefix>k</prefix><base>m</base><base>s</base><pow>-1</pow></unit>
+	<unit><base>c</base></unit>
+	<unit><prefix>k</prefix><base>m</base><pow>/</pow><base>s</base></unit>
+	<unit><base>AU</base></unit>
+	<unit><base>M</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>c</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
+<!--	<unit><base>c</base></unit>-->
+	<unit><base>light years</base></unit>
+	<unit><base>light years</base></unit>
+	<unit><base>light years</base></unit>
 	<unit><prefix>k</prefix><base>g</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>c</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 </units>

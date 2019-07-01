@@ -1,0 +1,11 @@
+<units xmlns="http://www.tei-c.org/ns/1.0">
+    <unit><base>years</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>kilometers</base></unit>
+	<unit><prefix>k</prefix><base>g</base></unit>
+	<unit><base>Hz</base></unit>
+	<unit><base>Hz</base></unit>
+	<unit><base>Hz</base></unit>
+	<unit><base>Hz</base></unit>
+</units>

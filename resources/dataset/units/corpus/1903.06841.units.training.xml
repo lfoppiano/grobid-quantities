@@ -1,0 +1,60 @@
+<units xmlns="http://www.tei-c.org/ns/1.0">
+    <unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><prefix>m</prefix><base>K</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><prefix>m</prefix><base>J</base></unit>
+	<unit><prefix>m</prefix><base>J</base></unit>
+	<unit><prefix>m</prefix><base>J</base></unit>
+	<unit><base>T</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><base>K</base></unit>
+<!--	<unit><base>−</base> <base>T</base> <pow>/</pow><prefix>T</prefix> <base>C</base></unit>-->
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>T</base></unit>
+	<unit><base>T</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><prefix>m</prefix><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><base>Å</base></unit>
+	<unit><base>µ</base></unit>
+	<unit><base>Å</base></unit>
+<!--	<unit><base>µ</base> <pow>B</pow> <pow>/</pow><base>U</base></unit>-->
+	<unit><base>K</base></unit>
+	<unit><base>Å</base> <pow>−1</pow></unit>
+	<unit><base>Å</base> <pow>−1</pow></unit>
+	<unit><base>Å</base> <pow>−1</pow></unit>
+	<unit><prefix>m</prefix><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><prefix>G</prefix><base>Pa</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>K</base></unit>
+</units>

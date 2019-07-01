@@ -1,4 +1,19 @@
 <units xmlns="http://www.tei-c.org/ns/1.0">
+	<unit><prefix>M</prefix><base>W</base></unit>
+	<unit><base>tonnes</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow> <prefix>m</prefix><base>m</base> <pow>2</pow></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -13,8 +28,13 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -33,85 +53,145 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>m</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<!--	<unit><base>% by weight</base></unit>-->
+	<!--	<unit><base>% by weight</base></unit>-->
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><base>m</base> <pow>2</pow></unit>
+	<unit><base>m</base> <pow>2</pow></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
 	<unit><base>A</base></unit>
 	<unit><base>A</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>c</prefix><base>m</base><pow>-2</pow></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>c</prefix><base>m </base><pow>-2</pow></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><base>A</base></unit>
+	<unit><base>A</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base><pow>2</pow></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base><pow>2</pow></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base> <pow>2</pow></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base> <pow>2</pow></unit>
+	<unit><base>rpm</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
 	<unit><prefix>k</prefix><base>g</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2</pow></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2</pow></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>°C</base><base>h</base><pow>-1</pow></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base><pow>/</pow><base>h</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
+	<unit><base>hours</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><prefix>k</prefix><base>G</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2</pow></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>°C</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2</pow></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -125,14 +205,61 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><base>%</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><base>%</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><base>°C</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><base>°C</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<unit><base>rpm</base></unit>
 	<unit><base>Hz</base></unit>
+	<unit><base>rpm</base></unit>
 	<unit><base>Hz</base></unit>
+	<unit><base>rpm</base></unit>
+	<unit><base>rpm</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
+	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><base>%</base></unit>
@@ -140,33 +267,68 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>atg</base></unit>
+	<unit><base>atg</base></unit>
+	<unit><base>atg</base></unit>
+	<unit><base>atg</base></unit>
+	<unit><base>atg</base></unit>
+	<unit><base>atg</base></unit>
 	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>ton</base></unit>
+	<unit><base>U</base></unit>
+	<unit><base>S</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base><pow>/</pow><base>hour</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><base>h</base></unit>
+	<unit><base>hours</base></unit>
+	<unit><base>°C</base><pow>/</pow> <base>hour</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
-	<unit><base>m</base></unit>
+	<unit><base>m</base> <pow>3</pow></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><base>A</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><base>rpm</base></unit>
 	<unit><base>Hz</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>c</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>g</base><pow>/</pow><prefix>c</prefix><base>m</base> <pow>2</pow> .<base>g</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>m</base></unit>
 	<unit><base>m</base></unit>
+	<unit><base>m</base> <pow>2</pow></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
 	<unit><prefix>M</prefix><base>W</base></unit>
-	<unit><base>m</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><base>m</base> <pow>2</pow></unit>
 	<unit><base>%</base></unit>
-	<unit><base>m</base></unit>
-	<unit><base>m</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><base>m</base> <pow>2</pow></unit>
+	<unit><base>m</base> <pow>2</pow></unit>
+	<unit><base>m</base> <pow>2</pow></unit>
+	<unit><prefix>M</prefix><base>VA</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°C</base></unit>
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<!--	<unit><base>% by</base> <base>weight</base></unit>-->
+	<!--	<unit><base>% by</base> <base>weight</base></unit>-->
+	<!--	<unit><base>% by</base> <base>weight</base></unit>-->
+	<!--	<unit><base>% by</base> <base>weight</base></unit>-->
 	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
@@ -181,47 +343,23 @@
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>°C</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
+	<!--	<unit><base>% by</base> <base>weight</base></unit>-->
 	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
 	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><base>%</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
+	<!--	<unit><base>Ge</base><base>w</base><pow>-%</pow></unit>-->
+	<!--	<unit><base>Ge</base><base>w</base><pow>-%</pow></unit>-->
+	<!--	<unit><base>Ge</base><base>w</base><pow>-%</pow></unit>-->
+	<!--	<unit><base>Ge</base><base>w</base><pow>-%</pow></unit>-->
+	<!--	<unit><base>Ge</base><base>w</base><pow>-%</pow></unit>-->
+	<unit><base>Raumtemperatur</base></unit>
 	<unit><base>%</base></unit>
 	<unit><base>°C</base></unit>
-	<unit><prefix>k</prefix><base>g</base><prefix>m</prefix><base>m</base> <pow>-2</pow></unit>
-	<unit><base>m</base></unit>
 	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
-	<unit><base>%</base></unit>
+	<unit><prefix>k</prefix><base>G</base></unit>
+	<!--	<unit><base>A</base><base>T</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>-->
 	<unit><base>%</base></unit>
 	<unit><base>%</base></unit>
 </units>

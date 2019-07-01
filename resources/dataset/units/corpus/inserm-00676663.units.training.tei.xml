@@ -11,38 +11,83 @@
 	<unit><base>min</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>decades</base></unit>
+	<unit><base>yrs</base></unit>
 	<unit><base>year</base></unit>
+	<unit><base>decades</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>year</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
 	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>decade</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>years</base></unit>
+<!--	<unit><base>years</base><pow>.</pow> <base>Female % %</base></unit>-->
+	<unit><prefix>k</prefix><base>m</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><base>year</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>decade</base></unit>
+	<unit><base>decade</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>decade</base></unit>
+	<unit><base>decade</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
 	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><prefix>k</prefix><base>m</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
-	<unit><base>year</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>yrs</base></unit>
+	<unit><base>years</base></unit>
+	<unit><base>years</base></unit>
 </units>

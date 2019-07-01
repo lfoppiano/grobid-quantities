@@ -1,0 +1,24 @@
+<units xmlns="http://www.tei-c.org/ns/1.0">
+    <unit><base>°</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>°</base></unit>
+	<unit><prefix>k</prefix><pow>Ω</pow>·<prefix>u</prefix><base>m</base></unit>
+	<unit><base>°</base></unit>
+	<unit><base>°</base></unit>
+	<unit><base>°</base></unit>
+	<unit><base>°</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>°</base></unit>
+	<unit><base>T</base></unit>
+	<unit><base>%</base></unit>
+	<unit><base>K</base></unit>
+	<unit><base>K</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><prefix>n</prefix><base>m</base></unit>
+	<unit><base>℃</base></unit>
+	<unit><base>°</base></unit>
+	<unit><base>°</base></unit>
+</units>
