@@ -2161,7 +2161,7 @@
         {
           "lemma": "electromagnetic unit",
           "inflection": "electromagnetic units"
-        },
+        }
       ]
     },
     {
@@ -2202,7 +2202,7 @@
         }
       ],
       "type": "FORCE",
-      "system": "SI",
+      "system": "SI_BASE",
       "supportsPrefixes": true,
       "names": [
         {
