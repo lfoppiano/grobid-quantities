@@ -59,6 +59,9 @@ public class QuantityNormaliser {
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mile");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mi");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "miles");
+                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yards");
+                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yard");
+                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yd");
                 }
             } catch (Exception e) {
                 LOGGER.warn("Exception when initialising the quantity normaliser. ", e);
