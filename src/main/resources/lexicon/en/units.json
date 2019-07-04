@@ -8,7 +8,7 @@
       ],
       "type": "LENGTH",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "metre",
@@ -47,7 +47,7 @@
       ],
       "type": "VOLUME",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "cubic meter",
@@ -71,7 +71,7 @@
       ],
       "type": "LENGTH",
       "system": "IMPERIAL",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "thou"
@@ -222,7 +222,7 @@
       ],
       "type": "MASS",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "gram",
@@ -388,6 +388,7 @@
       ],
       "type": "ELECTRIC_CURRENT",
       "system": "SI_BASE",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "ampere",
@@ -405,7 +406,7 @@
       ],
       "type": "TIME",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "second",
@@ -517,6 +518,7 @@
       ],
       "type": "TEMPERATURE",
       "system": "SI_BASE",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "kelvin",
@@ -537,7 +539,7 @@
       ],
       "type": "TEMPERATURE",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "celsius"
@@ -555,7 +557,7 @@
       ],
       "type": "TEMPERATURE",
       "system": "US",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "fahrenheit"
@@ -570,7 +572,7 @@
       ],
       "type": "LUMINOUS_INTENSITY",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "candela",
@@ -588,7 +590,7 @@
       ],
       "type": "AMOUNT_OF_SUBSTANCE",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "mole",
@@ -725,6 +727,7 @@
       ],
       "type": "VOLUME",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "litre",
@@ -902,6 +905,7 @@
       ],
       "type": "VOLTAGE",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "volt",
@@ -919,6 +923,7 @@
       ],
       "type": "ELECTRIC_CAPACITANCE",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "farad",
@@ -936,6 +941,7 @@
       ],
       "type": "ELECTRIC_RESISTANCE",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "ohm",
@@ -953,7 +959,7 @@
       ],
       "type": "ELECTRIC_CONDUCTANCE",
       "system": "SI_DERIVED",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "siemens"
@@ -968,6 +974,7 @@
       ],
       "type": "ENERGY",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "joule",
@@ -985,6 +992,7 @@
       ],
       "type": "ELECTRIC_CHARGE",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "coulomb",
@@ -1002,6 +1010,7 @@
       ],
       "type": "INDUCTANCE",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "henri",
@@ -1022,6 +1031,7 @@
       ],
       "type": "POWER",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "watt",
@@ -1039,6 +1049,7 @@
       ],
       "type": "POWER",
       "system": "NON_SI",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "volt-ampere",
@@ -1056,6 +1067,7 @@
       ],
       "type": "MAGNETIC_INDUCTION",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "tesla",
@@ -1073,6 +1085,7 @@
       ],
       "type": "MAGNETIC_FLUX",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "weber",
@@ -1090,6 +1103,7 @@
       ],
       "type": "ATTENUATION",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "decibel",
@@ -1116,6 +1130,7 @@
       ],
       "type": "ELECTRIC_FIELD",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "volt per metre",
@@ -1148,6 +1163,7 @@
       ],
       "type": "MAGNETIC_FIELD_STRENGTH",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "ampere per metre",
@@ -1180,6 +1196,7 @@
       ],
       "type": "MAGNETIC_FIELD_STRENGTH",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "ampere-turn per metre",
@@ -1261,6 +1278,7 @@
       ],
       "type": "FREQUENCY",
       "system": "SI_BASE",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "hertz"
@@ -1292,7 +1310,7 @@
       ],
       "type": "ENERGY",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "wavenumber",
@@ -1325,6 +1343,7 @@
       ],
       "type": "VELOCITY",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "meter per second",
@@ -1451,6 +1470,7 @@
       ],
       "type": "PRESSURE",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "pascal",
@@ -1468,6 +1488,7 @@
       ],
       "type": "PRESSURE",
       "system": "NON_SI",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "bar",
@@ -1485,6 +1506,7 @@
       ],
       "type": "PRESSURE",
       "system": "NON_SI",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "technical atmosphere"
@@ -1639,6 +1661,7 @@
       ],
       "type": "DYNAMIC_VISCOSITY",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "pascal-second"
@@ -1815,6 +1838,7 @@
       ],
       "type": "SOLID_ANGLE",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "steradian",
@@ -1878,7 +1902,7 @@
       ],
       "type": "DENSITY",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "kilogram per cubic metre",
@@ -1924,7 +1948,7 @@
       ],
       "type": "DENSITY",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "gram per cubic centimetre",
@@ -1949,6 +1973,7 @@
       "type": "ACIDITY",
       "system": "NON_SI",
       "skipNormalisation": true,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "power of hydrogen",
@@ -1966,7 +1991,7 @@
       ],
       "type": "ABSORBED_DOSE",
       "system": "SI_DERIVED",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "gray",
@@ -2001,6 +2026,7 @@
       ],
       "type": "RADIOACTIVITY",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "becquerel",
@@ -2018,6 +2044,7 @@
       ],
       "type": "EQUIVALENT_DOSE",
       "system": "SI_DERIVED",
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "sievert",
@@ -2064,7 +2091,7 @@
       ],
       "type": "DIFFUSION_FLUX",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "mol per squared metre per second"
@@ -2108,7 +2135,7 @@
       ],
       "type": "DIFFUSION_FLUX",
       "system": "SI_DERIVED",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "molecules per squared metre per second"
@@ -2126,7 +2153,7 @@
       ],
       "type": "SPECTRAL_FLUX_DENSITY",
       "system": "NON_SI",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "Jansky"
@@ -2141,7 +2168,7 @@
       ],
       "type": "MAGNETIC_MOMENT",
       "system": "NON_SI",
-      "supportsPrefixes": false,
+      "hasPrefixes": false,
       "names": [
         {
           "lemma": "Bohr magneton"
@@ -2156,7 +2183,7 @@
       ],
       "type": "MAGNETIC_MOMENT",
       "system": "CGS",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "electromagnetic unit",
@@ -2172,7 +2199,7 @@
       ],
       "type": "MAGNETIC_FIELD_STRENGTH",
       "system": "CGS",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "Oersted"
@@ -2187,7 +2214,7 @@
       ],
       "type": "FORCE",
       "system": "CGS",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "dyne",
@@ -2203,11 +2230,39 @@
       ],
       "type": "FORCE",
       "system": "SI_BASE",
-      "supportsPrefixes": true,
+      "hasPrefixes": true,
       "names": [
         {
           "lemma": "newton",
           "inflection": "newtons"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "min/km"
+        }
+      ],
+      "type": "PACE",
+      "system": "SI_BASE",
+      "hasPrefixes": false,
+      "names": [
+        {
+          "lemma": "minute per kilometer",
+          "inflection": "minutes per kilometer"
+        },
+        {
+          "lemma": "minute / kilometer",
+          "inflection": "minutes / kilometer"
+        },
+        {
+          "lemma": "min per kilometer",
+          "inflection": "mins per kilometer"
+        },
+        {
+          "lemma": "min / kilometer",
+          "inflection": "mins / kilometer"
         }
       ]
     }
