@@ -223,9 +223,6 @@ wrapper {
     gradleVersion "5.4.1"
 }
 
-//Cobertura
-//cobertura.coverageFormats = ['html', 'xml']
-
 jacocoTestReport {
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
