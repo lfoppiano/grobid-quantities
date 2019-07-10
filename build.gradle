@@ -16,7 +16,8 @@ buildscript {
 }
 
 plugins {
-    id 'net.saliman.cobertura' version '2.6.1'
+//    id 'net.saliman.cobertura' version '2.6.1'
+    id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.8.2'
 }
 
@@ -223,7 +224,18 @@ wrapper {
 }
 
 //Cobertura
-cobertura.coverageFormats = ['html', 'xml']
+//cobertura.coverageFormats = ['html', 'xml']
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
+
+coveralls {
+    jacocoReportPath 'build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+}
 
 
 
