@@ -208,13 +208,13 @@ public class QuantityTrainingData {
                 sb.append(text);
                 measurements = quantityParser.process(text);
 
-                if (measurements != null) {
-                    System.out.println("\n");
-                    for (Measurement measurement : measurements) {
-                        System.out.println(measurement.toString());
-                    }
-                    System.out.println("\n");
-                }
+//                if (measurements != null) {
+//                    System.out.println("\n");
+//                    for (Measurement measurement : measurements) {
+//                        System.out.println(measurement.toString());
+//                    }
+//                    System.out.println("\n");
+//                }
 
                 quantityNode.appendChild(quantityTrainingFormatter.trainingExtraction(measurements, text));
 

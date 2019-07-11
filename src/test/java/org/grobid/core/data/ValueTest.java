@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class ValueTest {
@@ -16,7 +17,7 @@ public class ValueTest {
         structure.setNumber("123");
         value.setStructure(structure);
 
-        System.out.println(value.toJson());
+        assertThat(value.toJson(), is("{ \"numeric\" : 123, \"structure\" : { \"type\" : \"NUMBER\", \"formatted\" : \"123\" }, \"parsed\" : \"123\" }"));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class ValueTest {
         structure.setPow("-2");
         value.setStructure(structure);
 
-        System.out.println(value.toJson());
+        assertThat(value.toJson(), is("{ \"numeric\" : 123, \"structure\" : { \"type\" : \"NUMBER\", \"formatted\" : \"123 x 10^-2\" }, \"parsed\" : \"123 x 10^-2\" }"));
     }
 
 }

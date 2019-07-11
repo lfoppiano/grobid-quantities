@@ -126,7 +126,7 @@ public class QuantifiedObjectAnnotationStaxHandlerTest {
 
         List<Pair<String, String>> labeled = target.getLabeled();
 
-        labeled.stream().map(Pair::toString).forEach(System.out::println);
+//        labeled.stream().map(Pair::toString).forEach(System.out::println);
 
         assertThat(labeled.stream().filter(p -> StringUtils.equals("\n", p.getLeft())).count(), is(2L));
         assertThat(labeled.get(26).getLeft(), is("\n"));
