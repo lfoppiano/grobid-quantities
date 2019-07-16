@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -147,7 +149,15 @@ public class QuantifiedObjectTrainer extends AbstractTrainer {
         GrobidProperties.getInstance();
 
         Trainer trainer = new QuantifiedObjectTrainer();
-        System.out.println(AbstractTrainer.runNFoldEvaluation(trainer, 10));
+        String report = AbstractTrainer.runNFoldEvaluation(trainer, 10);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/quantifiedObject-10fold-cross-validation.txt"))) {
+            writer.write(report);
+            writer.write("\n");
+        } catch (IOException e) {
+            throw new GrobidException("Error when dumping n-fold training data into files. ", e);
+        }
+
         AbstractTrainer.runTraining(trainer);
     }
 }

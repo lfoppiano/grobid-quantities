@@ -14,7 +14,11 @@ import org.grobid.trainer.sax.MeasureAnnotationSaxHandler;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -215,9 +219,18 @@ public class QuantityTrainer extends AbstractTrainer {
      */
     public static void main(String[] args) {
         GrobidProperties.getInstance();
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
         Trainer trainer = new QuantityTrainer();
-        System.out.println(AbstractTrainer.runNFoldEvaluation(trainer, 10));
+        String report = AbstractTrainer.runNFoldEvaluation(trainer, 10);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/quantities-10fold-cross-validation-" + formatter.format(date) + ".txt"))) {
+            writer.write(report);
+            writer.write("\n");
+        } catch (IOException e) {
+            throw new GrobidException("Error when dumping n-fold training data into files. ", e);
+        }
         AbstractTrainer.runTraining(trainer);
     }
 }

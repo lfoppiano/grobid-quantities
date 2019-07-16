@@ -16,7 +16,11 @@ import org.slf4j.LoggerFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -183,8 +187,25 @@ public class UnitTrainer extends AbstractTrainer {
     public static void main(String[] args) {
         GrobidProperties.getInstance();
 
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+
         Trainer trainer = new UnitTrainer();
-        System.out.println(AbstractTrainer.runNFoldEvaluation(trainer, 10));
+        String nFoldCrossValidationReport = AbstractTrainer.runNFoldEvaluation(trainer, 10);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/unit-10fold-cross-validation-" + formatter.format(date) + ".txt"))) {
+            writer.write(nFoldCrossValidationReport);
+            writer.write("\n");
+        } catch (IOException e) {
+            throw new GrobidException("Error when saving n-fold cross-validation results into files. ", e);
+        }
         AbstractTrainer.runTraining(trainer);
+        String evaluationReport = AbstractTrainer.runEvaluation(trainer);
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/end2end-unit-evaluation-" + formatter.format(date) + ".txt"))) {
+            writer.write(evaluationReport);
+            writer.write("\n");
+        } catch (IOException e) {
+            throw new GrobidException("Error when saving end 2 end evaluation results into files. ", e);
+        }
     }
 }
