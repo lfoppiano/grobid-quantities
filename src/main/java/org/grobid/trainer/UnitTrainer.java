@@ -200,7 +200,7 @@ public class UnitTrainer extends AbstractTrainer {
             throw new GrobidException("Error when saving n-fold cross-validation results into files. ", e);
         }
         AbstractTrainer.runTraining(trainer);
-        String evaluationReport = AbstractTrainer.runEvaluation(trainer);
+        String evaluationReport = AbstractTrainer.runEvaluation(trainer, true);
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/end2end-unit-evaluation-" + formatter.format(date) + ".txt"))) {
             writer.write(evaluationReport);
             writer.write("\n");
