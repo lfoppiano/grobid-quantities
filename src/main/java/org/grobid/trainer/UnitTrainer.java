@@ -191,7 +191,7 @@ public class UnitTrainer extends AbstractTrainer {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
         Trainer trainer = new UnitTrainer();
-        String nFoldCrossValidationReport = AbstractTrainer.runNFoldEvaluation(trainer, 10);
+        String nFoldCrossValidationReport = AbstractTrainer.runNFoldEvaluation(trainer, 10, true);
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/unit-10fold-cross-validation-" + formatter.format(date) + ".txt"))) {
             writer.write(nFoldCrossValidationReport);
