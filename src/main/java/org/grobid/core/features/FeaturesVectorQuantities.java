@@ -139,7 +139,7 @@ public class FeaturesVectorQuantities {
         if (word.length() == 1) {
             featuresVector.singleChar = true;
         }
-        
+
         if (featureFactory.test_all_capital(word))
             featuresVector.capitalisation = "ALLCAPS";
         else if (featureFactory.test_first_capital(word))
@@ -158,18 +158,26 @@ public class FeaturesVectorQuantities {
         if (m0.find()) {
             featuresVector.punctType = "PUNCT";
         }
-        if ((word.equals("(")) || (word.equals("["))) {
+        if (word.equals("(") || word.equals("[") || word.equals("{")) {
             featuresVector.punctType = "OPENBRACKET";
-        } else if ((word.equals(")")) || (word.equals("]"))) {
+        } else if (word.equals(")") || word.equals("]") || word.equals("}")) {
             featuresVector.punctType = "ENDBRACKET";
-        } else if (word.equals(".")) {
+        } else if (word.equals(".") || word.equals("·")) {
             featuresVector.punctType = "DOT";
         } else if (word.equals(",")) {
             featuresVector.punctType = "COMMA";
-        } else if (word.equals("-")) {
+        } else if (word.equals("-") || word.equals("−")) {
             featuresVector.punctType = "HYPHEN";
         } else if (word.equals("\"") || word.equals("\'") || word.equals("`")) {
             featuresVector.punctType = "QUOTE";
+        } else if (word.equals("/") || word.equals("∕")) {
+            featuresVector.punctType = "SLASH";
+        } else if (word.equals("^")) {
+            featuresVector.punctType = "EXPONENT";
+        } else if (word.equals("*")) {
+            featuresVector.punctType = "ASTERISK";
+        } else {
+            featuresVector.punctType = "NOPUNCT";
         }
 
         if (featuresVector.capitalisation == null)
