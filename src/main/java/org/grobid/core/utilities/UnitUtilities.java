@@ -96,7 +96,8 @@ public class UnitUtilities {
         ACCELERATION("acceleration"),
         DEGREE("angle"),
         DIFFUSION_FLUX("diffusion flux"),
-        MAGNETIC_MOMENT("magnetic moment");
+        MAGNETIC_MOMENT("magnetic moment"),
+        PACE("pace");
 
         private String name;
 
