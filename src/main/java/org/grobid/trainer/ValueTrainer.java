@@ -192,6 +192,6 @@ public class ValueTrainer extends AbstractTrainer {
         GrobidProperties.getInstance();
 
         Trainer trainer = new ValueTrainer();
-        AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
+        AbstractTrainer.runTraining(trainer);
     }
 }

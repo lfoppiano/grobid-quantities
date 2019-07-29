@@ -239,6 +239,6 @@ public class QuantityTrainer extends AbstractTrainer {
         GrobidProperties.getInstance();
 
         Trainer trainer = new QuantityTrainer();
-        AbstractTrainer.runSplitTrainingEvaluation(trainer, 1.0);
+        AbstractTrainer.runTraining(trainer);
     }
 }
