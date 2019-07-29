@@ -219,18 +219,18 @@ public class QuantityTrainer extends AbstractTrainer {
      */
     public static void main(String[] args) {
         GrobidProperties.getInstance();
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+//        Date date = new Date();
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
         Trainer trainer = new QuantityTrainer();
-        String report = AbstractTrainer.runNFoldEvaluation(trainer, 10);
-
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/quantities-10fold-cross-validation-" + formatter.format(date) + ".txt"))) {
-            writer.write(report);
-            writer.write("\n");
-        } catch (IOException e) {
-            throw new GrobidException("Error when dumping n-fold training data into files. ", e);
-        }
+//        String report = AbstractTrainer.runNFoldEvaluation(trainer, 10);
+//
+//        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/quantities-10fold-cross-validation-" + formatter.format(date) + ".txt"))) {
+//            writer.write(report);
+//            writer.write("\n");
+//        } catch (IOException e) {
+//            throw new GrobidException("Error when dumping n-fold training data into files. ", e);
+//        }
         AbstractTrainer.runTraining(trainer);
     }
 }

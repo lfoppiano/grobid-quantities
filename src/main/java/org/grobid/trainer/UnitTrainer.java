@@ -187,25 +187,25 @@ public class UnitTrainer extends AbstractTrainer {
     public static void main(String[] args) {
         GrobidProperties.getInstance();
 
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+//        Date date = new Date();
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
         Trainer trainer = new UnitTrainer();
-        String nFoldCrossValidationReport = AbstractTrainer.runNFoldEvaluation(trainer, 10, true);
+//        String nFoldCrossValidationReport = AbstractTrainer.runNFoldEvaluation(trainer, 10, true);
 
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/unit-10fold-cross-validation-" + formatter.format(date) + ".txt"))) {
-            writer.write(nFoldCrossValidationReport);
-            writer.write("\n");
-        } catch (IOException e) {
-            throw new GrobidException("Error when saving n-fold cross-validation results into files. ", e);
-        }
+//        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/unit-10fold-cross-validation-" + formatter.format(date) + ".txt"))) {
+//            writer.write(nFoldCrossValidationReport);
+//            writer.write("\n");
+//        } catch (IOException e) {
+//            throw new GrobidException("Error when saving n-fold cross-validation results into files. ", e);
+//        }
         AbstractTrainer.runTraining(trainer);
-        String evaluationReport = AbstractTrainer.runEvaluation(trainer, true);
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/end2end-unit-evaluation-" + formatter.format(date) + ".txt"))) {
-            writer.write(evaluationReport);
-            writer.write("\n");
-        } catch (IOException e) {
-            throw new GrobidException("Error when saving end 2 end evaluation results into files. ", e);
-        }
+//        String evaluationReport = AbstractTrainer.runEvaluation(trainer, true);
+//        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("logs/end2end-unit-evaluation-" + formatter.format(date) + ".txt"))) {
+//            writer.write(evaluationReport);
+//            writer.write("\n");
+//        } catch (IOException e) {
+//            throw new GrobidException("Error when saving end 2 end evaluation results into files. ", e);
+//        }
     }
 }
