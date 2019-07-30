@@ -72,22 +72,23 @@ public class TextParser {
      * Hidden constructor
      */
     private TextParser() throws Exception {
-        modelPath = "resources/clearnlp/models/";
+        modelPath = "resources/clearnlp/models";
+        modelPath = new File(modelPath).getAbsolutePath();
 
         // TBD: set up config profile for the ClearNLP models...
-        String dictionaryFile = modelPath + "/" + "dictionary-1.2.0.zip";
-        //String posModelFile = modelPath + "/" + "mayo-en-pos-1.3.0.tgz";    
-        //String posModelFile = modelPath + "/" + "ontonotes-en-pos-1.3.0.tgz"; 
-        //String posModelFile = modelPath + "/" + "medical-en-pos-1.1.0g.jar";   
-        String posModelFile = modelPath + "/" + "craft-en-pos-1.1.0g.jar";
-        //String depModelFile = modelPath + "/" + "mayo-en-dep-1.3.0.tgz";
-        String depModelFile = modelPath + "/" + "craft-en-dep-1.1.0b1.jar";
+        String dictionaryFile = modelPath + File.separator + "dictionary-1.2.0.zip";
+        //String posModelFile = modelPath + File.separator + "mayo-en-pos-1.3.0.tgz";
+        //String posModelFile = modelPath + File.separator + "ontonotes-en-pos-1.3.0.tgz";
+        //String posModelFile = modelPath + File.separator + "medical-en-pos-1.1.0g.jar";
+        String posModelFile = modelPath + File.separator + "craft-en-pos-1.1.0g.jar";
+        //String depModelFile = modelPath + File.separator + "mayo-en-dep-1.3.0.tgz";
+        String depModelFile = modelPath + File.separator + "craft-en-dep-1.1.0b1.jar";
         //String depModelFile = modelPath + "/" + "ontonotes-en-dep-1.1.0b3.jar";
         //String predModelFile = modelPath + "/" + "mayo-en-pred-1.3.0.tgz";  
-        String predModelFile = modelPath + "/" + "medical-en-pred-1.2.0.jar";
+        String predModelFile = modelPath + File.separator + "medical-en-pred-1.2.0.jar";
         //String labelModelFile = modelPath + "/" + "mayo-en-srl-1.3.0.tgz"; 
-        String labelModelFile = modelPath + "/" + "medical-en-srl-1.2.0b1.jar";
-        String roleClassifierModelFile = modelPath + "/" + "mayo-en-role-1.3.0.tgz";
+        String labelModelFile = modelPath + File.separator + "medical-en-srl-1.2.0b1.jar";
+        String roleClassifierModelFile = modelPath + File.separator + "mayo-en-role-1.3.0.tgz";
         //String roleClassifierModelFile = modelPath + "/" + "ontonotes-en-roleset-1.2.2.tgz"; 
 
         tokenizer = EngineGetter.getTokenizer(language, dictionaryFile);

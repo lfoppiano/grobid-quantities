@@ -1,0 +1,301 @@
+Recap results for each fold:
+
+
+====================== Fold 0 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_0.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units1130941862551688172.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units7656589373106547005.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               98.45        98.7         99.02        98.86        311    
+<pow>                100          100          100          100          34     
+<prefix>             99.33        98.97        97.96        98.46        99     
+
+all (micro avg.)     99.26        98.86        98.86        98.86        444    
+all (macro avg.)     99.26        99.22        98.99        99.11        444    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          276
+Instance-level recall:      98.92
+
+
+
+====================== Fold 1 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_1.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units5258946172411214128.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units3331538449534595435.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               99.76        99.67        100          99.84        304    
+<pow>                100          100          100          100          29     
+<prefix>             99.76        100          98.8         99.39        83     
+
+all (micro avg.)     99.84        99.76        99.76        99.76        416    
+all (macro avg.)     99.84        99.89        99.6         99.74        416    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          278
+Instance-level recall:      99.64
+
+
+
+====================== Fold 2 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_2.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units6123160617677057229.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units8069155510222028310.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               99.76        99.67        100          99.84        306    
+<pow>                100          100          100          100          34     
+<prefix>             99.76        100          98.67        99.33        75     
+
+all (micro avg.)     99.84        99.76        99.76        99.76        415    
+all (macro avg.)     99.84        99.89        99.56        99.72        415    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          278
+Instance-level recall:      99.64
+
+
+
+====================== Fold 3 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_3.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units447903529910668155.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units6674018036558241643.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               100          100          100          100          301    
+<pow>                100          100          100          100          29     
+<prefix>             100          100          100          100          72     
+
+all (micro avg.)     100          100          100          100          402    
+all (macro avg.)     100          100          100          100          402    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          279
+Instance-level recall:      100
+
+
+
+====================== Fold 4 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_4.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units2232601374216967235.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units7767233253195930182.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               98.57        99.02        99.02        99.02        309    
+<pow>                100          100          100          100          34     
+<prefix>             99.52        100          97.26        98.61        73     
+
+all (micro avg.)     99.37        99.27        98.79        99.03        416    
+all (macro avg.)     99.37        99.67        98.76        99.21        416    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          277
+Instance-level recall:      99.28
+
+
+
+====================== Fold 5 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_5.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units7602521195638793652.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units6190884295212446745.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               98.58        98.68        99.33        99           304    
+<pow>                99.76        96.15        100          98.04        26     
+<prefix>             99.53        100          97.75        98.86        89     
+
+all (micro avg.)     99.29        98.8         99.03        98.91        419    
+all (macro avg.)     99.29        98.28        99.03        98.64        419    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          276
+Instance-level recall:      98.92
+
+
+
+====================== Fold 6 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_6.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units2207128200057486470.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units4629465590189265112.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               99.76        99.67        100          99.83        300    
+<pow>                100          100          100          100          30     
+<prefix>             100          100          100          100          74     
+
+all (micro avg.)     99.92        99.75        100          99.88        404    
+all (macro avg.)     99.92        99.89        100          99.94        404    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          278
+Instance-level recall:      99.64
+
+
+
+====================== Fold 7 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_7.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units1486060152427478003.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units431381359122845922.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               98.17        98.7         98.7         98.7         312    
+<pow>                98.63        90           94.74        92.31        42     
+<prefix>             99.32        97.22        98.59        97.9         73     
+
+all (micro avg.)     98.71        97.62        98.32        97.97        427    
+all (macro avg.)     98.71        95.31        97.34        96.3         427    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          274
+Instance-level recall:      98.21
+
+
+
+====================== Fold 8 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_8.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units8048338480025802648.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units8241721259603281155.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               97.76        98.38        98.38        98.38        313    
+<pow>                99.11        94.29        94.29        94.29        37     
+<prefix>             99.78        98.8         100          99.39        83     
+
+all (micro avg.)     98.88        98.12        98.35        98.24        433    
+all (macro avg.)     98.88        97.15        97.55        97.35        433    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          275
+Instance-level recall:      98.57
+
+
+
+====================== Fold 9 ====================== 
+Saving model in /data/workspace/Luca/github/grobid/grobid-home/tmp/units_nfold_9.wapiti
+Training input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units7208734320929622850.train
+Evaluation input data: /data/workspace/Luca/github/grobid/grobid-home/tmp/units3374540341462008368.test
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               97.52        98.06        98.38        98.22        314    
+<pow>                100          100          100          100          27     
+<prefix>             99.55        98.97        98.97        98.97        98     
+
+all (micro avg.)     99.02        98.38        98.61        98.5         439    
+all (macro avg.)     99.02        99.01        99.12        99.06        439    
+
+===== Instance-level results =====
+
+Total expected instances:   283
+Correct instances:          280
+Instance-level recall:      98.94
+
+
+
+Summary results: 
+Worst Model
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               98.17        98.7         98.7         98.7         312    
+<pow>                98.63        90           94.74        92.31        42     
+<prefix>             99.32        97.22        98.59        97.9         73     
+
+all (micro avg.)     98.71        97.62        98.32        97.97        427    
+all (macro avg.)     98.71        95.31        97.34        96.3         427    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          274
+Instance-level recall:      98.21
+
+Best model:
+
+===== Field-level results =====
+
+label                accuracy     precision    recall       f1           support
+
+<base>               100          100          100          100          301    
+<pow>                100          100          100          100          29     
+<prefix>             100          100          100          100          72     
+
+all (micro avg.)     100          100          100          100          402    
+all (macro avg.)     100          100          100          100          402    
+
+===== Instance-level results =====
+
+Total expected instances:   279
+Correct instances:          279
+Instance-level recall:      100
+
+
+Average over 10 folds: 
+
+label                accuracy     precision    recall       f1           support
+
+<base>               98.83        99.05        99.28        99.17        3074   
+<pow>                99.75        98.04        98.9         98.46        322    
+<prefix>             99.66        99.4         98.8         99.09        819    
+
+all (macro avg.)     99.41        98.83        98.99        98.91  
+
+===== Instance-level results =====
+
+Total expected instances:   2794
+Correct instances:          2771
+Instance-level recall:      99.18
+
+
+N-Fold evaluation for org.grobid.core.GrobidModels$1@37918c79 model is realized in 138674 ms
