@@ -9,6 +9,7 @@ import org.grobid.core.data.Unit;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.normalization.NormalizationException;
 import org.grobid.core.data.normalization.QuantityNormalizer;
+import org.grobid.core.data.normalization.UnitNormalizer;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
@@ -41,10 +42,10 @@ public class QuantityParser extends AbstractParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityParser.class);
 
     private static volatile QuantityParser instance;
-    private ValueParser valueParser = ValueParser.getInstance();
+    private ValueParser valueParser;
     private QuantifiedObjectParser quantifiedObjectParser;
-    private QuantityNormalizer quantityNormalizer = new QuantityNormalizer();
-//    private EnglishTokenizer tokeniser;
+    private QuantityNormalizer quantityNormalizer;
+    //    private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
 
     public static QuantityParser getInstance(boolean disableSubstance) {
@@ -80,7 +81,11 @@ public class QuantityParser extends AbstractParser {
     public QuantityParser() {
         super(QuantitiesModels.QUANTITIES);
         quantityLexicon = QuantityLexicon.getInstance();
-        measurementOperations = new MeasurementOperations();
+        UnitNormalizer unitNormaliser = new UnitNormalizer();
+        measurementOperations = new MeasurementOperations(unitNormaliser);
+        quantityNormalizer = new QuantityNormalizer();
+
+        valueParser = new ValueParser();
         instance = this;
 //        this.tokeniser = new EnglishTokenizer();
     }

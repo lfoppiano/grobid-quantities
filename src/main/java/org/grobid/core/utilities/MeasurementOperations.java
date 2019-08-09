@@ -19,17 +19,15 @@ import java.util.stream.Collectors;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 /**
- * Try to resolve measurement extracted attributes (unit, values).
- *
- * @author Patrice Lopez
+ * Measurement operations and utilities class
  */
 public class MeasurementOperations {
     private static final Logger logger = LoggerFactory.getLogger(MeasurementOperations.class);
 
-    UnitNormalizer un;
+    private UnitNormalizer un;
 
     public MeasurementOperations() {
-        un = new UnitNormalizer();
+
     }
 
     public MeasurementOperations(UnitNormalizer un) {
@@ -248,21 +246,25 @@ public class MeasurementOperations {
             }
         }
 
-        return new ImmutablePair(start, end);
+        return new ImmutablePair<>(start, end);
+    }
+
+    public Pair<Integer, Integer> calculateQuantityExtremities(List<LayoutToken> tokens, Measurement measurement) {
+        return calculateQuantityExtremities(tokens, measurement);
     }
 
     /**
      * Return measurement extremities as the index of the layout token. It's useful if we want to combine
      * measurement and layoutToken content.
      */
-    public Pair<Integer, Integer> calculateQuantityExtremities(List<LayoutToken> tokens, Measurement measurement) {
+    public Pair<Integer, Integer> calculateQuantityExtremities(List<LayoutToken> tokens, Measurement measurement, int window) {
         Pair<Integer, Integer> extremities = null;
         switch (measurement.getType()) {
             case VALUE:
                 Quantity quantity = measurement.getQuantityAtomic();
                 List<LayoutToken> layoutTokens = quantity.getLayoutTokens();
 
-                extremities = getExtremitiesAsIndex(tokens, layoutTokens.get(0).getOffset(), layoutTokens.get(layoutTokens.size() - 1).getOffset());
+                extremities = getExtremitiesAsIndex(tokens, layoutTokens.get(0).getOffset(), layoutTokens.get(layoutTokens.size() - 1).getOffset(), window);
 
                 break;
             case INTERVAL_BASE_RANGE:
@@ -270,7 +272,7 @@ public class MeasurementOperations {
                     Quantity quantityBase = measurement.getQuantityBase();
                     Quantity quantityRange = measurement.getQuantityRange();
 
-                    extremities = getExtremitiesAsIndex(tokens, quantityBase.getLayoutTokens().get(0).getOffset(), quantityRange.getLayoutTokens().get(quantityRange.getLayoutTokens().size() - 1).getOffset());
+                    extremities = getExtremitiesAsIndex(tokens, quantityBase.getLayoutTokens().get(0).getOffset(), quantityRange.getLayoutTokens().get(quantityRange.getLayoutTokens().size() - 1).getOffset(), window);
                 } else {
                     Quantity quantityTmp;
                     if (measurement.getQuantityBase() == null) {
@@ -279,7 +281,7 @@ public class MeasurementOperations {
                         quantityTmp = measurement.getQuantityBase();
                     }
 
-                    extremities = getExtremitiesAsIndex(tokens, quantityTmp.getLayoutTokens().get(0).getOffset(), quantityTmp.getLayoutTokens().get(0).getOffset());
+                    extremities = getExtremitiesAsIndex(tokens, quantityTmp.getLayoutTokens().get(0).getOffset(), quantityTmp.getLayoutTokens().get(0).getOffset(), window);
                 }
 
                 break;
@@ -289,7 +291,7 @@ public class MeasurementOperations {
                     Quantity quantityLeast = measurement.getQuantityLeast();
                     Quantity quantityMost = measurement.getQuantityMost();
 
-                    extremities = getExtremitiesAsIndex(tokens, quantityLeast.getLayoutTokens().get(0).getOffset(), quantityMost.getLayoutTokens().get(quantityMost.getLayoutTokens().size() - 1).getOffset());
+                    extremities = getExtremitiesAsIndex(tokens, quantityLeast.getLayoutTokens().get(0).getOffset(), quantityMost.getLayoutTokens().get(quantityMost.getLayoutTokens().size() - 1).getOffset(), window);
                 } else {
                     Quantity quantityTmp;
                     if (measurement.getQuantityLeast() == null) {
@@ -298,16 +300,16 @@ public class MeasurementOperations {
                         quantityTmp = measurement.getQuantityLeast();
                     }
 
-                    extremities = getExtremitiesAsIndex(tokens, quantityTmp.getLayoutTokens().get(0).getOffset(), quantityTmp.getLayoutTokens().get(quantityTmp.getLayoutTokens().size() - 1).getOffset());
+                    extremities = getExtremitiesAsIndex(tokens, quantityTmp.getLayoutTokens().get(0).getOffset(), quantityTmp.getLayoutTokens().get(quantityTmp.getLayoutTokens().size() - 1).getOffset(), window);
                 }
                 break;
 
             case CONJUNCTION:
                 List<Quantity> quantityList = measurement.getQuantityList();
                 if (quantityList.size() > 1) {
-                    extremities = getExtremitiesAsIndex(tokens, quantityList.get(0).getLayoutTokens().get(0).getOffset(), quantityList.get(quantityList.size() - 1).getLayoutTokens().get(0).getOffset());
+                    extremities = getExtremitiesAsIndex(tokens, quantityList.get(0).getLayoutTokens().get(0).getOffset(), quantityList.get(quantityList.size() - 1).getLayoutTokens().get(0).getOffset(), window);
                 } else {
-                    extremities = getExtremitiesAsIndex(tokens, quantityList.get(0).getLayoutTokens().get(0).getOffset(), quantityList.get(0).getLayoutTokens().get(0).getOffset());
+                    extremities = getExtremitiesAsIndex(tokens, quantityList.get(0).getLayoutTokens().get(0).getOffset(), quantityList.get(0).getLayoutTokens().get(0).getOffset(), window);
                 }
 
                 break;

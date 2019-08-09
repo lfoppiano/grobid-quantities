@@ -57,8 +57,8 @@ public class QuantityNormalizer {
             }
         }
 
-        measurementOperations = new MeasurementOperations();
         unitNormalizer = new UnitNormalizer();
+        measurementOperations = new MeasurementOperations(unitNormalizer);
     }
 
     public Quantity.Normalized normalizeQuantity(Quantity quantity) throws NormalizationException {
