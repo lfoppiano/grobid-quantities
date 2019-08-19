@@ -39,7 +39,7 @@ public class QuantityNormaliser {
     protected static final String UNICODE_PROVIDER = "Unicode";
     protected static final String SI_PROVIDER = "SI";
     protected static final String COMMON_PROVIDER = "Common";
-//    protected static final String INDYRIA_PROVIDER = "DefaultServiceProvider";
+    //    protected static final String INDYRIA_PROVIDER = "DefaultServiceProvider";
     protected static final String SESHAT_PROVIDER = "UnitServices";
 
     private Map<String, UnitFormat> unitFormats = new HashMap<>();
@@ -59,9 +59,9 @@ public class QuantityNormaliser {
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mile");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mi");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "miles");
-                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yards");
-                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yard");
-                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yd");
+                    SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yards");
+                    SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yard");
+                    SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yd");
                 }
             } catch (Exception e) {
                 LOGGER.warn("Exception when initialising the quantity normaliser. ", e);
@@ -163,12 +163,12 @@ public class QuantityNormaliser {
                     } catch (MeasurementParseException e) {
 
                         //handling 1/{unit}, processing just the unit
-                        if(StringUtils.equalsAnyIgnoreCase(block.getPow(), "-1", "−1")) {
+                        if (StringUtils.equalsAnyIgnoreCase(block.getPow(), "-1", "−1")) {
                             String onlyUnit = block.getPrefix() + block.getBase();
                             javax.measure.Unit<?> onlyUnitParsed = null;
                             try {
                                 onlyUnitParsed = formatService.parse(onlyUnit);
-                            } catch(Throwable e2) {
+                            } catch (Throwable e2) {
                                 LOGGER.warn("Trying excluding the negative power. Cannot parse " + onlyUnit + " with " + formatService.getClass().getName(), e2);
                             }
                             unitList.add(onlyUnitParsed.pow(-1));
