@@ -20,18 +20,17 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by lfoppiano on 18.02.16.
  */
-@Ignore
 public class MeasurementOperationsTest {
 
     private MeasurementOperations target;
 
     @Before
     public void setUp() throws Exception {
-        target = new MeasurementOperations(null);
+        target = new MeasurementOperations();
     }
 
-    @Ignore("Doesn't test anything...")
     @Test
+    @Ignore("Doesn't test anything...")
     public void testSolve() throws Exception {
         List<Measurement> measurementList = new ArrayList<>();
 

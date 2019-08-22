@@ -2,6 +2,7 @@ package org.grobid.core.engines;
 
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
+import org.grobid.core.data.normalization.NormalizationException;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
@@ -99,7 +100,7 @@ public class ValueParser extends AbstractParser {
                         return secondPart;
                     }
 
-                } catch (ParseException e) {
+                } catch (ParseException | ArithmeticException e) {
                     LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
                 }
 
@@ -129,7 +130,7 @@ public class ValueParser extends AbstractParser {
                         return secondPart;
                     }
 
-                } catch (ParseException e) {
+                } catch (ParseException | ArithmeticException e) {
                     LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
                 }
 
@@ -137,7 +138,12 @@ public class ValueParser extends AbstractParser {
 
             case ALPHABETIC:
                 WordsToNumber w2n = WordsToNumber.getInstance();
-                return w2n.normalize(block.getAlphaAsString(), locale);
+                try {
+                    return w2n.normalize(block.getAlphaAsString(), locale);
+                } catch (NormalizationException e) {
+                    LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
+                }
+                break;
 
             case TIME:
                 //we do not parse it for the moment
