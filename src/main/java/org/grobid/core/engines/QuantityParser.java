@@ -687,16 +687,16 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
-        final Pair<Integer, Integer> currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
-        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.getLeft() && op.end > currentMeasureOffset.getRight())
-                .collect(Collectors.toList());
-
-        if (sentencesCurrentMeasure.size() > 1) {
-            throw new GrobidException("The measurement " + measurement + " is spread among two sentences.");
-        }
-        return sentencesCurrentMeasure.get(0);
-    }
+//    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
+//        final Pair<Integer, Integer> currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
+//        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.getLeft() && op.end > currentMeasureOffset.getRight())
+//                .collect(Collectors.toList());
+//
+//        if (sentencesCurrentMeasure.size() > 1) {
+//            throw new GrobidException("The measurement " + measurement + " is spread among two sentences.");
+//        }
+//        return sentencesCurrentMeasure.get(0);
+//    }
 
     public void setDisableSubstanceParser(boolean disableSubstanceParser) {
         this.disableSubstanceParser = disableSubstanceParser;

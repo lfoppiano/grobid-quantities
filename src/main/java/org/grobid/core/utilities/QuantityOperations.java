@@ -50,10 +50,10 @@ public class QuantityOperations {
 
     public static List<Pair<Integer, Integer>> getOffset(Measurement measurement) {
         return toQuantityList(measurement)
-                .stream()
-                .flatMap(q -> getOffsets(q).stream())
-                .sorted(Comparator.comparing(Pair::getRight))
-                .collect(Collectors.toList());
+            .stream()
+            .flatMap(q -> getOffsets(q).stream())
+            .sorted(Comparator.comparing(Pair::getRight))
+            .collect(Collectors.toList());
     }
 
     /**
@@ -62,11 +62,11 @@ public class QuantityOperations {
     public static List<Pair<Integer, Integer>> getOffset(List<Measurement> measurements) {
 
         return measurements
-                .stream()
-                .flatMap(m -> toQuantityList(m).stream().flatMap(q -> getOffsets(q).stream()))
-                .sorted(Comparator.comparing(Pair::getRight))
-                .distinct()
-                .collect(Collectors.toList());
+            .stream()
+            .flatMap(m -> toQuantityList(m).stream().flatMap(q -> getOffsets(q).stream()))
+            .sorted(Comparator.comparing(Pair::getRight))
+            .distinct()
+            .collect(Collectors.toList());
     }
 
     /**
@@ -83,12 +83,12 @@ public class QuantityOperations {
         offsets.add(new ImmutablePair<>(quantity.getOffsetStart(), quantity.getOffsetEnd()));
         if (quantity.getRawUnit() != null) {
             offsets.add(new ImmutablePair<>(quantity.getRawUnit().getOffsetStart(),
-                    quantity.getRawUnit().getOffsetEnd()));
+                quantity.getRawUnit().getOffsetEnd()));
         }
 
         return offsets.stream()
-                .sorted(Comparator.comparing(Pair::getRight))
-                .collect(Collectors.toList());
+            .sorted(Comparator.comparing(Pair::getRight))
+            .collect(Collectors.toList());
 
     }
 
@@ -104,7 +104,7 @@ public class QuantityOperations {
             output.add(new ImmutablePair<>(q.getOffsetStart(), q.getOffsetEnd()));
             if (q.getRawUnit() != null) {
                 output.add(new ImmutablePair<>(q.getRawUnit().getOffsetStart(),
-                        q.getRawUnit().getOffsetEnd()));
+                    q.getRawUnit().getOffsetEnd()));
             }
 
             return output.stream();
@@ -112,8 +112,8 @@ public class QuantityOperations {
 
 
         return offsets.stream()
-                .sorted(Comparator.comparing(Pair::getRight))
-                .collect(Collectors.toList());
+            .sorted(Comparator.comparing(Pair::getRight))
+            .collect(Collectors.toList());
 
     }
 
@@ -122,9 +122,9 @@ public class QuantityOperations {
      */
     public static Pair<Integer, Integer> getContainingOffset(List<Pair<Integer, Integer>> offsetList) {
         List<Pair<Integer, Integer>> sorted = offsetList
-                .stream()
-                .sorted(Comparator.comparing(Pair::getRight))
-                .collect(Collectors.toList());
+            .stream()
+            .sorted(Comparator.comparing(Pair::getRight))
+            .collect(Collectors.toList());
 
         return new ImmutablePair<>(sorted.get(0).getLeft(), Iterables.getLast(sorted).getRight());
     }
@@ -172,7 +172,7 @@ public class QuantityOperations {
             } else {
                 int tokenOffsetEnd = token.getOffset() + length(token.getText());
                 if (token.getOffset() >= mentionStart
-                        && tokenOffsetEnd <= mentionEnd) {
+                    && tokenOffsetEnd <= mentionEnd) {
                     isMeasure.add(Boolean.TRUE);
                 } else {
                     isMeasure.add(Boolean.FALSE);
@@ -198,4 +198,19 @@ public class QuantityOperations {
         return isMeasure;
     }
 
+    /**
+     * Return a list of layoutToken of all the elements of the measurement
+     **/
+    public static List<LayoutToken> getLayoutTokens(List<Quantity> quantities) {
+        return quantities
+            .stream()
+            .flatMap(q -> {
+                List<LayoutToken> lt = new ArrayList<>(q.getLayoutTokens());
+                if (q.getRawUnit() != null) {
+                    lt.addAll(q.getRawUnit().getLayoutTokens());
+                }
+                return lt.stream();
+            })
+            .collect(Collectors.toList());
+    }
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -226,6 +227,64 @@ public class QuantityOperationsTest {
         assertThat(booleans.get(2), is(true));
         assertThat(booleans.get(3), is(true));
         assertThat(booleans.get(4), is(false));
+    }
+
+    @Test
+    public void testGetLayoutTokens_empty() throws Exception {
+
+        List<Quantity> list  = new ArrayList<>();
+
+        final Unit unit = new Unit("kg", 4, 6);
+        list.add(new Quantity("20", unit, 2, 4));
+
+        final Unit unit2 = new Unit("mm", 85, 87);
+        list.add(new Quantity("90", unit2, 83, 85));
+
+        final Unit unit3 = new Unit("mm", 120, 123);
+        list.add(new Quantity("90", unit3, 125, 127));
+
+        list.add(new Quantity("90", null, 150, 155));
+
+
+        List<LayoutToken> layoutTokens = QuantityOperations.getLayoutTokens(list);
+
+        assertThat(layoutTokens, hasSize(0));
+
+    }
+
+    @Test
+    public void testGetLayoutTokens() throws Exception {
+
+        List<Quantity> list  = new ArrayList<>();
+
+        final Unit unit = new Unit("kg", 4, 6);
+        Quantity q1 = new Quantity("20", unit, 2, 4);
+        LayoutToken l1 = new LayoutToken("kg");
+        l1.setOffset(23);
+        q1.setLayoutTokens(Collections.singletonList(l1));
+
+        LayoutToken l2 = new LayoutToken("20");
+        l2.setOffset(25);
+        unit.setLayoutTokens(Collections.singletonList(l2));
+
+        list.add(q1);
+
+        final Unit unit2 = new Unit("mm", 85, 87);
+        Quantity q2 = new Quantity("90", unit2, 83, 85);
+        list.add(q2);
+
+        LayoutToken l3 = new LayoutToken("mm");
+        l3.setOffset(53);
+        q2.setLayoutTokens(Collections.singletonList(l3));
+
+        LayoutToken l4 = new LayoutToken("90");
+        l4.setOffset(45);
+        unit2.setLayoutTokens(Collections.singletonList(l4));
+
+        List<LayoutToken> layoutTokens = QuantityOperations.getLayoutTokens(list);
+
+        assertThat(layoutTokens, hasSize(4));
+
     }
 
 }
