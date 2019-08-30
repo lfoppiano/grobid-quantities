@@ -1,5 +1,6 @@
 package org.grobid.core.engines;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.analyzers.QuantityAnalyzer;
@@ -615,7 +616,7 @@ public class QuantityParser extends AbstractParser {
                         currentMeasurement.addBoundingBoxes(boundingBoxes);
                     }
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) {
-                    if ((currentMeasurement.getQuantityList() != null) && (currentMeasurement.getQuantityList().size() > 0)) {
+                    if (CollectionUtils.isNotEmpty(currentMeasurement.getQuantityList())) {
                         for (Quantity quantity : currentMeasurement.getQuantityList()) {
                             if ((quantity != null) && ((quantity.getRawUnit() == null) ||
                                     (quantity.getRawUnit().getRawName() == null))) {
@@ -648,6 +649,14 @@ public class QuantityParser extends AbstractParser {
                     if (currentMeasurement.isValid()) {
                         if ((currentMeasurement.getQuantityBase() != null) &&
                                 (currentMeasurement.getQuantityRange() != null)) {
+                            measurements.add(currentMeasurement);
+                            currentMeasurement = new Measurement();
+                            openMeasurement = null;
+                        }
+                    }
+                } else if (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) {
+                    if (currentMeasurement.isValid()) {
+                        if (CollectionUtils.isNotEmpty(currentMeasurement.getQuantityList())) {
                             measurements.add(currentMeasurement);
                             currentMeasurement = new Measurement();
                             openMeasurement = null;
