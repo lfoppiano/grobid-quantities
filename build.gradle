@@ -26,6 +26,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'com.jfrog.bintray'
 
 group = "org.grobid"
 
@@ -53,7 +54,6 @@ repositories {
     mavenCentral()
     jcenter()
     maven { url "https://dl.bintray.com/rookies/maven" }
-//    maven { url "http://oss.jfrog.org/artifactory/libs-snapshot" }
     maven { url "http://oss.jfrog.org/artifactory/libs-release" }
 }
 
@@ -231,6 +231,34 @@ jacocoTestReport {
 
 coveralls {
     jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
+}
+
+
+/*** Release ***/
+
+bintray {
+    dryRun = true // Whether to run this as dry-run, without deploying
+    publish = false // If version should be auto published after an upload
+
+    // read from ~/.gradle/gradle.properties. Set those up before releasing
+    user = project.hasProperty('bintrayUser') ? bintrayUser : ''
+    key = project.hasProperty('bintrayApiKey') ? bintrayApiKey : ''
+    configurations = ['archives']
+    pkg {
+        name = 'grobid-quantities'
+        repo = 'maven'
+        userOrg = 'rookies'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/kermitt2/grobid-quantities'
+        issueTrackerUrl = 'https://github.com/kermitt2/grobid-quantities/issues'
+        githubRepo = 'kermitt2/grobid'
+
+        version {
+            name = rootProject.version
+            vcsTag = rootProject.version
+            released = new Date()
+        }
+    }
 }
 
 
