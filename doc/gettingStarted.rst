@@ -3,7 +3,7 @@
 Getting started
 ===============
 
-Grobid-quantities requires *JDK 1.8* and Grobid to be installed.
+Grobid-quantities requires *JDK 1.8 or greater* and Grobid to be installed.
 
 Install and build
 ~~~~~~~~~~~~~~~~~
