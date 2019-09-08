@@ -1,7 +1,5 @@
 package org.grobid.core.utilities;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
@@ -13,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.lessThan;
@@ -51,15 +47,15 @@ public class QuantityOperationsTest {
         measurement4.setQuantityMost(new Quantity("90", null, 150, 155));
         measurementList.add(measurement4);
 
-        List<Pair<Integer, Integer>> offsetList = QuantityOperations.getOffset(measurementList);
+        List<OffsetPosition> offsetList = QuantityOperations.getOffset(measurementList);
 
         assertThat(offsetList, hasSize(7));
 
-        assertThat(offsetList.get(0).getLeft(), is(2));
-        assertThat(offsetList.get(0).getRight(), is(4));
+        assertThat(offsetList.get(0).start, is(2));
+        assertThat(offsetList.get(0).end, is(4));
 
-        assertThat(offsetList.get(1).getLeft(), is(4));
-        assertThat(offsetList.get(1).getRight(), is(6));
+        assertThat(offsetList.get(1).start, is(4));
+        assertThat(offsetList.get(1).end, is(6));
     }
 
     @Test
@@ -124,11 +120,11 @@ public class QuantityOperationsTest {
     @Test
     public void testGetOffsets() throws Exception {
         Quantity q1 = new Quantity("90", new Unit("mm", 120, 123), 125, 127);
-        List<Pair<Integer, Integer>> offsets = QuantityOperations.getOffsets(q1);
+        List<OffsetPosition> offsets = QuantityOperations.getOffsets(q1);
 
         assertThat(offsets, hasSize(2));
-        assertThat(offsets.get(0).getRight(), is(lessThan(offsets.get(1).getRight())));
-        assertThat(offsets.get(0).getLeft(), is(lessThan(offsets.get(1).getLeft())));
+        assertThat(offsets.get(0).end, is(lessThan(offsets.get(1).end)));
+        assertThat(offsets.get(0).start, is(lessThan(offsets.get(1).start)));
     }
 
     @Test
@@ -143,11 +139,11 @@ public class QuantityOperationsTest {
         measurement3.setQuantityMost(new Quantity("90", new Unit("mm", 120, 123), 125, 127));
         measurement3.setQuantityLeast(new Quantity("90", null, 150, 155));
 
-        List<Pair<Integer, Integer>> offsets = QuantityOperations.getOffset(Arrays.asList(measurement3, measurement1));
+        List<OffsetPosition> offsets = QuantityOperations.getOffset(Arrays.asList(measurement3, measurement1));
 
         assertThat(offsets, hasSize(5));
-        assertThat(offsets.get(0).getRight(), is(lessThan(offsets.get(1).getRight())));
-        assertThat(offsets.get(0).getLeft(), is(lessThan(offsets.get(1).getLeft())));
+        assertThat(offsets.get(0).end, is(lessThan(offsets.get(1).end)));
+        assertThat(offsets.get(0).start, is(lessThan(offsets.get(1).start)));
     }
 
     @Test
@@ -157,18 +153,18 @@ public class QuantityOperationsTest {
                 new Quantity("miao", new Unit("seconds", 2, 24), 22, 150)
         );
 
-        List<Pair<Integer, Integer>> offsets = QuantityOperations.getOffsets(list);
+        List<OffsetPosition> offsets = QuantityOperations.getOffsets(list);
 
         assertThat(offsets, hasSize(3));
     }
 
     @Test
     public void testGetContainingOffset() throws Exception {
-        Pair<Integer, Integer> offsets = QuantityOperations.getContainingOffset(
+        OffsetPosition offsets = QuantityOperations.getContainingOffset(
                 new Quantity("miao", new Unit("seconds", 2, 24), 22, 150));
 
-        assertThat(offsets.getLeft(), is(2));
-        assertThat(offsets.getRight(), is(150));
+        assertThat(offsets.start, is(2));
+        assertThat(offsets.end, is(150));
     }
 
     @Test
@@ -176,9 +172,9 @@ public class QuantityOperationsTest {
         List<LayoutToken> tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken("A 20kg ingot is made in a " +
                 "high frequency induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C.");
 
-        List<Pair<Integer, Integer>> offsetList = Arrays.asList(
-                new ImmutablePair<>(2, 50),
-                new ImmutablePair<>(103, 134)
+        List<OffsetPosition> offsetList = Arrays.asList(
+                new OffsetPosition(2, 50),
+                new OffsetPosition(103, 134)
         );
 
         List<Boolean> booleans = QuantityOperations.synchroniseLayoutTokensWithOffsets(tokens, offsetList);
@@ -206,16 +202,16 @@ public class QuantityOperationsTest {
         List<LayoutToken> tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken("A 20kg ingot is made in a " +
                 "high frequency induction melting furnace and forged to 30mm in thickness and 90mm in width at 850 to 1,150°C.");
 
-        List<Pair<Integer, Integer>> offsetList = Arrays.asList(
-                new ImmutablePair<>(2, 4),
-                new ImmutablePair<>(4, 6),
-                new ImmutablePair<>(81, 83),
-                new ImmutablePair<>(83, 85),
-                new ImmutablePair<>(103, 105),
-                new ImmutablePair<>(105, 107),
-                new ImmutablePair<>(120, 123),
-                new ImmutablePair<>(127, 132),
-                new ImmutablePair<>(132, 134)
+        List<OffsetPosition> offsetList = Arrays.asList(
+                new OffsetPosition(2, 4),
+                new OffsetPosition(4, 6),
+                new OffsetPosition(81, 83),
+                new OffsetPosition(83, 85),
+                new OffsetPosition(103, 105),
+                new OffsetPosition(105, 107),
+                new OffsetPosition(120, 123),
+                new OffsetPosition(127, 132),
+                new OffsetPosition(132, 134)
         );
 
         List<Boolean> booleans = QuantityOperations.synchroniseLayoutTokensWithOffsets(tokens, offsetList);
