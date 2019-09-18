@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!--
+    UNISCOR (Unit Segmentation CORpus)
+    See https://grobid-quantities.readthedocs.io/en/latest/references.html for more information
+-->
 <units>
     <unit><prefix>n</prefix><base>m</base></unit>
     <unit><base>°C</base></unit>
