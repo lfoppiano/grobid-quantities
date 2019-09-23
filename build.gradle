@@ -3,7 +3,9 @@ buildscript {
         mavenLocal()
         mavenCentral()
         jcenter()
-        maven { url "https://plugins.gradle.org/m2/" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath group: 'net.researchgate', name: 'gradle-release', version: '2.6.0'
@@ -14,7 +16,7 @@ buildscript {
 }
 
 plugins {
-    id 'net.saliman.cobertura' version '2.6.1'
+    id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.8.2'
 }
 
@@ -24,6 +26,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'com.jfrog.bintray'
 
 group = "org.grobid"
 
@@ -164,10 +167,6 @@ test {
     exclude '**/**IntegrationTest**'
 }
 
-//task unitTest(type: Test) {
-//    exclude '**/**IntegrationTest**'
-//}
-
 task integration(type: Test) {
     include '**'
 }
@@ -230,7 +229,7 @@ artifacts {
 
 task copyModels(type: Copy) {
     from "${rootDir}/resources/models"
-    include "**/*.wapiti"
+    include "**/model.wapiti", "**/config.json", "**/model_weights.hdf5", "**/preprocessor.pkl"
     into "${rootDir}/../grobid-home/models/"
 }
 
@@ -238,8 +237,44 @@ wrapper {
     gradleVersion "5.4.1"
 }
 
-//Cobertura
-cobertura.coverageFormats = ['html', 'xml']
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
+
+coveralls {
+    jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
+}
+
+
+/*** Release ***/
+
+bintray {
+    dryRun = true // Whether to run this as dry-run, without deploying
+    publish = false // If version should be auto published after an upload
+
+    // read from ~/.gradle/gradle.properties. Set those up before releasing
+    user = project.hasProperty('bintrayUser') ? bintrayUser : ''
+    key = project.hasProperty('bintrayApiKey') ? bintrayApiKey : ''
+    configurations = ['archives']
+    pkg {
+        name = 'grobid-quantities'
+        repo = 'maven'
+        userOrg = 'rookies'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/kermitt2/grobid-quantities'
+        issueTrackerUrl = 'https://github.com/kermitt2/grobid-quantities/issues'
+        githubRepo = 'kermitt2/grobid'
+
+        version {
+            name = rootProject.version
+            vcsTag = rootProject.version
+            released = new Date()
+        }
+    }
+}
 
 
 

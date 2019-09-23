@@ -14,10 +14,7 @@ import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.core.utilities.BoundingBoxCalculator;
-import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.QuantityOperations;
-import org.grobid.core.utilities.UnicodeUtil;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +79,7 @@ public class QuantifiedObjectParser extends AbstractParser {
             return measurements;
 
         try {
-            List<Pair<Integer, Integer>> offsetList = QuantityOperations.getOffset(measurements);
+            List<OffsetPosition> offsetList = QuantityOperations.getOffset(measurements);
 
             List<Boolean> measurementFlags = synchroniseLayoutTokensWithOffsets(layoutTokenNormalised, offsetList);
 
@@ -119,22 +116,22 @@ public class QuantifiedObjectParser extends AbstractParser {
         QuantifiedObject currentQuantifiedObject = quantifiedObjects.get(indexQuantifiedObject);
 
         for (Measurement measurement : measurements) {
-            List<Pair<Integer, Integer>> offsetList1 = QuantityOperations.getOffset(measurement);
-            Pair<Integer, Integer> offsetMeasurement = QuantityOperations.getContainingOffset(offsetList1);
+            List<OffsetPosition> offsetList1 = QuantityOperations.getOffset(measurement);
+            OffsetPosition offsetMeasurement = QuantityOperations.getContainingOffset(offsetList1);
 
             if (currentQuantifiedObject.getAttachment() == null) {
                 indexQuantifiedObject++;
                 currentQuantifiedObject = quantifiedObjects.get(indexQuantifiedObject);
             }
             if (currentQuantifiedObject.getAttachment().equals(QuantifiedObject.Attachment.LEFT)) {
-                if (offsetMeasurement.getLeft() <= currentQuantifiedObject.getOffsetStart()) {
+                if (offsetMeasurement.start <= currentQuantifiedObject.getOffsetStart()) {
                     measurement.setQuantifiedObject(currentQuantifiedObject);
                 } else {
                     continue;
                 }
 
             } else if (currentQuantifiedObject.getAttachment().equals(QuantifiedObject.Attachment.RIGHT)) {
-                if (offsetMeasurement.getLeft() < currentQuantifiedObject.getOffsetStart()) {
+                if (offsetMeasurement.end < currentQuantifiedObject.getOffsetStart()) {
                     continue;
                 } else {
                     measurement.setQuantifiedObject(currentQuantifiedObject);

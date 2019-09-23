@@ -2,6 +2,9 @@ package org.grobid.core.utilities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.data.normalization.NormalisationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +50,7 @@ public class WordsToNumber {
 
     private WordsToNumber() {
         // init the lexicon with the numerical operations
-        numWord = new HashMap<String, ScaleIncrementPair>();
+        numWord = new HashMap<>();
         numWord.put("and", new ScaleIncrementPair(1, 0));
 
         init();
@@ -58,11 +61,11 @@ public class WordsToNumber {
         try {
             JsonNode rootNode = mapper.readTree(this.getClass().getClassLoader().getResourceAsStream(VALUES_PATH));
 
-            bases = new ArrayList<String>();
-            tens = new ArrayList<String>();
-            scales = new ArrayList<String>();
-            numberTokens = new HashSet<String>();
-            List<String> decimalMarks = new ArrayList<String>();
+            bases = new ArrayList<>();
+            tens = new ArrayList<>();
+            scales = new ArrayList<>();
+            numberTokens = new HashSet<>();
+            List<String> decimalMarks = new ArrayList<>();
 
             JsonNode basesNode = rootNode.findPath("bases");
             if ((basesNode != null) && (!basesNode.isMissingNode())) {
@@ -126,13 +129,16 @@ public class WordsToNumber {
         return numberTokens;
     }
 
-    public BigDecimal normalize(String text, Locale local) {
+    public BigDecimal normalize(String text, Locale local) throws NormalisationException {
         double current = 0; 
         double result = 0;
-        text = text.toLowerCase();
+        text = StringUtils.lowerCase(text);
 
         // split integer and possible decimal part
-        String pieces[] = text.split(decimalMark);
+        String[] pieces = text.split(decimalMark);
+        if(ArrayUtils.isEmpty(pieces)) {
+            throw new NormalisationException("Cannot convert the alphabetic value '" + text + "' to digits");
+        }
         String integerPart = pieces[0].trim();
         String decimalPart = null;
         if (pieces.length > 1)

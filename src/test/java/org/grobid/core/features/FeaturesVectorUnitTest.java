@@ -55,6 +55,21 @@ public class FeaturesVectorUnitTest {
     }
 
     @Test
+    public void testPrintVector_sample3() throws Exception {
+        mockStatic(FeatureFactory.class);
+        expect(FeatureFactory.getInstance()).andReturn(featureFactoryMock);
+        expect(featureFactoryMock.test_all_capital("/")).andReturn(false);
+        expect(featureFactoryMock.test_number("/")).andReturn(false);
+        replay(FeatureFactory.class, featureFactoryMock);
+
+        FeaturesVectorUnits output = FeaturesVectorUnits.addFeaturesUnit("/", "LABEL", false, true, true);
+        verify(FeatureFactory.class, featureFactoryMock);
+
+        String outputString = output.printVector();
+        assertThat(outputString, is("/ 0 0 0 1 SLASH 1 LABEL"));
+    }
+
+    @Test
     public void testAddFeaturesUnit() throws Exception {
         mockStatic(FeatureFactory.class);
         expect(FeatureFactory.getInstance()).andReturn(featureFactoryMock);

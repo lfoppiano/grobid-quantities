@@ -203,8 +203,6 @@ public class UnitTrainer extends AbstractTrainer {
         GrobidProperties.getInstance();
 
         Trainer trainer = new UnitTrainer();
-        AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
-//        AbstractTrainer.runTraining(trainer);
-//        AbstractTrainer.runEvaluation(trainer);
+        AbstractTrainer.runTraining(trainer);
     }
 }

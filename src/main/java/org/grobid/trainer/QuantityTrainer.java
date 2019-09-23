@@ -211,7 +211,10 @@ public class QuantityTrainer extends AbstractTrainer {
     /**
      * Dispatch the example to the training or test data, based on the split ration and the drawing of
      * a random number
+     *
+     * @deprecated use AbstractTrainer.dispatchExample() instead. This will be removed in next release.
      */
+    @Deprecated
     private Writer dispatchExample(Writer writerTraining, Writer writerEvaluation, double splitRatio) {
         Writer writer = null;
         if ((writerTraining == null) && (writerEvaluation != null)) {
@@ -236,6 +239,6 @@ public class QuantityTrainer extends AbstractTrainer {
         GrobidProperties.getInstance();
 
         Trainer trainer = new QuantityTrainer();
-        AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
+        AbstractTrainer.runTraining(trainer);
     }
 }

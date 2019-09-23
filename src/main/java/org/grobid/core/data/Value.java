@@ -121,7 +121,9 @@ public class Value {
             } else
                 json.append(", ");
             json.append("\"structure\" : " + getStructure().toJson() + ", ");
-            json.append("\"parsed\" : \"" + getStructure().toString() + "\"");
+            byte[] encodedParsedName = encoder.quoteAsUTF8(getStructure().toString());
+            String outputParsedName = new String(encodedParsedName);
+            json.append("\"parsed\" : \"" + outputParsedName + "\"");
         }
 
         if (offsets != null) {
