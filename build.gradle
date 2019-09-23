@@ -214,7 +214,7 @@ artifacts {
 
 task copyModels(type: Copy) {
     from "${rootDir}/resources/models"
-    include "model.wapiti", "config.json", "model_weights.hdf5", "preprocessor.pkl"
+    include "**/model.wapiti", "**/config.json", "**/model_weights.hdf5", "**/preprocessor.pkl"
     into "${rootDir}/../grobid-home/models/"
 }
 
