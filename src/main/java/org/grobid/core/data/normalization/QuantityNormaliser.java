@@ -39,7 +39,7 @@ public class QuantityNormaliser {
     protected static final String UNICODE_PROVIDER = "Unicode";
     protected static final String SI_PROVIDER = "SI";
     protected static final String COMMON_PROVIDER = "Common";
-//    protected static final String INDYRIA_PROVIDER = "DefaultServiceProvider";
+    //    protected static final String INDYRIA_PROVIDER = "DefaultServiceProvider";
     protected static final String SESHAT_PROVIDER = "UnitServices";
 
     private Map<String, UnitFormat> unitFormats = new HashMap<>();
@@ -59,9 +59,9 @@ public class QuantityNormaliser {
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mile");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "mi");
                     SimpleUnitFormat.getInstance().alias(USCustomary.MILE, "miles");
-                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yards");
-                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yard");
-                SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yd");
+                    SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yards");
+                    SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yard");
+                    SimpleUnitFormat.getInstance().alias(USCustomary.YARD, "yd");
                 }
             } catch (Exception e) {
                 LOGGER.warn("Exception when initialising the quantity normaliser. ", e);
@@ -97,7 +97,7 @@ public class QuantityNormaliser {
             }
         } catch (Exception e) {
             throw new NormalisationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
-                    "or it is not recognized from the available parsers.", e);
+                "or it is not recognized from the available parsers.", e);
         }
         quantity.setNormalizedQuantity(normalizedQuantity);
 
@@ -139,7 +139,7 @@ public class QuantityNormaliser {
 
         if (CollectionUtils.isEmpty(parsers)) {
             throw new NormalisationException("Cannot find a parser for " + parsedUnit.getRawName()
-                    + ". Please check the dependencies of UOM or make sure the unit you're trying ot parse is supported. ");
+                + ". Please check the dependencies of UOM or make sure the unit you're trying ot parse is supported. ");
         }
 
         javax.measure.Unit unit = null;
@@ -163,12 +163,12 @@ public class QuantityNormaliser {
                     } catch (MeasurementParseException e) {
 
                         //handling 1/{unit}, processing just the unit
-                        if(StringUtils.equalsAnyIgnoreCase(block.getPow(), "-1", "−1")) {
+                        if (StringUtils.equalsAnyIgnoreCase(block.getPow(), "-1", "−1")) {
                             String onlyUnit = block.getPrefix() + block.getBase();
                             javax.measure.Unit<?> onlyUnitParsed = null;
                             try {
                                 onlyUnitParsed = formatService.parse(onlyUnit);
-                            } catch(Throwable e2) {
+                            } catch (Throwable e2) {
                                 LOGGER.warn("Trying excluding the negative power. Cannot parse " + onlyUnit + " with " + formatService.getClass().getName(), e2);
                             }
                             unitList.add(onlyUnitParsed.pow(-1));
@@ -184,7 +184,7 @@ public class QuantityNormaliser {
 
             if (CollectionUtils.isEmpty(unitList) || unitList.size() != parsedUnit.getProductBlocks().size()) {
                 throw new NormalisationException("Cannot parse " + parsedUnit.getRawName() + " using "
-                        + Arrays.toString(parsers.toArray()));
+                    + Arrays.toString(parsers.toArray()));
             }
 
             javax.measure.Unit result = null;

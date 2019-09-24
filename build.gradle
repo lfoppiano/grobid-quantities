@@ -56,8 +56,7 @@ repositories {
     maven { url "https://dl.bintray.com/rookies/maven" }
     maven { url "http://oss.jfrog.org/artifactory/libs-snapshot" }
     maven { url "http://oss.jfrog.org/artifactory/libs-release" }
-//    maven { url 'https://jitpack.io' }
-//    maven { url "https://dl.bintray.com/unitsofmeasurement/maven" }
+    maven { url "https://dl.bintray.com/unitsofmeasurement/maven" }
 }
 
 
@@ -174,11 +173,11 @@ task integration(type: Test) {
 // Training configuration
 
 def trainerTasks = [
-        //Training models
-        "train_units"            : "org.grobid.trainer.UnitTrainer",
-        "train_quantities"       : "org.grobid.trainer.QuantityTrainer",
-        "train_values"           : "org.grobid.trainer.ValueTrainer",
-        "train_quantifiedObjects": "org.grobid.trainer.QuantifiedObjectTrainer"
+    //Training models
+    "train_units"            : "org.grobid.trainer.UnitTrainer",
+    "train_quantities"       : "org.grobid.trainer.QuantityTrainer",
+    "train_values"           : "org.grobid.trainer.ValueTrainer",
+    "train_quantifiedObjects": "org.grobid.trainer.QuantifiedObjectTrainer"
 ]
 
 trainerTasks.each { taskName, mainClassName ->
