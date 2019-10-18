@@ -117,11 +117,7 @@ public class UnitTrainer extends AbstractTrainer {
 
             // then we convert the tei files into the usual CRF label format
             // we process all tei files in the output directory
-            File[] refFiles = corpusDir.listFiles(new FilenameFilter() {
-                public boolean accept(File dir, String name) {
-                    return name.toLowerCase().endsWith(".tei") || name.toLowerCase().endsWith(".tei.xml");
-                }
-            });
+            File[] refFiles = corpusDir.listFiles((dir, name) -> name.toLowerCase().endsWith(".tei") || name.toLowerCase().endsWith(".tei.xml"));
 
             if (refFiles == null) {
                 return 0;
@@ -173,25 +169,6 @@ public class UnitTrainer extends AbstractTrainer {
             IOUtils.closeQuietly(evaluationOutputWriter, trainingOutputWriter);
         }
         return totalExamples;
-    }
-
-    /**
-     * Dispatch the example to the training or test data, based on the split ration and the drawing of
-     * a random number
-     */
-    private Writer dispatchExample(Writer writerTraining, Writer writerEvaluation, double splitRatio) {
-        Writer writer = null;
-        if ((writerTraining == null) && (writerEvaluation != null)) {
-            writer = writerEvaluation;
-        } else if ((writerTraining != null) && (writerEvaluation == null)) {
-            writer = writerTraining;
-        } else {
-            if (Math.random() <= splitRatio)
-                writer = writerTraining;
-            else
-                writer = writerEvaluation;
-        }
-        return writer;
     }
 
     /**

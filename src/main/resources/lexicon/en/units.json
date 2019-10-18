@@ -2210,6 +2210,26 @@
           "inflection": "newtons"
         }
       ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "eV"
+        }
+      ],
+      "type": "ENERGY",
+      "system": "NON_SI",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "electron volt",
+          "inflection": "electron volts"
+        },
+        {
+          "lemma": "electron-volt",
+          "inflection": "electron-volts"
+        }
+      ]
     }
   ]
 }
