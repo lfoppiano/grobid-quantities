@@ -188,13 +188,18 @@ public class QuantityOperations {
         return quantities
                 .stream()
                 .flatMap(q -> {
-                    List<LayoutToken> lt = new ArrayList<>(q.getLayoutTokens());
-                    if (q.getRawUnit() != null) {
-                        lt.addAll(q.getRawUnit().getLayoutTokens());
-                    }
+                    List<LayoutToken> lt = getLayoutTokens(q);
                     return lt.stream();
                 })
                 .collect(Collectors.toList());
+    }
+
+    public static List<LayoutToken> getLayoutTokens(Quantity q) {
+        List<LayoutToken> lt = new ArrayList<>(q.getLayoutTokens());
+        if (q.getRawUnit() != null) {
+            lt.addAll(q.getRawUnit().getLayoutTokens());
+        }
+        return lt;
     }
 
 
