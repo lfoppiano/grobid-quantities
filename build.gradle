@@ -7,26 +7,20 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
     }
-    dependencies {
-        classpath group: 'net.researchgate', name: 'gradle-release', version: '2.6.0'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
-    }
 }
+
+
 
 plugins {
     id 'jacoco'
-    id 'com.github.kt3k.coveralls' version '2.8.2'
+    id 'com.github.kt3k.coveralls' version '2.8.4'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.jfrog.bintray" version "1.8.4"
+    id 'net.researchgate.release' version '2.6.0'
+    id 'java'
+    id 'maven'
+    id 'application'
 }
-
-
-apply plugin: 'maven'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'com.jfrog.bintray'
 
 group = "org.grobid"
 

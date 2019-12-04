@@ -204,7 +204,7 @@ public class QuantityTrainer extends AbstractTrainer {
                 isUnitPattern = false;
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
     }
 
