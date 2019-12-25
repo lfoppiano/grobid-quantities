@@ -56,7 +56,7 @@ public class UnitAnnotationSaxHandlerTest {
 
     @Test
     public void testParser_doubleBaseName() throws Exception {
-        String input = "<units><unit left=\"true\"><base>Hz</base></unit></units>";
+        String input = "<units><unit rightAttachment=\"true\"><base>Hz</base></unit></units>";
         InputStream is = IOUtils.toInputStream(input, UTF_8);
 
         SAXParser p = spf.newSAXParser();
@@ -102,7 +102,7 @@ public class UnitAnnotationSaxHandlerTest {
 
     @Test
     public void testParser_rightAttachment() throws Exception {
-        String input = "<units><unit left=\"true\"><base>Hz</base></unit></units>";
+        String input = "<units><unit rightAttachment=\"true\"><base>Hz</base></unit></units>";
         InputStream is = IOUtils.toInputStream(input, UTF_8);
 
         SAXParser p = spf.newSAXParser();
