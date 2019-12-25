@@ -155,7 +155,7 @@ public class UnitTrainer extends AbstractTrainer {
                     offsetPosition.end = pos + 1;
                     unitTokenPositions.add(offsetPosition);
 
-                    addFeatures(labels, writer, unitTokenPositions, labeledUnit.isUnitLeft());
+                    addFeatures(labels, writer, unitTokenPositions, labeledUnit.hasRightAttachment());
                     writer.write("\n");
                     writer = dispatchExample(trainingOutputWriter, evaluationOutputWriter, splitRatio);
                     pos++;
