@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.util.BufferRecyclers;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.Objects;
+
 /**
  * This class is responsible to hold the structured representation of a value expressed in
  * the form:
@@ -113,7 +115,7 @@ public class ValueBlock {
     }
 
     public String getNumberAsString() {
-        return String.valueOf(number);
+        return Objects.toString(number, "");
     }
 
     public Block getNumber() {

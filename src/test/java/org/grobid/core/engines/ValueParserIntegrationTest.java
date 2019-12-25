@@ -4,7 +4,6 @@ import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -31,13 +30,12 @@ public class ValueParserIntegrationTest {
 
         System.out.println(input + " -> " + output);
         System.out.println(output.getRawTaggedValue());
-        
+
         assertThat(output.getNumber().toString(), is("0.3"));
         assertThat(output.getBase().toString(), is("10"));
         assertThat(output.getPow().toString(), is("-7"));
     }
 
-    @Ignore("model not yet mature for this test")
     @Test
     public void testTagUnit_exponential_2() throws Exception {
         String input = "10 e -1";
@@ -50,7 +48,6 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void testParseValue_esponential_1() throws Exception {
         String input = "10 e -1";
         Value output = target.parseValue(input);
@@ -58,6 +55,28 @@ public class ValueParserIntegrationTest {
 
         assertThat(output.getStructure().getNumber().toString(), is("10"));
         assertThat(output.getStructure().getExp().toString(), is("-1"));
+    }
+
+    @Test
+    public void testParseValue_esponential_2() throws Exception {
+        String input = "10 -30";
+        Value output = target.parseValue(input);
+        System.out.println(input + " -> " + output);
+
+        assertThat(output.getStructure().getNumberAsString(), is(""));
+        assertThat(output.getStructure().getBaseAsString(), is("10"));
+        assertThat(output.getStructure().getPowAsString(), is("-30"));
+    }
+
+    @Test
+    public void testParseValue_esponential_3() throws Exception {
+        String input = "10 -33";
+        Value output = target.parseValue(input);
+        System.out.println(input + " -> " + output);
+
+        assertThat(output.getStructure().getNumberAsString(), is(""));
+        assertThat(output.getStructure().getBaseAsString(), is("10"));
+        assertThat(output.getStructure().getPowAsString(), is("-33"));
     }
 
     @Test
