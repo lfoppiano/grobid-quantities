@@ -1,5 +1,9 @@
 grobidHome: ../grobid-home
 
+corsAllowedOrigins: "*"
+corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
+corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
+
 views:
   .mustache:
     cache: false
