@@ -1,4 +1,4 @@
-.. _Python client GitHub page: https://gitlab.nims.go.jp/a017873/superconductors-documentation/issues
+.. _Python client GitHub page: https://github.com/lfoppiano/grobid-quantities-python-client
 
 .. topic:: Getting started, build, install
 
@@ -62,11 +62,7 @@ To test the API, is possible to run a simple text using ``curl``:
 Clients
 ~~~~~~~
 
-To interact with the server is possible to use the python client, which support both single and multi-thread processing.
-The client can be installed using pip:
-::
-
-  pip install grobid-quantities-client
-
-more information can be found a the `Python client GitHub page`_.
+The easiest way to interact with the server is to use the Python Client.
+It removes the complexity of dealing with the output data, and managing single or multi-thread processing.
+More information can be found at the `Python client GitHub page`_.
 
