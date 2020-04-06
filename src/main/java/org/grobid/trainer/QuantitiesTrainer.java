@@ -22,11 +22,11 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 /**
  * @author Patrice Lopez
  */
-public class QuantityTrainer extends AbstractTrainer {
+public class QuantitiesTrainer extends AbstractTrainer {
 
     private QuantityLexicon quantityLexicon = null;
 
-    public QuantityTrainer() {
+    public QuantitiesTrainer() {
         super(QuantitiesModels.QUANTITIES);
         // adjusting CRF training parameters for this model
         epsilon = 0.000001;
@@ -216,7 +216,7 @@ public class QuantityTrainer extends AbstractTrainer {
     public static void main(String[] args) {
         GrobidProperties.getInstance();
 
-        Trainer trainer = new QuantityTrainer();
+        Trainer trainer = new QuantitiesTrainer();
         AbstractTrainer.runTraining(trainer);
     }
 }
