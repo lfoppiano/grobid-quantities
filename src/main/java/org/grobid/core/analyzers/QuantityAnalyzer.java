@@ -5,6 +5,7 @@ import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -49,7 +50,7 @@ public class QuantityAnalyzer implements Analyzer {
     private QuantityAnalyzer() {
     }
 
-    public static final String DELIMITERS = " \n\r\t([^%‰°,:;?.!/)-–−=≈<>+±\"“”‘’'`$]*\u2666\u2665\u2663\u2660\u00A0";
+    public static final String DELIMITERS = " \n\r\t([^%‰°,:;?.!/)-–−=~≈<>+±\"“”‘’'`$]*\u2666\u2665\u2663\u2660\u00A0";
     private static final String REGEX = "(?<=[a-zA-Z])(?=\\d)|(?<=\\d)(?=\\D)";
 
     public String getName() {
@@ -63,9 +64,7 @@ public class QuantityAnalyzer implements Analyzer {
             String token = st.nextToken();
             // in addition we split "letter" characters and digits
             String[] subtokens = token.split(REGEX);
-            for (int i = 0; i < subtokens.length; i++) {
-                result.add(subtokens[i]);
-            }
+            result.addAll(Arrays.asList(subtokens));
         }
 
         return result;
@@ -83,11 +82,11 @@ public class QuantityAnalyzer implements Analyzer {
             String token = st.nextToken();
             // in addition we split "letter" characters and digits
             String[] subtokens = token.split(REGEX);
-            for (int i = 0; i < subtokens.length; i++) {
+            for (String subtoken : subtokens) {
                 LayoutToken layoutToken = new LayoutToken();
-                layoutToken.setText(subtokens[i]);
+                layoutToken.setText(subtoken);
                 layoutToken.setOffset(offset);
-                offset += subtokens[i].length();
+                offset += subtoken.length();
                 result.add(layoutToken);
             }
         }
@@ -119,12 +118,12 @@ public class QuantityAnalyzer implements Analyzer {
             String token = st.nextToken();
             // in addition we split "letter" characters and digits
             String[] subtokens = token.split(REGEX);
-            for (int i = 0; i < subtokens.length; i++) {
+            for (String subtoken : subtokens) {
                 LayoutToken theChunk = new LayoutToken(chunk); // deep copy
-                theChunk.setText(subtokens[i]);
+                theChunk.setText(subtoken);
                 result.add(theChunk);
                 theChunk.setOffset(startingIndex);
-                startingIndex+= StringUtils.length(theChunk.getText());
+                startingIndex += StringUtils.length(theChunk.getText());
             }
         }
         return result;
