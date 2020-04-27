@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
-public class QuantityParserIntegrationTests {
+public class QuantityParserIntegrationTest {
     QuantityParser target;
 
     @BeforeClass

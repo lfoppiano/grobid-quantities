@@ -1,6 +1,7 @@
 package org.grobid.core.engines;
 
 import org.apache.commons.io.IOUtils;
+import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.QuantifiedObject;
@@ -21,16 +22,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
-@Ignore("This model is not available normally, so this test will fail.")
-public class QuantifiedObjectParserIntegrationTest {
+public class QuantifiedObjectParserTest {
 
     private QuantifiedObjectParser target;
 
     @Before
     public void setUp() throws Exception {
-        LibraryLoader.load();
-
-        target = new QuantifiedObjectParser();
+        target = new QuantifiedObjectParser(GrobidModels.DUMMY);
     }
 
     @Ignore("Not a unit test ;-) ")

@@ -104,7 +104,7 @@ public class Unit {
     }*/
 
     public String toJson() {
-        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");

@@ -2,6 +2,7 @@ package org.grobid.core.engines;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.grobid.core.GrobidModel;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
@@ -74,8 +75,16 @@ public class QuantityParser extends AbstractParser {
         return instance;
     }
 
-    private QuantityLexicon quantityLexicon = null;
-    private MeasurementOperations measurementOperations = null;
+    private QuantityLexicon quantityLexicon;
+    private MeasurementOperations measurementOperations;
+
+    protected QuantityParser(GrobidModel model, QuantityLexicon quantityLexicon, MeasurementOperations measurementOperations, ValueParser valueParser) {
+        super(model);
+        this.quantityLexicon = quantityLexicon;
+        this.measurementOperations = measurementOperations;
+        this.valueParser = valueParser;
+        instance = this;
+    }
 
     @Inject
     public QuantityParser() {

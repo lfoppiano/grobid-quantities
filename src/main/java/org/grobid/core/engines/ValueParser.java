@@ -1,5 +1,7 @@
 package org.grobid.core.engines;
 
+import org.grobid.core.GrobidModel;
+import org.grobid.core.GrobidModels;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.data.normalization.NormalizationException;
@@ -48,6 +50,10 @@ public class ValueParser extends AbstractParser {
 
     protected ValueParser() {
         super(QuantitiesModels.VALUES);
+    }
+
+    public ValueParser(GrobidModel model) {
+        super(model);
     }
 
     public Value parseValue(String rawValue) {

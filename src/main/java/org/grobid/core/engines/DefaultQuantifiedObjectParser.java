@@ -1,5 +1,6 @@
 package org.grobid.core.engines;
 
+import org.grobid.core.GrobidModels;
 import org.grobid.core.data.*;
 import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.layout.LayoutToken;
@@ -23,7 +24,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultQuantifiedObjectParser.class);
 
     public DefaultQuantifiedObjectParser() {
-        super(false);
+        super(GrobidModels.DUMMY);
     }
 
     @Override
