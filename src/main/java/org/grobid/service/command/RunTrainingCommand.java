@@ -5,7 +5,6 @@ import io.dropwizard.setup.Bootstrap;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.grobid.core.engines.Engine;
-import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.main.LibraryLoader;
@@ -34,16 +33,8 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
 
     private final static List<String> ACTIONS = Arrays.asList("train", "nfold", "train_eval", "holdout");
 
-    Map<String, AbstractTrainer> trainerMap = new HashMap<>();
-
-
     public RunTrainingCommand() {
         super("training", "Training / Evaluate the model ");
-
-        trainerMap.put(QuantitiesModels.QUANTITIES.getModelName(), new QuantitiesTrainer());
-        trainerMap.put(QuantitiesModels.UNITS.getModelName(), new UnitTrainer());
-        trainerMap.put(QuantitiesModels.VALUES.getModelName(), new ValueTrainer());
-        trainerMap.put(QuantitiesModels.QUANTIFIED_OBJECT.getModelName(), new QuantifiedObjectTrainer());
     }
 
     @Override
@@ -83,6 +74,14 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
 
     @Override
     protected void run(Bootstrap bootstrap, Namespace namespace, GrobidQuantitiesConfiguration configuration) throws Exception {
+
+        // we need to execute this after the system has been initialised, or it will crash looking for the wapiti models in the wrong location
+        Map<String, AbstractTrainer> trainerMap = new HashMap<>();
+        trainerMap.putIfAbsent("quantities", new QuantitiesTrainer());
+        trainerMap.putIfAbsent("units", new UnitTrainer());
+        trainerMap.putIfAbsent("values", new ValueTrainer());
+        trainerMap.putIfAbsent("quantifiedObject", new QuantifiedObjectTrainer());
+
         try {
             GrobidProperties.set_GROBID_HOME_PATH(new File(configuration.getGrobidHome()).getAbsolutePath());
             String grobidHome = configuration.getGrobidHome();

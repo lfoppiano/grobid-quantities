@@ -26,8 +26,9 @@ logging:
   level: INFO
   appenders:
     - type: console
-    - type: file
       threshold: INFO
+    - type: file
+      threshold: DEBUG
       logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
       currentLogFilename: logs/grobid-quantities.log
       archivedLogFilenamePattern: logs/grobid-quantities-%d{yyyy-MM-dd}-%i.log.gz
