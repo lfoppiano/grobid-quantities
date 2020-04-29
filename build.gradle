@@ -75,9 +75,9 @@ dependencies {
     compile 'commons-pool:commons-pool:1.6'
 
     //Json
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.0'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.0'
+    compile "com.fasterxml.jackson.core:jackson-core:2.10.1"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.10.1"
+    compile "com.fasterxml.jackson.module:jackson-module-afterburner:2.10.1"
 
     // measurements
     compile group: 'si.uom', name: 'si-units-java8', version: '0.9'
@@ -112,9 +112,7 @@ dependencies {
 
     //Misc
     compile group: 'com.googlecode.clearnlp', name: 'clearnlp', version: '1.3.1'
-    compile group: 'com.google.guava', name: 'guava', version: '21.0'
-    compile group: 'directory-naming', name: 'naming-java', version: '0.8'
-    compile group: 'org.jvnet', name: 'mimepull', version: '1.6'
+    compile "com.google.guava:guava:28.2-jre"
     compile group: 'net.arnx', name: 'jsonic', version: '1.3.10'
 
     // XML
