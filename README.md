@@ -68,6 +68,10 @@ Evaluated on the 30/04/2020
 
 The current aveages results have been calculated using micro average which provides more realistic results by giving different weights to labels based on their frequency.
 The [paper](https://doi.org/10.1145/3342558.3345411) "Automatic Identification and Normalisation of Physical Measurements in Scientific Literature", published in September 2019 reported average evaluation based on macro average. 
+
+## Acknowledgement 
+
+This project has been developed with the support by [Inria](http://www.inria.fr), in Paris (France) and the [National Institute for Materials Science](http://www.nims.go.jp), in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
      
 ## License
 
