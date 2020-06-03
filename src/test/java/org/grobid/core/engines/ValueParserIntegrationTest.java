@@ -24,7 +24,7 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
-    public void testTagUnit_exponential_1() throws Exception {
+    public void testTagValue_exponential_1() throws Exception {
         String input = "0.3 x 10-7";
         ValueBlock output = target.tagValue(input);
 
@@ -37,7 +37,7 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
-    public void testTagUnit_exponential_2() throws Exception {
+    public void testTagValue_exponential_2() throws Exception {
         String input = "10 e -1";
         ValueBlock output = target.tagValue(input);
         System.out.println(input + " -> " + output);

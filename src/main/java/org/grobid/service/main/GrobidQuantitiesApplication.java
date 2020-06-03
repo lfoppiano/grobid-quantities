@@ -10,6 +10,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.grobid.service.QuantitiesServiceModule;
+import org.grobid.service.command.RunTrainingCommand;
 import org.grobid.service.command.UnitBatchProcessingCommand;
 import org.grobid.service.command.TrainingGenerationCommand;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
@@ -46,6 +47,7 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         bootstrap.addBundle(new AssetsBundle("/web", "/", "index.html", "assets"));
         bootstrap.addCommand(new TrainingGenerationCommand());
         bootstrap.addCommand(new UnitBatchProcessingCommand());
+        bootstrap.addCommand(new RunTrainingCommand());
     }
 
     @Override
@@ -62,9 +64,9 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
             environment.servlets().addFilter("CORS", CrossOriginFilter.class);
 
         // Configure CORS parameters
-        cors.setInitParameter("allowedOrigins", allowedOrigins);
-        cors.setInitParameter("allowedHeaders", allowedMethods);
-        cors.setInitParameter("allowedMethods", allowedHeaders);
+        cors.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, allowedOrigins);
+        cors.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, allowedMethods);
+        cors.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM, allowedHeaders);
 
         // Add URL mapping
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, RESOURCES + "/*");

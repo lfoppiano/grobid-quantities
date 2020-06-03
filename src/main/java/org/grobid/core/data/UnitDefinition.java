@@ -106,7 +106,7 @@ public class UnitDefinition {
     }
 
     public String toJson() {
-        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         if (type != null) {
@@ -131,7 +131,7 @@ public class UnitDefinition {
     }
 
     public String toJsonComplete() {
-        JsonStringEncoder encoder = BufferRecyclers.getJsonStringEncoder();
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");

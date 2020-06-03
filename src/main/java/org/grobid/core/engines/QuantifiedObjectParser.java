@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.grobid.core.GrobidModel;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.QuantifiedObject;
@@ -53,8 +54,8 @@ public class QuantifiedObjectParser extends AbstractParser {
     }
 
     /** Workaround to maintain the compatibility for the time being **/
-    protected QuantifiedObjectParser(boolean test) {
-        super(QuantitiesModels.QUANTITIES);
+    protected QuantifiedObjectParser(GrobidModel model) {
+        super(model);
     }
 
     public List<Measurement> process(List<LayoutToken> layoutTokens, List<Measurement> measurements) {

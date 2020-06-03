@@ -18,7 +18,7 @@ public class TextParserIntegrationTest {
     }
 
     @Test
-    public void test1() throws Exception {
+    public void testSafeThreadWhenParsingSentence_shouldWork() throws Exception {
 
         Runnable thread1 = new FakeThread(target);
         FakeThread thread2 = new FakeThread(target);
@@ -48,8 +48,8 @@ class FakeThread implements Runnable{
 
     @Override
     public void run() {
-        final Sentence parse = parser.parse("The decision of one food bank in the western city of Essen to stop signing up more foreigners after migrants gradually became the majority of its users has prompted a storm of reaction in Essen, a former coal town in Germany’s rust belt, and across the country. ");
+        final Sentence parsedSentence = parser.parse("The decision of one food bank in the western city of Essen to stop signing up more foreigners after migrants gradually became the majority of its users has prompted a storm of reaction in Essen, a former coal town in Germany’s rust belt, and across the country. ");
 
-        System.out.println(parse);
+        System.out.println(parsedSentence.toString());
     }
 }
