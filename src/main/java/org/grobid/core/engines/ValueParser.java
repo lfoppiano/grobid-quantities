@@ -2,6 +2,8 @@ package org.grobid.core.engines;
 
 import org.grobid.core.GrobidModel;
 import org.grobid.core.GrobidModels;
+import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.data.normalization.NormalizationException;
@@ -180,27 +182,18 @@ public class ValueParser extends AbstractParser {
 
         try {
             text = text.replace("\n\r", " ");
-            List<LayoutToken> tokenizations = new ArrayList<>();
 
-            String ress = null;
-            List<String> characters = new ArrayList<>();
-            for (char character : text.toCharArray()) {
-                characters.add(String.valueOf(character));
-                OffsetPosition position = new OffsetPosition();
-                position.start = text.indexOf(character);
-                position.end = text.indexOf(character) + 1;
-                LayoutToken lt = new LayoutToken(UnicodeUtil.normaliseText(String.valueOf(character)));
-                tokenizations.add(lt);
-            }
+            QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
+            List<LayoutToken> layoutTokens = analyzer.tokenizeWithLayoutTokenByCharacter(text);
 
-            ress = addFeatures(characters);
+            String ress = addFeatures(layoutTokens);
             String res;
             try {
                 res = label(ress);
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
-            parsedValue = resultExtraction(res, tokenizations);
+            parsedValue = resultExtraction(res, layoutTokens);
         } catch (Exception e) {
             throw new GrobidException("An exception occurred while running Grobid.", e);
         }
@@ -210,6 +203,9 @@ public class ValueParser extends AbstractParser {
 
     /**
      * Extract identified quantities from a labelled text.
+     *  - if whatever contained into is numeric, it goes into <number>
+     *  - if <number> comes after <pow> or <exp> it's probably the exponent or part of it and it's concatenated to the previous
+     *  - if <base> contains e then the following <pow> should go into <exp>
      */
     public ValueBlock resultExtraction(String result, List<LayoutToken> tokenizations) {
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.VALUES, result, tokenizations);
@@ -302,7 +298,7 @@ public class ValueParser extends AbstractParser {
                     } else {
                         valueBlock.getNumber().getOffsets().end = offsets.end;
                     }
-                    LOGGER.debug(clusterContent + "(fake A)");
+                    LOGGER.debug(clusterContent + "(fake A) -> (N)");
                 } else {
                     valueBlock.setAlpha(trimmedClusterContent);
                     valueBlock.getAlpha().setOffsets(offsets);
@@ -343,17 +339,17 @@ public class ValueParser extends AbstractParser {
 
 
     @SuppressWarnings({"UnusedParameters"})
-    private String addFeatures(List<String> characters) {
+    private String addFeatures(List<LayoutToken> layoutTokens) {
 
         StringBuilder result = new StringBuilder();
         try {
-            for (String character : characters) {
-                if (isBlank(character)) {
+            for (LayoutToken token : layoutTokens) {
+                if (isBlank(token.getText())) {
                     continue;
                 }
 
                 FeaturesVectorValues featuresVector =
-                    FeaturesVectorValues.addFeatures(trim(character), null);
+                    FeaturesVectorValues.addFeatures(trim(token.getText()), null);
 
                 result.append(featuresVector.printVector())
                     .append("\n");

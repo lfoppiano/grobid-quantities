@@ -2,6 +2,7 @@ package org.grobid.trainer.sax;
 
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.trainer.ValueLabeled;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -81,7 +82,8 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
             String text = getText();
 
             // text segmentation
-            List<String> tokens = tokenize(text);
+            QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
+            List<String> tokens = analyzer.tokenizeByCharacter(text);
 
             boolean begin = true;
             for (String token : tokens) {
@@ -103,23 +105,14 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
         }
     }
 
-    private List<String> tokenize(String text) {
-        char[] tokenizationByCharacter = text.toCharArray();
-        List<String> tokenizations = new ArrayList<>();
-        for (char characterToken : tokenizationByCharacter) {
-            tokenizations.add("" + characterToken);
-        }
-        return tokenizations;
-    }
-
     private boolean isRelevantTag(String qName) {
         if ("pow".equals(qName)
-                || "base".equals(qName)
-                || "number".equals(qName)
-                || "exp".equals(qName)
-                || "alpha".equals(qName)
-                || "time".equals(qName)
-                || "other".equals(qName)) {
+            || "base".equals(qName)
+            || "number".equals(qName)
+            || "exp".equals(qName)
+            || "alpha".equals(qName)
+            || "time".equals(qName)
+            || "other".equals(qName)) {
             return true;
         }
         return false;

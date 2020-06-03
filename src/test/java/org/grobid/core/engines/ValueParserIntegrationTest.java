@@ -1,17 +1,27 @@
 package org.grobid.core.engines;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Triple;
+import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
+import org.grobid.core.features.FeaturesVectorValues;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
 public class ValueParserIntegrationTest {
@@ -25,15 +35,27 @@ public class ValueParserIntegrationTest {
 
     @Test
     public void testTagValue_exponential_1() throws Exception {
-        String input = "0.3 x 10-7";
+        String input = "0 . 3 x 10 - 7";
         ValueBlock output = target.tagValue(input);
 
         System.out.println(input + " -> " + output);
         System.out.println(output.getRawTaggedValue());
 
-        assertThat(output.getNumber().toString(), is("0.3"));
+        assertThat(output.getNumber().toString(), is("0 . 3"));
         assertThat(output.getBase().toString(), is("10"));
-        assertThat(output.getPow().toString(), is("-7"));
+        assertThat(output.getPow().toString(), is("- 7"));
+    }
+
+    @Test
+    public void testTagValue_exponential_3() throws Exception {
+        String input = "10 - 7";
+        ValueBlock output = target.tagValue(input);
+
+        System.out.println(input + " -> " + output);
+        System.out.println(output.getRawTaggedValue());
+
+        assertThat(output.getBase().toString(), is("10"));
+        assertThat(output.getPow().toString(), is("- 7"));
     }
 
     @Test
@@ -78,38 +100,4 @@ public class ValueParserIntegrationTest {
         assertThat(output.getStructure().getBaseAsString(), is("10"));
         assertThat(output.getStructure().getPowAsString(), is("-33"));
     }
-
-    @Test
-    public void testParseValueBlock_simpleNumeric() throws Exception {
-        ValueBlock block = new ValueBlock();
-        block.setNumber("20");
-        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
-
-        assertThat(bigDecimal, is(not(nullValue())));
-        assertThat(bigDecimal, is(new BigDecimal("20")));
-    }
-
-    @Test
-    public void testParseValueBlock_simpleNumericWithBaseAndPow() throws Exception {
-        ValueBlock block = new ValueBlock();
-        block.setNumber("20");
-        block.setPow("-1");
-        block.setBase("10");
-        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
-
-        assertThat(bigDecimal, is(not(nullValue())));
-        assertThat(bigDecimal.intValue(), is(2));
-    }
-
-    @Test
-    public void testParseValueBlock_simpleNumericWithBase() throws Exception {
-        ValueBlock block = new ValueBlock();
-        block.setNumber("200");
-        block.setBase("10");
-        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
-
-        assertThat(bigDecimal, is(not(nullValue())));
-        assertThat(bigDecimal.intValue(), is(200));
-    }
-
 }

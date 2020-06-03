@@ -3,6 +3,8 @@ package org.grobid.core.analyzers;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.UnicodeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +12,13 @@ import java.util.StringTokenizer;
 
 /**
  * Quantity tokenizer adequate for all Indo-European languages and special characters.
- *
+ * <p>
  * The difference with the Standard Grobid tokenizer is that this tokenizer
  * is also tokenizing mixture of alphabetical and numerical characters.
- *
+ * <p>
  * 1m74 ->  tokens.add(new LayoutToken("1"));
- *          tokens.add(new LayoutToken("m"));
- *          tokens.add(new LayoutToken("74"));
+ * tokens.add(new LayoutToken("m"));
+ * tokens.add(new LayoutToken("74"));
  *
  * @author Patrice Lopez
  */
@@ -29,8 +31,8 @@ public class QuantityAnalyzer implements Analyzer {
         if (instance == null) {
             //double check idiom
             // synchronized (instanceController) {
-                if (instance == null)
-                    getNewInstance();
+            if (instance == null)
+                getNewInstance();
             // }
         }
         return instance;
@@ -124,9 +126,32 @@ public class QuantityAnalyzer implements Analyzer {
                 theChunk.setText(subtokens[i]);
                 result.add(theChunk);
                 theChunk.setOffset(startingIndex);
-                startingIndex+= StringUtils.length(theChunk.getText());
+                startingIndex += StringUtils.length(theChunk.getText());
             }
         }
         return result;
-    } 
+    }
+
+    public List<String> tokenizeByCharacter(String text) {
+        char[] tokenizationByCharacter = text.toCharArray();
+        List<String> tokenizations = new ArrayList<>();
+        for (char characterToken : tokenizationByCharacter) {
+            tokenizations.add("" + characterToken);
+        }
+        return tokenizations;
+    }
+
+
+    public List<LayoutToken> tokenizeWithLayoutTokenByCharacter(String text) {
+        List<LayoutToken> layoutTokens = new ArrayList<>();
+
+        for (char character : text.toCharArray()) {
+            OffsetPosition position = new OffsetPosition();
+            position.start = text.indexOf(character);
+            position.end = text.indexOf(character) + 1;
+            LayoutToken lt = new LayoutToken(UnicodeUtil.normaliseText(String.valueOf(character)));
+            layoutTokens.add(lt);
+        }
+        return layoutTokens;
+    }
 }
