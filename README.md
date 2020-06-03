@@ -23,6 +23,10 @@ Finally we support the identification of the "quantified" substance related to t
 As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
 The normalisation is handled by the java library [Units of measurement](http://unitsofmeasurement.github.io/).  
 
+## Latest version
+
+The latest version (and actually the first official release) of grobid-quantities is 0.6.0, on the 30/04/2020. 
+
 ## Documentation
 
 You can find the latest documentation [here](http://grobid-quantities.readthedocs.io). 
