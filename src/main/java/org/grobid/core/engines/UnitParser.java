@@ -2,6 +2,7 @@ package org.grobid.core.engines;
 
 import com.google.common.collect.Iterables;
 import org.apache.commons.collections4.CollectionUtils;
+import org.grobid.core.GrobidModel;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.length;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.VALUE_VALUE_OTHER;
 
@@ -49,6 +51,11 @@ public class UnitParser extends AbstractParser {
     private UnitParser() {
         super(QuantitiesModels.UNITS);
         quantityLexicon = QuantityLexicon.getInstance();
+    }
+
+    protected UnitParser(GrobidModel model, QuantityLexicon quantityLexicon) {
+        super(model);
+        this.quantityLexicon = quantityLexicon;
     }
 
     /**
@@ -236,13 +243,13 @@ public class UnitParser extends AbstractParser {
                 }
 
                 FeaturesVectorUnits featuresVector =
-                        FeaturesVectorUnits.addFeaturesUnit(character,
-                                null,
-                                quantityLexicon.inUnitDictionary(character),
-                                quantityLexicon.inPrefixDictionary(character), isUnitLeft);
+                    FeaturesVectorUnits.addFeaturesUnit(character,
+                        null,
+                        quantityLexicon.inUnitDictionary(character),
+                        quantityLexicon.inPrefixDictionary(character), isUnitLeft);
 
                 result.append(featuresVector.printVector())
-                        .append("\n");
+                    .append("\n");
             }
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);

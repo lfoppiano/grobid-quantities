@@ -26,6 +26,8 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.service.exceptions.GrobidServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -44,13 +46,14 @@ import java.util.stream.Stream;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.grobid.trainer.CRFPPGenericTrainer.LOGGER;
 
 /**
  * This class represent the aggregated processing applying multiple parsers or combining PDF extraction
  */
 @Singleton
 public class QuantitiesEngine {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuantitiesEngine.class);
 
     private QuantityParser quantityParser;
     private UnitParser unitParser;

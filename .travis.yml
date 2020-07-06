@@ -14,4 +14,4 @@ addons:
 script: ./gradlew clean build --no-daemon
 
 after_success:
-  - ./gradlew test cobertura coveralls  --no-daemon
+  - ./gradlew test jacocoTestReport coveralls --no-daemon

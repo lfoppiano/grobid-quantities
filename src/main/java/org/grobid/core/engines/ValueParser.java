@@ -1,7 +1,10 @@
 package org.grobid.core.engines;
 
+import org.grobid.core.GrobidModel;
+import org.grobid.core.GrobidModels;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
+import org.grobid.core.data.normalization.NormalizationException;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
@@ -9,10 +12,7 @@ import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.UnicodeUtil;
-import org.grobid.core.utilities.WordsToNumber;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,21 +52,26 @@ public class ValueParser extends AbstractParser {
         super(QuantitiesModels.VALUES);
     }
 
+    public ValueParser(GrobidModel model) {
+        super(model);
+    }
+
     public Value parseValue(String rawValue) {
         return parseValue(rawValue, Locale.ENGLISH);
     }
 
     public Value parseValue(String rawValue, Locale locale) {
-
         ValueBlock block = tagValue(rawValue);
 
         BigDecimal numeric = parseValueBlock(block, locale);
         final Value resultValue = new Value();
+        resultValue.setRawValue(rawValue);
         resultValue.setNumeric(numeric);
         resultValue.setStructure(block);
 
         return resultValue;
     }
+
 
     protected BigDecimal parseValueBlock(ValueBlock block, Locale locale) {
         NumberFormat format = NumberFormat.getInstance(locale);
@@ -77,7 +82,9 @@ public class ValueParser extends AbstractParser {
                     BigDecimal secondPart = null;
                     if (block.getPow() != null && block.getBase() != null) {
                         final Number pow = format.parse(block.getPowAsString());
-                        final BigDecimal baseBd = new BigDecimal(format.parse(block.getBaseAsString()).toString());
+                        String baseAsString = removeSpacesTabsAndBl(block.getBaseAsString());
+
+                        final BigDecimal baseBd = new BigDecimal(format.parse(baseAsString).toString());
                         final int intPower = pow.intValue();
 
                         if (intPower < 0) {
@@ -89,7 +96,8 @@ public class ValueParser extends AbstractParser {
                     }
 
                     if (block.getNumber() != null) {
-                        final BigDecimal number = new BigDecimal(format.parse(block.getNumberAsString()).toString());
+                        String numberAsString = removeSpacesTabsAndBl(block.getNumberAsString());
+                        final BigDecimal number = new BigDecimal(format.parse(numberAsString).toString());
                         if (secondPart != null) {
                             return number.multiply(secondPart);
                         }
@@ -98,7 +106,7 @@ public class ValueParser extends AbstractParser {
                         return secondPart;
                     }
 
-                } catch (ParseException e) {
+                } catch (ParseException | ArithmeticException e) {
                     LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
                 }
 
@@ -128,7 +136,7 @@ public class ValueParser extends AbstractParser {
                         return secondPart;
                     }
 
-                } catch (ParseException e) {
+                } catch (ParseException | ArithmeticException e) {
                     LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
                 }
 
@@ -136,7 +144,12 @@ public class ValueParser extends AbstractParser {
 
             case ALPHABETIC:
                 WordsToNumber w2n = WordsToNumber.getInstance();
-                return w2n.normalize(block.getAlphaAsString(), locale);
+                try {
+                    return w2n.normalize(block.getAlphaAsString(), locale);
+                } catch (NormalizationException e) {
+                    LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
+                }
+                break;
 
             case TIME:
                 //we do not parse it for the moment
@@ -145,7 +158,13 @@ public class ValueParser extends AbstractParser {
         }
 
         return null;
+    }
 
+    private String removeSpacesTabsAndBl(String block) {
+        return UnicodeUtil.normaliseText(block)
+                .replaceAll("\n", " ")
+                .replaceAll("\t", " ")
+                .replaceAll(" ", "");
     }
 
 

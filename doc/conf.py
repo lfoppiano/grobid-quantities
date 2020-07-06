@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Grobid-quantities'
-copyright = '2017, Patrice Lopez <patrice.lopez@science-miner.com>, Luca Foppiano <luca.foppiano@inria.fr>'
+copyright = '2016, Grobid contributors'
 author = 'Patrice Lopez <patrice.lopez@science-miner.com>, Luca Foppiano <luca@foppiano.org>'
 
 # The version info for the project you're documenting, acts as replacement for

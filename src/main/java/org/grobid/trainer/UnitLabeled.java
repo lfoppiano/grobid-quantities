@@ -10,15 +10,17 @@ import java.util.List;
  */
 public class UnitLabeled {
 
-    private boolean isUnitLeft = false;
+    //Indicate whether the unit has a quantity attached to the right. Units have usually left attachment (they come
+    // after the quantity. However for special cases, such as pH, they are placed before.
+    private boolean hasRightAttachment = false;
     private List<Pair<String, String>> labels = new ArrayList<>();
 
-    public boolean isUnitLeft() {
-        return isUnitLeft;
+    public boolean hasRightAttachment() {
+        return hasRightAttachment;
     }
 
-    public void setUnitLeft(boolean unitLeft) {
-        isUnitLeft = unitLeft;
+    public void setHasRightAttachment(boolean hasRightAttachment) {
+        this.hasRightAttachment = hasRightAttachment;
     }
 
     public boolean addLabel(Pair<String, String> label) {

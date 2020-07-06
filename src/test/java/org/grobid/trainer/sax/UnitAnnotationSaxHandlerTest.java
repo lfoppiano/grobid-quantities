@@ -36,7 +36,7 @@ public class UnitAnnotationSaxHandlerTest {
 
         assertThat(labeled.size(), is(4));
 
-        assertThat(labeled.get(0).isUnitLeft(), is(true));
+        assertThat(labeled.get(0).hasRightAttachment(), is(true));
         assertThat(labeled.get(0).getLabels().size(), is(5));
     }
 
@@ -50,13 +50,13 @@ public class UnitAnnotationSaxHandlerTest {
         List<UnitLabeled> labeled = target.getLabeledResult();
 
         assertThat(labeled.size(), is(2));
-        assertThat(labeled.get(0).isUnitLeft(), is(false));
+        assertThat(labeled.get(0).hasRightAttachment(), is(false));
         assertThat(labeled.get(0).getLabels().size(), is(5));
     }
 
     @Test
     public void testParser_doubleBaseName() throws Exception {
-        String input = "<units><unit left=\"true\"><base>Hz</base></unit></units>";
+        String input = "<units><unit rightAttachment=\"true\"><base>Hz</base></unit></units>";
         InputStream is = IOUtils.toInputStream(input, UTF_8);
 
         SAXParser p = spf.newSAXParser();
@@ -65,7 +65,7 @@ public class UnitAnnotationSaxHandlerTest {
         List<UnitLabeled> labeled = target.getLabeledResult();
 
         assertThat(labeled.size(), is(1));
-        assertThat(labeled.get(0).isUnitLeft(), is(true));
+        assertThat(labeled.get(0).hasRightAttachment(), is(true));
         assertThat(labeled.get(0).getLabels().size(), is(2));
         assertThat(labeled.get(0).getLabels().get(0).getA(), is("H"));
         assertThat(labeled.get(0).getLabels().get(0).getB(), is("I-<base>"));
@@ -84,7 +84,7 @@ public class UnitAnnotationSaxHandlerTest {
         List<UnitLabeled> labeled = target.getLabeledResult();
 
         assertThat(labeled.size(), is(1));
-        assertThat(labeled.get(0).isUnitLeft(), is(false));
+        assertThat(labeled.get(0).hasRightAttachment(), is(false));
         assertThat(labeled.get(0).getLabels().size(), is(6));
         assertThat(labeled.get(0).getLabels().get(0).getA(), is("k"));
         assertThat(labeled.get(0).getLabels().get(0).getB(), is("I-<prefix>"));
@@ -97,5 +97,25 @@ public class UnitAnnotationSaxHandlerTest {
         assertThat(labeled.get(0).getLabels().get(4).getB(), is("I-<pow>"));
         assertThat(labeled.get(0).getLabels().get(5).getA(), is("1"));
         assertThat(labeled.get(0).getLabels().get(5).getB(), is("<pow>"));
+    }
+
+
+    @Test
+    public void testParser_rightAttachment() throws Exception {
+        String input = "<units><unit rightAttachment=\"true\"><base>Hz</base></unit></units>";
+        InputStream is = IOUtils.toInputStream(input, UTF_8);
+
+        SAXParser p = spf.newSAXParser();
+        p.parse(is, target);
+
+        List<UnitLabeled> labeled = target.getLabeledResult();
+
+        assertThat(labeled.size(), is(1));
+        assertThat(labeled.get(0).hasRightAttachment(), is(true));
+        assertThat(labeled.get(0).getLabels().size(), is(2));
+        assertThat(labeled.get(0).getLabels().get(0).getA(), is("H"));
+        assertThat(labeled.get(0).getLabels().get(0).getB(), is("I-<base>"));
+        assertThat(labeled.get(0).getLabels().get(1).getA(), is("z"));
+        assertThat(labeled.get(0).getLabels().get(1).getB(), is("<base>"));
     }
 }

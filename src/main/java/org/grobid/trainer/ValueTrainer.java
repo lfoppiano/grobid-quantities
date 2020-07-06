@@ -165,25 +165,6 @@ public class ValueTrainer extends AbstractTrainer {
     }
 
     /**
-     * Dispatch the example to the training or test data, based on the split ration and the drawing of
-     * a random number
-     */
-    private Writer dispatchExample(Writer writerTraining, Writer writerEvaluation, double splitRatio) {
-        Writer writer = null;
-        if ((writerTraining == null) && (writerEvaluation != null)) {
-            writer = writerEvaluation;
-        } else if ((writerTraining != null) && (writerEvaluation == null)) {
-            writer = writerTraining;
-        } else {
-            if (Math.random() <= splitRatio)
-                writer = writerTraining;
-            else
-                writer = writerEvaluation;
-        }
-        return writer;
-    }
-
-    /**
      * Command line execution. Assuming grobid-home is in ../grobid-home
      *
      * @param args Command line arguments.
@@ -192,6 +173,6 @@ public class ValueTrainer extends AbstractTrainer {
         GrobidProperties.getInstance();
 
         Trainer trainer = new ValueTrainer();
-        AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.8);
+        AbstractTrainer.runTraining(trainer);
     }
 }

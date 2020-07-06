@@ -1,9 +1,7 @@
 package org.grobid.core.engines;
 
-import com.google.common.collect.Iterables;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
+import org.grobid.core.GrobidModel;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.QuantifiedObject;
@@ -14,10 +12,7 @@ import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.core.utilities.BoundingBoxCalculator;
-import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.QuantityOperations;
-import org.grobid.core.utilities.UnicodeUtil;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +23,6 @@ import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.length;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
 import static org.grobid.core.utilities.QuantityOperations.synchroniseLayoutTokensWithOffsets;
 
@@ -56,8 +50,8 @@ public class QuantifiedObjectParser extends AbstractParser {
     }
 
     /** Workaround to maintain the compatibility for the time being **/
-    protected QuantifiedObjectParser(boolean test) {
-        super(QuantitiesModels.QUANTITIES);
+    protected QuantifiedObjectParser(GrobidModel model) {
+        super(model);
     }
 
     public List<Measurement> process(List<LayoutToken> layoutTokens, List<Measurement> measurements) {
@@ -82,7 +76,7 @@ public class QuantifiedObjectParser extends AbstractParser {
             return measurements;
 
         try {
-            List<Pair<Integer, Integer>> offsetList = QuantityOperations.getOffset(measurements);
+            List<OffsetPosition> offsetList = QuantityOperations.getOffset(measurements);
 
             List<Boolean> measurementFlags = synchroniseLayoutTokensWithOffsets(layoutTokenNormalised, offsetList);
 
@@ -119,22 +113,22 @@ public class QuantifiedObjectParser extends AbstractParser {
         QuantifiedObject currentQuantifiedObject = quantifiedObjects.get(indexQuantifiedObject);
 
         for (Measurement measurement : measurements) {
-            List<Pair<Integer, Integer>> offsetList1 = QuantityOperations.getOffset(measurement);
-            Pair<Integer, Integer> offsetMeasurement = QuantityOperations.getContainingOffset(offsetList1);
+            List<OffsetPosition> offsetList1 = QuantityOperations.getOffset(measurement);
+            OffsetPosition offsetMeasurement = QuantityOperations.getContainingOffset(offsetList1);
 
             if (currentQuantifiedObject.getAttachment() == null) {
                 indexQuantifiedObject++;
                 currentQuantifiedObject = quantifiedObjects.get(indexQuantifiedObject);
             }
             if (currentQuantifiedObject.getAttachment().equals(QuantifiedObject.Attachment.LEFT)) {
-                if (offsetMeasurement.getLeft() <= currentQuantifiedObject.getOffsetStart()) {
+                if (offsetMeasurement.start <= currentQuantifiedObject.getOffsetStart()) {
                     measurement.setQuantifiedObject(currentQuantifiedObject);
                 } else {
                     continue;
                 }
 
             } else if (currentQuantifiedObject.getAttachment().equals(QuantifiedObject.Attachment.RIGHT)) {
-                if (offsetMeasurement.getLeft() < currentQuantifiedObject.getOffsetStart()) {
+                if (offsetMeasurement.end < currentQuantifiedObject.getOffsetStart()) {
                     continue;
                 } else {
                     measurement.setQuantifiedObject(currentQuantifiedObject);
@@ -230,7 +224,7 @@ public class QuantifiedObjectParser extends AbstractParser {
                 result.append("\n");
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
         return result.toString();
     }

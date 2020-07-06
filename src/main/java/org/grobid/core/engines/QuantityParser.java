@@ -1,14 +1,19 @@
 package org.grobid.core.engines;
 
+import com.googlecode.clearnlp.tokenization.EnglishTokenizer;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.assertj.core.data.Offset;
+import org.grobid.core.GrobidModel;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.Value;
-import org.grobid.core.data.normalization.NormalisationException;
-import org.grobid.core.data.normalization.QuantityNormaliser;
+import org.grobid.core.data.normalization.NormalizationException;
+import org.grobid.core.data.normalization.QuantityNormalizer;
+import org.grobid.core.data.normalization.UnitNormalizer;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
@@ -41,10 +46,10 @@ public class QuantityParser extends AbstractParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityParser.class);
 
     private static volatile QuantityParser instance;
-    private ValueParser valueParser = ValueParser.getInstance();
+    private ValueParser valueParser;
     private QuantifiedObjectParser quantifiedObjectParser;
-    private QuantityNormaliser quantityNormaliser = new QuantityNormaliser();
-    //    private EnglishTokenizer tokeniser;
+    private QuantityNormalizer quantityNormalizer;
+        private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
 
     public static QuantityParser getInstance(boolean disableSubstance) {
@@ -73,14 +78,27 @@ public class QuantityParser extends AbstractParser {
         return instance;
     }
 
-    private QuantityLexicon quantityLexicon = null;
-    private MeasurementOperations measurementOperations = null;
+    private QuantityLexicon quantityLexicon;
+    private MeasurementOperations measurementOperations;
+
+    protected QuantityParser(GrobidModel model, QuantityLexicon quantityLexicon, MeasurementOperations measurementOperations, ValueParser valueParser) {
+        super(model);
+        this.quantityLexicon = quantityLexicon;
+        this.measurementOperations = measurementOperations;
+        this.valueParser = valueParser;
+        instance = this;
+    }
 
     @Inject
     public QuantityParser() {
         super(QuantitiesModels.QUANTITIES);
         quantityLexicon = QuantityLexicon.getInstance();
-        measurementOperations = new MeasurementOperations();
+        
+        UnitNormalizer unitNormalizer = new UnitNormalizer();
+        measurementOperations = new MeasurementOperations(unitNormalizer);
+        quantityNormalizer = new QuantityNormalizer();
+
+        valueParser = new ValueParser();
         instance = this;
 //        this.tokeniser = new EnglishTokenizer();
     }
@@ -101,7 +119,7 @@ public class QuantityParser extends AbstractParser {
         ).collect(Collectors.toList());
 
         // list of textual tokens of the selected segment
-//        List<String> texts = getTexts(tokenizationParts);
+        //List<String> texts = getTexts(tokenizationParts);
 
         if (isEmpty(layoutTokenNormalised))
             return measurements;
@@ -244,11 +262,11 @@ public class QuantityParser extends AbstractParser {
         if (quantity.isNormalized())
             return;
         try {
-            Quantity.Normalized quantity1 = quantityNormaliser.normalizeQuantity(quantity);
+            Quantity.Normalized quantity1 = quantityNormalizer.normalizeQuantity(quantity);
             if (quantity1 != null) {
                 quantity.setNormalizedQuantity(quantity1);
             }
-        } catch (NormalisationException ne) {
+        } catch (NormalizationException ne) {
             final String rawName = quantity.getRawUnit() != null ? quantity.getRawUnit().getRawName() : null;
             LOGGER.warn("Could not normalize the value: '" + quantity.getRawValue()
                     + "' with unit '" + rawName + "'. ", ne.getMessage());
@@ -648,6 +666,14 @@ public class QuantityParser extends AbstractParser {
                             openMeasurement = null;
                         }
                     }
+                } else if (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) {
+                    if (currentMeasurement.isValid()) {
+                        if (CollectionUtils.isNotEmpty(currentMeasurement.getQuantityList())) {
+                            measurements.add(currentMeasurement);
+                            currentMeasurement = new Measurement();
+                            openMeasurement = null;
+                        }
+                    }
                 }
             } else if (clusterLabel.equals(QUANTITY_UNIT_RIGHT)) {
                 LOGGER.debug("unit (right attachment): " + clusterContent);
@@ -683,8 +709,8 @@ public class QuantityParser extends AbstractParser {
     }
 
     private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
-        final Pair<Integer, Integer> currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
-        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.getLeft() && op.end > currentMeasureOffset.getRight())
+        final OffsetPosition currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
+        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.start && op.end > currentMeasureOffset.end)
                 .collect(Collectors.toList());
 
         if (sentencesCurrentMeasure.size() > 1) {

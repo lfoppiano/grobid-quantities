@@ -7,7 +7,7 @@ import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.data.normalization.UnitNormaliser;
+import org.grobid.core.data.normalization.UnitNormalizer;
 import org.grobid.core.layout.LayoutToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,20 +19,19 @@ import java.util.stream.Collectors;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 /**
- * Try to resolve measurement extracted attributes (unit, values).
- *
- * @author Patrice Lopez
+ * Measurement operations and utilities class
  */
 public class MeasurementOperations {
     private static final Logger logger = LoggerFactory.getLogger(MeasurementOperations.class);
 
-    UnitNormaliser un;
+    private UnitNormalizer un;
 
     public MeasurementOperations() {
-        un = new UnitNormaliser();
+
+        un = new UnitNormalizer();
     }
 
-    public MeasurementOperations(UnitNormaliser un) {
+    public MeasurementOperations(UnitNormalizer un) {
         this.un = un;
     }
 
@@ -62,7 +61,7 @@ public class MeasurementOperations {
                     newMeasurements.add(measurement);
 
             } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                    (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                 // values of the interval do not matter if min/max or base/range
                 Quantity quantityLeast = measurement.getQuantityLeast();
                 if (quantityLeast == null)
@@ -318,8 +317,8 @@ public class MeasurementOperations {
     /**
      * Return the offset of the measurement - useful for matching into sentences or lexicons
      */
-    public Pair<Integer, Integer> calculateExtremitiesOffsets(Measurement measurement) {
-        List<Pair<Integer, Integer>> offsets = new ArrayList<>();
+    public OffsetPosition calculateExtremitiesOffsets(Measurement measurement) {
+        List<OffsetPosition> offsets = new ArrayList<>();
 
         switch (measurement.getType()) {
             case VALUE:

@@ -2,8 +2,8 @@
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation Status](https://readthedocs.org/projects/grobid-quantities/badge/?version=latest)](https://readthedocs.org/projects/grobid-quantities/?badge=latest)
-<!-- [![Build Status](https://travis-ci.org/kermitt2/grobid-quantities.svg?branch=master)](https://travis-ci.org/kermitt2/grobid-quantities) -->
-<!-- [![Coverage Status](https://coveralls.io/repos/kermitt2/grobid-quantities/badge.svg)](https://coveralls.io/r/kermitt2/grobid-quantities) -->
+[![Build Status](https://travis-ci.org/kermitt2/grobid-quantities.svg?branch=master)](https://travis-ci.org/kermitt2/grobid-quantities)
+[![Coverage Status](https://coveralls.io/repos/kermitt2/grobid-quantities/badge.svg)](https://coveralls.io/r/kermitt2/grobid-quantities)
 
 __Work in progress.__
 
@@ -23,12 +23,62 @@ Finally we support the identification of the "quantified" substance related to t
 As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
 The normalisation is handled by the java library [Units of measurement](http://unitsofmeasurement.github.io/).  
 
+## Latest version
+
+The latest version (and actually the first official release) of grobid-quantities is 0.6.0, on the 30/04/2020. 
+
 ## Documentation
 
 You can find the latest documentation [here](http://grobid-quantities.readthedocs.io). 
 
+## Evaluation
+The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). 
+We also indicate the best and worst results over the 10 folds in the complete result page.
+
+Evaluated on the 30/04/2020
+
+### Quantities     
+
+| Labels          | Precision  | Recall      |  F1-Score     |
+|-----------------|------------|-------------|---------------|
+| `<unitLeft>`    | 96.45      |   95.06     |   95.74       |    
+| `<unitRight>`   | 88.96      |   68.65     |   75.43       |    
+| `<valueAtomic>` | 85.75      |   85.35     |   85.49       |    
+| `<valueBase>`   | 73.06      |   66.43     |   68.92       |     
+| `<valueLeast>`  | 85.68      |   79.03     |   82.07       |    
+| `<valueList>`   | 68.38      |   53.31     |   58.94       |  
+| `<valueRange>`  | 90.25      |   88.58     |   88.86       |  
+| all (micro avg.)| 88.96      |   85.4      |   87.14       |      
+
+### Units
+
+| Labels          | Precision  | Recall      |  F1-Score     |
+|---------------- |------------|-------------|---------------|
+| `<base>`        | 98.95      |  99.02      |   98.98       |    
+| `<pow>`         | 97.2       |  98.49      |   97.83       |    
+| `<prefix>`      | 98.34      |  98.47      |   98.38       |    
+| all (micro avg.)| 98.7       |  98.89      |   98.8        |
+
+### Values 
+
+| Labels          | Precision  | Recall      |  F1-Score     |
+|-----------------|------------|-------------|---------------|
+| `<alpha>`       | 96.9       |   98.84     |   97.85       |    
+| `<base>`        | 85.14      |   74.48     |   79          |    
+| `<number>`      | 98.07      |   99.05     |   98.55       |    
+| `<pow>`         | 80.05      |   76.33     |   77.54       |     
+| `<time>`        | 73.07      |   86.82     |   79.26       |    
+| all (micro avg.)| 96.15      |   97.95     |   97.4        |
+
+The current aveages results have been calculated using micro average which provides more realistic results by giving different weights to labels based on their frequency.
+The [paper](https://doi.org/10.1145/3342558.3345411) "Automatic Identification and Normalisation of Physical Measurements in Scientific Literature", published in September 2019 reported average evaluation based on macro average. 
+
+## Acknowledgement 
+
+This project has been developed with the support by [Inria](http://www.inria.fr), in Paris (France) and the [National Institute for Materials Science](http://www.nims.go.jp), in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
+     
 ## License
 
 GROBID and grobid-quantities are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
 
-Contact: Patrice Lopez (<patrice.lopez@science-miner.com>), Luca Foppiano (<luca.foppiano@inria.fr>)
+Contact: Patrice Lopez (<patrice.lopez@science-miner.com>), Luca Foppiano (<luca@foppiano.org>)

@@ -42,8 +42,8 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
         if (isUnitTag(qName)) {
             currentUnit = new UnitLabeled();
 
-            if (isLeftPosition(attributes)) {
-                currentUnit.setUnitLeft(true);
+            if (hasRightAttachment(attributes)) {
+                currentUnit.setHasRightAttachment(true);
             }
         } else {
             // we have to write first what has been accumulated yet with the upper-level tag
@@ -59,10 +59,10 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
 
     }
 
-    private boolean isLeftPosition(Attributes attributes) {
-        final int leftIdx = attributes.getIndex("left");
-        if (leftIdx > -1) {
-            return "true".equals(attributes.getValue(leftIdx));
+    private boolean hasRightAttachment(Attributes attributes) {
+        final int attrIdx = attributes.getIndex("rightAttachment");
+        if (attrIdx > -1) {
+            return "true".equals(attributes.getValue(attrIdx));
         } else {
             return false;
         }

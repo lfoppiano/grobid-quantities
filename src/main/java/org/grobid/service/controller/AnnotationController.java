@@ -34,7 +34,6 @@ public class AnnotationController {
 
     @Inject
     public AnnotationController(GrobidQuantitiesConfiguration configuration,
-                                QuantityParser parser,
                                 QuantitiesEngine engine) {
         this.engine = engine;
     }

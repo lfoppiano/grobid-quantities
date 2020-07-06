@@ -1,3 +1,6 @@
+
+.. _rest_api:
+
 Rest API Documentation
 ======================
 
@@ -10,6 +13,7 @@ The response is structured following a simple schema composed two attributes: `r
 
 The basic JSON structure is the following
 ::
+
   {
      "runtime": "123
      "measurements": [
@@ -42,6 +46,7 @@ list                quantities                      list of quantity objects
 
 The quantity object follow the schema
 ::
+
   "quantity": {
     "type": "time",
     "rawValue": "two",
@@ -63,10 +68,12 @@ Process Quantities from Text
 
 Process text and extract and normalise measurements. The access point can be reach by:
 ::
+
   POST    /service/processQuantityText
 
 By processing our classical example ``I've lost two minutes``, it will returns a JSON response looking like:
 ::
+
   {
     "runtime": 52,
     "measurements": [
@@ -105,6 +112,7 @@ By processing our classical example ``I've lost two minutes``, it will returns a
 
 Another example of a quantity of type interval looks as below:
 ::
+
   {
     "runtime": 3,
     "measurements": [
@@ -175,12 +183,14 @@ Process Quantities from PDF
 Process PDF and generate annotations of measurements. The results are annotations which, by containing coordinate information, can be used to annotate directly a PDF.
 The access point can be reach by:
 ::
-   POST    /service/annotateQuantityPDF
+
+  POST    /service/annotateQuantityPDF
 
 and the file can be supplied using the ``input`` FormData parameter.
 
 The result follow the usual schema described above. For this case the resulting JSON contains the list of *pages* and their dimensions. Each measurement provides the coordinate for annotating each part of the entity on the PDF.
 ::
+
   {
     "runtime": 32186,
     "pages": [
@@ -248,10 +258,12 @@ This function takes in input a partially structured measurement and returns the 
 
 It can be reached by
 ::
+
   POST    /service/parseMeasure
 
 with ``raw body`` with the following schema:
 ::
+
   {
      "from" : "10",
      "to" : "20",
@@ -263,6 +275,7 @@ with ``raw body`` with the following schema:
 
 It will returns something like:
 ::
+
   {
     "runtime": 2120,
     "measurements": [
@@ -304,10 +317,12 @@ This entry point is used to structure units.
 
 It can be accessed at:
 ::
+
   POST    /service/processUnitsText
 
 The following text ``cm^2∕W`` with a ``FormParam`` parameter ``text`` will be structured in the following products:
 ::
+
   [
     {
         "prefix": "c",
