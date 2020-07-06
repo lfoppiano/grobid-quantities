@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.grobid.core.data.normalization.NormalisationException;
+import org.grobid.core.data.normalization.NormalizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,7 +129,7 @@ public class WordsToNumber {
         return numberTokens;
     }
 
-    public BigDecimal normalize(String text, Locale local) throws NormalisationException {
+    public BigDecimal normalize(String text, Locale local) throws NormalizationException {
         double current = 0; 
         double result = 0;
         text = StringUtils.lowerCase(text);
@@ -137,7 +137,7 @@ public class WordsToNumber {
         // split integer and possible decimal part
         String[] pieces = text.split(decimalMark);
         if(ArrayUtils.isEmpty(pieces)) {
-            throw new NormalisationException("Cannot convert the alphabetic value '" + text + "' to digits");
+            throw new NormalizationException("Cannot convert the alphabetic value '" + text + "' to digits");
         }
         String integerPart = pieces[0].trim();
         String decimalPart = null;

@@ -1,6 +1,6 @@
 package org.grobid.core.utilities;
 
-import org.grobid.core.data.normalization.NormalisationException;
+import org.grobid.core.data.normalization.NormalizationException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,7 +48,7 @@ public class WordsToNumberTest {
         assertThat(number, is(new BigDecimal("0.085802")));
     }
 
-    @Test(expected = NormalisationException.class)
+    @Test(expected = NormalizationException.class)
     public void testCornerCase() throws Exception {
         //Sometimes the word 'point' alone is recognised as value... this test was used to simulate the
         // exception
