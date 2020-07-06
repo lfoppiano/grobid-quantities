@@ -1,6 +1,5 @@
 package org.grobid.core.engines;
 
-import junit.framework.TestCase;
 import org.apache.commons.lang3.tuple.Triple;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;

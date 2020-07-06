@@ -11,7 +11,7 @@ addons:
       - oracle-java8-installer
 
 
-script: ./gradlew clean build --no-daemon
+script: ./gradlew clean build --no-daemon --info --stacktrace
 
 after_success:
   - ./gradlew test jacocoTestReport coveralls --no-daemon
