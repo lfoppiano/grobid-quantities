@@ -6,8 +6,14 @@ import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.lexicon.Lexicon;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,18 +22,26 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import static org.easymock.EasyMock.createMock;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
+@RunWith(PowerMockRunner.class)
+@SuppressStaticInitializationFor("org.grobid.core.lexicon.Lexicon")
+@PrepareForTest({ValueParser.class})
 public class ValueParserTest {
     ValueParser target;
+    Lexicon mockedLexicon;
 
     @Before
     public void setUp() throws Exception {
         target = new ValueParser(GrobidModels.DUMMY);
+
+        mockedLexicon = createMock(Lexicon.class);
+        Whitebox.setInternalState(Lexicon.class, mockedLexicon);
     }
 
     @Test
@@ -37,9 +51,9 @@ public class ValueParserTest {
         List<LayoutToken> layoutTokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutTokenByCharacter(input);
 
         List<Triple<String, Integer, Integer>> labels = Arrays.asList(
-            Triple.of("<number>", 0, 3),
-            Triple.of("<base>", 6, 8),
-            Triple.of("<pow>", 8, 10)
+                Triple.of("<number>", 0, 3),
+                Triple.of("<base>", 6, 8),
+                Triple.of("<pow>", 8, 10)
         );
         String results = getWapitiResult(layoutTokens, labels);
 
@@ -54,7 +68,6 @@ public class ValueParserTest {
     }
 
     /**
-     *
      * Current wapiti result:
      * 1	1	1	NOPUNCT	I-<alpha>
      * 0	1	1	NOPUNCT	<number>
@@ -71,11 +84,11 @@ public class ValueParserTest {
         List<LayoutToken> layoutTokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutTokenByCharacter(input);
 
         List<Triple<String, Integer, Integer>> labels = Arrays.asList(
-            Triple.of("<alpha>", 0, 1),
-            Triple.of("<number>", 1, 2),
-            Triple.of("<base>", 2, 3),
-            Triple.of("<pow>", 3, 4),
-            Triple.of("<exp>", 5, 7)
+                Triple.of("<alpha>", 0, 1),
+                Triple.of("<number>", 1, 2),
+                Triple.of("<base>", 2, 3),
+                Triple.of("<pow>", 3, 4),
+                Triple.of("<exp>", 5, 7)
         );
         String results = getWapitiResult(layoutTokens, labels);
 
@@ -99,8 +112,8 @@ public class ValueParserTest {
     public static String getWapitiResult(List<LayoutToken> layoutTokens, List<Triple<String, Integer, Integer>> labels) {
 
         List<String> features = layoutTokens.stream()
-            .map(token -> FeaturesVectorValues.addFeatures(token.getText(), null).printVector())
-            .collect(Collectors.toList());
+                .map(token -> FeaturesVectorValues.addFeatures(token.getText(), null).printVector())
+                .collect(Collectors.toList());
 
         List<String> labeled = new ArrayList<>();
         int idx = 0;
