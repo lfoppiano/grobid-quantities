@@ -51,6 +51,12 @@ repositories {
     maven { url "http://oss.jfrog.org/artifactory/libs-release" }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'javax.measure:unit-api:2.0-SNAPSHOT'
+    }
+}
+
 dependencies {
     //Tests
     testCompile 'junit:junit:4.12'

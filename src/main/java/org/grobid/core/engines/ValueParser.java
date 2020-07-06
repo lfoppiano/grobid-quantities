@@ -4,7 +4,7 @@ import org.grobid.core.GrobidModel;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
-import org.grobid.core.data.normalization.NormalizationException;
+import org.grobid.core.data.normalization.NormalisationException;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
@@ -12,7 +12,10 @@ import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
-import org.grobid.core.utilities.*;
+import org.grobid.core.utilities.LayoutTokensUtil;
+import org.grobid.core.utilities.OffsetPosition;
+import org.grobid.core.utilities.UnicodeUtil;
+import org.grobid.core.utilities.WordsToNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -146,7 +149,7 @@ public class ValueParser extends AbstractParser {
                 WordsToNumber w2n = WordsToNumber.getInstance();
                 try {
                     return w2n.normalize(block.getAlphaAsString(), locale);
-                } catch (NormalizationException e) {
+                } catch (NormalisationException e) {
                     LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
                 }
                 break;

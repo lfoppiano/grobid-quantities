@@ -1,19 +1,12 @@
 package org.grobid.core.utilities;
 
-import org.grobid.core.data.normalization.NormalizationException;
+import org.grobid.core.data.normalization.NormalisationException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.math.BigDecimal;
 import java.util.Locale;
 
-import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -55,7 +48,7 @@ public class WordsToNumberTest {
         assertThat(number, is(new BigDecimal("0.085802")));
     }
 
-    @Test(expected = NormalizationException.class)
+    @Test(expected = NormalisationException.class)
     public void testCornerCase() throws Exception {
         //Sometimes the word 'point' alone is recognised as value... this test was used to simulate the
         // exception
