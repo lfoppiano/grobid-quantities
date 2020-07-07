@@ -115,6 +115,9 @@
     {
       "notations": [
         {
+          "raw": "[yd_i]"
+        },
+        {
           "raw": "yd"
         }
       ],
@@ -371,6 +374,7 @@
       ],
       "type": "MASS",
       "system": "IMPERIAL",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "hundredweight",
@@ -424,6 +428,7 @@
       ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "minute",
@@ -441,6 +446,7 @@
       ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "hour",
@@ -451,8 +457,14 @@
       ]
     },
     {
+      "notations": [
+        {
+          "raw": "d"
+        }
+      ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "day",
@@ -463,8 +475,14 @@
       ]
     },
     {
+      "notations": [
+        {
+          "raw": "wk"
+        }
+      ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "week",
@@ -475,8 +493,14 @@
       ]
     },
     {
+      "notations": [
+        {
+          "raw": "mo"
+        }
+      ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "month",
@@ -487,8 +511,14 @@
       ]
     },
     {
+      "notations": [
+        {
+          "raw": "a"
+        }
+      ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "year",
@@ -501,6 +531,7 @@
     {
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "fortnight",
