@@ -4,15 +4,9 @@ import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-import java.util.Locale;
-
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 public class ValueParserIntegrationTest {
@@ -26,18 +20,29 @@ public class ValueParserIntegrationTest {
 
     @Test
     public void testTagValue_exponential_1() throws Exception {
-        String input = "0.3 x 10-7";
+        String input = "0 . 3 x 10 - 7";
         ValueBlock output = target.tagValue(input);
 
         System.out.println(input + " -> " + output);
         System.out.println(output.getRawTaggedValue());
-        
-        assertThat(output.getNumber().toString(), is("0.3"));
+
+        assertThat(output.getNumber().toString(), is("0 . 3"));
         assertThat(output.getBase().toString(), is("10"));
-        assertThat(output.getPow().toString(), is("-7"));
+        assertThat(output.getPow().toString(), is("- 7"));
     }
 
-    @Ignore("model not yet mature for this test")
+    @Test
+    public void testTagValue_exponential_3() throws Exception {
+        String input = "10 - 7";
+        ValueBlock output = target.tagValue(input);
+
+        System.out.println(input + " -> " + output);
+        System.out.println(output.getRawTaggedValue());
+
+        assertThat(output.getBase().toString(), is("10"));
+        assertThat(output.getPow().toString(), is("- 7"));
+    }
+
     @Test
     public void testTagValue_exponential_2() throws Exception {
         String input = "10 e -1";
@@ -50,7 +55,6 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void testParseValue_esponential_1() throws Exception {
         String input = "10 e -1";
         Value output = target.parseValue(input);
@@ -61,36 +65,24 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
-    public void testParseValueBlock_simpleNumeric() throws Exception {
-        ValueBlock block = new ValueBlock();
-        block.setNumber("20");
-        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
+    public void testParseValue_esponential_2() throws Exception {
+        String input = "10 -30";
+        Value output = target.parseValue(input);
+        System.out.println(input + " -> " + output);
 
-        assertThat(bigDecimal, is(not(nullValue())));
-        assertThat(bigDecimal, is(new BigDecimal("20")));
+        assertThat(output.getStructure().getNumberAsString(), is(""));
+        assertThat(output.getStructure().getBaseAsString(), is("10"));
+        assertThat(output.getStructure().getPowAsString(), is("-30"));
     }
 
     @Test
-    public void testParseValueBlock_simpleNumericWithBaseAndPow() throws Exception {
-        ValueBlock block = new ValueBlock();
-        block.setNumber("20");
-        block.setPow("-1");
-        block.setBase("10");
-        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
+    public void testParseValue_esponential_3() throws Exception {
+        String input = "10 -33";
+        Value output = target.parseValue(input);
+        System.out.println(input + " -> " + output);
 
-        assertThat(bigDecimal, is(not(nullValue())));
-        assertThat(bigDecimal.intValue(), is(2));
+        assertThat(output.getStructure().getNumberAsString(), is(""));
+        assertThat(output.getStructure().getBaseAsString(), is("10"));
+        assertThat(output.getStructure().getPowAsString(), is("-33"));
     }
-
-    @Test
-    public void testParseValueBlock_simpleNumericWithBase() throws Exception {
-        ValueBlock block = new ValueBlock();
-        block.setNumber("200");
-        block.setBase("10");
-        final BigDecimal bigDecimal = target.parseValueBlock(block, Locale.ENGLISH);
-
-        assertThat(bigDecimal, is(not(nullValue())));
-        assertThat(bigDecimal.intValue(), is(200));
-    }
-
 }

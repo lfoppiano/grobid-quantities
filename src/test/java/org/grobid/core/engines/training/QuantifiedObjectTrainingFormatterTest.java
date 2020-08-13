@@ -5,8 +5,6 @@ import org.grobid.core.data.Measurement;
 import org.grobid.core.data.QuantifiedObject;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
-import org.grobid.core.engines.QuantityParser;
-import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;

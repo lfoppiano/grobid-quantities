@@ -1,6 +1,8 @@
 package org.grobid.trainer.sax;
 
 
+import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.data.Quantity;
 import org.grobid.core.utilities.Pair;
 import org.grobid.trainer.UnitLabeled;
 import org.xml.sax.Attributes;
@@ -95,7 +97,8 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
             String text = getText();
 
             // text segmentation
-            List<String> tokens = tokenize(text);
+            QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
+            List<String> tokens = analyzer.tokenizeByCharacter(text);
 
             boolean begin = true;
             for (String token : tokens) {
@@ -117,15 +120,6 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
 
             //labeled.add(new Pair(text, currentTag));
         }
-    }
-
-    private List<String> tokenize(String text) {
-        char[] tokenizationByCharacter = text.toCharArray();
-        List<String> tokenizations = new ArrayList<>();
-        for (char characterToken : tokenizationByCharacter) {
-            tokenizations.add("" + characterToken);
-        }
-        return tokenizations;
     }
 
     private boolean isRelevantTag(String qName) {
