@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.pdfbox.io.IOUtils;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.*;
@@ -114,7 +114,7 @@ public class QuantitiesEngine {
             // from the header, we are interested in title, abstract and keywords
             SortedSet<DocumentPiece> documentParts = doc.getDocumentPart(SegmentationLabels.HEADER);
             if (documentParts != null) {
-                Pair<String, List<LayoutToken>> headerStruct = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts, true);
+                Pair<String, List<LayoutToken>> headerStruct = parsers.getHeaderParser().getSectionHeaderFeatured(doc, documentParts);
                 List<LayoutToken> tokenizationHeader = headerStruct.getRight();//doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 String header = headerStruct.getLeft();
                 String labeledResult = null;
