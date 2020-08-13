@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.pdfbox.io.IOUtils;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.GrobidAnalyzer;
 import org.grobid.core.data.*;
@@ -45,7 +45,6 @@ import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * This class represent the aggregated processing applying multiple parsers or combining PDF extraction
