@@ -70,6 +70,7 @@ public class AnnotationController {
     }
 
     @Path(PATH_QUANTITY_TEXT)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public String processText(@FormDataParam("text") String text) {
