@@ -1,7 +1,9 @@
 package org.grobid.core.engines;
 
+import com.google.common.collect.Iterables;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.grobid.core.GrobidModel;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
@@ -27,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -699,6 +702,12 @@ public class QuantityParser extends AbstractParser {
         if (currentMeasurement.isValid()) {
             measurements.add(currentMeasurement);
         }
+        
+        measurements.stream().forEach(m -> {
+            final Pair<OffsetPosition, String> measurementRawOffsetsAndText = QuantityOperations.getMeasurementRawOffsetsAndText(m, tokens);
+            m.setRawOffsets(measurementRawOffsetsAndText.getLeft());
+            m.setRawString(measurementRawOffsetsAndText.getRight());
+        });
 
         measurements = MeasurementOperations.postCorrection(measurements);
         return measurements;
