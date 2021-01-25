@@ -75,8 +75,8 @@ The [paper](https://doi.org/10.1145/3342558.3345411) "Automatic Identification a
 
 ## Acknowledgement 
 
-This project has been developed with the support by [Inria](http://www.inria.fr), in Paris (France) and the [National Institute for Materials Science](http://www.nims.go.jp), in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
-     
+This project has been created and developed by [science-miner](https://science-miner.com) since 2015, with additional support by [Inria](http://www.inria.fr), in Paris (France) and the [National Institute for Materials Science](http://www.nims.go.jp), in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
+
 ## License
 
 GROBID and grobid-quantities are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 

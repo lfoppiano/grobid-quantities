@@ -71,7 +71,14 @@ Process text and extract and normalise measurements. The access point can be rea
 
   POST    /service/processQuantityText
 
-By processing our classical example ``I've lost two minutes``, it will returns a JSON response looking like:
+By processing our classical example ``I've lost two minutes``:
+
+::
+    curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuantityText 
+
+
+It will returns a JSON response looking like
+
 ::
 
   {
@@ -187,6 +194,11 @@ The access point can be reach by:
   POST    /service/annotateQuantityPDF
 
 and the file can be supplied using the ``input`` FormData parameter.
+
+For instance with a ``curl`` query:
+
+::
+  curl --form input=@./myFile.pdf localhost:8060/service/annotateQuantityPDF
 
 The result follow the usual schema described above. For this case the resulting JSON contains the list of *pages* and their dimensions. Each measurement provides the coordinate for annotating each part of the entity on the PDF.
 ::
