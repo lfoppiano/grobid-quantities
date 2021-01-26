@@ -23,16 +23,14 @@ Here's a BibTeX entry using the `Software Heritage <https://www.softwareheritage
 Main works using grobid-quantities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-_
-::
-    Kyle Hundman and Chris A. Mattmann
-    Measurement Context Extraction from Text: Discovering Opportunities and Gaps in Earth Science
-    2017, KDD 2017, Halifax, Nova Scotia, Canada
-    https://arxiv.org/pdf/1710.04312.pdf
+|    Kyle Hundman and Chris A. Mattmann.
+|    Measurement Context Extraction from Text: Discovering Opportunities and Gaps in Earth Science.
+|    2017, KDD 2017, Halifax, Nova Scotia, Canada.
+|    https://arxiv.org/pdf/1710.04312.pdf
 
-    Luca Foppiano, Laurent Romary, Masashi Ishii, and Mikiko Tanifuji
-    Automatic identification and normalisation of physical measurements in scientific literature.
-    September 2019, ACM, DocEng '19, Berlin, Germany
+|    Luca Foppiano, Laurent Romary, Masashi Ishii, and Mikiko Tanifuji.
+|    Automatic identification and normalisation of physical measurements in scientific literature.
+|    September 2019, ACM, DocEng '19, Berlin, Germany.
 
 Other
 ~~~~~
@@ -41,5 +39,5 @@ UNISCOR (Units Segmentation Corpus) is available at (``resources/dataset/units/e
 It was created with the support of `NIMS (National Institute for Material Science) <https://www.nims.go.jp>`_, in Japan.
 For more information, see:
 ::
-    Leveraging Segmentation of Physical Units through a Newly Open Source Corpus
+    Leveraging Segmentation of Physical Units through a Newly Open Source Corpus.
     September 2019, JSAP Fall 2019, Sapporo, Japan
