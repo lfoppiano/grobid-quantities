@@ -23,6 +23,7 @@ Here's a BibTeX entry using the `Software Heritage <https://www.softwareheritage
 Main works using grobid-quantities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+_
 ::
     Kyle Hundman and Chris A. Mattmann
     Measurement Context Extraction from Text: Discovering Opportunities and Gaps in Earth Science
