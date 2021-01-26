@@ -42,11 +42,11 @@ Quantities CRF model
 ^^^^^^^^^^^^^^^^^^^^
 The trainer uses all the available training data from ``resouces/dataset/quantities/corpus/final``.
 
-- Gradle :
+Via Gradle :
 ::
   ./gradlew train_quantities
 
-- Via command line:
+Via command line:
 ::
   java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m quantities -a train resources/config/config.yml
 
@@ -54,11 +54,11 @@ Units CRF model
 ^^^^^^^^^^^^^^^
 The trainer uses all the available training data from ``resouces/dataset/units/corpus``. The training instance is the unit itself (a ``<unit></unit>`` entry in the XML training file)
 
-- Gradle :
+Via Gradle :
 ::
   ./gradlew train_units
 
-- Via command line:
+Via command line:
 ::
   java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m units -a train resources/config/config.yml
 
@@ -67,11 +67,11 @@ Values CRF model
 ^^^^^^^^^^^^^^^^
 The trainer uses all the available training data from ``resouces/dataset/values/corpus``. The training instance is the unit itself (a ``<value></value>`` entry in the XML training file)
 
-- Gradle :
+Via Gradle :
 ::
   ./gradlew train_values
 
-- Via command line:
+Via command line:
 ::
   java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m values -a train resources/config/config.yml
 
@@ -82,11 +82,11 @@ Quantified objects CRF model
 
 The trainer uses all the available training data from ``resouces/dataset/quantifiedObject/corpus``. The training instance is the paragraph itself (a ``<p></p>`` entry in the XML training file)
 
-- Gradle :
+Via Gradle :
 ::
   ./gradlew train_quantifiedObject
 
-- Via command line:
+Via command line:
 ::
   java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m quantifiedObject -a train resources/config/config.yml
 
@@ -100,11 +100,11 @@ the training and save the model produced in the latest iteration. 1000 iteration
 Evaluation
 ~~~~~~~~~~
 
-Grobid-quantities can be evaluated using `80/20`, `holdout` or `n-fold cross-validation`.
+Grobid-quantities can be evaluated using a random `80/20` ratio, using an `holdout` set or using `n-fold cross-validation`.
 
 80/20 evaluation
 ----------------
-The 80/20 evaluation uses all the training data in ``resouces/dataset/MODEL_NAME/corpus`` and randomly uses a random 20% of it for evaluation.
+The 80/20 evaluation uses random 80% training data in ``resouces/dataset/MODEL_NAME/corpus`` and the remaining 20% for evaluation.
 
 The command to run the 80/20 evaluation is:
 ::
@@ -113,7 +113,7 @@ The command to run the 80/20 evaluation is:
 
 Holdout evaluation
 ------------------
-The holdout evaluation train the model and run the evaluation against a fix set of training data. The training data is taken from ``resouces/dataset/MODEL_NAME/corpus`` and the evaluation data is taken from ``resouces/dataset/MODEL_NAME/evaluation``.
+The holdout evaluation train the model and run the evaluation against a fixed set of training data. The training data is taken from ``resouces/dataset/MODEL_NAME/corpus`` and the evaluation data is taken from ``resouces/dataset/MODEL_NAME/evaluation``.
 
 The command to run the holdout evauation is:
 ::
@@ -124,6 +124,6 @@ N-fold cross-validation
 The N-fold cross-validation perform the training and evaluation N times, partition the training data in N sets and using each set for evaluation while training with the rest. More detailed explanation `here <https://en.wikipedia.org/wiki/Cross-validation_(statistics)>`_.
 The evaluation will then give the average scores over these n models (against test set) and for the best model which will be saved.
 
-The command to run the n-fold cross-validation with X folds is the following:
+The command to run the n-fold cross-validation with N folds is the following:
 ::
   java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a nfold --fold-count N resources/config/config.yml

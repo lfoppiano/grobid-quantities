@@ -78,7 +78,7 @@ This project has been created and developed by [science-miner](https://science-m
 
 ## How to cite
 
-If you want to cite this work, please simply refer to the github project:
+If you want to cite this work, please simply refer to the github project with optionally the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier:
 
 ```
 grobid-quantities (2015-2021) <https://github.com/kermitt2/grobid-quantities>, swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
