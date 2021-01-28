@@ -706,7 +706,7 @@ public class QuantityParser extends AbstractParser {
         measurements.stream().forEach(m -> {
             final Pair<OffsetPosition, String> measurementRawOffsetsAndText = QuantityOperations.getMeasurementRawOffsetsAndText(m, tokens);
             m.setRawOffsets(measurementRawOffsetsAndText.getLeft());
-            m.setRawString(measurementRawOffsetsAndText.getRight());
+            m.setRawString(measurementRawOffsetsAndText.getRight().replace("\n", " "));
         });
 
         measurements = MeasurementOperations.postCorrection(measurements);
