@@ -42,9 +42,8 @@ Contact: Patrice Lopez (<patrice.lopez@science-miner.com>), Luca Foppiano (<luca
 
 License
 ^^^^^^^
-GROBID and grobid-quantities are distributed under `Apache 2.0 license <http://www.apache.org/licenses/LICENSE-2.0>`_.
+GROBID and grobid-quantities are distributed under `Apache 2.0 license <http://www.apache.org/licenses/LICENSE-2.0>`_. The documentation is distributed under `CC-0 <https://creativecommons.org/publicdomain/zero/1.0/>`_ license. The annotated data are licenced under `CC 4.0 BY <https://creativecommons.org/licenses/by/4.0/>`_.
 
-The evaluation dataset for units (``resources/dataset/units/evaluation/unit-evaluation-corpus.tei.xml``) is licenced
-under `CC 4.0 BY <https://creativecommons.org/licenses/by/4.0/>`_.
+If you contribute to grobid-quantities, you agree to share your contribution following these licenses. 
 
 The :ref:`References` page contains citations, acknowledgement and references resources related to the project.

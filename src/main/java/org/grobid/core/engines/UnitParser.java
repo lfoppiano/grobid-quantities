@@ -3,6 +3,7 @@ package org.grobid.core.engines;
 import com.google.common.collect.Iterables;
 import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.GrobidModel;
+import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
@@ -23,9 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.length;
-import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
-import static org.grobid.core.engines.label.QuantitiesTaggingLabels.VALUE_VALUE_OTHER;
+import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_OTHER;
+import static org.grobid.core.engines.label.QuantitiesTaggingLabels.UNIT_VALUE_POW;
 
 /**
  * Created by lfoppiano on 20.02.16.
@@ -75,23 +75,12 @@ public class UnitParser extends AbstractParser {
         try {
             String textPreprocessed = text.replace("\r\n", " ");
             textPreprocessed = UnicodeUtil.normaliseText(textPreprocessed);
-            List<LayoutToken> tokens = new ArrayList<>();
 
             String ress = null;
-            List<String> characters = new ArrayList<>();
-            List<OffsetPosition> unitTokenPositions = new ArrayList<>();
-            for (char character : textPreprocessed.toCharArray()) {
-                characters.add(String.valueOf(character));
-                OffsetPosition position = new OffsetPosition();
-                position.start = textPreprocessed.indexOf(character);
-                position.end = textPreprocessed.indexOf(character) + 1;
-                LayoutToken lt = new LayoutToken(String.valueOf(character));
-                tokens.add(lt);
+            QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
+            List<LayoutToken> tokens = analyzer.tokenizeWithLayoutTokenByCharacter(textPreprocessed);
 
-                unitTokenPositions.add(position);
-            }
-
-            ress = addFeatures(characters, unitTokenPositions, isUnitLeft);
+            ress = addFeatures(tokens, isUnitLeft);
             String res;
             try {
                 res = label(ress);
@@ -231,22 +220,21 @@ public class UnitParser extends AbstractParser {
 
 
     @SuppressWarnings({"UnusedParameters"})
-    private String addFeatures(List<String> characters,
-                               List<OffsetPosition> unitTokenPositions, boolean isUnitLeft) {
+    private String addFeatures(List<LayoutToken> layoutTokens, boolean isUnitLeft) {
 
         StringBuilder result = new StringBuilder();
 
         try {
-            for (String character : characters) {
-                if (isBlank(character)) {
+            for (LayoutToken layoutToken : layoutTokens) {
+                if (isBlank(layoutToken.getText())) {
                     continue;
                 }
 
                 FeaturesVectorUnits featuresVector =
-                    FeaturesVectorUnits.addFeaturesUnit(character,
+                    FeaturesVectorUnits.addFeaturesUnit(layoutToken.getText(),
                         null,
-                        quantityLexicon.inUnitDictionary(character),
-                        quantityLexicon.inPrefixDictionary(character), isUnitLeft);
+                        quantityLexicon.inUnitDictionary(layoutToken.getText()),
+                        quantityLexicon.inPrefixDictionary(layoutToken.getText()), isUnitLeft);
 
                 result.append(featuresVector.printVector())
                     .append("\n");

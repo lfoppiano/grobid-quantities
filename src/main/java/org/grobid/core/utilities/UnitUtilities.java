@@ -97,6 +97,7 @@ public class UnitUtilities {
         DEGREE("angle"),
         DIFFUSION_FLUX("diffusion flux"),
         MAGNETIC_MOMENT("magnetic moment"),
+        ATOM_MASS_UNIT("atom mass unit"),
         PACE("pace");
 
         private String name;

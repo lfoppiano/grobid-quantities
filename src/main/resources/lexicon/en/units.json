@@ -2035,6 +2035,33 @@
     {
       "notations": [
         {
+          "raw": "Da"
+        },
+        {
+          "raw": "u"
+        }
+      ],
+      "type": "ATOM_MASS_UNIT",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "dalton",
+          "inflections": [
+            "daltons"
+          ]
+        },
+        {
+          "lemma": "unified atomic mass unit",
+          "inflections": [
+            "unified atomic mass units"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "Ci"
         }
       ],

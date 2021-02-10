@@ -2,6 +2,8 @@ package org.grobid.core.engines;
 
 import org.grobid.core.GrobidModel;
 import org.grobid.core.GrobidModels;
+import org.grobid.core.analyzers.QuantityAnalyzer;
+import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.data.normalization.NormalizationException;
@@ -165,9 +167,9 @@ public class ValueParser extends AbstractParser {
 
     private String removeSpacesTabsAndBl(String block) {
         return UnicodeUtil.normaliseText(block)
-                .replaceAll("\n", " ")
-                .replaceAll("\t", " ")
-                .replaceAll(" ", "");
+            .replaceAll("\n", " ")
+            .replaceAll("\t", " ")
+            .replaceAll(" ", "");
     }
 
 
@@ -180,27 +182,18 @@ public class ValueParser extends AbstractParser {
 
         try {
             text = text.replace("\n\r", " ");
-            List<LayoutToken> tokenizations = new ArrayList<>();
 
-            String ress = null;
-            List<String> characters = new ArrayList<>();
-            for (char character : text.toCharArray()) {
-                characters.add(String.valueOf(character));
-                OffsetPosition position = new OffsetPosition();
-                position.start = text.indexOf(character);
-                position.end = text.indexOf(character) + 1;
-                LayoutToken lt = new LayoutToken(UnicodeUtil.normaliseText(String.valueOf(character)));
-                tokenizations.add(lt);
-            }
+            QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
+            List<LayoutToken> layoutTokens = analyzer.tokenizeWithLayoutTokenByCharacter(text);
 
-            ress = addFeatures(characters);
+            String ress = addFeatures(layoutTokens);
             String res;
             try {
                 res = label(ress);
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
-            parsedValue = resultExtraction(res, tokenizations);
+            parsedValue = resultExtraction(res, layoutTokens);
         } catch (Exception e) {
             throw new GrobidException("An exception occurred while running Grobid.", e);
         }
@@ -210,6 +203,9 @@ public class ValueParser extends AbstractParser {
 
     /**
      * Extract identified quantities from a labelled text.
+     *  - if whatever contained into is numeric, it goes into <number>
+     *  - if <number> comes after <pow> or <exp> it's probably the exponent or part of it and it's concatenated to the previous
+     *  - if <base> contains e then the following <pow> should go into <exp>
      */
     public ValueBlock resultExtraction(String result, List<LayoutToken> tokenizations) {
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.VALUES, result, tokenizations);
@@ -224,6 +220,9 @@ public class ValueParser extends AbstractParser {
         int end = 0;
 
         StringBuilder rawTaggedValue = new StringBuilder();
+        TaggingLabel previous = null;
+
+        boolean forceExp = false;
 
         for (TaggingTokenCluster cluster : clusters) {
             if (cluster == null) {
@@ -234,42 +233,80 @@ public class ValueParser extends AbstractParser {
             String clusterContent = LayoutTokensUtil.toText(cluster.concatTokens());
             end = start + clusterContent.length();
             OffsetPosition offsets = new OffsetPosition(start, end);
+            String trimmedClusterContent = trim(clusterContent);
 
             if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
                 rawTaggedValue.append(clusterLabel.getLabel());
             }
-            rawTaggedValue.append(trim(clusterContent));
+            rawTaggedValue.append(trimmedClusterContent);
             if (!clusterLabel.equals(VALUE_VALUE_OTHER)) {
                 rawTaggedValue.append(clusterLabel.getLabel().replace("<", "</"));
             }
 
             if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_NUMBER)) {
-                valueBlock.setNumber(trim(clusterContent));
-                valueBlock.getNumber().setOffsets(offsets);
-                LOGGER.debug(clusterContent + "(N)");
+                // If a number comes after an exponent, might be just wrongly recognised
+                /*if (trimmedClusterContent.equals("0") && previous != null) {
+                    appendToPrevious(valueBlock, trimmedClusterContent, previous);
+                } else*/
+                if (previous != null && (previous.equals(VALUE_VALUE_EXP) || previous.equals(VALUE_VALUE_POW))) {
+                    appendToPrevious(valueBlock, trimmedClusterContent, previous);
+                } else {
+                    if (isNotEmpty(valueBlock.getNumberAsString())) {
+                        valueBlock.setNumber(valueBlock.getNumberAsString() + trimmedClusterContent);
+                        valueBlock.getNumber().getOffsets().end = offsets.end;
+                        LOGGER.debug(clusterContent + "(appending N)");
+                    } else {
+                        valueBlock.setNumber(trimmedClusterContent);
+                        valueBlock.getNumber().setOffsets(offsets);
+                        LOGGER.debug(clusterContent + "(N)");
+                    }
+                }
             } else if (clusterLabel.equals(QuantitiesTaggingLabels.VALUE_VALUE_BASE)) {
-                valueBlock.setBase(trim(clusterContent));
-                valueBlock.getBase().setOffsets(offsets);
+                if (trimmedClusterContent.equalsIgnoreCase("e")) {
+                    forceExp = true;
+                } else {
+                    valueBlock.setBase(trimmedClusterContent);
+                    valueBlock.getBase().setOffsets(offsets);
+                }
                 LOGGER.debug(clusterContent + "(B)");
             } else if (clusterLabel.equals(VALUE_VALUE_OTHER)) {
                 LOGGER.debug(clusterContent + "(O)");
             } else if (clusterLabel.equals(VALUE_VALUE_POW)) {
-                valueBlock.setPow(clusterContent);
-                valueBlock.getPow().setOffsets(offsets);
-                LOGGER.debug(clusterContent + "(P)");
+                if (forceExp) {
+                    valueBlock.setExp(clusterContent);
+                    valueBlock.getExp().setOffsets(offsets);
+                    clusterLabel = VALUE_VALUE_EXP;
+                    forceExp = false;
+                } else {
+                    valueBlock.setPow(clusterContent);
+                    valueBlock.getPow().setOffsets(offsets);
+                    LOGGER.debug(clusterContent + "(P)");
+                }
             } else if (clusterLabel.equals(VALUE_VALUE_EXP)) {
                 valueBlock.setExp(clusterContent);
                 valueBlock.getExp().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(E)");
             } else if (clusterLabel.equals(VALUE_VALUE_TIME)) {
-                valueBlock.setTime(trim(clusterContent));
+                valueBlock.setTime(trimmedClusterContent);
                 valueBlock.getTime().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(T)");
             } else if (clusterLabel.equals(VALUE_VALUE_ALPHA)) {
-                valueBlock.setAlpha(trim(clusterContent));
-                valueBlock.getAlpha().setOffsets(offsets);
-                LOGGER.debug(clusterContent + "(A)");
+                if (isNumeric(trimmedClusterContent)) {
+                    valueBlock.setNumber(valueBlock.getNumberAsString() + trimmedClusterContent);
+                    if (valueBlock.getNumber().getOffsets().start == -1 && valueBlock.getNumber().getOffsets().end == -1) {
+                        valueBlock.getNumber().setOffsets(offsets);
+                    } else {
+                        valueBlock.getNumber().getOffsets().end = offsets.end;
+                    }
+                    LOGGER.debug(clusterContent + "(fake A) -> (N)");
+                } else {
+                    valueBlock.setAlpha(trimmedClusterContent);
+                    valueBlock.getAlpha().setOffsets(offsets);
+                    LOGGER.debug(clusterContent + "(A)");
+                }
             }
+            previous = clusterLabel;
+
             start = end;
         }
 
@@ -278,22 +315,44 @@ public class ValueParser extends AbstractParser {
         return valueBlock;
     }
 
+    private void appendToPrevious(ValueBlock valueBlock, String valueToBeAppended, TaggingLabel previous) {
+        if (previous.equals(QuantitiesTaggingLabels.VALUE_VALUE_NUMBER)) {
+            String previousValue = valueBlock.getNumberAsString();
+            valueBlock.getNumber().setValue(previousValue + valueToBeAppended);
+        } else if (previous.equals(QuantitiesTaggingLabels.VALUE_VALUE_BASE)) {
+            String previousValue = valueBlock.getBaseAsString();
+            valueBlock.setBase(previousValue + valueToBeAppended);
+        } else if (previous.equals(VALUE_VALUE_POW)) {
+            String previousValue = valueBlock.getPowAsString();
+            valueBlock.setPow(previousValue + valueToBeAppended);
+        } else if (previous.equals(VALUE_VALUE_EXP)) {
+            String previousValue = valueBlock.getExpAsString();
+            valueBlock.setExp(previousValue + valueToBeAppended);
+        } else if (previous.equals(VALUE_VALUE_TIME)) {
+            String previousValue = valueBlock.getTimeAsString();
+            valueBlock.setTime(previousValue + valueToBeAppended);
+        } else if (previous.equals(VALUE_VALUE_ALPHA)) {
+            String previousValue = valueBlock.getAlphaAsString();
+            valueBlock.setAlpha(previousValue + valueToBeAppended);
+        }
+    }
+
 
     @SuppressWarnings({"UnusedParameters"})
-    private String addFeatures(List<String> characters) {
+    private String addFeatures(List<LayoutToken> layoutTokens) {
 
         StringBuilder result = new StringBuilder();
         try {
-            for (String character : characters) {
-                if (isBlank(character)) {
+            for (LayoutToken token : layoutTokens) {
+                if (isBlank(token.getText())) {
                     continue;
                 }
 
                 FeaturesVectorValues featuresVector =
-                        FeaturesVectorValues.addFeatures(trim(character), null);
+                    FeaturesVectorValues.addFeatures(trim(token.getText()), null);
 
                 result.append(featuresVector.printVector())
-                        .append("\n");
+                    .append("\n");
             }
         } catch (Exception e) {
             throw new GrobidException("An exception occured while running Grobid.", e);

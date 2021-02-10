@@ -20,12 +20,12 @@ Finally we support the identification of the "quantified" substance related to t
 
 ![GROBID Quantity Demo](doc/img/Screenshot5.png)
 
-As the other GROBID models, the module relies only on machine learning and uses linear CRF. 
-The normalisation is handled by the java library [Units of measurement](http://unitsofmeasurement.github.io/).  
+As the other GROBID models, the module relies only on machine learning and it uses linear CRF. 
+The normalisation of quantities is handled by the java library [Units of measurement](http://unitsofmeasurement.github.io/).  
 
 ## Latest version
 
-The latest version (and actually the first official release) of grobid-quantities is 0.6.0, on the 30/04/2020. 
+The latest released version of grobid-quantities is 0.6.0. The current development version is 0.6.1. 
 
 ## Documentation
 
@@ -33,9 +33,8 @@ You can find the latest documentation [here](http://grobid-quantities.readthedoc
 
 ## Evaluation
 The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). 
-We also indicate the best and worst results over the 10 folds in the complete result page.
 
-Evaluated on the 30/04/2020
+Evaluated on the 30/04/2020.
 
 ### Quantities     
 
@@ -70,15 +69,40 @@ Evaluated on the 30/04/2020
 | `<time>`        | 73.07      |   86.82     |   79.26       |    
 | all (micro avg.)| 96.15      |   97.95     |   97.4        |
 
-The current aveages results have been calculated using micro average which provides more realistic results by giving different weights to labels based on their frequency.
+The current average results have been calculated using micro average which provides more realistic results by giving different weights to labels based on their frequency.
 The [paper](https://doi.org/10.1145/3342558.3345411) "Automatic Identification and Normalisation of Physical Measurements in Scientific Literature", published in September 2019 reported average evaluation based on macro average. 
 
 ## Acknowledgement 
 
-This project has been developed with the support by [Inria](http://www.inria.fr), in Paris (France) and the [National Institute for Materials Science](http://www.nims.go.jp), in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
-     
+This project has been created and developed by [science-miner](https://science-miner.com) since 2015, with additional support by [Inria](http://www.inria.fr), in Paris (France) and the [National Institute for Materials Science](http://www.nims.go.jp), in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
+
+## How to cite
+
+If you want to cite this work, please simply refer to the github project with optionally the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier:
+
+```
+grobid-quantities (2015-2021) <https://github.com/kermitt2/grobid-quantities>, swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
+```
+
+Here's a BibTeX entry using the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier:
+
+```bibtex
+@misc{grobid-quantities,
+    title = {grobid-quantities},
+    howpublished = {\url{https://github.com/kermitt2/grobid-quantities}},
+    publisher = {GitHub},
+    year = {2015--2021},
+    archivePrefix = {swh},
+    eprint = {1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7}
+}
+```
+
 ## License
 
 GROBID and grobid-quantities are distributed under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0). 
+
+The documentation is distributed under [CC-0](https://creativecommons.org/publicdomain/zero/1.0/) license and the annotated data under [CC-BY](https://creativecommons.org/licenses/by/4.0/) license.
+
+If you contribute to grobid-quantities, you agree to share your contribution following these licenses. 
 
 Contact: Patrice Lopez (<patrice.lopez@science-miner.com>), Luca Foppiano (<luca@foppiano.org>)
