@@ -2,7 +2,9 @@ package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.util.BufferRecyclers;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.layout.BoundingBox;
+import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.ArrayList;
@@ -29,6 +31,12 @@ public class Measurement {
     private Quantity quantityRange = null;
     private List<Quantity> quantityList = null;
     private QuantifiedObject quantifiedObject = null; // what is quantified, as extracted from the text
+
+    // Contains the raw string (considered from the lower to the higher offset)
+    private String rawString = "";
+
+    //Contains the global lower and higher offsets
+    private OffsetPosition rawOffsets = new OffsetPosition();
 
     // optional bounding box in the source document
     private List<BoundingBox> boundingBoxes = null;
@@ -281,6 +289,18 @@ public class Measurement {
             json.append("] ");
         }
 
+        if (StringUtils.isNotBlank(rawString)) {
+            json.append(", \"measurementRaw\" : \"" + rawString + "\"");
+        }
+
+        if (rawOffsets.start > -1 && rawOffsets.end > -1) {
+            json.append(", \"measurementOffsets\" : {");
+            json.append("\"start\" : " + rawOffsets.start + ", ");
+            json.append("\"end\" : " + rawOffsets.end);
+            json.append("}");
+        }
+
+
         json.append(" }");
         return json.toString();
     }
@@ -308,5 +328,21 @@ public class Measurement {
             (this.getQuantityLeast() != null || this.getQuantityMost() != null) ||
             (this.getQuantityBase() != null && this.getQuantityRange() != null)
         );
+    }
+
+    public void setRawString(String rawString) {
+        this.rawString = rawString;
+    }
+
+    public void setRawOffsets(OffsetPosition rawOffsets) {
+        this.rawOffsets = rawOffsets;
+    }
+
+    public String getRawString() {
+        return rawString;
+    }
+
+    public OffsetPosition getRawOffsets() {
+        return rawOffsets;
     }
 }

@@ -1,8 +1,10 @@
 package org.grobid.core.engines;
 
+import com.google.common.collect.Iterables;
 import com.googlecode.clearnlp.tokenization.EnglishTokenizer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.assertj.core.data.Offset;
 import org.grobid.core.GrobidModel;
@@ -30,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +52,7 @@ public class QuantityParser extends AbstractParser {
     private ValueParser valueParser;
     private QuantifiedObjectParser quantifiedObjectParser;
     private QuantityNormalizer quantityNormalizer;
-        private EnglishTokenizer tokeniser;
+    //    private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
 
     public static QuantityParser getInstance(boolean disableSubstance) {
@@ -93,9 +96,8 @@ public class QuantityParser extends AbstractParser {
     public QuantityParser() {
         super(QuantitiesModels.QUANTITIES);
         quantityLexicon = QuantityLexicon.getInstance();
-        
-        UnitNormalizer unitNormalizer = new UnitNormalizer();
-        measurementOperations = new MeasurementOperations(unitNormalizer);
+        UnitNormalizer unitNormaliser = new UnitNormalizer();
+        measurementOperations = new MeasurementOperations(unitNormaliser);
         quantityNormalizer = new QuantityNormalizer();
 
         valueParser = new ValueParser();
@@ -628,7 +630,7 @@ public class QuantityParser extends AbstractParser {
                         currentMeasurement.addBoundingBoxes(boundingBoxes);
                     }
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) {
-                    if ((currentMeasurement.getQuantityList() != null) && (currentMeasurement.getQuantityList().size() > 0)) {
+                    if (CollectionUtils.isNotEmpty(currentMeasurement.getQuantityList())) {
                         for (Quantity quantity : currentMeasurement.getQuantityList()) {
                             if ((quantity != null) && ((quantity.getRawUnit() == null) ||
                                     (quantity.getRawUnit().getRawName() == null))) {
@@ -704,20 +706,26 @@ public class QuantityParser extends AbstractParser {
             measurements.add(currentMeasurement);
         }
 
+        measurements.stream().forEach(m -> {
+            final Pair<OffsetPosition, String> measurementRawOffsetsAndText = QuantityOperations.getMeasurementRawOffsetsAndText(m, tokens);
+            m.setRawOffsets(measurementRawOffsetsAndText.getLeft());
+            m.setRawString(measurementRawOffsetsAndText.getRight().replace("\n", " "));
+        });
+
         measurements = MeasurementOperations.postCorrection(measurements);
         return measurements;
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
-        final OffsetPosition currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
-        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.start && op.end > currentMeasureOffset.end)
-                .collect(Collectors.toList());
-
-        if (sentencesCurrentMeasure.size() > 1) {
-            throw new GrobidException("The measurement " + measurement + " is spread among two sentences.");
-        }
-        return sentencesCurrentMeasure.get(0);
-    }
+//    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
+//        final Pair<Integer, Integer> currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
+//        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.getLeft() && op.end > currentMeasureOffset.getRight())
+//                .collect(Collectors.toList());
+//
+//        if (sentencesCurrentMeasure.size() > 1) {
+//            throw new GrobidException("The measurement " + measurement + " is spread among two sentences.");
+//        }
+//        return sentencesCurrentMeasure.get(0);
+//    }
 
     public void setDisableSubstanceParser(boolean disableSubstanceParser) {
         this.disableSubstanceParser = disableSubstanceParser;
