@@ -5,9 +5,11 @@ import net.sf.saxon.lib.Logger;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.assertj.core.data.Offset;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 
 import java.util.*;
@@ -18,6 +20,99 @@ import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.length;
 
 public class QuantityOperations {
+
+    public static Pair<OffsetPosition, String> getMeasurementRawOffsetsAndText(Measurement measurement, List<LayoutToken> tokens) {
+        List<Quantity> quantityList = QuantityOperations.toQuantityList(measurement);
+        List<LayoutToken> layoutTokens = QuantityOperations.getLayoutTokens(quantityList);
+        List<LayoutToken> sortedLayoutTokens = layoutTokens.stream()
+            .sorted(Comparator.comparingInt(LayoutToken::getOffset))
+            .collect(Collectors.toList());
+
+        int start = sortedLayoutTokens.get(0).getOffset();
+        int end = Iterables.getLast(sortedLayoutTokens).getOffset();
+
+        // Token start and end
+        Pair<Integer, Integer> extremitiesQuantityAsIndex = getExtremitiesAsIndex(tokens,
+                Math.min(start, end), Math.max(start, end) + 1);
+
+        //Offset start and end
+        List<OffsetPosition> offsets = QuantityOperations.getOffsets(quantityList);
+        List<OffsetPosition> sortedOffsets = offsets.stream()
+            .sorted(Comparator.comparingInt(o -> o.start))
+            .collect(Collectors.toList());
+
+        int lowerOffset = sortedOffsets.get(0).start;
+        int higherOffset = Iterables.getLast(sortedOffsets).end;
+        
+        String text = LayoutTokensUtil.toText(tokens.subList(extremitiesQuantityAsIndex.getLeft(), extremitiesQuantityAsIndex.getRight())).trim();
+
+        return Pair.of(new OffsetPosition(lowerOffset, higherOffset), text);
+    }
+
+    /**
+     * Get the index of the layout token referring to the to the startOffset, endOffset tokens in the
+     * supplied token list.
+     * <p>
+     * The returned are (start, end) with end excluded (same as usual java stuff).
+     */
+    public static Pair<Integer, Integer> getExtremitiesAsIndex(List<LayoutToken> tokens, int startOffset, int endOffset) {
+
+        if (isEmpty(tokens)) {
+            return Pair.of(0, 0);
+        }
+
+        if (startOffset > getLayoutTokenListEndOffset(tokens) || endOffset < getLayoutTokenListStartOffset(tokens)) {
+            throw new IllegalArgumentException("StartOffset and endOffset are outside the offset boundaries of the layoutTokens. ");
+        }
+        int start = 0;
+        int end = tokens.size() - 1;
+
+        List<LayoutToken> centralTokens = tokens.stream()
+            .filter(layoutToken -> (layoutToken.getOffset() >= startOffset && getLayoutTokenEndOffset(layoutToken) <= endOffset)
+                    || (layoutToken.getOffset() >= startOffset && layoutToken.getOffset() < endOffset
+                    || (getLayoutTokenEndOffset(layoutToken) > startOffset && getLayoutTokenEndOffset(layoutToken) < endOffset)
+                )
+            )
+            .collect(Collectors.toList());
+
+        int layoutTokenIndexStart = start;
+        int layoutTokenIndexEnd = end;
+
+        if (isNotEmpty(centralTokens)) {
+            layoutTokenIndexStart = tokens.indexOf(centralTokens.get(0));
+            layoutTokenIndexEnd = tokens.indexOf(Iterables.getLast(centralTokens));
+        }
+
+        // Making it exclusive as any java stuff
+        return Pair.of(layoutTokenIndexStart, layoutTokenIndexEnd + 1);
+    }
+
+    public static int getLayoutTokenEndOffset(LayoutToken layoutToken) {
+        return layoutToken.getOffset() + layoutToken.getText().length();
+    }
+
+    public static int getLayoutTokenStartOffset(LayoutToken layoutToken) {
+        return layoutToken.getOffset();
+    }
+
+
+    public static int getLayoutTokenListStartOffset(List<LayoutToken> tokens) {
+        if (isEmpty(tokens)) {
+            return 0;
+        }
+
+        LayoutToken firstToken = tokens.get(0);
+        return firstToken.getOffset();
+    }
+
+    public static int getLayoutTokenListEndOffset(List<LayoutToken> tokens) {
+        if (isEmpty(tokens)) {
+            return 0;
+        }
+
+        LayoutToken lastToken = tokens.get(tokens.size() - 1);
+        return lastToken.getOffset() + lastToken.getText().length();
+    }
 
     public static List<Quantity> toQuantityList(Measurement m) {
         List<Quantity> quantitiesList = new LinkedList<>();
