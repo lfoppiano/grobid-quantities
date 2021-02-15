@@ -98,6 +98,10 @@ public class UnitBlock {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
         for (UnitBlock ub : unitBlockList) {
+            //It should not happens but if some multiplication sign are slipping out we should replace them 
+            ub.setBase(ub.getBase().replace("•", ""));
+            ub.setPow(ub.getPow().replace("•", ""));
+            ub.setPrefix(ub.getPrefix().replace("•", ""));
             if (!first) {
                 sb.append("·");
             } else {
