@@ -14,8 +14,8 @@ import tech.units.indriya.format.SimpleUnitFormat;
 
 import javax.measure.format.MeasurementParseException;
 import javax.measure.format.UnitFormat;
+import javax.measure.spi.FormatService;
 import javax.measure.spi.ServiceProvider;
-import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -51,7 +51,7 @@ public class QuantityNormalizer {
     public QuantityNormalizer() {
         for (ServiceProvider provider : ServiceProvider.available()) {
             try {
-                UnitFormatService formatService = provider.getFormatService();
+                FormatService formatService = provider.getFormatService();
 
                 unitFormats.put(provider.toString(), formatService.getUnitFormat());
 
