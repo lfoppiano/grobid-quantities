@@ -15,13 +15,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 
 public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitiesConfiguration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrainingGenerationCommand.class);
-    private final static String INPUT_DIRECTORY = "Input directory";
-    private final static String OUTPUT_DIRECTORY = "Output directory";
-    private final static String RECURSIVE = "recursive";
+    public final static String INPUT_DIRECTORY = "Input directory";
+    public final static String OUTPUT_DIRECTORY = "Output directory";
+    public final static String GROBID_HOME_DIRECTORY = "Grobid Home";
+    public final static String RECURSIVE = "recursive";
 
 
     public TrainingGenerationCommand() {
@@ -34,15 +37,21 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
 
         subparser.addArgument("-dIn")
                 .dest(INPUT_DIRECTORY)
-                .type(String.class)
+                .type(Arguments.fileType().verifyCanRead().verifyIsDirectory())
                 .required(true)
                 .help("Input directory");
 
         subparser.addArgument("-dOut")
                 .dest(OUTPUT_DIRECTORY)
-                .type(String.class)
+                .type(Arguments.fileType().verifyIsDirectory().verifyCanWrite().or().verifyNotExists().verifyCanCreate())
                 .required(true)
                 .help("Output directory");
+
+        subparser.addArgument("-gH")
+            .dest(GROBID_HOME_DIRECTORY)
+            .type(Arguments.fileType().verifyExists().verifyCanRead().verifyIsDirectory())
+            .required(false)
+            .help("Override the grobid-home directory from the configuration. ");
 
         subparser.addArgument("-r")
                 .dest(RECURSIVE)
@@ -56,30 +65,37 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
 
     @Override
     protected void run(Bootstrap bootstrap, Namespace namespace, GrobidQuantitiesConfiguration configuration) throws Exception {
-        try {
+        File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
+        String grobidHome = configuration.getGrobidHome();
 
-            GrobidProperties.set_GROBID_HOME_PATH(new File(configuration.getGrobidHome()).getAbsolutePath());
-            String grobidHome = configuration.getGrobidHome();
-            if (grobidHome != null) {
-                GrobidProperties.setGrobidPropertiesPath(new File(grobidHome, "/config/grobid.properties").getAbsolutePath());
+        initGrobidHome(new File(grobidHome), grobidHomeOverride);
+
+        Path inputDirectory = namespace.get(INPUT_DIRECTORY);
+        Path outputDirectory = namespace.get(OUTPUT_DIRECTORY);
+        Boolean recursive = namespace.get(RECURSIVE);
+
+        new QuantityTrainingData().createTrainingBatch(inputDirectory.toAbsolutePath().toString(), outputDirectory.toAbsolutePath().toString(), recursive);
+    }
+
+    protected static void initGrobidHome(File configurationGrobidHome, File commandLineGrobidHome) {
+        try {
+            if(commandLineGrobidHome != null) {
+                configurationGrobidHome = commandLineGrobidHome;
             }
 
-            GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(configuration.getGrobidHome()));
+            if (configurationGrobidHome != null) {
+                GrobidProperties.set_GROBID_HOME_PATH(configurationGrobidHome.getAbsolutePath());
+                GrobidProperties.setGrobidPropertiesPath(new File(configurationGrobidHome, "/config/grobid.properties").getAbsolutePath());
+            }
+
+            GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(configurationGrobidHome.getAbsolutePath()));
             GrobidProperties.getInstance(grobidHomeFinder);
             Engine.getEngine(true);
             LibraryLoader.load();
         } catch (final Exception exp) {
-            System.err.println("Grobid initialisation failed, cannot find Grobid Home. Please use the option -gH to specify in the command.");
-            exp.printStackTrace();
+            LOGGER.error("Grobid initialisation failed, cannot find Grobid Home. Please verify the config.yml file or use the option -gH to specify in the command.", exp);
 
             System.exit(-1);
         }
-
-        String inputDirectory = namespace.get(INPUT_DIRECTORY);
-        String outputDirectory = namespace.get(OUTPUT_DIRECTORY);
-        Boolean recursive = namespace.get(RECURSIVE);
-
-        new QuantityTrainingData().createTrainingBatch(inputDirectory, outputDirectory, recursive);
-
     }
 }

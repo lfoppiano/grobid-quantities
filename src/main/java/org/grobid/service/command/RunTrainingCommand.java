@@ -2,6 +2,7 @@ package org.grobid.service.command;
 
 import io.dropwizard.cli.ConfiguredCommand;
 import io.dropwizard.setup.Bootstrap;
+import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.grobid.core.engines.Engine;
@@ -21,6 +22,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static org.grobid.service.command.TrainingGenerationCommand.GROBID_HOME_DIRECTORY;
+import static org.grobid.service.command.TrainingGenerationCommand.initGrobidHome;
 
 public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfiguration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RunTrainingCommand.class);
@@ -63,6 +67,12 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
             .setDefault(Boolean.FALSE)
             .help("Print on screen instead of writing on a log file");
 
+        subparser.addArgument("-gH")
+            .dest(GROBID_HOME_DIRECTORY)
+            .type(Arguments.fileType().verifyExists().verifyCanRead().verifyIsDirectory())
+            .required(false)
+            .help("Override the grobid-home directory from the configuration. ");
+
         subparser.addArgument("-fc", "--fold-count")
             .dest(FOLD_COUNT)
             .type(Integer.class)
@@ -82,23 +92,9 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
         trainerMap.putIfAbsent("values", new ValueTrainer());
         trainerMap.putIfAbsent("quantifiedObject", new QuantifiedObjectTrainer());
 
-        try {
-            GrobidProperties.set_GROBID_HOME_PATH(new File(configuration.getGrobidHome()).getAbsolutePath());
-            String grobidHome = configuration.getGrobidHome();
-            if (grobidHome != null) {
-                GrobidProperties.setGrobidPropertiesPath(new File(grobidHome, "/config/grobid.properties").getAbsolutePath());
-            }
-
-            GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Arrays.asList(configuration.getGrobidHome()));
-            GrobidProperties.getInstance(grobidHomeFinder);
-            Engine.getEngine(false);
-            LibraryLoader.load();
-        } catch (final Exception exp) {
-            System.err.println("Grobid initialisation failed, cannot find Grobid Home. Maybe you forget to specify the config.yml in the command launch?");
-            exp.printStackTrace();
-
-            System.exit(-1);
-        }
+        String configurationGrobidHome = configuration.getGrobidHome();
+        File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
+        initGrobidHome(new File(configurationGrobidHome), grobidHomeOverride);
 
         String modelName = namespace.get(MODEL_NAME);
         String action = namespace.get(ACTION);
