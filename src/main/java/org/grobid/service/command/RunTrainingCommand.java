@@ -5,11 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
-import org.grobid.core.engines.Engine;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.main.GrobidHomeFinder;
-import org.grobid.core.main.LibraryLoader;
-import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.grobid.trainer.*;
 import org.slf4j.Logger;
@@ -94,7 +90,7 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
 
         String configurationGrobidHome = configuration.getGrobidHome();
         File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
-        initGrobidHome(new File(configurationGrobidHome), grobidHomeOverride);
+        initGrobidHome(configurationGrobidHome, grobidHomeOverride);
 
         String modelName = namespace.get(MODEL_NAME);
         String action = namespace.get(ACTION);
@@ -103,7 +99,6 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-
 
         Trainer trainer = trainerMap.get(modelName);
         if (trainer != null) {
@@ -129,7 +124,7 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
                     name = "holdout-evaluation";
                     break;
                 default:
-                    System.out.println("No correct action were supplied. Please provide beside " + Arrays.toString(ACTIONS.toArray()));
+                    System.err.println("No correct action were supplied. Please provide beside " + Arrays.toString(ACTIONS.toArray()));
                     break;
 
             }
@@ -151,7 +146,7 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
                 }
             }
         } else {
-            System.out.println("Cannot find the specified model: " + modelName + ".");
+            System.err.println("Cannot find the specified model: " + modelName + ".");
         }
 
     }

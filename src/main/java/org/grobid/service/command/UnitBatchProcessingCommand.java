@@ -63,13 +63,12 @@ public class UnitBatchProcessingCommand extends ConfiguredCommand<GrobidQuantiti
     protected void run(Bootstrap bootstrap, Namespace namespace, GrobidQuantitiesConfiguration configuration) throws Exception {
         File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
         String grobidHome = configuration.getGrobidHome();
-        initGrobidHome(new File(grobidHome), grobidHomeOverride);
+        initGrobidHome(grobidHome, grobidHomeOverride);
 
         String inputDirectory = namespace.get(INPUT_DIRECTORY);
         String outputDirectory = namespace.get(OUTPUT_DIRECTORY);
         boolean isRecursive = namespace.get(RECURSIVE);
 
         new QuantitiesEngine().unitBatchProcess(inputDirectory, outputDirectory, isRecursive);
-
     }
 }
