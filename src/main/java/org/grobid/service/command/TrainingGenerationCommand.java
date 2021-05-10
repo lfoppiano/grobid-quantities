@@ -70,11 +70,11 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
 
         initGrobidHome(grobidHome, grobidHomeOverride);
 
-        Path inputDirectory = namespace.get(INPUT_DIRECTORY);
-        Path outputDirectory = namespace.get(OUTPUT_DIRECTORY);
+        File inputDirectory = namespace.get(INPUT_DIRECTORY);
+        File outputDirectory = namespace.get(OUTPUT_DIRECTORY);
         Boolean recursive = namespace.get(RECURSIVE);
 
-        new QuantityTrainingData().createTrainingBatch(inputDirectory.toAbsolutePath().toString(), outputDirectory.toAbsolutePath().toString(), recursive);
+        new QuantityTrainingData().createTrainingBatch(inputDirectory.getAbsolutePath(), outputDirectory.getAbsolutePath(), recursive);
     }
 
     protected static void initGrobidHome(String configurationGrobidHomeAsString, File commandLineGrobidHome) {

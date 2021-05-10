@@ -65,10 +65,10 @@ public class UnitBatchProcessingCommand extends ConfiguredCommand<GrobidQuantiti
         String grobidHome = configuration.getGrobidHome();
         initGrobidHome(grobidHome, grobidHomeOverride);
 
-        String inputDirectory = namespace.get(INPUT_DIRECTORY);
-        String outputDirectory = namespace.get(OUTPUT_DIRECTORY);
+        File inputDirectory = namespace.get(INPUT_DIRECTORY);
+        File outputDirectory = namespace.get(OUTPUT_DIRECTORY);
         boolean isRecursive = namespace.get(RECURSIVE);
 
-        new QuantitiesEngine().unitBatchProcess(inputDirectory, outputDirectory, isRecursive);
+        new QuantitiesEngine().unitBatchProcess(inputDirectory.getAbsolutePath(), outputDirectory.getAbsolutePath(), isRecursive);
     }
 }
