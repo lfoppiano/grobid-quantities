@@ -137,7 +137,7 @@ public class QuantityTrainingData {
         quantityDocumentRoot.appendChild(quantityNode);
 
         //Write the output for quantities model
-        String outputFileQuantity = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".quantity.xml");
+        String outputFileQuantity = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".quantity.tei.xml");
         try {
             FileUtils.writeStringToFile(new File(outputFileQuantity), XmlBuilderUtils.toXml(quantityDocumentRoot), UTF_8);
         } catch (IOException e) {
@@ -147,7 +147,7 @@ public class QuantityTrainingData {
         //We don't have TEI header, so we need one less annoying step :-)
 
         //Write the output for unit model
-        String outputFileUnit = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".unit.xml");
+        String outputFileUnit = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".unit.tei.xml");
         try {
             FileUtils.writeStringToFile(new File(outputFileUnit), XmlBuilderUtils.toXml(unitNode), UTF_8);
         } catch (IOException e) {
@@ -155,7 +155,7 @@ public class QuantityTrainingData {
         }
 
         //Write the output for unit model
-        String outputFileValue = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".value.xml");
+        String outputFileValue = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".value.tei.xml");
         try {
             FileUtils.writeStringToFile(new File(outputFileValue), XmlBuilderUtils.toXml(valueNode), UTF_8);
         } catch (IOException e) {
@@ -163,7 +163,7 @@ public class QuantityTrainingData {
         }
 
         //Write the output for quantifiedObject model
-        String outputFileQuantifiedObject = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".quantifiedObject.xml");
+        String outputFileQuantifiedObject = FilenameUtils.concat(outputDirectory, FilenameUtils.removeExtension(file.getName()) + ".quantifiedObject.tei.xml");
         try {
             FileUtils.writeStringToFile(new File(outputFileQuantifiedObject), XmlBuilderUtils.toXml(quantifiedObjectNode), UTF_8);
         } catch (IOException e) {
