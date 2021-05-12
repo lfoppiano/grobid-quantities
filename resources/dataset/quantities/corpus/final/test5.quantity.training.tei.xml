@@ -1,0 +1,15 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc xml:id="_1" />
+    <encodingDesc>
+      <appInfo>
+        <application version="0.6.2" ident="GROBID" when="2021-05-08T10:40+0000">
+          <ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref>
+        </application>
+      </appInfo>
+    </encodingDesc>
+  </teiHeader>
+  <text xml:lang="lexicon/en">
+    <p>They corresponded to sedimentation rates (acc) of <measure type="list"><num>0.45</num> and <num>0.3</num> <measure type="SEDIMENTATION_RATE" unit="cm yr^-1">cm yr-1</measure></measure> (Table 2). Beyond the middle shelf, MAR decreased sharply to <measure type="list"><num>132</num> and <num>44</num> <measure type="MASS_ACCUMULATION_RATE" unit="g m^-2 yr^-1">g m-2 yr-1</measure></measure> at St. 2 (11 S) and St. 8 (12 S), respectively. These latter values are associated with measurable <measure type="value"><num>210</num></measure>Pbxs in the upper <measure type="value"><num>3</num> <measure type="LENGTH" unit="cm">cm</measure></measure> only and thus indicative of sediment winnowing or resuspension, as mentioned above. A relatively low MAR of <measure type="value"><num>128</num> <measure type="MASS_ACCUMULATION_RATE" unit="kg m^-2 yr^-1">kg m-2 yr-1</measure></measure> was also determined for St. 4 at 12 S compared to the neighbouring stations. MAR and acc tended to be higher at the deep oxygenated stations compared to the OMZ stations, with acc of <measure type="value"><num>0.06</num> <measure type="SEDIMENTATION_RATE" unit="cm yr^-1">cm yr-1</measure></measure> at St. 10 (12 S) and <measure type="value"><num>0.05</num> <measure type="SEDIMENTATION_RATE" unit="cm yr^-1">cm yr-1</measure></measure> at St. 5 (11 S). Aluminium accumulation showed similar trends to MAR, with highest values on the shelf and a pronounced increase below the OMZ (Fig. 3b).</p>
+  </text>
+</tei>

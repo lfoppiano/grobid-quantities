@@ -1,0 +1,14 @@
+<tei xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc xml:id="_1" />
+    <encodingDesc>
+      <appInfo>
+        <application version="0.6.2" ident="GROBID" when="2021-05-09T18:31+0000">
+          <ref target="https://github.com/kermitt2/grobid">A machine learning software for extracting information from scholarly documents</ref>
+        </application>
+      </appInfo>
+    </encodingDesc>
+  </teiHeader>
+  <text xml:lang="lexicon/en"><p>The highest bioturbation coefficient determined by the model was <measure type="value"><num>4</num> <measure type="UNKNOWN" unit="cm^2 yr-1">cm2 yr-1</measure></measure> for St. 3 at 12 S (Table S2). Rates were extremely high at the shallowest stations (<measure type="list"><num>1200</num> and <num>1800</num> <measure type="MASS_ACCUMULATION_RATE" unit="g m^-2 yr^-1">g m-2 yr-1</measure></measure> at 11 and 12 S, respectively).</p>
+  </text>
+</tei>

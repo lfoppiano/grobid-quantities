@@ -1,0 +1,8 @@
+<units xmlns="http://www.tei-c.org/ns/1.0">
+  <unit><prefix>c</prefix><base>m</base> <base>yr</base><pow>-1</pow></unit>
+  <unit><base>g</base> <base>m</base><pow>-2</pow> <base>yr</base><pow>-1</pow></unit>
+  <unit><prefix>c</prefix><base>m</base></unit>
+  <unit><prefix>k</prefix><base>g</base> <base>m</base><pow>-2</pow> <base>yr</base><pow>-1</pow></unit>
+  <unit><prefix>c</prefix><base>m</base> <base>yr</base><pow>-1</pow></unit>
+  <unit><prefix>c</prefix><base>m</base> <base>yr</base><pow>-1</pow></unit>
+</units>
