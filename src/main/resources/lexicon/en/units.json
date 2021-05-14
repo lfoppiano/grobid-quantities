@@ -2265,6 +2265,7 @@
           "raw": "kg m^-2 yr^-1",
           "product": [
             {
+              "prefix": "k",
               "base": "g"
             },
             {
@@ -2281,6 +2282,7 @@
           "raw": "kg/(m2*yr)",
           "product": [
             {
+              "prefix": "k",
               "base": "g"
             },
             {
@@ -2297,6 +2299,7 @@
           "raw": "kg/m2/yr",
           "product": [
             {
+              "prefix": "k",
               "base": "g"
             },
             {
