@@ -2,7 +2,7 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
-        jcenter()
+//        jcenter()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -45,7 +45,7 @@ repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
-    maven { url "https://dl.bintray.com/rookies/maven" }
+//    maven { url "https://dl.bintray.com/rookies/maven" }
     maven { url "http://oss.jfrog.org/artifactory/libs-release" }
 }
 
@@ -60,8 +60,8 @@ dependencies {
 
     //GROBID
     compile 'org.grobid:grobid-core:0.6.2-SNAPSHOT'
-    compile 'org.grobid:grobid-trainer:0.6.1'
-    compile('org.grobid:grobid-service:0.6.1') {
+    compile 'org.grobid:grobid-trainer:0.6.2-SNAPSHOT'
+    compile('org.grobid:grobid-service:0.6.2-SNAPSHOT') {
         transitive = false
     }
 
@@ -83,11 +83,11 @@ dependencies {
     compile 'tech.units:indriya:2.1.1'
     compile group: 'si.uom', name: 'si-units', version: '2.0.1'
     compile group: 'si.uom', name: 'si-quantity', version: '2.0.1'
-    compile group: 'systems.uom', name: 'systems-quantity', version: '2.1.2'
+    compile group: 'systems.uom', name: 'systems-quantity', version: '2.0.2'
     compile group: 'systems.uom', name: 'systems-common', version: '2.0.2'
-    compile group: 'systems.uom', name: 'systems-unicode', version: '2.1.2'
-    compile group: 'systems.uom', name: 'systems-ucum', version: '2.1.2'
-    compile group: 'systems.uom', name: 'systems-unicode', version: '2.1.2'
+    compile group: 'systems.uom', name: 'systems-unicode', version: '2.0.2'
+    compile group: 'systems.uom', name: 'systems-ucum', version: '2.0.2'
+    compile group: 'systems.uom', name: 'systems-unicode', version: '2.0.2'
 
     // (2) UOM 1.3
 //    compile 'tech.units:indriya:1.3'
