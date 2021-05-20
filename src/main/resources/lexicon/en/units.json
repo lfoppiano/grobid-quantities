@@ -2257,6 +2257,107 @@
           "inflection": "electron-volts"
         }
       ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "g/m^2*yr",
+          "product": [
+            {
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "g/(m2*yr)",
+          "product": [
+            {
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "kg/m2/yr",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "MASS_ACCUMULATION_RATE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "mass accumulation rate",
+          "inflection": "mass accumulation rates"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "cm yr^-1",
+          "product": [
+            {
+              "prefix": "c",
+              "base": "m"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "cm/yr",
+          "product": [
+            {
+              "prefix": "c",
+              "base": "m"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "SEDIMENTATION_RATE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "sedimentation rate",
+          "inflection": "sedimentation rates"
+        }
+      ]
     }
   ]
 }

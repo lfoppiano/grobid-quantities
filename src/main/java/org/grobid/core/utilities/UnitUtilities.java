@@ -97,7 +97,10 @@ public class UnitUtilities {
         DEGREE("angle"),
         DIFFUSION_FLUX("diffusion flux"),
         MAGNETIC_MOMENT("magnetic moment"),
-        ATOM_MASS_UNIT("atom mass unit");
+        ATOM_MASS_UNIT("atom mass unit"),
+        MASS_ACCUMULATION_RATE("mass accumulation rate"),
+        SEDIMENTATION_RATE("sedimentation rate"),
+        PACE("pace");
 
         private String name;
 
