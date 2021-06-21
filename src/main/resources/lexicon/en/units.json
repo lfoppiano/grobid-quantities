@@ -511,6 +511,32 @@
       ]
     },
     {
+      "type": "TIME",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "century",
+          "inflections": [
+            "centuries"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TIME",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "millenium",
+          "inflections": [
+            "millenium",
+            "kiloannum",
+            "kyr"
+          ]
+        }
+      ]
+    },
+    {
       "notations": [
         {
           "raw": "K"
@@ -2279,6 +2305,23 @@
           ]
         },
         {
+          "raw": "kg/(m^2*yr)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
           "raw": "kg/(m2*yr)",
           "product": [
             {
@@ -2311,6 +2354,23 @@
               "pow": "-1"
             }
           ]
+        },
+        {
+          "raw": "kg/(s·m²)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            }
+          ]
         }
       ],
       "type": "MASS_ACCUMULATION_RATE",
@@ -2319,7 +2379,10 @@
       "names": [
         {
           "lemma": "mass accumulation rate",
-          "inflection": "mass accumulation rates"
+          "inflections": [
+            "mass accumulation rates",
+            "MAR"
+           ]
         }
       ]
     },
@@ -2347,6 +2410,18 @@
             },
             {
               "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "m/s",
+          "product": [
+            {
+              "base": "m"
+            },
+            {
+              "base": "s",
               "pow": "-1"
             }
           ]

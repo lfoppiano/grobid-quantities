@@ -26,6 +26,8 @@ h	TIME	NON_SI	hour
 	TIME	NON_SI	month
 	TIME	NON_SI	year
 	TIME	NON_SI	fortnight
+	TIME	NON_SI	century
+	TIME	NON_SI	millenium
 K	TEMPERATURE	SI_BASE	kelvin
 °C	TEMPERATURE	SI_DERIVED	celsius,celcius
 °F	TEMPERATURE	US	fahrenheit
