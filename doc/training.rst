@@ -12,7 +12,7 @@ Generation of training data
 Training data generation works the same as in GROBID, with executable name ``createTrainingQuantities``,
 for example:
 ::
-   java -jar build/libs/grobid-quantities-{version}-onejar.jar trainingGeneration -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/
+   java -jar build/libs/grobid-quantities-{version}-onejar.jar trainingGeneration -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/ resources/config/config.yml
 
 by default the generation of training data is performed on the specified directory.
 The argument ``-r`` will process all files within the subdirectories, recursively.
