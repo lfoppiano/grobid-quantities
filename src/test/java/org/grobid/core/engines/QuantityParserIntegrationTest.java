@@ -2,11 +2,9 @@ package org.grobid.core.engines;
 
 import org.apache.commons.io.IOUtils;
 import org.grobid.core.analyzers.QuantityAnalyzer;
-import org.grobid.core.data.Block;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
@@ -19,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.hamcrest.Matchers.greaterThan;
+import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
@@ -28,8 +26,8 @@ public class QuantityParserIntegrationTest {
     QuantityParser target;
 
     @BeforeClass
-    public static void init() {
-        LibraryLoader.load();
+    public static void init() throws Exception{
+        initEngineForTests();
     }
 
 

@@ -1,7 +1,6 @@
 package org.grobid.core.lexicon;
 
 import org.grobid.core.data.RegexValueHolder;
-import org.grobid.core.data.Unit;
 import org.grobid.core.utilities.OffsetPosition;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -13,7 +12,8 @@ import java.util.Set;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Patrice Lopez

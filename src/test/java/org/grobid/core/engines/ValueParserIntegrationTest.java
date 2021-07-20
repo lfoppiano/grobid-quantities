@@ -2,10 +2,10 @@ package org.grobid.core.engines;
 
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
-import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,7 +14,7 @@ public class ValueParserIntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        LibraryLoader.load();
+        initEngineForTests();
         target = new ValueParser();
     }
 
