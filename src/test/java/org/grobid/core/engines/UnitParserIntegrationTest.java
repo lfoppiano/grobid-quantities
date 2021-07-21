@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.data.normalization.UnitNormalizer;
+import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
@@ -13,6 +14,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;

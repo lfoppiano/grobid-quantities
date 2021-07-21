@@ -8,8 +8,11 @@ import org.grobid.core.data.QuantifiedObject;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.GrobidConfig;
+import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -24,6 +27,13 @@ import static org.junit.Assert.assertThat;
 public class QuantifiedObjectParserTest {
 
     private QuantifiedObjectParser target;
+
+    @BeforeClass
+    public static void before() throws Exception {
+        GrobidConfig.ModelParameters modelParameters = new GrobidConfig.ModelParameters();
+        modelParameters.name = "bao";
+        GrobidProperties.addModel(modelParameters);
+    }
 
     @Before
     public void setUp() throws Exception {

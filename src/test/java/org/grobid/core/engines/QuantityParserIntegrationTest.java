@@ -5,7 +5,6 @@ import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -13,7 +12,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;

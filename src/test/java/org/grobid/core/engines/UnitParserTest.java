@@ -3,7 +3,10 @@ package org.grobid.core.engines;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.GrobidConfig;
+import org.grobid.core.utilities.GrobidProperties;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,6 +17,13 @@ import static org.junit.Assert.assertThat;
 
 public class UnitParserTest {
     private UnitParser target;
+
+    @BeforeClass
+    public static void before() throws Exception {
+        GrobidConfig.ModelParameters modelParameters = new GrobidConfig.ModelParameters();
+        modelParameters.name = "bao";
+        GrobidProperties.addModel(modelParameters);
+    }
 
     @Before
     public void setUp() throws Exception {

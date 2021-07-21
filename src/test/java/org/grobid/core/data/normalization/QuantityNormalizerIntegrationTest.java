@@ -14,10 +14,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.measure.format.UnitFormat;
-import javax.measure.spi.ServiceProvider;
-import javax.measure.spi.UnitFormatService;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static org.easymock.EasyMock.*;
 import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
