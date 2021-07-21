@@ -89,7 +89,6 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
 
             GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(Collections.singletonList(configurationGrobidHome.getAbsolutePath()));
             GrobidProperties.getInstance(grobidHomeFinder);
-            Engine.getEngine(true);
             LibraryLoader.load();
         } catch (final Exception exp) {
             System.err.println("Grobid initialisation failed. Maybe you forget to specify the location of the config.yml in the command launch as final argument?");
