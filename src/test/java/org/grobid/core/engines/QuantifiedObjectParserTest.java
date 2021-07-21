@@ -8,7 +8,6 @@ import org.grobid.core.data.QuantifiedObject;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.Ignore;

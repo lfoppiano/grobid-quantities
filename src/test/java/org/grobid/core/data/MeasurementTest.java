@@ -4,7 +4,7 @@ import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class MeasurementTest {
 

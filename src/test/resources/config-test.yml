@@ -1,9 +1,5 @@
 grobidHome: ../grobid-home
 
-corsAllowedOrigins: "*"
-corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
-corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
-
 models:
   - name: "superconductors"
     engine: "wapiti"
@@ -64,7 +60,7 @@ models:
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
-
+  
   - name: "units"
     engine: "wapiti"
     #engine: "delft"
@@ -78,8 +74,8 @@ models:
       architecture: "BidLSTM_CRF"
       #architecture: "scibert"
       useELMo: false
-      embeddings_name: "glove-840B"
-
+      embeddings_name: "glove-840B" 
+        
   - name: "values"
     engine: "wapiti"
     #engine: "delft"
@@ -95,38 +91,3 @@ models:
       useELMo: false
       embeddings_name: "glove-840B"
 
-
-
-
-views:
-  .mustache:
-    cache: false
-
-server:
-  type: custom
-  idleTimeout: 120 seconds
-  applicationConnectors:
-    - type: http
-      port: 8060
-  adminConnectors:
-    - type: http
-      port: 8061
-  registerDefaultExceptionMappers: false
-  maxThreads: 2048
-  maxQueuedRequests: 2048
-  acceptQueueSize: 2048
-
-logging:
-  level: INFO
-  appenders:
-    - type: console
-      threshold: INFO
-    - type: file
-      threshold: DEBUG
-      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
-      currentLogFilename: logs/grobid-quantities.log
-      archivedLogFilenamePattern: logs/grobid-quantities-%d{yyyy-MM-dd}-%i.log.gz
-      archivedFileCount: 7
-      timeZone: UTC
-      maxFileSize: 10MB
-timeZone: UTC

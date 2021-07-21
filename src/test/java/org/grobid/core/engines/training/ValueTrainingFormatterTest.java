@@ -2,7 +2,6 @@ package org.grobid.core.engines.training;
 
 import nu.xom.Element;
 import org.grobid.core.data.*;
-import org.grobid.core.engines.training.ValueTrainingFormatter;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
@@ -14,7 +13,7 @@ import java.util.List;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ValueTrainingFormatterTest {
 

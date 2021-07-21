@@ -7,6 +7,8 @@ import org.grobid.core.data.ValueBlock;
 import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.Lexicon;
+import org.grobid.core.utilities.GrobidConfig;
+import org.grobid.core.utilities.GrobidProperties;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +40,9 @@ public class ValueParserTest {
 
     @Before
     public void setUp() throws Exception {
+        GrobidConfig.ModelParameters modelParameters = new GrobidConfig.ModelParameters();
+        modelParameters.name = "bao";
+        GrobidProperties.addModel(modelParameters);
         target = new ValueParser(GrobidModels.DUMMY);
 
         mockedLexicon = createMock(Lexicon.class);
