@@ -46,6 +46,12 @@
 .label.CONCENTRATION {
     background-color: #31B404;
 }
+.label.MASS_ACCUMULATION_RATE {
+    background-color: #21F434;
+}
+.label.SEDIMENTATION_RATE {
+    background-color: #48E122;
+}
 
 .label.biology {
     background-color: #398739;
@@ -209,7 +215,7 @@ span.section-active { color: #BC0E0E; }
 .table {background-color:#fff;border:0px solid #ddd;}
 .table th {background-color:#fff;} 
 .table tr {background-color:#fff;border:0px solid #ddd;}
-.table td {background-color:#fff;border:0px;font-size:14;}
+.table td {background-color:#fff;border:0px;font-size:14px;}
 /*.table tr{background-color:#FCF8E3;} */
 .table tbody tr.highlight td { background-color: #F2DEDE; word-break:normal; }
   
@@ -253,7 +259,7 @@ span {word-break:normal;}
 }
 
 .info-sense-box,.details-list {
-	margin:1px 1;padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
+	margin:1px;padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
 	font-size:13px;
 }
 
@@ -287,6 +293,12 @@ span {word-break:normal;}
 }
 .info-sense-box.CONCENTRATION {
     background-color: #31B404;
+}
+.info-sense-box.MASS_ACCUMULATION_RATE {
+    background-color: #21F434;
+}
+.info-sense-box.SEDIMENTATION_RATE {
+    background-color: #48E122;
 }
 
 /* DOMAINS */
@@ -344,8 +356,14 @@ span {word-break:normal;}
 .info-sense-box.electronics {
     background-color: #01A9DB;
 }
+.info-sense-box.mass_accumulation_rate {
+    background-color: #21F434;
+}
+.info-sense-box.sedimentation_rate {
+    background-color: #48E122;
+}
 
-// links for box PDF annotations
+/* Links for box PDF annotations*/
 a.TEMPERATURE {
     border-color: #398739;
 }
@@ -375,4 +393,10 @@ a.AREA {
 }
 a.CONCENTRATION {
     border-color: #31B404;
+}
+a.MASS_ACCUMULATION_RATE {
+    border-color: #21F434;
+}
+a.SEDIMENTATION_RATE {
+    border-color: #48E122;
 }
