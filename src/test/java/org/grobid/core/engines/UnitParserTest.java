@@ -3,6 +3,8 @@ package org.grobid.core.engines;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.GrobidConfig;
+import org.grobid.core.utilities.GrobidProperties;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +19,9 @@ public class UnitParserTest {
 
     @Before
     public void setUp() throws Exception {
+        GrobidConfig.ModelParameters modelParameters = new GrobidConfig.ModelParameters();
+        modelParameters.name = "bao";
+        GrobidProperties.addModel(modelParameters);
         target = new UnitParser(GrobidModels.DUMMY, null);
     }
 
