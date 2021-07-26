@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.grobid.core.utilities.UnitUtilities.Unit_Type.FRACTION;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class QuantityTrainingFormatterTest {
 

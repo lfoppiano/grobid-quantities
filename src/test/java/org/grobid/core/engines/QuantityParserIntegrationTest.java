@@ -20,7 +20,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class QuantityParserIntegrationTest {
     QuantityParser target;

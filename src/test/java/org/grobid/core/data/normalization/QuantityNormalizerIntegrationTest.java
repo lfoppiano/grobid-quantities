@@ -19,7 +19,7 @@ import java.util.Arrays;
 import static org.easymock.EasyMock.*;
 import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 @Ignore("we should mock also uom-se .. but for now is better to leave it out so that we can spot other errors")

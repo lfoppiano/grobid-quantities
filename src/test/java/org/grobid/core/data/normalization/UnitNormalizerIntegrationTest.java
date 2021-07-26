@@ -14,7 +14,7 @@ import static org.easymock.EasyMock.*;
 import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UnitNormalizerIntegrationTest {
 

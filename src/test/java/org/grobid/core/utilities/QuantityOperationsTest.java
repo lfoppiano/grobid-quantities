@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.number.OrderingComparison.greaterThan;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class QuantityOperationsTest {
 
