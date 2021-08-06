@@ -54,8 +54,6 @@ models:
       embeddings_name: "glove-840B"
 
 
-
-
 views:
   .mustache:
     cache: false
