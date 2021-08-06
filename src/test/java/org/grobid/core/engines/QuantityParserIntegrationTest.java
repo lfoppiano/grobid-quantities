@@ -5,7 +5,6 @@ import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -13,7 +12,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -83,8 +81,7 @@ public class QuantityParserIntegrationTest {
 
     @Test
     public void testQuantityParsing_composedUnit() throws Exception {
-        List<Measurement> measurements = target.process("the result was 10 m^1*s^-1 ");
-
+        List<Measurement> measurements = target.process("The result was 10 m -1 * s -1.");
 
         assertThat(measurements, hasSize(1));
         Measurement measurement = measurements.get(0);
@@ -292,7 +289,7 @@ public class QuantityParserIntegrationTest {
                 "stage\tstage\ts\tst\tsta\tstag\te\tge\tage\ttage\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
                 ".\t.\t.\t.\t.\t.\t.\t.\t.\t.\tALLCAPS\tNODIGIT\t1\tDOT\t.\t.\t0\t0\t<other>";
 
-        List<OffsetPosition> sentences = Arrays.asList(new OffsetPosition(0, 61), new OffsetPosition(61, 123));
+//        List<OffsetPosition> sentences = Arrays.asList(new OffsetPosition(0, 61), new OffsetPosition(61, 123));
 //        List<Measurement> measurementList = target.extractMeasurement(tokens, result, sentences);
         List<Measurement> measurementList = target.extractMeasurement(tokens, result);
 
