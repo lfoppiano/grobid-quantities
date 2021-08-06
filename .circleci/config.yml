@@ -47,3 +47,4 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install npm 
       
       - coveralls/upload
+        path_to_lcov: build/reports/jacoco/test/jacocoTestReport.xml
