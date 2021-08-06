@@ -2,7 +2,7 @@
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation Status](https://readthedocs.org/projects/grobid-quantities/badge/?version=latest)](https://readthedocs.org/projects/grobid-quantities/?badge=latest)
-[![Build Status](https://travis-ci.org/kermitt2/grobid-quantities.svg?branch=master)](https://travis-ci.org/kermitt2/grobid-quantities)
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/kermitt2/grobid-quantities)
 [![Coverage Status](https://coveralls.io/repos/kermitt2/grobid-quantities/badge.svg)](https://coveralls.io/r/kermitt2/grobid-quantities)
 
 __Work in progress.__
@@ -25,7 +25,11 @@ The normalisation of quantities is handled by the java library [Units of measure
 
 ## Latest version
 
-The latest released version of grobid-quantities is 0.6.0. The current development version is 0.6.1. 
+The latest released version of grobid-quantities is [0.7.0](https://github.com/kermitt2/grobid-quantities/releases/tag/0.7.0). The current development version is 0.7.1-SNAPSHOT.
+
+### Update from 0.6.0 to 0.7.0
+
+In version 0.7.0 the models have been updated, therefore is required to run a `./gradlew copyModels` to have properly results especially for what concern the unit normalisation. 
 
 ## Documentation
 
@@ -51,12 +55,14 @@ Evaluated on the 30/04/2020.
 
 ### Units
 
+Updated the 10/02/2021
+
 | Labels          | Precision  | Recall      |  F1-Score     |
 |---------------- |------------|-------------|---------------|
-| `<base>`        | 98.95      |  99.02      |   98.98       |    
-| `<pow>`         | 97.2       |  98.49      |   97.83       |    
-| `<prefix>`      | 98.34      |  98.47      |   98.38       |    
-| all (micro avg.)| 98.7       |  98.89      |   98.8        |
+| `<base>`        | 98.82      | 99.14       |  98.98        |    
+| `<pow>`         | 97.62      | 98.56       |  98.08        |    
+| `<prefix>`      | 99.5       | 98.76       |  99.13        |    
+| all (micro avg.)| 98.85      |  99.01      |  98.93        |
 
 ### Values 
 
