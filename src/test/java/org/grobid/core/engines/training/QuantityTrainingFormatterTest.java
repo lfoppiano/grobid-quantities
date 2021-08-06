@@ -5,9 +5,6 @@ import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
-import org.grobid.core.engines.QuantityParser;
-import org.grobid.core.engines.training.QuantityTrainingFormatter;
-import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,9 +13,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.grobid.core.utilities.UnitUtilities.Unit_Type.*;
+import static org.grobid.core.utilities.UnitUtilities.Unit_Type.FRACTION;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class QuantityTrainingFormatterTest {
 

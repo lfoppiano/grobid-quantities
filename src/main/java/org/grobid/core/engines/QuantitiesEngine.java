@@ -123,7 +123,7 @@ public class QuantitiesEngine {
 
                     BiblioItem resHeader = new BiblioItem();
                     //parsers.getHeaderParser().processingHeaderSection(false, doc, resHeader);
-                    resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+                    resHeader.generalResultMapping(labeledResult, tokenizationHeader);
 
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
@@ -176,8 +176,9 @@ public class QuantitiesEngine {
                             measurements.addAll(quantityParser.process(processedFigure.getCaptionLayoutTokens()));
                         } else if (cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
                             //apply the table model to only get the caption/description
-                            final Table processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
-                            measurements.addAll(quantityParser.process(processedTable.getFullDescriptionTokens()));
+                            final List<Table> processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
+                            processedTable.stream().forEach(t -> measurements.addAll(quantityParser.process(t.getFullDescriptionTokens())));
+                            
                         } else {
                             final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
 

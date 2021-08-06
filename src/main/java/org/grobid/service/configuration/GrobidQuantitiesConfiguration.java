@@ -2,6 +2,10 @@ package org.grobid.service.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import org.grobid.core.utilities.GrobidConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GrobidQuantitiesConfiguration extends Configuration {
 
@@ -14,6 +18,7 @@ public class GrobidQuantitiesConfiguration extends Configuration {
     @JsonProperty
     private String corsAllowedHeaders = "X-Requested-With,Content-Type,Accept,Origin";
 
+    private List<GrobidConfig.ModelParameters> models = new ArrayList<>();
     private int maxParallelRequests;
 
     public String getGrobidHome() {
@@ -46,6 +51,14 @@ public class GrobidQuantitiesConfiguration extends Configuration {
 
     public void setCorsAllowedHeaders(String corsAllowedHeaders) {
         this.corsAllowedHeaders = corsAllowedHeaders;
+    }
+
+    public List<GrobidConfig.ModelParameters> getModels() {
+        return models;
+    }
+
+    public void setModels(List<GrobidConfig.ModelParameters> models) {
+        this.models = models;
     }
 
     public int getMaxParallelRequests() {

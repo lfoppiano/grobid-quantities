@@ -3,19 +3,18 @@ package org.grobid.core.data.normalization;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.engines.UnitParser;
 import org.grobid.core.lexicon.QuantityLexicon;
-import org.grobid.core.main.LibraryLoader;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.easymock.EasyMock.*;
+import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UnitNormalizerIntegrationTest {
 
@@ -25,9 +24,9 @@ public class UnitNormalizerIntegrationTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        LibraryLoader.load();
+        initEngineForTests();
     }
-
+    
     @Before
     public void setUp() {
         target = new UnitNormalizer();

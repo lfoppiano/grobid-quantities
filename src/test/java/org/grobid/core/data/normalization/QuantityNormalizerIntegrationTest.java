@@ -4,7 +4,6 @@ import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
 import org.grobid.core.data.Value;
-import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -18,8 +17,9 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 import static org.easymock.EasyMock.*;
+import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 @Ignore("we should mock also uom-se .. but for now is better to leave it out so that we can spot other errors")
@@ -30,7 +30,7 @@ public class QuantityNormalizerIntegrationTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        LibraryLoader.load();
+        initEngineForTests();
     }
 
     @Before
