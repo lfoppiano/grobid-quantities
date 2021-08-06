@@ -43,5 +43,7 @@ jobs:
 
       # run tests!
       - run: gradle test jacocoTestReport coveralls --no-daemon
+    
+      - run: apt-get install npm 
       
       - coveralls/upload
