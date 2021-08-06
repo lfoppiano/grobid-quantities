@@ -8,7 +8,8 @@ import org.grobid.core.data.QuantifiedObject;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.utilities.GrobidConfig;
+import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -20,7 +21,7 @@ import java.util.List;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class QuantifiedObjectParserTest {
 
@@ -28,6 +29,9 @@ public class QuantifiedObjectParserTest {
 
     @Before
     public void setUp() throws Exception {
+        GrobidConfig.ModelParameters modelParameters = new GrobidConfig.ModelParameters();
+        modelParameters.name = "bao";
+        GrobidProperties.addModel(modelParameters);
         target = new QuantifiedObjectParser(GrobidModels.DUMMY);
     }
 

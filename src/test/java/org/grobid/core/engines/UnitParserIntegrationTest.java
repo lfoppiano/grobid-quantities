@@ -1,18 +1,22 @@
 package org.grobid.core.engines;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import org.grobid.core.data.UnitBlock;
-import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.data.normalization.UnitNormalizer;
 import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.utilities.GrobidProperties;
+import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by lfoppiano on 22.02.16.
@@ -24,8 +28,18 @@ public class UnitParserIntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        LibraryLoader.load();
+        initEngineForTests();
         target = UnitParser.getInstance();
+    }
+
+    public static void initEngineForTests() throws IOException {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
+        // https://stackoverflow.com/questions/14853324/can-not-find-deserialize-for-non-concrete-collection-type
+        mapper.registerModule(new GuavaModule());
+        GrobidQuantitiesConfiguration configuration = mapper.readValue(UnitNormalizer.class.getResourceAsStream("/config-test.yml"), GrobidQuantitiesConfiguration.class);
+        configuration.getModels().stream().forEach(GrobidProperties::addModel);
+        LibraryLoader.load();
     }
 
     @Test
