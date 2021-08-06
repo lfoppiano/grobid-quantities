@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UnitParserTest {
     private UnitParser target;
@@ -27,6 +27,9 @@ public class UnitParserTest {
 
     @Before
     public void setUp() throws Exception {
+        GrobidConfig.ModelParameters modelParameters = new GrobidConfig.ModelParameters();
+        modelParameters.name = "bao";
+        GrobidProperties.addModel(modelParameters);
         target = new UnitParser(GrobidModels.DUMMY, null);
     }
 

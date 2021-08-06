@@ -13,7 +13,7 @@ import java.util.List;
 import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ValueTrainingFormatterTest {
 

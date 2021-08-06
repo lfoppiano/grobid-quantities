@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import static org.easymock.EasyMock.expect;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.powermock.api.easymock.PowerMock.*;
 
 @RunWith(PowerMockRunner.class)
