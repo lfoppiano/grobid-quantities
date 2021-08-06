@@ -364,3 +364,11 @@ You can check whether the service is up and running by opening the following URL
 - GET ``http://yourhost:8060/service/health`` will return you the result of the health check
 
 - GET ``http://yourhost:8060/service/isalive`` will return true/false whether the service is up and running
+
+
+Maximum parallel requests limit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This parameter allow to limit the number of parallel requests that can be send to the service. 
+It can be modified in the configuration file the item `maxParallelRequests`.  
+By default, the number is set to 0, which indicate to allow a number of parallel requests not higher than the number of available CPUs. 

@@ -4,6 +4,9 @@ corsAllowedOrigins: "*"
 corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
 corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
 
+# Limit the maximum number of requests
+maxParallelRequests: 0
+
 models:
   - name: "quantities"
     engine: "wapiti"
@@ -49,8 +52,6 @@ models:
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
-
-
 
 
 views:

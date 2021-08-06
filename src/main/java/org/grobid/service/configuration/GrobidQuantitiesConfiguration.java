@@ -19,6 +19,7 @@ public class GrobidQuantitiesConfiguration extends Configuration {
     private String corsAllowedHeaders = "X-Requested-With,Content-Type,Accept,Origin";
 
     private List<GrobidConfig.ModelParameters> models = new ArrayList<>();
+    private int maxParallelRequests;
 
     public String getGrobidHome() {
         return grobidHome;
@@ -58,5 +59,12 @@ public class GrobidQuantitiesConfiguration extends Configuration {
 
     public void setModels(List<GrobidConfig.ModelParameters> models) {
         this.models = models;
+    }
+
+    public int getMaxParallelRequests() {
+        if (this.maxParallelRequests == 0) {
+            this.maxParallelRequests = Runtime.getRuntime().availableProcessors();
+        }
+        return this.maxParallelRequests;
     }
 }
