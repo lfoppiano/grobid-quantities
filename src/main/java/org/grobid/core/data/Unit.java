@@ -111,11 +111,8 @@ public class Unit {
         if (rawName != null) {
             byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
             String outputRawName = new String(encodedRawName);
-            if (!started) {
-                started = true;
-            } else
-                json.append(", ");
-            json.append("\"name\" : \"" + outputRawName + "\"");
+            started = true;
+            json.append("\"name\" : \"").append(outputRawName).append("\"");
         }
         if (getUnitDefinition() != null) {
             if (!started) {
@@ -129,15 +126,17 @@ public class Unit {
             if (getOffsetStart() != -1) {
                 if (!started) {
                     started = true;
-                } else
+                } else {
                     json.append(", ");
+                }
                 json.append("\"offsetStart\" : " + getOffsetStart());
             }
             if (getOffsetEnd() != -1) {
                 if (!started) {
                     started = true;
-                } else
+                } else {
                     json.append(", ");
+                }
                 json.append("\"offsetEnd\" : " + getOffsetEnd());
             }
         }
