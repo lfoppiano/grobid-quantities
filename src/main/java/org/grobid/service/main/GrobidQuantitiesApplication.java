@@ -14,6 +14,7 @@ import org.grobid.service.QuantitiesServiceModule;
 import org.grobid.service.command.RunTrainingCommand;
 import org.grobid.service.command.UnitBatchProcessingCommand;
 import org.grobid.service.command.TrainingGenerationCommand;
+import org.grobid.service.command.UnitsLookupBatchProcessingCommand;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
