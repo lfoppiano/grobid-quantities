@@ -344,7 +344,7 @@ public class QuantitiesEngine {
     }
 
     /**
-     * Processes a file with units
+     * Processes a file with units one per line
      */
     public void unitBatchProcess(String inputDirectory, String outputDirectory, boolean isRecursive) {
         Path inputPath = Paths.get(inputDirectory);
@@ -403,6 +403,93 @@ public class QuantitiesEngine {
 
 
                 outputWriter.write("</units>\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                IOUtils.closeQuietly(outputWriter);
+            }
+        }
+    }
+    /**
+     * Processes a file formatted as:
+     * - txt with raw units, one per line, or
+     * - xml with structured units (see the training data format)
+     * <p>
+     * and perform lookup using the local lexicon.
+     * <p>
+     * It writes the output as a CSV
+     **/
+    public void unitsLookupBatchProcess(File inputDirectory, File outputDirectory, boolean isRecursive) {
+        Path inputPath = Paths.get(inputDirectory.getAbsolutePath());
+        File[] refFiles = inputPath.toFile()
+            .listFiles((dir, name) -> name.toLowerCase().endsWith(".txt") || name.toLowerCase().endsWith(".xml"));
+
+        if (refFiles == null) {
+            return;
+        }
+
+        LOGGER.info(refFiles.length + " files");
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+
+        for (File inputFile : refFiles) {
+            Writer outputWriter = null;
+            try {
+                // the file for writing the training data
+                OutputStream os2 = null;
+
+                if (outputDirectory != null) {
+                    os2 = new FileOutputStream(outputDirectory + File.separator + inputFile.getName() + ".xml");
+                    outputWriter = new OutputStreamWriter(os2, UTF_8);
+                } else {
+                    return;
+                }
+
+
+//                outputWriter.write("");
+//                outputWriter.write("<units>\n");
+
+                try (Stream<String> stream = Files.lines(Paths.get(inputFile.getAbsolutePath()))) {
+
+                    stream.filter(s -> !s.startsWith("<?xml") && !s.startsWith("<units>")).forEach(s -> {
+                        StringBuilder resultString = new StringBuilder();
+                        List<LayoutToken> tokenisation = new ArrayList<>();
+
+                        SAXParser p = null;
+                        try {
+                            UnitAnnotationSaxHandler handler = new UnitAnnotationSaxHandler();
+                            p = spf.newSAXParser();
+                            p.parse(new InputSource(new StringReader(s)), handler);
+
+                            List<UnitLabeled> labeledResult = handler.getLabeledResult();
+                            Optional<UnitLabeled> first = labeledResult.stream().findFirst();
+
+                            first.ifPresent(unitLabeled -> unitLabeled.getLabels()
+                                .stream()
+                                .forEach(l -> {
+                                    resultString.append(l.getA() + "\t" + l.getB() + "\n");
+                                    tokenisation.add(new LayoutToken(l.getA()));
+                                }));
+                        } catch (ParserConfigurationException | SAXException | IOException e) {
+                            LOGGER.warn("Not well formed string: " + s);
+                        }
+
+                        List<UnitBlock> unitBlocks = unitParser.resultExtraction(resultString.toString(), tokenisation);
+
+                        String products = UnitBlock.asString(unitBlocks);
+                        UnitDefinition unitByNotation = QuantityLexicon.getInstance().getUnitbyName(products);
+                        if (unitByNotation != null) {
+                            System.out.println(s + ", " + products + ", " + unitByNotation.getType());
+                        } else {
+                            System.out.println(s + ", " + products + ", " + "unknown");
+                        }
+
+
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+//                outputWriter.write("</units>\n");
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {

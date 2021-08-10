@@ -14,10 +14,11 @@ public class UnitBlock {
     private String base = "";
     private String pow = "";
 
-    /** this value represent the raw tagging of the whole sequence, not only of this unit block
+    /** 
+     * this value represent the raw tagging of the whole sequence, not only of this unit block
      * Yes it's a workaround but there is no other way to carry this information further without creating a new object
      * in replacement of the List<UnitBlock>
-     * **/
+     **/
     private String rawTaggedValue;
 
 
@@ -78,6 +79,35 @@ public class UnitBlock {
         return sb.toString();
     }
 
+    /*
+     public String toString() {
+     return toString(false);
+     }
+
+     public String toString(boolean denominator) {
+     StringBuilder sb = new StringBuilder();
+     String denominatorSign = "";
+     sb.append(getPrefix());
+     sb.append(getBase());
+     if (isNotBlank(getPow()) && !getPow().equals("1")) {
+     if (denominator) denominatorSign = "-";
+
+     if (StringUtils.equals(getPow(), "/")) {
+     // ignore it 
+     } else if (StringUtils.endsWith(getPow(), "/")) {
+     // if the pow contains a / I have to remove and create a denominator
+     sb.append("^");
+     sb.append(denominatorSign).append(getPow(), 0, getPow().length() - 1);
+     } else {
+     sb.append("^");
+     sb.append(denominatorSign).append(getPow());
+     }
+     }
+
+     return sb.toString();
+     }
+     */
+
     public String toXml() {
         StringBuilder sb = new StringBuilder();
 
@@ -97,6 +127,7 @@ public class UnitBlock {
     public static String asProduct(List<UnitBlock> unitBlockList) {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
+//        boolean denominator = false;
         for (UnitBlock ub : unitBlockList) {
             //It should not happens but if some multiplication sign are slipping out we should replace them 
             ub.setBase(ub.getBase().replace("•", ""));
@@ -108,6 +139,12 @@ public class UnitBlock {
                 first = false;
             }
             sb.append(ub.toString());
+//            sb.append(ub.toString(denominator));
+//
+//            if (ub.getPow().contains("/")) {
+//                denominator = true;
+//            }
+            
         }
 
         return sb.toString();
@@ -119,6 +156,24 @@ public class UnitBlock {
         boolean firstNumerator = true;
         boolean firstDenominator = true;
         boolean fraction = false;
+
+//        boolean first = true;
+//        for (UnitBlock ub : unitBlockList) {
+//
+//            if (ub.getPow().contains("/")) {
+//                fraction = true;
+//                ub.setPow(ub.getPow().replace("/", ""));
+//            }
+//
+//            if (!first && fraction) {
+//                ub.setPow("-" + ub.getPow());
+//            }
+//
+//            if (first) first = false;
+//        }
+//
+//        fraction = false;
+        
         for (UnitBlock ub : unitBlockList) {
             if (!ub.getPow().equals("0")) {
                 if (ub.getPow().contains("-")) {

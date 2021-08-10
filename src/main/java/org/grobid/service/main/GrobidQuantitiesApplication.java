@@ -48,6 +48,7 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         bootstrap.addBundle(new AssetsBundle("/web", "/", "index.html", "assets"));
         bootstrap.addCommand(new TrainingGenerationCommand());
         bootstrap.addCommand(new UnitBatchProcessingCommand());
+        bootstrap.addCommand(new UnitsLookupBatchProcessingCommand());
         bootstrap.addCommand(new RunTrainingCommand());
     }
 
