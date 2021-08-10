@@ -36,7 +36,7 @@ public class QuantityLexicon {
     public static final String UNITS_FILENAME = "units.json";
     public static final String UNITS_EN_PATH = "lexicon/en/" + UNITS_FILENAME;
 
-    private static final String COMPOSED_UNIT_REGEX = "[^/*]";
+    private static final String COMPOSED_UNIT_REGEX = "[^/*]+";
     private static final String COMPOSED_UNIT_REGEX_WITH_DELIMITER = String.format("((?<=%1$s)|(?=%1$s))", "[/*]{1}");
 
     private Pattern composedUnitPattern = Pattern.compile(COMPOSED_UNIT_REGEX);
@@ -399,21 +399,6 @@ public class QuantityLexicon {
 
         while (m.find()) {
             decomposition.add(new RegexValueHolder(m.group(), m.start(), m.end()));
-        }
-
-        return decomposition;
-    }
-
-    @SuppressWarnings("deprecated")
-    @Deprecated
-    public static List<RegexValueHolder> decomposeComplexUnitWithDelimiter(String unitTerm) {
-        List<RegexValueHolder> decomposition = new ArrayList<>();
-        String[] splits = unitTerm.split(COMPOSED_UNIT_REGEX_WITH_DELIMITER);
-
-        int i = 0;
-        for (String split : splits) {
-            decomposition.add(new RegexValueHolder(split, i, i = i + split.length()));
-//            i += split.length();
         }
 
         return decomposition;
