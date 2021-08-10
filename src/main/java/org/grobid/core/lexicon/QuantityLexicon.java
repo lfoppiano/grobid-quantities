@@ -91,7 +91,7 @@ public class QuantityLexicon {
         unitPattern = new FastMatcher();
 
         prefixes = loadPrefixes(this.getClass().getClassLoader().getResourceAsStream(PREFIX_EN_PATH));
-        readJsonFile(this.getClass().getClassLoader().getResourceAsStream(UNITS_EN_PATH), "units", l -> processJsonNode(l));
+        readJsonFile(this.getClass().getClassLoader().getResourceAsStream(UNITS_EN_PATH), "units", this::processJsonNode);
 
         numberTokens = WordsToNumber.getInstance().getTokenSet();
     }
@@ -110,11 +110,11 @@ public class QuantityLexicon {
             unitDefinition.setSupportsPrefixes(supportsPrefixes.asBoolean());
         } else {
             // Imperial and us customary won't need prefixes
-            if (Arrays.asList(UnitUtilities.System_Type.IMPERIAL, UnitUtilities.System_Type.US)
+            if (Arrays.asList(UnitUtilities.System_Type.SI_BASE, UnitUtilities.System_Type.SI_DERIVED)
                 .contains(unitDefinition.getSystem())) {
-                unitDefinition.setSupportsPrefixes(false);
-            } else {
                 unitDefinition.setSupportsPrefixes(true);
+            } else {
+                unitDefinition.setSupportsPrefixes(false);
             }
         }
 
