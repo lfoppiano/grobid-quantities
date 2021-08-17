@@ -2,7 +2,7 @@
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation Status](https://readthedocs.org/projects/grobid-quantities/badge/?version=latest)](https://readthedocs.org/projects/grobid-quantities/?badge=latest)
-[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/kermitt2/grobid-quantities)
+[![CircleCI](https://circleci.com/gh/kermitt2/grobid-quantities.svg?style=svg)](https://circleci.com/gh/kermitt2/grobid-quantities)
 [![Coverage Status](https://coveralls.io/repos/kermitt2/grobid-quantities/badge.svg)](https://coveralls.io/r/kermitt2/grobid-quantities)
 
 __Work in progress.__
