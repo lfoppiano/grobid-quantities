@@ -3,9 +3,9 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2.1
-orbs:
-  coveralls: coveralls/coveralls@1.0.6
-  
+#orbs:
+#  coveralls: coveralls/coveralls@1.0.6
+#
 jobs:
   build:
     docker:
@@ -34,7 +34,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: gradle dependencies
+      - run: ./gradlew dependencies
 
       - save_cache:
           paths:
@@ -42,9 +42,10 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
-      - run: gradle test jacocoTestReport coveralls --no-daemon
+      - run: ./gradlew test jacocoTestReport coveralls --no-daemon
     
-      - run: sudo apt-get update && sudo apt-get install npm 
-      
-      - coveralls/upload:
-          path_to_lcov: build/reports/jacoco/test/jacocoTestReport.xml
+#      - run: sudo apt-get update && sudo apt-get install npm
+          
+#      - coveralls/upload:
+      - store_test_results:
+          path: build/reports/jacoco/test/jacocoTestReport.xml
