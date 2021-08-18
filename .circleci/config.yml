@@ -51,3 +51,11 @@ jobs:
           path: build/reports/jacoco/test/jacocoTestReport.xml
       - store_test_results:
           path: build/reports/tests/test
+      - upload_artifacts:
+          path: build/reports/jacoco/test/jacocoTestReport.xml
+      - upload_artifacts:
+          path: build/reports/tests/test
+      - upload_artifacts:
+          path: build/reports/jacoco/test/html/index.html
+      - upload_artifacts:
+          path: build/reports/tests/test/index.html
