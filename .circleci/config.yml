@@ -48,6 +48,6 @@ jobs:
           
 #      - coveralls/upload:
       - store_test_results:
-          path: build/reports/jacoco/test/html
+          path: build/reports/jacoco/test/html/index.html
       - store_test_results:
-          path: build/reports/tests/test
+          path: build/reports/tests/test/index.html
