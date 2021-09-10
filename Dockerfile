@@ -76,7 +76,7 @@ VOLUME ["/opt/grobid/grobid-home/tmp"]
 WORKDIR /opt/grobid/grobid-quantities
 
 RUN sed -i 's/pythonVirtualEnv:.*/pythonVirtualEnv: /g' config.yml
-RUN sed -i 's/grobidHome:.*/grobidHome: ../grobid-home/g' config.yml
+RUN sed -i 's/grobidHome:.*/grobidHome: ..\/grobid-home/g' config.yml
 
 # JProfiler
 #RUN wget https://download-gcdn.ej-technologies.com/jprofiler/jprofiler_linux_12_0_2.tar.gz -P /tmp/ && \
