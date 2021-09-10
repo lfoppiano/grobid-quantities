@@ -63,7 +63,7 @@ RUN apt-get update && \
 
 WORKDIR /opt/grobid
 
-RUN mkdir -p /opt/grobid/grobid-superconductors
+RUN mkdir -p /opt/grobid/grobid-quantities
 COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
 COPY --from=builder /opt/grobid-source/grobid-quantities/build/libs/* ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config.yml ./grobid-quantities/
@@ -73,10 +73,6 @@ VOLUME ["/opt/grobid/grobid-home/tmp"]
 # Install requirements
 WORKDIR /opt/grobid
 
-#RUN pip install git+https://github.com/lfoppiano/MaterialParser
-#RUN pip install -e /opt/grobid/grobid-superconductors-tools/materialParser
-
-#RUN sed -i 's/pythonVirtualEnv:.*/pythonVirtualEnv: \/opt\/grobid\/venv/g' grobid-superconductors/config.yml
 RUN sed -i 's/pythonVirtualEnv:.*/pythonVirtualEnv: /g' grobid-quantities/config.yml
 RUN sed -i 's/grobidHome:.*/grobidHome: grobid-home/g' grobid-quantities/config.yml
 
@@ -85,12 +81,12 @@ RUN sed -i 's/grobidHome:.*/grobidHome: grobid-home/g' grobid-quantities/config.
 #  tar -xzf /tmp/jprofiler_linux_12_0_2.tar.gz -C /usr/local &&\
 #  rm /tmp/jprofiler_linux_12_0_2.tar.gz
 
-EXPOSE 8072 8073
+EXPOSE 8060 8061
 #EXPOSE 8080 8081
 
 #CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities/grobid-quantities-0.7.0-SNAPSHOT-onejar.jar", "server", "grobid-quantities/config.yml"]
+CMD ["java", "-jar", "grobid-quantities/grobid-quantities-0.7.0-onejar.jar", "server", "grobid-quantities/config.yml"]
 
 ARG GROBID_VERSION
 
