@@ -63,18 +63,19 @@ RUN apt-get update && \
 
 WORKDIR /opt/grobid
 
-RUN mkdir -p /opt/grobid/grobid-quantities
+RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp
 COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
 COPY --from=builder /opt/grobid-source/grobid-quantities/build/libs/* ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config.yml ./grobid-quantities/
+COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/* ./grobid-quantities/resources/clearnlp
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
 # Install requirements
-WORKDIR /opt/grobid
+WORKDIR /opt/grobid/grobid-quantities
 
-RUN sed -i 's/pythonVirtualEnv:.*/pythonVirtualEnv: /g' grobid-quantities/config.yml
-RUN sed -i 's/grobidHome:.*/grobidHome: grobid-home/g' grobid-quantities/config.yml
+RUN sed -i 's/pythonVirtualEnv:.*/pythonVirtualEnv: /g' config.yml
+RUN sed -i 's/grobidHome:.*/grobidHome: grobid-home/g' config.yml
 
 # JProfiler
 #RUN wget https://download-gcdn.ej-technologies.com/jprofiler/jprofiler_linux_12_0_2.tar.gz -P /tmp/ && \
