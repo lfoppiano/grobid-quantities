@@ -77,6 +77,7 @@ logging:
   appenders:
     - type: console
       threshold: INFO
+#Docker-ignore-log-start      
     - type: file
       threshold: DEBUG
       logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
@@ -85,4 +86,6 @@ logging:
       archivedFileCount: 7
       timeZone: UTC
       maxFileSize: 10MB
+#Docker-ignore-log-end
 timeZone: UTC
+
