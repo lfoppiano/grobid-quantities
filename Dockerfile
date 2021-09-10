@@ -31,10 +31,8 @@ RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantit
 WORKDIR /opt/grobid-source/grobid-quantities
 COPY gradle.properties .
 
-COPY gradle.properties ./grobid-quantities/
-
 # Adjust config
-RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./grobid-quantities/resources/config/config-docker.yml
+RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
 
 # Preparing models
 RUN rm -rf /opt/grobid-source/grobid-home/models/*
