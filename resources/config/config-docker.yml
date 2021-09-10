@@ -1,0 +1,91 @@
+grobidHome: /opt/grobid/grobid-home
+
+corsAllowedOrigins: "*"
+corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
+corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
+
+# Limit the maximum number of requests
+maxParallelRequests: 0
+
+models:
+  - name: "quantities"
+    engine: "wapiti"
+    #engine: "delft"
+    wapiti:
+      # wapiti training parameters, they will be used at training time only
+      epsilon: 0.00001
+      window: 30
+      nbMaxIterations: 2000
+    delft:
+      # deep learning parameters
+      architecture: "BidLSTM_CRF"
+      #architecture: "scibert"
+      useELMo: false
+      embeddings_name: "glove-840B"
+
+  - name: "units"
+    engine: "wapiti"
+    #engine: "delft"
+    wapiti:
+      # wapiti training parameters, they will be used at training time only
+      epsilon: 0.00001
+      window: 30
+      nbMaxIterations: 2000
+    delft:
+      # deep learning parameters
+      architecture: "BidLSTM_CRF"
+      #architecture: "scibert"
+      useELMo: false
+      embeddings_name: "glove-840B"
+
+  - name: "values"
+    engine: "wapiti"
+    #engine: "delft"
+    wapiti:
+      # wapiti training parameters, they will be used at training time only
+      epsilon: 0.00001
+      window: 30
+      nbMaxIterations: 2000
+    delft:
+      # deep learning parameters
+      architecture: "BidLSTM_CRF"
+      #architecture: "scibert"
+      useELMo: false
+      embeddings_name: "glove-840B"
+
+
+views:
+  .mustache:
+    cache: false
+
+server:
+  type: custom
+  idleTimeout: 120 seconds
+  applicationConnectors:
+    - type: http
+      port: 8060
+  adminConnectors:
+    - type: http
+      port: 8061
+  registerDefaultExceptionMappers: false
+  maxThreads: 2048
+  maxQueuedRequests: 2048
+  acceptQueueSize: 2048
+
+logging:
+  level: INFO
+  appenders:
+    - type: console
+      threshold: INFO
+#Docker-ignore-log-start      
+    - type: file
+      threshold: DEBUG
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      currentLogFilename: logs/grobid-quantities.log
+      archivedLogFilenamePattern: logs/grobid-quantities-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 7
+      timeZone: UTC
+      maxFileSize: 10MB
+#Docker-ignore-log-end
+timeZone: UTC
+
