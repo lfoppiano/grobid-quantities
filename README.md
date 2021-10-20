@@ -77,7 +77,7 @@ Updated the 10/02/2021
 | all (micro avg.)| 96.15      |   97.95     |   97.4        |
 
 The current average results have been calculated using micro average which provides more realistic results by giving different weights to labels based on their frequency.
-The [paper](https://doi.org/10.1145/3342558.3345411) "Automatic Identification and Normalisation of Physical Measurements in Scientific Literature", published in September 2019 reported average evaluation based on macro average. 
+The [paper](https://hal.inria.fr/hal-02294424) "Automatic Identification and Normalisation of Physical Measurements in Scientific Literature", published in September 2019 reported average evaluation based on macro average. 
 
 ## Acknowledgement 
 
