@@ -40,7 +40,7 @@ You can find the latest documentation [here](http://grobid-quantities.readthedoc
 The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). 
 
 ### BidLSTM + CRF 
-Evaluated on the 28/11/2021 (using layout features BidLSTM_CRF_FEATURES)
+Evaluated on the 28/11/2021 (using layout features, architecture BidLSTM_CRF_FEATURES)
 
 #### Quantities
 
@@ -60,22 +60,22 @@ Evaluated on the 28/11/2021 (using layout features BidLSTM_CRF_FEATURES)
 
 | Labels          | Precision  | Recall      |  F1-Score     |
 |---------------- |------------|-------------|---------------|
-| `<base>`        | 98.82      | 99.14       |  98.98        |    
-| `<pow>`         | 97.62      | 98.56       |  98.08        |    
-| `<prefix>`      | 99.5       | 98.76       |  99.13        |    
-| all (micro avg.)| 98.85      |  99.01      |  98.93        |
+| `<base>`        | 98.26      | 98.52       |  98.39        |    
+| `<pow>`         | 100.00     | 98.57       |  99.28        |    
+| `<prefix>`      | 98.89      | 97.75       |  98.30        |    
+| all (micro avg.)| 98.51      |  98.39      |  98.45        |
+
 
 #### Values
 
 | Labels          | Precision  | Recall      |  F1-Score     |
 |-----------------|------------|-------------|---------------|
-| `<alpha>`       | 96.9       |   98.84     |   97.85       |    
-| `<base>`        | 85.14      |   74.48     |   79          |    
-| `<number>`      | 98.07      |   99.05     |   98.55       |    
-| `<pow>`         | 80.05      |   76.33     |   77.54       |     
-| `<time>`        | 73.07      |   86.82     |   79.26       |    
-| all (micro avg.)| 96.15      |   97.95     |   97.4        |
-
+| `<alpha>`       | 99.41     |   99.55     |   99.48      |    
+| `<base>`        | 96.67     |   100.00     |  98.00       |    
+| `<number>`      | 99.55     |   98.68     |   99.11      |    
+| `<pow>`         | 72.50     |   75.00     |   73.50      |     
+| `<time>`        | 80.84     |   100.00     |  89.28       |    
+| all (micro avg.)| 98.49      |   98.66     |   98.57        |
 
 ### CRF
 Evaluated on the 30/04/2020.
