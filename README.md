@@ -39,9 +39,48 @@ You can find the latest documentation [here](http://grobid-quantities.readthedoc
 ## Evaluation
 The results (Precision, Recall, F-score) for all the models have been obtained using 10-fold cross-validation (average metrics over the 10 folds). 
 
+### BidLSTM + CRF 
+Evaluated on the 28/11/2021 (using layout features BidLSTM_CRF_FEATURES)
+
+#### Quantities
+
+| Labels          | Precision  | Recall      |  F1-Score     |
+|-----------------|------------|-------------|---------------|
+| `<unitLeft>`    | 95.17      |  96.67      |  95.91      |    
+| `<unitRight>`   | 92.52      |  83.64      |  87.69      |    
+| `<valueAtomic>` | 81.74      |  89.21      |  85.30      |    
+| `<valueBase>`   | 100.00     |  75.00      |  85.71      |     
+| `<valueLeast>`  | 89.24      |  82.25      |  85.55      |    
+| `<valueList>`   | 75.27      |  75.33      |  75.12      |  
+| `<valueMost>`   | 89.02      |  81.56      |  85.10      |  
+| `<valueRange>`  | 100.00     |  96.25      |  97.90      |  
+| all (micro avg.)| 87.23      |  89.00      | 88.10       |      
+
+#### Units
+
+| Labels          | Precision  | Recall      |  F1-Score     |
+|---------------- |------------|-------------|---------------|
+| `<base>`        | 98.82      | 99.14       |  98.98        |    
+| `<pow>`         | 97.62      | 98.56       |  98.08        |    
+| `<prefix>`      | 99.5       | 98.76       |  99.13        |    
+| all (micro avg.)| 98.85      |  99.01      |  98.93        |
+
+#### Values
+
+| Labels          | Precision  | Recall      |  F1-Score     |
+|-----------------|------------|-------------|---------------|
+| `<alpha>`       | 96.9       |   98.84     |   97.85       |    
+| `<base>`        | 85.14      |   74.48     |   79          |    
+| `<number>`      | 98.07      |   99.05     |   98.55       |    
+| `<pow>`         | 80.05      |   76.33     |   77.54       |     
+| `<time>`        | 73.07      |   86.82     |   79.26       |    
+| all (micro avg.)| 96.15      |   97.95     |   97.4        |
+
+
+### CRF
 Evaluated on the 30/04/2020.
 
-### Quantities     
+#### Quantities     
 
 | Labels          | Precision  | Recall      |  F1-Score     |
 |-----------------|------------|-------------|---------------|
@@ -54,7 +93,7 @@ Evaluated on the 30/04/2020.
 | `<valueRange>`  | 90.25      |   88.58     |   88.86       |  
 | all (micro avg.)| 88.96      |   85.4      |   87.14       |      
 
-### Units
+#### Units
 
 Updated the 10/02/2021
 
@@ -65,7 +104,7 @@ Updated the 10/02/2021
 | `<prefix>`      | 99.5       | 98.76       |  99.13        |    
 | all (micro avg.)| 98.85      |  99.01      |  98.93        |
 
-### Values 
+#### Values 
 
 | Labels          | Precision  | Recall      |  F1-Score     |
 |-----------------|------------|-------------|---------------|
