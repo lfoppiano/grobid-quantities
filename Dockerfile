@@ -88,7 +88,7 @@ EXPOSE 8060 8061
 
 #CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities-0.7.0-onejar.jar", "server", "config.yml"]
+CMD ["java", "-jar", "grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "config.yml"]
 
 ARG GROBID_VERSION
 
