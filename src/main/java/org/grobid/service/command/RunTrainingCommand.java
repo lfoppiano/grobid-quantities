@@ -6,6 +6,7 @@ import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.grobid.trainer.*;
 import org.slf4j.Logger;
@@ -91,6 +92,7 @@ public class RunTrainingCommand extends ConfiguredCommand<GrobidQuantitiesConfig
         String configurationGrobidHome = configuration.getGrobidHome();
         File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
         initGrobidHome(configurationGrobidHome, grobidHomeOverride);
+        configuration.getModels().stream().forEach(GrobidProperties::addModel);
 
         String modelName = namespace.get(MODEL_NAME);
         String action = namespace.get(ACTION);
