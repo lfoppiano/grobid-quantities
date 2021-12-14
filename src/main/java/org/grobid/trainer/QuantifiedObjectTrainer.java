@@ -19,6 +19,7 @@ import java.util.List;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.engines.QuantitiesModels.QUANTIFIED_OBJECT;
+import static org.grobid.trainer.QuantitiesTrainer.loadConfigurationFromDefaultPath;
 
 public class QuantifiedObjectTrainer extends AbstractTrainer {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantifiedObjectTrainer.class);
@@ -145,6 +146,7 @@ public class QuantifiedObjectTrainer extends AbstractTrainer {
      */
     public static void main(String[] args) {
         GrobidProperties.getInstance();
+        loadConfigurationFromDefaultPath();
 
         Trainer trainer = new QuantifiedObjectTrainer();
         AbstractTrainer.runSplitTrainingEvaluation(trainer, 0.6);
