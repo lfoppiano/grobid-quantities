@@ -41,7 +41,7 @@ Then, build everything with:
    cd PATH-TO-GROBID/grobid-quantities/
 
    ./gradlew copyModels
-   ./gradlew clean install
+   ./gradlew clean build
 
 
 You should have the directories of the models ``quantities``, ``units`` and ``values`` inside ``../grobid-home/models``
