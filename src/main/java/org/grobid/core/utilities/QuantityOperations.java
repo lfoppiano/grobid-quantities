@@ -1,18 +1,17 @@
 package org.grobid.core.utilities;
 
 import com.google.common.collect.Iterables;
-import net.sf.saxon.lib.Logger;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.assertj.core.data.Offset;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.exceptions.GrobidException;
-import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;

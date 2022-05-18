@@ -20,7 +20,8 @@ public class HealthCheck extends com.codahale.metrics.health.HealthCheck {
     private GrobidQuantitiesConfiguration configuration;
 
     @Inject
-    public HealthCheck() {
+    public HealthCheck(GrobidQuantitiesConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     @GET

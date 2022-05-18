@@ -54,13 +54,13 @@ models:
       embeddings_name: "glove-840B"
 
 
-views:
-  .mustache:
-    cache: false
+#views:
+#  .mustache:
+#    cache: false
 
 server:
   type: custom
-  idleTimeout: 120 seconds
+  idleThreadTimeout: 120 seconds
   applicationConnectors:
     - type: http
       port: 8060
@@ -70,7 +70,6 @@ server:
   registerDefaultExceptionMappers: false
   maxThreads: 2048
   maxQueuedRequests: 2048
-  acceptQueueSize: 2048
 
 logging:
   level: INFO
@@ -84,8 +83,6 @@ logging:
       currentLogFilename: logs/grobid-quantities.log
       archivedLogFilenamePattern: logs/grobid-quantities-%d{yyyy-MM-dd}-%i.log.gz
       archivedFileCount: 7
-      timeZone: UTC
       maxFileSize: 10MB
 #Docker-ignore-log-end
-timeZone: UTC
 
