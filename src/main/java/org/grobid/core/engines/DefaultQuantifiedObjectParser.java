@@ -139,6 +139,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
             return;
 
         int startSentencePosition = processedSentence.getOffsetStart();
+        FeatureFactory featureFactory = FeatureFactory.getInstance();
 
         List<SentenceParse> parses = processedSentence.getParses();
         // we're just considering the first best parse
@@ -250,7 +251,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                                 (funct.equals("pobj") && pos.startsWith("NN")) ||
                                 (previousFunct.equals("num") && pos.startsWith("NN"))
                 ) {
-                    if (FeatureFactory.test_digit(pieces[1]))
+                    if (featureFactory.test_digit(pieces[1]))
                         substance = new QuantifiedObject(pieces[1], pieces[1]);
                     else
                         substance = new QuantifiedObject(pieces[1], pieces[2]);
