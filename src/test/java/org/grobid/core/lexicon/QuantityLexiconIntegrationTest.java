@@ -181,6 +181,20 @@ public class QuantityLexiconIntegrationTest {
     }
 
     @Test
+    public void testDecomposeComplexUnitWithDelimiterMultiplication() throws Exception {
+        List<RegexValueHolder> out = target.decomposeComplexUnit("m*s2");
+
+        assertThat(out.size(), is(2));
+
+        assertThat(out.get(0).getValue(), is("m"));
+        assertThat(out.get(0).getStart(), is(0));
+        assertThat(out.get(0).getEnd(), is(1));
+        assertThat(out.get(1).getValue(), is("s2"));
+        assertThat(out.get(1).getStart(), is(2));
+        assertThat(out.get(1).getEnd(), is(4));
+    }
+
+    @Test
     public void testDecomposeComplexUnitWithDelimiter() throws Exception {
         List<RegexValueHolder> out = target.decomposeComplexUnit("m/s2");
 
