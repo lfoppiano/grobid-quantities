@@ -60,10 +60,11 @@ models:
 
 server:
   type: custom
-  idleThreadTimeout: 120 seconds
   applicationConnectors:
     - type: http
       port: 8060
+      idleTimeout: 120 seconds
+      acceptQueueSize: 2048
   adminConnectors:
     - type: http
       port: 8061
@@ -76,6 +77,7 @@ logging:
   appenders:
     - type: console
       threshold: INFO
+      timeZone: UTC
 #Docker-ignore-log-start      
     - type: file
       threshold: DEBUG
@@ -83,6 +85,7 @@ logging:
       currentLogFilename: logs/grobid-quantities.log
       archivedLogFilenamePattern: logs/grobid-quantities-%d{yyyy-MM-dd}-%i.log.gz
       archivedFileCount: 7
+      timeZone: UTC
       maxFileSize: 10MB
 #Docker-ignore-log-end
 
