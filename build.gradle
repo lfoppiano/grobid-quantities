@@ -70,9 +70,9 @@ dependencies {
 
     //Json
     implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
-    implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.13.0'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+//    implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.13.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2'
 
     // measurements
 
@@ -87,13 +87,15 @@ dependencies {
     implementation group: 'systems.uom', name: 'systems-unicode', version: '2.1'
 
     //Dropwizard
-    implementation 'io.dropwizard:dropwizard-bom:2.0.25'
-    implementation 'io.dropwizard:dropwizard-assets:2.0.28'
     implementation 'ru.vyarus:dropwizard-guicey:5.5.0'
-    implementation 'io.dropwizard:dropwizard-testing:2.0.28'
-    implementation 'io.dropwizard:dropwizard-forms:2.0.25'
-    implementation 'io.dropwizard:dropwizard-client:2.0.28'
-    implementation 'io.dropwizard:dropwizard-auth:2.0.28'
+
+    implementation 'io.dropwizard:dropwizard-bom:2.1.0'
+    implementation 'io.dropwizard:dropwizard-core:2.1.0'
+    implementation 'io.dropwizard:dropwizard-assets:2.1.0'
+    implementation 'io.dropwizard:dropwizard-testing:2.1.0'
+    implementation 'io.dropwizard:dropwizard-forms:2.1.0'
+    implementation 'io.dropwizard:dropwizard-client:2.1.0'
+    implementation 'io.dropwizard:dropwizard-auth:2.1.0'
     implementation 'io.dropwizard.metrics:metrics-core:4.2.4'
     implementation 'io.dropwizard.metrics:metrics-servlets:4.2.4'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
