@@ -10,6 +10,22 @@ Grobid-quantities requires *JDK 1.8 or greater* and Grobid to be installed.
 Install and build
 ~~~~~~~~~~~~~~~~~
 
+Docker containers
+~~~~~~~~~~~~~~~~~
+The simplest way to run grobid-quantities is via docker containers.
+To run the container with the default configuration:
+::
+     docker run --rm --init -p 8060:8060 -p 8061:8061  lfoppiano/grobid-quantities:0.7.0
+
+To run the container with custom configuration, is possible by providing a configuration file with the parameter ``-v``
+Grobid quantities repository provides already the file `resources/config/config-docker.yml` that contains the correct grobidHome and can be modified to best suits ones's needs: 
+::
+     docker run --rm --init -p 8060:8060 -p 8061:8061 -v resources/config/config-docker.yml:/opt/grobid/grobid-quantities/config.yml:ro  lfoppiano/grobid-quantities:0.7.0
+
+
+Local installation 
+~~~~~~~~~~~~~~~~~~~~~
+
 First install the latest development version of GROBID as explained by the `documentation <http://grobid.readthedocs.org>`_.
 
 Grobid-quantities root directory needs to be placed as sibling sub-project inside Grobid directory:
@@ -25,7 +41,7 @@ Then, build everything with:
    cd PATH-TO-GROBID/grobid-quantities/
 
    ./gradlew copyModels
-   ./gradlew clean install
+   ./gradlew clean build
 
 
 You should have the directories of the models ``quantities``, ``units`` and ``values`` inside ``../grobid-home/models``

@@ -111,7 +111,7 @@ public class ValueParser extends AbstractParser {
                         return secondPart;
                     }
 
-                } catch (ParseException | ArithmeticException e) {
+                } catch (ParseException | ArithmeticException | NumberFormatException e) {
                     LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
                 }
 

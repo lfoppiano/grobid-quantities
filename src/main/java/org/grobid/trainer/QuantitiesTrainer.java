@@ -1,5 +1,9 @@
 package org.grobid.trainer;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import io.dropwizard.jackson.Jackson;
 import org.apache.commons.io.IOUtils;
 import org.grobid.core.engines.QuantitiesModels;
 import org.grobid.core.exceptions.GrobidException;
@@ -9,11 +13,14 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.Pair;
 import org.grobid.core.utilities.UnicodeUtil;
+import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.grobid.trainer.sax.MeasureAnnotationSaxHandler;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -215,8 +222,25 @@ public class QuantitiesTrainer extends AbstractTrainer {
      */
     public static void main(String[] args) {
         GrobidProperties.getInstance();
+        loadConfigurationFromDefaultPath();
 
         Trainer trainer = new QuantitiesTrainer();
         AbstractTrainer.runTraining(trainer);
+    }
+
+    public static void loadConfigurationFromDefaultPath() {
+        Path configFilePath = Paths.get("resources", "config", "config.yml");
+        ObjectMapper mapper = Jackson.newObjectMapper(new YAMLFactory());
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        
+        try {
+            System.out.println("Reading configuration from default location: "+ configFilePath.toAbsolutePath());
+            GrobidQuantitiesConfiguration configuration = mapper.readValue(configFilePath.toFile(), GrobidQuantitiesConfiguration.class);
+            configuration.getModels().stream().forEach(GrobidProperties::addModel);
+        } catch (Exception e) {
+            System.out.println("Cannot read configuration. To specify the configuration to a custom path, run the training via the JAR file. See java -jar build/lib/*.onjar.jar --help for information.");
+            System.out.println("Exception: " + e);
+            System.exit(-1);
+        }
     }
 }

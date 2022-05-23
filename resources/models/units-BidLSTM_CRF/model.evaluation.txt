@@ -1,0 +1,165 @@
+Using TensorFlow backend.
+WARNING:tensorflow:From /home/lfoppian0/anaconda3/envs/tensorflow-gpu_env/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /home/lfoppian0/anaconda3/envs/tensorflow-gpu_env/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py:3445: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+WARNING:tensorflow:From /home/lfoppian0/anaconda3/envs/tensorflow-gpu_env/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+Loading data...
+2243 train sequences
+250 validation sequences
+278 evaluation sequences
+embedding_lmdb_path is not specified in the embeddings registry, so the embeddings will be loaded in memory...
+loading embeddings...
+path: /lustre/group/tdm/Luca/delft/delft/data/embeddings/glove.840B.300d.txt
+embeddings loaded for 2196017 words and 300 dimensions
+
+Evaluation:
+
+------------------------ fold 0 --------------------------------------
+	f1 (micro): 98.65
+                  precision    recall  f1-score   support
+
+          <base>     0.9868    0.9836    0.9852       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     1.0000    0.9718    0.9857        71
+
+all (micro avg.)     0.9902    0.9829    0.9865       410
+
+
+------------------------ fold 1 --------------------------------------
+	f1 (micro): 98.41
+                  precision    recall  f1-score   support
+
+          <base>     0.9835    0.9803    0.9819       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     1.0000    0.9718    0.9857        71
+
+all (micro avg.)     0.9877    0.9805    0.9841       410
+
+
+------------------------ fold 2 --------------------------------------
+	f1 (micro): 98.04
+                  precision    recall  f1-score   support
+
+          <base>     0.9833    0.9704    0.9768       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     0.9726    1.0000    0.9861        71
+
+all (micro avg.)     0.9828    0.9780    0.9804       410
+
+
+------------------------ fold 3 --------------------------------------
+	f1 (micro): 97.81
+                  precision    recall  f1-score   support
+
+          <base>     0.9738    0.9770    0.9754       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     0.9722    0.9859    0.9790        71
+
+all (micro avg.)     0.9757    0.9805    0.9781       410
+
+
+------------------------ fold 4 --------------------------------------
+	f1 (micro): 98.17
+                  precision    recall  f1-score   support
+
+          <base>     0.9834    0.9770    0.9802       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     0.9722    0.9859    0.9790        71
+
+all (micro avg.)     0.9829    0.9805    0.9817       410
+
+
+------------------------ fold 5 --------------------------------------
+	f1 (micro): 98.16
+                  precision    recall  f1-score   support
+
+          <base>     0.9834    0.9770    0.9802       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     0.9857    0.9718    0.9787        71
+
+all (micro avg.)     0.9853    0.9780    0.9816       410
+
+
+------------------------ fold 6 --------------------------------------
+	f1 (micro): 98.41
+                  precision    recall  f1-score   support
+
+          <base>     0.9900    0.9770    0.9834       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     0.9722    0.9859    0.9790        71
+
+all (micro avg.)     0.9877    0.9805    0.9841       410
+
+
+------------------------ fold 7 --------------------------------------
+	f1 (micro): 98.78
+                  precision    recall  f1-score   support
+
+          <base>     0.9837    0.9901    0.9869       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     1.0000    0.9718    0.9857        71
+
+all (micro avg.)     0.9878    0.9878    0.9878       410
+
+
+------------------------ fold 8 --------------------------------------
+	f1 (micro): 98.05
+                  precision    recall  f1-score   support
+
+          <base>     0.9708    0.9836    0.9771       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     1.0000    0.9718    0.9857        71
+
+all (micro avg.)     0.9782    0.9829    0.9805       410
+
+
+------------------------ fold 9 --------------------------------------
+	f1 (micro): 97.68
+                  precision    recall  f1-score   support
+
+          <base>     0.9768    0.9704    0.9736       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     0.9722    0.9859    0.9790        71
+
+all (micro avg.)     0.9780    0.9756    0.9768       410
+
+----------------------------------------------------------------------
+
+** Worst ** model scores - run 9
+                  precision    recall  f1-score   support
+
+          <base>     0.9768    0.9704    0.9736       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     0.9722    0.9859    0.9790        71
+
+all (micro avg.)     0.9780    0.9756    0.9768       410
+
+
+** Best ** model scores - run 7
+                  precision    recall  f1-score   support
+
+          <base>     0.9837    0.9901    0.9869       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     1.0000    0.9718    0.9857        71
+
+all (micro avg.)     0.9878    0.9878    0.9878       410
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+          <base>     0.9816    0.9786    0.9801       304
+           <pow>     1.0000    1.0000    1.0000        35
+        <prefix>     0.9847    0.9803    0.9824        71
+
+all (micro avg.)     0.9836    0.9807    0.9822          
+
+model config file saved
+preprocessor saved
+model saved

@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitiesConfiguration> {
@@ -68,10 +69,11 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
     }
 
     @Override
-    protected void run(Bootstrap bootstrap, Namespace namespace, GrobidQuantitiesConfiguration configuration) throws Exception {
+    protected void run(Bootstrap bootstrap, Namespace namespace, GrobidQuantitiesConfiguration configuration) throws Exception {        
         File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
 
         initGrobidHome(configuration.getGrobidHome(), grobidHomeOverride);
+        configuration.getModels().stream().forEach(GrobidProperties::addModel);
 
         File inputDirectory = namespace.get(INPUT_DIRECTORY);
         File outputDirectory = namespace.get(OUTPUT_DIRECTORY);
