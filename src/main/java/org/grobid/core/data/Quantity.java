@@ -336,22 +336,16 @@ public class Quantity implements Comparable<Quantity> {
 
         public String toJson() {
             StringBuilder json = new StringBuilder();
-            boolean started = false;
+            boolean first = true;
             json.append("{ ");
 
             if (unit != null) {
-                if (!started) {
-                    started = true;
-                } else {
-                    json.append(", ");
-                }
+                first = false;
                 json.append("\"normalizedUnit\":" + unit.toJson());
             }
 
             if (value != null) {
-                if (!started) {
-                    started = true;
-                } else {
+                if (!first) {
                     json.append(", ");
                 }
                 json.append("\"normalizedValue\":" + value.toString());
