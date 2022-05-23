@@ -19,6 +19,7 @@ import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
+import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
@@ -26,20 +27,24 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.service.exceptions.GrobidServiceException;
+import org.grobid.trainer.UnitLabeled;
+import org.grobid.trainer.sax.UnitAnnotationSaxHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.Response;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.SortedSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -344,9 +349,9 @@ public class QuantitiesEngine {
     }
 
     /**
-     * Processes a file with units
+     * Processes a file with units one per line
      */
-    public void unitBatchProcess(String inputDirectory, String outputDirectory, boolean isRecursive) {
+    public void unitBatchProcess(String inputDirectory, String outputDirectory) {
         Path inputPath = Paths.get(inputDirectory);
         File[] refFiles = inputPath.toFile().listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name) {

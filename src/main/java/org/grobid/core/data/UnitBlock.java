@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
@@ -14,10 +15,11 @@ public class UnitBlock {
     private String base = "";
     private String pow = "";
 
-    /** this value represent the raw tagging of the whole sequence, not only of this unit block
+    /**
+     * This value represent the raw tagging of the whole sequence, not only of this unit block
      * Yes it's a workaround but there is no other way to carry this information further without creating a new object
      * in replacement of the List<UnitBlock>
-     * **/
+     **/
     private String rawTaggedValue;
 
 
@@ -65,14 +67,34 @@ public class UnitBlock {
             this.pow = pow;
         }
     }
-
+    
     public String toString() {
+        return toString(false);
+    }
+
+    /**
+     * Convert to string a unit block. 
+     * @param invertPower invert the power of the current block 
+     * @return
+     */
+    public String toString(boolean invertPower) {
         StringBuilder sb = new StringBuilder();
+        String denominatorSign = "";
         sb.append(getPrefix());
         sb.append(getBase());
-        if (!getPow().equals("")) {
-            sb.append("^");
-            sb.append(getPow());
+        if (isNotBlank(getPow()) && !getPow().equals("1")) {
+            if (invertPower) denominatorSign = "-";
+
+            if (StringUtils.equals(getPow(), "/")) {
+                // ignore it 
+            } else if (StringUtils.endsWith(getPow(), "/")) {
+                // if the pow contains a / I have to remove and create a denominator
+                sb.append("^");
+                sb.append(denominatorSign).append(getPow(), 0, getPow().length() - 1);
+            } else {
+                sb.append("^");
+                sb.append(denominatorSign).append(getPow());
+            }
         }
 
         return sb.toString();
@@ -97,8 +119,9 @@ public class UnitBlock {
     public static String asProduct(List<UnitBlock> unitBlockList) {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
+        boolean invertPower = false;
         for (UnitBlock ub : unitBlockList) {
-            //It should not happens but if some multiplication sign are slipping out we should replace them 
+            //It should not happen but if some multiplication sign are slipping out we should replace them
             ub.setBase(ub.getBase().replace("•", ""));
             ub.setPow(ub.getPow().replace("•", ""));
             ub.setPrefix(ub.getPrefix().replace("•", ""));
@@ -107,7 +130,12 @@ public class UnitBlock {
             } else {
                 first = false;
             }
-            sb.append(ub.toString());
+            sb.append(ub.toString(invertPower));
+
+            if (ub.getPow().contains("/")) {
+                invertPower = true;
+            }
+
         }
 
         return sb.toString();
@@ -119,6 +147,24 @@ public class UnitBlock {
         boolean firstNumerator = true;
         boolean firstDenominator = true;
         boolean fraction = false;
+
+        boolean first = true;
+        for (UnitBlock ub : unitBlockList) {
+
+            if (ub.getPow().contains("/")) {
+                fraction = true;
+                ub.setPow(ub.getPow().replace("/", ""));
+            }
+
+            if (!first && fraction) {
+                ub.setPow("-" + ub.getPow());
+            }
+
+            if (first) first = false;
+        }
+
+        fraction = false;
+
         for (UnitBlock ub : unitBlockList) {
             if (!ub.getPow().equals("0")) {
                 if (ub.getPow().contains("-")) {
