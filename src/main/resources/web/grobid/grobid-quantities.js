@@ -410,6 +410,8 @@ var grobid = (function ($) {
                             startUnit = parseInt(unit.offsetStart, 10);
                             endUnit = parseInt(unit.offsetEnd, 10);
                         }
+                        if (quantityType)
+                            quantityType = quantityType.replaceAll(" ", "_");
                         var start = parseInt(quantity.offsetStart, 10);
                         var end = parseInt(quantity.offsetEnd, 10);
                         if ((startUnit != -1) && ((startUnit == end) || (startUnit == end + 1)))
@@ -732,7 +734,7 @@ var grobid = (function ($) {
             colorLabel = quantityLeast.rawName;
         }
         if (colorLabel)
-            colorLabel = colorLabel.replace(" ", "_");
+            colorLabel = colorLabel.replaceAll(" ", "_");
         var leastValue = quantityLeast.rawValue;
         var startUniLeast = -1;
         var endUnitLeast = -1;
@@ -825,7 +827,10 @@ var grobid = (function ($) {
             } else {
                 colorLabel = quantity.rawName;
             }
-
+            
+            if (colorLabel)
+                colorLabel = colorLabel.replaceAll(" ", "_");
+                
             var rawValue = quantity.rawValue;
             var unit = quantity.rawUnit;
 

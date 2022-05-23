@@ -33,13 +33,16 @@ public class UnitBatchProcessingCommand extends ConfiguredCommand<GrobidQuantiti
 
         subparser.addArgument("-dIn")
             .dest(INPUT_DIRECTORY)
-            .type(String.class)
+            .type(Arguments.fileType().verifyCanRead().verifyIsDirectory())
             .required(true)
             .help("Input directory");
 
         subparser.addArgument("-dOut")
             .dest(OUTPUT_DIRECTORY)
-            .type(String.class)
+            .type(Arguments.fileType()
+                .verifyNotExists().verifyCanCreate()
+                .or()
+                .verifyIsDirectory().verifyCanWrite())
             .required(true)
             .help("Output directory");
 
@@ -50,12 +53,12 @@ public class UnitBatchProcessingCommand extends ConfiguredCommand<GrobidQuantiti
             .help("Override the grobid-home directory from the configuration. ");
 
 
-        subparser.addArgument("-r")
-            .dest(RECURSIVE)
-            .type(Boolean.class)
-            .setDefault(false)
-            .required(false)
-            .help("Recursive processing");
+//        subparser.addArgument("-r")
+//            .dest(RECURSIVE)
+//            .type(Boolean.class)
+//            .setDefault(false)
+//            .required(false)
+//            .help("Recursive processing");
 
     }
 
@@ -64,11 +67,12 @@ public class UnitBatchProcessingCommand extends ConfiguredCommand<GrobidQuantiti
         File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
         String grobidHome = configuration.getGrobidHome();
         initGrobidHome(grobidHome, grobidHomeOverride);
+        configuration.getModels().stream().forEach(GrobidProperties::addModel);
 
         File inputDirectory = namespace.get(INPUT_DIRECTORY);
         File outputDirectory = namespace.get(OUTPUT_DIRECTORY);
-        boolean isRecursive = namespace.get(RECURSIVE);
+//        boolean isRecursive = namespace.get(RECURSIVE);
 
-        new QuantitiesEngine().unitBatchProcess(inputDirectory.getAbsolutePath(), outputDirectory.getAbsolutePath(), isRecursive);
+        new QuantitiesEngine().unitBatchProcess(inputDirectory.getAbsolutePath(), outputDirectory.getAbsolutePath());
     }
 }

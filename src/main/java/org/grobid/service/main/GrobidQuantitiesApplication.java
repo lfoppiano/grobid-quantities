@@ -9,7 +9,9 @@ import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
+import org.eclipse.jetty.servlets.QoSFilter;
 import org.grobid.service.QuantitiesServiceModule;
+import org.grobid.service.command.PrepareDelftTrainingCommand;
 import org.grobid.service.command.RunTrainingCommand;
 import org.grobid.service.command.UnitBatchProcessingCommand;
 import org.grobid.service.command.TrainingGenerationCommand;
@@ -48,6 +50,7 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         bootstrap.addCommand(new TrainingGenerationCommand());
         bootstrap.addCommand(new UnitBatchProcessingCommand());
         bootstrap.addCommand(new RunTrainingCommand());
+        bootstrap.addCommand(new PrepareDelftTrainingCommand());
     }
 
     @Override
@@ -70,6 +73,12 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
 
         // Add URL mapping
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, RESOURCES + "/*");
+
+        // Enable QoS filter
+        final FilterRegistration.Dynamic qos = environment.servlets().addFilter("QOS", QoSFilter.class);
+        qos.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+        qos.setInitParameter("maxRequests", String.valueOf(configuration.getMaxParallelRequests()));
+        
     }
 
     public static void main(String[] args) throws Exception {

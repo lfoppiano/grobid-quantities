@@ -1,7 +1,6 @@
 package org.grobid.core.lexicon;
 
 import org.grobid.core.data.RegexValueHolder;
-import org.grobid.core.data.Unit;
 import org.grobid.core.utilities.OffsetPosition;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -13,7 +12,8 @@ import java.util.Set;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * @author Patrice Lopez
@@ -181,42 +181,50 @@ public class QuantityLexiconIntegrationTest {
     }
 
     @Test
-    public void testDecomposeComplexUnitWithDelimiter() throws Exception {
-        List<RegexValueHolder> out = target.decomposeComplexUnitWithDelimiter("m/s2");
+    public void testDecomposeComplexUnitWithDelimiterMultiplication() throws Exception {
+        List<RegexValueHolder> out = target.decomposeComplexUnit("m*s2");
 
-        assertThat(out.size(), is(3));
+        assertThat(out.size(), is(2));
 
         assertThat(out.get(0).getValue(), is("m"));
         assertThat(out.get(0).getStart(), is(0));
         assertThat(out.get(0).getEnd(), is(1));
-        assertThat(out.get(1).getValue(), is("/"));
-        assertThat(out.get(1).getStart(), is(1));
-        assertThat(out.get(1).getEnd(), is(2));
-        assertThat(out.get(2).getValue(), is("s2"));
-        assertThat(out.get(2).getStart(), is(2));
-        assertThat(out.get(2).getEnd(), is(4));
+        assertThat(out.get(1).getValue(), is("s2"));
+        assertThat(out.get(1).getStart(), is(2));
+        assertThat(out.get(1).getEnd(), is(4));
+    }
+
+    @Test
+    public void testDecomposeComplexUnitWithDelimiter() throws Exception {
+        List<RegexValueHolder> out = target.decomposeComplexUnit("m/s2");
+
+        assertThat(out.size(), is(2));
+
+        assertThat(out.get(0).getValue(), is("m"));
+        assertThat(out.get(0).getStart(), is(0));
+        assertThat(out.get(0).getEnd(), is(1));
+        assertThat(out.get(1).getValue(), is("s2"));
+        assertThat(out.get(1).getStart(), is(2));
+        assertThat(out.get(1).getEnd(), is(4));
     }
 
     @Test
     public void testDecomposeComplexUnitWithDelimiter2() throws Exception {
-        List<RegexValueHolder> out = target.decomposeComplexUnitWithDelimiter("mol/m^3");
+        List<RegexValueHolder> out = target.decomposeComplexUnit("mol/m^3");
 
-        assertThat(out.size(), is(3));
+        assertThat(out.size(), is(2));
 
         assertThat(out.get(0).getValue(), is("mol"));
         assertThat(out.get(0).getStart(), is(0));
         assertThat(out.get(0).getEnd(), is(3));
-        assertThat(out.get(1).getValue(), is("/"));
-        assertThat(out.get(1).getStart(), is(3));
-        assertThat(out.get(1).getEnd(), is(4));
-        assertThat(out.get(2).getValue(), is("m^3"));
-        assertThat(out.get(2).getStart(), is(4));
-        assertThat(out.get(2).getEnd(), is(7));
+        assertThat(out.get(1).getValue(), is("m^3"));
+        assertThat(out.get(1).getStart(), is(4));
+        assertThat(out.get(1).getEnd(), is(7));
     }
 
     @Test
     public void testDecomposeComplexUnitWithDelimiter3() throws Exception {
-        List<RegexValueHolder> out = target.decomposeComplexUnitWithDelimiter("cm⁻¹");
+        List<RegexValueHolder> out = target.decomposeComplexUnit("cm⁻¹");
 
         assertThat(out.size(), is(1));
 

@@ -115,6 +115,9 @@
     {
       "notations": [
         {
+          "raw": "[yd_i]"
+        },
+        {
           "raw": "yd"
         }
       ],
@@ -371,6 +374,7 @@
       ],
       "type": "MASS",
       "system": "IMPERIAL",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "hundredweight",
@@ -388,6 +392,7 @@
       ],
       "type": "ELECTRIC_CURRENT",
       "system": "SI_BASE",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "ampere",
@@ -423,6 +428,7 @@
       ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "minute",
@@ -440,6 +446,7 @@
       ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "hour",
@@ -450,8 +457,14 @@
       ]
     },
     {
+      "notations": [
+        {
+          "raw": "d"
+        }
+      ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "day",
@@ -462,8 +475,14 @@
       ]
     },
     {
+      "notations": [
+        {
+          "raw": "wk"
+        }
+      ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "week",
@@ -474,8 +493,14 @@
       ]
     },
     {
+      "notations": [
+        {
+          "raw": "mo"
+        }
+      ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "month",
@@ -486,8 +511,14 @@
       ]
     },
     {
+      "notations": [
+        {
+          "raw": "a"
+        }
+      ],
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "year",
@@ -500,6 +531,7 @@
     {
       "type": "TIME",
       "system": "NON_SI",
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "fortnight",
@@ -543,6 +575,7 @@
       ],
       "type": "TEMPERATURE",
       "system": "SI_BASE",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "kelvin",
@@ -751,6 +784,7 @@
       ],
       "type": "VOLUME",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "litre",
@@ -928,6 +962,7 @@
       ],
       "type": "VOLTAGE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "volt",
@@ -945,6 +980,7 @@
       ],
       "type": "ELECTRIC_CAPACITANCE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "farad",
@@ -962,6 +998,7 @@
       ],
       "type": "ELECTRIC_RESISTANCE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "ohm",
@@ -994,6 +1031,7 @@
       ],
       "type": "ENERGY",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "joule",
@@ -1011,6 +1049,7 @@
       ],
       "type": "ELECTRIC_CHARGE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "coulomb",
@@ -1028,6 +1067,7 @@
       ],
       "type": "INDUCTANCE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "henri",
@@ -1048,6 +1088,7 @@
       ],
       "type": "POWER",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "watt",
@@ -1065,6 +1106,7 @@
       ],
       "type": "POWER",
       "system": "NON_SI",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "volt-ampere",
@@ -1082,6 +1124,7 @@
       ],
       "type": "MAGNETIC_INDUCTION",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "tesla",
@@ -1099,6 +1142,7 @@
       ],
       "type": "MAGNETIC_FLUX",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "weber",
@@ -1116,6 +1160,7 @@
       ],
       "type": "ATTENUATION",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "decibel",
@@ -1142,6 +1187,7 @@
       ],
       "type": "ELECTRIC_FIELD",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "volt per metre",
@@ -1174,6 +1220,7 @@
       ],
       "type": "MAGNETIC_FIELD_STRENGTH",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "ampere per metre",
@@ -1206,6 +1253,7 @@
       ],
       "type": "MAGNETIC_FIELD_STRENGTH",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "ampere-turn per metre",
@@ -1287,6 +1335,7 @@
       ],
       "type": "FREQUENCY",
       "system": "SI_BASE",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "hertz"
@@ -1351,6 +1400,7 @@
       ],
       "type": "VELOCITY",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "meter per second",
@@ -1477,6 +1527,7 @@
       ],
       "type": "PRESSURE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "pascal",
@@ -1494,6 +1545,7 @@
       ],
       "type": "PRESSURE",
       "system": "NON_SI",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "bar",
@@ -1511,6 +1563,7 @@
       ],
       "type": "PRESSURE",
       "system": "NON_SI",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "technical atmosphere"
@@ -1665,6 +1718,7 @@
       ],
       "type": "DYNAMIC_VISCOSITY",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "pascal-second"
@@ -1841,6 +1895,7 @@
       ],
       "type": "SOLID_ANGLE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "steradian",
@@ -1975,6 +2030,7 @@
       "type": "ACIDITY",
       "system": "NON_SI",
       "skipNormalisation": true,
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "power of hydrogen",
@@ -2054,6 +2110,7 @@
       ],
       "type": "RADIOACTIVITY",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "becquerel",
@@ -2071,6 +2128,7 @@
       ],
       "type": "EQUIVALENT_DOSE",
       "system": "SI_DERIVED",
+      "supportsPrefixes": true,
       "names": [
         {
           "lemma": "sievert",
@@ -2261,6 +2319,34 @@
         {
           "lemma": "newton",
           "inflection": "newtons"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "min/km"
+        }
+      ],
+      "type": "PACE",
+      "system": "SI_BASE",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "minute per kilometer",
+          "inflection": "minutes per kilometer"
+        },
+        {
+          "lemma": "minute / kilometer",
+          "inflection": "minutes / kilometer"
+        },
+        {
+          "lemma": "min per kilometer",
+          "inflection": "mins per kilometer"
+        },
+        {
+          "lemma": "min / kilometer",
+          "inflection": "mins / kilometer"
         }
       ]
     },

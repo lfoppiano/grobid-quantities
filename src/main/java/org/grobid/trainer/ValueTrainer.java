@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.grobid.trainer.QuantitiesTrainer.loadConfigurationFromDefaultPath;
 
 /**
  * Created by lfoppiano on 21.02.16.
@@ -171,6 +172,7 @@ public class ValueTrainer extends AbstractTrainer {
      */
     public static void main(String[] args) {
         GrobidProperties.getInstance();
+        loadConfigurationFromDefaultPath();
 
         Trainer trainer = new ValueTrainer();
         AbstractTrainer.runTraining(trainer);

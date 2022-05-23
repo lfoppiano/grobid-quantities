@@ -5,8 +5,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 @Ignore
 public class TextParserIntegrationTest {
 
@@ -17,6 +15,7 @@ public class TextParserIntegrationTest {
         target = TextParser.getInstance();
     }
 
+    /** This test is specific to test a concurrency issue with clear NLP **/
     @Test
     public void testSafeThreadWhenParsingSentence_shouldWork() throws Exception {
 

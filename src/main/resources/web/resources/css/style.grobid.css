@@ -134,7 +134,7 @@ p {word-break:normal;}
 /*span {word-break:normal;}*/
 
 .info-sense-box,.details-list {
-	margin:1px 1;padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
+	margin:1px;padding:5px 2px 3px 2px;border:1px solid #87A1A8;background-color:#87A1A8;border-radius:5px;
 	font-size:14px;
 }
 

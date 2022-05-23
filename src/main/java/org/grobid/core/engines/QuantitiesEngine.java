@@ -19,6 +19,7 @@ import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
+import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
@@ -26,24 +27,29 @@ import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
 import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.service.exceptions.GrobidServiceException;
+import org.grobid.trainer.UnitLabeled;
+import org.grobid.trainer.sax.UnitAnnotationSaxHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.Response;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.SortedSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 /**
  * This class represent the aggregated processing applying multiple parsers or combining PDF extraction
@@ -123,7 +129,7 @@ public class QuantitiesEngine {
 
                     BiblioItem resHeader = new BiblioItem();
                     //parsers.getHeaderParser().processingHeaderSection(false, doc, resHeader);
-                    resHeader.generalResultMapping(doc, labeledResult, tokenizationHeader);
+                    resHeader.generalResultMapping(labeledResult, tokenizationHeader);
 
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
@@ -176,8 +182,9 @@ public class QuantitiesEngine {
                             measurements.addAll(quantityParser.process(processedFigure.getCaptionLayoutTokens()));
                         } else if (cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
                             //apply the table model to only get the caption/description
-                            final Table processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
-                            measurements.addAll(quantityParser.process(processedTable.getFullDescriptionTokens()));
+                            final List<Table> processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
+                            processedTable.stream().forEach(t -> measurements.addAll(quantityParser.process(t.getFullDescriptionTokens())));
+                            
                         } else {
                             final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
 
@@ -342,9 +349,9 @@ public class QuantitiesEngine {
     }
 
     /**
-     * Processes a file with units
+     * Processes a file with units one per line
      */
-    public void unitBatchProcess(String inputDirectory, String outputDirectory, boolean isRecursive) {
+    public void unitBatchProcess(String inputDirectory, String outputDirectory) {
         Path inputPath = Paths.get(inputDirectory);
         File[] refFiles = inputPath.toFile().listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name) {
@@ -378,8 +385,15 @@ public class QuantitiesEngine {
                 try (Stream<String> stream = Files.lines(Paths.get(inputFile.getAbsolutePath()))) {
 
                     List<String> processedUnits = stream.map(
-                            s -> unitParser.tagUnit(s).stream().map(UnitBlock::getRawTaggedValue).collect(Collectors.joining())
-                    ).collect(Collectors.toList());
+                            s -> {
+                                List<UnitBlock> unitBlocks = unitParser.tagUnit(s);
+
+                                if (isNotEmpty(unitBlocks)) {
+                                    return unitBlocks.get(0).getRawTaggedValue();
+                                }
+                                return "";
+                            }
+                    ).filter(StringUtils::isNotBlank).collect(Collectors.toList());
 
                     for (String processedUnit : processedUnits) {
                         outputWriter.write("<unit>");
