@@ -16,7 +16,7 @@ public class UnitBlock {
     private String pow = "";
 
     /**
-     * this value represent the raw tagging of the whole sequence, not only of this unit block
+     * This value represent the raw tagging of the whole sequence, not only of this unit block
      * Yes it's a workaround but there is no other way to carry this information further without creating a new object
      * in replacement of the List<UnitBlock>
      **/
@@ -121,7 +121,7 @@ public class UnitBlock {
         boolean first = true;
         boolean invertPower = false;
         for (UnitBlock ub : unitBlockList) {
-            //It should not happens but if some multiplication sign are slipping out we should replace them 
+            //It should not happen but if some multiplication sign are slipping out we should replace them
             ub.setBase(ub.getBase().replace("•", ""));
             ub.setPow(ub.getPow().replace("•", ""));
             ub.setPrefix(ub.getPrefix().replace("•", ""));
