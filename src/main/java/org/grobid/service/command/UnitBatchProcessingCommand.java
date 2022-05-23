@@ -64,6 +64,7 @@ public class UnitBatchProcessingCommand extends ConfiguredCommand<GrobidQuantiti
         File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
         String grobidHome = configuration.getGrobidHome();
         initGrobidHome(grobidHome, grobidHomeOverride);
+        configuration.getModels().stream().forEach(GrobidProperties::addModel);
 
         File inputDirectory = namespace.get(INPUT_DIRECTORY);
         File outputDirectory = namespace.get(OUTPUT_DIRECTORY);

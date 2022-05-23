@@ -11,6 +11,7 @@ import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.servlets.QoSFilter;
 import org.grobid.service.QuantitiesServiceModule;
+import org.grobid.service.command.PrepareDelftTrainingCommand;
 import org.grobid.service.command.RunTrainingCommand;
 import org.grobid.service.command.UnitBatchProcessingCommand;
 import org.grobid.service.command.TrainingGenerationCommand;
@@ -51,6 +52,7 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         bootstrap.addCommand(new UnitBatchProcessingCommand());
         bootstrap.addCommand(new UnitsLookupBatchProcessingCommand());
         bootstrap.addCommand(new RunTrainingCommand());
+        bootstrap.addCommand(new PrepareDelftTrainingCommand());
     }
 
     @Override

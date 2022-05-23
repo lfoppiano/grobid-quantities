@@ -22,6 +22,7 @@ public class GrobidEngineInitialiser {
         GrobidHomeFinder grobidHomeFinder = new GrobidHomeFinder(ImmutableList.of(configuration.getGrobidHome()));
         GrobidProperties.getInstance(grobidHomeFinder);
         configuration.getModels().stream().forEach(GrobidProperties::addModel);
+        
         LibraryLoader.load();
     }
 }
