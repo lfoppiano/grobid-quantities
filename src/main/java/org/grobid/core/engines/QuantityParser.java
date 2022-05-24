@@ -202,7 +202,7 @@ public class QuantityParser extends AbstractParser {
             LOGGER.error("fail to tokenize:, " + text, e);
         }
 
-        if ((tokens == null) || (tokens.size() == 0)) {
+        if (CollectionUtils.isEmpty(tokens)) {
             return null;
         }
         return process(tokens);
