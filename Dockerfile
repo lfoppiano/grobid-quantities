@@ -60,8 +60,8 @@ ENV LANG C.UTF-8
 # install JRE 8, python and other dependencies
 RUN apt-key del 7fa2af80 && \
     curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb -O cuda-keyring_1.0-1_all.deb && \
-    dpkg -i cuda-keyring_1.0-1_all.deb && \
-    apt-get -y --no-install-recommends install git wget
+    dpkg -i cuda-keyring_1.0-1_all.deb
+RUN apt-get -y --no-install-recommends install git wget
 #    apt-get -y remove python3.6 && \
 #    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata && \
 #    apt-get -y --no-install-recommends install git python3.7 python3.7-venv python3.7-dev python3.7-distutil
