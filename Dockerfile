@@ -22,8 +22,8 @@ USER root
 
 RUN apt-key del 7fa2af80 && \
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb && \
-    dpkg -i cuda-keyring_1.0-1_all.deb
-RUN apt-get update && \
+    dpkg -i cuda-keyring_1.0-1_all.deb && \
+    apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git
 
 RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.1
