@@ -62,7 +62,7 @@ RUN apt-key del 7fa2af80 && \
     curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb -O cuda-keyring_1.0-1_all.deb && \
     dpkg -i cuda-keyring_1.0-1_all.deb && \
     rm /etc/apt/sources.list.d/cuda.list && \
-    rm /etc/apt/sources.list.d/nvidia-ml.list \
+    rm /etc/apt/sources.list.d/nvidia-ml.list
 
 RUN apt-get update && \
     apt-get -y --no-install-recommends install git wget
