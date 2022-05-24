@@ -23,17 +23,25 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultQuantifiedObjectParser.class);
 
+    private TextParser textParser;
+
     public DefaultQuantifiedObjectParser() {
         super(GrobidModels.DUMMY);
+        try {
+            textParser = TextParser.getInstance();
+        } catch (Exception e) {
+            logger.warn("Something bad happened when instantiating the text parser. ", e);
+        }
     }
 
     @Override
     public List<Measurement> process(List<LayoutToken> tokens, List<Measurement> measurements) {
-        if (isEmpty(measurements))
+        if (isEmpty(measurements) || textParser == null){
             return null;
+        }
+
         try {
             String text = LayoutTokensUtil.toText(tokens);
-            TextParser textParser = TextParser.getInstance();
             List<Sentence> parsedSentences = textParser.parseText(text);
             int indexMeasurement = 0;
             int offset = 0;
@@ -62,7 +70,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                         }
                         position = quantity.getOffsetStart();
                     } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                            (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                        (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                         // values of the interval do not matter if min/max or base/range
                         Quantity quantityLeast = measurement.getQuantityLeast();
                         if (quantityLeast == null)
@@ -194,7 +202,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                     // if case of an interval, we need to take the last quantity object for the position
                     UnitUtilities.Measurement_Type type = measurement.getType();
                     if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                            (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                        (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
 
                         int lastPosition = position;
                         Quantity quantityLeast = measurement.getQuantityLeast();
@@ -216,7 +224,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                         }
                     }
                     String nextStruct = getNextStruct(position + 1, indexMeasurementTokens,
-                            processedSentence.getOffsetEnd() - processedSentence.getOffsetStart(), parse);
+                        processedSentence.getOffsetEnd() - processedSentence.getOffsetStart(), parse);
                     if (nextStruct != null) {
                         String[] subpieces = nextStruct.split("\t");
                         if (subpieces.length == 8) {
@@ -226,7 +234,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                             String nextFunct = subpieces[6].trim();
                             String nextPos = subpieces[3].trim();
                             if ((nextFunct.equals("prep") && nextPos.startsWith("IN") && !nextToken.equals("to")) ||
-                                    (nextFunct.equals("nn") && nextPos.startsWith("NN"))) {
+                                (nextFunct.equals("nn") && nextPos.startsWith("NN"))) {
                                 OffsetPosition phrasePosition = new OffsetPosition(parse.getOffsetStartIndex(nextIndex), parse.getOffsetEndIndex(nextIndex));
                                 phrasePosition = getFullPhrase(phrasePosition, parse, indexMeasurementTokens, false);
                                 phrasePosition.start = parse.getOffsetEndIndex(nextIndex) + 1;
@@ -245,18 +253,18 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
 
                 // case dependency to the syntactic head
                 if (
-                        (funct.equals("nsubjpass") && pos.startsWith("NN")) ||
-                                (funct.equals("conj") && pos.startsWith("NN")) ||
-                                (funct.equals("appos") && pos.startsWith("NN")) ||
-                                (funct.equals("pobj") && pos.startsWith("NN")) ||
-                                (previousFunct.equals("num") && pos.startsWith("NN"))
+                    (funct.equals("nsubjpass") && pos.startsWith("NN")) ||
+                        (funct.equals("conj") && pos.startsWith("NN")) ||
+                        (funct.equals("appos") && pos.startsWith("NN")) ||
+                        (funct.equals("pobj") && pos.startsWith("NN")) ||
+                        (previousFunct.equals("num") && pos.startsWith("NN"))
                 ) {
                     if (featureFactory.test_digit(pieces[1]))
                         substance = new QuantifiedObject(pieces[1], pieces[1]);
                     else
                         substance = new QuantifiedObject(pieces[1], pieces[2]);
                     OffsetPosition substancePosition =
-                            new OffsetPosition(parse.getOffsetStartIndex(currentIndex), parse.getOffsetEndIndex(currentIndex));
+                        new OffsetPosition(parse.getOffsetStartIndex(currentIndex), parse.getOffsetEndIndex(currentIndex));
                     substancePosition = getFullPhrase(substancePosition, parse, indexMeasurementTokens, true);
                     substance.setOffsetStart(substancePosition.start + startSentencePosition);
                     substance.setOffsetEnd(substancePosition.end + startSentencePosition);
@@ -343,12 +351,12 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
 
             if ((parse.getOffsetStartIndex(currentIndex) != -1) && (parse.getOffsetEndIndex(currentIndex) != -1)) {
                 OffsetPosition subOffsetPosition =
-                        new OffsetPosition(parse.getOffsetStartIndex(currentIndex),
-                                parse.getOffsetEndIndex(currentIndex));
+                    new OffsetPosition(parse.getOffsetStartIndex(currentIndex),
+                        parse.getOffsetEndIndex(currentIndex));
                 //subOffsetPosition = getFullPhrase(subOffsetPosition, parse, indexMeasurementTokens);
 
                 if ((subOffsetPosition.start > offsetPosition.end) &&
-                        ((subOffsetPosition.start - offsetPosition.end < 3) || !strictExpansion))
+                    ((subOffsetPosition.start - offsetPosition.end < 3) || !strictExpansion))
                     offsetPosition.end = subOffsetPosition.end;
             }
         }
@@ -385,12 +393,12 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
 
             if ((parse.getOffsetStartIndex(currentIndex) != -1) && (parse.getOffsetEndIndex(currentIndex) != -1)) {
                 OffsetPosition subOffsetPosition =
-                        new OffsetPosition(parse.getOffsetStartIndex(currentIndex),
-                                parse.getOffsetEndIndex(currentIndex));
+                    new OffsetPosition(parse.getOffsetStartIndex(currentIndex),
+                        parse.getOffsetEndIndex(currentIndex));
                 //subOffsetPosition = getFullPhrase(subOffsetPosition, parse, indexMeasurementTokens);
 
                 if ((subOffsetPosition.end < offsetPosition.start) &&
-                        ((offsetPosition.start - subOffsetPosition.end < 3) || !strictExpansion))
+                    ((offsetPosition.start - subOffsetPosition.end < 3) || !strictExpansion))
                     offsetPosition.start = subOffsetPosition.start;
             }
         }
@@ -425,7 +433,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                     addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
                 }
             } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                    (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+                (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                 // values of the interval do not matter if min/max or base/range
                 Quantity quantityLeast = measurement.getQuantityLeast();
                 if (quantityLeast == null)

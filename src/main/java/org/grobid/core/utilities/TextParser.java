@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,8 +77,7 @@ public class TextParser {
      * Hidden constructor
      */
     private TextParser() throws Exception {
-        modelPath = "resources/clearnlp/models";
-        modelPath = new File(modelPath).getAbsolutePath();
+        modelPath = Paths.get("resources/clearnlp/models").toAbsolutePath().toString();
 
         // TBD: set up config profile for the ClearNLP models...
         String dictionaryFile = modelPath + File.separator + "dictionary-1.2.0.zip";
@@ -95,23 +95,16 @@ public class TextParser {
         String roleClassifierModelFile = modelPath + File.separator + "mayo-en-role-1.3.0.tgz";
         //String roleClassifierModelFile = modelPath + "/" + "ontonotes-en-roleset-1.2.2.tgz"; 
 
-        tokenizer = EngineGetter.getTokenizer(language, dictionaryFile);
-        analyzer = EngineGetter.getMPAnalyzer(language, dictionaryFile);
-        taggers = EngineGetter.getPOSTaggers(posModelFile);
-        parser = EngineGetter.getDEPParser(depModelFile);
-        predicater = EngineGetter.getPredIdentifier(predModelFile);
-        labeler = EngineGetter.getSRLabeler(labelModelFile);
-
-        // this is for version 1.3.0 of ClearNLP   
-        FileInputStream is = new FileInputStream(new File(roleClassifierModelFile));
-        roleClassifier = (CRolesetClassifier) EngineGetter.getComponent(is, AbstractReader.LANG_EN, NLPLib.MODE_ROLE);
-
-        depReader = new DEPReader(0, 1, 2, 3, 4, 5, 6);
-
-        segmenter = new OpenNLPSentenceDetector();
+        this.init(dictionaryFile, posModelFile, depModelFile, predModelFile, labelModelFile, roleClassifierModelFile);
     }
 
     private TextParser(String dictionaryFile, String posModelFile, String depModelFile,
+                       String predModelFile, String labelModelFile, String roleClassifierModelFile) throws Exception {
+        this.init(dictionaryFile, posModelFile, depModelFile, predModelFile, labelModelFile, roleClassifierModelFile);
+    }
+
+
+    private void init(String dictionaryFile, String posModelFile, String depModelFile,
                        String predModelFile, String labelModelFile, String roleClassifierModelFile)
         throws Exception {
         tokenizer = EngineGetter.getTokenizer(language, dictionaryFile);
@@ -147,6 +140,13 @@ public class TextParser {
 
         Sentence result = null;
 
+        List<SentenceParse> theResult = getSentenceParses(sentence);
+        result = new Sentence(sentence, theResult, new OffsetPosition(0, sentence.length()));
+
+        return result;
+    }
+
+    private List<SentenceParse> getSentenceParses(String sentence) {
         DEPTree tree = EngineProcess.getDEPTree(tokenizer, taggers,
             //analyzer, parser, predicater, labeler, sentence);
             analyzer, parser, sentence);
@@ -157,9 +157,7 @@ public class TextParser {
         parse.createMap(sentence);
         List<SentenceParse> theResult = new ArrayList<>();
         theResult.add(parse);
-        result = new Sentence(sentence, theResult, new OffsetPosition(0, sentence.length()));
-
-        return result;
+        return theResult;
     }
 
     /**
@@ -227,14 +225,7 @@ public class TextParser {
         for (OffsetPosition sentencePosition : sentences) {
             String sentence = text.substring(sentencePosition.start, sentencePosition.end);
             //DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, predicater, labeler, tokens);
-            DEPTree tree = EngineProcess.getDEPTree(tokenizer, taggers, analyzer, parser, sentence);
-            EngineProcess.predictSRL(predicater, roleClassifier, labeler, tree);
-            // we only have the top parse with the ClearParser, no n-best !
-            SentenceParse parse = new SentenceParse();
-            parse.setParseRepresentation(tree.toStringSRL());
-            parse.createMap(sentence);
-            List<SentenceParse> parses = new ArrayList<>();
-            parses.add(parse);
+            List<SentenceParse> parses = getSentenceParses(sentence);
             // To be reviewed! this is not exactly the original sentence, but not so important for the moment
             Sentence pack = new Sentence(sentence, parses, null);
             results.add(pack);
