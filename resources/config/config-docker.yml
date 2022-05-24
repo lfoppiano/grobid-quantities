@@ -18,7 +18,7 @@ models:
       nbMaxIterations: 2000
     delft:
       # deep learning parameters
-      architecture: "BidLSTM_CRF"
+      architecture: "BidLSTM_CRF_FEATURES"
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
@@ -33,14 +33,14 @@ models:
       nbMaxIterations: 2000
     delft:
       # deep learning parameters
-      architecture: "BidLSTM_CRF"
+      architecture: "BidLSTM_CRF_FEATURES"
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
 
   - name: "values"
-    engine: "wapiti"
-    #engine: "delft"
+#    engine: "wapiti"
+    engine: "delft"
     wapiti:
       # wapiti training parameters, they will be used at training time only
       epsilon: 0.00001
@@ -48,15 +48,11 @@ models:
       nbMaxIterations: 2000
     delft:
       # deep learning parameters
-      architecture: "BidLSTM_CRF"
+      architecture: "BidLSTM_CRF_FEATURES"
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
 
-
-views:
-  .mustache:
-    cache: false
 
 server:
   type: custom
@@ -77,15 +73,5 @@ logging:
   appenders:
     - type: console
       threshold: INFO
-#Docker-ignore-log-start      
-    - type: file
-      threshold: DEBUG
-      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
-      currentLogFilename: logs/grobid-quantities.log
-      archivedLogFilenamePattern: logs/grobid-quantities-%d{yyyy-MM-dd}-%i.log.gz
-      archivedFileCount: 7
       timeZone: UTC
-      maxFileSize: 10MB
-#Docker-ignore-log-end
-timeZone: UTC
 

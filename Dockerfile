@@ -7,7 +7,7 @@
 ## docker build -t lfoppiano/grobid-quantities:0.7.0 --build-arg GROBID_VERSION=0.7.0 --file Dockerfile .
 
 ## no GPU:
-## docker run -t --rm --init -p 8072:8072 -p 8073:8073 -v config.yml:/opt/grobid/grobid-quantities:ro  lfoppiano/grobid-quantities:0.7.0
+## docker run -t --rm --init -p 8060:8060 -p 8061:8061 -v config.yml:/opt/grobid/grobid-quantities:ro  lfoppiano/grobid-quantities:0.7.1
 
 ## allocate all available GPUs (only Linux with proper nvidia driver installed on host machine):
 ## docker run --rm --gpus all --init -p 8072:8072 -p 8073:8073 -v grobid.yaml:/opt/grobid/grobid-home/config/grobid.yaml:ro  lfoppiano/grobid-superconductors:0.3.0-SNAPSHOT
@@ -20,14 +20,17 @@ FROM openjdk:8u275-jdk as builder
 
 USER root
 
-RUN apt-get update && \
+RUN apt-key del 7fa2af80 && \
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb && \
+    dpkg -i cuda-keyring_1.0-1_all.deb && \
+    apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git
 
-RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.0
+RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.1
 WORKDIR /opt/grobid-source
 COPY gradle.properties .
 
-RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout 0.7.0
+RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities
 WORKDIR /opt/grobid-source/grobid-quantities
 COPY gradle.properties .
 
@@ -49,12 +52,18 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM grobid/grobid:0.7.1
+FROM grobid/grobid:0.7.1 as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
 
 # install JRE 8, python and other dependencies
+RUN apt-key del 7fa2af80 && \
+    curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb -O cuda-keyring_1.0-1_all.deb && \
+    dpkg -i cuda-keyring_1.0-1_all.deb && \
+    rm /etc/apt/sources.list.d/cuda.list && \
+    rm /etc/apt/sources.list.d/nvidia-ml.list
+
 RUN apt-get update && \
     apt-get -y --no-install-recommends install git wget
 #    apt-get -y remove python3.6 && \
