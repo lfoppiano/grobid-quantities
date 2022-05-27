@@ -7,6 +7,8 @@ corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
 # Limit the maximum number of requests
 maxParallelRequests: 0
 
+cleanlpModelPath: "resources/cleanlp/models"
+
 models:
   - name: "quantities"
     engine: "wapiti"
