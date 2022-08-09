@@ -16,7 +16,7 @@
 # build builder image
 # -------------------
 
-FROM openjdk:8u275-jdk as builder
+FROM openjdk:8u342-jdk as builder
 
 USER root
 
@@ -26,11 +26,16 @@ RUN apt-key del 7fa2af80 && \
     apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git
 
-RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.1
+#RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.1
+RUN git clone --filter=blob:none --no-checkout https://github.com/kermitt2/grobid.git /opt/grobid-source && \
+    cd /opt/grobid-source && \
+    git sparse-checkout set --cone grobid-home && \
+    git checkout 0.7.1
 WORKDIR /opt/grobid-source
 COPY gradle.properties .
 
-RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout features/updated-dl-models
+#RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout features/updated-dl-models
+RUN git clone --branch features/updated-dl-models --depth 1 https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities
 WORKDIR /opt/grobid-source/grobid-quantities
 COPY gradle.properties .
 
@@ -63,9 +68,9 @@ COPY --from=builder /opt/cuda-keyring_1.0-1_all.deb  /opt
 RUN apt-key del 7fa2af80 && \
 #    curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb --output cuda-keyring_1.0-1_all.deb && \
     dpkg -i /opt/cuda-keyring_1.0-1_all.deb && \
-    rm /opt/cuda-keyring*.deb && \
-    rm /etc/apt/sources.list.d/cuda.list && \
-    rm /etc/apt/sources.list.d/nvidia-ml.list
+    rm /opt/cuda-keyring*.deb
+#    rm /etc/apt/sources.list.d/cuda.list && \
+#    rm /etc/apt/sources.list.d/nvidia-ml.list
 
 RUN apt-get update && \
     apt-get -y --no-install-recommends install git wget
