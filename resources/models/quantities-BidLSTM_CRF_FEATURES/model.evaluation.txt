@@ -1,0 +1,356 @@
+Loading data...
+1240 train sequences
+138 validation sequences
+154 evaluation sequences
+embedding_lmdb_path is not specified in the embeddings registry, so the embeddings will be loaded in memory...
+loading embeddings...
+path: /lustre/group/tdm/Luca/delft/delft/data/embeddings/glove.840B.300d.txt
+embeddings loaded for 2196017 words and 300 dimensions
+Output directory: data/models/sequenceLabelling/quantities-BidLSTM_CRF_FEATURES
+---
+max_epoch: 60
+early_stop: True
+batch_size: 20
+max_sequence_length: 3000
+model_name: quantities-BidLSTM_CRF_FEATURES
+learning_rate:  0.001
+use_ELMo:  False
+---
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5500       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,580
+Trainable params: 403,580
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403580    
+                                                                 
+=================================================================
+Total params: 405,758
+Trainable params: 405,758
+Non-trainable params: 0
+_________________________________________________________________
+
+[...]
+training runtime: 103110.324 seconds 
+
+Evaluation:
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5500       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,580
+Trainable params: 403,580
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403580    
+                                                                 
+=================================================================
+Total params: 405,758
+Trainable params: 405,758
+Non-trainable params: 0
+_________________________________________________________________
+---
+max_epoch: 60
+early_stop: True
+batch_size: 20
+max_sequence_length: 3000
+model_name: quantities-BidLSTM_CRF_FEATURES
+learning_rate:  0.001
+use_ELMo:  False
+---
+
+------------------------ fold 0 --------------------------------------
+	f1 (micro): 86.31
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9394    0.9612    0.9502       258
+     <unitRight>     0.8889    0.7273    0.8000        11
+   <valueAtomic>     0.8036    0.8750    0.8378       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8767    0.8000    0.8366        80
+     <valueList>     0.6897    0.6667    0.6780        60
+     <valueMost>     0.8971    0.7922    0.8414        77
+    <valueRange>     1.0000    0.8750    0.9333         8
+
+all (micro avg.)     0.8578    0.8685    0.8631       806
+
+
+------------------------ fold 1 --------------------------------------
+	f1 (micro): 86.47
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9434    0.9690    0.9560       258
+     <unitRight>     1.0000    0.8182    0.9000        11
+   <valueAtomic>     0.7784    0.8783    0.8253       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8800    0.8250    0.8516        80
+     <valueList>     0.7414    0.7167    0.7288        60
+     <valueMost>     0.9048    0.7403    0.8143        77
+    <valueRange>     1.0000    1.0000    1.0000         8
+
+all (micro avg.)     0.8537    0.8759    0.8647       806
+
+
+------------------------ fold 2 --------------------------------------
+	f1 (micro): 84.43
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9430    0.9612    0.9520       258
+     <unitRight>     0.6364    0.6364    0.6364        11
+   <valueAtomic>     0.7729    0.8618    0.8149       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.7949    0.7750    0.7848        80
+     <valueList>     0.7347    0.6000    0.6606        60
+     <valueMost>     0.8806    0.7662    0.8194        77
+    <valueRange>     1.0000    0.7500    0.8571         8
+
+all (micro avg.)     0.8376    0.8511    0.8443       806
+
+
+------------------------ fold 3 --------------------------------------
+	f1 (micro): 84.00
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9213    0.9535    0.9371       258
+     <unitRight>     0.6667    0.5455    0.6000        11
+   <valueAtomic>     0.7904    0.8684    0.8276       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.7887    0.7000    0.7417        80
+     <valueList>     0.7451    0.6333    0.6847        60
+     <valueMost>     0.8406    0.7532    0.7945        77
+    <valueRange>     1.0000    0.7500    0.8571         8
+
+all (micro avg.)     0.8364    0.8437    0.8400       806
+
+
+------------------------ fold 4 --------------------------------------
+	f1 (micro): 84.93
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9392    0.9574    0.9482       258
+     <unitRight>     0.9000    0.8182    0.8571        11
+   <valueAtomic>     0.7933    0.8586    0.8246       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8378    0.7750    0.8052        80
+     <valueList>     0.7447    0.5833    0.6542        60
+     <valueMost>     0.8194    0.7662    0.7919        77
+    <valueRange>     1.0000    0.7500    0.8571         8
+
+all (micro avg.)     0.8488    0.8499    0.8493       806
+
+
+------------------------ fold 5 --------------------------------------
+	f1 (micro): 86.72
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9387    0.9496    0.9441       258
+     <unitRight>     0.9000    0.8182    0.8571        11
+   <valueAtomic>     0.8270    0.8651    0.8457       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8904    0.8125    0.8497        80
+     <valueList>     0.7377    0.7500    0.7438        60
+     <valueMost>     0.8551    0.7662    0.8082        77
+    <valueRange>     0.8750    0.8750    0.8750         8
+
+all (micro avg.)     0.8672    0.8672    0.8672       806
+
+
+------------------------ fold 6 --------------------------------------
+	f1 (micro): 83.66
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9356    0.9574    0.9464       258
+     <unitRight>     0.7500    0.5455    0.6316        11
+   <valueAtomic>     0.7731    0.8520    0.8106       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8462    0.6875    0.7586        80
+     <valueList>     0.6863    0.5833    0.6306        60
+     <valueMost>     0.8493    0.8052    0.8267        77
+    <valueRange>     0.7500    0.7500    0.7500         8
+
+all (micro avg.)     0.8346    0.8387    0.8366       806
+
+
+------------------------ fold 7 --------------------------------------
+	f1 (micro): 86.61
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9432    0.9651    0.9540       258
+     <unitRight>     0.8889    0.7273    0.8000        11
+   <valueAtomic>     0.8208    0.8586    0.8392       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8481    0.8375    0.8428        80
+     <valueList>     0.7241    0.7000    0.7119        60
+     <valueMost>     0.8472    0.7922    0.8188        77
+    <valueRange>     0.8889    1.0000    0.9412         8
+
+all (micro avg.)     0.8613    0.8710    0.8661       806
+
+
+------------------------ fold 8 --------------------------------------
+	f1 (micro): 85.22
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9394    0.9612    0.9502       258
+     <unitRight>     0.9000    0.8182    0.8571        11
+   <valueAtomic>     0.7774    0.8618    0.8175       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.9333    0.7000    0.8000        80
+     <valueList>     0.7321    0.6833    0.7069        60
+     <valueMost>     0.8592    0.7922    0.8243        77
+    <valueRange>     0.8571    0.7500    0.8000         8
+
+all (micro avg.)     0.8496    0.8548    0.8522       806
+
+
+------------------------ fold 9 --------------------------------------
+	f1 (micro): 84.75
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9354    0.9535    0.9443       258
+     <unitRight>     0.6667    0.5455    0.6000        11
+   <valueAtomic>     0.8012    0.8487    0.8243       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8852    0.6750    0.7660        80
+     <valueList>     0.7091    0.6500    0.6783        60
+     <valueMost>     0.8732    0.8052    0.8378        77
+    <valueRange>     1.0000    0.8750    0.9333         8
+
+all (micro avg.)     0.8539    0.8412    0.8475       806
+
+----------------------------------------------------------------------
+
+** Worst ** model scores - run 6
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9356    0.9574    0.9464       258
+     <unitRight>     0.7500    0.5455    0.6316        11
+   <valueAtomic>     0.7731    0.8520    0.8106       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8462    0.6875    0.7586        80
+     <valueList>     0.6863    0.5833    0.6306        60
+     <valueMost>     0.8493    0.8052    0.8267        77
+    <valueRange>     0.7500    0.7500    0.7500         8
+
+all (micro avg.)     0.8346    0.8387    0.8366       806
+
+
+** Best ** model scores - run 5
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9387    0.9496    0.9441       258
+     <unitRight>     0.9000    0.8182    0.8571        11
+   <valueAtomic>     0.8270    0.8651    0.8457       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8904    0.8125    0.8497        80
+     <valueList>     0.7377    0.7500    0.7438        60
+     <valueMost>     0.8551    0.7662    0.8082        77
+    <valueRange>     0.8750    0.8750    0.8750         8
+
+all (micro avg.)     0.8672    0.8672    0.8672       806
+
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9379    0.9589    0.9483       258
+     <unitRight>     0.8197    0.7000    0.7539        11
+   <valueAtomic>     0.7938    0.8628    0.8268       304
+     <valueBase>     1.0000    0.7500    0.8571         8
+    <valueLeast>     0.8581    0.7588    0.8037        80
+     <valueList>     0.7245    0.6567    0.6878        60
+     <valueMost>     0.8626    0.7779    0.8177        77
+    <valueRange>     0.9371    0.8375    0.8804         8
+
+all (micro avg.)     0.8501    0.8562    0.8531          
+
+model config file saved
+preprocessor saved
+model saved
