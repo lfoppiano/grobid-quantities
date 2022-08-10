@@ -46,7 +46,7 @@ RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/c
 RUN rm -rf /opt/grobid-source/grobid-home/models/*
 
 WORKDIR /opt/grobid-source/grobid-quantities
-RUN ./gradlew clean assemble --no-daemon  --info --stacktrace
+RUN ./gradlew clean assemble --no-daemon  --stacktrace --info
 #RUN ./gradlew installScibert --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
 RUN ./gradlew copyModels --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.tar.gz
 
@@ -91,8 +91,8 @@ VOLUME ["/opt/grobid/grobid-home/tmp"]
 # Install requirements
 WORKDIR /opt/grobid
 
-RUN #ln -s /opt/grobid/delft/ delft
-
+#RUN ln -s /opt/grobid/delft/ delft
+RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
 # JProfiler
 #RUN wget https://download-gcdn.ej-technologies.com/jprofiler/jprofiler_linux_12_0_2.tar.gz -P /tmp/ && \
