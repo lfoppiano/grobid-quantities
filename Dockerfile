@@ -35,7 +35,7 @@ WORKDIR /opt/grobid-source
 COPY gradle.properties .
 
 #RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout features/updated-dl-models
-RUN git clone --branch features/updated-dl-models --depth 1 https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities
+RUN git clone --depth 1 --branch features/updated-dl-models https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities
 WORKDIR /opt/grobid-source/grobid-quantities
 COPY gradle.properties .
 
@@ -89,7 +89,9 @@ COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/mode
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
 # Install requirements
-WORKDIR /opt/grobid/grobid-quantities
+WORKDIR /opt/grobid
+
+RUN #ln -s /opt/grobid/delft/ delft
 
 
 # JProfiler
@@ -97,12 +99,11 @@ WORKDIR /opt/grobid/grobid-quantities
 #  tar -xzf /tmp/jprofiler_linux_12_0_2.tar.gz -C /usr/local &&\
 #  rm /tmp/jprofiler_linux_12_0_2.tar.gz
 
-EXPOSE 8060 8061
-#EXPOSE 8080 8081
+EXPOSE 8060 8061 5005
 
-#CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
+#CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005", "-jar", "grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "config.yml"]
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "config.yml"]
+CMD ["java", "-jar", "grobid-quantities/grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "grobid-quantities/config.yml"]
 
 ARG GROBID_VERSION
 
