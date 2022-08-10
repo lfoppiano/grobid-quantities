@@ -20,7 +20,7 @@ models:
       nbMaxIterations: 2000
     delft:
       # deep learning parameters
-      architecture: "BidLSTM_CRF_FEATURES"
+      architecture: "BidLSTM_CRF"
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
@@ -35,7 +35,7 @@ models:
       nbMaxIterations: 2000
     delft:
       # deep learning parameters
-      architecture: "BidLSTM_CRF_FEATURES"
+      architecture: "BidLSTM_CRF"
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
@@ -50,7 +50,7 @@ models:
       nbMaxIterations: 2000
     delft:
       # deep learning parameters
-      architecture: "BidLSTM_CRF_FEATURES"
+      architecture: "BidLSTM_CRF"
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"

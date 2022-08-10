@@ -1,7 +1,7 @@
 ### Grobid-quantities models
 
-For the moment we ship 3 models 
- - unit 
+We ship 3 models 
  - quantity
+ - unit 
  - values 
 

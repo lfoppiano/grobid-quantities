@@ -11,8 +11,8 @@ cleanlpModelPath: "/opt/grobid/grobid-quantities/resources/cleanlp/models"
 
 models:
   - name: "quantities"
-#    engine: "wapiti"
-    engine: "delft"
+    engine: "wapiti"
+#    engine: "delft"
     wapiti:
       # wapiti training parameters, they will be used at training time only
       epsilon: 0.00001
