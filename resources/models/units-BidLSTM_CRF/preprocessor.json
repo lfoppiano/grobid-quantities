@@ -1,9 +1,11 @@
 {
-    "use_char_feature": true,
     "padding": true,
     "return_lengths": true,
+    "return_word_embeddings": true,
     "return_casing": false,
     "return_features": false,
+    "return_chars": true,
+    "return_bert_embeddings": false,
     "vocab_char": {
         "<PAD>": 0,
         "<UNK>": 1,
@@ -101,5 +103,14 @@
         "contains_digit"
     ],
     "max_char_length": 30,
-    "feature_preprocessor": null
+    "feature_preprocessor": null,
+    "indice_tag": {
+        "0": "<PAD>",
+        "1": "B-<base>",
+        "2": "B-<pow>",
+        "3": "B-<prefix>",
+        "4": "I-<base>",
+        "5": "I-<pow>",
+        "6": "O"
+    }
 }

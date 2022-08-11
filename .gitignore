@@ -1,6 +1,6 @@
 target
 *.class
-.idea
+.idea/*
 *.log
 grobid.log*
 quantities.log*

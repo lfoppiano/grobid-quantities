@@ -21,6 +21,8 @@ public class GrobidQuantitiesConfiguration extends Configuration {
     private List<GrobidConfig.ModelParameters> models = new ArrayList<>();
     private int maxParallelRequests;
 
+    private String cleanlpModelPath = "resources/cleanlp/models";
+
     public String getGrobidHome() {
         return grobidHome;
     }
@@ -66,5 +68,13 @@ public class GrobidQuantitiesConfiguration extends Configuration {
             this.maxParallelRequests = Runtime.getRuntime().availableProcessors();
         }
         return this.maxParallelRequests;
+    }
+
+    public String getCleanlpModelPath() {
+        return cleanlpModelPath;
+    }
+
+    public void setCleanlpModelPath(String cleanlpModelPath) {
+        this.cleanlpModelPath = cleanlpModelPath;
     }
 }
