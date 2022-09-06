@@ -23,25 +23,18 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
     private static final Logger logger = LoggerFactory.getLogger(DefaultQuantifiedObjectParser.class);
 
-    private TextParser textParser;
-
     public DefaultQuantifiedObjectParser() {
         super(GrobidModels.DUMMY);
-        try {
-            textParser = TextParser.getInstance();
-        } catch (Exception e) {
-            logger.warn("Something bad happened when instantiating the text parser. ", e);
-        }
     }
 
     @Override
     public List<Measurement> process(List<LayoutToken> tokens, List<Measurement> measurements) {
-        if (isEmpty(measurements) || textParser == null){
+        if (isEmpty(measurements)) {
             return null;
         }
-
         try {
             String text = LayoutTokensUtil.toText(tokens);
+            TextParser textParser = TextParser.getInstance();
             List<Sentence> parsedSentences = textParser.parseText(text);
             int indexMeasurement = 0;
             int offset = 0;
