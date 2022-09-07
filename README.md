@@ -18,7 +18,7 @@ As part of this task we support the recognition of the different value represent
 
 ![Grobid Quantity Demo](doc/img/Screenshot7.png)
 
-Finally we support the identification of the "quantified" substance related to the measure, e.g. _silicon nitride powder_ in 
+Finally, we support the identification of the "quantified" substance related to the measure, e.g. _silicon nitride powder_ in 
 
 ![GROBID Quantity Demo](doc/img/Screenshot5.png)
 
@@ -130,7 +130,7 @@ This project has been created and developed by [science-miner](https://science-m
 
 ## How to cite
 
-If you want to cite this work, please simply refer to the github project with optionally the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier:
+If you want to cite this work, please simply refer to the Github project with optionally the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier:
 
 ```
 grobid-quantities (2015-2022) <https://github.com/kermitt2/grobid-quantities>, swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7

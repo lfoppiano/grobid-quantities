@@ -15,12 +15,12 @@ Docker containers
 The simplest way to run grobid-quantities is via docker containers.
 To run the container with the default configuration:
 ::
-     docker run --rm --init -p 8060:8060 -p 8061:8061  lfoppiano/grobid-quantities:0.7.0
+     docker run --rm --init -p 8060:8060 -p 8061:8061  lfoppiano/grobid-quantities:0.7.1
 
 To run the container with custom configuration, is possible by providing a configuration file with the parameter ``-v``
 Grobid quantities repository provides already the file `resources/config/config-docker.yml` that contains the correct grobidHome and can be modified to best suits ones's needs: 
 ::
-     docker run --rm --init -p 8060:8060 -p 8061:8061 -v resources/config/config-docker.yml:/opt/grobid/grobid-quantities/config.yml:ro  lfoppiano/grobid-quantities:0.7.0
+     docker run --rm --init -p 8060:8060 -p 8061:8061 -v resources/config/config-docker.yml:/opt/grobid/grobid-quantities/config.yml:ro  lfoppiano/grobid-quantities:0.7.1
 
 
 Local installation 
