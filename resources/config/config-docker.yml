@@ -41,8 +41,8 @@ models:
       embeddings_name: "glove-840B"
 
   - name: "values"
-#    engine: "wapiti"
-    engine: "delft"
+    engine: "wapiti"
+#    engine: "delft"
     wapiti:
       # wapiti training parameters, they will be used at training time only
       epsilon: 0.00001
