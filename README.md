@@ -27,7 +27,12 @@ The normalisation of quantities is handled by the java library [Units of measure
 
 ## Latest version
 
-The latest released version of grobid-quantities is [0.7.0](https://github.com/kermitt2/grobid-quantities/releases/tag/0.7.0). The current development version is 0.7.1-SNAPSHOT.
+The latest released version of grobid-quantities is [0.7.1](https://github.com/kermitt2/grobid-quantities/releases/tag/0.7.1). The current development version is 0.7.2-SNAPSHOT.
+
+### Update from 0.7.0 to 0.7.1
+
+In version 0.7.1 a new version of DeLFT using Tensorflow 2.x is used.  
+The DL models must be updated by running `./gradlew copyModels`. 
 
 ### Update from 0.6.0 to 0.7.0
 
