@@ -27,17 +27,19 @@ RUN apt-key del 7fa2af80 && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git
 
 #RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.1
-RUN git clone --filter=blob:none --no-checkout https://github.com/kermitt2/grobid.git /opt/grobid-source && \
+RUN git clone --filter=blob:none --branch 0.7.1 --no-checkout https://github.com/kermitt2/grobid.git /opt/grobid-source && \
     cd /opt/grobid-source && \
-    git sparse-checkout set --cone grobid-home && \
-    git checkout 0.7.1
+    git sparse-checkout set --cone grobid-home
+
 WORKDIR /opt/grobid-source
 COPY gradle.properties .
 
-#RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout features/updated-dl-models
-RUN git clone --depth 1 --branch features/updated-dl-models https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities
+#RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout 0.7.1
+RUN git clone --depth 1 --branch 0.7.1 https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
+    cd grobid-quantities
+
 WORKDIR /opt/grobid-source/grobid-quantities
-COPY gradle.properties .
+#COPY gradle.properties .
 
 # Adjust config
 RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
@@ -103,7 +105,7 @@ EXPOSE 8060 8061 5005
 
 #CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005", "-jar", "grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "config.yml"]
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities/grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "grobid-quantities/config.yml"]
+CMD ["java", "-jar", "grobid-quantities/grobid-quantities-0.7.2-SNAPSHOT-onejar.jar", "server", "grobid-quantities/config.yml"]
 
 ARG GROBID_VERSION
 
