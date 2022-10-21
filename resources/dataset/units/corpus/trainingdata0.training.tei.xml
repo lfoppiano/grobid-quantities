@@ -1,210 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <units>
-    <unit>
-        <prefix>c</prefix>
-        <base>m</base>
-        <pow>2</pow>
-        <pow>/</pow>
-        <base>s</base>
-    </unit>
-    <unit>
-        <prefix>k</prefix>
-        <base>m</base>
-        <pow>/</pow>
-        <base>s</base>
-        <pow>2</pow>
-    </unit>
-    <unit>
-        <prefix>Y</prefix>
-        <base>m</base>
-        <pow>/</pow>
-        <base>s</base>
-        <pow>2</pow>
-        <pow>/</pow>
-        <base>g</base>
-        <pow>2</pow>
-    </unit>
-    <unit>
-        <prefix>c</prefix>
-        <base>m</base>
-        <pow>2</pow>
-        <pow>/</pow>
-        <base>s</base>
-    </unit>
-    <unit>
-        <base>m</base>
-        <pow>2</pow>
-        <pow>/</pow>
-        <base>s</base>
-        <pow>2</pow>
-    </unit>
-    <unit>
-        <prefix>k</prefix>
-        <base>g</base>
-    </unit>
-    <unit>
-        <prefix>m</prefix>
-        <base>m</base>
-    </unit>
-    <unit>
-        <base>°C</base>
-    </unit>
-    <unit>
-        <base>°C</base>
-        <pow>/</pow>
-        <base>m</base>
-        <pow>2</pow>
-    </unit>
-    <unit>
-        <other>1</other>
-        <base>°C</base>
-        <pow>/</pow>
-        <base>m</base>
-        <pow>2</pow>
-    </unit>
-    <unit>
-        <other>1</other>
-        <other>2</other>
-        <base>°</base>
-        <base>C</base>
-        <op>/</op>
-        <base>m</base>
-        <pow>2</pow>
-    </unit>
-    <unit>
-        <other>12</other>
-        <base>°C</base>
-        <pow>/</pow>
-        <base>m</base>
-        <pow>2</pow>
-    </unit>
-    <unit>
-        <base>°C</base>
-        <pow>/</pow>
-        <base>m</base>
-        <pow>222</pow>
-    </unit>
-
-    <unit>
-        <prefix>m</prefix>
-        <base>Jy</base>
-    </unit>
-    <unit>
-        <prefix>μ</prefix>
-        <base>m</base>
-    </unit>
-
-    <unit>
-        <other>~</other>
-        <other>7</other>
-        <other>5</other>
-        <base>%</base>
-    </unit>
-    <unit>
-        <base>σ</base>
-    </unit>
-
-    <unit>
-        <other>24</other>
-        <prefix>μ</prefix>
-        <base>m</base>
-    </unit>
-    <unit>
-        <prefix>μ</prefix>
-        <base>JY</base>
-    </unit>
-    <unit>
-        <prefix>G</prefix>
-        <base>b</base>
-        <pow>/</pow>
-        <base>s</base>
-    </unit>
-    <unit>
-        <base>dB</base>
-        <other>*</other>
-        <base>m</base>
-    </unit>
-    <unit>
-        <prefix>G</prefix>
-        <base>Hz</base>
-    </unit>
-    <unit>
-        <prefix>G</prefix>
-        <base>Hz</base>
-        <base>m</base>
-    </unit>
-    <unit>
-        <prefix>k</prefix>
-        <base>Hz</base>
-        <base>m</base>
-        <base>g</base>
-    </unit>
-    <unit>
-        <prefix>k</prefix>
-        <base>Hz</base>
-        <base>m</base>
-        <base>g</base>
-        <pow>33</pow>
-        <pow>/</pow>
-        <base>s</base>
-        <pow>3</pow>
-    </unit>
-    <unit>
-        <base>V</base>
-        <pow>/</pow>
-        <prefix>c</prefix>
-        <base>m</base>
-    </unit>
-
-    <unit>
-        <other>223455,6</other>
-        <base>V</base>
-        <pow>/</pow>
-        <prefix>c</prefix>
-        <base>m</base>
-    </unit>
-
-    <unit>
-        <prefix>μ</prefix>
-        <base>g</base>
-    </unit>
-    <unit>
-        <prefix>μ</prefix>
-        <base>l</base>
-    </unit>
-    <unit rightAttachment="true">
-        <base>pH</base>
-    </unit>
-    <unit rightAttachment="true">
-        <base>pH</base>
-    </unit>
-    <unit rightAttachment="true">
-        <base>pH</base>
-    </unit>
-    <unit rightAttachment="true">
-        <base>pH</base>
-    </unit>
-
-    <unit>
-        <prefix>μ</prefix>
-        <base>g</base>
-    </unit>
-    <unit>
-        <prefix>μ</prefix>
-        <base>l</base>
-    </unit>
-    <unit rightAttachment="true">
-        <base>pH</base>
-    </unit>
-    <unit rightAttachment="true">
-        <base>pH</base>
-    </unit>
-    <unit rightAttachment="true">
-        <base>pH</base>
-    </unit>
-    <unit rightAttachment="true">
-        <base>pH</base>
-    </unit>
-
-
+    <unit><prefix>c</prefix><base>m</base><pow>2</pow><pow>/</pow><base>s</base></unit>
+    <unit><prefix>k</prefix><base>m</base><pow>/</pow><base>s</base><pow>2</pow></unit>
+    <unit><prefix>Y</prefix><base>m</base><pow>/</pow><base>s</base><pow>2</pow><pow>/</pow><base>g</base><pow>2</pow></unit>
+    <unit><prefix>c</prefix><base>m</base><pow>2</pow><pow>/</pow><base>s</base></unit>
+    <unit><base>m</base><pow>2</pow><pow>/</pow><base>s</base><pow>2</pow></unit>
+    <unit><prefix>k</prefix><base>g</base></unit>
+    <unit><prefix>m</prefix><base>m</base></unit>
+    <unit><base>°C</base></unit>
+    <unit><base>°C</base><pow>/</pow><base>m</base><pow>2</pow></unit>
+    <unit><other>1</other><base>°C</base><pow>/</pow><base>m</base><pow>2</pow></unit>
+    <unit><other>1</other><other>2</other><base>°</base><base>C</base><pow>/</pow><base>m</base><pow>2</pow></unit>
+    <unit><other>12</other><base>°C</base><pow>/</pow><base>m</base><pow>2</pow></unit>
+    <unit><base>°C</base><pow>/</pow><base>m</base><pow>222</pow></unit>
+    <unit><prefix>m</prefix><base>Jy</base></unit>
+    <unit><prefix>μ</prefix><base>m</base></unit>
+    <unit><other>~</other><other>7</other><other>5</other><base>%</base></unit>
+    <unit><base>σ</base></unit>
+    <unit><other>24</other><prefix>μ</prefix><base>m</base></unit>
+    <unit><prefix>μ</prefix><base>JY</base></unit>
+    <unit><prefix>G</prefix><base>b</base><pow>/</pow><base>s</base></unit>
+    <unit><base>dB</base><other>*</other><base>m</base></unit>
+    <unit><prefix>G</prefix><base>Hz</base></unit>
+    <unit><prefix>G</prefix><base>Hz</base><base>m</base></unit>
+    <unit><prefix>k</prefix><base>Hz</base><base>m</base><base>g</base></unit>
+    <unit><prefix>k</prefix><base>Hz</base><base>m</base><base>g</base><pow>33</pow><pow>/</pow><base>s</base><pow>3</pow></unit>
+    <unit><base>V</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>
+    <unit><other>223455,6</other><base>V</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>
+    <unit><prefix>μ</prefix><base>g</base></unit>
+    <unit><prefix>μ</prefix><base>l</base></unit>
+    <unit rightAttachment="true"><base>pH</base></unit>
+    <unit rightAttachment="true"><base>pH</base></unit>
+    <unit rightAttachment="true"><base>pH</base></unit>
+    <unit rightAttachment="true"><base>pH</base></unit>
+    <unit><prefix>μ</prefix><base>g</base></unit>
+    <unit><prefix>μ</prefix><base>l</base></unit>
+    <unit rightAttachment="true"><base>pH</base></unit>
+    <unit rightAttachment="true"><base>pH</base></unit>
+    <unit rightAttachment="true"><base>pH</base></unit>
+    <unit rightAttachment="true"><base>pH</base></unit>
 </units>

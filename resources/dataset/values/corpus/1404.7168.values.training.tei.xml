@@ -3,7 +3,7 @@
 	<value><alpha>few</alpha></value>
 	<value><number>90</number></value>
 	<value><number>100</number></value>
-	<value><alhpa>several</alhpa></value>
+	<value><alpha>several</alpha></value>
 	<value><base>10</base> <pow>−7</pow></value>
 	<value><time>October 19, 2014 at approximately 18:29 UT</time></value>
 	<value><number>134,000</number></value>
@@ -70,7 +70,7 @@
 	<value><number>0.2</number></value>
 	<value><alpha>five million</alpha></value>
 	<value><alpha>few hundred</alpha></value>
-	<value><alhpa>a thousand</alhpa></value>
+	<value><alpha>a thousand</alpha></value>
 	<value><number>3,400</number></value>
 	<value><base>10</base> <pow>−6</pow></value>
 	<value><base>10</base> <pow>−1</pow></value>
