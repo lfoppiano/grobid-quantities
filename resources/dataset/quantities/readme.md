@@ -1,25 +1,30 @@
-| set      | files   | sentences | tokens  | entities | uniq_entities | classes   | positive_examples | negative_examples |
-|----------|---------|-----------|---------|----------|---------------|-----------|-------------------|-------------------|
-| training | 28      | 9149      | 296849  | 3268     | 2198          | 3         | 3268              | 5881              |
-| holdout  | 7       | 2643      | 64589   | 1096     | 695           | 3         | 1096              | 1547              |
-| ratio    | 25.00%  | 28.89%    | 21.76%  | 33.54%   | 31.62%        | 100.00%   | 33.54%            | 26.31%            |
+## General information
+
+| set      | files   | sentences | tokens  | entities | uniq_entities | classes  | positive_examples | negative_examples |
+|----------|---------|-----------|---------|----------|---------------|----------|-------------------|-------------------|
+| training | 26      | 9695      | 293884  | 3559     | 2338          | 3        | 3559              | 6136              |
+| holdout  | 9       | 2097      | 67554   | 805      | 555           | 3        | 805               | 1292              |
+| ratio    | 34.62%  | 21.63%    | 22.99%  | 22.62%   | 23.74%        | 100.00%  | 22.62%            | 21.06%            |
 
 
+## Labels information
 
 | set             | value  | interval  | list   |
 |-----------------|--------|-----------|--------|
-| training        | 2504   | 650       | 114    |
-| holdout         | 568    | 508       | 20     |
-| ratio           | 22.68% | 78.15%    | 17.54% |
+| training        | 2482   | 967       | 110    |
+| holdout         | 590    | 191       | 24     |
+| ratio           | 23.77% | 19.75%    | 21.82% |
 | ---             |
-| training unique | 1231   | 452       | 106    |
-| holdout unique  | 327    | 315       | 20     |
-| ratio uniq      | 26.56% | 69.69%    | 18.87% |
+| training unique | 1232   | 632       | 102    |
+| holdout unique  | 346    | 133       | 24     |
+| ratio uniq      | 28.08% | 21.04%    | 23.53% |
 
 
+
+## In-domain / out-of-domain information
 
 | label    | # in domain | # in domain uniques | # out domain | # out domain unique |
 |----------|-------------|---------------------|--------------|---------------------|
-| value    | 231         | 79                  | 337          | 248                 |
-| interval | 53          | 20                  | 455          | 295                 |
-| list     | 1           | 1                   | 19           | 19                  |
+| value    | 268         | 99                  | 322          | 247                 |
+| interval | 51          | 18                  | 140          | 115                 |
+| list     | 1           | 1                   | 23           | 23                  |
