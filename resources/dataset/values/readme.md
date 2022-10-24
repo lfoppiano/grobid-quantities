@@ -23,3 +23,7 @@ Out of domain
 | time   | 11          | 6                   | 35           | 25                  |
 | base   | 13          | 1                   | 0            | 0                   |
 | pow    | 12          | 5                   | 1            | 1                   |
+
+**NOTE**: base and pow have low variability. Base has probably one single value (10) in all the examples, 
+so it results difficult to obtain higher out of domain values. 
+At the moment we don't have examples with <exp> in the training data. 
