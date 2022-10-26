@@ -8153,19 +8153,6 @@ z 0 0 0 1 NOPUNCT 0 <base>
 ∕ 1 0 0 0 SLASH 0 <pow>
 2 1 1 0 0 NOPUNCT 0 <pow>
 
-T 1 0 1 1 NOPUNCT 0 I-<prefix>
-e 0 0 0 0 NOPUNCT 0 <prefix>
-r 0 0 0 0 NOPUNCT 0 <prefix>
-a 0 0 0 1 NOPUNCT 0 <prefix>
-b 0 0 0 0 NOPUNCT 0 I-<base>
-i 0 0 0 0 NOPUNCT 0 <base>
-t 0 0 0 0 NOPUNCT 0 <base>
-∕ 1 0 0 0 SLASH 0 I-<pow>
-i 0 0 0 0 NOPUNCT 0 I-<base>
-n 0 0 0 1 NOPUNCT 0 <base>
-^ 1 0 0 0 EXPONENT 0 <other>
-2 1 1 0 0 NOPUNCT 0 I-<pow>
-
 n 0 0 0 1 NOPUNCT 0 I-<prefix>
 m 0 0 1 1 NOPUNCT 0 I-<base>
 ∕ 1 0 0 0 SLASH 0 I-<pow>
