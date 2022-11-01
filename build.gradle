@@ -262,6 +262,17 @@ coveralls {
     jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
 }
 
+task installTransformers(dependsOn: copyModels) {
+    doLast {
+        download {
+            src "https://storagescienceminer.s3.eu-central-1.amazonaws.com/NIMS/quantities-transformers-0.7.1.zip"
+            dest "${rootDir}/../grobid-home/models/quantities-transformers-0.7.1.zip"
+            overwrite false
+        }
+        ant.unzip(src: "${rootDir}/../grobid-home/models/quantities-transformers-0.7.1", dest: "${rootDir}/../grobid-home/models/")
+    }
+}
+
 //release {
 //    failOnUpdateNeeded = false
 //    failOnUnversionedFiles = false
