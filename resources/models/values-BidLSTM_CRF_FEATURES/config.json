@@ -1,5 +1,5 @@
 {
-    "model_name": "grobid-values-BidLSTM_CRF_FEATURES",
+    "model_name": "values-BidLSTM_CRF_FEATURES",
     "architecture": "BidLSTM_CRF_FEATURES",
     "embeddings_name": "glove-840B",
     "char_vocab_size": 68,
