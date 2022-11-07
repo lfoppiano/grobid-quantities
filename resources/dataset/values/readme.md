@@ -1,10 +1,12 @@
-| set      | entities | uniq_entities | classes  | materials |
-|----------|----------|---------------|----------|-----------|
-| training | 3913     | 1907          | 5        | 3866      |
-| holdout  | 1009     | 498           | 5        | 989       |
-| ratio    | 25.79%   | 26.11%        | 100.00%  | 25.58%    |
+## General information
 
+| set        | entities  | uniq_entities   |
+|------------|-----------|-----------------|
+| training   | 3913      | 1907            |
+| holdout    | 1009      | 498             |
+| ratio      | 25.79%    | 26.11%          |
 
+## Labels information
 
 | set        | `<number>` | `<alpha>` | `<time>` | `<base>` | `<pow>` |
 |------------|------------|-----------|----------|----------|---------|
@@ -14,7 +16,7 @@
 
 
 
-Out of domain
+## In-domain / out-of-domain information
 
 | label       | # in domain | # in domain uniques | # out domain | # out domain unique |
 |-------------|-------------|---------------------|--------------|---------------------|
