@@ -1,20 +1,27 @@
+.. topic:: Introduction
+
 .. _Grobid: http://github.com/kermitt2/grobid
 .. _Units of measurement: http://unitsofmeasurement.github.io/
 
 
-.. topic:: Introduction
-
 Introduction
 ===============
 
-Grobid-quantities is a Java application, based on `Grobid`_ (GeneRation Of BIbliographic Data), a machine learning framework for parsing and structuring raw documents such as PDF or plain text. Grobid-quantities is designed for large-scale processing tasks in batch or via a web REST API.
+Grobid-quantities is a Java application, based on `Grobid`_ (GeneRation Of BIbliographic Data), a machine learning framework for parsing and structuring raw documents such as PDF or plain text.
+Grobid-quantities is designed for large-scale processing tasks in batch or via a web REST API.
 
-The machine learning engine architecture follows the cascade approach, where each model is specialised in the resolution of a specific task. The models are trained using CRF (Conditional Random Field) algorithm.
+The machine learning engine architecture follows the cascade approach, where each model is specialised in the resolution of a specific task.
+
+.. figure:: img/cascade-schema.png
+   :alt: Grobid-quantities cascade schema
+
+The models are trained using the Conditional Random Field (CRF) algorithm and Recurrent neural networks (RNN) using the bidirectional LSTM with CRF as activation layer (BidLSTM_CRF).
+
 
 **quantities** are modelled using three different types:
     (a) ``atomic values`` in case of single measurements (e.g., 10 grams),
     (b) ``interval`` (e.g. ``from 3 to 5 km``) and ``range`` (``100 +- 4``  ) for continuous values, and,
-    (c) ``lists`` of discrete values:
+    (c) ``lists`` of discrete values where the measurement unit is shared.
 
 **units** are decomposed and restructured. Complementary information like unit system, type of measurement are attached by lookup in an internal lexicon.
 
@@ -28,7 +35,7 @@ The machine learning engine architecture follows the cascade approach, where eac
 
 The measurements that are identified are normalised toward the International System of Units (SI) using the java library `Units of measurement`_.
 
-Grobid-quantities also contains a module implementing the identification of the "quantified" object/substance related to the measure. This module is currently *experimental*.
+Grobid-quantities also contains a module implementing the identification of the "quantified" object/substance related to the measure. This module is still *experimental*.
 
 The following screenshot illustrate an example of measurement that is extracted, parsed and normalised, the quantified substance, *streptomycin* is additionally recognised:
 

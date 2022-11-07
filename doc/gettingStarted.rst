@@ -1,30 +1,36 @@
+.. topic:: Getting started, build, install
+
 .. _Python client GitHub page: https://github.com/lfoppiano/grobid-quantities-python-client
 
-.. topic:: Getting started, build, install
+.. _not compatible with Windows: https://grobid.readthedocs.io/en/latest/Troubleshooting/#windows-related-issues
+
+
 
 Getting started
 ===============
 
-Grobid-quantities requires *JDK 1.8 or greater* and Grobid to be installed.
+Before you start
+~~~~~~~~~~~~~~~~
+.. warning:: Grobid and grobid-quantities are `not compatible with Windows`_. Windows users can easily use Grobid and grobid-quantities through docker comtainers. See below.
 
 Install and build
 ~~~~~~~~~~~~~~~~~
 
 Docker containers
-~~~~~~~~~~~~~~~~~
+-----------------
 The simplest way to run grobid-quantities is via docker containers.
-To run the container with the default configuration:
-::
-     docker run --rm --init -p 8060:8060 -p 8061:8061  lfoppiano/grobid-quantities:0.7.1
 
-To run the container with custom configuration, is possible by providing a configuration file with the parameter ``-v``
-Grobid quantities repository provides already the file `resources/config/config-docker.yml` that contains the correct grobidHome and can be modified to best suits ones's needs: 
+The Grobid-quantities repository provides a configuration file for docker: `resources/config/config-docker.yml`, which should work out of the box, although we recommend to **check the configuration** (e.g., to enable modules using deep learning).
+
+To run the container use:
 ::
      docker run --rm --init -p 8060:8060 -p 8061:8061 -v resources/config/config-docker.yml:/opt/grobid/grobid-quantities/config.yml:ro  lfoppiano/grobid-quantities:0.7.1
 
+The container will respond on port http://localhost:8060, and 8061 for the admin interface.
 
 Local installation 
-~~~~~~~~~~~~~~~~~~~~~
+------------------
+Grobid-quantities requires *JDK 1.8 or greater*, and Grobid to be installed.
 
 First install the latest development version of GROBID as explained by the `documentation <http://grobid.readthedocs.org>`_.
 
@@ -44,7 +50,7 @@ Then, build everything with:
    ./gradlew clean build
 
 
-You should have the directories of the models ``quantities``, ``units`` and ``values`` inside ``../grobid-home/models``
+You should have the directories of the models ``quantities*``, ``units*`` and ``values*`` inside ``../grobid-home/models``
 
 Run some test:
 ::
@@ -55,7 +61,7 @@ Run some test:
 
 
 Start and use the service
-~~~~~~~~~~~~~~~~~~~~~~~~~
+'''''''''''''''''''''''''
 
 Grobid-quantities can be run with the following command:
 ::
@@ -63,7 +69,10 @@ Grobid-quantities can be run with the following command:
   java -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
 
 
-There is a GUI interface demo accessible at ``http://localhost:8060``, and a REST API, reachable under ``http://localhost:8060/service`` and documented in the :ref:`rest_api`
+Accessing the service
+~~~~~~~~~~~~~~~~~~~~~
+
+Grobid-quantitiesa provides a graphical demo accessible at ``http://localhost:8060``, and a REST API, reachable under ``http://localhost:8060/service`` and documented in the :ref:`rest_api`
 
 To test the API, is possible to run a simple text using ``curl``:
 
@@ -72,11 +81,11 @@ To test the API, is possible to run a simple text using ``curl``:
   curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuantityText
 
 
-**Note**: The model is designed and trained to work at *paragraph level*. The expected text input to the parser is a paragraph or a text segment of similar size, not a complete document. In case you have a long textual document, it is better either to exploit existing structures (e.g. XML/HTML ``<p>`` elements) to initially segment it into paragraphs or sentences, or to apply an automatic paragraph/sentence segmentation. Then send them separately to grobid-quantities to be processed.
+.. note:: The model is designed and trained to work at *paragraph level*. The expected text input to the parser is a paragraph or a text segment of similar size, not a complete document. In case you have a long textual document, it is better either to exploit existing structures (e.g. XML/HTML ``<p>`` elements) to initially segment it into paragraphs or sentences, or to apply an automatic paragraph/sentence segmentation. Then send them separately to grobid-quantities to be processed.
 
 
-Clients
-~~~~~~~
+Using the python client
+-----------------------
 
 The easiest way to interact with the server is to use the Python Client.
 It removes the complexity of dealing with the output data, and managing single or multi-thread processing.
