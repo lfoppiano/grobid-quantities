@@ -9,22 +9,22 @@
 
 ## Labels information
 
-| set             | value  | interval  | list   |
-|-----------------|--------|-----------|--------|
-| training        | 2482   | 967       | 110    |
-| holdout         | 590    | 191       | 24     |
-| ratio           | 23.77% | 19.75%    | 21.82% |
+| set             | `<value>`   | `<interval>`  | `<list>`   |
+|-----------------|-------------|---------------|------------|
+| training        | 2482        | 967           | 110        |
+| holdout         | 590         | 191           | 24         |
+| ratio           | 23.77%      | 19.75%        | 21.82%     |
 | ---             |
-| training unique | 1232   | 632       | 102    |
-| holdout unique  | 346    | 133       | 24     |
-| ratio uniq      | 28.08% | 21.04%    | 23.53% |
+| training unique | 1232        | 632           | 102        |
+| holdout unique  | 346         | 133           | 24         |
+| ratio uniq      | 28.08%      | 21.04%        | 23.53%     |
 
 
 
 ## In-domain / out-of-domain information
 
-| label    | # in domain | # in domain uniques | # out domain | # out domain unique |
-|----------|-------------|---------------------|--------------|---------------------|
-| value    | 268         | 99                  | 322          | 247                 |
-| interval | 51          | 18                  | 140          | 115                 |
-| list     | 1           | 1                   | 23           | 23                  |
+| label         | # in domain | # in domain uniques | # out domain | # out domain unique |
+|---------------|-------------|---------------------|--------------|---------------------|
+| `<value>`     | 268         | 99                  | 322          | 247                 |
+| `<interval>`  | 51          | 18                  | 140          | 115                 |
+| `<list>`      | 1           | 1                   | 23           | 23                  |
