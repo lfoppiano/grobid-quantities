@@ -5,7 +5,7 @@
 <!--    <value><number>0.002</number>e<exp>-30</exp></value>-->
     <value><number>0.002</number></value>
     <value><number>2</number></value>
-    <value><alhpa>twentytwo</alhpa></value>
+    <value><alpha>twentytwo</alpha></value>
     <value><alpha>twenty-two</alpha></value>
     <value><base>10</base><pow>-1</pow></value>
 <!--    <value>e<exp>-1</exp></value>-->
