@@ -39,7 +39,7 @@ RUN git clone --depth 1 --branch 0.7.1 https://github.com/kermitt2/grobid-quanti
     cd grobid-quantities
 
 WORKDIR /opt/grobid-source/grobid-quantities
-#COPY gradle.properties .
+COPY gradle.properties .
 
 # Adjust config
 RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
