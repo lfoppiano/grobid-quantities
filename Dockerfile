@@ -49,7 +49,7 @@ RUN rm -rf /opt/grobid-source/grobid-home/models/*
 
 WORKDIR /opt/grobid-source/grobid-quantities
 RUN ./gradlew clean assemble --no-daemon  --stacktrace --info
-RUN ./gradlew installTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
+RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
 RUN ./gradlew copyModels --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.tar.gz
 
 
