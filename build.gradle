@@ -259,7 +259,6 @@ task copyModels(type: Copy) {
 
     doLast {
         print "Copy models under grobid-home: ${grobidHome}"
-        ant.gunzip(src: "${rootDir}/${grobidHome}/models/superconductors/model.wapiti.gz", dest: "${rootDir}/${grobidHome}/models/superconductors/")
     }
 }
 
