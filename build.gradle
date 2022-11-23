@@ -248,7 +248,6 @@ def grobidHome = conf.grobidHome.replace("\$", "").replace('{', "").replace("GRO
 task copyModels(type: Copy) {
     from "${rootDir}/resources/models"
     include "**/*.wapiti"
-    include "**/*.wapiti.gz"
     include "**/config.json"
     include "**/transformer-config.json"
     include "**/transformer-tokenizer/**"
