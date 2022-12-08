@@ -20,13 +20,9 @@ FROM openjdk:8u342-jdk as builder
 
 USER root
 
-RUN apt-key del 7fa2af80 && \
-    curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb --output /opt/cuda-keyring_1.0-1_all.deb && \
-    dpkg -i /opt/cuda-keyring_1.0-1_all.deb && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git
 
-#RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.1
 RUN git clone --filter=blob:none --branch 0.7.1 --no-checkout https://github.com/kermitt2/grobid.git /opt/grobid-source && \
     cd /opt/grobid-source && \
     git sparse-checkout set --cone grobid-home
@@ -66,19 +62,8 @@ ENV LANG C.UTF-8
 
 COPY --from=builder /opt/cuda-keyring_1.0-1_all.deb  /opt
 
-# install JRE 8, python and other dependencies
-RUN apt-key del 7fa2af80 && \
-#    curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb --output cuda-keyring_1.0-1_all.deb && \
-    dpkg -i /opt/cuda-keyring_1.0-1_all.deb && \
-    rm /opt/cuda-keyring*.deb
-#    rm /etc/apt/sources.list.d/cuda.list && \
-#    rm /etc/apt/sources.list.d/nvidia-ml.list
-
 RUN apt-get update && \
     apt-get -y --no-install-recommends install git wget
-#    apt-get -y remove python3.6 && \
-#    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata && \
-#    apt-get -y --no-install-recommends install git python3.7 python3.7-venv python3.7-dev python3.7-distutil
 
 WORKDIR /opt/grobid
 
@@ -90,10 +75,8 @@ COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/mode
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
-# Install requirements
 WORKDIR /opt/grobid
 
-#RUN ln -s /opt/grobid/delft/ delft
 RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
 # JProfiler
