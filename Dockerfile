@@ -59,7 +59,7 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM grobid/grobid:0.7.1u as runtime
+FROM grobid/grobid:0.7.2 as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
