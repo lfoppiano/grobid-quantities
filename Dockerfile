@@ -28,7 +28,6 @@ RUN git clone --filter=blob:none --branch 0.7.1 --no-checkout https://github.com
     git sparse-checkout set --cone grobid-home
 
 WORKDIR /opt/grobid-source
-COPY gradle.properties .
 
 #RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout 0.7.1
 RUN git clone --depth 1 --branch feature/add-additional-dl-models https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
@@ -72,8 +71,6 @@ COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
-
-WORKDIR /opt/grobid
 
 RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
