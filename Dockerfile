@@ -79,15 +79,17 @@ RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 #  tar -xzf /tmp/jprofiler_linux_12_0_2.tar.gz -C /usr/local &&\
 #  rm /tmp/jprofiler_linux_12_0_2.tar.gz
 
-EXPOSE 8060 8061 5005
 
 ARG GROBID_VERSION
-
+RUN echo $GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-unknown}
+RUN echo $GROBID_VERSION
+
+EXPOSE 8060 8061 5005
 
 #CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005", "-jar", "grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-quantities/config.yml"]
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-quantities/config.yml"]
+CMD ["sh", "-c", "java -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
 
 LABEL \
     authors="Luca Foppiano, Patrice Lopez" \
