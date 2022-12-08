@@ -60,8 +60,6 @@ FROM grobid/grobid:0.7.2 as runtime
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
 
-COPY --from=builder /opt/cuda-keyring_1.0-1_all.deb  /opt
-
 RUN apt-get update && \
     apt-get -y --no-install-recommends install git wget
 
@@ -86,12 +84,13 @@ RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
 EXPOSE 8060 8061 5005
 
-#CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005", "-jar", "grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "config.yml"]
-#CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities/grobid-quantities-0.7.2-SNAPSHOT-onejar.jar", "server", "grobid-quantities/config.yml"]
-
 ARG GROBID_VERSION
 
+ENV GROBID_VERSION=${GROBID_VERSION:-unknown}
+
+#CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005", "-jar", "grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-quantities/config.yml"]
+#CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
+CMD ["java", "-jar", "grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-quantities/config.yml"]
 
 LABEL \
     authors="Luca Foppiano, Patrice Lopez" \
