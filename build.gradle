@@ -6,6 +6,9 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
     }
+    dependencies {
+        classpath group: 'org.yaml', name: 'snakeyaml', version: '1.19'
+    }
 }
 
 plugins {
@@ -15,6 +18,7 @@ plugins {
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.12.0'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id "de.undercouch.download" version "4.1.1"
 //    id 'net.researchgate.release' version '3.0.1'
 }
 
@@ -59,9 +63,9 @@ dependencies {
     testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
 
     //GROBID
-    implementation 'org.grobid:grobid-core:0.7.1u'
-    implementation 'org.grobid:grobid-trainer:0.7.1u'
-    implementation 'org.grobid:grobid-service:0.7.1u'
+    implementation 'org.grobid:grobid-core:0.7.2'
+    implementation 'org.grobid:grobid-trainer:0.7.2'
+    implementation 'org.grobid:grobid-service:0.7.2'
     implementation "xerces:xercesImpl:2.12.0"
     implementation "net.arnx:jsonic:1.3.10"
     implementation "net.sf.saxon:Saxon-HE:9.6.0-9"
@@ -236,14 +240,38 @@ publishing {
     }
 }
 
+def conf = new org.yaml.snakeyaml.Yaml().load( new File("resources/config/config.yml").newInputStream() )
+def grobidHome = conf.grobidHome.replace("\$", "").replace('{', "").replace("GROBID_HOME:- ", "").replace("}", "")
+
 /** Model management **/
+
 task copyModels(type: Copy) {
     from "${rootDir}/resources/models"
     include "**/*.wapiti"
     include "**/config.json"
+    include "**/transformer-config.json"
+    include "**/transformer-tokenizer/**"
     include "**/model_weights.hdf5"
     include "**/preprocessor.json"
-    into "${rootDir}/../grobid-home/models/"
+    exclude "**/features-engineering/**"
+    exclude "**/result-logs/**"
+    into "${rootDir}/${grobidHome}/models/"
+
+    doLast {
+        print "Copy models under grobid-home: ${grobidHome}"
+    }
+}
+
+task downloadTransformers(dependsOn: copyModels) {
+    doLast {
+        download {
+            src "https://kdrive.infomaniak.com/app/share/104844/e458be50-b94c-4e16-b190-6fa17db58ef0/147421/download"
+            dest "${rootDir}/${grobidHome}/models/quantities-transformers.zip"
+            overwrite false
+            print "Download bulky transformers files under grobid-home: ${grobidHome}"
+        }
+        ant.unzip(src: "${rootDir}/${grobidHome}/models/quantities-transformers.zip", dest: "${rootDir}/${grobidHome}/models/")
+    }
 }
 
 wrapper {

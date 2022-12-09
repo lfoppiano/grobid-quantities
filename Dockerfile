@@ -20,26 +20,16 @@ FROM openjdk:8u342-jdk as builder
 
 USER root
 
-RUN apt-key del 7fa2af80 && \
-    curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb --output /opt/cuda-keyring_1.0-1_all.deb && \
-    dpkg -i /opt/cuda-keyring_1.0-1_all.deb && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git
 
-#RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.1
-RUN git clone --filter=blob:none --branch 0.7.1 --no-checkout https://github.com/kermitt2/grobid.git /opt/grobid-source && \
-    cd /opt/grobid-source && \
-    git sparse-checkout set --cone grobid-home
-
 WORKDIR /opt/grobid-source
-COPY gradle.properties .
 
-#RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout 0.7.1
-RUN git clone --depth 1 --branch 0.7.1 https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
+RUN git clone --depth 1 --branch feature/add-additional-dl-models https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
     cd grobid-quantities
 
 WORKDIR /opt/grobid-source/grobid-quantities
-#COPY gradle.properties .
+COPY gradle.properties .
 
 # Adjust config
 RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
@@ -49,9 +39,7 @@ RUN rm -rf /opt/grobid-source/grobid-home/models/*
 
 WORKDIR /opt/grobid-source/grobid-quantities
 RUN ./gradlew clean assemble --no-daemon  --stacktrace --info
-#RUN ./gradlew installScibert --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
-RUN ./gradlew copyModels --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.tar.gz
-
+RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
 
 WORKDIR /opt
 
@@ -59,41 +47,23 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM grobid/grobid:0.7.1u as runtime
+FROM grobid/grobid:0.7.2 as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
 
-COPY --from=builder /opt/cuda-keyring_1.0-1_all.deb  /opt
-
-# install JRE 8, python and other dependencies
-RUN apt-key del 7fa2af80 && \
-#    curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb --output cuda-keyring_1.0-1_all.deb && \
-    dpkg -i /opt/cuda-keyring_1.0-1_all.deb && \
-    rm /opt/cuda-keyring*.deb
-#    rm /etc/apt/sources.list.d/cuda.list && \
-#    rm /etc/apt/sources.list.d/nvidia-ml.list
-
 RUN apt-get update && \
     apt-get -y --no-install-recommends install git wget
-#    apt-get -y remove python3.6 && \
-#    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata && \
-#    apt-get -y --no-install-recommends install git python3.7 python3.7-venv python3.7-dev python3.7-distutil
 
 WORKDIR /opt/grobid
 
 RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp/models /opt/grobid/grobid-quantities/resources/clearnlp/config
-COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
 COPY --from=builder /opt/grobid-source/grobid-quantities/build/libs/* ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config.yml ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
-# Install requirements
-WORKDIR /opt/grobid
-
-#RUN ln -s /opt/grobid/delft/ delft
 RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
 # JProfiler
@@ -101,14 +71,15 @@ RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 #  tar -xzf /tmp/jprofiler_linux_12_0_2.tar.gz -C /usr/local &&\
 #  rm /tmp/jprofiler_linux_12_0_2.tar.gz
 
-EXPOSE 8060 8061 5005
-
-#CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005", "-jar", "grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "config.yml"]
-#CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities/grobid-quantities-0.7.2-SNAPSHOT-onejar.jar", "server", "grobid-quantities/config.yml"]
 
 ARG GROBID_VERSION
+ENV GROBID_VERSION=${GROBID_VERSION:-unknown}
 
+EXPOSE 8060 8061 5005
+
+#CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
+CMD ["sh", "-c", "java -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
+CMD ["sh", "-c", "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005 -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
 
 LABEL \
     authors="Luca Foppiano, Patrice Lopez" \
