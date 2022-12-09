@@ -23,13 +23,8 @@ USER root
 RUN apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git
 
-RUN git clone --filter=blob:none --branch 0.7.1 --no-checkout https://github.com/kermitt2/grobid.git /opt/grobid-source && \
-    cd /opt/grobid-source && \
-    git sparse-checkout set --cone grobid-home
-
 WORKDIR /opt/grobid-source
 
-#RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout 0.7.1
 RUN git clone --depth 1 --branch feature/add-additional-dl-models https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
     cd grobid-quantities
 
@@ -45,8 +40,6 @@ RUN rm -rf /opt/grobid-source/grobid-home/models/*
 WORKDIR /opt/grobid-source/grobid-quantities
 RUN ./gradlew clean assemble --no-daemon  --stacktrace --info
 RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
-RUN ./gradlew copyModels --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.tar.gz
-
 
 WORKDIR /opt
 
@@ -65,7 +58,6 @@ RUN apt-get update && \
 WORKDIR /opt/grobid
 
 RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp/models /opt/grobid/grobid-quantities/resources/clearnlp/config
-COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
 COPY --from=builder /opt/grobid-source/grobid-quantities/build/libs/* ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config.yml ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
@@ -81,15 +73,13 @@ RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
 
 ARG GROBID_VERSION
-RUN echo $GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-unknown}
-RUN echo $GROBID_VERSION
 
 EXPOSE 8060 8061 5005
 
-#CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005", "-jar", "grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-quantities/config.yml"]
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
 CMD ["sh", "-c", "java -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
+CMD ["sh", "-c", "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005 -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
 
 LABEL \
     authors="Luca Foppiano, Patrice Lopez" \
