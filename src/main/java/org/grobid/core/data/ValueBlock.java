@@ -228,9 +228,10 @@ public class ValueBlock {
             } else
                 json.append(", ");
             json.append("\"formatted\" : \"" + outputRawName + "\"");
-
-            json.append(" }");
         }
+
+        json.append(" }");
+
         return json.toString();
     }
 
