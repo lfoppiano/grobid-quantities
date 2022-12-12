@@ -35,9 +35,8 @@ COPY gradle.properties .
 RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
 
 # Preparing models
-RUN rm -rf /opt/grobid-source/grobid-home/models/*
-
 WORKDIR /opt/grobid-source/grobid-quantities
+RUN rm -rf /opt/grobid-source/grobid-home/models/*
 RUN ./gradlew clean assemble --no-daemon  --stacktrace --info
 RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
 
@@ -58,6 +57,7 @@ RUN apt-get update && \
 WORKDIR /opt/grobid
 
 RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp/models /opt/grobid/grobid-quantities/resources/clearnlp/config
+COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
 COPY --from=builder /opt/grobid-source/grobid-quantities/build/libs/* ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config.yml ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
