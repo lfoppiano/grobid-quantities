@@ -224,8 +224,9 @@ public class ValueBlock {
             String outputRawName = new String(encodedRawName);
             if (!started) {
                 started = true;
-            } else
+            } else {
                 json.append(", ");
+            }
             json.append("\"formatted\" : \"" + outputRawName + "\"");
         }
 
