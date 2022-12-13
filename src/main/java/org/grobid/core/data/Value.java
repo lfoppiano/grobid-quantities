@@ -121,9 +121,11 @@ public class Value {
             } else
                 json.append(", ");
             json.append("\"structure\" : " + getStructure().toJson() + ", ");
-            byte[] encodedParsedName = encoder.quoteAsUTF8(getStructure().toString());
-            String outputParsedName = new String(encodedParsedName);
-            json.append("\"parsed\" : \"" + outputParsedName + "\"");
+            if (getStructure().getType() != ValueBlock.Type.UNKNOWN) {
+                byte[] encodedParsedName = encoder.quoteAsUTF8(getStructure().toString());
+                String outputParsedName = new String(encodedParsedName);
+                json.append("\"parsed\" : \"" + outputParsedName + "\"");
+            }
         }
 
         if (offsets != null) {

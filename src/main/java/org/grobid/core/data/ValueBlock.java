@@ -215,13 +215,12 @@ public class ValueBlock {
         json.append("\"type\" : \"" + getType() + "\"");
         if (!started) {
             started = true;
-        } else
+        } else {
             json.append(", ");
+        }
 
-
-        String valueAsString = toString();
-        if (valueAsString != null) {
-            byte[] encodedRawName = encoder.quoteAsUTF8(valueAsString);
+        if (getType() != Type.UNKNOWN) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(toString());
             String outputRawName = new String(encodedRawName);
             if (!started) {
                 started = true;
