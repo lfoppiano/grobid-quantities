@@ -73,6 +73,7 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
     implementation 'org.apache.opennlp:opennlp-tools:1.9.1'
     implementation 'black.ninia:jep:4.0.2'
+    implementation "org.apache.lucene:lucene-analyzers-common:4.5.1"
 
     //Apache commons
     implementation 'org.apache.commons:commons-collections4:4.4'
