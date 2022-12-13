@@ -148,7 +148,7 @@ public class QuantityNormalizer {
                 unit = formatService.parse(parsedUnit.getRawName());
                 break;
             } catch (Throwable e) {
-                LOGGER.warn("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), e);
+                LOGGER.debug("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), e);
             }
         }
 
@@ -174,9 +174,9 @@ public class QuantityNormalizer {
                             break;
                         }
 
-                        LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), e);
+                        LOGGER.debug("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), e);
                     } catch (Throwable t) {
-                        LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), t);
+                        LOGGER.debug("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), t);
                     }
                 }
             }
