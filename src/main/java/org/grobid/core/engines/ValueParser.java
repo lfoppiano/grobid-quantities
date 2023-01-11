@@ -186,7 +186,7 @@ public class ValueParser extends AbstractParser {
             text = text.replace("\n\r", " ");
 
             QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
-            List<LayoutToken> layoutTokens = analyzer.tokenizeWithLayoutTokenByCharacter(text);
+            List<LayoutToken> layoutTokens = analyzer.tokenizeWithLayoutToken(text);
 
             String ress = addFeatures(layoutTokens);
             String res;

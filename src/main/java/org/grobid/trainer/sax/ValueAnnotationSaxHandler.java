@@ -83,7 +83,7 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
 
             // text segmentation
             QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
-            List<String> tokens = analyzer.tokenizeByCharacter(text);
+            List<String> tokens = analyzer.tokenize(text);
 
             boolean begin = true;
             for (String token : tokens) {

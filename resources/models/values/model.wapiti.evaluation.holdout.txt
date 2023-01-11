@@ -1,2412 +1,452 @@
 === START RAW RESULTS ===
-O	1	0	NOPUNCT	I-<time>	I-<time>
-c	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-o	0	0	NOPUNCT	<time>	<time>
-b	0	0	NOPUNCT	<time>	<time>
-e	0	0	NOPUNCT	<time>	<time>
-r	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+10	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
+15	1	1	NOPUNCT	I-<number>	I-<number>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+15	1	1	NOPUNCT	I-<number>	I-<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+20	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
 
-O	1	0	NOPUNCT	I-<time>	I-<time>
-c	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-o	0	0	NOPUNCT	<time>	<time>
-b	0	0	NOPUNCT	<time>	<time>
-e	0	0	NOPUNCT	<time>	<time>
-r	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-a	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-:	1	0	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+twenty	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-J	1	0	NOPUNCT	I-<time>	I-<time>
-a	0	0	NOPUNCT	<time>	<time>
-n	0	0	NOPUNCT	<time>	<time>
-u	0	0	NOPUNCT	<time>	<time>
-a	0	0	NOPUNCT	<time>	<time>
-r	0	0	NOPUNCT	<time>	<time>
-y	0	0	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-3	1	1	NOPUNCT	<time>	<time>
+1998	1	1	NOPUNCT	I-<time>	I-<number>
 
-O	1	0	NOPUNCT	I-<time>	I-<time>
-c	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-o	0	0	NOPUNCT	<time>	<time>
-b	0	0	NOPUNCT	<time>	<time>
-e	0	0	NOPUNCT	<time>	<time>
-r	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
+2012	1	1	NOPUNCT	I-<time>	I-<time>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
+10	1	1	NOPUNCT	I-<number>	I-<number>
 
-7	1	1	NOPUNCT	I-<number>	I-<number>
+70	1	1	NOPUNCT	I-<number>	I-<number>
 
-M	1	0	NOPUNCT	I-<time>	I-<time>
-a	0	0	NOPUNCT	<time>	<time>
-r	0	0	NOPUNCT	<time>	<time>
-c	0	0	NOPUNCT	<time>	<time>
-h	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-5	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
+1919	1	1	NOPUNCT	I-<time>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+25	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+1920	1	1	NOPUNCT	I-<time>	I-<number>
 
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-u	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
+15	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<number>	I-<base>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-−	1	0	HYPHEN	I-<pow>	I-<pow>
-7	1	1	NOPUNCT	<pow>	<pow>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-M	1	0	NOPUNCT	I-<time>	I-<time>
-a	0	0	NOPUNCT	<time>	<time>
-r	0	0	NOPUNCT	<time>	<time>
-c	0	0	NOPUNCT	<time>	<time>
-h	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-5	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-M	1	0	NOPUNCT	I-<time>	I-<time>
-a	0	0	NOPUNCT	<time>	<time>
-y	0	0	NOPUNCT	<time>	<time>
-7	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-z	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-−	1	0	HYPHEN	I-<pow>	I-<pow>
-6	1	1	NOPUNCT	<pow>	<pow>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-×	1	0	NOPUNCT	<other>	<other>
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-−	1	0	HYPHEN	I-<pow>	I-<pow>
-4	1	1	NOPUNCT	<pow>	<pow>
-
-z	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-×	1	0	NOPUNCT	<other>	<other>
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-−	1	0	HYPHEN	I-<pow>	I-<pow>
-4	1	1	NOPUNCT	<pow>	<pow>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-−	1	0	HYPHEN	I-<pow>	I-<pow>
-4	1	1	NOPUNCT	<pow>	<pow>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
-×	1	0	NOPUNCT	<other>	<other>
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-−	1	0	HYPHEN	I-<pow>	I-<pow>
-4	1	1	NOPUNCT	<pow>	<pow>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-O	1	0	NOPUNCT	I-<time>	I-<time>
-c	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-a	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-:	1	0	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-O	1	0	NOPUNCT	I-<time>	I-<time>
-c	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<number>
-8	1	1	NOPUNCT	<time>	<number>
-:	1	0	NOPUNCT	<time>	<time>
-3	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-J	1	0	NOPUNCT	I-<time>	I-<time>
-u	0	0	NOPUNCT	<time>	<time>
-l	0	0	NOPUNCT	<time>	<time>
-y	0	0	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-−	1	0	HYPHEN	I-<pow>	I-<pow>
-4	1	1	NOPUNCT	<pow>	<pow>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-O	1	0	NOPUNCT	I-<time>	I-<time>
-c	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-a	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-:	1	0	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-/	1	0	SLASH	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-z	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<base>	I-<number>
-0	1	1	NOPUNCT	<base>	<number>
-7	1	1	NOPUNCT	I-<pow>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-x	0	0	NOPUNCT	<other>	<other>
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-7	1	1	NOPUNCT	I-<pow>	I-<pow>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<base>	I-<number>
-0	1	1	NOPUNCT	<base>	<number>
-7	1	1	NOPUNCT	I-<pow>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-x	0	0	NOPUNCT	<other>	<time>
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
-7	1	1	NOPUNCT	I-<pow>	I-<pow>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
 ,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+428	1	1	NOPUNCT	<number>	<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
+1903	1	1	NOPUNCT	I-<time>	I-<number>
 
 5	1	1	NOPUNCT	I-<number>	I-<number>
 ,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+745	1	1	NOPUNCT	<number>	<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
+1926	1	1	NOPUNCT	I-<time>	I-<number>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+500	1	1	NOPUNCT	I-<number>	I-<number>
 
-9	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+300	1	1	NOPUNCT	I-<number>	I-<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
+1926	1	1	NOPUNCT	I-<time>	I-<number>
+
+200	1	1	NOPUNCT	I-<number>	I-<number>
+
+1960	1	1	NOPUNCT	I-<time>	I-<number>
+
+10	1	1	NOPUNCT	I-<number>	I-<number>
+
+16	1	1	NOPUNCT	I-<number>	I-<number>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+2000	1	1	NOPUNCT	I-<time>	I-<time>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+1905	1	1	NOPUNCT	I-<time>	I-<number>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
 ,	1	0	COMMA	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
+25	1	1	NOPUNCT	I-<number>	I-<number>
 
-6	1	1	NOPUNCT	I-<number>	I-<number>
+30	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<base>
-0	1	1	NOPUNCT	<number>	<base>
-5	1	1	NOPUNCT	<number>	I-<pow>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<time>
-0	1	1	NOPUNCT	<number>	<time>
-x	0	0	NOPUNCT	<other>	<time>
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<base>
--	1	0	HYPHEN	I-<pow>	I-<pow>
-4	1	1	NOPUNCT	<pow>	<pow>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-/	1	0	SLASH	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
+25	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 7	1	1	NOPUNCT	<number>	<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+1903	1	1	NOPUNCT	I-<time>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
+41	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
 7	1	1	NOPUNCT	<number>	<number>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
+62	1	1	NOPUNCT	I-<number>	I-<number>
+
+70	1	1	NOPUNCT	I-<number>	I-<number>
+
+1920	1	1	NOPUNCT	I-<time>	I-<number>
+
+40	1	1	NOPUNCT	I-<number>	I-<number>
+
+1930	1	1	NOPUNCT	I-<time>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+2000	1	1	NOPUNCT	I-<time>	I-<time>
+
+1926	1	1	NOPUNCT	I-<time>	I-<number>
+
+126	1	1	NOPUNCT	I-<number>	I-<number>
+
+162	1	1	NOPUNCT	I-<number>	I-<number>
+
+77	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 8	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
+36	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
+24	1	1	NOPUNCT	I-<number>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
+13	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 3	1	1	NOPUNCT	<number>	<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
+10	1	1	NOPUNCT	I-<number>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+15	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+,	1	0	COMMA	<number>	<number>
+115	1	1	NOPUNCT	<number>	<number>
+,	1	0	COMMA	<number>	<number>
+800	1	1	NOPUNCT	<number>	<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
+3	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+21	1	1	NOPUNCT	I-<number>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
+1948	1	1	NOPUNCT	I-<time>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+1958	1	1	NOPUNCT	I-<time>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
+80	1	1	NOPUNCT	I-<number>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
+77	1	1	NOPUNCT	I-<number>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+Six	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
+2013	1	1	NOPUNCT	I-<number>	I-<time>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
+24	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
+30	1	1	NOPUNCT	I-<number>	I-<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+100	1	1	NOPUNCT	I-<number>	I-<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
+190	1	1	NOPUNCT	I-<number>	I-<number>
 
-9	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
+60	1	1	NOPUNCT	I-<number>	I-<number>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+668	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+50	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+a	0	0	NOPUNCT	<other>	I-<time>
+1980	1	1	NOPUNCT	I-<time>	I-<number>
+
+1980	1	1	NOPUNCT	I-<time>	I-<time>
+s	0	0	NOPUNCT	<time>	<time>
+
+5	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+50	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+65	1	1	NOPUNCT	I-<number>	I-<number>
+
+€	1	0	NOPUNCT	<other>	<other>
+250	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+16	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+77	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+in	0	0	NOPUNCT	<other>	I-<time>
+2003	1	1	NOPUNCT	I-<time>	I-<number>
+
+130	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+44	1	1	NOPUNCT	I-<number>	I-<number>
+
+2010	1	1	NOPUNCT	I-<time>	I-<time>
+
+1980	1	1	NOPUNCT	I-<time>	I-<time>
+s	0	0	NOPUNCT	<time>	<time>
+
+1925	1	1	NOPUNCT	I-<time>	I-<number>
+
+few	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+51	1	1	NOPUNCT	I-<number>	I-<number>
+
+2010	1	1	NOPUNCT	I-<time>	I-<time>
+
+200	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+40	1	1	NOPUNCT	I-<number>	I-<number>
+
+1952	1	1	NOPUNCT	I-<time>	I-<number>
 
 5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+
+2010	1	1	NOPUNCT	I-<time>	I-<time>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+51	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<alpha>	I-<number>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+five	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+seven	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+1952	1	1	NOPUNCT	I-<time>	I-<number>
+
+28	1	1	NOPUNCT	I-<number>	I-<number>
+
+2014	1	1	NOPUNCT	I-<time>	I-<time>
+
+seven	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+€	1	0	NOPUNCT	<other>	<other>
+450	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+€	1	0	NOPUNCT	<other>	<other>
+200	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+€	1	0	NOPUNCT	<other>	<other>
+100	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+11	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+500	1	1	NOPUNCT	<number>	<number>
+
+four	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+four	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+25	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+12	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+10	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+million	0	0	NOPUNCT	<alpha>	<alpha>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+1999	1	1	NOPUNCT	I-<time>	I-<number>
+
+95	1	1	NOPUNCT	I-<number>	I-<number>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+seven	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+zero	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+68	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+68	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+68	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+68	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 2	1	1	NOPUNCT	<number>	<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+10	1	1	NOPUNCT	I-<number>	I-<number>
+
+25	1	1	NOPUNCT	I-<number>	I-<number>
 
 7	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+6	1	1	NOPUNCT	<number>	<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
+1998	1	1	NOPUNCT	I-<time>	I-<number>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
+2012	1	1	NOPUNCT	I-<time>	I-<time>
 
-0	1	1	NOPUNCT	I-<number>	I-<number>
+17	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
 
 7	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<time>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-
-P	1	0	NOPUNCT	<other>	<other>
-∼	1	0	NOPUNCT	I-<number>	<other>
-9	1	1	NOPUNCT	<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
 7	1	1	NOPUNCT	<number>	<number>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+Two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+four	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+9	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
+
+14	1	1	NOPUNCT	I-<number>	I-<number>
+
+9	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+6	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+6	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+few	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+few	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+P	1	0	NOPUNCT	<other>	I-<alpha>
+∼9	1	0	NOPUNCT	I-<number>	<time>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+12	1	1	NOPUNCT	<number>	<number>
+
+275	1	1	NOPUNCT	I-<number>	I-<number>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+25	1	1	NOPUNCT	<number>	<number>
+
+5800	1	1	NOPUNCT	I-<number>	I-<number>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+25	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+08	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -2418,9 +458,8 @@ o	0	0	NOPUNCT	<alpha>	<alpha>
 0	1	1	NOPUNCT	<number>	<number>
 
 2	1	1	NOPUNCT	<other>	I-<number>
-∼	1	0	NOPUNCT	<other>	<number>
-3	1	1	NOPUNCT	I-<number>	<number>
-1	1	1	NOPUNCT	<number>	<time>
+∼	1	0	NOPUNCT	<other>	<other>
+31	1	1	NOPUNCT	I-<number>	<number>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -2428,14 +467,11 @@ o	0	0	NOPUNCT	<alpha>	<alpha>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
+86	1	1	NOPUNCT	<number>	<number>
 
 8	1	1	NOPUNCT	I-<number>	I-<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+250	1	1	NOPUNCT	I-<number>	I-<number>
 
 9	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -2443,63 +479,36 @@ o	0	0	NOPUNCT	<alpha>	<alpha>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 
-J	1	0	NOPUNCT	I-<time>	I-<time>
-u	0	0	NOPUNCT	<time>	<time>
-l	0	0	NOPUNCT	<time>	<time>
-y	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-h	0	0	NOPUNCT	<time>	<alpha>
+July	0	0	NOPUNCT	I-<time>	I-<time>
+14	1	1	NOPUNCT	<time>	<alpha>
+th	0	0	NOPUNCT	<time>	<alpha>
 
-A	1	0	NOPUNCT	I-<time>	I-<time>
-u	0	0	NOPUNCT	<time>	<time>
-g	0	0	NOPUNCT	<time>	<time>
-u	0	0	NOPUNCT	<time>	<time>
-s	0	0	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-t	0	0	NOPUNCT	<time>	<time>
-h	0	0	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
+August	0	0	NOPUNCT	I-<time>	I-<time>
+19	1	1	NOPUNCT	<time>	<alpha>
+th	0	0	NOPUNCT	<time>	<alpha>
+2004	1	1	NOPUNCT	<time>	<time>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
+16	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+15	1	1	NOPUNCT	I-<number>	I-<number>
 
 8	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+15	1	1	NOPUNCT	I-<number>	I-<number>
 
 ∼	1	0	NOPUNCT	<other>	<other>
-7	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+740	1	1	NOPUNCT	I-<number>	I-<number>
 
 6	1	1	NOPUNCT	I-<number>	I-<number>
 
 ∼	1	0	NOPUNCT	<other>	<other>
-6	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+660	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+10000	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -2511,8 +520,7 @@ h	0	0	NOPUNCT	<time>	<time>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
+14	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -2520,15 +528,13 @@ h	0	0	NOPUNCT	<time>	<time>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
+43	1	1	NOPUNCT	<number>	<number>
 
 8	1	1	NOPUNCT	I-<number>	I-<number>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
+31	1	1	NOPUNCT	I-<number>	I-<number>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -2538,9 +544,7 @@ h	0	0	NOPUNCT	<time>	<time>
 .	1	0	DOT	<number>	<number>
 4	1	1	NOPUNCT	<number>	<number>
 
-∼	1	0	NOPUNCT	I-<number>	<other>
-3	1	1	NOPUNCT	<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+∼30	1	0	NOPUNCT	I-<number>	I-<number>
 
 9	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -2548,8 +552,7 @@ h	0	0	NOPUNCT	<time>	<time>
 
 7	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
+14	1	1	NOPUNCT	I-<number>	I-<number>
 
 9	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -2557,657 +560,1294 @@ h	0	0	NOPUNCT	<time>	<time>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
+09	1	1	NOPUNCT	<number>	<number>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
+14	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
+09	1	1	NOPUNCT	<number>	<number>
 
 3	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+10	1	1	NOPUNCT	I-<number>	I-<number>
 
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 3	1	1	NOPUNCT	<number>	<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+15	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+15	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+20	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+28	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+25	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+01	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 1	1	1	NOPUNCT	<number>	<number>
 
-h	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-a	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-f	0	0	NOPUNCT	<alpha>	<alpha>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
 
 5	1	1	NOPUNCT	I-<number>	I-<number>
 
-s	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
 
-T	1	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
 
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+3	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 6	1	1	NOPUNCT	<number>	<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
 1	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
 
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+25	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+6	1	1	NOPUNCT	<number>	<number>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+45	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+03	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+15	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+005	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+01	1	1	NOPUNCT	<number>	<number>
+
+five	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0015	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+001	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+02	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+800	1	1	NOPUNCT	I-<number>	I-<number>
+
+900	1	1	NOPUNCT	I-<number>	I-<number>
+
+525	1	1	NOPUNCT	I-<number>	I-<number>
+
+650	1	1	NOPUNCT	I-<number>	I-<number>
+
+30	1	1	NOPUNCT	I-<number>	I-<number>
+
+70	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+540	1	1	NOPUNCT	I-<number>	I-<number>
+
+625	1	1	NOPUNCT	I-<number>	I-<number>
+
+10	1	1	NOPUNCT	I-<number>	I-<number>
+
+80	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+300	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 3	1	1	NOPUNCT	<number>	<number>
 
-9	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-u	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
+0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
+025	1	1	NOPUNCT	<number>	<number>
 
-9	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
--	1	0	HYPHEN	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+5	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
 5	1	1	NOPUNCT	<number>	<number>
 
 6	1	1	NOPUNCT	I-<number>	I-<number>
-
-s	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-x	0	0	NOPUNCT	<alpha>	<alpha>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-u	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-u	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
+6	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
 
--	1	0	HYPHEN	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-.	1	0	DOT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
+5	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 6	1	1	NOPUNCT	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-0	1	1	NOPUNCT	I-<number>	I-<number>
+6	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-
--	1	0	HYPHEN	I-<number>	I-<number>
 0	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+10	1	1	NOPUNCT	I-<base>	I-<base>
+7	1	1	NOPUNCT	I-<pow>	I-<pow>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<time>
+x	0	0	NOPUNCT	<other>	<other>
+10	1	1	NOPUNCT	I-<base>	I-<base>
+7	1	1	NOPUNCT	I-<pow>	I-<pow>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+10	1	1	NOPUNCT	I-<base>	I-<base>
+7	1	1	NOPUNCT	I-<pow>	I-<pow>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 8	1	1	NOPUNCT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<time>
+x	0	0	NOPUNCT	<other>	<other>
+10	1	1	NOPUNCT	I-<base>	I-<base>
+7	1	1	NOPUNCT	I-<pow>	I-<pow>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+08	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+12	1	1	NOPUNCT	<number>	<number>
+
+19	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+24	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+19	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+003	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+006	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+004	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+005	1	1	NOPUNCT	<number>	<number>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+104	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+990	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+400	1	1	NOPUNCT	I-<number>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+500	1	1	NOPUNCT	I-<number>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+30	1	1	NOPUNCT	I-<number>	I-<number>
+
+90	1	1	NOPUNCT	I-<number>	I-<number>
+
+850	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+150	1	1	NOPUNCT	<number>	<number>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
+6	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+840	1	1	NOPUNCT	I-<number>	I-<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+575	1	1	NOPUNCT	I-<number>	I-<number>
+
+590	1	1	NOPUNCT	I-<number>	I-<number>
+
+32	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+105	1	1	NOPUNCT	I-<number>	I-<number>
+
+12	1	1	NOPUNCT	I-<number>	I-<number>
+
+820	1	1	NOPUNCT	I-<number>	I-<number>
+
+16	1	1	NOPUNCT	I-<number>	I-<number>
+
+34	1	1	NOPUNCT	I-<number>	I-<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+625	1	1	NOPUNCT	I-<number>	I-<number>
+
+635	1	1	NOPUNCT	I-<number>	I-<number>
+
+40	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+14	1	1	NOPUNCT	I-<number>	I-<number>
+
+900	1	1	NOPUNCT	I-<number>	I-<number>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
+850	1	1	NOPUNCT	I-<number>	I-<number>
 
-9	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+2	1	1	NOPUNCT	I-<number>	I-<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
+120	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+575	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
+60	1	1	NOPUNCT	I-<number>	I-<number>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
+40	1	1	NOPUNCT	I-<number>	I-<number>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+6	1	1	NOPUNCT	I-<number>	I-<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
+15	1	1	NOPUNCT	I-<number>	I-<number>
 
-s	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-a	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
+14	1	1	NOPUNCT	I-<number>	I-<number>
 
 5	1	1	NOPUNCT	I-<number>	I-<number>
 
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+02	1	1	NOPUNCT	<number>	<number>
+
+78	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+990	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+900	1	1	NOPUNCT	I-<number>	I-<number>
+
+30	1	1	NOPUNCT	I-<number>	I-<number>
+
+900	1	1	NOPUNCT	I-<number>	I-<number>
+
 2	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-T	1	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+.	1	0	DOT	<number>	<number>
+60	1	1	NOPUNCT	<number>	<number>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
+15	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+4	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+50	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+93	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+17	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+93	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 3	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+8	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+6	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+93	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+8	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+13	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+20	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+014	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+018	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+65	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+700	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+015	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+990	1	1	NOPUNCT	I-<number>	I-<number>
+
+70	1	1	NOPUNCT	I-<number>	I-<time>
+x	0	0	NOPUNCT	<other>	<other>
+10	1	1	NOPUNCT	I-<base>	I-<base>
+-	1	0	HYPHEN	I-<pow>	I-<pow>
+4	1	1	NOPUNCT	<pow>	<pow>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+200	1	1	NOPUNCT	<number>	<number>
+
+300	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+02	1	1	NOPUNCT	<number>	<number>
+
+82	1	1	NOPUNCT	I-<number>	I-<number>
+
+44	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+200	1	1	NOPUNCT	<number>	<number>
+
+400	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+600	1	1	NOPUNCT	<number>	<number>
+
+60	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+500	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+800	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+60	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+12	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+4	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+115	1	1	NOPUNCT	I-<number>	I-<number>
+
+125	1	1	NOPUNCT	I-<number>	I-<number>
+
+10	1	1	NOPUNCT	I-<number>	I-<number>
+
+70	1	1	NOPUNCT	I-<number>	I-<number>
+
+90	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+25	1	1	NOPUNCT	I-<number>	I-<number>
+
+23	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+120	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+/	1	0	SLASH	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+900	1	1	NOPUNCT	I-<number>	I-<number>
+
+840	1	1	NOPUNCT	I-<number>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+100	1	1	NOPUNCT	I-<number>	I-<number>
+
+580	1	1	NOPUNCT	I-<number>	I-<number>
+
+60	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+7	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+7	1	1	NOPUNCT	<number>	<number>
+
+10	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+100	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+9	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+600	1	1	NOPUNCT	<number>	<number>
+
+60	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0047	1	1	NOPUNCT	<number>	<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+83	1	1	NOPUNCT	<number>	<number>
+
+18	1	1	NOPUNCT	I-<number>	I-<number>
+
+18	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+4	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+16	1	1	NOPUNCT	I-<number>	I-<number>
+
+6	1	1	NOPUNCT	I-<number>	I-<number>
+
+120	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+086	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+13	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+800	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+098	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+08	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+09	1	1	NOPUNCT	<number>	<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+6	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+93	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+5000	1	1	NOPUNCT	I-<number>	I-<number>
+
+900	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+15	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 3	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+03	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+006	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+001	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+001	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+6	1	1	NOPUNCT	<number>	<number>
+
+93	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+02	1	1	NOPUNCT	<number>	<number>
+
+74	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+990	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+15	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+03	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+025	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+03	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+003	1	1	NOPUNCT	<number>	<number>
+
+93	1	1	NOPUNCT	I-<number>	I-<number>
+
+9	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+02	1	1	NOPUNCT	<number>	<number>
+
+74	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+990	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+6	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+001	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+93	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+74	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+990	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+025	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+003	1	1	NOPUNCT	<number>	<number>
+
+93	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+02	1	1	NOPUNCT	I-<number>	I-<number>
+
+74	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+990	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+15	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+03	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+0005	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+006	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+001	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+081	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+6	1	1	NOPUNCT	<number>	<number>
+
+025	1	1	NOPUNCT	I-<number>	I-<number>
+
+several	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+29	1	1	NOPUNCT	I-<number>	I-<number>
+
+35	1	1	NOPUNCT	I-<number>	I-<number>
+
+40	1	1	NOPUNCT	I-<number>	I-<number>
+
+8250	1	1	NOPUNCT	I-<number>	I-<number>
+
+Two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+03	1	1	NOPUNCT	<number>	<number>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
 •	1	0	NOPUNCT	<other>	<other>
-1	1	1	NOPUNCT	I-<base>	I-<base>
-0	1	1	NOPUNCT	<base>	<time>
-1	1	1	NOPUNCT	I-<pow>	I-<pow>
-0	1	1	NOPUNCT	<pow>	<time>
+10	1	1	NOPUNCT	I-<base>	<other>
+10	1	1	NOPUNCT	I-<pow>	I-<pow>
 
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+6000	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+15	1	1	NOPUNCT	I-<number>	I-<number>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+50	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+10	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+100	1	1	NOPUNCT	I-<number>	I-<number>
 
-8	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+8000	1	1	NOPUNCT	I-<number>	I-<number>
 
 5	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+1500	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
+04	1	1	NOPUNCT	<number>	<number>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+50	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+100	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+0435	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 5	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-7	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+750	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+35	1	1	NOPUNCT	I-<number>	I-<number>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
 
@@ -3215,77 +1855,45 @@ e	0	0	NOPUNCT	<alpha>	<alpha>
 .	1	0	DOT	<number>	<number>
 1	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-7	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+7500	1	1	NOPUNCT	I-<number>	I-<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+300	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+1000	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-2	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
+28	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 8	1	1	NOPUNCT	<number>	<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
+39	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 7	1	1	NOPUNCT	<number>	<number>
 
-3	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
+34	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 9	1	1	NOPUNCT	<number>	<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
+13	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
+67	1	1	NOPUNCT	<number>	<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
+03	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+4000	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
+ten	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+4000	1	1	NOPUNCT	I-<number>	I-<number>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
@@ -3293,859 +1901,871 @@ n	0	0	NOPUNCT	<alpha>	<alpha>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+35	1	1	NOPUNCT	<number>	<number>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+85	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
+ten	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+4000	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
+08	1	1	NOPUNCT	<number>	<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+10	1	1	NOPUNCT	I-<number>	I-<number>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
+53	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
+83	1	1	NOPUNCT	<number>	<number>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 
-5	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+55	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+90	1	1	NOPUNCT	<number>	<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+150	1	1	NOPUNCT	I-<number>	I-<number>
 
 3	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 7	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+120	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+1999	1	1	NOPUNCT	I-<time>	I-<number>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+77	1	1	NOPUNCT	I-<number>	I-<number>
 
-2	1	1	NOPUNCT	I-<alpha>	I-<time>
-0	1	1	NOPUNCT	<alpha>	<time>
-m	0	0	NOPUNCT	<alpha>	<time>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
+77	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+42	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-t	0	0	NOPUNCT	<alpha>	<alpha>
-y	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<number>
-9	1	1	NOPUNCT	<time>	<number>
-8	1	1	NOPUNCT	<time>	<number>
-
-2	1	1	NOPUNCT	I-<time>	I-<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<number>
-9	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-3	1	1	NOPUNCT	<time>	<time>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
-4	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-6	1	1	NOPUNCT	<time>	<time>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-6	1	1	NOPUNCT	<time>	<time>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-6	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<time>	I-<time>
-0	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-5	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
+54	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
 
-1	1	1	NOPUNCT	I-<time>	I-<number>
-9	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-3	1	1	NOPUNCT	<time>	<time>
+35	1	1	NOPUNCT	I-<number>	I-<number>
 
-4	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
+45	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-3	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<time>	I-<time>
-0	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-6	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-.	1	0	DOT	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-6	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-3	1	1	NOPUNCT	<number>	<number>
-.	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-5	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-,	1	0	COMMA	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-1	1	1	NOPUNCT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-8	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-8	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-5	1	1	NOPUNCT	<time>	<time>
-8	1	1	NOPUNCT	<time>	<time>
-
-8	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-7	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
-
-S	1	0	NOPUNCT	I-<alpha>	I-<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-x	0	0	NOPUNCT	<alpha>	<alpha>
-
-2	1	1	NOPUNCT	I-<number>	I-<time>
-0	1	1	NOPUNCT	<number>	<time>
-1	1	1	NOPUNCT	<number>	<time>
-3	1	1	NOPUNCT	<number>	<time>
-
-2	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-4	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-3	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-9	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-6	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-6	1	1	NOPUNCT	<alpha>	<alpha>
-8	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-5	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-0	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-a	0	0	NOPUNCT	<other>	<other>
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-8	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-8	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-s	0	0	NOPUNCT	<time>	<time>
-
-5	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-5	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-0	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
 5	1	1	NOPUNCT	<number>	<number>
 
-€	1	0	NOPUNCT	<other>	<other>
-2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<time>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
+43	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-6	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-7	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-7	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-i	0	0	NOPUNCT	<other>	I-<alpha>
-n	0	0	NOPUNCT	<other>	<alpha>
-2	1	1	NOPUNCT	I-<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-3	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-3	1	1	NOPUNCT	<alpha>	<alpha>
-0	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-4	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<time>	I-<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-8	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-s	0	0	NOPUNCT	<time>	<time>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-5	1	1	NOPUNCT	<time>	<time>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+21	1	1	NOPUNCT	I-<number>	I-<number>
 
 5	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<time>	I-<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-4	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-5	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<time>	I-<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-0	1	1	NOPUNCT	<time>	<time>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-2	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-s	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-5	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<time>	I-<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-4	1	1	NOPUNCT	<time>	<time>
-
-s	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-€	1	0	NOPUNCT	<other>	<other>
-4	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-€	1	0	NOPUNCT	<other>	<other>
-2	1	1	NOPUNCT	I-<number>	I-<time>
-0	1	1	NOPUNCT	<number>	<time>
-0	1	1	NOPUNCT	<number>	<time>
-,	1	0	COMMA	<number>	<time>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-€	1	0	NOPUNCT	<other>	<other>
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<time>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-1	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-u	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-u	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-2	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-,	1	0	COMMA	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-2	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-1	1	1	NOPUNCT	I-<alpha>	I-<alpha>
-5	1	1	NOPUNCT	<alpha>	<alpha>
-m	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-l	0	0	NOPUNCT	<alpha>	<alpha>
-i	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
-9	1	1	NOPUNCT	<time>	<time>
 
 9	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
 
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+952	1	1	NOPUNCT	I-<number>	I-<number>
 
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+12	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+4	1	1	NOPUNCT	I-<number>	I-<number>
 
-s	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-v	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
+28	1	1	NOPUNCT	I-<number>	I-<number>
+
+56	1	1	NOPUNCT	I-<number>	I-<number>
+
+73	1	1	NOPUNCT	I-<number>	I-<number>
+
+16	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
 
 5	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
+
+6	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+28	1	1	NOPUNCT	I-<number>	I-<number>
+
+200	1	1	NOPUNCT	I-<number>	I-<number>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
 
+77	1	1	NOPUNCT	I-<number>	I-<number>
+
+42	1	1	NOPUNCT	I-<number>	I-<number>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+45	1	1	NOPUNCT	I-<number>	I-<number>
+
+31	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+14	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+43	1	1	NOPUNCT	I-<number>	I-<number>
+
+200	1	1	NOPUNCT	I-<number>	I-<number>
+
+77	1	1	NOPUNCT	I-<number>	I-<number>
+
+18	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+24	1	1	NOPUNCT	I-<number>	I-<number>
+
+77	1	1	NOPUNCT	I-<number>	I-<number>
+
+18	1	1	NOPUNCT	I-<number>	I-<number>
+
+34	1	1	NOPUNCT	I-<number>	I-<number>
+
+24	1	1	NOPUNCT	I-<number>	I-<number>
+
+200	1	1	NOPUNCT	I-<number>	I-<number>
+
+five	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+8	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+half	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
 5	1	1	NOPUNCT	I-<number>	I-<number>
+
+seven	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+Two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+five	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+126	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+01	1	1	NOPUNCT	<number>	<number>
+
+77	1	1	NOPUNCT	I-<number>	I-<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+
+34	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+45	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
+
+77	1	1	NOPUNCT	I-<number>	I-<number>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+43	1	1	NOPUNCT	I-<number>	I-<number>
+
+95	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+four	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+89	1	1	NOPUNCT	<number>	<number>
+
+95	1	1	NOPUNCT	I-<number>	I-<number>
+
+-	1	0	HYPHEN	I-<number>	I-<number>
 0	1	1	NOPUNCT	<number>	<number>
-
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-z	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-
-6	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
 .	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
+22	1	1	NOPUNCT	<number>	<number>
 
-6	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
+3	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
+99	1	1	NOPUNCT	<number>	<number>
 
-6	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
+7	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-3	1	1	NOPUNCT	<number>	<number>
+18	1	1	NOPUNCT	<number>	<number>
+
+95	1	1	NOPUNCT	I-<number>	I-<number>
+
+4	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+52	1	1	NOPUNCT	<number>	<number>
+
+9	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+10	1	1	NOPUNCT	<number>	<number>
+
+90	1	1	NOPUNCT	I-<number>	I-<number>
+
+25	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+14	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+15	1	1	NOPUNCT	I-<number>	I-<number>
 
 6	1	1	NOPUNCT	I-<number>	I-<number>
-8	1	1	NOPUNCT	<number>	<number>
+
+six	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+10	1	1	NOPUNCT	I-<number>	I-<number>
+
+four	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+four	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+40	1	1	NOPUNCT	I-<number>	I-<number>
+
+43	1	1	NOPUNCT	I-<number>	I-<number>
+
+75	1	1	NOPUNCT	I-<number>	I-<number>
+
+24	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+41	1	1	NOPUNCT	<number>	<number>
+
+-	1	0	HYPHEN	I-<number>	I-<number>
+7	1	1	NOPUNCT	<number>	<number>
+.	1	0	DOT	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
+
+21	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+67	1	1	NOPUNCT	<number>	<number>
+
+200	1	1	NOPUNCT	I-<number>	I-<number>
+
+76	1	1	NOPUNCT	I-<number>	I-<number>
+
+87	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+31	1	1	NOPUNCT	<number>	<number>
+
+-	1	0	HYPHEN	I-<number>	I-<number>
+0	1	1	NOPUNCT	<number>	<number>
+.	1	0	DOT	<number>	<number>
+86	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+49	1	1	NOPUNCT	<number>	<number>
+
+43	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+90	1	1	NOPUNCT	I-<number>	I-<number>
+
+34	1	1	NOPUNCT	I-<number>	I-<number>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+12	1	1	NOPUNCT	I-<number>	I-<number>
+
+47	1	1	NOPUNCT	I-<number>	I-<number>
+
+45	1	1	NOPUNCT	I-<number>	I-<number>
+
+33	1	1	NOPUNCT	I-<number>	I-<number>
+
+October	0	0	NOPUNCT	I-<time>	I-<time>
+19	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
+
+135	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+13	1	1	NOPUNCT	I-<number>	I-<number>
+
+5000	1	1	NOPUNCT	I-<number>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+October	0	0	NOPUNCT	I-<time>	I-<time>
+19	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
+at	0	0	NOPUNCT	<time>	<time>
+20	1	1	NOPUNCT	<time>	<time>
+:	1	0	NOPUNCT	<time>	<time>
+09	1	1	NOPUNCT	<time>	<time>
+
+43	1	1	NOPUNCT	I-<number>	I-<number>
+
+130	1	1	NOPUNCT	I-<number>	I-<number>
+
+January	0	0	NOPUNCT	I-<time>	I-<time>
+2013	1	1	NOPUNCT	<time>	<time>
+
+October	0	0	NOPUNCT	I-<time>	I-<time>
+19	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
+
+56	1	1	NOPUNCT	I-<number>	I-<number>
+
+7	1	1	NOPUNCT	I-<number>	I-<number>
+
+March	0	0	NOPUNCT	I-<time>	I-<time>
+15	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+5	1	1	NOPUNCT	<number>	<number>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+four	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+597	1	1	NOPUNCT	I-<number>	I-<number>
+
+16	1	1	NOPUNCT	I-<number>	I-<number>
+
+69	1	1	NOPUNCT	I-<number>	I-<number>
+
+99	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+101	1	1	NOPUNCT	I-<number>	I-<number>
+
+70	1	1	NOPUNCT	I-<number>	I-<number>
+
+171	1	1	NOPUNCT	I-<number>	I-<number>
+
+186	1	1	NOPUNCT	I-<number>	I-<number>
+
+171	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+9	1	1	NOPUNCT	<number>	<number>
+
+10	1	1	NOPUNCT	I-<base>	I-<base>
+−	1	0	HYPHEN	I-<pow>	I-<pow>
+7	1	1	NOPUNCT	<pow>	<pow>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+130	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+March	0	0	NOPUNCT	I-<time>	I-<time>
+15	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
+
+60	1	1	NOPUNCT	I-<number>	I-<number>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+five	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+5000	1	1	NOPUNCT	I-<number>	I-<number>
+
+1000	1	1	NOPUNCT	I-<number>	I-<number>
+
+6000	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 2	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+45	1	1	NOPUNCT	I-<number>	I-<number>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
-
-5	1	1	NOPUNCT	I-<number>	I-<number>
-
-1	1	1	NOPUNCT	I-<number>	I-<number>
-0	1	1	NOPUNCT	<number>	<number>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
-5	1	1	NOPUNCT	<number>	<number>
 
-7	1	1	NOPUNCT	I-<number>	I-<number>
-.	1	0	DOT	<number>	<number>
-6	1	1	NOPUNCT	<number>	<number>
+90	1	1	NOPUNCT	I-<number>	I-<number>
 
-1	1	1	NOPUNCT	I-<time>	I-<time>
-9	1	1	NOPUNCT	<time>	<number>
-9	1	1	NOPUNCT	<time>	<number>
-8	1	1	NOPUNCT	<time>	<number>
+60	1	1	NOPUNCT	I-<number>	I-<number>
 
-2	1	1	NOPUNCT	I-<time>	I-<time>
-0	1	1	NOPUNCT	<time>	<time>
-1	1	1	NOPUNCT	<time>	<time>
-2	1	1	NOPUNCT	<time>	<time>
+May	0	0	NOPUNCT	I-<time>	I-<time>
+7	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
 
 1	1	1	NOPUNCT	I-<number>	I-<number>
-7	1	1	NOPUNCT	<number>	<number>
 .	1	0	DOT	<number>	<number>
-5	1	1	NOPUNCT	<number>	<number>
+3	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+01	1	1	NOPUNCT	<number>	<number>
+
+10	1	1	NOPUNCT	I-<number>	I-<number>
+
+zero	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+10	1	1	NOPUNCT	I-<base>	I-<base>
+−	1	0	HYPHEN	I-<pow>	I-<pow>
+6	1	1	NOPUNCT	<pow>	<pow>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+4	1	1	NOPUNCT	<number>	<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+43	1	1	NOPUNCT	<number>	<number>
+×	1	0	NOPUNCT	<other>	<other>
+10	1	1	NOPUNCT	I-<base>	I-<base>
+−	1	0	HYPHEN	I-<pow>	I-<pow>
+4	1	1	NOPUNCT	<pow>	<pow>
+
+zero	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+418	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+×	1	0	NOPUNCT	<other>	<other>
+10	1	1	NOPUNCT	I-<base>	I-<base>
+−	1	0	HYPHEN	I-<pow>	I-<pow>
+4	1	1	NOPUNCT	<pow>	<pow>
+
+16	1	1	NOPUNCT	I-<number>	I-<number>
+
+13	1	1	NOPUNCT	I-<number>	I-<number>
+
+10	1	1	NOPUNCT	I-<base>	I-<base>
+−	1	0	HYPHEN	I-<pow>	I-<pow>
+4	1	1	NOPUNCT	<pow>	<pow>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+
+5	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+7	1	1	NOPUNCT	<number>	<number>
+×	1	0	NOPUNCT	<other>	<other>
+10	1	1	NOPUNCT	I-<base>	I-<base>
+−	1	0	HYPHEN	I-<pow>	I-<pow>
+4	1	1	NOPUNCT	<pow>	<pow>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+001	1	1	NOPUNCT	<number>	<number>
+
+one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+13	1	1	NOPUNCT	I-<number>	I-<number>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+Oct	0	0	NOPUNCT	I-<time>	I-<time>
+19	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
+at	0	0	NOPUNCT	<time>	<time>
+20	1	1	NOPUNCT	<time>	<time>
+:	1	0	NOPUNCT	<time>	<time>
+09	1	1	NOPUNCT	<time>	<time>
+
+43	1	1	NOPUNCT	I-<number>	I-<number>
+
+130	1	1	NOPUNCT	I-<number>	I-<number>
+
+Oct	0	0	NOPUNCT	I-<time>	I-<time>
+19	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
+
+135	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+000	1	1	NOPUNCT	<number>	<number>
+
+18	1	1	NOPUNCT	I-<time>	I-<time>
+:	1	0	NOPUNCT	<time>	<time>
+30	1	1	NOPUNCT	<time>	<time>
+
+July	0	0	NOPUNCT	I-<time>	I-<time>
+2014	1	1	NOPUNCT	<time>	<time>
+
+10	1	1	NOPUNCT	I-<base>	I-<base>
+−	1	0	HYPHEN	I-<pow>	I-<pow>
+4	1	1	NOPUNCT	<pow>	<pow>
+
+13	1	1	NOPUNCT	I-<number>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+Oct	0	0	NOPUNCT	I-<time>	I-<time>
+19	1	1	NOPUNCT	<time>	<time>
+,	1	0	COMMA	<time>	<time>
+2014	1	1	NOPUNCT	<time>	<time>
+at	0	0	NOPUNCT	<time>	<time>
+20	1	1	NOPUNCT	<time>	<time>
+:	1	0	NOPUNCT	<time>	<time>
+09	1	1	NOPUNCT	<time>	<time>
+
+2	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+001	1	1	NOPUNCT	<number>	<number>
+
+43	1	1	NOPUNCT	I-<number>	I-<number>
+
+130	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+1	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+
+45	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+75	1	1	NOPUNCT	I-<number>	I-<number>
+
+75	1	1	NOPUNCT	I-<number>	I-<number>
+
+48	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+05	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+44	1	1	NOPUNCT	<number>	<number>
+
+45	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+122	1	1	NOPUNCT	I-<number>	I-<number>
+
+11	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
+
+40	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+45	1	1	NOPUNCT	I-<number>	I-<number>
+
+50	1	1	NOPUNCT	I-<number>	I-<number>
+
+55	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+15	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+20	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+44	1	1	NOPUNCT	<number>	<number>
+
+75	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+/	1	0	SLASH	<number>	<number>
+2	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+20	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+40	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+44	1	1	NOPUNCT	<number>	<number>
+
+75	1	1	NOPUNCT	I-<number>	I-<number>
+
+75	1	1	NOPUNCT	I-<number>	I-<number>
+
+48	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+40	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+44	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+44	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
+
+zero	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+48	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+20	1	1	NOPUNCT	<number>	<number>
+
+30	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+20	1	1	NOPUNCT	<number>	<number>
+
+75	1	1	NOPUNCT	I-<number>	I-<number>
 
 7	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-7	1	1	NOPUNCT	<number>	<number>
+292	1	1	NOPUNCT	<number>	<number>
 
-o	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-n	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+10	1	1	NOPUNCT	I-<number>	I-<number>
 
-T	1	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+14	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+13	1	1	NOPUNCT	I-<number>	I-<number>
+,	1	0	COMMA	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+1	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+023	1	1	NOPUNCT	<number>	<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-h	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
-e	0	0	NOPUNCT	<alpha>	<alpha>
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+018	1	1	NOPUNCT	<number>	<number>
 
-f	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
-u	0	0	NOPUNCT	<alpha>	<alpha>
-r	0	0	NOPUNCT	<alpha>	<alpha>
+14	1	1	NOPUNCT	I-<number>	I-<number>
 
-t	0	0	NOPUNCT	I-<alpha>	I-<alpha>
-w	0	0	NOPUNCT	<alpha>	<alpha>
-o	0	0	NOPUNCT	<alpha>	<alpha>
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+3	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+0	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+030	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+044	1	1	NOPUNCT	<number>	<number>
+
+40	1	1	NOPUNCT	I-<number>	I-<number>
+
+44	1	1	NOPUNCT	I-<number>	I-<number>
+
+14	1	1	NOPUNCT	I-<number>	I-<number>
+
+20	1	1	NOPUNCT	I-<number>	I-<number>
+
+111	1	1	NOPUNCT	I-<number>	I-<number>
+
+111	1	1	NOPUNCT	I-<number>	I-<number>
+
+28	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+14	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+20	1	1	NOPUNCT	<number>	<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+20	1	1	NOPUNCT	<number>	<number>
+
+48	1	1	NOPUNCT	I-<number>	I-<number>
+
+0	1	1	NOPUNCT	I-<number>	I-<number>
+.	1	0	DOT	<number>	<number>
+44	1	1	NOPUNCT	<number>	<number>
+
+48	1	1	NOPUNCT	I-<number>	I-<number>
 === END RAw RESULTS ===
 
 
@@ -4153,20 +2773,20 @@ o	0	0	NOPUNCT	<alpha>	<alpha>
 
 label                accuracy     precision    recall       f1           support
 
-<alpha>              99.63        97.66        99.21        98.43        126    
-<base>               99.44        76.92        76.92        76.92        13     
-<number>             97.2         97.8         98.52        98.16        811    
-<pow>                99.53        83.33        76.92        80           13     
-<time>               97.85        70.18        86.96        77.67        46     
+<alpha>              99.53        96.9         99.21        98.04        126    
+<base>               99.91        100          92.31        96           13     
+<number>             96.83        96.64        99.26        97.93        811    
+<pow>                100          100          100          100          13     
+<time>               96.83        68.75        47.83        56.41        46     
 
-all (micro avg.)     98.73        95.81        97.52        96.66        1009   
-all (macro avg.)     98.73        85.18        87.71        86.24        1009   
+all (micro avg.)     98.62        95.88        96.83        96.35        1009   
+all (macro avg.)     98.62        92.46        87.72        89.68        1009   
 
 ===== Instance-level results =====
 
 Total expected instances:   989
-Correct instances:          965
-Instance-level recall:      97.57
+Correct instances:          956
+Instance-level recall:      96.66
 
 
-Evaluation for org.grobid.core.GrobidModels$1@456bcb74 model is realized in 125 ms
+Evaluation for org.grobid.core.GrobidModels$1@4f59a516 model is realized in 72 ms
