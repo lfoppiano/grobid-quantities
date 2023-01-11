@@ -46,6 +46,19 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
+    public void testTagValue_exponential_1c() throws Exception {
+        String input = "0.3 x 10-7";
+        ValueBlock output = target.tagValue(input);
+
+        System.out.println(input + " -> " + output);
+        System.out.println(output.getRawTaggedValue());
+
+        assertThat(output.getNumber().toString(), is("0.3"));
+        assertThat(output.getBase().toString(), is("10"));
+        assertThat(output.getPow().toString(), is("-7"));
+    }
+
+    @Test
     public void testTagValue_exponential_3() throws Exception {
         String input = "10 - 7";
         ValueBlock output = target.tagValue(input);

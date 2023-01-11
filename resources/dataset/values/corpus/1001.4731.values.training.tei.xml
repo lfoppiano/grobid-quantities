@@ -38,7 +38,7 @@
 	<value><alpha>six</alpha></value>
 	<value><alpha>two</alpha></value>
 	<value><alpha>five</alpha></value>
-	<value><time>2001 August</time></value>
+<!--	<value><time>2001 August</time></value>-->
 	<value><alpha>two</alpha></value>
 	<value><number>140</number></value>
 	<value><number>10</number></value>
@@ -147,8 +147,8 @@
 	<value><number>3</number></value>
 	<value><number>7.5</number></value>
 	<value><number>350</number></value>
-	<value><time>2001 July</time></value>
-	<value><time>October</time></value>
+<!--	<value><time>2001 July</time></value>-->
+<!--	<value><time>October</time></value>-->
 	<value><number>40</number></value>
 	<value><alpha>seven</alpha></value>
 	<value><number>5</number></value>
@@ -157,8 +157,8 @@
 	<value><number>50</number></value>
 	<value><number>180</number></value>
 	<value><number>146</number></value>
-	<value><time>1990 April 28</time></value>
-	<value><time>September 20</time></value>
+<!--	<value><time>1990 April 28</time></value>-->
+<!--	<value><time>September 20</time></value>-->
 	<value><alpha>six</alpha></value>
 	<value><number>12</number></value>
 	<value><number>25</number></value>
@@ -275,7 +275,7 @@
 	<value><number>10</number></value>
 	<value><number>20</number></value>
 	<value><number>90</number></value>
-	<value><time>1985</time></value>
+<!--	<value><time>1985</time></value>-->
 	<value><number>6</number></value>
 	<value><alpha>several</alpha></value>
 	<value><number>90</number></value>
@@ -293,7 +293,7 @@
 	<value><alpha>seven</alpha></value>
 	<value><alpha>seven</alpha></value>
 	<value><number>3.55</number></value>
-	<value><time>1966</time></value>
+<!-- 	<value><time>1966</time></value>-->
 	<value><number>30</number></value>
 	<value><number>30</number></value>
 	<value><pow>1990</pow></value>
@@ -339,27 +339,27 @@
 	<value><number>3.7</number></value>
 	<value><number>0.6</number></value>
 	<value><number>15</number></value>
-	<value><time>1965</time></value>
-	<value><time>1995</time></value>
+<!-- 	<value><time>1965</time></value>-->
+<!-- 	<value><time>1995</time></value>-->
 	<value><number>0.019</number></value>
 	<value><number>33</number></value>
 	<value><number>927</number></value>
-	<value><time>1962</time></value>
-	<value><time>1977</time></value>
+<!-- 	<value><time>1962</time></value>-->
+<!-- 	<value><time>1977</time></value>-->
 	<value><number>0.167</number></value>
 	<value><number>0.015</number></value>
 	<value><number>8</number></value>
-	<value><time>1968</time></value>
-	<value><time>1984</time></value>
+<!-- 	<value><time>1968</time></value>-->
+<!-- 	<value><time>1984</time></value>-->
 	<value><number>30</number></value>
-	<value><time>2002 January</time></value>
+<!-- 	<value><time>2002 January</time></value>-->
 	<value><base>0.10</base></value>
 	<value><number>33</number></value>
-	<value><time>1987</time>7</value>
+<!-- 	<value><time>1987</time>7</value>-->
 	<value><number>0.32</number></value>
 	<value><number>408</number></value>
-	<value><time>1967</time></value>
-	<value><time>1986</time></value>
+<!-- 	<value><time>1967</time></value>-->
+<!-- 	<value><time>1986</time></value>-->
 	<value><number>0.33</number></value>
 	<value><number>10</number></value>
 	<value><number>5</number></value>
@@ -372,10 +372,10 @@
 	<value><number>2.6</number></value>
 	<value><number>90</number></value>
 	<value><number>1.4</number></value>
-	<value><time>1985</time></value>
-	<value><time>1986 August</time></value>
+<!-- 	<value><time>1985</time></value>-->
+<!-- 	<value><time>1986 August</time></value>-->
 	<value><number>43</number></value>
-	<value><time>2008 January</time></value>
+<!-- 	<value><time>2008 January</time></value>-->
 	<value><number>4</number></value>
 	<value><number>1</number></value>
 	<value><alpha>seven</alpha></value>
@@ -482,7 +482,7 @@
 	<value><number>0.4</number></value>
 	<value><alpha>ten</alpha></value>
 	<value><number>3</number></value>
-	<value><time>2010</time></value>
+<!-- 	<value><time>2010</time></value>-->
 	<value><alpha>seven</alpha></value>
 	<value><number>3</number></value>
 	<value><number>7</number></value>
@@ -506,14 +506,14 @@
 	<value><number>100</number></value>
 	<value><number>0</number></value>
 	<value><number>24</number></value>
-	<value><time>1970</time></value>
-	<value><time>1980</time></value>
-	<value><time>1990</time></value>
-	<value><time>1966</time></value>
+<!-- 	<value><time>1970</time></value>-->
+<!-- 	<value><time>1980</time></value>-->
+<!-- 	<value><time>1990</time></value>-->
+<!-- 	<value><time>1966</time></value>-->
 	<value><number>3.5</number></value>
 	<value><number>30</number></value>
-	<value><time>1980</time></value>
-	<value><time>1990</time></value>
+<!-- 	<value><time>1980</time></value>-->
+<!-- 	<value><time>1990</time></value>-->
 	<value><number>93</number></value>
 	<value><number>60.8</number></value>
 	<value><number>19.3</number></value>

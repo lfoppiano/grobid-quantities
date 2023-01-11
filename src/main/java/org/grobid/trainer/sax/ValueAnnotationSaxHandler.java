@@ -111,7 +111,7 @@ public class ValueAnnotationSaxHandler extends DefaultHandler {
             || "number".equals(qName)
             || "exp".equals(qName)
             || "alpha".equals(qName)
-            || "time".equals(qName)
+//            || "time".equals(qName)
             || "other".equals(qName)) {
             return true;
         }

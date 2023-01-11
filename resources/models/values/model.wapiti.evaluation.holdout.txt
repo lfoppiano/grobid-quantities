@@ -16,20 +16,17 @@ three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 twenty	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-1998	1	1	NOPUNCT	I-<time>	I-<number>
+1998	1	1	NOPUNCT	<other>	I-<number>
 
-2012	1	1	NOPUNCT	I-<time>	I-<time>
-
+2012	1	1	NOPUNCT	<other>	<other>
 10	1	1	NOPUNCT	I-<number>	I-<number>
 
 70	1	1	NOPUNCT	I-<number>	I-<number>
 
-1919	1	1	NOPUNCT	I-<time>	I-<number>
-
+1919	1	1	NOPUNCT	<other>	<other>
 25	1	1	NOPUNCT	I-<number>	I-<number>
 
-1920	1	1	NOPUNCT	I-<time>	I-<number>
-
+1920	1	1	NOPUNCT	<other>	<other>
 15	1	1	NOPUNCT	I-<number>	I-<number>
 
 one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
@@ -38,34 +35,29 @@ one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 ,	1	0	COMMA	<number>	<number>
 428	1	1	NOPUNCT	<number>	<number>
 
-1903	1	1	NOPUNCT	I-<time>	I-<number>
-
+1903	1	1	NOPUNCT	<other>	<other>
 5	1	1	NOPUNCT	I-<number>	I-<number>
 ,	1	0	COMMA	<number>	<number>
 745	1	1	NOPUNCT	<number>	<number>
 
-1926	1	1	NOPUNCT	I-<time>	I-<number>
-
+1926	1	1	NOPUNCT	<other>	<other>
 500	1	1	NOPUNCT	I-<number>	I-<number>
 
 300	1	1	NOPUNCT	I-<number>	I-<number>
 
-1926	1	1	NOPUNCT	I-<time>	I-<number>
-
+1926	1	1	NOPUNCT	<other>	<other>
 200	1	1	NOPUNCT	I-<number>	I-<number>
 
-1960	1	1	NOPUNCT	I-<time>	I-<number>
-
+1960	1	1	NOPUNCT	<other>	<other>
 10	1	1	NOPUNCT	I-<number>	I-<number>
 
 16	1	1	NOPUNCT	I-<number>	I-<number>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 
-2000	1	1	NOPUNCT	I-<time>	I-<time>
+2000	1	1	NOPUNCT	<other>	I-<number>
 
-1905	1	1	NOPUNCT	I-<time>	I-<number>
-
+1905	1	1	NOPUNCT	<other>	<other>
 1	1	1	NOPUNCT	I-<number>	I-<number>
 ,	1	0	COMMA	<number>	<number>
 000	1	1	NOPUNCT	<number>	<number>
@@ -78,8 +70,7 @@ one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 .	1	0	DOT	<number>	<number>
 7	1	1	NOPUNCT	<number>	<number>
 
-1903	1	1	NOPUNCT	I-<time>	I-<number>
-
+1903	1	1	NOPUNCT	<other>	<other>
 41	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 7	1	1	NOPUNCT	<number>	<number>
@@ -88,18 +79,15 @@ one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 70	1	1	NOPUNCT	I-<number>	I-<number>
 
-1920	1	1	NOPUNCT	I-<time>	I-<number>
-
+1920	1	1	NOPUNCT	<other>	<other>
 40	1	1	NOPUNCT	I-<number>	I-<number>
 
-1930	1	1	NOPUNCT	I-<time>	I-<number>
-
+1930	1	1	NOPUNCT	<other>	<other>
 20	1	1	NOPUNCT	I-<number>	I-<number>
 
-2000	1	1	NOPUNCT	I-<time>	I-<time>
+2000	1	1	NOPUNCT	<other>	I-<number>
 
-1926	1	1	NOPUNCT	I-<time>	I-<number>
-
+1926	1	1	NOPUNCT	<other>	<other>
 126	1	1	NOPUNCT	I-<number>	I-<number>
 
 162	1	1	NOPUNCT	I-<number>	I-<number>
@@ -133,17 +121,16 @@ three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 21	1	1	NOPUNCT	I-<number>	I-<number>
 
-1948	1	1	NOPUNCT	I-<time>	I-<number>
+1948	1	1	NOPUNCT	<other>	I-<number>
 
-1958	1	1	NOPUNCT	I-<time>	I-<number>
-
+1958	1	1	NOPUNCT	<other>	<other>
 80	1	1	NOPUNCT	I-<number>	I-<number>
 
 77	1	1	NOPUNCT	I-<number>	I-<number>
 
 Six	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-2013	1	1	NOPUNCT	I-<number>	I-<time>
+2013	1	1	NOPUNCT	I-<number>	I-<number>
 
 24	1	1	NOPUNCT	I-<alpha>	I-<alpha>
 million	0	0	NOPUNCT	<alpha>	<alpha>
@@ -166,13 +153,13 @@ million	0	0	NOPUNCT	<alpha>	<alpha>
 50	1	1	NOPUNCT	I-<alpha>	I-<alpha>
 million	0	0	NOPUNCT	<alpha>	<alpha>
 
-a	0	0	NOPUNCT	<other>	I-<time>
-1980	1	1	NOPUNCT	I-<time>	I-<number>
+a	0	0	NOPUNCT	<other>	I-<alpha>
 
-1980	1	1	NOPUNCT	I-<time>	I-<time>
-s	0	0	NOPUNCT	<time>	<time>
+1980	1	1	NOPUNCT	<other>	I-<number>
 
-5	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+1980	1	1	NOPUNCT	<other>	I-<alpha>
+s	0	0	NOPUNCT	<other>	<alpha>
+5	1	1	NOPUNCT	I-<alpha>	<alpha>
 million	0	0	NOPUNCT	<alpha>	<alpha>
 
 50	1	1	NOPUNCT	I-<alpha>	I-<alpha>
@@ -191,31 +178,29 @@ million	0	0	NOPUNCT	<alpha>	<alpha>
 77	1	1	NOPUNCT	I-<alpha>	I-<alpha>
 million	0	0	NOPUNCT	<alpha>	<alpha>
 
-in	0	0	NOPUNCT	<other>	I-<time>
-2003	1	1	NOPUNCT	I-<time>	I-<number>
+in	0	0	NOPUNCT	<other>	I-<alpha>
 
-130	1	1	NOPUNCT	I-<alpha>	I-<alpha>
+2003	1	1	NOPUNCT	<other>	I-<number>
+130	1	1	NOPUNCT	I-<alpha>	<alpha>
 million	0	0	NOPUNCT	<alpha>	<alpha>
 
 three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 44	1	1	NOPUNCT	I-<number>	I-<number>
 
-2010	1	1	NOPUNCT	I-<time>	I-<time>
+2010	1	1	NOPUNCT	<other>	I-<number>
 
-1980	1	1	NOPUNCT	I-<time>	I-<time>
-s	0	0	NOPUNCT	<time>	<time>
+1980	1	1	NOPUNCT	<other>	I-<alpha>
+s	0	0	NOPUNCT	<other>	<alpha>
 
-1925	1	1	NOPUNCT	I-<time>	I-<number>
-
-few	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+1925	1	1	NOPUNCT	<other>	I-<alpha>
+few	0	0	NOPUNCT	I-<alpha>	<alpha>
 
 two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 51	1	1	NOPUNCT	I-<number>	I-<number>
 
-2010	1	1	NOPUNCT	I-<time>	I-<time>
-
+2010	1	1	NOPUNCT	<other>	<other>
 200	1	1	NOPUNCT	I-<number>	I-<number>
 
 50	1	1	NOPUNCT	I-<number>	I-<number>
@@ -226,13 +211,11 @@ two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 40	1	1	NOPUNCT	I-<number>	I-<number>
 
-1952	1	1	NOPUNCT	I-<time>	I-<number>
-
+1952	1	1	NOPUNCT	<other>	<other>
 5	1	1	NOPUNCT	I-<number>	I-<number>
 
-2010	1	1	NOPUNCT	I-<time>	I-<time>
-
-two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+2010	1	1	NOPUNCT	<other>	I-<alpha>
+two	0	0	NOPUNCT	I-<alpha>	<alpha>
 
 51	1	1	NOPUNCT	I-<number>	I-<number>
 
@@ -245,12 +228,10 @@ five	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 seven	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-1952	1	1	NOPUNCT	I-<time>	I-<number>
-
+1952	1	1	NOPUNCT	<other>	<other>
 28	1	1	NOPUNCT	I-<number>	I-<number>
 
-2014	1	1	NOPUNCT	I-<time>	I-<time>
-
+2014	1	1	NOPUNCT	<other>	I-<alpha>
 seven	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 €	1	0	NOPUNCT	<other>	<other>
@@ -309,8 +290,7 @@ two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-1999	1	1	NOPUNCT	I-<time>	I-<number>
-
+1999	1	1	NOPUNCT	<other>	<other>
 95	1	1	NOPUNCT	I-<number>	I-<number>
 
 one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
@@ -361,10 +341,9 @@ two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 .	1	0	DOT	<number>	<number>
 6	1	1	NOPUNCT	<number>	<number>
 
-1998	1	1	NOPUNCT	I-<time>	I-<number>
+1998	1	1	NOPUNCT	<other>	I-<number>
 
-2012	1	1	NOPUNCT	I-<time>	I-<time>
-
+2012	1	1	NOPUNCT	<other>	<other>
 17	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
@@ -417,8 +396,8 @@ few	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 few	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
-P	1	0	NOPUNCT	<other>	I-<alpha>
-∼9	1	0	NOPUNCT	I-<number>	<time>
+P	1	0	NOPUNCT	<other>	<other>
+∼9	1	0	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
 
@@ -483,15 +462,14 @@ two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 4	1	1	NOPUNCT	I-<number>	I-<number>
 
-July	0	0	NOPUNCT	I-<time>	I-<time>
-14	1	1	NOPUNCT	<time>	<alpha>
-th	0	0	NOPUNCT	<time>	<alpha>
+July	0	0	NOPUNCT	<other>	<other>
+14	1	1	NOPUNCT	<other>	<alpha>
+th	0	0	NOPUNCT	<other>	<alpha>
 
-August	0	0	NOPUNCT	I-<time>	I-<time>
-19	1	1	NOPUNCT	<time>	<alpha>
-th	0	0	NOPUNCT	<time>	<alpha>
-2004	1	1	NOPUNCT	<time>	<time>
-
+August	0	0	NOPUNCT	<other>	<other>
+19	1	1	NOPUNCT	<other>	<alpha>
+th	0	0	NOPUNCT	<other>	<alpha>
+2004	1	1	NOPUNCT	<other>	<other>
 16	1	1	NOPUNCT	I-<number>	I-<number>
 
 15	1	1	NOPUNCT	I-<number>	I-<number>
@@ -823,7 +801,7 @@ one	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 3	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<time>
+0	1	1	NOPUNCT	<number>	<number>
 x	0	0	NOPUNCT	<other>	<other>
 10	1	1	NOPUNCT	I-<base>	I-<base>
 7	1	1	NOPUNCT	I-<pow>	I-<pow>
@@ -841,7 +819,7 @@ x	0	0	NOPUNCT	<other>	<other>
 
 2	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
-0	1	1	NOPUNCT	<number>	<time>
+0	1	1	NOPUNCT	<number>	<number>
 x	0	0	NOPUNCT	<other>	<other>
 10	1	1	NOPUNCT	I-<base>	I-<base>
 7	1	1	NOPUNCT	I-<pow>	I-<pow>
@@ -1216,7 +1194,7 @@ x	0	0	NOPUNCT	<other>	<other>
 
 990	1	1	NOPUNCT	I-<number>	I-<number>
 
-70	1	1	NOPUNCT	I-<number>	I-<time>
+70	1	1	NOPUNCT	I-<number>	I-<number>
 x	0	0	NOPUNCT	<other>	<other>
 10	1	1	NOPUNCT	I-<base>	I-<base>
 -	1	0	HYPHEN	I-<pow>	I-<pow>
@@ -1947,9 +1925,8 @@ two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 120	1	1	NOPUNCT	I-<number>	I-<number>
 
-1999	1	1	NOPUNCT	I-<time>	I-<number>
-
-three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
+1999	1	1	NOPUNCT	<other>	I-<alpha>
+three	0	0	NOPUNCT	I-<alpha>	<alpha>
 
 77	1	1	NOPUNCT	I-<number>	I-<number>
 
@@ -2248,11 +2225,10 @@ three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 33	1	1	NOPUNCT	I-<number>	I-<number>
 
-October	0	0	NOPUNCT	I-<time>	I-<time>
-19	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-
+October	0	0	NOPUNCT	<other>	<other>
+19	1	1	NOPUNCT	<other>	I-<number>
+,	1	0	COMMA	<other>	<number>
+2014	1	1	NOPUNCT	<other>	<number>
 135	1	1	NOPUNCT	I-<number>	I-<number>
 ,	1	0	COMMA	<number>	<number>
 000	1	1	NOPUNCT	<number>	<number>
@@ -2263,36 +2239,33 @@ October	0	0	NOPUNCT	I-<time>	I-<time>
 
 20	1	1	NOPUNCT	I-<number>	I-<number>
 
-October	0	0	NOPUNCT	I-<time>	I-<time>
-19	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-at	0	0	NOPUNCT	<time>	<time>
-20	1	1	NOPUNCT	<time>	<time>
-:	1	0	NOPUNCT	<time>	<time>
-09	1	1	NOPUNCT	<time>	<time>
-
+October	0	0	NOPUNCT	<other>	<other>
+19	1	1	NOPUNCT	<other>	I-<number>
+,	1	0	COMMA	<other>	<alpha>
+2014	1	1	NOPUNCT	<other>	<number>
+at	0	0	NOPUNCT	<other>	<other>
+20	1	1	NOPUNCT	<other>	<other>
+:	1	0	NOPUNCT	<other>	<other>
+09	1	1	NOPUNCT	<other>	<other>
 43	1	1	NOPUNCT	I-<number>	I-<number>
 
 130	1	1	NOPUNCT	I-<number>	I-<number>
 
-January	0	0	NOPUNCT	I-<time>	I-<time>
-2013	1	1	NOPUNCT	<time>	<time>
+January	0	0	NOPUNCT	<other>	<other>
+2013	1	1	NOPUNCT	<other>	I-<number>
 
-October	0	0	NOPUNCT	I-<time>	I-<time>
-19	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-
+October	0	0	NOPUNCT	<other>	<other>
+19	1	1	NOPUNCT	<other>	<alpha>
+,	1	0	COMMA	<other>	<number>
+2014	1	1	NOPUNCT	<other>	<number>
 56	1	1	NOPUNCT	I-<number>	I-<number>
 
 7	1	1	NOPUNCT	I-<number>	I-<number>
 
-March	0	0	NOPUNCT	I-<time>	I-<time>
-15	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-
+March	0	0	NOPUNCT	<other>	<other>
+15	1	1	NOPUNCT	<other>	I-<number>
+,	1	0	COMMA	<other>	<number>
+2014	1	1	NOPUNCT	<other>	<number>
 0	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 5	1	1	NOPUNCT	<number>	<number>
@@ -2349,11 +2322,10 @@ three	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 ,	1	0	COMMA	<number>	<number>
 000	1	1	NOPUNCT	<number>	<number>
 
-March	0	0	NOPUNCT	I-<time>	I-<time>
-15	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-
+March	0	0	NOPUNCT	<other>	<other>
+15	1	1	NOPUNCT	<other>	<alpha>
+,	1	0	COMMA	<other>	<number>
+2014	1	1	NOPUNCT	<other>	<number>
 60	1	1	NOPUNCT	I-<number>	I-<number>
 
 two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
@@ -2382,11 +2354,10 @@ five	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 60	1	1	NOPUNCT	I-<number>	I-<number>
 
-May	0	0	NOPUNCT	I-<time>	I-<time>
-7	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-
+May	0	0	NOPUNCT	<other>	<other>
+7	1	1	NOPUNCT	<other>	I-<number>
+,	1	0	COMMA	<other>	<number>
+2014	1	1	NOPUNCT	<other>	<number>
 1	1	1	NOPUNCT	I-<number>	I-<number>
 .	1	0	DOT	<number>	<number>
 3	1	1	NOPUNCT	<number>	<number>
@@ -2465,35 +2436,32 @@ two	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 20	1	1	NOPUNCT	I-<number>	I-<number>
 
-Oct	0	0	NOPUNCT	I-<time>	I-<time>
-19	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-at	0	0	NOPUNCT	<time>	<time>
-20	1	1	NOPUNCT	<time>	<time>
-:	1	0	NOPUNCT	<time>	<time>
-09	1	1	NOPUNCT	<time>	<time>
-
+Oct	0	0	NOPUNCT	<other>	<other>
+19	1	1	NOPUNCT	<other>	I-<number>
+,	1	0	COMMA	<other>	<alpha>
+2014	1	1	NOPUNCT	<other>	<number>
+at	0	0	NOPUNCT	<other>	<other>
+20	1	1	NOPUNCT	<other>	<other>
+:	1	0	NOPUNCT	<other>	<other>
+09	1	1	NOPUNCT	<other>	<other>
 43	1	1	NOPUNCT	I-<number>	I-<number>
 
 130	1	1	NOPUNCT	I-<number>	I-<number>
 
-Oct	0	0	NOPUNCT	I-<time>	I-<time>
-19	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-
+Oct	0	0	NOPUNCT	<other>	<other>
+19	1	1	NOPUNCT	<other>	I-<number>
+,	1	0	COMMA	<other>	<number>
+2014	1	1	NOPUNCT	<other>	<number>
 135	1	1	NOPUNCT	I-<number>	I-<number>
 ,	1	0	COMMA	<number>	<number>
 000	1	1	NOPUNCT	<number>	<number>
 
-18	1	1	NOPUNCT	I-<time>	I-<time>
-:	1	0	NOPUNCT	<time>	<time>
-30	1	1	NOPUNCT	<time>	<time>
+18	1	1	NOPUNCT	<other>	I-<number>
+:	1	0	NOPUNCT	<other>	<other>
+30	1	1	NOPUNCT	<other>	<number>
 
-July	0	0	NOPUNCT	I-<time>	I-<time>
-2014	1	1	NOPUNCT	<time>	<time>
-
+July	0	0	NOPUNCT	<other>	<other>
+2014	1	1	NOPUNCT	<other>	<other>
 10	1	1	NOPUNCT	I-<base>	I-<base>
 −	1	0	HYPHEN	I-<pow>	I-<pow>
 4	1	1	NOPUNCT	<pow>	<pow>
@@ -2502,15 +2470,14 @@ July	0	0	NOPUNCT	I-<time>	I-<time>
 
 20	1	1	NOPUNCT	I-<number>	I-<number>
 
-Oct	0	0	NOPUNCT	I-<time>	I-<time>
-19	1	1	NOPUNCT	<time>	<time>
-,	1	0	COMMA	<time>	<time>
-2014	1	1	NOPUNCT	<time>	<time>
-at	0	0	NOPUNCT	<time>	<time>
-20	1	1	NOPUNCT	<time>	<time>
-:	1	0	NOPUNCT	<time>	<time>
-09	1	1	NOPUNCT	<time>	<time>
-
+Oct	0	0	NOPUNCT	<other>	<other>
+19	1	1	NOPUNCT	<other>	I-<number>
+,	1	0	COMMA	<other>	<alpha>
+2014	1	1	NOPUNCT	<other>	<number>
+at	0	0	NOPUNCT	<other>	<other>
+20	1	1	NOPUNCT	<other>	<other>
+:	1	0	NOPUNCT	<other>	<other>
+09	1	1	NOPUNCT	<other>	<other>
 2	1	1	NOPUNCT	I-<number>	I-<number>
 
 0	1	1	NOPUNCT	I-<number>	I-<number>
@@ -2773,20 +2740,19 @@ zero	0	0	NOPUNCT	I-<alpha>	I-<alpha>
 
 label                accuracy     precision    recall       f1           support
 
-<alpha>              99.53        96.9         99.21        98.04        126    
+<alpha>              98.06        88.32        96.03        92.02        126    
 <base>               99.91        100          92.31        96           13     
-<number>             96.83        96.64        99.26        97.93        811    
+<number>             97.5         96.89        99.88        98.36        811    
 <pow>                100          100          100          100          13     
-<time>               96.83        68.75        47.83        56.41        46     
 
-all (micro avg.)     98.62        95.88        96.83        96.35        1009   
-all (macro avg.)     98.62        92.46        87.72        89.68        1009   
+all (micro avg.)     98.87        95.79        99.27        97.5         963    
+all (macro avg.)     98.87        96.3         97.05        96.59        963    
 
 ===== Instance-level results =====
 
-Total expected instances:   989
-Correct instances:          956
-Instance-level recall:      96.66
+Total expected instances:   956
+Correct instances:          923
+Instance-level recall:      96.55
 
 
-Evaluation for org.grobid.core.GrobidModels$1@4f59a516 model is realized in 72 ms
+Evaluation for org.grobid.core.GrobidModels$1@76437e9b model is realized in 66 ms

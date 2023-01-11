@@ -1,7 +1,7 @@
 <values xmlns="http://www.tei-c.org/ns/1.0">
     <value><alpha>four</alpha></value>
 	<value><alpha>two</alpha></value>
-	<value><time>1980's</time></value>
+<!-- 	<value><time>1980's</time></value>-->
 	<value><alpha>two</alpha></value>
 	<value><alpha>two</alpha></value>
 	<value><number>1</number></value>
@@ -20,8 +20,8 @@
 	<value><number>100</number></value>
 	<value><number>1/4</number></value>
 	<value><number>8</number></value>
-	<value><time>03/23/09, 18:00</time></value>
-	<value><time>03/28/09, 11:00 GMT</time></value>
+<!-- 	<value><time>03/23/09, 18:00</time></value>-->
+<!-- 	<value><time>03/28/09, 11:00 GMT</time></value>-->
 	<value><number>18</number></value>
 	<value><number>10</number></value>
 	<value><number>8</number></value>

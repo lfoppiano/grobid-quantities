@@ -5,9 +5,9 @@
 	<value><number>100</number></value>
 	<value><alpha>several</alpha></value>
 	<value><base>10</base> <pow>−7</pow></value>
-	<value><time>October 19, 2014 at approximately 18:29 UT</time></value>
+<!-- 	<value><time>October 19, 2014 at approximately 18:29 UT</time></value>-->
 	<value><number>134,000</number></value>
-	<value><time>March 17, 2014</time></value>
+<!-- 	<value><time>March 17, 2014</time></value>-->
 	<value><number>129</number></value>
 	<value><number>56</number></value>
 	<value><number>72</number></value>
@@ -21,9 +21,9 @@
 	<value><number>1</number></value>
 	<value><number>7.2</number></value>
 	<value><number>1</number></value>
-	<value><time>October 29, 2013</time></value>
-	<value><time>Jan 21, 2014</time></value>
-	<value><time>March 11, 2014</time></value>
+<!-- 	<value><time>October 29, 2013</time></value>-->
+<!-- 	<value><time>Jan 21, 2014</time></value>-->
+<!-- 	<value><time>March 11, 2014</time></value>-->
 	<value><number>28</number></value>
 	<value><number>46</number></value>
 	<value><number>4.59</number></value>
@@ -34,7 +34,7 @@
 	<value><number>80</number></value>
 	<value><number>3.28</number></value>
 	<value><number>1</number></value>
-	<value><time>Jan 16, 2014</time></value>
+<!-- 	<value><time>Jan 16, 2014</time></value>-->
 	<value><number>3.82</number></value>
 	<value><number>10</number></value>
 	<value><number>1.7</number></value>
@@ -119,6 +119,6 @@
 	<value><base>10</base> <pow>−7</pow></value>
 	<value><number>90</number></value>
 	<value><number>100</number></value>
-	<value><time>19:59</time></value>
-	<value><time>20:09 UT of October 19, 2014</time></value>
+<!-- 	<value><time>19:59</time></value>-->
+<!-- 	<value><time>20:09 UT of October 19, 2014</time></value>-->
 </values>

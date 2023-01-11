@@ -7,7 +7,7 @@
 	<value><number>42.2</number></value>
 	<value><alpha>ten</alpha></value>
 	<value><number>1983</number></value>
-	<value><time>2012</time></value>
+<!-- 	<value><time>2012</time></value>-->
 	<value><alpha>ten</alpha></value>
 	<value><number>15.2</number></value>
 	<value><number>11.3</number></value>
@@ -27,7 +27,7 @@
 	<value><number>21.1</number></value>
 	<value><alpha>ten</alpha></value>
 	<value><number>1998</number></value>
-	<value><time>2013</time></value>
+<!-- 	<value><time>2013</time></value>-->
 	<value><alpha>ten</alpha></value>
 	<value><alpha>two</alpha></value>
 	<value><alpha>ten</alpha></value>
@@ -57,12 +57,12 @@
 	<value><alpha>ten</alpha></value>
 	<value><alpha>ten</alpha></value>
 	<value><number>1998</number></value>
-	<value><time>2013</time></value>
+<!-- 	<value><time>2013</time></value>-->
 	<value><alpha>half</alpha></value>
 	<value><alpha>ten</alpha></value>
 	<value><alpha>ten</alpha></value>
 	<value><number>1983</number></value>
-	<value><time>2012</time></value>
+<!-- 	<value><time>2012</time></value>-->
 	<value><alpha>ten</alpha></value>
 	<value><alpha>ten</alpha></value>
 	<value><number>70.3</number></value>
@@ -71,8 +71,8 @@
 	<value><number>70.3</number></value>
 	<value><number>70.3</number></value>
 	<value><alpha>half</alpha></value>
-	<value><time>2006</time></value>
-	<value><time>2011</time></value>
+<!-- 	<value><time>2006</time></value>-->
+<!-- 	<value><time>2011</time></value>-->
 	<value><alpha>two</alpha></value>
 	<value><alpha>two</alpha></value>
 	<value><alpha>ten</alpha></value>
