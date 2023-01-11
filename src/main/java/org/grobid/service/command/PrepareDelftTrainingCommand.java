@@ -76,7 +76,7 @@ public class PrepareDelftTrainingCommand extends ConfiguredCommand<GrobidQuantit
                 "units",
                 "values"))
             .required(false)
-            .setDefault("superconductors")
+            .setDefault("quantities")
             .help("Model data to use. ");
 
     }

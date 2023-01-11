@@ -1268,7 +1268,7 @@
     <unit><base>Tbpsi</base></unit>
     <unit><prefix>p</prefix><base>T</base><pow>∕</pow><base>Hz</base><pow>0.5</pow></unit>
     <unit><base>T</base><pow>∕</pow><base>Hz</base><pow>1∕2</pow></unit>
-    <unit><prefix>Tera</prefix><base>bit</base><pow>∕</pow><base>in</base>^<pow>2</pow></unit>
+<!--    <unit><prefix>Tera</prefix><base>bit</base><pow>∕</pow><base>in</base>^<pow>2</pow></unit>-->
     <unit><prefix>n</prefix><base>m</base><pow>∕</pow><base>V</base></unit>
     <unit><base>rad</base><pow>∕</pow><base>T</base> <base>s</base></unit>
     <unit><prefix>p</prefix><base>J</base></unit>

@@ -102,28 +102,34 @@ public class Value {
             String outputRawName = new String(encodedRawName);
             if (!started) {
                 started = true;
-            } else
+            } else {
                 json.append(", ");
+            }
             json.append("\"name\" : \"" + outputRawName + "\"");
         }
 
         if (getNumeric() != null) {
             if (!started) {
                 started = true;
-            } else
+            } else {
                 json.append(", ");
+            }
             json.append("\"numeric\" : " + getNumeric());
         }
 
         if (getStructure() != null) {
             if (!started) {
                 started = true;
-            } else
+            } else {
                 json.append(", ");
-            json.append("\"structure\" : " + getStructure().toJson() + ", ");
-            byte[] encodedParsedName = encoder.quoteAsUTF8(getStructure().toString());
-            String outputParsedName = new String(encodedParsedName);
-            json.append("\"parsed\" : \"" + outputParsedName + "\"");
+            }
+            json.append("\"structure\" : " + getStructure().toJson());
+            if (getStructure().getType() != ValueBlock.Type.UNKNOWN) {
+                json.append(", ");
+                byte[] encodedParsedName = encoder.quoteAsUTF8(getStructure().toString());
+                String outputParsedName = new String(encodedParsedName);
+                json.append("\"parsed\" : \"" + outputParsedName + "\"");
+            }
         }
 
         if (offsets != null) {

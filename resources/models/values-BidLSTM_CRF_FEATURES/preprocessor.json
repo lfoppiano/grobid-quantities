@@ -1,9 +1,11 @@
 {
-    "use_char_feature": true,
     "padding": true,
     "return_lengths": true,
+    "return_word_embeddings": true,
     "return_casing": false,
     "return_features": true,
+    "return_chars": true,
+    "return_bert_embeddings": false,
     "vocab_char": {
         "<PAD>": 0,
         "<UNK>": 1,
@@ -125,5 +127,19 @@
                 "SLASH": 31
             }
         }
+    },
+    "indice_tag": {
+        "0": "<PAD>",
+        "1": "B-<alpha>",
+        "2": "B-<base>",
+        "3": "B-<number>",
+        "4": "B-<pow>",
+        "5": "B-<time>",
+        "6": "I-<alpha>",
+        "7": "I-<base>",
+        "8": "I-<number>",
+        "9": "I-<pow>",
+        "10": "I-<time>",
+        "11": "O"
     }
 }

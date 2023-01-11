@@ -7,10 +7,12 @@ corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
 # Limit the maximum number of requests
 maxParallelRequests: 0
 
+cleanlpModelPath: "/opt/grobid/grobid-quantities/resources/cleanlp/models"
+
 models:
   - name: "quantities"
     engine: "wapiti"
-    #engine: "delft"
+#    engine: "delft"
     wapiti:
       # wapiti training parameters, they will be used at training time only
       epsilon: 0.00001
@@ -18,7 +20,7 @@ models:
       nbMaxIterations: 2000
     delft:
       # deep learning parameters
-      architecture: "BidLSTM_CRF_FEATURES"
+      architecture: "BidLSTM_CRF"
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
@@ -39,8 +41,8 @@ models:
       embeddings_name: "glove-840B"
 
   - name: "values"
-#    engine: "wapiti"
-    engine: "delft"
+    engine: "wapiti"
+#    engine: "delft"
     wapiti:
       # wapiti training parameters, they will be used at training time only
       epsilon: 0.00001
@@ -48,11 +50,15 @@ models:
       nbMaxIterations: 2000
     delft:
       # deep learning parameters
-      architecture: "BidLSTM_CRF_FEATURES"
+      architecture: "BidLSTM_CRF"
       #architecture: "scibert"
       useELMo: false
       embeddings_name: "glove-840B"
 
+
+views:
+  .mustache:
+    cache: false
 
 server:
   type: custom

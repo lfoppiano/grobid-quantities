@@ -87,6 +87,7 @@ public class ValueParser extends AbstractParser {
                 try {
                     BigDecimal secondPart = null;
                     if (block.getPow() != null && block.getBase() != null) {
+
                         final Number pow = format.parse(block.getPowAsString());
                         String baseAsString = removeSpacesTabsAndBl(block.getBaseAsString());
 
@@ -113,7 +114,7 @@ public class ValueParser extends AbstractParser {
                     }
 
                 } catch (ParseException | ArithmeticException | NumberFormatException e) {
-                    LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
+                    LOGGER.error("Cannot parse " + block + " with Locale " + locale, e);
                 }
 
                 break;
