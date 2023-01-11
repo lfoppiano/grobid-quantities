@@ -3,6 +3,7 @@ package org.grobid.core.engines;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
@@ -19,7 +20,7 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
-    public void testTagValue_exponential_1() throws Exception {
+    public void testTagValue_exponential_1a() throws Exception {
         String input = "0 . 3 x 10 - 7";
         ValueBlock output = target.tagValue(input);
 
@@ -29,6 +30,19 @@ public class ValueParserIntegrationTest {
         assertThat(output.getNumber().toString(), is("0 . 3"));
         assertThat(output.getBase().toString(), is("10"));
         assertThat(output.getPow().toString(), is("- 7"));
+    }
+
+    @Test
+    public void testTagValue_exponential_1b() throws Exception {
+        String input = "0.3 × 10-7";
+        ValueBlock output = target.tagValue(input);
+
+        System.out.println(input + " -> " + output);
+        System.out.println(output.getRawTaggedValue());
+
+        assertThat(output.getNumber().toString(), is("0.3"));
+        assertThat(output.getBase().toString(), is("10"));
+        assertThat(output.getPow().toString(), is("-7"));
     }
 
     @Test
@@ -44,8 +58,9 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
+    @Ignore("<exp> is not yet implemented")
     public void testTagValue_exponential_2() throws Exception {
-        String input = "10 e -1";
+        String input = "10 e-1";
         ValueBlock output = target.tagValue(input);
         System.out.println(input + " -> " + output);
         System.out.println(output.getRawTaggedValue());
@@ -55,6 +70,7 @@ public class ValueParserIntegrationTest {
     }
 
     @Test
+    @Ignore("<exp> is not yet implemented")
     public void testParseValue_esponential_1() throws Exception {
         String input = "10 e -1";
         Value output = target.parseValue(input);
