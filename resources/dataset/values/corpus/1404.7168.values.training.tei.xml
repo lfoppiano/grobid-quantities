@@ -16,6 +16,7 @@
 	<value><number>27,000</number></value>
 	<value><number>102</number></value>
 	<value><number>1600</number> × <base>700</base></value>
+	<value><number>1600</number> x <base>700</base></value>
 	<value><number>20</number></value>
 	<value><number>1</number></value>
 	<value><number>7.2</number></value>
@@ -53,6 +54,7 @@
 	<value><number>1</number></value>
 	<value><number>1</number></value>
 	<value><number>5.76</number> × <base>10</base> <pow>−4</pow></value>
+	<value><number>5.76</number> x <base>10</base> <pow>−4</pow></value>
 	<value><number>5</number></value>
 	<value><alpha>three</alpha></value>
 	<value><number>0.8</number></value>

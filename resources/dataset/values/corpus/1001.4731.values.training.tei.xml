@@ -541,6 +541,7 @@
 	<value><number>174</number></value>
 	<value><number>6</number></value>
 	<value><number>7.153</number>× <base>10</base> <pow>−10</pow></value>
+	<value><number>7.153</number>x <base>10</base> <pow>−10</pow></value>
 	<value><number>1.5</number></value>
 	<value><number>2.2</number></value>
 	<value><number>2.0</number></value>
@@ -550,6 +551,7 @@
 	<value><number>3.2</number></value>
 	<value><number>350</number></value>
 	<value><number>2.482</number> × <base>10</base> −<pow>10</pow></value>
+	<value><number>2.482</number> x <base>10</base> −<pow>10</pow></value>
 	<value><number>19.0</number></value>
 	<value><number>2.2</number></value>
 	<value><number>2.0</number></value>
@@ -563,6 +565,7 @@
 	<value><number>116</number></value>
 	<value><number>90</number></value>
 	<value><number>1.006</number> × <base>10</base> −<pow>10</pow></value>
+	<value><number>1.006</number> x <base>10</base> −<pow>10</pow></value>
 	<value><number>29.0</number></value>
 	<value><number>2.2</number></value>
 	<value><number>2.0</number></value>

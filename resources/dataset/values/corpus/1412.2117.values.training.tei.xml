@@ -87,7 +87,9 @@
 	<value><number>100</number></value>
 	<value><number>1</number></value>
 	<value><number>2.46</number> × <base>10</base> <pow>−4</pow></value>
+	<value><number>2.46</number> x <base>10</base> <pow>−4</pow></value>
 	<value><number>2.86</number> × <base>10</base> <pow>−3</pow></value>
+	<value><number>2.86</number> x <base>10</base> <pow>−3</pow></value>
 <!--	<value><base>10</base><pow>5</pow></value>-->
 	<value><number>0.6</number></value>
 	<value><time>2014 Jan</time>.</value>
