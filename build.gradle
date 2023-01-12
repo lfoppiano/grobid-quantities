@@ -271,7 +271,7 @@ task downloadTransformers(dependsOn: copyModels) {
             overwrite false
             print "Download bulky transformers files under grobid-home: ${grobidHome}"
         }
-        ant.unzip(src: "${rootDir}/${grobidHome}/models/quantities-transformers.zip", dest: "${rootDir}/${grobidHome}/models/")
+        ant.unzip(src: "${rootDir}/${grobidHome}/models/quantities-transformers-valueParser_update.zip", dest: "${rootDir}/${grobidHome}/models/")
     }
 }
 
