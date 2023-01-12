@@ -4,14 +4,14 @@
 	<value><number>13</number></value>
 	<value><number>5000</number></value>
 	<value><number>20</number></value>
-	<value><time>October 19, 2014 at 20:09</time></value>
+<!-- 	<value><time>October 19, 2014 at 20:09</time></value>-->
 	<value><number>43</number></value>
 	<value><number>130</number></value>
-	<value><time>January 2013</time></value>
-	<value><time>October 19, 2014</time></value>
+<!-- 	<value><time>January 2013</time></value>-->
+<!-- 	<value><time>October 19, 2014</time></value>-->
 	<value><number>56</number></value>
 	<value><number>7</number></value>
-	<value><time>March 15, 2014</time></value>
+<!-- 	<value><time>March 15, 2014</time></value>-->
 	<value><number>0.5</number></value>
 	<value><alpha>three</alpha></value>
 	<value><alpha>four</alpha></value>
@@ -50,7 +50,7 @@
 	<value><number>2</number></value>
 	<value><number>90</number></value>
 	<value><number>60</number></value>
-	<value><time>May 7, 2014</time></value>
+<!-- 	<value><time>May 7, 2014</time></value>-->
 	<value><number>1.3</number></value>
 	<value><number>0.01</number></value>
 	<value><number>10</number></value>
@@ -75,17 +75,17 @@
 	<value><number>13</number></value>
 	<value><number>2</number></value>
 	<value><number>20</number></value>
-	<value><time>Oct 19, 2014 at 20:09</time></value>
+<!-- 	<value><time>Oct 19, 2014 at 20:09</time></value>-->
 	<value><number>43</number></value>
 	<value><number>130</number></value>
-	<value><time>Oct 19, 2014</time></value>
+<!-- 	<value><time>Oct 19, 2014</time></value>-->
 	<value><number>135,000</number></value>
-	<value><time>18:30</time></value>
-	<value><time>July 2014</time></value>
+<!-- 	<value><time>18:30</time></value>-->
+<!-- 	<value><time>July 2014</time></value>-->
 	<value><base>10</base> <pow>−4</pow></value>
 	<value><number>13</number></value>
 	<value><number>20</number></value>
-	<value><time>Oct 19, 2014 at 20:09</time></value>
+<!-- 	<value><time>Oct 19, 2014 at 20:09</time></value>-->
 	<value><number>2</number></value>
 	<value><number>0.001</number></value>
 	<value><number>43</number></value>
