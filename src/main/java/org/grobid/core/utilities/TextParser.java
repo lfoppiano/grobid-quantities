@@ -12,20 +12,25 @@ import com.googlecode.clearnlp.pos.POSTagger;
 import com.googlecode.clearnlp.predicate.AbstractPredIdentifier;
 import com.googlecode.clearnlp.reader.AbstractReader;
 import com.googlecode.clearnlp.reader.DEPReader;
-import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
 import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
 import com.googlecode.clearnlp.util.UTInput;
 import com.googlecode.clearnlp.util.pair.Pair;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.data.Sentence;
 import org.grobid.core.data.SentenceParse;
 import org.grobid.core.exceptions.GrobidException;
+import org.grobid.core.lang.SentenceDetector;
+import org.grobid.core.lang.impl.OpenNLPSentenceDetector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // this is for version 1.3.0 of ClearNLP
 
@@ -52,7 +57,7 @@ public class TextParser {
     private AbstractPredIdentifier predicater = null;
     private AbstractSRLabeler labeler = null;
     private DEPReader depReader = null;
-    private AbstractSegmenter segmenter;
+    private SentenceDetector segmenter;
 
     // this is for version 1.3.0 of ClearNLP
     private CRolesetClassifier roleClassifier = null;
@@ -72,8 +77,7 @@ public class TextParser {
      * Hidden constructor
      */
     private TextParser() throws Exception {
-        modelPath = "resources/clearnlp/models";
-        modelPath = new File(modelPath).getAbsolutePath();
+        modelPath = Paths.get("resources/clearnlp/models").toAbsolutePath().toString();
 
         // TBD: set up config profile for the ClearNLP models...
         String dictionaryFile = modelPath + File.separator + "dictionary-1.2.0.zip";
@@ -91,25 +95,18 @@ public class TextParser {
         String roleClassifierModelFile = modelPath + File.separator + "mayo-en-role-1.3.0.tgz";
         //String roleClassifierModelFile = modelPath + "/" + "ontonotes-en-roleset-1.2.2.tgz"; 
 
-        tokenizer = EngineGetter.getTokenizer(language, dictionaryFile);
-        analyzer = EngineGetter.getMPAnalyzer(language, dictionaryFile);
-        taggers = EngineGetter.getPOSTaggers(posModelFile);
-        parser = EngineGetter.getDEPParser(depModelFile);
-        predicater = EngineGetter.getPredIdentifier(predModelFile);
-        labeler = EngineGetter.getSRLabeler(labelModelFile);
-
-        // this is for version 1.3.0 of ClearNLP   
-        FileInputStream is = new FileInputStream(new File(roleClassifierModelFile));
-        roleClassifier = (CRolesetClassifier) EngineGetter.getComponent(is, AbstractReader.LANG_EN, NLPLib.MODE_ROLE);
-
-        depReader = new DEPReader(0, 1, 2, 3, 4, 5, 6);
-
-        segmenter = EngineGetter.getSegmenter(language, tokenizer);
+        this.init(dictionaryFile, posModelFile, depModelFile, predModelFile, labelModelFile, roleClassifierModelFile);
     }
 
     private TextParser(String dictionaryFile, String posModelFile, String depModelFile,
+                       String predModelFile, String labelModelFile, String roleClassifierModelFile) throws Exception {
+        this.init(dictionaryFile, posModelFile, depModelFile, predModelFile, labelModelFile, roleClassifierModelFile);
+    }
+
+
+    private void init(String dictionaryFile, String posModelFile, String depModelFile,
                        String predModelFile, String labelModelFile, String roleClassifierModelFile)
-            throws Exception {
+        throws Exception {
         tokenizer = EngineGetter.getTokenizer(language, dictionaryFile);
         analyzer = EngineGetter.getMPAnalyzer(language, dictionaryFile);
         taggers = EngineGetter.getPOSTaggers(posModelFile);
@@ -123,7 +120,7 @@ public class TextParser {
 
         depReader = new DEPReader(0, 1, 2, 3, 4, 5, 6);
 
-        segmenter = EngineGetter.getSegmenter(language, tokenizer);
+        segmenter = new OpenNLPSentenceDetector();
     }
 
     /**
@@ -143,19 +140,24 @@ public class TextParser {
 
         Sentence result = null;
 
+        List<SentenceParse> theResult = getSentenceParses(sentence);
+        result = new Sentence(sentence, theResult, new OffsetPosition(0, sentence.length()));
+
+        return result;
+    }
+
+    private List<SentenceParse> getSentenceParses(String sentence) {
         DEPTree tree = EngineProcess.getDEPTree(tokenizer, taggers,
-                //analyzer, parser, predicater, labeler, sentence);
-                analyzer, parser, sentence);
+            //analyzer, parser, predicater, labeler, sentence);
+            analyzer, parser, sentence);
         EngineProcess.predictSRL(predicater, roleClassifier, labeler, tree);
         // we only have the top parse with the ClearParser, no n-best ! and no score.
         SentenceParse parse = new SentenceParse();
         parse.setParseRepresentation(tree.toStringSRL());
         parse.createMap(sentence);
-        List<SentenceParse> theResult = new ArrayList<SentenceParse>();
+        List<SentenceParse> theResult = new ArrayList<>();
         theResult.add(parse);
-        result = new Sentence(sentence, theResult, new OffsetPosition(0, sentence.length()));
-
-        return result;
+        return theResult;
     }
 
     /**
@@ -175,53 +177,31 @@ public class TextParser {
             return null;
         }
 
-        List<Sentence> results = null;
+        List<Sentence> results = new ArrayList<>();
+        List<OffsetPosition> sentences = this.segmenter.detect(text);
 
-        // convert String into InputStream
-        InputStream is = new ByteArrayInputStream(text.getBytes());
-
-        // read it with BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        List<List<String>> sentences = segmenter.getSentences(br);
-
-        if ((sentences == null) || (sentences.size() == 0)) {
+        if (CollectionUtils.isEmpty(sentences)) {
             // there is some text but not in a state so that a sentence at least can be
             // identified by the sentence segmenter, so we parse it as a single sentence
             Sentence pack = parse(text);
             //ProcessedSentence pack = new ProcessedSentence(text, null, null, theResult);
-            results = new ArrayList<Sentence>();
             results.add(pack);
             return results;
         }
 
-        results = new ArrayList<Sentence>();
-        int position = 0;
-        for (List<String> tokens : sentences) {
+        for (OffsetPosition sentencePosition : sentences) {
+            String sentence = text.substring(sentencePosition.start, sentencePosition.end);
             //DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, predicater, labeler, tokens);                  
-            DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, tokens);
+            DEPTree tree = EngineProcess.getDEPTree(tokenizer, taggers, analyzer, parser, sentence);
             EngineProcess.predictSRL(predicater, roleClassifier, labeler, tree);
             // we only have the top parse with the ClearParser, no n-best !
             SentenceParse parse = new SentenceParse();
             parse.setParseRepresentation(tree.toStringSRL());
-//System.out.println(tree.toStringSRL());
-            List<SentenceParse> parses = new ArrayList<SentenceParse>();
+            //System.out.println(tree.toStringSRL());
+            List<SentenceParse> parses = new ArrayList<>();
             parses.add(parse);
-            // To be reviewed! we want offsets, not the modified sentence provided by clearnlp
-            int endPosition = position;
-            for (int i = 0; i < tokens.size(); i++) {
-                int startPosition = text.indexOf(tokens.get(i), endPosition);
-                if (i == 0)
-                    position = startPosition;
-                if (startPosition == -1) {
-                    logger.debug("unmatche token: " + tokens.get(i) + " for text: " + text + " from position: " + endPosition);
-                } else {
-                    //logger.debug("matched token: " + tokens.get(i) + " at position " + startPosition);
-                    endPosition = startPosition + tokens.get(i).length();
-                }
-            }
-            parse.createMap(text.substring(position, endPosition));
-            Sentence pack = new Sentence(text.substring(position, endPosition), parses, new OffsetPosition(position, endPosition));
-            position = endPosition;
+            parse.createMap(sentence);
+            Sentence pack = new Sentence(sentence, parses, sentencePosition);
             results.add(pack);
         }
 
@@ -236,23 +216,18 @@ public class TextParser {
      * (http://code.google.com/p/clearnlp/wiki/DataFormat#Semantic_role_format_(srl)).
      */
     public List<Sentence> parse(BufferedReader reader) throws GrobidException {
-        List<Sentence> results = null;
+        List<Sentence> results = new ArrayList<>();
 
-        List<List<String>> sentences = segmenter.getSentences(reader);
+        String text = reader.lines().collect(Collectors.joining());
 
-        results = new ArrayList<Sentence>();
-        for (List<String> tokens : sentences) {
+        List<OffsetPosition> sentences = segmenter.detect(text);
+
+        for (OffsetPosition sentencePosition : sentences) {
+            String sentence = text.substring(sentencePosition.start, sentencePosition.end);
             //DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, predicater, labeler, tokens);
-            DEPTree tree = EngineProcess.getDEPTree(taggers, analyzer, parser, tokens);
-            EngineProcess.predictSRL(predicater, roleClassifier, labeler, tree);
-            // we only have the top parse with the ClearParser, no n-best !
-            SentenceParse parse = new SentenceParse();
-            parse.setParseRepresentation(tree.toStringSRL());
-            parse.createMap(StringUtils.join(tokens, " "));
-            List<SentenceParse> parses = new ArrayList<SentenceParse>();
-            parses.add(parse);
+            List<SentenceParse> parses = getSentenceParses(sentence);
             // To be reviewed! this is not exactly the original sentence, but not so important for the moment
-            Sentence pack = new Sentence(StringUtils.join(tokens, " "), parses, null);
+            Sentence pack = new Sentence(sentence, parses, null);
             results.add(pack);
         }
 

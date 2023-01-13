@@ -1,5 +1,6 @@
 package org.grobid.core.engines;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.GrobidModel;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;
@@ -86,6 +87,7 @@ public class ValueParser extends AbstractParser {
                 try {
                     BigDecimal secondPart = null;
                     if (block.getPow() != null && block.getBase() != null) {
+
                         final Number pow = format.parse(block.getPowAsString());
                         String baseAsString = removeSpacesTabsAndBl(block.getBaseAsString());
 
@@ -112,7 +114,7 @@ public class ValueParser extends AbstractParser {
                     }
 
                 } catch (ParseException | ArithmeticException | NumberFormatException e) {
-                    LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
+                    LOGGER.error("Cannot parse " + block + " with Locale " + locale, e);
                 }
 
                 break;
@@ -184,7 +186,7 @@ public class ValueParser extends AbstractParser {
             text = text.replace("\n\r", " ");
 
             QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
-            List<LayoutToken> layoutTokens = analyzer.tokenizeWithLayoutTokenByCharacter(text);
+            List<LayoutToken> layoutTokens = analyzer.tokenizeWithLayoutToken(text);
 
             String ress = addFeatures(layoutTokens);
             String res;
@@ -287,9 +289,14 @@ public class ValueParser extends AbstractParser {
                 valueBlock.getExp().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(E)");
             } else if (clusterLabel.equals(VALUE_VALUE_TIME)) {
-                valueBlock.setTime(trimmedClusterContent);
-                valueBlock.getTime().setOffsets(offsets);
-                LOGGER.debug(clusterContent + "(T)");
+                if (StringUtils.length(trimmedClusterContent) < 2 && previous != null) {
+                    appendToPrevious(valueBlock, trimmedClusterContent, previous);
+                    LOGGER.debug(clusterContent + "appended to previous");
+                } else {
+                    valueBlock.setTime(trimmedClusterContent);
+                    valueBlock.getTime().setOffsets(offsets);
+                    LOGGER.debug(clusterContent + "(T)");
+                }
             } else if (clusterLabel.equals(VALUE_VALUE_ALPHA)) {
                 if (isNumeric(trimmedClusterContent)) {
                     valueBlock.setNumber(valueBlock.getNumberAsString() + trimmedClusterContent);
@@ -300,9 +307,14 @@ public class ValueParser extends AbstractParser {
                     }
                     LOGGER.debug(clusterContent + "(fake A) -> (N)");
                 } else {
-                    valueBlock.setAlpha(trimmedClusterContent);
-                    valueBlock.getAlpha().setOffsets(offsets);
-                    LOGGER.debug(clusterContent + "(A)");
+                    if (valueBlock.getAlpha() != null) {
+                        valueBlock.getAlpha().setValue(valueBlock.getAlphaAsString() + trimmedClusterContent);
+                        valueBlock.getAlpha().setOffsets(new OffsetPosition(valueBlock.getAlpha().getOffsets().start, offsets.end));
+                    } else {
+                        valueBlock.setAlpha(trimmedClusterContent);
+                        valueBlock.getAlpha().setOffsets(offsets);
+                        LOGGER.debug(clusterContent + "(A)");
+                    }
                 }
             }
             previous = clusterLabel;

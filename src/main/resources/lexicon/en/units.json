@@ -2521,6 +2521,158 @@
           "inflection": "sedimentation rates"
         }
       ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "J K^-1 m^-3"
+        },
+        {
+          "raw": "J/K*m-3"
+        },
+        {
+          "raw": "J/(K*m^3)"
+        },
+        {
+          "raw": "J/(K*m³)"
+        }
+      ],
+      "type": "VOLUMETRIC_HEAT_CAPACITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "volumetric heat capacity"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "J m^-3"
+        },
+        {
+          "raw": "J*m^-3"
+        },
+        {
+          "raw": "J/m^3"
+        },
+        {
+          "raw": "J/m³"
+        }
+      ],
+      "type": "MAXIMUM_ENERGY_PRODUCT",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "maximum energy product",
+          "inflection": "Maximum energy products"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "at. %"
+        },
+        {
+          "raw": "at %"
+        },
+        {
+          "raw": "at%"
+        },
+        {
+          "raw": "at.%"
+        }
+      ],
+      "type": "ATOMIC_RATIO",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "atomic ratio"
+        },
+        {
+          "lemma": "atomic percentage"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "J K^-1 m^-3"
+        },
+        {
+          "raw": "J/K*m-3"
+        },
+        {
+          "raw": "J/(K*m^3)"
+        },
+        {
+          "raw": "J/(K*m³)"
+        }
+      ],
+      "type": "VOLUMETRIC_HEAT_CAPACITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "volumetric heat capacity"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "J m^-3"
+        },
+        {
+          "raw": "J*m^-3"
+        },
+        {
+          "raw": "J/m^3"
+        },
+        {
+          "raw": "J/m³"
+        }
+      ],
+      "type": "MAXIMUM_ENERGY_PRODUCT",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "maximum energy product",
+          "inflection": "Maximum energy products"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "at. %"
+        },
+        {
+          "raw": "at %"
+        },
+        {
+          "raw": "at%"
+        },
+        {
+          "raw": "at.%"
+        }
+      ],
+      "type": "ATOMIC_RATIO",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "atomic ratio"
+        },
+        {
+          "lemma": "atomic percentage"
+        }
+      ]
     }
   ]
 }

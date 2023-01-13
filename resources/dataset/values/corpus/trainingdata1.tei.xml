@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <values>
     <value><number>2</number> x <base>10</base> <pow>3</pow></value>
+    <value><number>2</number> × <base>10</base> <pow>3</pow></value>
 <!--    <value><number>0.2</number> E <exp>-3</exp></value>-->
 <!--    <value><number>0.002</number>e<exp>-30</exp></value>-->
     <value><number>0.002</number></value>
     <value><number>2</number></value>
-    <value><alhpa>twentytwo</alhpa></value>
+    <value><alpha>twentytwo</alpha></value>
     <value><alpha>twenty-two</alpha></value>
     <value><base>10</base><pow>-1</pow></value>
 <!--    <value>e<exp>-1</exp></value>-->

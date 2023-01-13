@@ -6,41 +6,51 @@ Annotation guidelines
 The first step of the annotation process is to generate training data from unlabeled documents based on the current models.
 The procedure is explained in details in :ref:`training_data`. GROBID will create the training data corresponding to these documents in the right TEI format and with pre-annotations.
 The annotation work then consists of manually checking the produced annotations and adding the missing ones.
-**It is very important not to modify the text content in these generated files, not adding spaces or other characters, but only adding or moving XML tags.**
 
-When the training data has been manually corrected, move the file under the repository ``resouces/dataset/${model}/corpus/`` for retraining, or under ``resouces/dataset/${model}/evaluation/`` is the annotated data should be used for evalutation only.
+.. warning:: It is very important not to modify the text content in these generated files, not adding spaces or other characters, but only adding or moving XML tags.
+
+When the training data has been manually corrected, move the file under the repository ``resouces/dataset/${model}/corpus/`` for retraining, or under ``resouces/dataset/${model}/evaluation/`` if the annotated data should be used for evaluation only.
 To see the different evaluation options, see GROBID documentation on `training and evaluating <http://grobid.readthedocs.org/en/latest/Training-the-models-of-Grobid>`_.
 
-**NOTE**: the exact directory where the data is picked up could be also a ``final`` under ``corpus``. Please check the description under each model definition, below.
+.. note:: the exact directory where the data is picked up could be also a ``final`` under ``corpus``. Please check the description under each model definition, below.
 
 
 In this document we describe the annotation guidelines for the following models:
- - :ref:`Quantities CRF model` - STABLE
- - :ref:`Units CRF model` - STABLE
- - :ref:`Values CRF model` - STABLE
- - :ref:`Quantified objects CRF model` / substance CRF model - WIP
+ - :ref:`Quantities model` - STABLE
+ - :ref:`Units model` - STABLE
+ - :ref:`Values model` - STABLE
+ - :ref:`Quantified objects CRF model` / substance CRF model - **Work in progress**
 
 
 .. _Quantities CRF model:
 
-Quantities CRF model
+Quantities model
 --------------------
-The Quantities CRF models is the first model of the chain and segment text into units and values.
-This model pick up the training data from ``resouces/dataset/${model}/corpus/final``.
+The Quantities model is the first model of the chain and segment text into units and values.
+This model pick up the training data from ``resouces/dataset/${model}/corpus``.
 
-Currently it supports three types of measurements: single value (or *atomic* value), continuous values in intervals (or range of values) or lists of discrete values.
-At the present time we do not distinguish between conjunctive and disjunctive lists.
+Currently it supports three types of measurements:
+ - single value (or *atomic* value),
+ - continuous values in intervals (or range of values),
+ - lists of discrete values.
+
+.. note:: At the present time we do not distinguish between conjunctive and disjunctive lists.
 
 Unit type vocabulary
 ~~~~~~~~~~~~~~~~~~~~
 
-The list of unit types (temperature, pressure, length, etc.) is controlled and based on SI definition. This controlled vocabulary contains currently 50 types.
-The unit types are given in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java```. They are used to get the right transformation.
+The list of unit types (temperature, pressure, length, etc.) is controlled and based on SI definition.
+This controlled vocabulary contains currently around 50 types.
+The unit types are provided in the file ```src/main/java/org/grobid/core/utilities/UnitUtilities.java``` and they are used to get the right transformation.
+
+.. note:: at the moment we do not support disambiguation of overlapping units.
+
 The given names of the unit types has to be used when annotating measurement. 
 
-In the future, the list of units should however not be controlled and GROBID should support units never seen before.
+.. note:: In the future, the list of units should however not be controlled and GROBID should support units never seen before. For now it is admitted to annotate with ``UNKNOWN`` in case of doubt about the type.
 
-For now it is admitted to annotate with ``UNKNOWN`` in case of doubt about the type. Examples:
+
+Examples:
 
 • ``m^2/kg`` (`specific surface area <https://en.wikipedia.org/wiki/Specific_surface_area>`_)
 
@@ -106,7 +116,7 @@ Intervals
 An interval introduces a range of values. We can distinguish two kinds of interval expressions:
 
 1. Bounded value
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 Interval defined by a lower bound value and an upper bound value:
 
@@ -133,7 +143,7 @@ Note that an interval can be introduced by only one boundary value:
 
 
 2. Base and differential value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Take the example
 
 .. code-block:: xml
@@ -276,7 +286,7 @@ The encoding is then straightforward for atomic values (with attribute ``@when``
 
 
 Time tag (and difference with Date tag)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 • if only the part of a date is expressed (for example the time of a day), but we can infer the date, a complete date is implicit and the context can make it being fully quantified.
 For example ``20:10 UTC`` will be annotated:
@@ -685,7 +695,7 @@ can be annotated as:
 
 The quantified object is identified by its ID  and linked to the measure via the attribute `ptr="#ID"`.
 
-*NOTE* This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities are not supported.
+.. note:: This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities are not supported.
 
 
 *How to annotate?*

@@ -36,7 +36,7 @@ public class FeaturesVectorQuantitiesTest {
         expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
         expect(featureFactoryMock.test_first_capital(word)).andReturn(true);
         expect(featureFactoryMock.test_number(word)).andReturn(false);
-        expect(FeatureFactory.test_digit(word)).andReturn(false);
+        expect(featureFactoryMock.test_digit(word)).andReturn(false);
         replay(FeatureFactory.class, featureFactoryMock);
 
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
@@ -55,7 +55,7 @@ public class FeaturesVectorQuantitiesTest {
         expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
         expect(featureFactoryMock.test_first_capital(word)).andReturn(true);
         expect(featureFactoryMock.test_number(word)).andReturn(false);
-        expect(FeatureFactory.test_digit(word)).andReturn(false);
+        expect(featureFactoryMock.test_digit(word)).andReturn(false);
         replay(FeatureFactory.class, featureFactoryMock);
 
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
@@ -74,7 +74,7 @@ public class FeaturesVectorQuantitiesTest {
         expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
         expect(featureFactoryMock.test_first_capital(word)).andReturn(false);
         expect(featureFactoryMock.test_number(word)).andReturn(false);
-        expect(FeatureFactory.test_digit(word)).andReturn(false);
+        expect(featureFactoryMock.test_digit(word)).andReturn(false);
         replay(FeatureFactory.class, featureFactoryMock);
 
         FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);

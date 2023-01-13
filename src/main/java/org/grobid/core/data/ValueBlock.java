@@ -215,19 +215,23 @@ public class ValueBlock {
         json.append("\"type\" : \"" + getType() + "\"");
         if (!started) {
             started = true;
-        } else
+        } else {
             json.append(", ");
+        }
 
-
-        byte[] encodedRawName = encoder.quoteAsUTF8(toString());
-        String outputRawName = new String(encodedRawName);
-        if (!started) {
-            started = true;
-        } else
-            json.append(", ");
-        json.append("\"formatted\" : \"" + outputRawName + "\"");
+        if (getType() != Type.UNKNOWN) {
+            byte[] encodedRawName = encoder.quoteAsUTF8(toString());
+            String outputRawName = new String(encodedRawName);
+            if (!started) {
+                started = true;
+            } else {
+                json.append(", ");
+            }
+            json.append("\"formatted\" : \"" + outputRawName + "\"");
+        }
 
         json.append(" }");
+
         return json.toString();
     }
 

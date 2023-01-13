@@ -148,7 +148,7 @@ public class QuantityNormalizer {
                 unit = formatService.parse(parsedUnit.getRawName());
                 break;
             } catch (Throwable e) {
-                LOGGER.warn("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), e);
+                LOGGER.debug("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), e);
             }
         }
 
@@ -165,19 +165,18 @@ public class QuantityNormalizer {
                         //handling 1/{unit}, processing just the unit
                         if (StringUtils.equalsAnyIgnoreCase(block.getPow(), "-1", "−1")) {
                             String onlyUnit = block.getPrefix() + block.getBase();
-                            javax.measure.Unit<?> onlyUnitParsed = null;
                             try {
-                                onlyUnitParsed = formatService.parse(onlyUnit);
+                                javax.measure.Unit<?> onlyUnitParsed = formatService.parse(onlyUnit);
+                                unitList.add(onlyUnitParsed.pow(-1));
                             } catch (Throwable e2) {
                                 LOGGER.warn("Trying excluding the negative power. Cannot parse " + onlyUnit + " with " + formatService.getClass().getName(), e2);
                             }
-                            unitList.add(onlyUnitParsed.pow(-1));
                             break;
                         }
 
-                        LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), e);
+                        LOGGER.debug("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), e);
                     } catch (Throwable t) {
-                        LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), t);
+                        LOGGER.debug("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), t);
                     }
                 }
             }

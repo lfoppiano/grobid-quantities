@@ -34,6 +34,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
@@ -54,6 +55,8 @@ public class QuantityParser extends AbstractParser {
     private QuantityNormalizer quantityNormalizer;
     //    private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
+
+    public static Pattern MINUS_SIGN_REGEX= Pattern.compile("\u2212");
 
     public static QuantityParser getInstance(boolean disableSubstance) {
         if (instance == null) {
@@ -115,6 +118,7 @@ public class QuantityParser extends AbstractParser {
         //Normalisation
         List<LayoutToken> layoutTokenNormalised = tokens.stream().map(layoutToken -> {
                     layoutToken.setText(UnicodeUtil.normaliseText(layoutToken.getText()));
+                    layoutToken.setText(MINUS_SIGN_REGEX.matcher(layoutToken.getText()).replaceAll("-"));
 
                     return layoutToken;
                 }
@@ -207,7 +211,7 @@ public class QuantityParser extends AbstractParser {
             LOGGER.error("fail to tokenize:, " + text, e);
         }
 
-        if ((tokens == null) || (tokens.size() == 0)) {
+        if (CollectionUtils.isEmpty(tokens)) {
             return null;
         }
         return process(tokens);

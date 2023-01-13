@@ -137,6 +137,8 @@ public class QuantityLexicon {
                 }
                 if (unitDefinition.isSupportsPrefixes()) {
                     expandAndAdd(unitDefinition, rawNotation);
+                } else {
+                    unitDefinition.addNotation(rawNotation);
                 }
             }
         }

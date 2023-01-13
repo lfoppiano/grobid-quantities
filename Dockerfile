@@ -7,7 +7,7 @@
 ## docker build -t lfoppiano/grobid-quantities:0.7.0 --build-arg GROBID_VERSION=0.7.0 --file Dockerfile .
 
 ## no GPU:
-## docker run -t --rm --init -p 8072:8072 -p 8073:8073 -v config.yml:/opt/grobid/grobid-quantities:ro  lfoppiano/grobid-quantities:0.7.0
+## docker run -t --rm --init -p 8060:8060 -p 8061:8061 -v config.yml:/opt/grobid/grobid-quantities:ro  lfoppiano/grobid-quantities:0.7.1
 
 ## allocate all available GPUs (only Linux with proper nvidia driver installed on host machine):
 ## docker run --rm --gpus all --init -p 8072:8072 -p 8073:8073 -v grobid.yaml:/opt/grobid/grobid-home/config/grobid.yaml:ro  lfoppiano/grobid-superconductors:0.3.0-SNAPSHOT
@@ -16,18 +16,18 @@
 # build builder image
 # -------------------
 
-FROM openjdk:8u275-jdk as builder
+FROM openjdk:8u342-jdk as builder
 
 USER root
 
 RUN apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git
 
-RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.0
 WORKDIR /opt/grobid-source
-COPY gradle.properties .
 
-RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities && git checkout 0.7.0
+RUN git clone --depth 1 --branch master https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
+    cd grobid-quantities
+
 WORKDIR /opt/grobid-source/grobid-quantities
 COPY gradle.properties .
 
@@ -35,13 +35,10 @@ COPY gradle.properties .
 RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
 
 # Preparing models
-RUN rm -rf /opt/grobid-source/grobid-home/models/*
-
 WORKDIR /opt/grobid-source/grobid-quantities
-RUN ./gradlew clean assemble --no-daemon  --info --stacktrace
-#RUN ./gradlew installScibert --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
-RUN ./gradlew copyModels --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.tar.gz
-
+RUN rm -rf /opt/grobid-source/grobid-home/models/*
+RUN ./gradlew clean assemble --no-daemon  --stacktrace --info
+RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
 
 WORKDIR /opt
 
@@ -49,17 +46,13 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM grobid/grobid:0.7.0
+FROM grobid/grobid:0.7.2 as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
 
-# install JRE 8, python and other dependencies
 RUN apt-get update && \
     apt-get -y --no-install-recommends install git wget
-#    apt-get -y remove python3.6 && \
-#    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata && \
-#    apt-get -y --no-install-recommends install git python3.7 python3.7-venv python3.7-dev python3.7-distutil
 
 WORKDIR /opt/grobid
 
@@ -67,31 +60,26 @@ RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp/models /opt/grobid
 COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
 COPY --from=builder /opt/grobid-source/grobid-quantities/build/libs/* ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config.yml ./grobid-quantities/
-COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/config/* ./grobid-quantities/resources/clearnlp/config
 COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
-# Install requirements
-WORKDIR /opt/grobid/grobid-quantities
-
-RUN sed -i 's/pythonVirtualEnv:.*/pythonVirtualEnv: /g' config.yml
-RUN sed -i 's/grobidHome:.*/grobidHome: ..\/grobid-home/g' config.yml
+RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
 # JProfiler
 #RUN wget https://download-gcdn.ej-technologies.com/jprofiler/jprofiler_linux_12_0_2.tar.gz -P /tmp/ && \
 #  tar -xzf /tmp/jprofiler_linux_12_0_2.tar.gz -C /usr/local &&\
 #  rm /tmp/jprofiler_linux_12_0_2.tar.gz
 
-EXPOSE 8060 8061
-#EXPOSE 8080 8081
-
-#CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-#CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "config.yml"]
 
 ARG GROBID_VERSION
+ENV GROBID_VERSION=${GROBID_VERSION:-unknown}
 
+EXPOSE 8060 8061 5005
+
+#CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
+#CMD ["sh", "-c", "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005 -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
+CMD ["sh", "-c", "java -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
 
 LABEL \
     authors="Luca Foppiano, Patrice Lopez" \
