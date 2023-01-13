@@ -193,6 +193,9 @@ public class UnitBlock {
         }
 
         if (fraction) {
+//            if (denominator.toString().contains("·")) {
+//                denominator = new StringBuilder("(").append(denominator).append(")");
+//            }
             return numerator.append("/").append(denominator).toString();
         } else {
             return numerator.toString();

@@ -513,7 +513,7 @@
     {
       "notations": [
         {
-          "raw": "a"
+          "raw": "yr"
         }
       ],
       "type": "TIME",
@@ -2407,6 +2407,23 @@
           ]
         },
         {
+          "raw": "g/(m^2*yr)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
           "raw": "kg/(m2*yr)",
           "product": [
             {
@@ -2422,6 +2439,8 @@
               "pow": "-1"
             }
           ]
+        },{
+          "raw": "kg/m2·yr"
         },
         {
           "raw": "kg/m2/yr",
@@ -2460,7 +2479,7 @@
       ],
       "type": "MASS_ACCUMULATION_RATE",
       "system": "SI_DERIVED",
-      "supportsPrefixes": true,
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "mass accumulation rate",
@@ -2514,87 +2533,11 @@
       ],
       "type": "SEDIMENTATION_RATE",
       "system": "SI_DERIVED",
-      "supportsPrefixes": true,
+      "supportsPrefixes": false,
       "names": [
         {
           "lemma": "sedimentation rate",
           "inflection": "sedimentation rates"
-        }
-      ]
-    },
-    {
-      "notations": [
-        {
-          "raw": "J K^-1 m^-3"
-        },
-        {
-          "raw": "J/K*m-3"
-        },
-        {
-          "raw": "J/(K*m^3)"
-        },
-        {
-          "raw": "J/(K*m³)"
-        }
-      ],
-      "type": "VOLUMETRIC_HEAT_CAPACITY",
-      "system": "SI_DERIVED",
-      "supportsPrefixes": false,
-      "names": [
-        {
-          "lemma": "volumetric heat capacity"
-        }
-      ]
-    },
-    {
-      "notations": [
-        {
-          "raw": "J m^-3"
-        },
-        {
-          "raw": "J*m^-3"
-        },
-        {
-          "raw": "J/m^3"
-        },
-        {
-          "raw": "J/m³"
-        }
-      ],
-      "type": "MAXIMUM_ENERGY_PRODUCT",
-      "system": "SI_DERIVED",
-      "supportsPrefixes": false,
-      "names": [
-        {
-          "lemma": "maximum energy product",
-          "inflection": "Maximum energy products"
-        }
-      ]
-    },
-    {
-      "notations": [
-        {
-          "raw": "at. %"
-        },
-        {
-          "raw": "at %"
-        },
-        {
-          "raw": "at%"
-        },
-        {
-          "raw": "at.%"
-        }
-      ],
-      "type": "ATOMIC_RATIO",
-      "system": "NON_SI",
-      "supportsPrefixes": false,
-      "names": [
-        {
-          "lemma": "atomic ratio"
-        },
-        {
-          "lemma": "atomic percentage"
         }
       ]
     },

@@ -103,8 +103,7 @@ public class UnitUtilities {
         MAXIMUM_ENERGY_PRODUCT("maximum energy product"),
         ATOMIC_RATIO("atomic ratio"),
         MASS_ACCUMULATION_RATE("mass accumulation rate"),
-        SEDIMENTATION_RATE("sedimentation rate"),
-        PACE("pace");
+        SEDIMENTATION_RATE("sedimentation rate");
 
         private String name;
 
