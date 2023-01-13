@@ -2392,6 +2392,33 @@
           "inflection": "Maximum energy products"
         }
       ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "at. %"
+        },
+        {
+          "raw": "at %"
+        },
+        {
+          "raw": "at%"
+        },
+        {
+          "raw": "at.%"
+        }
+      ],
+      "type": "ATOMIC_RATIO",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "atomic ratio"
+        },
+        {
+          "lemma": "atomic percentage"
+        }
+      ]
     }
   ]
 }

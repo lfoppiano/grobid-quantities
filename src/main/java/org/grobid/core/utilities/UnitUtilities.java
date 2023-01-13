@@ -100,7 +100,8 @@ public class UnitUtilities {
         MAGNETIC_MOMENT("magnetic moment"),
         ATOM_MASS_UNIT("atom mass unit"),
         PACE("pace"),
-        MAXIMUM_ENERGY_PRODUCT("maximum energy product");
+        MAXIMUM_ENERGY_PRODUCT("maximum energy product"),
+        ATOMIC_RATIO("atomic ratio");
 
         private String name;
 
