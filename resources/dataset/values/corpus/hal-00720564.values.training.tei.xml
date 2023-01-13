@@ -1,4 +1,5 @@
-<values xmlns="http://www.tei-c.org/ns/1.0"><value><time>1984</time></value>
+<values xmlns="http://www.tei-c.org/ns/1.0">
+<!--    <value><time>1984</time></value>-->
 	<value><alpha>three</alpha></value>
 	<value><number>25</number></value>
 	<value><number>50</number></value>
@@ -140,7 +141,7 @@
 	<value><number>16</number></value>
 	<value><number>82</number></value>
 	<value><number>20</number></value>
-	<value><time>2000</time></value>
+<!-- 	<value><time>2000</time></value>-->
 	<value><number>90</number></value>
 	<value><number>95</number></value>
 	<value><number>6.5</number></value>

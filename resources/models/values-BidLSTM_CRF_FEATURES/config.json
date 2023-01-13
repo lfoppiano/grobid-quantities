@@ -2,7 +2,7 @@
     "model_name": "values-BidLSTM_CRF_FEATURES",
     "architecture": "BidLSTM_CRF_FEATURES",
     "embeddings_name": "glove-840B",
-    "char_vocab_size": 68,
+    "char_vocab_size": 57,
     "case_vocab_size": 8,
     "char_embedding_size": 25,
     "num_char_lstm_units": 25,
@@ -42,8 +42,7 @@
             "HYPHEN": 27,
             "NOPUNCT": 28,
             "OPENBRACKET": 29,
-            "QUOTE": 30,
-            "SLASH": 31
+            "SLASH": 30
         }
     }
 }

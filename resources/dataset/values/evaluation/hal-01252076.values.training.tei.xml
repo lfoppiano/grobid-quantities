@@ -1,6 +1,6 @@
 <values xmlns="http://www.tei-c.org/ns/1.0">
     <value><number>120</number></value>
-	<value><time>1999</time></value>
+<!-- 	<value><time>1999</time></value>-->
 	<!--<value><time>2007</time><number>. 12</number></value>-->
 	<value><alpha>three</alpha></value>
 	<value><number>77</number></value>

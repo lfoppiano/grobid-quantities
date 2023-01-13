@@ -2,7 +2,7 @@
     "model_name": "values-BERT_CRF",
     "architecture": "BERT_CRF",
     "embeddings_name": null,
-    "char_vocab_size": 68,
+    "char_vocab_size": 57,
     "case_vocab_size": 8,
     "char_embedding_size": 25,
     "num_char_lstm_units": 25,
@@ -29,12 +29,10 @@
         "B-<base>": 2,
         "B-<number>": 3,
         "B-<pow>": 4,
-        "B-<time>": 5,
-        "I-<alpha>": 6,
-        "I-<base>": 7,
-        "I-<number>": 8,
-        "I-<pow>": 9,
-        "I-<time>": 10,
-        "O": 11
+        "I-<alpha>": 5,
+        "I-<base>": 6,
+        "I-<number>": 7,
+        "I-<pow>": 8,
+        "O": 9
     }
 }
