@@ -78,6 +78,7 @@ public class UnitUtilities {
         THERMAL_CONDUCTIVITY("thermal conductivity"),
         THERMAL_DIFFUSIVITY("thermal diffusivity"),
         HEAT_CAPACITY("specific heat capacity"),
+        VOLUMETRIC_HEAT_CAPACITY("volumetric heat capacity"),
         EMISSION_RATE("emission rate"),
         CATALYTIC_ACTIVITY("catalytic activity"),
         RADIANCE("radiance"),
@@ -98,7 +99,8 @@ public class UnitUtilities {
         DIFFUSION_FLUX("diffusion flux"),
         MAGNETIC_MOMENT("magnetic moment"),
         ATOM_MASS_UNIT("atom mass unit"),
-        PACE("pace");
+        PACE("pace"),
+        MAXIMUM_ENERGY_PRODUCT("maximum energy product");
 
         private String name;
 

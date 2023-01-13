@@ -187,13 +187,13 @@ public class UnitBlock {
                         firstNumerator = false;
                     }
 
-                    numerator.append(ub.toString());
+                    numerator.append(ub);
                 }
             }
         }
 
         if (fraction) {
-            return numerator.append("/").append(denominator.toString()).toString();
+            return numerator.append("/").append(denominator).toString();
         } else {
             return numerator.toString();
         }
