@@ -52,6 +52,7 @@ public class UnitUtilities {
         ELECTRIC_CONDUCTANCE("electric conductance"),
         ELECTRIC_FIELD("electric field"),
         MAGNETIC_FLUX("magnetic flux"),
+        MAGNETIC_FLUX_DENSITY("magnetic flux density"),
         MAGNETIC_INDUCTION("magnetic induction"),
         MAGNETIC_FIELD_STRENGTH("magnetic field strength"),
         INDUCTANCE("inductance"),

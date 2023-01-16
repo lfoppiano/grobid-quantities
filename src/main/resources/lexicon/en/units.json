@@ -1112,6 +1112,24 @@
       "notations": [
         {
           "raw": "Wb"
+        },
+        {
+          "raw": "Vs"
+        },
+        {
+          "raw": "V*s"
+        },
+        {
+          "raw": "V•s"
+        },
+        {
+          "raw": "T*s^2"
+        },
+        {
+          "raw": "T•s^2"
+        },
+        {
+          "raw": "T•s"
         }
       ],
       "type": "MAGNETIC_FLUX",
@@ -1123,6 +1141,32 @@
           "inflections": [
             "webers"
           ]
+        },
+        {
+          "lemma": "Volt per second",
+          "inflections": [
+            "Volt per seconds",
+            "Volts per second",
+            "Volts per seconds"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "G"
+        },
+        {
+          "raw": "Gs"
+        }
+      ],
+      "type": "MAGNETIC_FLUX_DENSITY",
+      "system": "CGS",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "Gauss"
         }
       ]
     },
@@ -2267,6 +2311,24 @@
     {
       "notations": [
         {
+          "raw": "MGOe"
+        }
+      ],
+      "type": "MAXIMUM_ENERGY_PRODUCT",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "mega-gauss-oersted"
+        },
+        {
+          "lemma": "Mega Gauss Oersted"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "dyn"
         }
       ],
@@ -2357,6 +2419,15 @@
         },
         {
           "raw": "J/(K*m³)"
+        },
+        {
+          "raw": "J/K•m-3"
+        },
+        {
+          "raw": "J/(K•m^3)"
+        },
+        {
+          "raw": "J/(K•m³)"
         }
       ],
       "type": "VOLUMETRIC_HEAT_CAPACITY",
@@ -2375,6 +2446,9 @@
         },
         {
           "raw": "J*m^-3"
+        },
+        {
+          "raw": "J•m^-3"
         },
         {
           "raw": "J/m^3"
