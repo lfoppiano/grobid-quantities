@@ -36,6 +36,11 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
             String text = LayoutTokensUtil.toText(tokens);
             TextParser textParser = TextParser.getInstance();
             List<Sentence> parsedSentences = textParser.parseText(text);
+            int firstTokenOffsetStart = tokens.get(0).getOffset();
+            parsedSentences.stream().forEach( s -> {
+                s.getOffset().start = s.getOffsetStart() + firstTokenOffsetStart;
+                s.getOffset().end = s.getOffsetEnd() + firstTokenOffsetStart;
+            });
             int indexMeasurement = 0;
             int offset = 0;
 
@@ -48,8 +53,8 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                 while (indexMeasurement < measurements.size()) {
                     Measurement measurement = measurements.get(indexMeasurement);
                     int position = -1;
+
                     // is the measurement quantities in the current sentence?
-                    UnitUtilities.Measurement_Type type = measurement.getType();
                     if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
                         Quantity quantity = measurement.getQuantityAtomic();
                         if (quantity.getOffsetStart() > processedSentence.getOffsetEnd()) {

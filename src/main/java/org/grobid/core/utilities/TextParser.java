@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  * @author Patrice Lopez
  */
 public class TextParser {
-    private static final Logger logger = LoggerFactory.getLogger(TextParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TextParser.class);
 
     public final String language = AbstractReader.LANG_EN;
 
@@ -69,7 +69,7 @@ public class TextParser {
     }
 
     private static synchronized void getNewInstance() throws Exception {
-        logger.debug("Get new instance of TextParser");
+        LOGGER.debug("Get new instance of TextParser");
         instance = new TextParser();
     }
 
@@ -172,8 +172,7 @@ public class TextParser {
         if (text == null) {
             throw new GrobidException("Cannot parse the sentence, because it is null.");
         } else if (text.length() == 0) {
-            System.out.println("The length of the text to be parsed is 0.");
-            logger.error("The length of the text to be parsed is 0.");
+            LOGGER.error("The length of the text to be parsed is 0.");
             return null;
         }
 
