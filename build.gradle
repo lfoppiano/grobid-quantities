@@ -91,7 +91,7 @@ dependencies {
     // measurements
 
     // (1) UOM 2.x
-    implementation 'tech.units:indriya:2.1.2'
+    implementation 'tech.units:indriya:2.1.3'
     implementation group: 'si.uom', name: 'si-units', version: '2.1'
     implementation group: 'si.uom', name: 'si-quantity', version: '2.1'
     implementation group: 'systems.uom', name: 'systems-quantity', version: '2.1'
