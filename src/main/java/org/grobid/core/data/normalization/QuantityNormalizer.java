@@ -117,20 +117,22 @@ public class QuantityNormalizer {
         List<UnitFormat> parsers = new ArrayList<>();
 
         if (parsedUnit.getUnitDefinition() == null) {
-            parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(UNICODE_PROVIDER), unitFormats.get(SESHAT_PROVIDER));
+            parsers.add(unitFormats.get(UCUM_PROVIDER));
+            parsers.add(unitFormats.get(UNICODE_PROVIDER));
         } else {
             if (!parsedUnit.getUnitDefinition().isSkipNormalisation()) {
                 if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) {
-
                     //I normalize SI units
-                    parsers = Arrays.asList(unitFormats.get(SI_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER));
+                    parsers.add(unitFormats.get(SI_PROVIDER));
+                    parsers.add(unitFormats.get(UOM_DEFAULT_PROVIDER));
                 } else if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED) {
-
                     //I normalize SI derived units
-                    parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER), unitFormats.get(UNICODE_PROVIDER));
-
+                    parsers.add(unitFormats.get(UCUM_PROVIDER));
+                    parsers.add(unitFormats.get(UOM_DEFAULT_PROVIDER));
+                    parsers.add(unitFormats.get(UNICODE_PROVIDER));
                 } else {
-                    parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(COMMON_PROVIDER));
+                    parsers.add(unitFormats.get(UCUM_PROVIDER));
+                    parsers.add(unitFormats.get(COMMON_PROVIDER));
                 }
             }
         }
