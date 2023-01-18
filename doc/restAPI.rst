@@ -374,8 +374,9 @@ The version and the last git revision are available at the following URL
 
   GET http://yourhost:8060/service/version
 
-as
+and the result is as follow:
 ::
+
    {
     "version":"0.7.2-SNAPSHOT",
     "revision":"0.7.1-29-g26a151b.dirty"
