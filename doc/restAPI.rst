@@ -366,6 +366,24 @@ You can check whether the service is up and running by opening the following URL
 - GET ``http://yourhost:8060/service/isalive`` will return true/false whether the service is up and running
 
 
+Version
+~~~~~~~
+
+The version and the last git revision are available at the following URL
+::
+
+  GET http://yourhost:8060/service/version
+
+as
+::
+   {
+    "version":"0.7.2-SNAPSHOT",
+    "revision":"0.7.1-29-g26a151b.dirty"
+   }
+
+The version is 0.7.2-SNAPSHOT and the revision `g26a151b` allow to know what is the last commit
+
+
 Maximum parallel requests limit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
