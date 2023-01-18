@@ -19,6 +19,7 @@ plugins {
     id 'com.github.kt3k.coveralls' version '2.12.0'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
     id "de.undercouch.download" version "4.1.1"
+    id 'com.palantir.git-version' version '0.12.3'
 //    id 'net.researchgate.release' version '3.0.1'
 }
 
@@ -201,6 +202,13 @@ processResources {
 // return the default value if the property has not been specified in command line
 ext.getArg = { propName, defaultVal ->
     return project.hasProperty(propName) ? project.getProperty(propName) : defaultVal;
+}
+
+processResources {
+    filesMatching(["version.txt", "revision.txt"]) {
+        expand(project_version: project.property('version'),
+            project_revision: gitVersion())
+    }
 }
 
 /*** Packaging and distribution ***/
