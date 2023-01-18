@@ -87,7 +87,9 @@ public class QuantityNormalizer {
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         normalizedQuantity.setRawValue(quantity.getRawValue());
-        normalizedQuantity.setUnit(new Unit(unit.getSystemUnit().toString()));
+        if (StringUtils.isNotBlank(unit.getSystemUnit().getSymbol())) {
+            normalizedQuantity.setUnit(new Unit(unit.getSystemUnit().toString()));
+        }
         try {
             if (quantity.getParsedValue() != null) {
                 BigDecimal converted = new BigDecimal(unit.getConverterTo(unit.getSystemUnit()).convert(quantity.getParsedValue().getNumeric()).toString());

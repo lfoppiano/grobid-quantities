@@ -1558,7 +1558,7 @@
     {
       "notations": [
         {
-          "raw": "Bar"
+          "raw": "bar"
         }
       ],
       "type": "PRESSURE",
