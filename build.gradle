@@ -20,7 +20,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.0.0'
     id "de.undercouch.download" version "4.1.1"
     id 'com.palantir.git-version' version '0.12.3'
-    id 'net.researchgate.release' version '3.0.2'
+//    id 'net.researchgate.release' version '3.0.2'
 }
 
 group = "org.grobid"
@@ -299,16 +299,16 @@ coveralls {
     jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
 }
 
-release {
-    failOnUpdateNeeded = false
-    failOnUnversionedFiles = false
-    failOnCommitNeeded = false
-
-    git {
-        requireBranch.set('master')
-//        pushToRemote = ""
-    }
-}
+//release {
+//    failOnUpdateNeeded = false
+//    failOnUnversionedFiles = false
+//    failOnCommitNeeded = false
+//
+//    git {
+//        requireBranch.set('master')
+////        pushToRemote = ""
+//    }
+//}
 
 
 
