@@ -25,7 +25,7 @@ RUN apt-get update && \
 
 WORKDIR /opt/grobid-source
 
-RUN git clone --depth 1 --branch 0.7.2-fixes https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
+RUN git clone --depth 1 --branch master https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
     cd grobid-quantities
 
 WORKDIR /opt/grobid-source/grobid-quantities
