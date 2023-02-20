@@ -14,10 +14,16 @@ var grobid = (function ($) {
 
     function defineBaseURL(ext) {
         var baseUrl = null;
-        if ($(location).attr('href').indexOf("index.html") != -1)
-            baseUrl = $(location).attr('href').replace("index.html", ext);
-        else
-            baseUrl = $(location).attr('href') + ext;
+        let locaBase = $(location).attr('href');
+        if (locaBase.indexOf("index.html") != -1)
+            baseUrl = locaBase.replace("index.html", ext);
+        else if (localBase.indexOf("?") != -1) {
+            // remove possible uri parameters
+            baseUrl = localBase.substring(0,localBase.indexOf("?")) + ext;
+        } else {
+            baseUrl = locaBase + ext;
+        }
+        
         return baseUrl;
     }
 
