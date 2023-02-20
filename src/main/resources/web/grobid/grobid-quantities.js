@@ -17,9 +17,9 @@ var grobid = (function ($) {
         let locaBase = $(location).attr('href');
         if (locaBase.indexOf("index.html") != -1)
             baseUrl = locaBase.replace("index.html", ext);
-        else if (localBase.indexOf("?") != -1) {
+        else if (locaBase.indexOf("?") != -1) {
             // remove possible uri parameters
-            baseUrl = localBase.substring(0,localBase.indexOf("?")) + ext;
+            baseUrl = locaBase.substring(0,locaBase.indexOf("?")) + ext;
         } else {
             baseUrl = locaBase + ext;
         }
