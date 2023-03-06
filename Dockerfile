@@ -73,7 +73,9 @@ RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
 
 ARG GROBID_VERSION
-ENV GROBID_VERSION=${GROBID_VERSION:-unknown}
+ENV GROBID_VERSION=${GROBID_VERSION:-latest}
+
+RUN if [ ! -f "grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar" ]; then mv grobid-quantities/grobid-quantities-*-onejar.jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar; fi  
 
 EXPOSE 8060 8061 5005
 
