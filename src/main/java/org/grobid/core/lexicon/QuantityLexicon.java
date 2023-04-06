@@ -139,6 +139,8 @@ public class QuantityLexicon {
                     expandAndAdd(unitDefinition, rawNotation);
                 } else {
                     unitDefinition.addNotation(rawNotation);
+                    addToUnitTokens(rawNotation);
+                    unitPattern.loadTerm(rawNotation, QuantityAnalyzer.getInstance());
                 }
             }
         }
@@ -233,13 +235,14 @@ public class QuantityLexicon {
             // inflected -> name (e.g. meters -> m)
             inflection2name.put(inflectedForm, name);
 
+            if (unitDefinition.isSupportsPrefixes()) {
+                for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
+                    // complex unit inflected form -> name (kilometers -> km)
+                    inflection2name.put(prefix.getValue() + inflectedForm, prefix.getKey() + name);
 
-            for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
-                // complex unit inflected form -> name (kilometers -> km)
-                inflection2name.put(prefix.getValue() + inflectedForm, prefix.getKey() + name);
-
-                // (variation) complex unit inflected form -> name (e.g. kmeter -> km)
-                inflection2name.put(prefix.getKey() + inflectedForm, prefix.getKey() + name);
+                    // (variation) complex unit inflected form -> name (e.g. kmeter -> km)
+                    inflection2name.put(prefix.getKey() + inflectedForm, prefix.getKey() + name);
+                }
             }
 
 
