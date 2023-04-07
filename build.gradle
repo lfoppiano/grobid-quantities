@@ -274,7 +274,7 @@ task copyModels(type: Copy) {
 task downloadTransformers(dependsOn: copyModels) {
     doLast {
         download {
-            src "https://kdrive.infomaniak.com/2/app/104844/share/9a517eaa-5546-408e-8b9f-340cd11e209f/files/149872/download"
+            src "s3://transformers-data/quantities-transformers.zip"
             dest "${rootDir}/${grobidHome}/models/quantities-transformers.zip"
             overwrite false
             print "Download bulky transformers files under grobid-home: ${grobidHome}"
