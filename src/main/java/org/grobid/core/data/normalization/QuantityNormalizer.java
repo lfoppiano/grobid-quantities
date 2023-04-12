@@ -87,7 +87,7 @@ public class QuantityNormalizer {
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         normalizedQuantity.setRawValue(quantity.getRawValue());
-        if (StringUtils.isNotBlank(unit.getSystemUnit().getSymbol())) {
+        if (StringUtils.isNotBlank(unit.getSystemUnit().toString())) {
             normalizedQuantity.setUnit(new Unit(unit.getSystemUnit().toString()));
         }
         try {
@@ -99,7 +99,7 @@ public class QuantityNormalizer {
             }
         } catch (Exception e) {
             throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
-                    "or it is not recognized from the available parsers.", e);
+                "or it is not recognized from the available parsers.", e);
         }
         quantity.setNormalizedQuantity(normalizedQuantity);
 
@@ -107,12 +107,36 @@ public class QuantityNormalizer {
 
         if (quantity.isNormalized()) {
             UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
-            if (definition != null) {
+            if (definition == null) {
+                String normalisedUnit = quantity.getNormalizedQuantity().getUnit().getRawName();
+                String normalisedUnitWithoutSuperscripts = replaceSuperscripts(normalisedUnit);
+                Unit newUnit = new Unit(normalisedUnitWithoutSuperscripts);
+
+                definition = unitNormalizer.findDefinition(newUnit);
+                if (definition != null) {
+                    quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
+                }
+            } else {
                 quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
             }
         }
 
         return normalizedQuantity;
+    }
+
+    private String replaceSuperscripts(String normalisedUnit) {
+        String str = normalisedUnit.replaceAll("⁰", "0");
+        str = str.replaceAll("¹", "1");
+        str = str.replaceAll("²", "2");
+        str = str.replaceAll("³", "3");
+        str = str.replaceAll("⁴", "4");
+        str = str.replaceAll("⁵", "5");
+        str = str.replaceAll("⁶", "6");
+        str = str.replaceAll("⁷", "7");
+        str = str.replaceAll("⁸", "8");
+        str = str.replaceAll("⁹", "9");
+
+        return str;
     }
 
     protected javax.measure.Unit tryParsing(Unit parsedUnit) throws NormalizationException {
@@ -143,7 +167,7 @@ public class QuantityNormalizer {
 
         if (CollectionUtils.isEmpty(parsers)) {
             throw new NormalizationException("Cannot find a parser for " + parsedUnit.getRawName()
-                    + ". Please check the dependencies of UOM or make sure the unit you're trying ot parse is supported. ");
+                + ". Please check the dependencies of UOM or make sure the unit you're trying ot parse is supported. ");
         }
 
         javax.measure.Unit unit = null;
@@ -187,7 +211,7 @@ public class QuantityNormalizer {
 
             if (CollectionUtils.isEmpty(unitList) || unitList.size() != parsedUnit.getProductBlocks().size()) {
                 throw new NormalizationException("Cannot parse " + parsedUnit.getRawName() + " using "
-                        + Arrays.toString(parsers.toArray()));
+                    + Arrays.toString(parsers.toArray()));
             }
 
             javax.measure.Unit result = null;

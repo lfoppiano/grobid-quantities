@@ -1155,6 +1155,31 @@
     {
       "notations": [
         {
+          "raw": "Wb/m2"
+        },
+        {
+          "raw": "Wb/m^2"
+        },
+        {
+          "raw": "Wb/(m^2)"
+        }
+      ],
+      "type": "MAGNETIC_FLUX_DENSITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "Weber for square meter",
+          "inflections": [
+            "Weber for square meter",
+            "Webers for square meters"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "G"
         },
         {
@@ -1164,6 +1189,7 @@
       "type": "MAGNETIC_FLUX_DENSITY",
       "system": "CGS",
       "supportsPrefixes": true,
+      "skipNormalisation": false, 
       "names": [
         {
           "lemma": "Gauss"
