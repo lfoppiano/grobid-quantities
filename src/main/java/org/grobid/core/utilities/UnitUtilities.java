@@ -102,7 +102,10 @@ public class UnitUtilities {
         ATOM_MASS_UNIT("atom mass unit"),
         PACE("pace"),
         MAXIMUM_ENERGY_PRODUCT("maximum energy product"),
-        ATOMIC_RATIO("atomic ratio");
+        ATOMIC_RATIO("atomic ratio"),
+        WEIGHT_RATIO("weight ratio"),
+        MASS_ACCUMULATION_RATE("mass accumulation rate"),
+        SEDIMENTATION_RATE("sedimentation rate");;
 
         private String name;
 

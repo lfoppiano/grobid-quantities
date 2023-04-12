@@ -46,6 +46,40 @@
 .label.CONCENTRATION {
     background-color: #31B404;
 }
+.label.MASS_ACCUMULATION_RATE {
+    background-color: #21F434;
+}
+.label.SEDIMENTATION_RATE {
+    background-color: #48E122;
+}
+
+  .label.magnetic_induction {
+      background-color: #c43c3570;
+  }
+
+.label.magnetic_flux_density {
+  background-color: #c4ac3570;
+}
+
+.label.atomic_ratio {
+  background-color: rgba(53, 196, 196, 0.44);
+}
+
+.label.weight_ratio {
+  background-color: rgba(53, 136, 196, 0.44);
+}
+
+.label.maximum_energy_product {
+  background-color: rgba(255, 125, 85, 0.44)
+}
+
+.label.diffusion_flux {
+  background-color: rgba(208, 118, 90, 0.44)
+}
+
+.label.magnetic_moment {
+  background-color: rgba(179, 90, 208, 0.44)
+}
 
 .label.biology {
     background-color: #398739;
@@ -289,6 +323,26 @@ span {word-break:normal;}
     background-color: #31B404;
 }
 
+.info-sense-box.magnetic_induction {
+    background-color: #c43c35;
+}
+
+.info-sense-box.magnetic_flux_density {
+    background-color: #c4ac35;
+}
+
+.info-sense-box.atomic_ratio {
+    background-color: rgb(53, 196, 196);
+}
+
+.info-sense-box.weight_ratio {
+    background-color: rgb(53, 136, 196);
+}
+
+info-sense-box.maximum_energy_product {
+    background-color: rgb(255, 125, 85)
+}
+
 /* DOMAINS */
 .info-sense-box.biology {
     background-color: #398739;
@@ -343,6 +397,12 @@ span {word-break:normal;}
 }
 .info-sense-box.electronics {
     background-color: #01A9DB;
+}
+.info-sense-box.diffusion_flux {
+  background-color: rgb(208, 118, 90)
+}
+.info-sense-box.magnetic_moment {
+  background-color: rgb(179, 90, 208)
 }
 
 /*links for box PDF annotations*/

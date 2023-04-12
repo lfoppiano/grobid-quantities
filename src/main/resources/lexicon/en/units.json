@@ -513,7 +513,7 @@
     {
       "notations": [
         {
-          "raw": "a"
+          "raw": "yr"
         }
       ],
       "type": "TIME",
@@ -537,6 +537,32 @@
           "lemma": "fortnight",
           "inflections": [
             "fortnights"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TIME",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "century",
+          "inflections": [
+            "centuries"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TIME",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "millenium",
+          "inflections": [
+            "millenium",
+            "kiloannum",
+            "kyr"
           ]
         }
       ]
@@ -1585,6 +1611,9 @@
       "notations": [
         {
           "raw": "bar"
+        },
+        {
+          "raw": "Bar"
         }
       ],
       "type": "PRESSURE",
@@ -2517,6 +2546,216 @@
         },
         {
           "lemma": "atomic percentage"
+        }
+      ]
+    },{
+      "notations": [
+        {
+          "raw": "wt. %"
+        },
+        {
+          "raw": "wt %"
+        },
+        {
+          "raw": "wt%"
+        },
+        {
+          "raw": "wt.%"
+        }
+      ],
+      "type": "WEIGHT_RATIO",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "weight ratio"
+        },
+        {
+          "lemma": "weight percentage"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "kg m^-2 yr^-1",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "kg/(m^2*yr)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "g/(m^2*yr)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "kg/(m2*yr)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },{
+          "raw": "kg/m2·yr"
+        },
+        {
+          "raw": "kg/m2/yr",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "kg/(s·m²)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "MASS_ACCUMULATION_RATE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "mass accumulation rate",
+          "inflections": [
+            "mass accumulation rates",
+            "MAR"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "cm yr-1",
+          "product": [
+            {
+              "prefix": "c",
+              "base": "m"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "cm yr^-1",
+          "product": [
+            {
+              "prefix": "c",
+              "base": "m"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "cm/yr",
+          "product": [
+            {
+              "prefix": "c",
+              "base": "m"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "m/s",
+          "product": [
+            {
+              "base": "m"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "SEDIMENTATION_RATE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "sedimentation rate",
+          "inflection": "sedimentation rates"
         }
       ]
     }
