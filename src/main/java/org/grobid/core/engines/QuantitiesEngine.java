@@ -293,13 +293,18 @@ public class QuantitiesEngine {
             // note: there is no way to enforce the measurement type here
             // it will be inferred from the raw unit
             measurement.setAtomicQuantity(quantity);
+            quantity.setParsedValue(this.quantityParser.getValueParser().parseValue(atomicValue));
         } else {
             Quantity quantityLeast = new Quantity();
             Quantity quantityMost = new Quantity();
             quantityLeast.setRawValue(fromValue);
             quantityLeast.setRawUnit(new Unit(unitValue));
+            quantityLeast.setParsedValue(this.quantityParser.getValueParser().parseValue(fromValue));
+
             quantityMost.setRawValue(toValue);
             quantityMost.setRawUnit(new Unit(unitValue));
+            quantityMost.setParsedValue(this.quantityParser.getValueParser().parseValue(toValue));
+
             measurement.setQuantityLeast(quantityLeast);
             measurement.setQuantityMost(quantityMost);
         }
