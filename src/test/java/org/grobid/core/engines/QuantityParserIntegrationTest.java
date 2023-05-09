@@ -5,20 +5,22 @@ import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Measurement;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class QuantityParserIntegrationTest {
     QuantityParser target;
@@ -212,7 +214,6 @@ public class QuantityParserIntegrationTest {
 //    }
 
     @Test
-    @Ignore("Failing test, we should fix the issue ;-) ")
     public void testQuantityParser_particularCaseWhereIntervalsAreMerged() throws Exception {
 
         String text = "Before the 1920s the number of stages was usually 15 at most and the riders enjoyed at least one day of rest after each stage.";
@@ -247,14 +248,12 @@ public class QuantityParserIntegrationTest {
                 "stage\tstage\ts\tst\tsta\tstag\te\tge\tage\ttage\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
                 ".\t.\t.\t.\t.\t.\t.\t.\t.\t.\tALLCAPS\tNODIGIT\t1\tDOT\t.\t.\t0\t0\t<other>";
 
-        List<Measurement> measurementList = target.extractMeasurement(tokens, result);
-//        List<Measurement> measurementList = target.extractMeasurement(tokens, result, target.getSentencesOffsets(tokens));
+        List<Measurement> measurementList = target.extractMeasurement(tokens, result, target.getSentencesOffsets(tokens));
 
         assertThat(measurementList, hasSize(3));
     }
 
     @Test
-    @Ignore("To be plugged in when we re-enable the sentence parser.")
     public void testReconstructionWithSentenceTokenizer() throws Exception {
 
         String text = "Before the 1920s the number of stages was usually 15 at most. The riders enjoyed at least one day of rest after each stage.";
@@ -289,9 +288,8 @@ public class QuantityParserIntegrationTest {
                 "stage\tstage\ts\tst\tsta\tstag\te\tge\tage\ttage\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
                 ".\t.\t.\t.\t.\t.\t.\t.\t.\t.\tALLCAPS\tNODIGIT\t1\tDOT\t.\t.\t0\t0\t<other>";
 
-//        List<OffsetPosition> sentences = Arrays.asList(new OffsetPosition(0, 61), new OffsetPosition(61, 123));
-//        List<Measurement> measurementList = target.extractMeasurement(tokens, result, sentences);
-        List<Measurement> measurementList = target.extractMeasurement(tokens, result);
+        List<OffsetPosition> sentences = Arrays.asList(new OffsetPosition(0, 61), new OffsetPosition(61, 123));
+        List<Measurement> measurementList = target.extractMeasurement(tokens, result, sentences);
 
         assertThat(measurementList, hasSize(3));
 
@@ -459,12 +457,15 @@ public class QuantityParserIntegrationTest {
                 "terms\tterms\tt\tte\tter\tterm\ts\tms\trms\terms\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
                 "gives\tgives\tg\tgi\tgiv\tgive\ts\tes\tves\tives\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>";
 
-        List<Measurement> measurementList = target.extractMeasurement(tokens, result);
+        List<OffsetPosition> sentences = new ArrayList<>();
+        sentences.add(new OffsetPosition(0, 105));
+        sentences.add(new OffsetPosition(106, 410));
+        sentences.add(new OffsetPosition(411, 432));
+        List<Measurement> measurementList = target.extractMeasurement(tokens, result, sentences);
 
         assertThat(measurementList, hasSize(3));
 
         assertThat(measurementList.get(0).getQuantityList().get(0).getRawValue(), is("2:30"));
-//        assertThat(measurementList.get(0).getQuantityList().get(0).getOffsetStart(), )
         assertThat(measurementList.get(0).getQuantityList().get(1).getRawValue(), is("1.79"));
         assertThat(measurementList.get(0).getQuantityList().get(2).getRawValue(), is("1.51"));
 

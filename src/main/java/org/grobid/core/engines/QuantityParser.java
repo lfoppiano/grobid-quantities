@@ -16,6 +16,8 @@ import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorQuantities;
+import org.grobid.core.lang.SentenceDetector;
+import org.grobid.core.lang.impl.OpenNLPSentenceDetector;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.QuantityLexicon;
@@ -34,8 +36,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
+import static org.grobid.core.utilities.QuantityOperations.getExtremitiesAsIndex;
 
 /**
  * Quantity/measurement extraction.
@@ -51,7 +55,6 @@ public class QuantityParser extends AbstractParser {
     private QuantityNormalizer quantityNormalizer;
     //    private EnglishTokenizer tokeniser;
     private boolean disableSubstanceParser = false;
-
     public static Pattern MINUS_SIGN_REGEX = Pattern.compile("\u2212");
 
     public static QuantityParser getInstance(boolean disableSubstance) {
@@ -81,6 +84,7 @@ public class QuantityParser extends AbstractParser {
     }
 
     private QuantityLexicon quantityLexicon;
+
     private MeasurementOperations measurementOperations;
 
     protected QuantityParser(GrobidModel model, QuantityLexicon quantityLexicon, MeasurementOperations measurementOperations, ValueParser valueParser) {
@@ -137,16 +141,16 @@ public class QuantityParser extends AbstractParser {
                 return measurements;
 
             // labeled result from CRF lib
-            String res = null;
+            String resultLabelling = null;
             try {
-                res = label(ress);
+                resultLabelling = label(ress);
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
 
-//            List<OffsetPosition> sentences = getSentencesOffsets(layoutTokenNormalised);
+            List<OffsetPosition> sentences = getSentencesOffsets(layoutTokenNormalised);
 
-            List<Measurement> localMeasurements = extractMeasurement(layoutTokenNormalised, res);
+            List<Measurement> localMeasurements = extractMeasurement(layoutTokenNormalised, resultLabelling, sentences);
             if (isEmpty(localMeasurements))
                 return measurements;
 
@@ -171,22 +175,17 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
-    /*protected List<OffsetPosition> getSentencesOffsets(List<LayoutToken> tokens) {
-        List<Token> tokensNlp4j = tokens
-                .stream()
-                .map(token -> {
-                    Token token1 = new Token(token.getText());
-                    token1.setStartOffset(token.getOffset());
-                    token1.setEndOffset(token.getOffset() + token.getText().length());
-                    return token1;
-                })
-                .collect(Collectors.toList());
+    protected List<OffsetPosition> getSentencesOffsets(List<LayoutToken> tokens) {
+        SentenceDetector segmenter = new OpenNLPSentenceDetector();
+        String text = LayoutTokensUtil.toText(tokens);
+        List<OffsetPosition> results = segmenter.detect(text);
 
-        return tokeniser.segmentize(tokensNlp4j)
-                .stream()
-                .map(t -> new OffsetPosition(t.get(0).getStartOffset(), t.get(t.size() - 1).getEndOffset()))
-                .collect(Collectors.toList());
-    }*/
+        if (CollectionUtils.isEmpty(results)) {
+            results = Arrays.asList(new OffsetPosition(0, text.length()));
+        }
+
+        return results;
+    }
 
     /**
      * Extract all occurrences of measurement/quantities from a simple piece of text.
@@ -376,10 +375,14 @@ public class QuantityParser extends AbstractParser {
         return result.toString();
     }
 
+    public List<Measurement> extractMeasurement(List<LayoutToken> tokens, String result) {
+        return extractMeasurement(tokens, result, Arrays.asList(new OffsetPosition(0, LayoutTokensUtil.toText(tokens).length())));
+    }
+
     /**
      * Extract identified quantities from a labeled text.
      */
-    public List<Measurement> extractMeasurement(List<LayoutToken> tokens, String result) {
+    public List<Measurement> extractMeasurement(List<LayoutToken> tokens, String result, List<OffsetPosition> sentences) {
         List<Measurement> measurements = new ArrayList<>();
 
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.QUANTITIES, result, tokens);
@@ -389,8 +392,8 @@ public class QuantityParser extends AbstractParser {
         Measurement currentMeasurement = new Measurement();
         UnitUtilities.Measurement_Type openMeasurement = null;
 
-//        int currentSentenceIndex = 0;
-//        OffsetPosition currentSentence = sentences.get(currentSentenceIndex);
+        int currentSentenceIndex = 0;
+        OffsetPosition currentSentence = sentences.get(currentSentenceIndex);
 
         int pos = 0; // position in terms of characters for creating the offsets
 
@@ -467,15 +470,31 @@ public class QuantityParser extends AbstractParser {
                 // 1) there is an open measurement AND the open measurement is of the same type
                 // 3) the least quantity already present is not null OR
                 // 4) the mostQuantity not in the same sentence
-                if ((openMeasurement != null &&
-                    (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX ||
-                        currentMeasurement.getQuantityLeast() != null /*||
-                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))*/))
-                ) {
-                    if (currentMeasurement.isValid()) {
-                        measurements.add(currentMeasurement);
-                        currentMeasurement = new Measurement();
-                        currentUnit = new Unit();
+                if (openMeasurement != null) {
+                    if (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX ||
+                        currentMeasurement.getQuantityLeast() != null ||
+                        !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))
+                    ) {
+                        if (currentMeasurement.isValid()) {
+                            measurements.add(currentMeasurement);
+                            currentMeasurement = new Measurement();
+                            currentUnit = new Unit();
+                        }
+                    } else {
+                        Quantity quantityMost = currentMeasurement.getQuantityMost();
+                        if (quantityMost != null) {
+                            // Workaround - if the list item is more than 10 character from the previous, we start a new measurement
+                            Pair<Integer, Integer> extremitiesAsIndex = getExtremitiesAsIndex(tokens, quantityMost.getOffsetEnd(), endPos);
+                            int tokensInBetween = tokens.subList(extremitiesAsIndex.getLeft(), extremitiesAsIndex.getRight()).size();
+                            if (tokensInBetween > 8 ||
+                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))) {
+                                if (currentMeasurement.isValid()) {
+                                    measurements.add(currentMeasurement);
+                                    currentMeasurement = new Measurement();
+                                    currentUnit = new Unit();
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -496,15 +515,32 @@ public class QuantityParser extends AbstractParser {
                 LOGGER.debug("value most: " + clusterContent);
                 if (openMeasurement != null &&
                     (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX ||
-                        currentMeasurement.getQuantityMost() != null /*||
-                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))*/)
+                        currentMeasurement.getQuantityMost() != null ||
+                        !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement)))
                 ) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
                         currentMeasurement = new Measurement();
                         currentUnit = new Unit();
                     }
+                } else {
+                    Quantity quantityLeast = currentMeasurement.getQuantityLeast();
+
+                    if (quantityLeast != null) {
+                        // Workaround - if the list item is more than 10 character from the previous, we start a new measurement
+                        Pair<Integer, Integer> extremitiesAsIndex = getExtremitiesAsIndex(tokens, quantityLeast.getOffsetEnd(), endPos);
+                        int tokensInBetween = tokens.subList(extremitiesAsIndex.getLeft(), extremitiesAsIndex.getRight()).size();
+                        if (tokensInBetween > 8 ||
+                            !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))) {
+                            if (currentMeasurement.isValid()) {
+                                measurements.add(currentMeasurement);
+                                currentMeasurement = new Measurement();
+                                currentUnit = new Unit();
+                            }
+                        }
+                    }
                 }
+
                 currentQuantity = new Quantity(clusterContent, null, startPos, endPos);
                 final Value parsedValue = valueParser.parseValue(currentQuantity.getRawValue());
                 if (parsedValue != null) {
@@ -522,8 +558,8 @@ public class QuantityParser extends AbstractParser {
                 LOGGER.debug("base value: " + clusterContent);
                 if (openMeasurement != null &&
                     (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE ||
-                        currentMeasurement.getQuantityBase() != null /*||
-                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))*/)
+                        currentMeasurement.getQuantityBase() != null ||
+                        !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement)))
                 ) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
@@ -548,8 +584,8 @@ public class QuantityParser extends AbstractParser {
                 LOGGER.debug("range value: " + clusterContent);
                 if (openMeasurement != null &&
                     (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE ||
-                        currentMeasurement.getQuantityRange() != null /*||
-                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))*/)
+                        currentMeasurement.getQuantityRange() != null ||
+                        !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement)))
                 ) {
                     if (currentMeasurement.isValid()) {
                         measurements.add(currentMeasurement);
@@ -581,14 +617,19 @@ public class QuantityParser extends AbstractParser {
                         }
                     } else {
                         List<Quantity> quantityList = currentMeasurement.getQuantityList();
-                        Quantity lastQuantityinList = quantityList.get(quantityList.size() - 1);
-                        
-                        // Workaround - if the list item is more than 10 character from the previous, we start a new measurement
-                        if (endPos - lastQuantityinList.getOffsetEnd() > 10) {
-                            if (currentMeasurement.isValid()) {
-                                measurements.add(currentMeasurement);
-                                currentMeasurement = new Measurement();
-                                //currentUnit = new Unit();
+                        if (isNotEmpty(quantityList)) {
+                            Quantity lastQuantityinList = quantityList.get(quantityList.size() - 1);
+
+                            // Workaround - if the list item is more than 10 character from the previous, we start a new measurement
+                            Pair<Integer, Integer> extremitiesAsIndex = getExtremitiesAsIndex(tokens, lastQuantityinList.getOffsetEnd(), endPos);
+                            int tokensInBetween = tokens.subList(extremitiesAsIndex.getLeft(), extremitiesAsIndex.getRight()).size();
+                            if (tokensInBetween > 8 ||
+                                !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement))) {
+                                if (currentMeasurement.isValid()) {
+                                    measurements.add(currentMeasurement);
+                                    currentMeasurement = new Measurement();
+                                    //currentUnit = new Unit();
+                                }
                             }
                         }
                     }
@@ -710,10 +751,10 @@ public class QuantityParser extends AbstractParser {
             }
 
             pos = endPos;
-//            while (pos > currentSentence.end) {
-//                currentSentenceIndex++;
-//                currentSentence = sentences.get(currentSentenceIndex);
-//            }
+            while (pos > currentSentence.end) {
+                currentSentenceIndex++;
+                currentSentence = sentences.get(currentSentenceIndex);
+            }
         }
 
         if (currentMeasurement.isValid()) {
@@ -730,16 +771,16 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
-//    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
-//        final Pair<Integer, Integer> currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
-//        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.getLeft() && op.end > currentMeasureOffset.getRight())
-//                .collect(Collectors.toList());
-//
-//        if (sentencesCurrentMeasure.size() > 1) {
-//            throw new GrobidException("The measurement " + measurement + " is spread among two sentences.");
-//        }
-//        return sentencesCurrentMeasure.get(0);
-//    }
+    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
+        OffsetPosition currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
+        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.start && op.end > currentMeasureOffset.end)
+            .collect(Collectors.toList());
+
+        if (sentencesCurrentMeasure.size() > 1) {
+            throw new GrobidException("The measurement " + measurement + " is spread among two sentences.");
+        }
+        return sentencesCurrentMeasure.get(0);
+    }
 
     public void setDisableSubstanceParser(boolean disableSubstanceParser) {
         this.disableSubstanceParser = disableSubstanceParser;
