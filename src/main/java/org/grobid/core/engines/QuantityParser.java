@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -746,5 +747,9 @@ public class QuantityParser extends AbstractParser {
 
     public void setQuantifiedObjectParser(QuantifiedObjectParser quantifiedObjectParser) {
         this.quantifiedObjectParser = quantifiedObjectParser;
+    }
+
+    public ValueParser getValueParser() {
+        return valueParser;
     }
 }

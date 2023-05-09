@@ -101,13 +101,13 @@ public class QuantitiesEngine {
                 throw new GrobidServiceException("Input file is empty or null", Response.Status.BAD_REQUEST);
             }
             GrobidAnalysisConfig config =
-                    new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
-                            .analyzer(GrobidAnalyzer.getInstance())
-                            .consolidateHeader(0)
-                            .consolidateCitations(0)
-                            .build();
+                new GrobidAnalysisConfig.GrobidAnalysisConfigBuilder()
+                    .analyzer(GrobidAnalyzer.getInstance())
+                    .consolidateHeader(0)
+                    .consolidateCitations(0)
+                    .build();
             DocumentSource documentSource =
-                    DocumentSource.fromPdf(originFile);
+                DocumentSource.fromPdf(originFile);
 
             doc = parsers.getSegmentationParser().processing(documentSource, config);
 
@@ -167,32 +167,32 @@ public class QuantitiesEngine {
                     }
 
                     TaggingTokenClusteror clusteror = new TaggingTokenClusteror(GrobidModels.FULLTEXT, fulltextTaggedRawResult,
-                            layoutTokenization.getTokenization(), true);
+                        layoutTokenization.getTokenization(), true);
 
                     //Iterate and exclude figures and tables
                     for (TaggingTokenCluster cluster : Iterables.filter(clusteror.cluster(),
-                            new TaggingTokenClusteror
-                                    .LabelTypeExcludePredicate(TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER,
-                                    TaggingLabels.FIGURE_MARKER, TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL))) {
+                        new TaggingTokenClusteror
+                            .LabelTypeExcludePredicate(TaggingLabels.TABLE_MARKER, TaggingLabels.EQUATION, TaggingLabels.CITATION_MARKER,
+                            TaggingLabels.FIGURE_MARKER, TaggingLabels.EQUATION_MARKER, TaggingLabels.EQUATION_LABEL))) {
 
                         if (cluster.getTaggingLabel().equals(TaggingLabels.FIGURE)) {
                             //apply the figure model to only get the caption
                             final Figure processedFigure = parsers.getFigureParser()
-                                    .processing(cluster.concatTokens(), cluster.getFeatureBlock());
+                                .processing(cluster.concatTokens(), cluster.getFeatureBlock());
                             measurements.addAll(quantityParser.process(processedFigure.getCaptionLayoutTokens()));
                         } else if (cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
                             //apply the table model to only get the caption/description
                             final List<Table> processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
                             processedTable.stream().forEach(t -> measurements.addAll(quantityParser.process(t.getFullDescriptionTokens())));
-                            
+
                         } else {
                             final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
 
                             // extract all the layout tokens from the cluster as a list
                             List<LayoutToken> tokens = labeledTokensContainers.stream()
-                                    .map(LabeledTokensContainer::getLayoutTokens)
-                                    .flatMap(List::stream)
-                                    .collect(Collectors.toList());
+                                .map(LabeledTokensContainer::getLayoutTokens)
+                                .flatMap(List::stream)
+                                .collect(Collectors.toList());
 
                             measurements.addAll(quantityParser.process(tokens));
                         }
@@ -232,7 +232,7 @@ public class QuantitiesEngine {
                                                   Document doc) {
         // List<LayoutToken> for the selected segment
         List<LayoutToken> layoutTokens
-                = doc.getTokenizationParts(documentParts, doc.getTokenizations());
+            = doc.getTokenizationParts(documentParts, doc.getTokenizations());
         return quantityParser.process(layoutTokens);
     }
 
@@ -273,13 +273,12 @@ public class QuantitiesEngine {
 
         UnitUtilities.Measurement_Type theType = null;
         String atomicValue = null;
-        if (((fromValue == null) || (fromValue.length() == 0)) &&
-                ((toValue == null) || (toValue.length() == 0))) {
+        if (StringUtils.isEmpty(fromValue) && StringUtils.isEmpty(toValue)) {
             throw new GrobidServiceException("The input JSON is empty or null.", Response.Status.NO_CONTENT);
-        } else if ((fromValue == null) || (fromValue.length() == 0)) {
+        } else if (StringUtils.isEmpty(fromValue)) {
             atomicValue = toValue;
             theType = UnitUtilities.Measurement_Type.VALUE;
-        } else if ((toValue == null) || (toValue.length() == 0)) {
+        } else if (StringUtils.isEmpty(toValue)) {
             atomicValue = fromValue;
             theType = UnitUtilities.Measurement_Type.VALUE;
         } else
@@ -385,14 +384,14 @@ public class QuantitiesEngine {
                 try (Stream<String> stream = Files.lines(Paths.get(inputFile.getAbsolutePath()))) {
 
                     List<String> processedUnits = stream.map(
-                            s -> {
-                                List<UnitBlock> unitBlocks = unitParser.tagUnit(s);
+                        s -> {
+                            List<UnitBlock> unitBlocks = unitParser.tagUnit(s);
 
-                                if (isNotEmpty(unitBlocks)) {
-                                    return unitBlocks.get(0).getRawTaggedValue();
-                                }
-                                return "";
+                            if (isNotEmpty(unitBlocks)) {
+                                return unitBlocks.get(0).getRawTaggedValue();
                             }
+                            return "";
+                        }
                     ).filter(StringUtils::isNotBlank).collect(Collectors.toList());
 
                     for (String processedUnit : processedUnits) {
