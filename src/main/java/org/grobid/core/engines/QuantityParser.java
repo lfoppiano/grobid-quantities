@@ -164,12 +164,12 @@ public class QuantityParser extends AbstractParser {
             if (!disableSubstanceParser) {
                 localMeasurements = quantifiedObjectParser.process(layoutTokenNormalised, localMeasurements);
             } else {
-                LOGGER.warn("Substance parser disabled, skpping it. ");
+                LOGGER.warn("Substance parser disabled, skipping it. ");
             }
 
             measurements.addAll(localMeasurements);
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
 
         return measurements;
@@ -482,6 +482,7 @@ public class QuantityParser extends AbstractParser {
                         }
                     } else {
                         Quantity quantityMost = currentMeasurement.getQuantityMost();
+                        
                         if (quantityMost != null) {
                             // Workaround - if the list item is more than 10 character from the previous, we start a new measurement
                             Pair<Integer, Integer> extremitiesAsIndex = getExtremitiesAsIndex(tokens, quantityMost.getOffsetEnd(), endPos);
@@ -504,7 +505,8 @@ public class QuantityParser extends AbstractParser {
                     currentQuantity.setParsedValue(parsedValue);
                 }
                 currentQuantity.setLayoutTokens(theTokens);
-                if (currentUnit.getRawName() != null) {
+                if (currentUnit.getRawName() != null 
+                    && currentSentence.equals(findSentenceOffset(sentences, new OffsetPosition(currentUnit.getOffsetStart(), currentUnit.getOffsetEnd())))) {
                     currentQuantity.setRawUnit(currentUnit);
                 }
                 currentMeasurement.setQuantityLeast(currentQuantity);
@@ -513,7 +515,7 @@ public class QuantityParser extends AbstractParser {
                 currentMeasurement.addBoundingBoxes(boundingBoxes);
             } else if (clusterLabel.equals(QUANTITY_VALUE_MOST)) {
                 LOGGER.debug("value most: " + clusterContent);
-                if (openMeasurement != null &&
+                    if (openMeasurement != null &&
                     (openMeasurement != UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX ||
                         currentMeasurement.getQuantityMost() != null ||
                         !currentSentence.equals(findSentenceOffset(sentences, currentMeasurement)))
@@ -773,6 +775,15 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
+    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition offsets) {
+        OffsetPosition currentMeasureOffset = QuantityOperations.getContainingOffset(Arrays.asList(offsets));
+
+        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.start && op.end > currentMeasureOffset.end)
+            .collect(Collectors.toList());
+        
+        return sentencesCurrentMeasure.get(0);
+    }
+
     private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
         OffsetPosition currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
         List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.start && op.end > currentMeasureOffset.end)
@@ -780,6 +791,9 @@ public class QuantityParser extends AbstractParser {
 
         if (sentencesCurrentMeasure.size() > 1) {
             throw new GrobidException("The measurement " + measurement + " is spread among two sentences.");
+        } else if (CollectionUtils.isEmpty(sentencesCurrentMeasure)){
+            LOGGER.warn("Cannot find sentence. The entity might be inconsistent: " + measurement.getRawOffsets().toString());
+            return new OffsetPosition(-1, -1);
         }
         return sentencesCurrentMeasure.get(0);
     }
