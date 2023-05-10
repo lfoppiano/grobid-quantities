@@ -5,6 +5,11 @@ import java.util.stream.Collectors
 
 class GenericUtils {
     companion object {
+
+        /**
+         * Corrects the (rare) sequence of labels that are inconsistent (and for which I did not understand the cause)
+         * The sequence is recognised when a initial (I-<label>) sequence is followed by a non-initial sequence of a different label
+         */
         @JvmStatic
         fun correctLabelling(resultLabelling: String): String? {
             val resultAsList: MutableList<MutableList<String>> = Arrays
@@ -50,11 +55,11 @@ class GenericUtils {
                 previousLabel = currentLabel;
             }
 
-            val fixedList = resultAsList
+            val fixedListAsString = resultAsList
                 .map { i -> i.joinToString(separator = "\t") }
                 .toList().joinToString(separator = "\n")
-
-            return fixedList
+            
+            return fixedListAsString
         }
     }
 }

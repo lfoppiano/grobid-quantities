@@ -63,7 +63,8 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
     testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
     testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
-
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    
     //GROBID
     implementation 'org.grobid:grobid-core:0.7.2'
     implementation 'org.grobid:grobid-trainer:0.7.2'
@@ -160,6 +161,7 @@ sourceSets.test.resources {
 
 test {
     exclude '**/**IntegrationTest**'
+    useJUnitPlatform()
 }
 
 tasks.run.workingDir = rootProject.rootDir
