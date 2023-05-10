@@ -659,27 +659,29 @@ public class QuantityParser extends AbstractParser {
                         currentMeasurement.addBoundingBoxes(boundingBoxes);
                     }
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
-                    if ((currentMeasurement.getQuantityMost() != null) &&
-                        ((currentMeasurement.getQuantityMost().getRawUnit() == null) ||
-                            (currentMeasurement.getQuantityMost().getRawUnit().getRawName() == null))) {
+                    if (currentMeasurement.getQuantityMost() != null &&
+                        (currentMeasurement.getQuantityMost().getRawUnit() == null ||
+                            currentMeasurement.getQuantityMost().getRawUnit().getRawName() == null)) {
                         currentMeasurement.getQuantityMost().setRawUnit(currentUnit);
-
-                        if ((currentMeasurement.getQuantityLeast() != null) &&
-                            ((currentMeasurement.getQuantityLeast().getRawUnit() == null) ||
-                                (currentMeasurement.getQuantityLeast().getRawUnit().getRawName() == null)))
-                            currentMeasurement.getQuantityLeast().setRawUnit(currentUnit);
-
-                        currentMeasurement.addBoundingBoxes(boundingBoxes);
                     }
+                        
+                    if ((currentMeasurement.getQuantityLeast() != null) &&
+                            ((currentMeasurement.getQuantityLeast().getRawUnit() == null) ||
+                                (currentMeasurement.getQuantityLeast().getRawUnit().getRawName() == null))) {
+                        currentMeasurement.getQuantityLeast().setRawUnit(currentUnit);
+                    }
+
+                    currentMeasurement.addBoundingBoxes(boundingBoxes);
+                    
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE) {
-                    if ((currentMeasurement.getQuantityRange() != null) &&
-                        ((currentMeasurement.getQuantityRange().getRawUnit() == null) ||
-                            (currentMeasurement.getQuantityRange().getRawUnit().getRawName() == null))) {
+                    if (currentMeasurement.getQuantityRange() != null &&
+                        (currentMeasurement.getQuantityRange().getRawUnit() == null ||
+                            currentMeasurement.getQuantityRange().getRawUnit().getRawName() == null)) {
                         currentMeasurement.getQuantityRange().setRawUnit(currentUnit);
 
-                        if ((currentMeasurement.getQuantityBase() != null) &&
-                            ((currentMeasurement.getQuantityBase().getRawUnit() == null) ||
-                                (currentMeasurement.getQuantityBase().getRawUnit().getRawName() == null)))
+                        if (currentMeasurement.getQuantityBase() != null &&
+                            (currentMeasurement.getQuantityBase().getRawUnit() == null ||
+                                currentMeasurement.getQuantityBase().getRawUnit().getRawName() == null))
                             currentMeasurement.getQuantityBase().setRawUnit(currentUnit);
 
                         currentMeasurement.addBoundingBoxes(boundingBoxes);
@@ -687,11 +689,11 @@ public class QuantityParser extends AbstractParser {
                 } else if (openMeasurement == UnitUtilities.Measurement_Type.CONJUNCTION) {
                     if (CollectionUtils.isNotEmpty(currentMeasurement.getQuantityList())) {
                         for (Quantity quantity : currentMeasurement.getQuantityList()) {
-                            if ((quantity != null) && ((quantity.getRawUnit() == null) ||
-                                (quantity.getRawUnit().getRawName() == null))) {
+                            if (quantity != null 
+                                && (quantity.getRawUnit() == null || quantity.getRawUnit().getRawName() == null)) {
                                 quantity.setRawUnit(currentUnit);
                                 currentMeasurement.addBoundingBoxes(boundingBoxes);
-                            } else if ((quantity == null) && (openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX)) {
+                            } else if (quantity == null && openMeasurement == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) {
                                 // we skip the least value, but we can still for robustness attach the unit to the upper range quantity
                             } else
                                 break;

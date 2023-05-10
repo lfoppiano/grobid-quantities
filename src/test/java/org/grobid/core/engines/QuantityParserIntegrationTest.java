@@ -252,6 +252,49 @@ public class QuantityParserIntegrationTest {
 
         assertThat(measurementList, hasSize(3));
     }
+    
+    @Test
+    public void testEntitiesExtractionWithParticularCase() throws Exception {
+        String text = "Through EPD technique, we can increase the coercivity by more than 6.5 kOe with less than 1.2 wt.% Dy.";
+
+        List<LayoutToken> tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text);
+        
+        String result = "Through\tthrough\tT\tTh\tThr\tThro\th\tgh\tugh\tough\tINITCAP\tNODIGIT\t0\tNOPUNCT\tXxxx\tXx\t0\t0\t<other>\n" +
+            "EPD\tepd\tE\tEP\tEPD\tEPD\tD\tPD\tEPD\tEPD\tALLCAPS\tNODIGIT\t0\tNOPUNCT\tXXX\tX\t0\t0\t<other>\n" +
+            "technique\ttechnique\tt\tte\ttec\ttech\te\tue\tque\tique\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
+            ",\t,\t,\t,\t,\t,\t,\t,\t,\t,\tALLCAPS\tNODIGIT\t1\tCOMMA\t,\t,\t0\t0\t<other>\n" +
+            "we\twe\tw\twe\twe\twe\te\twe\twe\twe\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txx\tx\t0\t0\t<other>\n" +
+            "can\tcan\tc\tca\tcan\tcan\tn\tan\tcan\tcan\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxx\tx\t0\t0\t<other>\n" +
+            "increase\tincrease\ti\tin\tinc\tincr\te\tse\tase\tease\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
+            "the\tthe\tt\tth\tthe\tthe\te\the\tthe\tthe\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxx\tx\t0\t0\t<other>\n" +
+            "coercivity\tcoercivity\tc\tco\tcoe\tcoer\ty\tty\tity\tvity\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
+            "by\tby\tb\tby\tby\tby\ty\tby\tby\tby\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txx\tx\t0\t0\t<other>\n" +
+            "more\tmore\tm\tmo\tmor\tmore\te\tre\tore\tmore\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
+            "than\tthan\tt\tth\ttha\tthan\tn\tan\than\tthan\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
+            "6\t6\t6\t6\t6\t6\t6\t6\t6\t6\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\tI-<valueLeast>\n" +
+            ".\t.\t.\t.\t.\t.\t.\t.\t.\t.\tALLCAPS\tNODIGIT\t1\tDOT\t.\t.\t0\t0\t<valueLeast>\n" +
+            "5\t5\t5\t5\t5\t5\t5\t5\t5\t5\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueLeast>\n" +
+            "kOe\tkoe\tk\tkO\tkOe\tkOe\te\tOe\tkOe\tkOe\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txXx\txXx\t1\t0\tI-<unitLeft>\n" +
+            "with\twith\tw\twi\twit\twith\th\tth\tith\twith\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
+            "less\tless\tl\tle\tles\tless\ts\tss\tess\tless\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
+            "than\tthan\tt\tth\ttha\tthan\tn\tan\than\tthan\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txxxx\tx\t0\t0\t<other>\n" +
+            "1\t1\t1\t1\t1\t1\t1\t1\t1\t1\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\tI-<valueMost>\n" +
+            ".\t.\t.\t.\t.\t.\t.\t.\t.\t.\tALLCAPS\tNODIGIT\t1\tDOT\t.\t.\t0\t0\t<valueMost>\n" +
+            "2\t2\t2\t2\t2\t2\t2\t2\t2\t2\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueMost>\n" +
+            "wt\twt\tw\twt\twt\twt\tt\twt\twt\twt\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txx\tx\t0\t0\tI-<unitLeft>\n" +
+            ".\t.\t.\t.\t.\t.\t.\t.\t.\t.\tALLCAPS\tNODIGIT\t1\tDOT\t.\t.\t0\t0\t<unitLeft>\n" +
+            "%\t%\t%\t%\t%\t%\t%\t%\t%\t%\tALLCAPS\tNODIGIT\t1\tNOPUNCT\t%\t%\t0\t0\t<unitLeft>\n" +
+            "Dy\tdy\tD\tDy\tDy\tDy\ty\tDy\tDy\tDy\tINITCAP\tNODIGIT\t0\tNOPUNCT\tXx\tXx\t0\t0\t<other>\n" +
+            ".\t.\t.\t.\t.\t.\t.\t.\t.\t.\tALLCAPS\tNODIGIT\t1\tDOT\t.\t.\t0\t0\t<other>\n";
+
+        List<Measurement> measurementList = target.extractMeasurement(tokens, result, target.getSentencesOffsets(tokens));
+
+        assertThat(measurementList, hasSize(2));
+        assertThat(measurementList.get(0).getQuantityLeast().getRawValue(), is("6.5"));
+        assertThat(measurementList.get(0).getQuantityLeast().getRawUnit().getRawName(), is("kOe"));
+        assertThat(measurementList.get(1).getQuantityMost().getRawValue(), is("1.2"));
+        assertThat(measurementList.get(1).getQuantityMost().getRawUnit().getRawName(), is("wt.%"));
+    }
 
     @Test
     public void testReconstructionWithSentenceTokenizer() throws Exception {
