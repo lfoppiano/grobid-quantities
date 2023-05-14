@@ -60,7 +60,7 @@ repositories {
 dependencies {
     //Tests
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.easymock:easymock:4.3'
+    testImplementation 'org.easymock:easymock:5.1.0'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
     testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
     testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
@@ -161,6 +161,34 @@ sourceSets.test.resources {
 
 test {
     exclude '**/**IntegrationTest**'
+
+    maxHeapSize = "1024m"
+
+    def libraries = ""
+    if (Os.isFamily(Os.FAMILY_MAC)) {
+        if (Os.OS_ARCH.equals("aarch64")) {
+            libraries = "${file("./grobid-home/lib/mac_arm-64").absolutePath}"
+        } else {
+            libraries = "${file("./grobid-home/lib/mac-64").absolutePath}"
+        }
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        def jepDir = rootProject.rootDir.getAbsolutePath() + "/grobid-home/lib/lin-64/jep"
+        libraries = jepDir
+        jepDir = rootProject.rootDir.getAbsolutePath() + "/grobid-home/lib/lin-64"
+        libraries += ":" + jepDir
+    } else {
+        throw new RuntimeException("Unsupported platform!")
+    }
+
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
+            "--add-opens", "java.base/java.io=ALL-UNNAMED",
+            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+            "--add-opens", "java.base/java.util.regex=ALL-UNNAMED",
+            "--add-opens", "java.base/java.math=ALL-UNNAMED",
+            "--add-opens", "java.base/java.text=ALL-UNNAMED"
+    }
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + libraries
 }
 
 tasks.run.workingDir = rootProject.rootDir
@@ -180,7 +208,7 @@ run {
     } else if (Os.isFamily(Os.FAMILY_UNIX)) {
         libraries = "${file("../grobid-home/lib/lin-64/jep").absolutePath}:" +
             "${file("../grobid-home/lib/lin-64").absolutePath}:"
-    } else  {
+    } else {
         throw new RuntimeException("Unsupported platform!")
     }
 
@@ -195,16 +223,44 @@ run {
 
 task integration(type: Test) {
     include '**'
+
+    maxHeapSize = "1024m"
+
+    def libraries = ""
+    if (Os.isFamily(Os.FAMILY_MAC)) {
+        if (Os.OS_ARCH.equals("aarch64")) {
+            libraries = "${file("./grobid-home/lib/mac_arm-64").absolutePath}"
+        } else {
+            libraries = "${file("./grobid-home/lib/mac-64").absolutePath}"
+        }
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        def jepDir = rootProject.rootDir.getAbsolutePath() + "/grobid-home/lib/lin-64/jep"
+        libraries = jepDir
+        jepDir = rootProject.rootDir.getAbsolutePath() + "/grobid-home/lib/lin-64"
+        libraries += ":" + jepDir
+    } else {
+        throw new RuntimeException("Unsupported platform!")
+    }
+
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
+            "--add-opens", "java.base/java.io=ALL-UNNAMED",
+            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+            "--add-opens", "java.base/java.util.regex=ALL-UNNAMED",
+            "--add-opens", "java.base/java.math=ALL-UNNAMED",
+            "--add-opens", "java.base/java.text=ALL-UNNAMED"
+    }
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Training configuration
 
 def trainerTasks = [
-        //Training models
-        "train_units"            : "org.grobid.trainer.UnitTrainer",
-        "train_quantities"       : "org.grobid.trainer.QuantitiesTrainer",
-        "train_values"           : "org.grobid.trainer.ValueTrainer",
-        "train_quantifiedObjects": "org.grobid.trainer.QuantifiedObjectTrainer"
+    //Training models
+    "train_units"            : "org.grobid.trainer.UnitTrainer",
+    "train_quantities"       : "org.grobid.trainer.QuantitiesTrainer",
+    "train_values"           : "org.grobid.trainer.ValueTrainer",
+    "train_quantifiedObjects": "org.grobid.trainer.QuantifiedObjectTrainer"
 ]
 
 
@@ -273,7 +329,7 @@ publishing {
     }
 }
 
-def conf = new org.yaml.snakeyaml.Yaml().load( new File("resources/config/config.yml").newInputStream() )
+def conf = new org.yaml.snakeyaml.Yaml().load(new File("resources/config/config.yml").newInputStream())
 def grobidHome = conf.grobidHome.replace("\$", "").replace('{', "").replace("GROBID_HOME:- ", "").replace("}", "")
 
 /** Model management **/
