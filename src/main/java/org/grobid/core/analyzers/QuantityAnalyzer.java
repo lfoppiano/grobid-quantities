@@ -1,5 +1,6 @@
 package org.grobid.core.analyzers;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
@@ -95,6 +96,21 @@ public class QuantityAnalyzer implements Analyzer {
         }
 
         return result;
+    }
+
+    @Override
+    public List<String> retokenizeSubdigits(List<String> list) {
+        throw new NotImplementedException("Not yet implemented");
+    }
+
+    @Override
+    public List<LayoutToken> retokenizeSubdigitsWithLayoutToken(List<String> list) {
+        throw new NotImplementedException("Not yet implemented");
+    }
+
+    @Override
+    public List<LayoutToken> retokenizeSubdigitsFromLayoutToken(List<LayoutToken> list) {
+        throw new NotImplementedException("Not yet implemented");
     }
 
     public List<String> retokenize(List<String> chunks) {
