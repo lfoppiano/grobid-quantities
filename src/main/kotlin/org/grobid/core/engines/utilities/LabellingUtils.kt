@@ -3,7 +3,7 @@ package org.grobid.core.engines.utilities
 import java.util.*
 import java.util.stream.Collectors
 
-class GenericUtils {
+class LabellingUtils {
     companion object {
 
         /**
@@ -46,7 +46,7 @@ class GenericUtils {
                     fixValue = previousLabel.replace("I-", "")
                 }
 
-                println(fixNext)
+//                println(fixNext)
 
                 if (fixNext) {
                     fixValue?.let { item.set(indexLabel, it) }

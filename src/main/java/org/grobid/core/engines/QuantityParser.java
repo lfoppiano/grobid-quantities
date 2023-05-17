@@ -1,6 +1,5 @@
 package org.grobid.core.engines;
 
-import com.google.common.collect.Iterables;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -40,7 +39,7 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
-import static org.grobid.core.engines.utilities.GenericUtils.correctLabelling;
+import static org.grobid.core.engines.utilities.LabellingUtils.correctLabelling;
 import static org.grobid.core.utilities.QuantityOperations.getExtremitiesAsIndex;
 
 /**
