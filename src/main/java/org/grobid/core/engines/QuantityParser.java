@@ -1,5 +1,6 @@
 package org.grobid.core.engines;
 
+import com.google.common.collect.Iterables;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -763,8 +764,14 @@ public class QuantityParser extends AbstractParser {
 
             pos = endPos;
             while (pos > currentSentence.end) {
-                currentSentenceIndex++;
-                currentSentence = sentences.get(currentSentenceIndex);
+                if (currentSentenceIndex < sentences.size() - 1) {
+                    currentSentenceIndex++;
+                    currentSentence = sentences.get(currentSentenceIndex);
+                } else {
+                    // There are spurious characters that are not recognised as sentences at the end of the stream, 
+                    // we ignore it and whatever comes out will be considered on a different sentence 
+                    break;
+                }
             }
         }
 
