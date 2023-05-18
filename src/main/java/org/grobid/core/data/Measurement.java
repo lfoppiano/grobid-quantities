@@ -7,6 +7,7 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
@@ -289,7 +290,7 @@ public class Measurement {
         }
 
         if (StringUtils.isNotBlank(rawString)) {
-            json.append(", \"measurementRaw\" : \"" + rawString + "\"");
+            json.append(", \"measurementRaw\" : \"" + Arrays.toString(encoder.quoteAsUTF8(rawString)) + "\"");
         }
 
         if (rawOffsets.start > -1 && rawOffsets.end > -1) {
