@@ -95,7 +95,7 @@ public class QuantityNormalizer {
                 BigDecimal converted = new BigDecimal(unit.getConverterTo(unit.getSystemUnit()).convert(quantity.getParsedValue().getNumeric()).toString());
                 normalizedQuantity.setValue(converted);
             } else {
-                normalizedQuantity.setValue(new BigDecimal(quantity.getRawValue()));
+                throw new NormalizationException("Normalisation impossible without parsed value. ");
             }
         } catch (Exception e) {
             throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +

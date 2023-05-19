@@ -1,4 +1,4 @@
-name: Build unstable
+name: Build
 
 on: [push]
 
