@@ -16,7 +16,7 @@
 # build builder image
 # -------------------
 
-FROM openjdk:8u342-jdk as builder
+FROM openjdk:17-jdk-slim as builder
 
 USER root
 
@@ -25,7 +25,7 @@ RUN apt-get update && \
 
 WORKDIR /opt/grobid-source
 
-RUN git clone --depth 1 --branch feature/improve-extraction https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
+RUN git clone --depth 1 --branch update-grobid https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
     cd grobid-quantities
 
 WORKDIR /opt/grobid-source/grobid-quantities
@@ -46,7 +46,7 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM grobid/grobid:0.7.2 as runtime
+FROM grobid/grobid:0.7.3 as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
@@ -81,7 +81,7 @@ EXPOSE 8060 8061 5005
 
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
 #CMD ["sh", "-c", "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005 -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
-CMD ["sh", "-c", "java -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
+CMD ["sh", "-c", "java -Djava.library.path=grobid-home/lib/lin-64:grobid-home/lib/lin-64/jep --add-opens java.base/java.lang=ALL-UNNAMED -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
 
 LABEL \
     authors="Luca Foppiano, Patrice Lopez" \
