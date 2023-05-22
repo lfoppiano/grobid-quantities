@@ -37,8 +37,22 @@ Spaces: https://lfoppiano-grobid-quantities.hf.space/
 ## Latest version
 
 The latest released version of grobid-quantities
-is [0.7.2](https://github.com/kermitt2/grobid-quantities/releases/tag/0.7.2). The current development version is
-0.7.3-SNAPSHOT.
+is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/0.7.3). The current development version is
+0.7.4-SNAPSHOT.
+
+### Update from 0.7.2 to 0.7.3
+
+#### Grobid models
+In version 0.7.3 we have updated the DeLFT models. The DL models must be updated by running `./gradlew copyModels`.
+
+#### JDK Update
+The version 0.7.3 enable the support for running with JDK > 11. We recommend to run it with JDK 17.
+Running grobid-quantities with gradle (`./gradlew clean run`) is already supported in the `build.gradle`.
+Running grobid-quantities via the JAR file requires an additional parameter to set the java.path: 
+- Linux: `-Djava.library.path=grobid-home/lib/lin-64:grobid-home/lib/lin-64/jep`
+- Mac: `-Djava.library.path=.:/usr/lib/java:grobid-home/lib/mac_arm-64:{MY_VIRTUAL_ENV}/jep/lib:{MY_VIRTUAL_ENV}/jep/lib/python3.9/site-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED`
+    With `MY_VIRTUAL_ENV` I use `/Users/lfoppiano/anaconda3/envs`
+
 
 ### Update from 0.7.1 to 0.7.2
 
