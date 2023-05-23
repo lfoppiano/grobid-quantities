@@ -35,7 +35,7 @@ RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/c
 
 # Preparing models
 RUN rm -rf /opt/grobid-source/grobid-home/models/*
-RUN ./gradlew clean assemble --no-daemon  --stacktrace --info
+RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
 RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
 
 # Preparing distribution
