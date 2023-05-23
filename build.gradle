@@ -323,7 +323,7 @@ artifacts {
     archives shadowJar
 }
 
-distZip.enabled = false
+distZip.enabled = true
 distTar.enabled = false
 shadowDistZip.enabled = false
 shadowDistTar.enabled = false
