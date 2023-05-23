@@ -21,24 +21,26 @@ FROM openjdk:17-jdk-slim as builder
 USER root
 
 RUN apt-get update && \
-    apt-get -y --no-install-recommends install apt-utils libxml2 git
+    apt-get -y --no-install-recommends install apt-utils libxml2 git unzip
 
 WORKDIR /opt/grobid-source
 
-RUN git clone --depth 1 --branch update-grobid https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities &&  \
-    cd grobid-quantities
+RUN git clone --depth 1 --branch update-grobid https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities-source 
 
-WORKDIR /opt/grobid-source/grobid-quantities
+WORKDIR /opt/grobid-source/grobid-quantities-source
 COPY gradle.properties .
 
 # Adjust config
 RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
 
 # Preparing models
-WORKDIR /opt/grobid-source/grobid-quantities
 RUN rm -rf /opt/grobid-source/grobid-home/models/*
 RUN ./gradlew clean assemble --no-daemon  --stacktrace --info
 RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
+
+# Preparing distribution
+WORKDIR /opt/grobid-source
+RUN unzip -o /opt/grobid-source/grobid-quantities-source/build/distributions/grobid-quantities-*.zip -d grobid-quantities_distribution && mv grobid-quantities_distribution/grobid-quantities-* grobid-quantities
 
 WORKDIR /opt
 
@@ -58,9 +60,9 @@ WORKDIR /opt/grobid
 
 RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp/models /opt/grobid/grobid-quantities/resources/clearnlp/config
 COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
-COPY --from=builder /opt/grobid-source/grobid-quantities/build/libs/* ./grobid-quantities/
-COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config.yml ./grobid-quantities/
-COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
+COPY --from=builder /opt/grobid-source/grobid-quantities ./grobid-quantities/
+COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/config/config.yml ./grobid-quantities/resources/config/
+COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
@@ -71,17 +73,18 @@ RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 #  tar -xzf /tmp/jprofiler_linux_12_0_2.tar.gz -C /usr/local &&\
 #  rm /tmp/jprofiler_linux_12_0_2.tar.gz
 
-
+WORKDIR /opt/grobid/grobid-quantities
 ARG GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-latest}
-
-RUN if [ ! -f "grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar" ]; then mv grobid-quantities/grobid-quantities-*-onejar.jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar; fi  
+ENV GROBID_QUANTITIES_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64 --add-opens java.base/java.lang=ALL-UNNAMED"
 
 EXPOSE 8060 8061 5005
 
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
 #CMD ["sh", "-c", "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005 -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
-CMD ["sh", "-c", "java -Djava.library.path=grobid-home/lib/lin-64 --add-opens java.base/java.lang=ALL-UNNAMED -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
+#CMD ["sh", "-c", "java -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
+CMD ["bin/grobid-quantities", "server", "resources/config/config.yml"]
+
 
 LABEL \
     authors="Luca Foppiano, Patrice Lopez" \
