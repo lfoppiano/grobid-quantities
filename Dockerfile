@@ -59,10 +59,10 @@ RUN apt-get update && \
 WORKDIR /opt/grobid
 
 RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp/models /opt/grobid/grobid-quantities/resources/clearnlp/config
-COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
+COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models/
 COPY --from=builder /opt/grobid-source/grobid-quantities ./grobid-quantities/
 COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/config/config.yml ./grobid-quantities/resources/config/
-COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
+COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models/
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
