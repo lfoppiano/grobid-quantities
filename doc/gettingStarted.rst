@@ -4,6 +4,8 @@
 
 .. _not compatible with Windows: https://grobid.readthedocs.io/en/latest/Troubleshooting/#windows-related-issues
 
+.. _latest discussion: https://github.com/kermitt2/grobid/issues/1014
+
 
 
 Getting started
@@ -11,7 +13,10 @@ Getting started
 
 Before you start
 ~~~~~~~~~~~~~~~~
-.. warning:: Grobid and grobid-quantities are `not compatible with Windows`_. Windows users can easily use Grobid and grobid-quantities through docker comtainers. See below.
+.. warning:: Grobid and grobid-quantities are `not compatible with Windows`_ and limited on Apple M1. While Windows users can easily use Grobid and grobid-quantities through docker containers, the support for grobid on ARM is under development, see the `latest discussion`_. 
+
+.. warning:: Since grobid-quantities 0.7.3 (using grobid 0.7.3), we extended the support to JDK after version 11. This requires specifying the `java.library.path` explicitly. Obviously, *all these issues are solved by using Docker containers*.
+
 
 Install and build
 ~~~~~~~~~~~~~~~~~
@@ -24,15 +29,15 @@ The Grobid-quantities repository provides a configuration file for docker: `reso
 
 To run the container use:
 ::
-     docker run --rm --init -p 8060:8060 -p 8061:8061 -v resources/config/config-docker.yml:/opt/grobid/grobid-quantities/config.yml:ro  lfoppiano/grobid-quantities:0.7.1
+     docker run --rm --init -p 8060:8060 -p 8061:8061 -v resources/config/config-docker.yml:/opt/grobid/grobid-quantities/config.yml:ro  lfoppiano/grobid-quantities:0.7.2
 
 The container will respond on port http://localhost:8060, and 8061 for the admin interface.
 
 Local installation 
 ------------------
-Grobid-quantities requires *JDK 1.8 or greater*, and Grobid to be installed.
+Grobid-quantities requires *JDK 1.8 or greater*, and Grobid to be installed. Since version 0.7.3 we recommend to use *JDK 17 or greater*.
 
-First install the latest development version of GROBID as explained by the `documentation <http://grobid.readthedocs.org>`_.
+First install the latest version of GROBID as explained by the `documentation <http://grobid.readthedocs.org>`_.
 
 Grobid-quantities root directory needs to be placed as sibling sub-project inside Grobid directory:
 ::
@@ -62,11 +67,13 @@ Run some test:
 
 Start and use the service
 '''''''''''''''''''''''''
-
 Grobid-quantities can be run with the following command:
 ::
 
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{virtual_env_path}/lib:{virtual_env_path}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
+
+.. warning:: The command requires the following parameters: ``{arch}`` is the subdirectory under ``grobid-home/lib`` that support the following architectures: ``lin-64``, ``mac-64``, ``mac_arm-64``. ``{virtual_env_path}`` is the path to the virtualenv (e.g. in my case is something like ``/Users/lfoppiano/anaconda3/envs/jep/``)
+
 
 
 Accessing the service
