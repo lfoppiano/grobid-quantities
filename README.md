@@ -49,9 +49,10 @@ In version 0.7.3 we have updated the DeLFT models. The DL models must be updated
 The version 0.7.3 enable the support for running with JDK > 11. We recommend to run it with JDK 17.
 Running grobid-quantities with gradle (`./gradlew clean run`) is already supported in the `build.gradle`.
 Running grobid-quantities via the JAR file requires an additional parameter to set the java.path: 
-- Linux: `-Djava.library.path=grobid-home/lib/lin-64:grobid-home/lib/lin-64/jep`
-- Mac: `-Djava.library.path=.:/usr/lib/java:grobid-home/lib/mac_arm-64:{MY_VIRTUAL_ENV}/jep/lib:{MY_VIRTUAL_ENV}/jep/lib/python3.9/site-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED`
-    With `MY_VIRTUAL_ENV` I use `/Users/lfoppiano/anaconda3/envs`
+- Linux: `-Djava.library.path=../grobid-home/lib/lin-64:../grobid-home/lib/lin-64/jep`
+- Mac (arm): `-Djava.library.path=.:/usr/lib/java:../grobid-home/lib/mac_arm-64:{MY_VIRTUAL_ENV}/jep/lib:{MY_VIRTUAL_ENV}/jep/lib/python3.9/site-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED`
+- Mac (intel): `-Djava.library.path=.:/usr/lib/java:../grobid-home/lib/mac-64:{MY_VIRTUAL_ENV}/jep/lib:{MY_VIRTUAL_ENV}/jep/lib/python3.9/site-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED`
+    With `MY_VIRTUAL_ENV` I use `/Users/lfoppiano/anaconda3/envs/jep`
 
 
 ### Update from 0.7.1 to 0.7.2

@@ -16,14 +16,14 @@ Generation of training data
 Training data generation works the same as in GROBID, with executable name ``createTrainingQuantities``,
 for example:
 ::
-   java -jar build/libs/grobid-quantities-{version}-onejar.jar trainingGeneration -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/ resources/config/config.yml
+   java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar trainingGeneration -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/ resources/config/config.yml
 
 by default the generation of training data is performed on the specified directory.
 The argument ``-r`` will process all files within the subdirectories, recursively.
 
 Help can be invoked with
 ::
-   java -jar build/libs/grobid-quantities-{version}-onejar.jar trainingGeneration --help
+   java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar trainingGeneration --help
 
 
 The input directory can contain PDF (.pdf, scientific articles only), XML/TEI (.xml or .tei,
@@ -55,7 +55,7 @@ Via Gradle :
 
 Via command line:
 ::
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m quantities -a train resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m quantities -a train resources/config/config.yml
 
 Units CRF model
 ^^^^^^^^^^^^^^^
@@ -67,7 +67,7 @@ Via Gradle :
 
 Via command line:
 ::
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m units -a train resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m units -a train resources/config/config.yml
 
 
 Values CRF model
@@ -80,7 +80,7 @@ Via Gradle :
 
 Via command line:
 ::
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m values -a train resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m values -a train resources/config/config.yml
 
 
 Quantified objects CRF model
@@ -95,7 +95,7 @@ Via Gradle :
 
 Via command line:
 ::
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m quantifiedObject -a train resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m quantifiedObject -a train resources/config/config.yml
 
 
 .. For the moment, the default training stop criteria are used. So, the training can be stopped manually after 2000 iterations, simply do a "control-C" to stop
@@ -125,7 +125,7 @@ The training data is taken from ``resouces/dataset/MODEL_NAME/corpus`` and the e
 
 The command to run the holdout evauation is:
 ::
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a holdout resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a holdout resources/config/config.yml
 
 80/20 evaluation
 ^^^^^^^^^^^^^^^^
@@ -134,7 +134,7 @@ The 80/20 evaluation uses random 80% training data in ``resouces/dataset/MODEL_N
 
 The command to run the 80/20 evaluation is:
 ::
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a train_eval resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a train_eval resources/config/config.yml
 
 
 N-fold cross-validation
@@ -145,4 +145,4 @@ The evaluation will then give the average scores over these n models (against te
 
 The command to run the n-fold cross-validation with N folds is the following:
 ::
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a nfold --fold-count N resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a nfold --fold-count N resources/config/config.yml
