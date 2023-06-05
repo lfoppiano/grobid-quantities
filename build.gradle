@@ -394,6 +394,6 @@ release {
     failOnCommitNeeded = false
     tagTemplate = 'v${version}'
     git {
-        requireBranch.set('update-grobid')
+        requireBranch.set('master')
     }
 }

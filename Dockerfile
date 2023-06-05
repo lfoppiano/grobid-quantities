@@ -25,7 +25,7 @@ RUN apt-get update && \
 
 WORKDIR /opt/grobid-source
 
-RUN git clone --depth 1 --branch update-grobid https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities-source 
+RUN git clone --depth 1 --branch master https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities-source 
 
 WORKDIR /opt/grobid-source/grobid-quantities-source
 COPY gradle.properties .
