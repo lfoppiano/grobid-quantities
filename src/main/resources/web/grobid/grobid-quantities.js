@@ -19,11 +19,11 @@ var grobid = (function ($) {
             baseUrl = locaBase.replace("index.html", ext);
         else if (locaBase.indexOf("?") != -1) {
             // remove possible uri parameters
-            baseUrl = locaBase.substring(0,locaBase.indexOf("?")) + ext;
+            baseUrl = locaBase.substring(0, locaBase.indexOf("?")) + ext;
         } else {
             baseUrl = locaBase + ext;
         }
-        
+
         return baseUrl;
     }
 
@@ -124,24 +124,39 @@ var grobid = (function ($) {
         return true;
     }
 
-    function showError(jqXHR, textStatus, errorThrown) {
-        $('#requestResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + jqXHR.responseText + "</font>");
-        responseJson = null;
-    }
 
-    function showError(statusCode, message) {
-        message = "Error: " + statusCode + ", " + message + " - The PDF document cannot be annotated. Please check the server logs.";
-        $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + message + "</font>");
-        responseJson = null;
-        return true;
-    }
+    function onError(message) {
+        if (!message) {
+            message = "The Text or the PDF document cannot be processed. Please check the server logs.";
+        } else {
+            if (message.responseJSON) {
+                let type = message.responseJSON['type']
+                let split = message.responseJSON['description'].split(type);
+                if (split.startsWith(":")) {
+                    split = split.substring(1);
+                }
+                message = split[split.length - 1]
+            } else if (message) {
+                if (typeof message === "string" || message instanceof String) {
+                    message = message;
+                } else {
+                    let type = message.type
+                    if (type !== undefined && message.description) {
+                        let split = message.description.split(type);
+                        if (split.startsWith(":")) {
+                            split = split.substring(1);
+                        } 
+                        message = split[split.length - 1]
+                    } else {
+                        message = message['message']
+                    }
+                }
+            } else {
+                message = "The Text or the PDF document cannot be processed. Please check the server logs. "
+            }
+        }
 
-    function showError(message) {
-        if (!message)
-            message = "Error: ";
-        message += " - The PDF document cannot be annotated. Please check the server logs.";
         $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + message + "</font>");
-        responseJson = null;
         return true;
     }
 
@@ -167,7 +182,7 @@ var grobid = (function ($) {
                 url: urlLocal,
                 data: formData,
                 success: SubmitSuccesful,
-                error: showError,
+                error: onError,
                 contentType: false,
                 processData: false
             });
@@ -303,11 +318,9 @@ var grobid = (function ($) {
             xhr.onreadystatechange = function (e) {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var response = e.target.response;
-                    //var response = JSON.parse(xhr.responseText);
-                    //console.log(response);
                     setupAnnotations(response);
                 } else if (xhr.status !== 200) {
-                    showError(statusCode=xhr.status, message=xhr.statusText);
+                    onError(e.target.response);
                 }
             };
             xhr.send(formData);
@@ -833,10 +846,10 @@ var grobid = (function ($) {
             } else {
                 colorLabel = quantity.rawName;
             }
-            
+
             if (colorLabel)
                 colorLabel = colorLabel.replaceAll(" ", "_");
-                
+
             var rawValue = quantity.rawValue;
             var unit = quantity.rawUnit;
 
