@@ -401,8 +401,6 @@ public class QuantityParser extends AbstractParser {
         int currentSentenceIndex = 0;
         OffsetPosition currentSentence = sentences.get(currentSentenceIndex);
         LayoutToken defaultLayoutToken = new LayoutToken();
-        ;
-        ;
         defaultLayoutToken.setOffset(0);
         int offset = Iterables.getFirst(tokens, defaultLayoutToken).getOffset();
 
@@ -803,32 +801,33 @@ public class QuantityParser extends AbstractParser {
         return findSentenceOffset(sentences, offsets);
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition offsets, int offset) {
-        OffsetPosition currentMeasureOffset = QuantityOperations.getContainingOffset(Arrays.asList(offsets));
-
-        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream().filter(op -> op.start < currentMeasureOffset.start && op.end > currentMeasureOffset.end)
+    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition currentMeasureOffset, int firstTokenOffset) {
+        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream()
+            .filter(sop -> sop.start < currentMeasureOffset.start - firstTokenOffset
+                && sop.end > currentMeasureOffset.end - firstTokenOffset)
             .collect(Collectors.toList());
 
-        return sentencesCurrentMeasure.get(0);
+        if (sentencesCurrentMeasure.size() == 1) {
+            return sentencesCurrentMeasure.get(0);
+        } else if (sentencesCurrentMeasure.size() > 1) {
+            LOGGER.warn("The measurement is spread along multiple sentences. We return an expanded sentence: " + currentMeasureOffset.toString());
+            OffsetPosition defaultValue = new OffsetPosition(0, 0);
+            return new OffsetPosition(Iterables.getFirst(sentencesCurrentMeasure, defaultValue).start, Iterables.getLast(sentencesCurrentMeasure).end);
+        } else {
+            LOGGER.warn("Cannot find sentence. The entity might be inconsistent: " + currentMeasureOffset.toString());
+            OffsetPosition defaultValue = new OffsetPosition(0, 0);
+            return new OffsetPosition(Iterables.getFirst(sentences, defaultValue).start, Iterables.getLast(sentences).end);
+        }
     }
 
     private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
         return findSentenceOffset(sentences, measurement, 0);
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement, int offset) {
+    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement, int firstTokenOffset) {
         OffsetPosition currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
-        List<OffsetPosition> sentencesCurrentMeasure = sentences.stream()
-            .filter(sop -> sop.start < currentMeasureOffset.start - offset && sop.end > currentMeasureOffset.end - offset)
-            .collect(Collectors.toList());
 
-        if (sentencesCurrentMeasure.size() > 1) {
-            throw new GrobidException("The measurement " + measurement + " is spread among two sentences.");
-        } else if (CollectionUtils.isEmpty(sentencesCurrentMeasure)) {
-            LOGGER.warn("Cannot find sentence. The entity might be inconsistent: " + measurement.getRawOffsets().toString());
-            return new OffsetPosition(-1, -1);
-        }
-        return sentencesCurrentMeasure.get(0);
+        return findSentenceOffset(sentences, currentMeasureOffset, firstTokenOffset);
     }
 
     public void setDisableSubstanceParser(boolean disableSubstanceParser) {
