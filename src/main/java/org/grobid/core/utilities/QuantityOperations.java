@@ -203,7 +203,7 @@ public class QuantityOperations {
                 .sorted(Comparator.comparing(o -> o.end))
                 .collect(Collectors.toList());
 
-        return new OffsetPosition(sorted.get(0).start, Iterables.getLast(sorted).end);
+        return new OffsetPosition(Iterables.getFirst(sorted, new OffsetPosition()).start, Iterables.getLast(sorted).end);
     }
 
     /**

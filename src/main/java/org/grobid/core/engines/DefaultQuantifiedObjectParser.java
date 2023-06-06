@@ -1,18 +1,19 @@
 package org.grobid.core.engines;
 
+import com.google.common.collect.Iterables;
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.data.*;
 import org.grobid.core.features.FeatureFactory;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.utilities.LayoutTokensUtil;
-import org.grobid.core.utilities.OffsetPosition;
-import org.grobid.core.utilities.TextParser;
-import org.grobid.core.utilities.UnitUtilities;
+import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
@@ -37,7 +38,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
             TextParser textParser = TextParser.getInstance();
             List<Sentence> parsedSentences = textParser.parseText(text);
             int firstTokenOffsetStart = tokens.get(0).getOffset();
-            parsedSentences.stream().forEach( s -> {
+            parsedSentences.stream().forEach(s -> {
                 s.getOffset().start = s.getOffsetStart() + firstTokenOffsetStart;
                 s.getOffset().end = s.getOffsetEnd() + firstTokenOffsetStart;
             });
@@ -70,38 +71,28 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                     } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
                         (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                         // values of the interval do not matter if min/max or base/range
-                        Quantity quantityLeast = measurement.getQuantityLeast();
-                        if (quantityLeast == null)
-                            quantityLeast = measurement.getQuantityBase();
-                        Quantity quantityMost = measurement.getQuantityMost();
-                        if (quantityMost == null)
-                            quantityMost = measurement.getQuantityRange();
-                        if ((quantityLeast != null) && (quantityLeast.getOffsetEnd() < processedSentence.getOffsetStart())) {
+                        List<Quantity> sortedQuantities = QuantityOperations.toQuantityList(measurement).stream()
+                            .sorted(Comparator.comparingInt(Quantity::getOffsetStart))
+                            .collect(Collectors.toList());
+
+                        Quantity firstQuantity = Iterables.getFirst(sortedQuantities, null);
+                        Quantity lastQuantity = Iterables.getLast(sortedQuantities);
+
+                        if ((lastQuantity != null) && (lastQuantity.getOffsetEnd() < processedSentence.getOffsetStart())) {
                             // next measurement
                             indexMeasurement++;
                             continue;
                         }
-                        if ((quantityLeast != null) && (quantityLeast.getOffsetStart() > processedSentence.getOffsetEnd())) {
+                        if ((firstQuantity != null) && (firstQuantity.getOffsetStart() > processedSentence.getOffsetEnd())) {
                             // next sentence
                             break;
                         }
-                        if ((quantityMost != null) && (quantityMost.getOffsetEnd() < processedSentence.getOffsetStart())) {
-                            // next measurement
-                            indexMeasurement++;
-                            continue;
-                        }
-                        if ((quantityMost != null) && (quantityMost.getOffsetStart() > processedSentence.getOffsetEnd())) {
-                            // next sentence
-                            break;
-                        }
-                        if (quantityLeast != null)
-                            position = quantityLeast.getOffsetStart();
-                        else
-                            position = quantityMost.getOffsetStart();
+
+                        position = firstQuantity.getOffsetStart();
                     } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
                         // list must be consistent in unit type, and avoid too large chunk
                         List<Quantity> quantities = measurement.getQuantityList();
-                        if ((quantities != null) && (quantities.size() > 0)) {
+                        if (CollectionUtils.isNotEmpty(quantities)) {
                             // just exploit the first quantity for positioning
                             Quantity quantity = quantities.get(0);
                             if (quantity.getOffsetEnd() < processedSentence.getOffsetStart()) {
@@ -407,19 +398,24 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
 
     private List<String> getIndexMeasurementTokens(List<Measurement> measurements,
                                                    Sentence processedSentence) {
-        if ((measurements == null) || (measurements.size() == 0))
+        if (CollectionUtils.isEmpty(measurements)) {
             return null;
-        List<String> result = new ArrayList<String>();
+        }
+
+        List<String> result = new ArrayList<>();
         int startSentencePosition = processedSentence.getOffsetStart();
         List<SentenceParse> parses = processedSentence.getParses();
         // we're just considering the first best parse
-        if ((parses == null) || (parses.size() == 0))
+        if (CollectionUtils.isEmpty(parses)) {
             return null;
+        }
+
         SentenceParse parse = parses.get(0);
 
         for (Measurement measurement : measurements) {
             UnitUtilities.Measurement_Type type = measurement.getType();
-            if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
+
+            if (type == UnitUtilities.Measurement_Type.VALUE) {
                 Quantity quantity = measurement.getQuantityAtomic();
                 int position = quantity.getOffsetStart();
                 addTokenIndex(position - startSentencePosition, quantity.getOffsetEnd() - quantity.getOffsetStart(), parse, result);
@@ -430,8 +426,8 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                     position = rawUnit.getOffsetStart();
                     addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
                 }
-            } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
+            } else if ((type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
+                (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
                 // values of the interval do not matter if min/max or base/range
                 Quantity quantityLeast = measurement.getQuantityLeast();
                 if (quantityLeast == null)

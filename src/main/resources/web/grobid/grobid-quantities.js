@@ -132,10 +132,10 @@ var grobid = (function ($) {
             if (message.responseJSON) {
                 let type = message.responseJSON['type']
                 let split = message.responseJSON['description'].split(type);
-                if (split.startsWith(":")) {
-                    split = split.substring(1);
-                }
                 message = split[split.length - 1]
+                if (message.startsWith(":")) {
+                    message = message.substring(1);
+                }
             } else if (message) {
                 if (typeof message === "string" || message instanceof String) {
                     message = message;
@@ -143,10 +143,10 @@ var grobid = (function ($) {
                     let type = message.type
                     if (type !== undefined && message.description) {
                         let split = message.description.split(type);
-                        if (split.startsWith(":")) {
-                            split = split.substring(1);
-                        } 
                         message = split[split.length - 1]
+                        if (message.startsWith(":")) {
+                            message = message.substring(1);
+                        } 
                     } else {
                         message = message['message']
                     }
