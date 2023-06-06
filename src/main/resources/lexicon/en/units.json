@@ -2735,18 +2735,6 @@
               "pow": "-1"
             }
           ]
-        },
-        {
-          "raw": "m/s",
-          "product": [
-            {
-              "base": "m"
-            },
-            {
-              "base": "s",
-              "pow": "-1"
-            }
-          ]
         }
       ],
       "type": "SEDIMENTATION_RATE",
