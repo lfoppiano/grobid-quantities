@@ -1984,6 +1984,29 @@
     {
       "notations": [
         {
+          "raw": "Å"
+        }
+      ],
+      "type": "LENGTH",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "angstrom",
+          "inflections": [
+            "angstroms"
+          ]
+        },
+        {
+          "lemma": "ångström", 
+          "inflections": [
+            "ångströms"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "AU"
         },
         {
