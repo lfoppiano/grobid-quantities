@@ -78,6 +78,7 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         final FilterRegistration.Dynamic qos = environment.servlets().addFilter("QOS", QoSFilter.class);
         qos.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
         qos.setInitParameter("maxRequests", String.valueOf(configuration.getMaxParallelRequests()));
+        qos.setInitParameter("waitMs", String.valueOf(configuration.getWaitMs()));
         
     }
 

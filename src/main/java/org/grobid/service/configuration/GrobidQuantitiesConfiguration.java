@@ -38,6 +38,7 @@ public class GrobidQuantitiesConfiguration extends Configuration {
 
     private List<GrobidConfig.ModelParameters> models = new ArrayList<>();
     private int maxParallelRequests;
+    private int waitMs;
 
     private String cleanlpModelPath = "resources/cleanlp/models";
 
@@ -128,5 +129,16 @@ public class GrobidQuantitiesConfiguration extends Configuration {
 
     public void setCleanlpModelPath(String cleanlpModelPath) {
         this.cleanlpModelPath = cleanlpModelPath;
+    }
+
+    public int getWaitMs() {
+        if (this.waitMs == 0) {
+            this.waitMs = 50;
+        }
+        return this.waitMs;
+    }
+
+    public void setWaitMs(int waitMs) {
+        this.waitMs = waitMs;
     }
 }
