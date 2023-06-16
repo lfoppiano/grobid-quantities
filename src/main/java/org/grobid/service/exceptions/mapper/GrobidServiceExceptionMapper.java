@@ -7,14 +7,13 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
-import org.grobid.core.exceptions.GrobidException;
+import org.grobid.service.exceptions.GrobidServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @Provider
-public class GrobidExceptionMapper implements ExceptionMapper<GrobidException> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GrobidExceptionMapper.class);
+public class GrobidServiceExceptionMapper implements ExceptionMapper<GrobidServiceException> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionMapper.class);
 
     @Context
     protected HttpHeaders headers;
@@ -25,15 +24,13 @@ public class GrobidExceptionMapper implements ExceptionMapper<GrobidException> {
     @Inject
     private GrobidExceptionsTranslationUtility mapper;
 
-
     @Inject
-    public GrobidExceptionMapper() {
+    public GrobidServiceExceptionMapper() {
 
     }
 
     @Override
-    public Response toResponse(GrobidException exception) {
-        LOGGER.error("An exception has occurred:", exception);
-        return mapper.processException(exception, GrobidStatusToHttpStatusMapper.getStatusCode(exception.getStatus()));
+    public Response toResponse(GrobidServiceException exception) {
+        return mapper.processException(exception, exception.getResponseCode());
     }
 }
