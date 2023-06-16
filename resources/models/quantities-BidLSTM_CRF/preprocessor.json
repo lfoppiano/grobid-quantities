@@ -1,9 +1,11 @@
 {
-    "use_char_feature": true,
     "padding": true,
     "return_lengths": true,
+    "return_word_embeddings": true,
     "return_casing": false,
     "return_features": false,
+    "return_chars": true,
+    "return_bert_embeddings": false,
     "vocab_char": {
         "<PAD>": 0,
         "<UNK>": 1,
@@ -260,5 +262,25 @@
         "contains_digit"
     ],
     "max_char_length": 30,
-    "feature_preprocessor": null
+    "feature_preprocessor": null,
+    "indice_tag": {
+        "0": "<PAD>",
+        "1": "B-<unitLeft>",
+        "2": "B-<unitRight>",
+        "3": "B-<valueAtomic>",
+        "4": "B-<valueBase>",
+        "5": "B-<valueLeast>",
+        "6": "B-<valueList>",
+        "7": "B-<valueMost>",
+        "8": "B-<valueRange>",
+        "9": "I-<unitLeft>",
+        "10": "I-<unitRight>",
+        "11": "I-<valueAtomic>",
+        "12": "I-<valueBase>",
+        "13": "I-<valueLeast>",
+        "14": "I-<valueList>",
+        "15": "I-<valueMost>",
+        "16": "I-<valueRange>",
+        "17": "O"
+    }
 }

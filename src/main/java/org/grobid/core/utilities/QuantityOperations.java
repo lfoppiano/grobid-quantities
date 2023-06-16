@@ -49,7 +49,7 @@ public class QuantityOperations {
     }
 
     /**
-     * Get the index of the layout token referring to the to the startOffset, endOffset tokens in the
+     * Get the index of the layout token referring to the startOffset, endOffset tokens in the
      * supplied token list.
      * <p>
      * The returned are (start, end) with end excluded (same as usual java stuff).
@@ -203,7 +203,7 @@ public class QuantityOperations {
                 .sorted(Comparator.comparing(o -> o.end))
                 .collect(Collectors.toList());
 
-        return new OffsetPosition(sorted.get(0).start, Iterables.getLast(sorted).end);
+        return new OffsetPosition(Iterables.getFirst(sorted, new OffsetPosition()).start, Iterables.getLast(sorted).end);
     }
 
     /**

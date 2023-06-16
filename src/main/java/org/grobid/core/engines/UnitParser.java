@@ -111,7 +111,7 @@ public class UnitParser extends AbstractParser {
         TaggingTokenClusteror clusteror = new TaggingTokenClusteror(QuantitiesModels.UNITS, result, tokenizations);
         List<TaggingTokenCluster> clusters = clusteror.cluster();
 
-        int pos = 0; // position in term of characters for creating the offsets
+        int pos = 0; // position of characters for creating the offsets
 
         boolean denominator = false;
         int currentPow = 1;
@@ -178,21 +178,22 @@ public class UnitParser extends AbstractParser {
             } else if (clusterLabel.equals(UNIT_VALUE_OTHER)) {
                 LOGGER.debug(clusterContent + "(O)");
             } else if (clusterLabel.equals(UNIT_VALUE_POW)) {
-                if (clusterContent.equals("/")) {
+                String clusterWithoutSpaces = clusterContent.replace(" ", "");
+                if (clusterWithoutSpaces.equals("/")) {
                     denominator = true;
-                } else if (clusterContent.endsWith("/")) {
+                } else if (clusterWithoutSpaces.endsWith("/")) {
                     denominator = true;
-                    unitBlock.setPow(clusterContent.replace("/", ""));
-                } else if (clusterContent.equals("*")) {
+                    unitBlock.setPow(clusterWithoutSpaces.replace("/", ""));
+                } else if (clusterWithoutSpaces.equals("*")) {
                     //nothing to do
                 } else {
                     if (denominator) {
-                        unitBlock.setPow("-" + clusterContent);
+                        unitBlock.setPow("-" + clusterWithoutSpaces);
                     } else {
-                        unitBlock.setPow(clusterContent);
+                        unitBlock.setPow(clusterWithoutSpaces);
                     }
                 }
-                LOGGER.debug(clusterContent + "(P)");
+                LOGGER.debug(clusterWithoutSpaces + "(P)");
             }
             previousTag = clusterLabel;
         }

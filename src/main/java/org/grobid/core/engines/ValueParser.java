@@ -1,9 +1,9 @@
 package org.grobid.core.engines;
 
+import org.apache.commons.lang3.RegExUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.GrobidModel;
-import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;
-import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Value;
 import org.grobid.core.data.ValueBlock;
 import org.grobid.core.data.normalization.NormalizationException;
@@ -25,9 +25,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
@@ -41,6 +41,7 @@ public class ValueParser extends AbstractParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(ValueParser.class);
 
     private static volatile ValueParser instance;
+    private static final Pattern TILDE_PATTERNS = Pattern.compile("[∼~]");
 
     public static ValueParser getInstance() {
         if (instance == null) {
@@ -86,8 +87,10 @@ public class ValueParser extends AbstractParser {
                 try {
                     BigDecimal secondPart = null;
                     if (block.getPow() != null && block.getBase() != null) {
+
                         final Number pow = format.parse(block.getPowAsString());
                         String baseAsString = removeSpacesTabsAndBl(block.getBaseAsString());
+                        baseAsString = removeTilde(baseAsString);
 
                         final BigDecimal baseBd = new BigDecimal(format.parse(baseAsString).toString());
                         final int intPower = pow.intValue();
@@ -102,6 +105,7 @@ public class ValueParser extends AbstractParser {
 
                     if (block.getNumber() != null) {
                         String numberAsString = removeSpacesTabsAndBl(block.getNumberAsString());
+                        numberAsString = removeTilde(numberAsString);
                         final BigDecimal number = new BigDecimal(format.parse(numberAsString).toString());
                         if (secondPart != null) {
                             return number.multiply(secondPart);
@@ -112,7 +116,7 @@ public class ValueParser extends AbstractParser {
                     }
 
                 } catch (ParseException | ArithmeticException | NumberFormatException e) {
-                    LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
+                    LOGGER.error("Cannot parse " + block + " with Locale " + locale, e);
                 }
 
                 break;
@@ -165,6 +169,13 @@ public class ValueParser extends AbstractParser {
         return null;
     }
 
+    private String removeTilde(String text) {
+        if (StringUtils.startsWithAny(text, "∼", "~")) {
+            return RegExUtils.replaceAll(text, TILDE_PATTERNS, "");
+        }
+        return text;
+    }
+
     private String removeSpacesTabsAndBl(String block) {
         return UnicodeUtil.normaliseText(block)
             .replaceAll("\n", " ")
@@ -184,7 +195,7 @@ public class ValueParser extends AbstractParser {
             text = text.replace("\n\r", " ");
 
             QuantityAnalyzer analyzer = QuantityAnalyzer.getInstance();
-            List<LayoutToken> layoutTokens = analyzer.tokenizeWithLayoutTokenByCharacter(text);
+            List<LayoutToken> layoutTokens = analyzer.tokenizeWithLayoutToken(text);
 
             String ress = addFeatures(layoutTokens);
             String res;
@@ -287,9 +298,14 @@ public class ValueParser extends AbstractParser {
                 valueBlock.getExp().setOffsets(offsets);
                 LOGGER.debug(clusterContent + "(E)");
             } else if (clusterLabel.equals(VALUE_VALUE_TIME)) {
-                valueBlock.setTime(trimmedClusterContent);
-                valueBlock.getTime().setOffsets(offsets);
-                LOGGER.debug(clusterContent + "(T)");
+                if (StringUtils.length(trimmedClusterContent) < 2 && previous != null) {
+                    appendToPrevious(valueBlock, trimmedClusterContent, previous);
+                    LOGGER.debug(clusterContent + "appended to previous");
+                } else {
+                    valueBlock.setTime(trimmedClusterContent);
+                    valueBlock.getTime().setOffsets(offsets);
+                    LOGGER.debug(clusterContent + "(T)");
+                }
             } else if (clusterLabel.equals(VALUE_VALUE_ALPHA)) {
                 if (isNumeric(trimmedClusterContent)) {
                     valueBlock.setNumber(valueBlock.getNumberAsString() + trimmedClusterContent);
@@ -300,9 +316,14 @@ public class ValueParser extends AbstractParser {
                     }
                     LOGGER.debug(clusterContent + "(fake A) -> (N)");
                 } else {
-                    valueBlock.setAlpha(trimmedClusterContent);
-                    valueBlock.getAlpha().setOffsets(offsets);
-                    LOGGER.debug(clusterContent + "(A)");
+                    if (valueBlock.getAlpha() != null) {
+                        valueBlock.getAlpha().setValue(valueBlock.getAlphaAsString() + trimmedClusterContent);
+                        valueBlock.getAlpha().setOffsets(new OffsetPosition(valueBlock.getAlpha().getOffsets().start, offsets.end));
+                    } else {
+                        valueBlock.setAlpha(trimmedClusterContent);
+                        valueBlock.getAlpha().setOffsets(offsets);
+                        LOGGER.debug(clusterContent + "(A)");
+                    }
                 }
             }
             previous = clusterLabel;

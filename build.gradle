@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 buildscript {
     repositories {
         mavenLocal()
@@ -6,6 +8,9 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
     }
+    dependencies {
+        classpath group: 'org.yaml', name: 'snakeyaml', version: '1.19'
+    }
 }
 
 plugins {
@@ -13,9 +18,12 @@ plugins {
     id 'application'
     id 'maven-publish'
     id 'jacoco'
-    id 'com.github.kt3k.coveralls' version '2.12.0'
+    id 'com.github.kt3k.coveralls' version '2.12.2'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
-    id 'net.researchgate.release' version '2.6.0'
+    id "de.undercouch.download" version "4.1.1"
+    id 'com.palantir.git-version' version '0.12.3'
+    id 'net.researchgate.release' version '3.0.2'
+    id "org.jetbrains.kotlin.jvm" version "1.8.21"
 }
 
 group = "org.grobid"
@@ -25,12 +33,24 @@ measurements (e.g. pressure, temperature, etc.), to parse and normalization them
 these measurements into SI units. We focus our work on technical and scientific articles (text, XML and PDF input) 
 and patents (text and XML input)."""
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    //    options.compilerArgs << "-Xlint:deprecation"
+    //    options.compilerArgs << "-Xlint:unchecked"
 }
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+
 tasks.run.workingDir = rootProject.rootDir
 
 ext {
@@ -50,18 +70,23 @@ repositories {
     }
 }
 
+
+
 dependencies {
     //Tests
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.easymock:easymock:4.3'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.3'
+    testImplementation(platform('org.junit:junit-bom:5.9.3'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation 'org.easymock:easymock:5.1.0'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
     testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
     testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
 
     //GROBID
-    implementation 'org.grobid:grobid-core:0.7.1'
-    implementation 'org.grobid:grobid-trainer:0.7.1'
-    implementation 'org.grobid:grobid-service:0.7.1'
+    implementation 'org.grobid:grobid-core:0.7.3'
+    implementation 'org.grobid:grobid-trainer:0.7.3'
+    implementation 'org.grobid:grobid-service:0.7.3'
     implementation "xerces:xercesImpl:2.12.0"
     implementation "net.arnx:jsonic:1.3.10"
     implementation "net.sf.saxon:Saxon-HE:9.6.0-9"
@@ -69,6 +94,7 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
     implementation 'org.apache.opennlp:opennlp-tools:1.9.1'
     implementation 'black.ninia:jep:4.0.2'
+    implementation "org.apache.lucene:lucene-analyzers-common:4.5.1"
 
     //Apache commons
     implementation 'org.apache.commons:commons-collections4:4.4'
@@ -86,7 +112,7 @@ dependencies {
     // measurements
 
     // (1) UOM 2.x
-    implementation 'tech.units:indriya:2.1.2'
+    implementation 'tech.units:indriya:2.1.3'
     implementation group: 'si.uom', name: 'si-units', version: '2.1'
     implementation group: 'si.uom', name: 'si-quantity', version: '2.1'
     implementation group: 'systems.uom', name: 'systems-quantity', version: '2.1'
@@ -130,21 +156,13 @@ configurations {
     implementation.exclude group: 'log4j', module: "log4j"
 }
 
-configurations.all {
+configurations.configureEach {
     resolutionStrategy {
         force 'xml-apis:xml-apis:1.4.01'
     }
 }
 
 /** Other configuration **/
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-    //    options.compilerArgs << "-Xlint:deprecation"
-    //    options.compilerArgs << "-Xlint:unchecked"
-}
 
 sourceSets.main.resources {
     srcDirs = ["src/main/resources", "resources/config"]
@@ -155,6 +173,34 @@ sourceSets.test.resources {
 
 test {
     exclude '**/**IntegrationTest**'
+    useJUnitPlatform()
+    maxHeapSize = "1024m"
+
+    def libraries = ""
+    if (Os.isFamily(Os.FAMILY_MAC)) {
+        if (Os.OS_ARCH.equals("aarch64")) {
+            libraries = "${file("./grobid-home/lib/mac_arm-64").absolutePath}"
+        } else {
+            libraries = "${file("./grobid-home/lib/mac-64").absolutePath}"
+        }
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        def jepDir = rootProject.rootDir.getAbsolutePath() + "/grobid-home/lib/lin-64/jep"
+        libraries = jepDir
+        jepDir = rootProject.rootDir.getAbsolutePath() + "/grobid-home/lib/lin-64"
+        libraries += ":" + jepDir
+    } else {
+        throw new RuntimeException("Unsupported platform!")
+    }
+
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
+            "--add-opens", "java.base/java.io=ALL-UNNAMED",
+            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+            "--add-opens", "java.base/java.util.regex=ALL-UNNAMED",
+            "--add-opens", "java.base/java.math=ALL-UNNAMED",
+            "--add-opens", "java.base/java.text=ALL-UNNAMED"
+    }
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + libraries
 }
 
 tasks.run.workingDir = rootProject.rootDir
@@ -163,20 +209,70 @@ mainClassName = 'org.grobid.service.GrobidSuperconductorsApplication'
 
 run {
     args = ['server', 'resources/config/config.yml']
+
+    def libraries = ""
+    if (Os.isFamily(Os.FAMILY_MAC)) {
+        if (Os.OS_ARCH.equals("aarch64")) {
+            libraries = "${file("../grobid-home/lib/mac_arm-64").absolutePath}"
+        } else {
+            libraries = "${file("../grobid-home/lib/mac-64").absolutePath}"
+        }
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        libraries = "${file("../grobid-home/lib/lin-64/jep").absolutePath}:" +
+            "${file("../grobid-home/lib/lin-64").absolutePath}:"
+    } else {
+        throw new RuntimeException("Unsupported platform!")
+    }
+
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+        jvmArgs "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    }
+    workingDir = rootProject.rootDir
+    def javaLibraryPath = "${System.getProperty('java.library.path')}:" + libraries
+
+    systemProperty "java.library.path", javaLibraryPath
 }
 
 task integration(type: Test) {
     include '**'
+
+    maxHeapSize = "1024m"
+
+    def libraries = ""
+    if (Os.isFamily(Os.FAMILY_MAC)) {
+        if (Os.OS_ARCH.equals("aarch64")) {
+            libraries = "${file("./grobid-home/lib/mac_arm-64").absolutePath}"
+        } else {
+            libraries = "${file("./grobid-home/lib/mac-64").absolutePath}"
+        }
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        def jepDir = rootProject.rootDir.getAbsolutePath() + "/grobid-home/lib/lin-64/jep"
+        libraries = jepDir
+        jepDir = rootProject.rootDir.getAbsolutePath() + "/grobid-home/lib/lin-64"
+        libraries += ":" + jepDir
+    } else {
+        throw new RuntimeException("Unsupported platform!")
+    }
+
+    if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
+//        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
+//            "--add-opens", "java.base/java.io=ALL-UNNAMED",
+//            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+//            "--add-opens", "java.base/java.util.regex=ALL-UNNAMED",
+//            "--add-opens", "java.base/java.math=ALL-UNNAMED",
+//            "--add-opens", "java.base/java.text=ALL-UNNAMED"
+    }
+    systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + libraries
 }
 
 // Training configuration
 
 def trainerTasks = [
-        //Training models
-        "train_units"            : "org.grobid.trainer.UnitTrainer",
-        "train_quantities"       : "org.grobid.trainer.QuantitiesTrainer",
-        "train_values"           : "org.grobid.trainer.ValueTrainer",
-        "train_quantifiedObjects": "org.grobid.trainer.QuantifiedObjectTrainer"
+    //Training models
+    "train_units"            : "org.grobid.trainer.UnitTrainer",
+    "train_quantities"       : "org.grobid.trainer.QuantitiesTrainer",
+    "train_values"           : "org.grobid.trainer.ValueTrainer",
+    "train_quantifiedObjects": "org.grobid.trainer.QuantifiedObjectTrainer"
 ]
 
 
@@ -198,6 +294,13 @@ processResources {
 // return the default value if the property has not been specified in command line
 ext.getArg = { propName, defaultVal ->
     return project.hasProperty(propName) ? project.getProperty(propName) : defaultVal;
+}
+
+processResources {
+    filesMatching(["version.txt", "revision.txt"]) {
+        expand(project_version: project.property('version'),
+            project_revision: gitVersion())
+    }
 }
 
 /*** Packaging and distribution ***/
@@ -222,7 +325,7 @@ artifacts {
     archives shadowJar
 }
 
-distZip.enabled = false
+distZip.enabled = true
 distTar.enabled = false
 shadowDistZip.enabled = false
 shadowDistTar.enabled = false
@@ -238,18 +341,42 @@ publishing {
     }
 }
 
+def conf = new org.yaml.snakeyaml.Yaml().load(new File("resources/config/config.yml").newInputStream())
+def grobidHome = conf.grobidHome.replace("\$", "").replace('{', "").replace("GROBID_HOME:- ", "").replace("}", "")
+
 /** Model management **/
+
 task copyModels(type: Copy) {
     from "${rootDir}/resources/models"
     include "**/*.wapiti"
     include "**/config.json"
+    include "**/transformer-config.json"
+    include "**/transformer-tokenizer/**"
     include "**/model_weights.hdf5"
     include "**/preprocessor.json"
-    into "${rootDir}/../grobid-home/models/"
+    exclude "**/features-engineering/**"
+    exclude "**/result-logs/**"
+    into "${rootDir}/${grobidHome}/models/"
+
+    doLast {
+        print "Copy models under grobid-home: ${grobidHome}"
+    }
+}
+
+task downloadTransformers(dependsOn: copyModels) {
+    doLast {
+        download {
+            src "https://transformers-data.s3.eu-central-1.amazonaws.com/quantities-transformers.zip"
+            dest "${rootDir}/${grobidHome}/models/quantities-transformers.zip"
+            overwrite false
+            print "Download bulky transformers files under grobid-home: ${grobidHome}"
+        }
+        ant.unzip(src: "${rootDir}/${grobidHome}/models/quantities-transformers.zip", dest: "${rootDir}/${grobidHome}/models/")
+    }
 }
 
 wrapper {
-    gradleVersion "7.1.1"
+    gradleVersion "7.2"
 }
 
 jacocoTestReport {
@@ -264,5 +391,11 @@ coveralls {
     jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
 }
 
-
-
+release {
+    failOnUnversionedFiles = false
+    failOnCommitNeeded = false
+    tagTemplate = 'v${version}'
+    git {
+        requireBranch.set('master')
+    }
+}

@@ -21,7 +21,7 @@
 	<value><number>60</number></value>
 	<value><alpha>many</alpha></value>
 	<value><alpha>4.5 million</alpha></value>
-	<value><time>2015</time></value>
+<!-- 	<value><time>2015</time></value>-->
 	<value><number>30</number></value>
 	<value><alpha>few</alpha></value>
 	<value><number>80</number></value>
@@ -30,7 +30,7 @@
 	<value><number>35</number></value>
 	<value><number>27</number></value>
 	<value><number>34</number></value>
-	<value><time>2016</time></value>
+<!-- 	<value><time>2016</time></value>-->
 	<value><number>43</number></value>
 	<value><number>40</number></value>
 	<value><number>43</number></value>
@@ -68,8 +68,8 @@
 	<value><number>30</number></value>
 	<value><number>38</number></value>
 	<value><number>21</number></value>
-	<value><time>2011</time></value>
-	<value><time>3 h 15</time></value>
+<!-- 	<value><time>2011</time></value>-->
+<!-- 	<value><time>3 h 15</time></value>-->
 	<value><number>3.59</number></value>
 	<value><number>37</number></value>
 	<value><number>5.72</number></value>

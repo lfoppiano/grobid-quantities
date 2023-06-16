@@ -1,11 +1,11 @@
 <values xmlns="http://www.tei-c.org/ns/1.0">
     <value><time>2011</time></value>
 	<value><number>232/250</number></value>
-	<value><time>2009</time></value>
-	<value><time>2011</time></value>
+<!-- 	<value><time>2009</time></value>-->
+<!-- 	<value><time>2011</time></value>-->
 	<value><alpha>one</alpha></value>
 	<value><alpha>one</alpha></value>
-	<value><time>2009</time></value>
+<!-- 	<value><time>2009</time></value>-->
 	<value><number>8,379</number></value>
 	<value><number>52.7</number></value>
 	<value><number>18.8</number></value>
@@ -29,9 +29,9 @@
 	<value><number>3</number></value>
 	<value><number>3</number></value>
 	<value><number>3</number></value>
-	<value><time>2009</time></value>
-	<value><time>2011</time></value>
-	<value><time>2009</time></value>
+<!-- 	<value><time>2009</time></value>-->
+<!-- 	<value><time>2011</time></value>-->
+<!-- 	<value><time>2009</time></value>-->
 	<value><number>365</number></value>
 	<value><alpha>two</alpha></value>
 	<value><alpha>one</alpha></value>
@@ -41,8 +41,8 @@
 	<value><number>28</number></value>
 	<value><number>1</number></value>
 	<value><number>812,314</number></value>
-	<value><time>2009</time></value>
-	<value><time>2011</time></value>
+<!-- 	<value><time>2009</time></value>-->
+<!-- 	<value><time>2011</time></value>-->
 	<value><number>132,927</number></value>
 	<value><number>52</number></value>
 	<value><number>40</number></value>

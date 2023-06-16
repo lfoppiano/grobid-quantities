@@ -1,5 +1,6 @@
 package org.grobid.core.data.normalization;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.data.UnitDefinition;
@@ -78,8 +79,15 @@ public class UnitNormalizer {
 
         UnitDefinition def = quantityLexicon.getUnitByNotation(reformatted);
         if (def == null) {
+            String reformattedWithoutSpaces = StringUtils.trim(reformatted).replace(" ", "");
+            def = quantityLexicon.getUnitByNotation(reformattedWithoutSpaces);
+            parsedUnit.setRawName(reformattedWithoutSpaces);
+        }
+
+        if (def == null) {
             def = quantityLexicon.getUnitbyName(reformatted);
         }
+
         parsedUnit.setUnitDefinition(def);
         return parsedUnit;
     }

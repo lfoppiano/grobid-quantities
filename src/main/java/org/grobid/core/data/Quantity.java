@@ -253,8 +253,11 @@ public class Quantity implements Comparable<Quantity> {
             } else {
                 json.append(", ");
             }
-            json.append("\"normalizedQuantity\" : " + normalizedQuantity.getValue() + ",");
-            json.append("\"normalizedUnit\" : " + normalizedQuantity.getUnit().toJson());
+            json.append("\"normalizedQuantity\" : " + normalizedQuantity.getValue());
+            if (normalizedQuantity.getUnit() != null) {
+                json.append(", ");
+                json.append("\"normalizedUnit\" : " + normalizedQuantity.getUnit().toJson());
+            }
         }
 
         if (hasOffset()) {

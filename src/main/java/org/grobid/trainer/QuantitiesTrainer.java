@@ -55,7 +55,7 @@ public class QuantitiesTrainer extends AbstractTrainer {
 
         try {
 
-            File adaptedCorpusDir = new File(corpusDir.getAbsolutePath() + File.separator + "final");
+            File adaptedCorpusDir = new File(corpusDir.getAbsolutePath());
             LOGGER.info("sourcePathLabel: " + adaptedCorpusDir);
             if (trainingOutputPath != null)
                 LOGGER.info("outputPath for training data: " + trainingOutputPath);

@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.valueOf;
+
 /**
  *  Class for representing a complete sentence parse. The representation covers a single parse  
  *  including syntactic and semantic dependencies as well as predication and semantic roles
@@ -135,7 +137,7 @@ public class SentenceParse {
                 if (tokenStructures == null)
                     tokenStructures = new HashMap<Integer, String>();
 //System.out.println("put: " + startPosition + "\n" + lines[i]);                
-                tokenStructures.put(new Integer(startPosition), lines[i]);
+                tokenStructures.put(valueOf(startPosition), lines[i]);
                 if (tokenIndex == null)
                     tokenIndex = new HashMap<String, String>();
                 tokenIndex.put(pieces[0].trim(), lines[i]);
@@ -158,7 +160,7 @@ public class SentenceParse {
                         startPosition = text.indexOf(subtoken, startPosition);
                         if (tokenStructures == null)
                             tokenStructures = new HashMap<Integer, String>();
-                        tokenStructures.put(new Integer(startPosition), lines[i]);
+                        tokenStructures.put(valueOf(startPosition), lines[i]);
                     }
                 }
 
@@ -166,10 +168,10 @@ public class SentenceParse {
                 // index offset positions in the offset maps
                 if (index2OffsetStart == null)
                     index2OffsetStart = new HashMap<String, Integer>();
-                index2OffsetStart.put(pieces[0].trim(), new Integer(startPosition));
+                index2OffsetStart.put(pieces[0].trim(), valueOf(startPosition));
                 if (index2OffsetEnd == null)
                     index2OffsetEnd = new HashMap<String, Integer>();
-                index2OffsetEnd.put(pieces[0].trim(), new Integer(endPosition));
+                index2OffsetEnd.put(pieces[0].trim(), valueOf(endPosition));
                 //System.out.println(pieces[0].trim() + " " + startPosition + " " + endPosition + " / " + text.substring(startPosition, endPosition) );
                 // parent -> children information
                 if (childIndex == null)
@@ -276,7 +278,7 @@ public class SentenceParse {
     public String getTokenStructureByPosition(int position) {
         if (tokenStructures == null)
             return null;
-        return tokenStructures.get(new Integer(position));
+        return tokenStructures.get(valueOf(position));
     }
 
     public String getTokenStructureByIndex(String index) {

@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.grobid.core.data.MeasurementsResponse;
+import org.grobid.core.data.ServiceInfo;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.engines.QuantitiesEngine;
 import org.grobid.core.engines.QuantityParser;
@@ -32,10 +33,13 @@ public class AnnotationController {
 
     private QuantitiesEngine engine;
 
+    private GrobidQuantitiesConfiguration configuration;
+
     @Inject
     public AnnotationController(GrobidQuantitiesConfiguration configuration,
                                 QuantitiesEngine engine) {
         this.engine = engine;
+        this.configuration = configuration;
     }
 
     @Path(PATH_IS_ALIVE)
@@ -57,6 +61,14 @@ public class AnnotationController {
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
         return response;
+    }
+
+
+    @Path("/version")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public ServiceInfo getVersion() {
+        return new ServiceInfo(this.configuration.getVersion(), this.configuration.getRevision());
     }
 
     @Path(PATH_ANNOTATE_QUANTITY_PDF)

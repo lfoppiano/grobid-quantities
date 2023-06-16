@@ -79,4 +79,16 @@ public class UnitBlockTest {
 
         assertThat(UnitBlock.asProduct(unitBlockList), is("mm^2·km^-2"));
     }
+
+    @Test
+    public void testErrorCase() {
+
+        final List<UnitBlock> unitBlockList = Arrays.asList(
+            new UnitBlock("k", "J", ""),
+            new UnitBlock("", "m", "-3")
+        );
+
+        assertThat(UnitBlock.asString(unitBlockList), is("kJ/m^3"));
+    }
+
 }

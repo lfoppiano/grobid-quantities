@@ -87,17 +87,19 @@ public class QuantityNormalizer {
         Quantity.Normalized normalizedQuantity = new Quantity().new Normalized();
 
         normalizedQuantity.setRawValue(quantity.getRawValue());
-        normalizedQuantity.setUnit(new Unit(unit.getSystemUnit().toString()));
+        if (StringUtils.isNotBlank(unit.getSystemUnit().toString())) {
+            normalizedQuantity.setUnit(new Unit(unit.getSystemUnit().toString()));
+        }
         try {
             if (quantity.getParsedValue() != null) {
                 BigDecimal converted = new BigDecimal(unit.getConverterTo(unit.getSystemUnit()).convert(quantity.getParsedValue().getNumeric()).toString());
                 normalizedQuantity.setValue(converted);
             } else {
-                normalizedQuantity.setValue(new BigDecimal(quantity.getRawValue()));
+                throw new NormalizationException("Normalisation impossible without parsed value. ");
             }
         } catch (Exception e) {
             throw new NormalizationException("The value " + quantity.getRawValue() + " cannot be normalized. It is either not a valid value " +
-                    "or it is not recognized from the available parsers.", e);
+                "or it is not recognized from the available parsers.", e);
         }
         quantity.setNormalizedQuantity(normalizedQuantity);
 
@@ -105,7 +107,16 @@ public class QuantityNormalizer {
 
         if (quantity.isNormalized()) {
             UnitDefinition definition = unitNormalizer.findDefinition(quantity.getNormalizedQuantity().getUnit());
-            if (definition != null) {
+            if (definition == null) {
+                String normalisedUnit = quantity.getNormalizedQuantity().getUnit().getRawName();
+                String normalisedUnitWithoutSuperscripts = replaceSuperscripts(normalisedUnit);
+                Unit newUnit = new Unit(normalisedUnitWithoutSuperscripts);
+
+                definition = unitNormalizer.findDefinition(newUnit);
+                if (definition != null) {
+                    quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
+                }
+            } else {
                 quantity.getNormalizedQuantity().getUnit().setUnitDefinition(definition);
             }
         }
@@ -113,24 +124,41 @@ public class QuantityNormalizer {
         return normalizedQuantity;
     }
 
+    private String replaceSuperscripts(String normalisedUnit) {
+        String str = normalisedUnit.replaceAll("⁰", "0");
+        str = str.replaceAll("¹", "1");
+        str = str.replaceAll("²", "2");
+        str = str.replaceAll("³", "3");
+        str = str.replaceAll("⁴", "4");
+        str = str.replaceAll("⁵", "5");
+        str = str.replaceAll("⁶", "6");
+        str = str.replaceAll("⁷", "7");
+        str = str.replaceAll("⁸", "8");
+        str = str.replaceAll("⁹", "9");
+
+        return str;
+    }
+
     protected javax.measure.Unit tryParsing(Unit parsedUnit) throws NormalizationException {
         List<UnitFormat> parsers = new ArrayList<>();
 
         if (parsedUnit.getUnitDefinition() == null) {
-            parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(UNICODE_PROVIDER), unitFormats.get(SESHAT_PROVIDER));
+            parsers.add(unitFormats.get(UCUM_PROVIDER));
+            parsers.add(unitFormats.get(UNICODE_PROVIDER));
         } else {
             if (!parsedUnit.getUnitDefinition().isSkipNormalisation()) {
                 if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_BASE) {
-
                     //I normalize SI units
-                    parsers = Arrays.asList(unitFormats.get(SI_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER));
+                    parsers.add(unitFormats.get(SI_PROVIDER));
+                    parsers.add(unitFormats.get(UOM_DEFAULT_PROVIDER));
                 } else if (parsedUnit.getUnitDefinition().getSystem() == UnitUtilities.System_Type.SI_DERIVED) {
-
                     //I normalize SI derived units
-                    parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(UOM_DEFAULT_PROVIDER), unitFormats.get(UNICODE_PROVIDER));
-
+                    parsers.add(unitFormats.get(UCUM_PROVIDER));
+                    parsers.add(unitFormats.get(UOM_DEFAULT_PROVIDER));
+                    parsers.add(unitFormats.get(UNICODE_PROVIDER));
                 } else {
-                    parsers = Arrays.asList(unitFormats.get(UCUM_PROVIDER), unitFormats.get(COMMON_PROVIDER));
+                    parsers.add(unitFormats.get(UCUM_PROVIDER));
+                    parsers.add(unitFormats.get(COMMON_PROVIDER));
                 }
             }
         }
@@ -139,7 +167,7 @@ public class QuantityNormalizer {
 
         if (CollectionUtils.isEmpty(parsers)) {
             throw new NormalizationException("Cannot find a parser for " + parsedUnit.getRawName()
-                    + ". Please check the dependencies of UOM or make sure the unit you're trying ot parse is supported. ");
+                + ". Please check the dependencies of UOM or make sure the unit you're trying ot parse is supported. ");
         }
 
         javax.measure.Unit unit = null;
@@ -148,7 +176,7 @@ public class QuantityNormalizer {
                 unit = formatService.parse(parsedUnit.getRawName());
                 break;
             } catch (Throwable e) {
-                LOGGER.warn("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), e);
+                LOGGER.debug("Cannot parse " + parsedUnit + " with " + formatService.getClass().getName(), e);
             }
         }
 
@@ -165,26 +193,25 @@ public class QuantityNormalizer {
                         //handling 1/{unit}, processing just the unit
                         if (StringUtils.equalsAnyIgnoreCase(block.getPow(), "-1", "−1")) {
                             String onlyUnit = block.getPrefix() + block.getBase();
-                            javax.measure.Unit<?> onlyUnitParsed = null;
                             try {
-                                onlyUnitParsed = formatService.parse(onlyUnit);
+                                javax.measure.Unit<?> onlyUnitParsed = formatService.parse(onlyUnit);
+                                unitList.add(onlyUnitParsed.pow(-1));
                             } catch (Throwable e2) {
                                 LOGGER.warn("Trying excluding the negative power. Cannot parse " + onlyUnit + " with " + formatService.getClass().getName(), e2);
                             }
-                            unitList.add(onlyUnitParsed.pow(-1));
                             break;
                         }
 
-                        LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), e);
+                        LOGGER.debug("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), e);
                     } catch (Throwable t) {
-                        LOGGER.warn("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), t);
+                        LOGGER.debug("Cannot parse " + block.toString() + " with " + formatService.getClass().getName(), t);
                     }
                 }
             }
 
             if (CollectionUtils.isEmpty(unitList) || unitList.size() != parsedUnit.getProductBlocks().size()) {
                 throw new NormalizationException("Cannot parse " + parsedUnit.getRawName() + " using "
-                        + Arrays.toString(parsers.toArray()));
+                    + Arrays.toString(parsers.toArray()));
             }
 
             javax.measure.Unit result = null;

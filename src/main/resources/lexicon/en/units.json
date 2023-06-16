@@ -513,7 +513,7 @@
     {
       "notations": [
         {
-          "raw": "a"
+          "raw": "yr"
         }
       ],
       "type": "TIME",
@@ -537,6 +537,32 @@
           "lemma": "fortnight",
           "inflections": [
             "fortnights"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TIME",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "century",
+          "inflections": [
+            "centuries"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TIME",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "millenium",
+          "inflections": [
+            "millenium",
+            "kiloannum",
+            "kyr"
           ]
         }
       ]
@@ -968,6 +994,9 @@
       "notations": [
         {
           "raw": "Ω"
+        },
+        {
+          "raw": "Ω"
         }
       ],
       "type": "ELECTRIC_RESISTANCE",
@@ -1112,6 +1141,24 @@
       "notations": [
         {
           "raw": "Wb"
+        },
+        {
+          "raw": "Vs"
+        },
+        {
+          "raw": "V*s"
+        },
+        {
+          "raw": "V•s"
+        },
+        {
+          "raw": "T*s^2"
+        },
+        {
+          "raw": "T•s^2"
+        },
+        {
+          "raw": "T•s"
         }
       ],
       "type": "MAGNETIC_FLUX",
@@ -1123,6 +1170,58 @@
           "inflections": [
             "webers"
           ]
+        },
+        {
+          "lemma": "Volt per second",
+          "inflections": [
+            "Volt per seconds",
+            "Volts per second",
+            "Volts per seconds"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Wb/m2"
+        },
+        {
+          "raw": "Wb/m^2"
+        },
+        {
+          "raw": "Wb/(m^2)"
+        }
+      ],
+      "type": "MAGNETIC_FLUX_DENSITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "Weber for square meter",
+          "inflections": [
+            "Weber for square meter",
+            "Webers for square meters"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "G"
+        },
+        {
+          "raw": "Gs"
+        }
+      ],
+      "type": "MAGNETIC_FLUX_DENSITY",
+      "system": "CGS",
+      "supportsPrefixes": true,
+      "skipNormalisation": false, 
+      "names": [
+        {
+          "lemma": "Gauss"
         }
       ]
     },
@@ -1514,6 +1613,9 @@
     {
       "notations": [
         {
+          "raw": "bar"
+        },
+        {
           "raw": "Bar"
         }
       ],
@@ -1879,6 +1981,29 @@
         },
         {
           "lemma": "square radian"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Å"
+        }
+      ],
+      "type": "LENGTH",
+      "system": "NON_SI",
+      "names": [
+        {
+          "lemma": "angstrom",
+          "inflections": [
+            "angstroms"
+          ]
+        },
+        {
+          "lemma": "ångström", 
+          "inflections": [
+            "ångströms"
+          ]
         }
       ]
     },
@@ -2267,6 +2392,24 @@
     {
       "notations": [
         {
+          "raw": "MGOe"
+        }
+      ],
+      "type": "MAXIMUM_ENERGY_PRODUCT",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "mega-gauss-oersted"
+        },
+        {
+          "lemma": "Mega Gauss Oersted"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "dyn"
         }
       ],
@@ -2341,6 +2484,292 @@
         {
           "lemma": "electron-volt",
           "inflection": "electron-volts"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "J K^-1 m^-3"
+        },
+        {
+          "raw": "J/K*m-3"
+        },
+        {
+          "raw": "J/(K*m^3)"
+        },
+        {
+          "raw": "J/(K*m³)"
+        },
+        {
+          "raw": "J/K•m-3"
+        },
+        {
+          "raw": "J/(K•m^3)"
+        },
+        {
+          "raw": "J/(K•m³)"
+        }
+      ],
+      "type": "VOLUMETRIC_HEAT_CAPACITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "volumetric heat capacity"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "J m^-3"
+        },
+        {
+          "raw": "J*m^-3"
+        },
+        {
+          "raw": "J•m^-3"
+        },
+        {
+          "raw": "J/m^3"
+        },
+        {
+          "raw": "J/m³"
+        }
+      ],
+      "type": "MAXIMUM_ENERGY_PRODUCT",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "maximum energy product",
+          "inflection": "Maximum energy products"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "at. %"
+        },
+        {
+          "raw": "at %"
+        },
+        {
+          "raw": "at%"
+        },
+        {
+          "raw": "at.%"
+        }
+      ],
+      "type": "ATOMIC_RATIO",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "atomic ratio"
+        },
+        {
+          "lemma": "atomic percentage"
+        }
+      ]
+    },{
+      "notations": [
+        {
+          "raw": "wt. %"
+        },
+        {
+          "raw": "wt %"
+        },
+        {
+          "raw": "wt%"
+        },
+        {
+          "raw": "wt.%"
+        }
+      ],
+      "type": "WEIGHT_RATIO",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "weight ratio"
+        },
+        {
+          "lemma": "weight percentage"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "kg m^-2 yr^-1",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "kg/(m^2*yr)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "g/(m^2*yr)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "kg/(m2*yr)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },{
+          "raw": "kg/m2·yr"
+        },
+        {
+          "raw": "kg/m2/yr",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "kg/(s·m²)",
+          "product": [
+            {
+              "prefix": "k",
+              "base": "g"
+            },
+            {
+              "base": "m",
+              "pow": "-2"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "MASS_ACCUMULATION_RATE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "mass accumulation rate",
+          "inflections": [
+            "mass accumulation rates",
+            "MAR"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "cm yr-1",
+          "product": [
+            {
+              "prefix": "c",
+              "base": "m"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "cm yr^-1",
+          "product": [
+            {
+              "prefix": "c",
+              "base": "m"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "cm/yr",
+          "product": [
+            {
+              "prefix": "c",
+              "base": "m"
+            },
+            {
+              "base": "yr",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "SEDIMENTATION_RATE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "sedimentation rate",
+          "inflection": "sedimentation rates"
         }
       ]
     }

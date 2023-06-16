@@ -1,32 +1,43 @@
+.. topic:: Getting started, build, install
+
 .. _Python client GitHub page: https://github.com/lfoppiano/grobid-quantities-python-client
 
-.. topic:: Getting started, build, install
+.. _not compatible with Windows: https://grobid.readthedocs.io/en/latest/Troubleshooting/#windows-related-issues
+
+.. _latest discussion: https://github.com/kermitt2/grobid/issues/1014
+
+
 
 Getting started
 ===============
 
-Grobid-quantities requires *JDK 1.8 or greater* and Grobid to be installed.
+Before you start
+~~~~~~~~~~~~~~~~
+.. warning:: Grobid and grobid-quantities are `not compatible with Windows`_ and limited on Apple M1. While Windows users can easily use Grobid and grobid-quantities through docker containers, the support for grobid on ARM is under development, see the `latest discussion`_. 
+
+.. warning:: Since grobid-quantities 0.7.3 (using grobid 0.7.3), we extended the support to JDK after version 11. This requires specifying the `java.library.path` explicitly. Obviously, *all these issues are solved by using Docker containers*.
+
 
 Install and build
 ~~~~~~~~~~~~~~~~~
 
 Docker containers
-~~~~~~~~~~~~~~~~~
+-----------------
 The simplest way to run grobid-quantities is via docker containers.
-To run the container with the default configuration:
-::
-     docker run --rm --init -p 8060:8060 -p 8061:8061  lfoppiano/grobid-quantities:0.7.0
 
-To run the container with custom configuration, is possible by providing a configuration file with the parameter ``-v``
-Grobid quantities repository provides already the file `resources/config/config-docker.yml` that contains the correct grobidHome and can be modified to best suits ones's needs: 
-::
-     docker run --rm --init -p 8060:8060 -p 8061:8061 -v resources/config/config-docker.yml:/opt/grobid/grobid-quantities/config.yml:ro  lfoppiano/grobid-quantities:0.7.0
+The Grobid-quantities repository provides a configuration file for docker: `resources/config/config-docker.yml`, which should work out of the box, although we recommend to **check the configuration** (e.g., to enable modules using deep learning).
 
+To run the container use:
+::
+     docker run --rm --init -p 8060:8060 -p 8061:8061 -v resources/config/config-docker.yml:/opt/grobid/grobid-quantities/config.yml:ro  lfoppiano/grobid-quantities:0.7.2
+
+The container will respond on port http://localhost:8060, and 8061 for the admin interface.
 
 Local installation 
-~~~~~~~~~~~~~~~~~~~~~
+------------------
+Grobid-quantities requires *JDK 1.8 or greater*, and Grobid to be installed. Since version 0.7.3 we recommend to use *JDK 17 or greater*.
 
-First install the latest development version of GROBID as explained by the `documentation <http://grobid.readthedocs.org>`_.
+First install the latest version of GROBID as explained by the `documentation <http://grobid.readthedocs.org>`_.
 
 Grobid-quantities root directory needs to be placed as sibling sub-project inside Grobid directory:
 ::
@@ -44,7 +55,7 @@ Then, build everything with:
    ./gradlew clean build
 
 
-You should have the directories of the models ``quantities``, ``units`` and ``values`` inside ``../grobid-home/models``
+You should have the directories of the models ``quantities*``, ``units*`` and ``values*`` inside ``../grobid-home/models``
 
 Run some test:
 ::
@@ -55,15 +66,20 @@ Run some test:
 
 
 Start and use the service
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
+'''''''''''''''''''''''''
 Grobid-quantities can be run with the following command:
 ::
 
-  java -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
+  java -Djava.library.path=../grobid-home/lib/{arch}/:{virtual_env_path}/lib:{virtual_env_path}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
+
+.. warning:: The command requires the following parameters: ``{arch}`` is the subdirectory under ``grobid-home/lib`` that support the following architectures: ``lin-64``, ``mac-64``, ``mac_arm-64``. ``{virtual_env_path}`` is the path to the virtualenv (e.g. in my case is something like ``/Users/lfoppiano/anaconda3/envs/jep/``)
 
 
-There is a GUI interface demo accessible at ``http://localhost:8060``, and a REST API, reachable under ``http://localhost:8060/service`` and documented in the :ref:`rest_api`
+
+Accessing the service
+~~~~~~~~~~~~~~~~~~~~~
+
+Grobid-quantitiesa provides a graphical demo accessible at ``http://localhost:8060``, and a REST API, reachable under ``http://localhost:8060/service`` and documented in the :ref:`rest_api`
 
 To test the API, is possible to run a simple text using ``curl``:
 
@@ -72,11 +88,11 @@ To test the API, is possible to run a simple text using ``curl``:
   curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuantityText
 
 
-**Note**: The model is designed and trained to work at *paragraph level*. The expected text input to the parser is a paragraph or a text segment of similar size, not a complete document. In case you have a long textual document, it is better either to exploit existing structures (e.g. XML/HTML ``<p>`` elements) to initially segment it into paragraphs or sentences, or to apply an automatic paragraph/sentence segmentation. Then send them separately to grobid-quantities to be processed.
+.. note:: The model is designed and trained to work at *paragraph level*. The expected text input to the parser is a paragraph or a text segment of similar size, not a complete document. In case you have a long textual document, it is better either to exploit existing structures (e.g. XML/HTML ``<p>`` elements) to initially segment it into paragraphs or sentences, or to apply an automatic paragraph/sentence segmentation. Then send them separately to grobid-quantities to be processed.
 
 
-Clients
-~~~~~~~
+Using the python client
+-----------------------
 
 The easiest way to interact with the server is to use the Python Client.
 It removes the complexity of dealing with the output data, and managing single or multi-thread processing.

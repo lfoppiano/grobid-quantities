@@ -1,13 +1,13 @@
 package org.grobid.core.data;
 
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
-import com.fasterxml.jackson.core.util.BufferRecyclers;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
@@ -290,7 +290,7 @@ public class Measurement {
         }
 
         if (StringUtils.isNotBlank(rawString)) {
-            json.append(", \"measurementRaw\" : \"" + rawString + "\"");
+            json.append(", \"measurementRaw\" : \"" + Arrays.toString(encoder.quoteAsUTF8(rawString)) + "\"");
         }
 
         if (rawOffsets.start > -1 && rawOffsets.end > -1) {

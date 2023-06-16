@@ -1,0 +1,19 @@
+{
+  "add_prefix_space": true,
+  "add_special_tokens": true,
+  "cls_token": "[CLS]",
+  "do_basic_tokenize": true,
+  "do_lower_case": false,
+  "mask_token": "[MASK]",
+  "max_length": 50,
+  "model_max_length": 1000000000000000019884624838656,
+  "name_or_path": "/home/a017873/development/embeddings/scibert_scivocab_cased_hf",
+  "never_split": null,
+  "pad_token": "[PAD]",
+  "sep_token": "[SEP]",
+  "special_tokens_map_file": null,
+  "strip_accents": null,
+  "tokenize_chinese_chars": true,
+  "tokenizer_class": "BertTokenizer",
+  "unk_token": "[UNK]"
+}

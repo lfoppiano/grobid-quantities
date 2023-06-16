@@ -1,5 +1,6 @@
 package org.grobid.core.analyzers;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.lang.Language;
 import org.grobid.core.layout.LayoutToken;
@@ -51,7 +52,7 @@ public class QuantityAnalyzer implements Analyzer {
     private QuantityAnalyzer() {
     }
 
-    public static final String DELIMITERS = " \n\r\t([^%‰°,:;?.!/)-–−=≈<>+±\"“”‘’'`$]*\u2666\u2665\u2663\u2660\u00A0";
+    public static final String DELIMITERS = " \n\r\t\f([^%‰°•⋅·,:;?.!/)-–−‐=~∼≈<>+±\"“”‘’'`#$]*\u2666\u2665\u2663\u2660\u00A0";
     private static final String REGEX = "(?<=[a-zA-Z])(?=\\d)|(?<=\\d)(?=\\D)";
 
     public String getName() {
@@ -95,6 +96,21 @@ public class QuantityAnalyzer implements Analyzer {
         }
 
         return result;
+    }
+
+    @Override
+    public List<String> retokenizeSubdigits(List<String> list) {
+        throw new NotImplementedException("Not yet implemented");
+    }
+
+    @Override
+    public List<LayoutToken> retokenizeSubdigitsWithLayoutToken(List<String> list) {
+        throw new NotImplementedException("Not yet implemented");
+    }
+
+    @Override
+    public List<LayoutToken> retokenizeSubdigitsFromLayoutToken(List<LayoutToken> list) {
+        throw new NotImplementedException("Not yet implemented");
     }
 
     public List<String> retokenize(List<String> chunks) {

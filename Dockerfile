@@ -16,22 +16,18 @@
 # build builder image
 # -------------------
 
-FROM openjdk:8u275-jdk as builder
+FROM openjdk:17-jdk-slim as builder
 
 USER root
 
-RUN apt-key del 7fa2af80 && \
-    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb && \
-    dpkg -i cuda-keyring_1.0-1_all.deb && \
-    apt-get update && \
-    apt-get -y --no-install-recommends install apt-utils libxml2 git
+RUN apt-get update && \
+    apt-get -y --no-install-recommends install apt-utils libxml2 git unzip
 
-RUN git clone https://github.com/kermitt2/grobid.git /opt/grobid-source && cd /opt/grobid-source && git checkout 0.7.1
 WORKDIR /opt/grobid-source
-COPY gradle.properties .
 
-RUN git clone https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities && cd grobid-quantities
-WORKDIR /opt/grobid-source/grobid-quantities
+RUN git clone --depth 1 --branch master https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities-source 
+
+WORKDIR /opt/grobid-source/grobid-quantities-source
 COPY gradle.properties .
 
 # Adjust config
@@ -39,12 +35,12 @@ RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/c
 
 # Preparing models
 RUN rm -rf /opt/grobid-source/grobid-home/models/*
+RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
+RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
 
-WORKDIR /opt/grobid-source/grobid-quantities
-RUN ./gradlew clean assemble --no-daemon  --info --stacktrace
-#RUN ./gradlew installScibert --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
-RUN ./gradlew copyModels --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.tar.gz
-
+# Preparing distribution
+WORKDIR /opt/grobid-source
+RUN unzip -o /opt/grobid-source/grobid-quantities-source/build/distributions/grobid-quantities-*.zip -d grobid-quantities_distribution && mv grobid-quantities_distribution/grobid-quantities-* grobid-quantities
 
 WORKDIR /opt
 
@@ -52,55 +48,43 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
+FROM grobid/grobid:0.7.3 as runtime
 
-FROM grobid/grobid:0.7.1 as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
 
-# install JRE 8, python and other dependencies
-RUN apt-key del 7fa2af80 && \
-    curl https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb -O cuda-keyring_1.0-1_all.deb && \
-    dpkg -i cuda-keyring_1.0-1_all.deb && \
-    rm /etc/apt/sources.list.d/cuda.list && \
-    rm /etc/apt/sources.list.d/nvidia-ml.list
-
 RUN apt-get update && \
     apt-get -y --no-install-recommends install git wget
-#    apt-get -y remove python3.6 && \
-#    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata && \
-#    apt-get -y --no-install-recommends install git python3.7 python3.7-venv python3.7-dev python3.7-distutil
 
 WORKDIR /opt/grobid
 
 RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp/models /opt/grobid/grobid-quantities/resources/clearnlp/config
-COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models
-COPY --from=builder /opt/grobid-source/grobid-quantities/build/libs/* ./grobid-quantities/
-COPY --from=builder /opt/grobid-source/grobid-quantities/resources/config/config.yml ./grobid-quantities/
-COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/config/* ./grobid-quantities/resources/clearnlp/config
-COPY --from=builder /opt/grobid-source/grobid-quantities/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models
+COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models/
+COPY --from=builder /opt/grobid-source/grobid-quantities ./grobid-quantities/
+COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/config/config.yml ./grobid-quantities/resources/config/
+COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models/
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
-# Install requirements
-WORKDIR /opt/grobid/grobid-quantities
-
-RUN sed -i 's/pythonVirtualEnv:.*/pythonVirtualEnv: /g' config.yml
-RUN sed -i 's/grobidHome:.*/grobidHome: ..\/grobid-home/g' config.yml
+RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 
 # JProfiler
 #RUN wget https://download-gcdn.ej-technologies.com/jprofiler/jprofiler_linux_12_0_2.tar.gz -P /tmp/ && \
 #  tar -xzf /tmp/jprofiler_linux_12_0_2.tar.gz -C /usr/local &&\
 #  rm /tmp/jprofiler_linux_12_0_2.tar.gz
 
-EXPOSE 8060 8061
-#EXPOSE 8080 8081
-
-#CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-#CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-superconductors-0.2.1-SNAPSHOT-onejar.jar", "server", "grobid-superconductors/config.yml"]
-CMD ["java", "-jar", "grobid-quantities-0.7.1-SNAPSHOT-onejar.jar", "server", "config.yml"]
-
+WORKDIR /opt/grobid/grobid-quantities
 ARG GROBID_VERSION
+ENV GROBID_VERSION=${GROBID_VERSION:-latest}
+ENV GROBID_QUANTITIES_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64 --add-opens java.base/java.lang=ALL-UNNAMED"
+
+EXPOSE 8060 8061 5005
+
+#CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
+#CMD ["sh", "-c", "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005 -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
+#CMD ["sh", "-c", "java -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
+CMD ["bin/grobid-quantities", "server", "resources/config/config.yml"]
 
 
 LABEL \

@@ -14,10 +14,16 @@ var grobid = (function ($) {
 
     function defineBaseURL(ext) {
         var baseUrl = null;
-        if ($(location).attr('href').indexOf("index.html") != -1)
-            baseUrl = $(location).attr('href').replace("index.html", ext);
-        else
-            baseUrl = $(location).attr('href') + ext;
+        let locaBase = $(location).attr('href');
+        if (locaBase.indexOf("index.html") != -1)
+            baseUrl = locaBase.replace("index.html", ext);
+        else if (locaBase.indexOf("?") != -1) {
+            // remove possible uri parameters
+            baseUrl = locaBase.substring(0, locaBase.indexOf("?")) + ext;
+        } else {
+            baseUrl = locaBase + ext;
+        }
+
         return baseUrl;
     }
 
@@ -118,24 +124,39 @@ var grobid = (function ($) {
         return true;
     }
 
-    function showError(jqXHR, textStatus, errorThrown) {
-        $('#requestResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + jqXHR.responseText + "</font>");
-        responseJson = null;
-    }
 
-    function showError(statusCode, message) {
-        message = "Error: " + statusCode + ", " + message + " - The PDF document cannot be annotated. Please check the server logs.";
-        $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + message + "</font>");
-        responseJson = null;
-        return true;
-    }
+    function onError(message) {
+        if (!message) {
+            message = "The Text or the PDF document cannot be processed. Please check the server logs.";
+        } else {
+            if (message.responseJSON) {
+                let type = message.responseJSON['type']
+                let split = message.responseJSON['description'].split(type);
+                message = split[split.length - 1]
+                if (message.startsWith(":")) {
+                    message = message.substring(1);
+                }
+            } else if (message) {
+                if (typeof message === "string" || message instanceof String) {
+                    message = message;
+                } else {
+                    let type = message.type
+                    if (type !== undefined && message.description) {
+                        let split = message.description.split(type);
+                        message = split[split.length - 1]
+                        if (message.startsWith(":")) {
+                            message = message.substring(1);
+                        } 
+                    } else {
+                        message = message['message']
+                    }
+                }
+            } else {
+                message = "The Text or the PDF document cannot be processed. Please check the server logs. "
+            }
+        }
 
-    function showError(message) {
-        if (!message)
-            message = "Error: ";
-        message += " - The PDF document cannot be annotated. Please check the server logs.";
         $('#infoResult').html("<font color='red'>Error encountered while requesting the server.<br/>" + message + "</font>");
-        responseJson = null;
         return true;
     }
 
@@ -161,7 +182,7 @@ var grobid = (function ($) {
                 url: urlLocal,
                 data: formData,
                 success: SubmitSuccesful,
-                error: showError,
+                error: onError,
                 contentType: false,
                 processData: false
             });
@@ -297,11 +318,9 @@ var grobid = (function ($) {
             xhr.onreadystatechange = function (e) {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var response = e.target.response;
-                    //var response = JSON.parse(xhr.responseText);
-                    //console.log(response);
                     setupAnnotations(response);
                 } else if (xhr.status !== 200) {
-                    showError(statusCode=xhr.status, message=xhr.statusText);
+                    onError(e.target.response);
                 }
             };
             xhr.send(formData);
@@ -601,7 +620,7 @@ var grobid = (function ($) {
         }
     }
 
-    function annotateEntity(theId, thePos, theUrl, page_height, page_width, measurementIndex, positionIndex) {
+    function annotateEntity(quantity_measurement_type, thePos, theUrl, page_height, page_width, measurementIndex, positionIndex) {
         var page = thePos.p;
         var pageDiv = $('#page-' + page);
         var canvas = pageDiv.children('canvas').eq(0);
@@ -618,15 +637,15 @@ var grobid = (function ($) {
         var height = thePos.h * scale_y + 1;
 
         //make clickable the area
-        theId = "" + theId;
-        if (theId)
-            theId = theId.replace(" ", "_");
+        quantity_measurement_type = "" + quantity_measurement_type;
+        if (quantity_measurement_type)
+            quantity_measurement_type = quantity_measurement_type.replaceAll(" ", "_");
         var element = document.createElement("a");
         var attributes = "display:block; width:" + width + "px; height:" + height + "px; position:absolute; top:" +
             y + "px; left:" + x + "px;";
-        element.setAttribute("style", attributes + "border:2px solid; border-color: " + getColor(theId) + ";");
+        element.setAttribute("style", attributes + "border:2px solid;");
         //element.setAttribute("style", attributes + "border:2px solid;");
-        element.setAttribute("class", theId);
+        element.setAttribute("class", "pdf_annot" + " " + quantity_measurement_type);
         element.setAttribute("id", 'annot-' + measurementIndex + '-' + positionIndex);
         element.setAttribute("page", page);
         /*element.setAttribute("data-toggle", "popover");
@@ -827,10 +846,10 @@ var grobid = (function ($) {
             } else {
                 colorLabel = quantity.rawName;
             }
-            
+
             if (colorLabel)
                 colorLabel = colorLabel.replaceAll(" ", "_");
-                
+
             var rawValue = quantity.rawValue;
             var unit = quantity.rawUnit;
 
@@ -966,19 +985,6 @@ var grobid = (function ($) {
         //$('#gbdForm').attr('enctype', '');
         //$('#gbdForm').attr('method', 'post');
     }
-
-    var mapColor = {
-        'area': '#87A1A8',
-        'volume': '#c43c35',
-        'velocity': '#c43c35',
-        'fraction': '#c43c35',
-        'length': '#01A9DB',
-        'time': '#f89406',
-        'mass': '#c43c35',
-        'temperature': '#398739',
-        'frequency': '#8904B1;',
-        'concentration': '#31B404'
-    };
 
     /* return a color based on the quantity type */
     function getColor(type) {

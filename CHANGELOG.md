@@ -6,11 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.7.1] – 2021-09-06
+
 ### Added
-+ New BidLSTM + CRF models for quantities, values and units parsing #129
++ New BidLSTM_CRF models for quantities, values and units parsing #129
++ Add docker image on hub.docker.com #142 
++ Update to Grobid 0.7.1 #137        
+
+### Changed
++ Use the grobid sentence segmentation for the quantified object sentence splitting #138
 
 ### Fixed
 + Fixes incorrect boxes colors #125
++ Fixed lexicon #134  
+
 
 ## [0.7.0] – 2021-08-06
 
