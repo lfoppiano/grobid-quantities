@@ -5,8 +5,8 @@ corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
 corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
 
 # Limit the maximum number of requests
-maxParallelRequests: 0
-waitMs: 120
+maxParallelRequests: 2
+waitMs: 1 
 
 cleanlpModelPath: "resources/cleanlp/models"
 
@@ -63,13 +63,14 @@ views:
 
 server:
   type: custom
-  idleTimeout: 120 seconds
   applicationConnectors:
     - type: http
       port: 8060
+      idleTimeout: 120 seconds
   adminConnectors:
     - type: http
       port: 8061
+      idleTimeout: 120 seconds
   registerDefaultExceptionMappers: false
   maxThreads: 2048
   maxQueuedRequests: 2048
