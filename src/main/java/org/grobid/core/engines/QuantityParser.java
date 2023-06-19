@@ -1,6 +1,7 @@
 package org.grobid.core.engines;
 
 import com.google.common.collect.Iterables;
+import jakarta.inject.Inject;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -17,8 +18,6 @@ import org.grobid.core.engines.label.QuantitiesTaggingLabels;
 import org.grobid.core.engines.label.TaggingLabel;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.features.FeaturesVectorQuantities;
-import org.grobid.core.lang.SentenceDetector;
-import org.grobid.core.lang.impl.OpenNLPSentenceDetector;
 import org.grobid.core.layout.BoundingBox;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.lexicon.QuantityLexicon;
@@ -28,7 +27,6 @@ import org.grobid.core.utilities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jakarta.inject.Inject;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -181,9 +179,10 @@ public class QuantityParser extends AbstractParser {
     }
 
     protected List<OffsetPosition> getSentencesOffsets(List<LayoutToken> tokens) {
-        SentenceDetector segmenter = new OpenNLPSentenceDetector();
+        SentenceUtilities segmenter = SentenceUtilities.getInstance();
+        
         String text = LayoutTokensUtil.toText(tokens);
-        List<OffsetPosition> results = segmenter.detect(text);
+        List<OffsetPosition> results = segmenter.runSentenceDetection(text);
 
         if (CollectionUtils.isEmpty(results)) {
             results = Arrays.asList(new OffsetPosition(0, text.length()));
