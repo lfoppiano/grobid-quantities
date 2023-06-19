@@ -10,7 +10,7 @@ import jakarta.ws.rs.ext.Provider;
 import org.grobid.core.exceptions.GrobidExceptionStatus;
 import org.slf4j.MDC;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

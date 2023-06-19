@@ -1,6 +1,8 @@
 package org.grobid.service;
 
 import com.google.common.collect.ImmutableList;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidProperties;
@@ -8,8 +10,6 @@ import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 @Singleton
 public class GrobidEngineInitialiser {
