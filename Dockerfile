@@ -54,7 +54,7 @@ FROM grobid/grobid:0.7.3 as runtime
 ENV LANG C.UTF-8
 
 RUN apt-get update && \
-    apt-get -y --no-install-recommends install git wget
+    apt-get -y --no-install-recommends install git wget openjdk-17-jre-headless ca-certificates-java
 
 WORKDIR /opt/grobid
 
