@@ -37,7 +37,7 @@ Spaces: https://lfoppiano-grobid-quantities.hf.space/
 ## Latest version
 
 The latest released version of grobid-quantities
-is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/0.7.3). The current development version is
+is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/v0.7.3). The current development version is
 0.7.4-SNAPSHOT.
 
 ### Update from 0.7.2 to 0.7.3
