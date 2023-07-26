@@ -238,14 +238,14 @@ public class Quantity implements Comparable<Quantity> {
             json.append("\"parsedValue\" : " + parsedValue.toJson());
         }
 
-        /*if (parsedUnit != null) {
+        if (parsedUnit != null) {
             if (!started) {
                 started = true;
             } else {
                 json.append(", ");
             }
             json.append("\"parsedUnit\" : " + parsedUnit.toJson());
-        }*/
+        }
 
         if (isNormalized()) {
             if (!started) {
