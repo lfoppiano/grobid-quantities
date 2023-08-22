@@ -178,7 +178,7 @@ Scientific Literature", published in September 2019 reported average evaluation 
 
 ## Acknowledgement
 
-This project has been created and developed by [science-miner](https://science-miner.com) since 2015, with additional
+This project has been created and developed by [science-miner](https://www.science-miner.com) since 2015, with additional
 support by [Inria](http://www.inria.fr), in Paris (France) and
 the [National Institute for Materials Science](http://www.nims.go.jp),
 in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
