@@ -4,6 +4,7 @@
 [![Documentation Status](https://readthedocs.org/projects/grobid-quantities/badge/?version=latest)](https://readthedocs.org/projects/grobid-quantities/?badge=latest)
 [![Github actions](https://github.com/kermitt2/grobid-quantities/actions/workflows/ci-build.yml/badge.svg)](https://github.com/kermitt2/grobid-quantities/actions/workflows/ci-build.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/kermitt2/grobid-quantities/badge.svg)](https://coveralls.io/r/kermitt2/grobid-quantities)
+[![Demo grobid-quantities](https://img.shields.io/website-up-down-green-red/https/lfoppiano-grobid-quantities.hf.space.svg)](https://lfoppiano-grobid-quantities.hf.space)
 [![](https://jitpack.io/v/kermitt2/grobid-quantities.svg)](https://jitpack.io/#kermitt2/grobid-quantities)
 [![Docker Hub](https://img.shields.io/docker/pulls/lfoppiano/grobid-quantities.svg)](https://hub.docker.com/r/lfoppiano/grobid-quantities/ "Docker Pulls")
 
