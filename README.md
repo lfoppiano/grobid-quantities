@@ -190,7 +190,7 @@ If you want to cite this work, please simply refer to the Github project with op
 the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier:
 
 ```
-grobid-quantities (2015-2022) <https://github.com/kermitt2/grobid-quantities>, swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
+grobid-quantities (2015-2023) <https://github.com/kermitt2/grobid-quantities>, swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
 ```
 
 Here's a BibTeX entry using the [Software Heritage](https://www.softwareheritage.org/) project-level permanent
@@ -201,7 +201,7 @@ identifier:
     title = {grobid-quantities},
     howpublished = {\url{https://github.com/kermitt2/grobid-quantities}},
     publisher = {GitHub},
-    year = {2015--2022},
+    year = {2015--2023},
     archivePrefix = {swh},
     eprint = {1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7}
 }
