@@ -25,15 +25,17 @@ RUN apt-get update && \
 
 WORKDIR /opt/grobid-source
 
-RUN git clone --depth 1 --branch master https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities-source 
+RUN mkdir grobid-quantities-source
+COPY src grobid-quantities-source/src
+COPY resources/config/config-docker.yml grobid-quantities-source/resources/config/config.yml
+COPY build.gradle grobid-quantities-source/
+COPY gradle.properties grobid-quantities-source/
+COPY gradle grobid-quantities-source/gradle/
+COPY gradlew grobid-quantities-source/
 
-WORKDIR /opt/grobid-source/grobid-quantities-source
-COPY gradle.properties .
-
-# Adjust config
-RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
 
 # Preparing models
+WORKDIR /opt/grobid-source/grobid-quantities-source
 RUN rm -rf /opt/grobid-source/grobid-home/models/*
 RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
 RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
@@ -77,6 +79,10 @@ WORKDIR /opt/grobid
 ARG GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-latest}
 ENV GROBID_QUANTITIES_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.8/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED"
+ 
+RUN sed -i '/seed(7)/d' /usr/local/lib/python3.8/dist-packages/delft/utilities/Utilities.py
+RUN sed -i 'from numpy.random import seed/d' /usr/local/lib/python3.8/dist-packages/delft/utilities/Utilities.py
+
 
 EXPOSE 8060 8061 5005
 
