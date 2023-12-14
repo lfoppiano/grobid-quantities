@@ -55,7 +55,7 @@ FROM grobid/grobid:0.7.3 as runtime
 ENV LANG C.UTF-8
 
 RUN apt-get update && \
-    apt-get -y --no-install-recommends install git wget
+    apt-get -y --no-install-recommends install git wget 
 
 WORKDIR /opt/grobid
 
@@ -74,17 +74,17 @@ RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 #  tar -xzf /tmp/jprofiler_linux_12_0_2.tar.gz -C /usr/local &&\
 #  rm /tmp/jprofiler_linux_12_0_2.tar.gz
 
-WORKDIR /opt/grobid/grobid-quantities
+WORKDIR /opt/grobid
 ARG GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-latest}
-ENV GROBID_QUANTITIES_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64 --add-opens java.base/java.lang=ALL-UNNAMED"
+ENV GROBID_QUANTITIES_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.8/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED"
 
 EXPOSE 8060 8061 5005
 
 #CMD ["java", "-agentpath:/usr/local/jprofiler12.0.2/bin/linux-x64/libjprofilerti.so=port=8849", "-jar", "grobid-superconductors/grobid-quantities-${GROBID_VERSION}-onejar.jar", "server", "grobid-superconductors/config.yml"]
 #CMD ["sh", "-c", "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005 -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
 #CMD ["sh", "-c", "java -jar grobid-quantities/grobid-quantities-${GROBID_VERSION}-onejar.jar server grobid-quantities/config.yml"]
-CMD ["bin/grobid-quantities", "server", "resources/config/config.yml"]
+CMD ["./grobid-quantities/bin/grobid-quantities", "server", "grobid-quantities/resources/config/config.yml"]
 
 
 LABEL \

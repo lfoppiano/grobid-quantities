@@ -2,8 +2,9 @@
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation Status](https://readthedocs.org/projects/grobid-quantities/badge/?version=latest)](https://readthedocs.org/projects/grobid-quantities/?badge=latest)
-[![Github actions](https://github.com/kermitt2/grobid-quantities/actions/workflows/ci-build-unstable.yml/badge.svg)](https://github.com/kermitt2/grobid-quantities/actions/workflows/ci-build.yml/badge.svg)
+[![Github actions](https://github.com/kermitt2/grobid-quantities/actions/workflows/ci-build.yml/badge.svg)](https://github.com/kermitt2/grobid-quantities/actions/workflows/ci-build.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/kermitt2/grobid-quantities/badge.svg)](https://coveralls.io/r/kermitt2/grobid-quantities)
+[![Demo grobid-quantities](https://img.shields.io/website-up-down-green-red/https/lfoppiano-grobid-quantities.hf.space.svg)](https://lfoppiano-grobid-quantities.hf.space)
 [![](https://jitpack.io/v/kermitt2/grobid-quantities.svg)](https://jitpack.io/#kermitt2/grobid-quantities)
 [![Docker Hub](https://img.shields.io/docker/pulls/lfoppiano/grobid-quantities.svg)](https://hub.docker.com/r/lfoppiano/grobid-quantities/ "Docker Pulls")
 
@@ -37,7 +38,7 @@ Spaces: https://lfoppiano-grobid-quantities.hf.space/
 ## Latest version
 
 The latest released version of grobid-quantities
-is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/0.7.3). The current development version is
+is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/v0.7.3). The current development version is
 0.7.4-SNAPSHOT.
 
 ### Update from 0.7.2 to 0.7.3
@@ -178,7 +179,7 @@ Scientific Literature", published in September 2019 reported average evaluation 
 
 ## Acknowledgement
 
-This project has been created and developed by [science-miner](https://science-miner.com) since 2015, with additional
+This project has been created and developed by [science-miner](https://www.science-miner.com) since 2015, with additional
 support by [Inria](http://www.inria.fr), in Paris (France) and
 the [National Institute for Materials Science](http://www.nims.go.jp),
 in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
@@ -189,7 +190,7 @@ If you want to cite this work, please simply refer to the Github project with op
 the [Software Heritage](https://www.softwareheritage.org/) project-level permanent identifier:
 
 ```
-grobid-quantities (2015-2022) <https://github.com/kermitt2/grobid-quantities>, swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
+grobid-quantities (2015-2023) <https://github.com/kermitt2/grobid-quantities>, swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
 ```
 
 Here's a BibTeX entry using the [Software Heritage](https://www.softwareheritage.org/) project-level permanent
@@ -200,7 +201,7 @@ identifier:
     title = {grobid-quantities},
     howpublished = {\url{https://github.com/kermitt2/grobid-quantities}},
     publisher = {GitHub},
-    year = {2015--2022},
+    year = {2015--2023},
     archivePrefix = {swh},
     eprint = {1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7}
 }

@@ -290,7 +290,7 @@ public class Measurement {
         }
 
         if (StringUtils.isNotBlank(rawString)) {
-            json.append(", \"measurementRaw\" : \"" + Arrays.toString(encoder.quoteAsUTF8(rawString)) + "\"");
+            json.append(", \"measurementRaw\" : \"" + new String(encoder.quoteAsUTF8(rawString)) + "\"");
         }
 
         if (rawOffsets.start > -1 && rawOffsets.end > -1) {

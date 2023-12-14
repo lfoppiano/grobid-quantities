@@ -2377,6 +2377,211 @@
     {
       "notations": [
         {
+          "raw": "erg",
+          "product": [
+            {
+              "base": "erg"
+            }
+          ]
+        },
+        {
+          "raw":  "g cm2/s2",
+          "product": [
+            {
+              "base": "g"
+            },
+            {
+              "prefix": "c",
+              "base": "m",
+              "pow": "2"
+            },
+            {
+              "base": "s",
+              "pow": "-2"
+            }
+          ]
+        },
+        {
+          "raw":  "g⋅cm2/s2",
+          "product": [
+            {
+              "base": "g"
+            },
+            {
+              "prefix": "c",
+              "base": "m",
+              "pow": "2"
+            },
+            {
+              "base": "s",
+              "pow": "-2"
+            }
+          ]
+        }
+      ],
+      "type": "ENERGY",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "ergon",
+          "inflection": "ergons"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw":  "erg/G",
+          "product":  [
+            {
+              "base":  "erg"
+            },
+            {
+              "base": "G",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw":  "J/T",
+          "product": [
+            {
+              "base": "J"
+            },
+            {
+              "base": "G",
+              "pow": -1
+            }
+          ]
+        }
+      ],
+      "type": "MAGNETIC_MOMENT",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "magnetic moment"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "emu/g",
+          "product": [
+            {
+              "base": "emu"
+            },
+            {
+              "base": "g",
+              "pow": -1
+            }
+          ]
+        }
+      ],
+      "type": "MASS_MAGNETIZATION",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "mass magnetization"
+        },
+        {
+          "lemma": "mass magnetisation"
+        },
+        {
+          "lemma": "specific magnetization"
+        },
+        {
+          "lemma": "specific magnetisation"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "erg/G cm3",
+          "product": [
+            {
+              "base": "erg"
+            },
+            {
+              "base": "G"
+            },
+            {
+              "prefix": "c",
+              "base": "m",
+              "pow": -3
+            }
+          ]
+        },
+        {
+          "raw": "emu/cm3",
+          "product": [
+            {
+              "base": "emu"
+            },
+            {
+              "prefix": "c",
+              "base": "m",
+              "pow": -3
+            }
+          ]
+        },
+        {
+          "raw": "emu/cm^3",
+          "product": [
+            {
+              "base": "emu"
+            },
+            {
+              "prefix": "c",
+              "base": "m",
+              "pow": -3
+            }
+          ]
+        }
+      ],
+      "type": "MAGNETIZATION",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "electromagnetic unit",
+          "inflection": "electromagnetic units"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "erg/cm",
+          "product": [
+            {
+              "base": "erg"
+            },
+            {
+              "prefix": "c",
+              "base": "m",
+              "pow": -1
+            }
+          ]
+        }
+      ],
+      "type": "ENERGY_DENSITY",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "ergon per centimeter",
+          "inflection": "ergon per centimeters"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
           "raw": "Oe"
         }
       ],
