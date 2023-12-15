@@ -1,3 +1,5 @@
+.. topic:: Evaluation
+
 **********
 Evaluation
 **********
@@ -76,19 +78,21 @@ Quantities
 Units
 -----
 
-+------------------+-----------+--------+---------+------------+--------+---------+
-|                  | CRF                          | BERT_CRF                      |
-+==================+===========+========+=========+============+========+=========+
-| Labels           | P         | R      | F1      | P          | R      | F1      |
-+------------------+-----------+--------+---------+------------+--------+---------+
-| `<base>`         | 80.57     | 82.34  | 81.45   | 61.41      | 57.08  | 59.16   |
-+------------------+-----------+--------+---------+------------+--------+---------+
-| `<pow>`          | 72.65     | 74.45  | 73.54   | 91.24      | 64.60  | 75.60   |
-+------------------+-----------+--------+---------+------------+--------+---------+
-| `<prefix>`       | 93.80     | 84.69  | 89.02   | 82.10      | 85.30  | 83.62   |
-+------------------+-----------+--------+---------+------------+--------+---------+
-| All (micro avg)  | 80.73     | 80.60  | 80.66   | 73.02      | 64.97  | 68.76   |
-+------------------+-----------+--------+---------+------------+--------+---------+
+Units were evaluated using UNISCOR dataset. For more information check the section :ref:`uniscor`.  
+
++------------------+-----------+---------+---------+------------+--------+---------+
+|                  | CRF                           | BERT_CRF                      |
++==================+===========+=========+=========+============+========+=========+
+| Labels           | P         | R       | F1      | P          | R      | F1      |
++------------------+-----------+---------+---------+------------+--------+---------+
+| `<base>`         | 80.57     | 82.34   | 81.45   | 61.41      | 57.08  | 59.16   |
++------------------+-----------+---------+---------+------------+--------+---------+
+| `<pow>`          | 72.65     | 74.45   | 73.54   | 91.24      | 64.60  | 75.60   |
++------------------+-----------+---------+---------+------------+--------+---------+
+| `<prefix>`       | 93.80     | 84.69   | 89.02   | 82.10      | 85.30  | 83.62   |
++------------------+-----------+---------+---------+------------+--------+---------+
+| All (micro avg)  | **80.73** |**80.60**|**80.66**| 73.02      | 64.97  | 68.76   |
++------------------+-----------+---------+---------+------------+--------+---------+
 
 +------------------+--------------+--------+---------+-------------------------+--------+---------+
 |                  | BidLSTM_CRF                     | BidLSTM_CRF_FEATURES                       |
@@ -141,15 +145,18 @@ Values
 | All (micro avg) | 98.90      | 99.17  | 99.03    | 98.86                   | 99.25   | 99.05    |
 +-----------------+------------+--------+----------+-------------------------+---------+----------+
 
-====================
-Previous evaluations 
-====================
+================
+Previous results 
+================
+
+The scores of this evaluation were obtained using n-fold cross-validation. The metrics are the micro average of n=10 folds.
 
 
-Previous evaluation was provided using 10-fold cross-validation (with average metrics over the 10 folds).
+.. note:: The `paper` "Automatic Identification and Normalisation of Physical Measurements in Scientific Literature," published in September 2019, reported macro averaged evaluation scores. 
 
-The `CRF` model was evaluated on the 30/04/2020.
-The `BidLSTM_CRF_FEATURES` model was evaluated on the 28/11/2021
+Evaluation notes: 
+ - The `CRF` model was evaluated on the 30/04/2020.
+ - The `BidLSTM_CRF_FEATURES` model was evaluated on the 28/11/2021
 
 ----------
 Quantities
@@ -200,9 +207,9 @@ CRF was updated on the 10/02/2021
 +------------------+------------+--------+----------+-----------+-------+-----------+
 
 
-
+------
 Values
-^^^^^^
+------
 
 +------------------+------------+--------+----------+-----------+--------+----------+
 |                  | CRF                            | BidLSTM_CRF_FEATURES          |
@@ -221,8 +228,3 @@ Values
 +------------------+------------+--------+----------+-----------+-------+-----------+
 | All (micro avg)  | 96.15      | 97.95  | 97.40    | 98.49     | 98.66 | 98.57     |
 +------------------+------------+--------+----------+-----------+-------+-----------+
-
-
-The current average results have been calculated using micro average, which provides more realistic results by giving
-different weights to labels based on their frequency.
-The `paper` "Automatic Identification and Normalisation of Physical Measurements in Scientific Literature," published in September 2019, reported average evaluation based on macro average.
