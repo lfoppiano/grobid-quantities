@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.8.0]
+
+### Added
+
++ Docker image snapshots are built and pushed on dockerhub at each commit
++ new Dockerfile.local that does not clone from github
+
+### Changed
+
++ Updated to Grobid version 0.8.0
++ Updated to Dropwizard version 4.x (from version 1.x)
+
+
+
 ## [0.7.3] – 2023-06-26
 
 ### Added

@@ -44,7 +44,7 @@ The following screenshot illustrate an example of measurement that is extracted,
 
 Contacts
 ^^^^^^^^
-Contact: Patrice Lopez (<patrice.lopez@science-miner.com>), Luca Foppiano (<luca@foppiano.org>)
+Contact: Patrice Lopez (patrice.lopez_AT_science-miner.com), Luca Foppiano (luca_AT_foppiano.org)
 
 
 License

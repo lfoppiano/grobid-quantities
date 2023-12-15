@@ -342,6 +342,9 @@ publishing {
 
 def conf = new org.yaml.snakeyaml.Yaml().load(new File("resources/config/config.yml").newInputStream())
 def grobidHome = conf.grobidHome.replace("\$", "").replace('{', "").replace("GROBID_HOME:- ", "").replace("}", "")
+if (grobidHome.startsWith("../")) {
+    grobidHome = "${rootProject.rootDir}/${grobidHome}"
+}
 
 /** Model management **/
 
@@ -355,7 +358,7 @@ task copyModels(type: Copy) {
     include "**/preprocessor.json"
     exclude "**/features-engineering/**"
     exclude "**/result-logs/**"
-    into "${rootDir}/${grobidHome}/models/"
+    into "${grobidHome}/models/"
 
     doLast {
         print "Copy models under grobid-home: ${grobidHome}"
@@ -366,11 +369,11 @@ task downloadTransformers(dependsOn: copyModels) {
     doLast {
         download {
             src "https://transformers-data.s3.eu-central-1.amazonaws.com/quantities-transformers.zip"
-            dest "${rootDir}/${grobidHome}/models/quantities-transformers.zip"
+            dest "${grobidHome}/models/quantities-transformers.zip"
             overwrite false
             print "Download bulky transformers files under grobid-home: ${grobidHome}"
         }
-        ant.unzip(src: "${rootDir}/${grobidHome}/models/quantities-transformers.zip", dest: "${rootDir}/${grobidHome}/models/")
+        ant.unzip(src: "${grobidHome}/models/quantities-transformers.zip", dest: "${grobidHome}/models/")
     }
 }
 
