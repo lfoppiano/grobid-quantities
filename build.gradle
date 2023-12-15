@@ -131,9 +131,8 @@ dependencies {
     implementation 'io.dropwizard:dropwizard-forms:4.0.0'
     implementation 'io.dropwizard:dropwizard-client:4.0.0'
     implementation 'io.dropwizard:dropwizard-auth:4.0.0'
-    implementation 'io.dropwizard.metrics:metrics-core:4.2.19'
-    implementation 'io.dropwizard.metrics:metrics-servlets:4.2.19'
-//    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    implementation 'io.dropwizard.metrics:metrics-core:4.2.22'
+    implementation 'io.dropwizard.metrics:metrics-servlets:4.2.22'
 
     //Misc
     implementation group: 'com.googlecode.clearnlp', name: 'clearnlp', version: '1.3.1'
