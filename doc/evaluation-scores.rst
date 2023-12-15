@@ -1,8 +1,8 @@
-.. topic:: Evaluation
+.. topic:: Evaluation scores
 
-**********
-Evaluation
-**********
+*****************
+Evaluation scores
+*****************
 
 The scores (P: Precision, R: Recall, F1: F1-score) for all the models are performed either as 10-fold cross-validation or using an holdout dataset. 
 For DL (BidLSTM_CRF, BERT_CRF) models, we provide the average over 5 runs.
