@@ -1,0 +1,18 @@
+version: 2
+
+# Set the version of Python and other tools you might need
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.11"
+
+submodules:
+  exclude: all
+
+#python:
+#  install:
+#    - requirements: doc/requirements.txt
+
+#mkdocs:
+#  configuration: mkdocs.yml
+#  fail_on_warning: false

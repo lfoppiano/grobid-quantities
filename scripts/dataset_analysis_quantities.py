@@ -6,9 +6,8 @@ from difflib import SequenceMatcher
 from pathlib import Path
 
 from bs4 import BeautifulSoup, NavigableString, Tag
-
-from grobid_superconductors.commons.grobid_tokenizer import tokenizeSimple
-from grobid_superconductors.commons.quantities_tei_parser import get_children_list
+from supermat.grobid_tokenizer import tokenizeSimple
+from supermat.supermat_tei_parser import get_children_list
 
 
 def process_dir(input):
@@ -53,7 +52,7 @@ def process_file(input):
 
     document_statistics['batch'] = batch
 
-    children = get_children_list(soup)
+    children = get_children_list(soup, use_paragraphs=True)
 
     for paragraph in children:
         for item in paragraph:
