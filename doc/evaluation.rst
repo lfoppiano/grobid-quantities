@@ -2,7 +2,7 @@
 Evaluation
 **********
 
-The results (P: Precision, R: Recall, F1: F1-score) for all the models have been obtained using a holdout set.
+The scores (P: Precision, R: Recall, F1: F1-score) for all the models are performed either as 10-fold cross-validation or using an holdout dataset. 
 For DL (BidLSTM_CRF, BERT_CRF) models, we provide the average over 5 runs.
 
 The models are organised as follow: 
@@ -11,11 +11,12 @@ The models are organised as follow:
 - BERT_CRF is a BERT-based model obtained by fine-tuning a SciBERT encoder. Like others, the activation function is composed by a CRF layer. 
 
 
-==============
-Latest results
-==============
+=======================
+Results from 27/10/2022
+=======================
 
-Updated on the 27/10/2022
+The evaluation was performed on the holdout dataset from the grobid-quantities dataset.
+Average values are computed as Micro average. 
 
 ----------
 Quantities
