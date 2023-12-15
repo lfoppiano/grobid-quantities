@@ -17,6 +17,7 @@ Extracted measurements are normalised toward the International System of Units (
   introduction.rst
   gettingStarted.rst
   restAPI.rst
+  evaluation.rst
   guidelines.rst
   training.rst
   references.rst

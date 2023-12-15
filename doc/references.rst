@@ -1,5 +1,7 @@
 .. _References:
 
+.. _here: https://github.com/lfoppiano/grobid-quantities/tree/master/resources/dataset/units/evaluation
+
 References
 ==========
 
@@ -39,9 +41,11 @@ Main papers about grobid-quantities
 Other
 ~~~~~
 
-UNISCOR (Units Segmentation Corpus) is available at (``resources/dataset/units/evaluation/unit-evaluation-corpus.tei.xml``).
+UNISCOR (Units Segmentation Corpus) is a corpus of "unit segmentation" and is available `here`_.
 It was created with the support of `NIMS (National Institute for Material Science) <https://www.nims.go.jp>`_, in Japan.
 For more information, see:
 ::
     Leveraging Segmentation of Physical Units through a Newly Open Source Corpus.
     September 2019, JSAP Fall 2019, Sapporo, Japan
+
+
