@@ -75,7 +75,6 @@ results especially for what concern the unit normalisation.
 
 You can find the latest documentation [here](http://grobid-quantities.readthedocs.io).
 
-
 ## Acknowledgement
 
 This project has been created and developed by [science-miner](https://www.science-miner.com) since 2015, with additional
