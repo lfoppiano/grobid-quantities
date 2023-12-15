@@ -74,7 +74,7 @@ repositories {
 
 dependencies {
     //Tests
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.3'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.9.3'
     testImplementation(platform('org.junit:junit-bom:5.9.3'))
     testImplementation('org.junit.jupiter:junit-jupiter')
     testImplementation 'org.easymock:easymock:5.1.0'
@@ -104,10 +104,10 @@ dependencies {
     implementation 'commons-pool:commons-pool:1.6'
 
     //Json
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.3'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
-    implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.13.3'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.3'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.3'
+    implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.14.3'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.3'
 
     // measurements
 
