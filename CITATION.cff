@@ -1,11 +1,5 @@
 cff-version: 1.2.0
 message: "If you use this software for your research, please cite it as below."
-authors:
-- family-names: "Foppiano"
-  given-names: "Luca"
-  orcid: "https://orcid.org/0000-0002-6114-6164"
-- family-names: "Lopez"
-  given-names: "Patrice"
 title: "grobid-quantities"
 version: 0.8.0
 url: "https://github.com/lfoppiano/grobid-quantities"
