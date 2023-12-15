@@ -129,7 +129,7 @@ public class QuantitiesEngine {
 
                     BiblioItem resHeader = new BiblioItem();
                     //parsers.getHeaderParser().processingHeaderSection(false, doc, resHeader);
-                    resHeader.generalResultMapping(labeledResult, tokenizationHeader);
+                    resHeader.generalResultMappingHeader(labeledResult, tokenizationHeader);
 
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
