@@ -11,8 +11,5 @@ version: 0.8.0
 url: "https://github.com/lfoppiano/grobid-quantities"
 preferred-citation:
 - type: misc
-  howpublished: https://github.com/kermitt2/grobid-quantities
   title: "grobid-quantities"
   year: "2015-2023"
-  archivePrefix: "swh"
-  eprint = "1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7"
