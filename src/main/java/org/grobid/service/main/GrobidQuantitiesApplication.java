@@ -1,28 +1,28 @@
 package org.grobid.service.main;
 
-import com.google.common.collect.Lists;
-import com.google.inject.Module;
-import com.hubspot.dropwizard.guicier.GuiceBundle;
-import io.dropwizard.Application;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.google.inject.AbstractModule;
 import io.dropwizard.assets.AssetsBundle;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.forms.MultiPartBundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.FilterRegistration;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.servlets.QoSFilter;
 import org.grobid.service.QuantitiesServiceModule;
 import org.grobid.service.command.PrepareDelftTrainingCommand;
 import org.grobid.service.command.RunTrainingCommand;
-import org.grobid.service.command.UnitBatchProcessingCommand;
 import org.grobid.service.command.TrainingGenerationCommand;
+import org.grobid.service.command.UnitBatchProcessingCommand;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
+import org.grobid.service.controller.HealthCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterRegistration;
 import java.util.EnumSet;
-import java.util.List;
 
 public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesConfiguration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(GrobidQuantitiesApplication.class);
@@ -35,17 +35,19 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         return "grobid-quantities";
     }
 
-    private List<? extends Module> getGuiceModules() {
-        return Lists.newArrayList(new QuantitiesServiceModule());
+    private AbstractModule getGuiceModules() {
+        return new QuantitiesServiceModule();
     }
 
     @Override
     public void initialize(Bootstrap<GrobidQuantitiesConfiguration> bootstrap) {
-        GuiceBundle<GrobidQuantitiesConfiguration> guiceBundle = GuiceBundle.defaultBuilder(GrobidQuantitiesConfiguration.class)
-                .modules(getGuiceModules())
-                .build();
+        GuiceBundle guiceBundle = GuiceBundle.builder()
+            .modules(getGuiceModules())
+            .build();
+
         bootstrap.addBundle(guiceBundle);
         bootstrap.addBundle(new MultiPartBundle());
+        bootstrap.getObjectMapper().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         bootstrap.addBundle(new AssetsBundle("/web", "/", "index.html", "assets"));
         bootstrap.addCommand(new TrainingGenerationCommand());
         bootstrap.addCommand(new UnitBatchProcessingCommand());
@@ -55,6 +57,9 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
 
     @Override
     public void run(GrobidQuantitiesConfiguration configuration, Environment environment) {
+
+        environment.healthChecks().register("health-check", new HealthCheck(configuration));
+
         LOGGER.info("Service config={}", configuration);
         environment.jersey().setUrlPattern(RESOURCES + "/*");
 
@@ -78,7 +83,6 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         final FilterRegistration.Dynamic qos = environment.servlets().addFilter("QOS", QoSFilter.class);
         qos.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
         qos.setInitParameter("maxRequests", String.valueOf(configuration.getMaxParallelRequests()));
-        
     }
 
     public static void main(String[] args) throws Exception {

@@ -1,7 +1,7 @@
 package org.grobid.service.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 import org.apache.commons.io.IOUtils;
 import org.grobid.core.utilities.GrobidConfig;
 import org.grobid.core.utilities.GrobidProperties;

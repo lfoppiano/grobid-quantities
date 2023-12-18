@@ -1,6 +1,9 @@
 package org.grobid.service.controller;
 
 import com.codahale.metrics.annotation.Timed;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.grobid.core.data.MeasurementsResponse;
@@ -10,11 +13,8 @@ import org.grobid.core.engines.QuantitiesEngine;
 import org.grobid.core.engines.QuantityParser;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import java.io.InputStream;
 import java.util.List;
 

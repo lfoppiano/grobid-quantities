@@ -50,6 +50,7 @@ WORKDIR /opt
 
 FROM grobid/grobid:0.7.3 as runtime
 
+
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
 

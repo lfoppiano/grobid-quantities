@@ -1,7 +1,7 @@
 package org.grobid.service.command;
 
-import io.dropwizard.cli.ConfiguredCommand;
-import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.core.cli.ConfiguredCommand;
+import io.dropwizard.core.setup.Bootstrap;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.MutuallyExclusiveGroup;
 import net.sourceforge.argparse4j.inf.Namespace;

@@ -34,9 +34,9 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+import jakarta.ws.rs.core.Response;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -129,7 +129,7 @@ public class QuantitiesEngine {
 
                     BiblioItem resHeader = new BiblioItem();
                     //parsers.getHeaderParser().processingHeaderSection(false, doc, resHeader);
-                    resHeader.generalResultMapping(labeledResult, tokenizationHeader);
+                    resHeader.generalResultMappingHeader(labeledResult, tokenizationHeader);
 
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
