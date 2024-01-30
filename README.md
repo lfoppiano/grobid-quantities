@@ -44,17 +44,19 @@ is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/v0.7.3). T
 ### Update from 0.7.2 to 0.7.3
 
 #### Grobid models
+
 In version 0.7.3 we have updated the DeLFT models. The DL models must be updated by running `./gradlew copyModels`.
 
 #### JDK Update
+
 The version 0.7.3 enable the support for running with JDK > 11. We recommend to run it with JDK 17.
 Running grobid-quantities with gradle (`./gradlew clean run`) is already supported in the `build.gradle`.
-Running grobid-quantities via the JAR file requires an additional parameter to set the java.path: 
+Running grobid-quantities via the JAR file requires an additional parameter to set the java.path:
+
 - Linux: `-Djava.library.path=../grobid-home/lib/lin-64:../grobid-home/lib/lin-64/jep`
 - Mac (arm): `-Djava.library.path=.:/usr/lib/java:../grobid-home/lib/mac_arm-64:{MY_VIRTUAL_ENV}/jep/lib:{MY_VIRTUAL_ENV}/jep/lib/python3.9/site-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED`
 - Mac (intel): `-Djava.library.path=.:/usr/lib/java:../grobid-home/lib/mac-64:{MY_VIRTUAL_ENV}/jep/lib:{MY_VIRTUAL_ENV}/jep/lib/python3.9/site-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED`
-    With `MY_VIRTUAL_ENV` I use `/Users/lfoppiano/anaconda3/envs/jep`
-
+  With `MY_VIRTUAL_ENV` I use `/Users/lfoppiano/anaconda3/envs/jep`
 
 ### Update from 0.7.1 to 0.7.2
 
@@ -83,42 +85,42 @@ Update on the 27/10/2022
 
 #### Quantities
 
-| Labels           | CRF           |            |              | **BidLSTM_CRF** |            |              | **BidLSTM_CRF_FEATURES** |            |              | **BERT_CRF**  |            |              |
-|------------------|---------------|------------|--------------|-----------------|------------|--------------|--------------------------|------------|--------------|---------------|------------|--------------|
-| Metrics          | **Precision** | **Recall** | **F1-Score** | **Precision**   | **Recall** | **F1-Score** | **Precision**            | **Recall** | **F1-Score** | **Precision** | **Recall** | **F1-Score** |
-| `<unitLeft>`     | 88.74         | 83.19      | 85.87        | 88.56           | 92.07      | 90.28        | 88.91                    | 92.20      | 90.53        | 93.99         | 90.30      | 92.11        |
-| `<unitRight>`    | 30.77         | 30.77      | 30.77        | 24.75           | 30.77      | 27.42        | 21.73                    | 30.77      | 25.41        | 21.84         | 36.92      | 27.44        |
-| `<valueAtomic>`  | 76.29         | 78.66      | 77.46        | 78.14           | 86.06      | 81.90        | 78.21                    | 86.20      | 82.01        | 84.50         | 88.19      | 86.31        |
-| `<valueBase>`    | 84.62         | 62.86      | 72.13        | 83.51           | 94.86      | 88.61        | 83.36                    | 97.14      | 89.72        | 100.00        | 90.86      | 95.20        |
-| `<valueLeast>`   | 77.68         | 69.05      | 73.11        | 82.14           | 60.63      | 69.67        | 80.73                    | 60.63      | 69.12        | 81.09         | 71.59      | 76.04        |
-| `<valueList>`    | 45.45         | 18.87      | 26.67        | 62.15           | 10.19      | 17.34        | 73.33                    | 8.68       | 15.33        | 64.12         | 43.78      | 51.64        |
-| `<valueMost>`    | 71.62         | 54.64      | 61.99        | 77.64           | 68.25      | 72.61        | 77.25                    | 70.31      | 73.58        | 81.52         | 67.42      | 73.71        |
-| `<valueRange>`   | 100           | 97.14      | 98.55        | 96.72           | 100.00     | 98.32        | 94.05                    | 98.86      | 96.38        | 99.39         | 91.43      | 95.24        |
-| --               |               |            |              |                 |            |              |                          |            |              |               |            |              |
-| All (micro avg)  | 80.08         | 75         | 77.45        | 81.81           | 81.73      | 81.76        | 81.76                    | 81.94      | 81.85        | 86.24         | 83.96      | 85.08        |
+| Labels          | CRF           |            |              | **BidLSTM_CRF** |            |              | **BidLSTM_CRF_FEATURES** |            |              | **BERT_CRF**  |            |              | **Support** | 
+|-----------------|---------------|------------|--------------|-----------------|------------|--------------|--------------------------|------------|--------------|---------------|------------|--------------|-------------|
+| Metrics         | **Precision** | **Recall** | **F1-Score** | **Precision**   | **Recall** | **F1-Score** | **Precision**            | **Recall** | **F1-Score** | **Precision** | **Recall** | **F1-Score** |             |
+| `<unitLeft>`    | 88.74         | 83.19      | 85.87        | 88.56           | 92.07      | 90.28        | 88.91                    | 92.20      | 90.53        | 93.99         | 90.30      | 92.11        | 464         |
+| `<unitRight>`   | 30.77         | 30.77      | 30.77        | 24.75           | 30.77      | 27.42        | 21.73                    | 30.77      | 25.41        | 21.84         | 36.92      | 27.44        | 13          |
+| `<valueAtomic>` | 76.29         | 78.66      | 77.46        | 78.14           | 86.06      | 81.90        | 78.21                    | 86.20      | 82.01        | 84.50         | 88.19      | 86.31        | 581         |
+| `<valueBase>`   | 84.62         | 62.86      | 72.13        | 83.51           | 94.86      | 88.61        | 83.36                    | 97.14      | 89.72        | 100.00        | 90.86      | 95.20        | 35          |
+| `<valueLeast>`  | 77.68         | 69.05      | 73.11        | 82.14           | 60.63      | 69.67        | 80.73                    | 60.63      | 69.12        | 81.09         | 71.59      | 76.04        | 126         |
+| `<valueList>`   | 45.45         | 18.87      | 26.67        | 62.15           | 10.19      | 17.34        | 73.33                    | 8.68       | 15.33        | 64.12         | 43.78      | 51.64        | 53          |
+| `<valueMost>`   | 71.62         | 54.64      | 61.99        | 77.64           | 68.25      | 72.61        | 77.25                    | 70.31      | 73.58        | 81.52         | 67.42      | 73.71        | 97          |
+| `<valueRange>`  | 100.00        | 97.14      | 98.55        | 96.72           | 100.00     | 98.32        | 94.05                    | 98.86      | 96.38        | 99.39         | 91.43      | 95.24        | 35          |
+| --              |               |            |              |                 |            |              |                          |            |              |               |            |              |             | 
+| All (micro avg) | 80.08         | 75         | 77.45        | 81.81           | 81.73      | 81.76        | 81.76                    | 81.94      | 81.85        | 86.24         | 83.96      | 85.08        |             | 
 
 #### Units
 
-|                 | **CRF**       |            |              | **BidLSTM_CRF** |            |              | **BidLSTM_CRF_FEATURES** |            |              | **BERT_CRF**  |            |              |
-|-----------------|---------------|------------|--------------|-----------------|------------|--------------|--------------------------|------------|--------------|---------------|------------|--------------|
-| Labels          | **Precision** | **Recall** | **F1-Score** | **Precision**   | **Recall** | **F1-Score** | **Precision**            | **Recall** | **F1-Score** | **Precision** | **Recall** | **F1-Score** |
-| `<base>`        | 80.57         | 82.34      | 81.45        | 56.01           | 50.34      | 53.02        | 59.98                    | 56.33      | 58.09        | 61.41         | 57.08      | 59.16        |
-| `<pow>`         | 72.65         | 74.45      | 73.54        | 93.70           | 62.38      | 74.88        | 93.71                    | 68.40      | 78.94        | 91.24         | 64.60      | 75.60        |
-| `<prefix>`      | 93.8          | 84.69      | 89.02        | 80.31           | 85.25      | 82.54        | 83.21                    | 83.58      | 83.35        | 82.10         | 85.30      | 83.62        |
-| --              |               |            |              |                 |            |              |                          |            |              |               |            |              |
-| All (micro avg) | 80.73         | 80.6       | 80.66        | 70.19           | 60.88      | 65.20        | 73.03                    | 65.31      | 68.94        | 73.02         | 64.97      | 68.76        |
+|                 | **CRF**       |            |              | **BidLSTM_CRF** |            |              | **BidLSTM_CRF_FEATURES** |            |              | **BERT_CRF**  |            |              | **Support** |
+|-----------------|---------------|------------|--------------|-----------------|------------|--------------|--------------------------|------------|--------------|---------------|------------|--------------|-------------|
+| Labels          | **Precision** | **Recall** | **F1-Score** | **Precision**   | **Recall** | **F1-Score** | **Precision**            | **Recall** | **F1-Score** | **Precision** | **Recall** | **F1-Score** |             | 
+| `<base>`        | 80.57         | 82.34      | 81.45        | 56.01           | 50.34      | 53.02        | 59.98                    | 56.33      | 58.09        | 61.41         | 57.08      | 59.16        | 3228        |
+| `<pow>`         | 72.65         | 74.45      | 73.54        | 93.70           | 62.38      | 74.88        | 93.71                    | 68.40      | 78.94        | 91.24         | 64.60      | 75.60        | 1773        |
+| `<prefix>`      | 93.8          | 84.69      | 89.02        | 80.31           | 85.25      | 82.54        | 83.21                    | 83.58      | 83.35        | 82.10         | 85.30      | 83.62        | 1287        |
+| --              |               |            |              |                 |            |              |                          |            |              |               |            |              |             | 
+| All (micro avg) | 80.73         | 80.6       | 80.66        | 70.19           | 60.88      | 65.20        | 73.03                    | 65.31      | 68.94        | 73.02         | 64.97      | 68.76        |             |
 
 #### Values
 
-|                 | **CRF**       |            |              | **BidLSTM_CRF** |            |          | **BidLSTM_CRF_FEATURES** |            |              | **BERT_CRF**    |            |              |
-|-----------------|---------------|------------|--------------|-----------------|------------|----------|--------------------------|------------|--------------|-----------------|------------|--------------|
-| Labels          | **Precision** | **Recall** | **F1-Score** | **Precision**   | **Recall** | F1-Score | **Precision**            | **Recall** | **F1-Score** | **Precision**   | **Recall** | **F1-Score** |
-| `<alpha>`       | 98.06         | 96.03      | 92.02        | 97.67           | 99.53      | 98.58    | 97.82                    | 99.53	     | 98.66        | 98.59           | 99.53      | 99.05        |
-| `<base>`        | 99.91         | 92.31      | 96           | 96.92           | 92.31      | 94.52    | 96.92                    | 93.85	     | 95.32        | 90.40           | 98.46      | 92.88        |
-| `<number>`      | 97.5          | 99.88      | 98.36        | 99.24           | 99.34      | 99.29    | 99.21                    | 99.38	     | 99.30        | 99.48           | 99.31      | 99.40        |
-| `<pow>`         | 100           | 100        | 100          | 92.92           | 92.31      | 92.47    | 90.28                    | 93.85	     | 91.90        | 100.00          | 100.00     | 100.00       |
-| --              |               |            |              |                 |            |          |                          |            |              |                 |            |              |
-| All (micro avg) | 95.79         | 99.27      | 97.5         | 98.90           | 99.17      | 99.03    | 98.86                    | 99.25	     | 99.05        | 99.13           | 99.33      | 99.23        | 
+|                 | **CRF**       |            |              | **BidLSTM_CRF** |            |          | **BidLSTM_CRF_FEATURES** |            |              | **BERT_CRF**  |            |              | **Support** | 
+|-----------------|---------------|------------|--------------|-----------------|------------|----------|--------------------------|------------|--------------|---------------|------------|--------------|-------------|
+| Labels          | **Precision** | **Recall** | **F1-Score** | **Precision**   | **Recall** | F1-Score | **Precision**            | **Recall** | **F1-Score** | **Precision** | **Recall** | **F1-Score** |             | 
+| `<alpha>`       | 98.06         | 96.03      | 92.02        | 97.67           | 99.53      | 98.58    | 97.82                    | 99.53	     | 98.66        | 98.59         | 99.53      | 99.05        | 126         |
+| `<base>`        | 99.91         | 92.31      | 96           | 96.92           | 92.31      | 94.52    | 96.92                    | 93.85	     | 95.32        | 90.40         | 98.46      | 92.88        | 13          |
+| `<number>`      | 97.5          | 99.88      | 98.36        | 99.24           | 99.34      | 99.29    | 99.21                    | 99.38	     | 99.30        | 99.48         | 99.31      | 99.40        | 811         |
+| `<pow>`         | 100           | 100        | 100          | 92.92           | 92.31      | 92.47    | 90.28                    | 93.85	     | 91.90        | 100.00        | 100.00     | 100.00       | 13          |
+| --              |               |            |              |                 |            |          |                          |            |              |               |            |              |             | 
+| All (micro avg) | 95.79         | 99.27      | 97.5         | 98.90           | 99.17      | 99.03    | 98.86                    | 99.25	     | 99.05        | 99.13         | 99.33      | 99.23        |             |
 
 <details>
   <summary>Previous evaluations</summary>
@@ -179,9 +181,8 @@ Scientific Literature", published in September 2019 reported average evaluation 
 
 ## Acknowledgement
 
-This project has been created and developed by [science-miner](https://www.science-miner.com) since 2015, with additional
-support by [Inria](http://www.inria.fr), in Paris (France) and
-the [National Institute for Materials Science](http://www.nims.go.jp),
+This project has been created and developed by [science-miner](https://www.science-miner.com) since 2015, with
+additional support by [Inria](http://www.inria.fr), in Paris (France) and the [National Institute for Materials Science](http://www.nims.go.jp),
 in [Tsukuba](https://en.wikipedia.org/wiki/Tsukuba,_Ibaraki) (Japan).
 
 ## How to cite
