@@ -4,13 +4,18 @@
 Evaluation scores
 *****************
 
-The scores (P: Precision, R: Recall, F1: F1-score) for all the models are performed either as 10-fold cross-validation or using an holdout dataset. 
-For DL (BidLSTM_CRF, BERT_CRF) models, we provide the average over 5 runs.
+The scores (P: Precision, R: Recall, F1: F1-score) for all the models are performed either as 10-fold cross-validation or using an holdout dataset.
+The holdout dataset of Grobid-quantities is composed by the following examples: 
+ - Quantities ML: 10 articles
+ - Units ML: [UNISCOR dataset](https://grobid-quantities.readthedocs.io/en/latest/references.html#other) with around 1600 examples 
+ - Values ML: 950 examples
+
+For Deep learning models (BidLSTM_CRF/BidLSTM_CRF_FEATURES, BERT_CRF) models, we provide the average over 5 runs.
 
 The models are organised as follow: 
-- BidLSTM_CRF is a RNN model based on Lample et al. work, with a CRF model as activation function 
-- BidLSTM_CRF_FEATURES is an extension of BidLSTM_CRF that allow using layout features
-- BERT_CRF is a BERT-based model obtained by fine-tuning a SciBERT encoder. Like others, the activation function is composed by a CRF layer. 
+ - BidLSTM_CRF is a RNN model based on (Lample et al., 2016) work, with a CRF model as activation function 
+ - BidLSTM_CRF_FEATURES is an extension of BidLSTM_CRF that allow using layout features
+ - BERT_CRF is a BERT-based model obtained by fine-tuning a SciBERT encoder. Like others, the activation function is composed by a CRF layer. 
 
 
 =======================
@@ -27,7 +32,7 @@ Quantities
 +------------------+-----------+--------+---------+------------+---------+---------+
 | Labels           | CRF                          | BERT_CRF                       |
 +==================+===========+========+=========+============+=========+=========+
-| Metrics          | P          | R     | F1      | P          | R       | F1      |
+| Metrics          | P         | R      | F1      | P          | R       | F1      |
 +------------------+-----------+--------+---------+------------+---------+---------+
 | `<unitLeft>`     | 88.74     | 83.19  | 85.87   | 93.99      | 90.30   | 92.11   |
 +------------------+-----------+--------+---------+------------+---------+---------+
