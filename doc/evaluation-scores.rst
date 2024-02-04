@@ -34,9 +34,9 @@ Machine Learning Named Entities Recognition  Evaluation
 
 The scores (P: Precision, R: Recall, F1: F1-score) for all the models are performed either as 10-fold cross-validation or using an holdout dataset.
 The holdout dataset of Grobid-quantities is composed by the following examples: 
- - Quantities ML: 10 articles
- - Units ML: `UNISCOR dataset <https://grobid-quantities.readthedocs.io/en/latest/references.html#other>`_ with around 1600 examples 
- - Values ML: 950 examples
+- Quantities ML: 10 articles
+- Units ML: `UNISCOR dataset <https://grobid-quantities.readthedocs.io/en/latest/references.html#other>`_ with around 1600 examples 
+- Values ML: 950 examples
 
 For Deep learning models (BidLSTM_CRF/BidLSTM_CRF_FEATURES, BERT_CRF) models, we provide the average over 5 runs.
 
@@ -52,6 +52,7 @@ Results from 27/10/2022
 
 The evaluation was performed on the holdout dataset from the grobid-quantities dataset.
 Average values are computed as Micro average. 
+To reproduce it, see :ref:`evaluation_doc`.
 
 
 Quantities
