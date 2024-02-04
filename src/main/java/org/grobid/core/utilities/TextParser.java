@@ -57,7 +57,7 @@ public class TextParser {
     private AbstractPredIdentifier predicater = null;
     private AbstractSRLabeler labeler = null;
     private DEPReader depReader = null;
-    private SentenceDetector segmenter;
+    private SentenceUtilities segmenter;
 
     // this is for version 1.3.0 of ClearNLP
     private CRolesetClassifier roleClassifier = null;
@@ -120,7 +120,7 @@ public class TextParser {
 
         depReader = new DEPReader(0, 1, 2, 3, 4, 5, 6);
 
-        segmenter = new OpenNLPSentenceDetector();
+        segmenter = SentenceUtilities.getInstance();
     }
 
     /**
@@ -177,7 +177,7 @@ public class TextParser {
         }
 
         List<Sentence> results = new ArrayList<>();
-        List<OffsetPosition> sentences = this.segmenter.detect(text);
+        List<OffsetPosition> sentences = this.segmenter.runSentenceDetection(text);
 
         if (CollectionUtils.isEmpty(sentences)) {
             // there is some text but not in a state so that a sentence at least can be
@@ -219,7 +219,7 @@ public class TextParser {
 
         String text = reader.lines().collect(Collectors.joining());
 
-        List<OffsetPosition> sentences = segmenter.detect(text);
+        List<OffsetPosition> sentences = segmenter.runSentenceDetection(text);
 
         for (OffsetPosition sentencePosition : sentences) {
             String sentence = text.substring(sentencePosition.start, sentencePosition.end);

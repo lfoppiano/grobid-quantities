@@ -2,9 +2,11 @@ package org.grobid.service;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
 import com.google.inject.Provides;
-import com.hubspot.dropwizard.guicier.DropwizardAwareModule;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
 import org.grobid.core.engines.QuantitiesEngine;
 import org.grobid.core.engines.QuantityParser;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
@@ -14,34 +16,32 @@ import org.grobid.service.exceptions.mapper.GrobidExceptionMapper;
 import org.grobid.service.exceptions.mapper.GrobidExceptionsTranslationUtility;
 import org.grobid.service.exceptions.mapper.GrobidServiceExceptionMapper;
 import org.grobid.service.exceptions.mapper.WebApplicationExceptionMapper;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
+import ru.vyarus.dropwizard.guice.module.support.DropwizardAwareModule;
 
 
 public class QuantitiesServiceModule extends DropwizardAwareModule<GrobidQuantitiesConfiguration> {
 
     @Override
-    public void configure(Binder binder) {
+    public void configure() {
         // -- Generic modules --
-        binder.bind(GrobidEngineInitialiser.class);
-        binder.bind(HealthCheck.class);
+        bind(GrobidEngineInitialiser.class);
+        bind(HealthCheck.class);
 
         //Services
-        binder.bind(QuantityParser.class);
-        binder.bind(QuantitiesEngine.class);
+        bind(QuantityParser.class);
+        bind(QuantitiesEngine.class);
 
         //REST
-        binder.bind(AnnotationController.class);
+        bind(AnnotationController.class);
 
         //Exception Mappers - directly imported from Grobid
-        binder.bind(GrobidServiceExceptionMapper.class);
-        binder.bind(GrobidExceptionsTranslationUtility.class);
-        binder.bind(GrobidExceptionMapper.class);
-        binder.bind(WebApplicationExceptionMapper.class);
+        bind(GrobidServiceExceptionMapper.class);
+        bind(GrobidExceptionsTranslationUtility.class);
+        bind(GrobidExceptionMapper.class);
+        bind(WebApplicationExceptionMapper.class);
     }
 
-    @Provides
+    /*@Provides
     protected ObjectMapper getObjectMapper() {
         return getEnvironment().getObjectMapper();
     }
@@ -54,7 +54,7 @@ public class QuantitiesServiceModule extends DropwizardAwareModule<GrobidQuantit
     //for unit tests
     protected MetricRegistry getMetricRegistry() {
         return getEnvironment().metrics();
-    }
+    }*/
 
     @Provides
     Client provideClient() {

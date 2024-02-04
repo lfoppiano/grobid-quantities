@@ -13,8 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-+ Updated to Grobid version 0.8.0 
++ Updated to Grobid version 0.8.0
 + Updated to Dropwizard version 4.x (from version 1.x)
+
+
 
 ## [0.7.3] – 2023-06-26
 
