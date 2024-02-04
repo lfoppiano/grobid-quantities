@@ -43,7 +43,7 @@ The latest released version of grobid-quantities is [0.7.3](https://github.com/k
 
 ## Documentation
 
-You can find the latest documentation [here](http://grobid-quantities.readthedocs.io).
+All information on how to set up Grobid-quantities, including how to use the REST API, training and evaluation are in the documentation [here](http://grobid-quantities.readthedocs.io).
 
 
 ## Acknowledgement
