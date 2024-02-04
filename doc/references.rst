@@ -10,7 +10,9 @@ How to cite
 
 If you want to cite this work, please simply refer to the github project, with optionally the `Software Heritage <https://www.softwareheritage.org/>`_ project-level permanent identifier:
 ::
- grobid-quantities (2015-2022) <https://github.com/kermitt2/grobid-quantities>, swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
+  grobid-quantities (2015-2022) 
+  <https://github.com/kermitt2/grobid-quantities>, 
+  swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
 
 Here's a BibTeX entry using the `Software Heritage <https://www.softwareheritage.org/>`_ project-level permanent identifier:
 ::
@@ -38,8 +40,11 @@ Main papers about grobid-quantities
 |    https://arxiv.org/pdf/1710.04312.pdf
 
 
-Other
-~~~~~
+
+.. _uniscor: 
+
+Datasets
+~~~~~~~~
 
 UNISCOR (Units Segmentation Corpus) is a corpus of "unit segmentation" and is available `here`_.
 It was created with the support of `NIMS (National Institute for Material Science) <https://www.nims.go.jp>`_, in Japan.

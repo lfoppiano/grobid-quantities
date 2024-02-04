@@ -98,16 +98,16 @@ Via command line:
   java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m quantifiedObject -a train resources/config/config.yml
 
 
-.. For the moment, the default training stop criteria are used. So, the training can be stopped manually after 2000 iterations, simply do a "control-C" to stop
-the training and save the model produced in the latest iteration. 1000 iterations are largely enough.
+.. For the moment, the default training stop criteria are used. So, the training can be stopped manually after 2000 iterations, simply do a "control-C" to stop the training and save the model produced in the latest iteration. 1000 iterations are largely enough.
 
 .. Otherwise, the training will continue beyond several thousand iterations before stopping.
 
+..  _evaluation_doc:
 
 Evaluation
 ~~~~~~~~~~
 
-Grobid-quantities can be evaluated using a random `80/20` ratio, an `holdout` set, or as `n-fold cross-validation`.
+Grobid-quantities can be evaluated using a random ``80/20`` ratio, an ``holdout`` set, or as ``n-fold cross-validation``.
 
 .. note:: Since 12/2022, the holdout evaluation is the default means of evaluation for all the models.
 

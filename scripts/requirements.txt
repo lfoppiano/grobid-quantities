@@ -4,3 +4,6 @@ tqdm
 pyyaml
 sklearn
 supermat
+grobid-quantities-client
+python-dotenv
+textdistance[extras]
