@@ -1,8 +1,34 @@
 .. topic:: Evaluation scores
 
-*****************
-Evaluation scores
-*****************
+**********
+Evaluation
+**********
+
+--------------------
+End 2 end evaluation
+--------------------
+
+The end-to-end evaluation was performed with the `MeasEval dataset <https://github.com/harperco/MeasEval>`_ (SemEval-2021 Task 8).
+The scores in the following table are the micro average. 
+MeasEval was annotated to allow approximated entities, which are not supported in grobid-quantities. 
+
++---------------------------+----------------+-----------+--------+---------+---------+
+| Type (Ref)                | Matching method| Precision | Recall | F1-score| Support |
++===========================+================+===========+========+=========+=========+
+| Quantities (QUANT)        | strict         | 53.05     | 54.74  | 53.88   | 1165    |
++---------------------------+----------------+-----------+--------+---------+---------+
+| Quantities (QUANT)        | soft           | 64.64     | 66.70  | 65.65   | 1165    |
++---------------------------+----------------+-----------+--------+---------+---------+
+| Quantified substance (ME) | strict         | 14.03     | 9.78   | 11.53   | 613     |
++---------------------------+----------------+-----------+--------+---------+---------+
+| Quantified substance (ME) | soft           | 21.53     | 15.02  | 17.69   | 613     |
++---------------------------+----------------+-----------+--------+---------+---------+
+
+Note: the ME (Measured Entity) is still experimental in Grobid-quantities
+
+-------------------------------------------------------
+Machine Learning Named Entities Recognition  Evaluation
+-------------------------------------------------------
 
 The scores (P: Precision, R: Recall, F1: F1-score) for all the models are performed either as 10-fold cross-validation or using an holdout dataset.
 The holdout dataset of Grobid-quantities is composed by the following examples: 
@@ -18,14 +44,14 @@ The models are organised as follow:
  - BERT_CRF is a BERT-based model obtained by fine-tuning a SciBERT encoder. Like others, the activation function is composed by a CRF layer. 
 
 
-=======================
+
 Results from 27/10/2022
-=======================
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The evaluation was performed on the holdout dataset from the grobid-quantities dataset.
 Average values are computed as Micro average. 
 
-----------
+
 Quantities
 ----------
 
@@ -79,7 +105,6 @@ Quantities
 +------------------+--------------+--------+---------+-------------------------+--------+---------+
 
 
------
 Units
 -----
 
@@ -113,7 +138,7 @@ Units were evaluated using UNISCOR dataset. For more information check the secti
 | All (micro avg)  | 70.19        | 60.88  | 65.20   | 73.03                   | 65.31  | 68.94   |
 +------------------+--------------+--------+---------+-------------------------+--------+---------+
 
-------
+
 Values
 ------
 
@@ -150,9 +175,9 @@ Values
 | All (micro avg) | 98.90      | 99.17  | 99.03    | 98.86                   | 99.25   | 99.05    |
 +-----------------+------------+--------+----------+-------------------------+---------+----------+
 
-================
+
 Previous results 
-================
+~~~~~~~~~~~~~~~~
 
 The scores of this evaluation were obtained using n-fold cross-validation. The metrics are the micro average of n=10 folds.
 
@@ -163,7 +188,7 @@ Evaluation notes:
  - The `CRF` model was evaluated on the 30/04/2020.
  - The `BidLSTM_CRF_FEATURES` model was evaluated on the 28/11/2021
 
-----------
+
 Quantities
 ----------
 
@@ -191,7 +216,6 @@ Quantities
 | All (micro avg)     | 88.96      | 85.40  | 87.14    | 87.23                | 89.00  | 88.10    |
 +---------------------+------------+--------+----------+----------------------+--------+----------+
 
------
 Units
 -----  
 
@@ -212,7 +236,6 @@ CRF was updated on the 10/02/2021
 +------------------+------------+--------+----------+-----------+-------+-----------+
 
 
-------
 Values
 ------
 

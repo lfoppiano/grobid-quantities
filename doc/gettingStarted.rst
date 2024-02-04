@@ -7,15 +7,55 @@
 .. _latest discussion: https://github.com/kermitt2/grobid/issues/1014
 
 
-
+###############
 Getting started
-===============
+###############
 
-Before you start
-~~~~~~~~~~~~~~~~
 .. warning:: Grobid and grobid-quantities are `not compatible with Windows`_ and limited on Apple M1. While Windows users can easily use Grobid and grobid-quantities through docker containers, the support for grobid on ARM is under development, see the `latest discussion`_. 
 
 .. warning:: Since grobid-quantities 0.7.3 (using grobid 0.7.3), we extended the support to JDK after version 11. This requires specifying the `java.library.path` explicitly. Obviously, *all these issues are solved by using Docker containers*.
+
+
+Upgrade
+~~~~~~~
+
+0.7.2 to 0.7.3
+==============
+
+Grobid models
+-------------
+
+In version 0.7.3, we have updated the DeLFT models. The DL models must be updated by running ``./gradlew copyModels``.
+
+JDK Update
+-----------
+
+The version 0.7.3 enables the support for running with JDK > 11. We recommend running it with JDK 17.
+Running grobid-quantities with gradle (``./gradlew clean run``) is already supported in the ``build.gradle``.
+Running grobid-quantities via the JAR file requires an additional parameter to set the java.path:
+
+- Linux: ``-Djava.library.path=../grobid-home/lib/lin-64:../grobid-home/lib/lin-64/jep``
+- Mac (arm): ``-Djava.library.path=.:/usr/lib/java:../grobid-home/lib/mac_arm-64:{MY_VIRTUAL_ENV}/jep/lib:{MY_VIRTUAL_ENV}/jep/lib/python3.9/site-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED``
+- Mac (intel): ``-Djava.library.path=.:/usr/lib/java:../grobid-home/lib/mac-64:{MY_VIRTUAL_ENV}/jep/lib:{MY_VIRTUAL_ENV}/jep/lib/python3.9/site-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED``
+    With ``MY_VIRTUAL_ENV`` I use ``/Users/lfoppiano/anaconda3/envs/jep``
+
+0.7.1 to 0.7.2
+==============
+
+In version 0.7.2, we have updated the DeLFT models.
+The DL models must be updated by running ``./gradlew copyModels``.
+
+0.7.0 to 0.7.1
+==============
+
+In version 0.7.1, a new version of DeLFT using Tensorflow 2.x is used.
+The DL models must be updated by running ``./gradlew copyModels``.
+
+0.6.0 to 0.7.0
+==============
+
+In version 0.7.0, the models have been updated, therefore it is required to run a ``./gradlew copyModels`` to have properly
+results, especially for what concerns the unit normalization.
 
 
 Install and build
@@ -25,7 +65,7 @@ Docker containers
 -----------------
 The simplest way to run grobid-quantities is via docker containers.
 
-The Grobid-quantities repository provides a configuration file for docker: `resources/config/config-docker.yml`, which should work out of the box, although we recommend to **check the configuration** (e.g., to enable modules using deep learning).
+The Grobid-quantities repository provides a configuration file for docker: ``resources/config/config-docker.yml``, which should work out of the box, although we recommend to **check the configuration** (e.g., to enable modules using deep learning).
 
 To run the container use:
 ::
