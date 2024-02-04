@@ -12,3 +12,4 @@ build
 out
 **/.DS_Store
 logs/**
+scripts/.idea
