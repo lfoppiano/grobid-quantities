@@ -103,7 +103,7 @@ html_sidebars = { '**': ['globaltoc.html', 'searchbox.html'] }
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Grobid-quantitiesdoc'
+htmlhelp_basename = 'Grobid-quantities'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -152,7 +152,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'Grobid-quantities', 'Grobid-quantities Documentation',
-     author, 'Grobid-quantities', 'One line description of project.',
+     author, 'Grobid-quantities', 'GROBID extension for identifying and normalizing physical quantities.',
      'Miscellaneous'),
 ]
 

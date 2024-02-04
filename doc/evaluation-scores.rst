@@ -26,6 +26,8 @@ MeasEval was annotated to allow approximated entities, which are not supported i
 
 Note: the ME (Measured Entity) is still experimental in Grobid-quantities
 
+To reproduce the end-to-end evaluation, you can run the ``scripts/measeval_e2e_eval.py`` script (use the requirements.txt to install the correct dependencies). 
+
 -------------------------------------------------------
 Machine Learning Named Entities Recognition  Evaluation
 -------------------------------------------------------

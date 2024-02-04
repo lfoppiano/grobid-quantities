@@ -107,7 +107,7 @@ the training and save the model produced in the latest iteration. 1000 iteration
 Evaluation
 ~~~~~~~~~~
 
-Grobid-quantities can be evaluated using a random `80/20` ratio, an `holdout` set, or as `n-fold cross-validation`.
+Grobid-quantities can be evaluated using a random ``80/20`` ratio, an ``holdout`` set, or as ``n-fold cross-validation``.
 
 .. note:: Since 12/2022, the holdout evaluation is the default means of evaluation for all the models.
 
