@@ -1,4 +1,5 @@
-.. topic:: Annotation guidelines
+..  topic:: Annotation guidelines
+
 
 Annotation guidelines
 =====================
@@ -9,20 +10,23 @@ The annotation work then consists of manually checking the produced annotations 
 
 .. warning:: It is very important not to modify the text content in these generated files, not adding spaces or other characters, but only adding or moving XML tags.
 
-When the training data has been manually corrected, move the file under the repository ``resouces/dataset/${model}/corpus/`` for retraining, or under ``resouces/dataset/${model}/evaluation/`` if the annotated data should be used for evaluation only.
+When the training data has been manually corrected, move the file under the repository ``resources/dataset/${model}/corpus/`` for retraining, or under ``resouces/dataset/${model}/evaluation/`` if the annotated data should be used for evaluation only.
 To see the different evaluation options, see GROBID documentation on `training and evaluating <http://grobid.readthedocs.org/en/latest/Training-the-models-of-Grobid>`_.
 
 .. note:: the exact directory where the data is picked up could be also a ``final`` under ``corpus``. Please check the description under each model definition, below.
 
-
-In this document we describe the annotation guidelines for the following models:
+In this document, after the general rules, we describe the annotation guidelines for the following models:
  - :ref:`Quantities model` - STABLE
  - :ref:`Units model` - STABLE
  - :ref:`Values model` - STABLE
  - :ref:`Quantified objects CRF model` / substance CRF model - **Work in progress**
 
 
-.. _Quantities CRF model:
+.. warning:: References markers in the text such as ``[...] previous work, 10 showed that we are right [...]``, 10 refers to the references number 10 and should be ignored. The reference marker should be commented out: ``[...] previous work, <!--10--> showed that we are right [...]``. This is valid for any numerical reference number: [1], 1 and with other styles: (Foppiano et al, 2021), Foppiano et al. (2021), etc.
+
+.. warning:: If the year is not present, and the reference just refers to some author, they should be left in the file. For example ``Drodzov et al demonstrate that we are right[...]``.
+
+.. _Quantities model:
 
 Quantities model
 --------------------
@@ -567,12 +571,12 @@ XML examples (ended with the name of the file between brackets)
   Patients with SS have a <measure type="interval"><num atLeast="20">20</num>-<num atMost="40">40 fold</num></measure> increased risk of developing lymphoma [hal-00987664]
 
 
-.. _Units CRF model:
+.. _Units model:
 
-Units CRF model
+Units model
 ---------------
 
-The Units model is used to parse chunks of text recognised as units from the Quantity CRF model. The data handled as unit is modelled based on the SI representation of unit, which models any unit as a triple: prefix, base and pow. For example ``m^2`` can be represented as ``[-, m, 2]``. Complex units are naturally supported: ``m^3/kg*s`` can be rewritten as ``[(-, m, 3)(k, g, -1)(-, s, -1)]``.
+The Units model is used to parse chunks of text recognised as units from the Quantity model. The data handled as unit is modelled based on the SI representation of unit, which models any unit as a triple: prefix, base and pow. For example ``m^2`` can be represented as ``[-, m, 2]``. Complex units are naturally supported: ``m^3/kg*s`` can be rewritten as ``[(-, m, 3)(k, g, -1)(-, s, -1)]``.
 
 There are 3 labels for this model:
  - ``<prefix>`` represent the unit prefix, for example ``k`` for ``kilo``, ``G`` for ``giga`` and so on and so forth. The definition of these prefix is in the prefix dictionary under ``resources/lexicon/${lang}/prefix.txt``.
@@ -609,11 +613,11 @@ General principles:
 - in general  ``numerator / den1 den2 den3 is equivalent`` to ``numerator/(den1*den2*den3)``. Groups by parenthesis are not supported.
 
 
-.. _Values CRF model:
+.. _Values model:
 
-Values CRF model
+Values model
 --------------------
-The Values model is used to parse chunks of text recognised as values from the Quantity CRF model.
+The Values model is used to parse chunks of text recognised as values from the Quantity model.
 
 .. Issue about the value parser:
 .. _#13: https://github.com/kermitt2/grobid-quantities/issues/13
