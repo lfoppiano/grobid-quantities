@@ -124,7 +124,7 @@ public class QuantitiesEngine {
                 List<LayoutToken> tokenizationHeader = headerStruct.getRight();//doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 String header = headerStruct.getLeft();
                 String labeledResult = null;
-                if ((header != null) && (header.trim().length() > 0)) {
+                if (StringUtils.isNotBlank(header)) {
                     labeledResult = parsers.getHeaderParser().label(header);
 
                     BiblioItem resHeader = new BiblioItem();

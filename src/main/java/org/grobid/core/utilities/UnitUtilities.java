@@ -15,6 +15,8 @@ public class UnitUtilities {
         IMPERIAL("imperial"),
         US("us"),
         CGS("centimetre–gram–second"),
+        MKS("metre-kilogram-second"),
+        GAUSSIAN("gaussian"), //We add as it seems that the CGS is not the proper term 
         NON_SI("non SI");
 
         private String name;
@@ -57,6 +59,7 @@ public class UnitUtilities {
         MAGNETIC_FLUX_DENSITY("magnetic flux density"),
         MAGNETIC_INDUCTION("magnetic induction"),
         MAGNETIC_FIELD_STRENGTH("magnetic field strength"),
+        MAGNETIC_FIELD_RATIO("magnetic field ratio"),
         INDUCTANCE("inductance"),
         LUMINOUS_FLUX("luminous flux"),
         ILLUMINANCE("illuminance"),
