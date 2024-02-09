@@ -1348,6 +1348,9 @@
           "raw": "rpm"
         },
         {
+          "raw": "RPM"
+        },
+        {
           "raw": "round/min",
           "product": [
             {
@@ -1358,9 +1361,33 @@
               "pow": "-1"
             }
           ]
+        },
+        {
+          "raw": "rev/min",
+          "product": [
+            {
+              "base": "rev"
+            },
+            {
+              "base": "min",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "r/min",
+          "product": [
+            {
+              "base": "r"
+            },
+            {
+              "base": "min",
+              "pow": "-1"
+            }
+          ]
         }
       ],
-      "type": "FREQUENCY",
+      "type": "ROTATION",
       "system": "NON_SI",
       "names": [
         {
@@ -1368,6 +1395,9 @@
           "inflections": [
             "rounds per minute"
           ]
+        },
+        {
+          "lemma": "number of revolutions"
         }
       ]
     },

@@ -111,7 +111,8 @@ public class UnitUtilities {
         ATOMIC_RATIO("atomic ratio"),
         WEIGHT_RATIO("weight ratio"),
         MASS_ACCUMULATION_RATE("mass accumulation rate"),
-        SEDIMENTATION_RATE("sedimentation rate");;
+        SEDIMENTATION_RATE("sedimentation rate"),
+        ROTATION("rotation");
 
         private String name;
 
