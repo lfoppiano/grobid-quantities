@@ -24,7 +24,7 @@
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
-	<unit><base>N</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2/</pow><base>min</base></unit>
+	<unit><base>N</base><pow>/</pow><prefix>m</prefix><base>m</base> <pow>2</pow><pow>/</pow><base>min</base></unit>
 	<unit><prefix>m</prefix><base>m</base></unit>
 	<unit><base>percent</base></unit>
 	<unit><base>days</base></unit>
