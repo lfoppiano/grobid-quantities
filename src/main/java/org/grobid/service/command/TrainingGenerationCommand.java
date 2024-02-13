@@ -68,7 +68,7 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
     }
 
     @Override
-    protected void run(Bootstrap bootstrap, Namespace namespace, GrobidQuantitiesConfiguration configuration) throws Exception {        
+    protected void run(Bootstrap bootstrap, Namespace namespace, GrobidQuantitiesConfiguration configuration) throws Exception {
         File grobidHomeOverride = namespace.get(GROBID_HOME_DIRECTORY);
 
         initGrobidHome(configuration.getGrobidHome(), grobidHomeOverride);
@@ -90,14 +90,14 @@ public class TrainingGenerationCommand extends ConfiguredCommand<GrobidQuantitie
                 grobidHomeFinder = new GrobidHomeFinder(Collections.singletonList(grobidHomeFromConfig));
             }
             GrobidProperties.getInstance(grobidHomeFinder);
-            
+
             Engine.getEngine(true);
             LibraryLoader.load();
             return GrobidProperties.getGrobidHome().getAbsolutePath();
-            
+
         } catch (final Exception exp) {
             System.err.println("Grobid initialisation failed. Maybe you forget to specify the location of the config.yml in the command launch as final argument?");
-            LOGGER.debug("Grobid initialisation error. ", exp);
+            System.err.println("Grobid initialisation error. " + exp);
 
             System.exit(-1);
         }
