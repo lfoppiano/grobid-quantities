@@ -82,7 +82,6 @@ dependencies {
     testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
     testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
-
     //GROBID
     implementation 'org.grobid:grobid-core:0.8.0'
     implementation 'org.grobid:grobid-trainer:0.8.0'
@@ -379,6 +378,10 @@ task downloadTransformers(dependsOn: copyModels) {
 
 wrapper {
     gradleVersion "7.2"
+}
+
+test {
+    useJUnitPlatform()
 }
 
 jacocoTestReport {
