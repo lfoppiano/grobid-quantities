@@ -220,8 +220,6 @@ two 0 0 NOPUNCT I-<alpha>
 . 1 0 DOT <number>
 625 1 1 NOPUNCT <number>
 
-
-2011 1 1 NOPUNCT <other>
 232 1 1 NOPUNCT I-<number>
 / 1 0 SLASH <number>
 250 1 1 NOPUNCT <number>
@@ -1454,8 +1452,6 @@ zero 0 0 NOPUNCT I-<alpha>
 
 65 1 1 NOPUNCT I-<number>
 
-
-2005 1 1 NOPUNCT <other>
 Nine 0 0 NOPUNCT I-<alpha>
 
 27 1 1 NOPUNCT I-<number>
@@ -5759,9 +5755,6 @@ half 0 0 NOPUNCT I-<alpha>
 
 5 1 1 NOPUNCT I-<number>
 
-
-October 0 0 NOPUNCT <other>
-2014 1 1 NOPUNCT <other>
 10 1 1 NOPUNCT I-<number>
 
 10 1 1 NOPUNCT I-<base>
@@ -6323,10 +6316,6 @@ two 0 0 NOPUNCT <alpha>
 
 10 1 1 NOPUNCT I-<number>
 
-
-19 1 1 NOPUNCT <other>
-, 1 0 COMMA <other>
-2014 1 1 NOPUNCT <other>
 few 0 0 NOPUNCT I-<alpha>
 
 90 1 1 NOPUNCT I-<number>
