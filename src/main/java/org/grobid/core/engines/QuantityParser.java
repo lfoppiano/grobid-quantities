@@ -812,7 +812,7 @@ public class QuantityParser extends AbstractParser {
             OffsetPosition defaultValue = new OffsetPosition(0, 0);
             return new OffsetPosition(Iterables.getFirst(sentencesCurrentMeasure, defaultValue).start, Iterables.getLast(sentencesCurrentMeasure).end);
         } else {
-            LOGGER.warn("Cannot find sentence. The entity might be inconsistent: " + currentMeasureOffset.toString());
+            LOGGER.warn("Cannot find sentence. The entity might be outside the sentence: " + currentMeasureOffset.toString());
             OffsetPosition defaultValue = new OffsetPosition(0, 0);
             return new OffsetPosition(Iterables.getFirst(sentences, defaultValue).start, Iterables.getLast(sentences).end);
         }

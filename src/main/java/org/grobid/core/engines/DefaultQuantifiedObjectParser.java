@@ -36,7 +36,11 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
         try {
             String text = LayoutTokensUtil.toText(tokens);
             TextParser textParser = TextParser.getInstance();
-            List<Sentence> parsedSentences = textParser.parseText(text);
+            int firstOffset = Iterables.getFirst(tokens, new LayoutToken()).getOffset();
+            List<OffsetPosition> measurementsOffsets = measurements.stream()
+                .map(m -> new OffsetPosition(m.getRawOffsets().start - firstOffset, m.getRawOffsets().end - firstOffset))
+                .collect(Collectors.toList());
+            List<Sentence> parsedSentences = textParser.parseText(text, measurementsOffsets);
             int firstTokenOffsetStart = tokens.get(0).getOffset();
             parsedSentences.stream().forEach(s -> {
                 s.getOffset().start = s.getOffsetStart() + firstTokenOffsetStart;

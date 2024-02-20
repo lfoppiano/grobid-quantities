@@ -16,6 +16,7 @@ import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
 import com.googlecode.clearnlp.util.UTInput;
 import com.googlecode.clearnlp.util.pair.Pair;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.Sentence;
 import org.grobid.core.data.SentenceParse;
 import org.grobid.core.exceptions.GrobidException;
@@ -168,16 +169,16 @@ public class TextParser {
      * semantic role labeling) as the n-best list of Parse object. If the CLEAR_PARSER is
      * selected, only the best parse is provided in the list.
      */
-    public synchronized List<Sentence> parseText(String text) throws GrobidException {
+    public synchronized List<Sentence> parseText(String text, List<OffsetPosition> measurementOffsets) throws GrobidException {
         if (text == null) {
             throw new GrobidException("Cannot parse the sentence, because it is null.");
-        } else if (text.length() == 0) {
+        } else if (StringUtils.isEmpty(text)) {
             LOGGER.error("The length of the text to be parsed is 0.");
             return null;
         }
 
         List<Sentence> results = new ArrayList<>();
-        List<OffsetPosition> sentences = this.segmenter.runSentenceDetection(text);
+        List<OffsetPosition> sentences = this.segmenter.runSentenceDetection(text, measurementOffsets);
 
         if (CollectionUtils.isEmpty(sentences)) {
             // there is some text but not in a state so that a sentence at least can be
