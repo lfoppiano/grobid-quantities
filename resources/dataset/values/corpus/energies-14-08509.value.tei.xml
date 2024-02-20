@@ -1,4 +1,5 @@
-<values xmlns="http://www.tei-c.org/ns/1.0"><value><alpha>three</alpha></value>
+<values xmlns="http://www.tei-c.org/ns/1.0">
+    <value><alpha>three</alpha></value>
     <value><alpha>three</alpha></value>
     <value><number>3</number></value>
     <value><alpha>three</alpha></value>
