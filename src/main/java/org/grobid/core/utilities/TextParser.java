@@ -165,6 +165,8 @@ public class TextParser {
      * Parsing of some raw text.
      *
      * @param text the raw text to be parsed
+     * @param measurementOffsets cancel the segmentation if sentence boundaries are falling on a measurement 
+     *              
      * @return the list of parses - one per sentence - (including predicate identification and
      * semantic role labeling) as the n-best list of Parse object. If the CLEAR_PARSER is
      * selected, only the best parse is provided in the list.

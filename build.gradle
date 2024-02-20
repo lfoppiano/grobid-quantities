@@ -41,12 +41,12 @@ tasks.withType(JavaCompile).configureEach {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
 }
 
@@ -253,12 +253,12 @@ task integration(type: Test) {
     }
 
     if (JavaVersion.current().compareTo(JavaVersion.VERSION_1_8) > 0) {
-//        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
-//            "--add-opens", "java.base/java.io=ALL-UNNAMED",
-//            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
-//            "--add-opens", "java.base/java.util.regex=ALL-UNNAMED",
-//            "--add-opens", "java.base/java.math=ALL-UNNAMED",
-//            "--add-opens", "java.base/java.text=ALL-UNNAMED"
+        jvmArgs "--add-opens", "java.base/java.util.stream=ALL-UNNAMED",
+            "--add-opens", "java.base/java.io=ALL-UNNAMED",
+            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+            "--add-opens", "java.base/java.util.regex=ALL-UNNAMED",
+            "--add-opens", "java.base/java.math=ALL-UNNAMED",
+            "--add-opens", "java.base/java.text=ALL-UNNAMED"
     }
     systemProperty "java.library.path", "${System.getProperty('java.library.path')}:" + libraries
 }

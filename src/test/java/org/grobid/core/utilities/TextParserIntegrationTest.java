@@ -2,14 +2,22 @@ package org.grobid.core.utilities;
 
 import org.grobid.core.data.Sentence;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import static org.grobid.core.engines.UnitParserIntegrationTest.initEngineForTests;
 
 @Ignore
 public class TextParserIntegrationTest {
 
     TextParser target;
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        initEngineForTests();
+    }
+    
     @Before
     public void setUp() throws Exception {
         target = TextParser.getInstance();

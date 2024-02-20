@@ -9,11 +9,20 @@ import org.junit.jupiter.api.Test
 class QuantitiesEngineTest {
 
     @Test
-    fun normaliseAndCleanup() {
+    fun normaliseAndCleanup_shouldReplaceToken() {
         val tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken("This \uF0A0 is an interesting") 
         val tokensNormalised = QuantitiesEngine.normaliseAndCleanup(tokens)
         
         assertThat(tokensNormalised, hasSize(tokens.size))
         assertThat(tokensNormalised[2].text, `is`(" "))
+    }
+
+    @Test
+    fun normaliseAndCleanup_shouldNotReplaceToken() {
+        val tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken("This material is an interesting")
+        val tokensNormalised = QuantitiesEngine.normaliseAndCleanup(tokens)
+
+        assertThat(tokensNormalised, hasSize(tokens.size))
+        assertThat(tokensNormalised[2].text, `is`("material"))
     }
 }
