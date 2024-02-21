@@ -41,12 +41,12 @@ tasks.withType(JavaCompile).configureEach {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
@@ -74,14 +74,20 @@ repositories {
 
 dependencies {
     //Tests
-    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.9.3'
-    testImplementation(platform('org.junit:junit-bom:5.9.3'))
+    testImplementation(platform('org.junit:junit-bom:5.10.2'))
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher") {
+        because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions")
+    }
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
     testImplementation('org.junit.jupiter:junit-jupiter')
-    testImplementation 'org.easymock:easymock:5.1.0'
+    
+    testImplementation 'org.easymock:easymock:5.2.0'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
     testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
     testImplementation 'org.powermock:powermock-api-easymock:2.0.9'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    
     //GROBID
     implementation 'org.grobid:grobid-core:0.8.0'
     implementation 'org.grobid:grobid-trainer:0.8.0'
@@ -176,7 +182,7 @@ test {
 
     def libraries = ""
     if (Os.isFamily(Os.FAMILY_MAC)) {
-        if (Os.OS_ARCH.equals("aarch64")) {
+        if (Os.isArch("aarch64")) {
             libraries = "${file("./grobid-home/lib/mac_arm-64").absolutePath}"
         } else {
             libraries = "${file("./grobid-home/lib/mac-64").absolutePath}"
@@ -210,7 +216,7 @@ run {
 
     def libraries = ""
     if (Os.isFamily(Os.FAMILY_MAC)) {
-        if (Os.OS_ARCH.equals("aarch64")) {
+        if (Os.isArch("aarch64")) {
             libraries = "${file("../grobid-home/lib/mac_arm-64").absolutePath}"
         } else {
             libraries = "${file("../grobid-home/lib/mac-64").absolutePath}"
@@ -238,7 +244,7 @@ task integration(type: Test) {
 
     def libraries = ""
     if (Os.isFamily(Os.FAMILY_MAC)) {
-        if (Os.OS_ARCH.equals("aarch64")) {
+        if (Os.isArch("aarch64")) {
             libraries = "${file("./grobid-home/lib/mac_arm-64").absolutePath}"
         } else {
             libraries = "${file("./grobid-home/lib/mac-64").absolutePath}"
