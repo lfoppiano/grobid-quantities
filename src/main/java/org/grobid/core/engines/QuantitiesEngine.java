@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -437,7 +438,7 @@ public class QuantitiesEngine {
             .collect(Collectors.toList());
 
         //Removing duplicated spaces
-        /*List<LayoutToken> cleanedTokens = IntStream
+        List<LayoutToken> cleanedTokens = IntStream
             .range(0, bodyLayouts.size())
             .filter(i -> {
                     if (i < bodyLayouts.size() - 1) {
@@ -449,10 +450,10 @@ public class QuantitiesEngine {
                 }
             )
             .mapToObj(bodyLayouts::get)
-            .collect(Collectors.toList());*/
+            .collect(Collectors.toList());
 
         // Correcting offsets after having removed certain tokens
-/*        IntStream
+        IntStream
             .range(1, cleanedTokens.size())
             .forEach(i -> {
                 int expectedFollowingOffset = cleanedTokens.get(i - 1).getOffset()
@@ -462,8 +463,8 @@ public class QuantitiesEngine {
                     LOGGER.trace("Correcting offsets " + i + " from " + cleanedTokens.get(i).getOffset() + " to " + expectedFollowingOffset);
                     cleanedTokens.get(i).setOffset(expectedFollowingOffset);
                 }
-            });*/
+            });
 
-        return bodyLayouts;
+        return cleanedTokens;
     }
 }
