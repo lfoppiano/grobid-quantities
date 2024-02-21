@@ -78,11 +78,10 @@ class QuantityParserTest {
         @JvmStatic
         @BeforeAll
         @Throws(Exception::class)
-        fun before(): Unit {
+        fun before() {
             val modelParameters = ModelParameters()
             modelParameters.name = "bao"
             GrobidProperties.addModel(modelParameters)
-            GrobidProperties.getInstance()
         }
     }
 
