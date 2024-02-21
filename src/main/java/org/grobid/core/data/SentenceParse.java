@@ -12,6 +12,7 @@ import com.googlecode.clearnlp.headrule.HeadRuleMap;
 import com.googlecode.clearnlp.morphology.AbstractMPAnalyzer;
 import com.googlecode.clearnlp.morphology.EnglishMPAnalyzer;
 import com.googlecode.clearnlp.util.UTInput;
+import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -278,13 +279,13 @@ public class SentenceParse {
     public String getTokenStructureByPosition(int position) {
         if (tokenStructures == null)
             return null;
-        return tokenStructures.get(valueOf(position));
+        return tokenStructures.get(position);
     }
 
     public String getTokenStructureByIndex(String index) {
         if (tokenIndex == null)
             return null;
-        if ( (index == null) || (index.length() == 0) )
+        if (StringUtils.isEmpty(index))
             return null;
         return tokenIndex.get(index);
     }
