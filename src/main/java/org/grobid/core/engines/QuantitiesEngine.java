@@ -231,7 +231,7 @@ public class QuantitiesEngine {
         // List<LayoutToken> for the selected segment
         List<LayoutToken> layoutTokens
             = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-        return quantityParser.process(layoutTokens);
+        return quantityParser.process(normaliseAndCleanup(layoutTokens));
     }
 
     public List<Measurement> parseMeasurement(String json) {

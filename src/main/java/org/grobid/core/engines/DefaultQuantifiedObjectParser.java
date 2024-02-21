@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,93 +36,47 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
             String text = LayoutTokensUtil.toText(tokens);
             TextParser textParser = TextParser.getInstance();
             int firstOffset = Iterables.getFirst(tokens, new LayoutToken()).getOffset();
-            List<OffsetPosition> measurementsOffsets = measurements.stream()
+            List<OffsetPosition> measurementsOffsetsAdjusted = measurements.stream()
                 .map(m -> new OffsetPosition(m.getRawOffsets().start - firstOffset, m.getRawOffsets().end - firstOffset))
                 .collect(Collectors.toList());
-            List<Sentence> parsedSentences = textParser.parseText(text, measurementsOffsets);
-            int firstTokenOffsetStart = tokens.get(0).getOffset();
-            parsedSentences.stream().forEach(s -> {
-                s.getOffset().start = s.getOffsetStart() + firstTokenOffsetStart;
-                s.getOffset().end = s.getOffsetEnd() + firstTokenOffsetStart;
-            });
+            List<Sentence> parsedSentences = textParser.parseText(text, measurementsOffsetsAdjusted);
             int indexMeasurement = 0;
-            int offset = 0;
 
             // this part is for identifying for each sentence, the measurements belonging to the sentence 
-            for (Sentence processedSentence : parsedSentences) {
-                // list of measurements for the current sentence
-                List<Measurement> sentenceMeasurements = new ArrayList<>();
-                // Positions of measurements
+            for (Sentence sentence : parsedSentences) {
+                List<Measurement> measurementsInSentence = new ArrayList<>();
+                List<OffsetPosition> measurementsOffsetsInSentence = new ArrayList<>();
                 List<Integer> positionMeasurements = new ArrayList<>();
-                while (indexMeasurement < measurements.size()) {
+                while (indexMeasurement < measurementsOffsetsAdjusted.size()) {
                     Measurement measurement = measurements.get(indexMeasurement);
-                    int position = -1;
-
-                    // is the measurement quantities in the current sentence?
-                    if (measurement.getType() == UnitUtilities.Measurement_Type.VALUE) {
-                        Quantity quantity = measurement.getQuantityAtomic();
-                        if (quantity.getOffsetStart() > processedSentence.getOffsetEnd()) {
-                            // next sentence
-                            break;
-                        }
-                        if (quantity.getOffsetEnd() < processedSentence.getOffsetStart()) {
-                            // next measurement
-                            indexMeasurement++;
-                            continue;
-                        }
-                        position = quantity.getOffsetStart();
-                    } else if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                        (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
-                        // values of the interval do not matter if min/max or base/range
-                        List<Quantity> sortedQuantities = QuantityOperations.toQuantityList(measurement).stream()
-                            .sorted(Comparator.comparingInt(Quantity::getOffsetStart))
-                            .collect(Collectors.toList());
-
-                        Quantity firstQuantity = Iterables.getFirst(sortedQuantities, null);
-                        Quantity lastQuantity = Iterables.getLast(sortedQuantities);
-
-                        if ((lastQuantity != null) && (lastQuantity.getOffsetEnd() < processedSentence.getOffsetStart())) {
-                            // next measurement
-                            indexMeasurement++;
-                            continue;
-                        }
-                        if ((firstQuantity != null) && (firstQuantity.getOffsetStart() > processedSentence.getOffsetEnd())) {
-                            // next sentence
-                            break;
-                        }
-
-                        position = firstQuantity.getOffsetStart();
-                    } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
-                        // list must be consistent in unit type, and avoid too large chunk
-                        List<Quantity> quantities = measurement.getQuantityList();
-                        if (CollectionUtils.isNotEmpty(quantities)) {
-                            // just exploit the first quantity for positioning
-                            Quantity quantity = quantities.get(0);
-                            if (quantity.getOffsetEnd() < processedSentence.getOffsetStart()) {
-                                // next sentence
-                                break;
-                            }
-                            if (quantity.getOffsetStart() > processedSentence.getOffsetEnd()) {
-                                // next measurement
-                                indexMeasurement++;
-                                continue;
-                            }
-                            position = quantity.getOffsetStart();
-                        }
+                    OffsetPosition measurementOffsets = measurementsOffsetsAdjusted.get(indexMeasurement);
+                    
+                    if (measurementOffsets.start > sentence.getOffsetEnd()) {
+                        // next sentence
+                        break;
                     }
-
+                    if (measurementOffsets.end < sentence.getOffsetStart()) {
+                        // next measurement
+                        indexMeasurement++;
+                        continue;
+                    }
+                    
                     // if we arrive here, this measurement is in the current sentence
-
-                    sentenceMeasurements.add(measurement);
-                    positionMeasurements.add(position);
+                    measurementsInSentence.add(measurement);
+                    measurementsOffsetsInSentence.add(measurementOffsets);
+                    positionMeasurements.add(measurementOffsets.start);
                     indexMeasurement++;
                 }
 
+                // Note to myself: 
+                // - measurementsInSentence do not have any offset normalisation, they are the original offsets. 
+                // - measurementOffsetsInSentence, they are normalised only by firstToken. They reference to the beginning of the sentence 
+                // - position measurements are the same of measurementOffsetsInSentence
                 // get the list of indexes corresponding to measurement parts
-                List<String> indexMeasurementTokens = getIndexMeasurementTokens(sentenceMeasurements, processedSentence);
+                List<String> indexMeasurementTokens = getIndexMeasurementTokens(measurementsOffsetsInSentence, sentence);
 
                 // find the syntactic head... this will define the QuantifiedObject to the measurements
-                setHeads(processedSentence, sentenceMeasurements, positionMeasurements, indexMeasurementTokens);
+                setHeads(sentence, measurementsInSentence, positionMeasurements, indexMeasurementTokens);
             }
         } catch (Exception e) {
             logger.error("error in substance parser: ", e);
@@ -144,7 +97,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
 
         List<SentenceParse> parses = processedSentence.getParses();
         // we're just considering the first best parse
-        if ((parses == null) || (parses.size() == 0))
+        if (CollectionUtils.isEmpty(parses))
             return;
         SentenceParse parse = parses.get(0);
         int p = 0;
@@ -193,7 +146,6 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                     // case direct modifier "... of something"
 
                     // if case of an interval, we need to take the last quantity object for the position
-                    UnitUtilities.Measurement_Type type = measurement.getType();
                     if ((measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
                         (measurement.getType() == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
 
@@ -400,9 +352,9 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
     }
 
 
-    private List<String> getIndexMeasurementTokens(List<Measurement> measurements,
+    private List<String> getIndexMeasurementTokens(List<OffsetPosition> measurementsOffsets,
                                                    Sentence processedSentence) {
-        if (CollectionUtils.isEmpty(measurements)) {
+        if (CollectionUtils.isEmpty(measurementsOffsets)) {
             return null;
         }
 
@@ -416,89 +368,30 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
 
         SentenceParse parse = parses.get(0);
 
-        for (Measurement measurement : measurements) {
-            UnitUtilities.Measurement_Type type = measurement.getType();
+        for (OffsetPosition measurementOffset : measurementsOffsets) {
+            int measurementPositionInSentence = measurementOffset.start - startSentencePosition;
+            int measurementLength = measurementOffset.end - measurementOffset.start;
 
-            if (type == UnitUtilities.Measurement_Type.VALUE) {
-                Quantity quantity = measurement.getQuantityAtomic();
-                int position = quantity.getOffsetStart();
-                addTokenIndex(position - startSentencePosition, quantity.getOffsetEnd() - quantity.getOffsetStart(), parse, result);
-
-                // unit position
-                Unit rawUnit = quantity.getRawUnit();
-                if (rawUnit != null) {
-                    position = rawUnit.getOffsetStart();
-                    addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
-                }
-            } else if ((type == UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX) ||
-                (type == UnitUtilities.Measurement_Type.INTERVAL_BASE_RANGE)) {
-                // values of the interval do not matter if min/max or base/range
-                Quantity quantityLeast = measurement.getQuantityLeast();
-                if (quantityLeast == null)
-                    quantityLeast = measurement.getQuantityBase();
-                Quantity quantityMost = measurement.getQuantityMost();
-                if (quantityMost == null)
-                    quantityMost = measurement.getQuantityRange();
-
-                if (quantityLeast != null) {
-                    int position = quantityLeast.getOffsetStart();
-                    addTokenIndex(position - startSentencePosition, quantityLeast.getOffsetEnd() - quantityLeast.getOffsetStart(), parse, result);
-
-                    // unit position
-                    Unit rawUnit = quantityLeast.getRawUnit();
-                    if (rawUnit != null) {
-                        position = rawUnit.getOffsetStart();
-                        addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
-                    }
-                }
-
-                if (quantityMost != null) {
-                    int position = quantityMost.getOffsetStart();
-                    addTokenIndex(position - startSentencePosition, quantityMost.getOffsetEnd() - quantityMost.getOffsetStart(), parse, result);
-
-                    // unit position
-                    Unit rawUnit = quantityMost.getRawUnit();
-                    if (rawUnit != null) {
-                        position = rawUnit.getOffsetStart();
-                        addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
-                    }
-                }
-            } else if (measurement.getType() == UnitUtilities.Measurement_Type.CONJUNCTION) {
-                // list must be consistent in unit type, and avoid too large chunk
-                List<Quantity> quantities = measurement.getQuantityList();
-                if ((quantities != null) && (quantities.size() > 0)) {
-                    // just exploit the first quantity for positioning
-                    Quantity quantity = quantities.get(0);
-                    int position = quantity.getOffsetStart();
-                    addTokenIndex(position - startSentencePosition, quantity.getOffsetEnd() - quantity.getOffsetStart(), parse, result);
-
-                    // unit position
-                    Unit rawUnit = quantity.getRawUnit();
-                    if (rawUnit != null) {
-                        position = rawUnit.getOffsetStart();
-                        addTokenIndex(position - startSentencePosition, rawUnit.getOffsetEnd() - rawUnit.getOffsetStart(), parse, result);
-                    }
-                }
-            }
+            addTokenIndex(measurementPositionInSentence, measurementLength, parse, result);
         }
         return result;
     }
 
-    private List<String> addTokenIndex(int position, int length, SentenceParse parse, List<String> result) {
+    private void addTokenIndex(int position, int length, SentenceParse parse, List<String> result) {
         String tokenStruct = parse.getTokenStructureByPosition(position);
         if (tokenStruct != null) {
             String[] pieces = tokenStruct.split("\t");
             if (pieces.length == 8) {
                 String index = pieces[0].trim();
                 if (result == null)
-                    result = new ArrayList<String>();
+                    result = new ArrayList<>();
                 if (!result.contains(index))
                     result.add(index);
             }
         } else {
             logger.info("Invalid position: " + position + " - no parse result find at this position.");
         }
-        // brute force adding all subtokens in the specified interval
+        // brute force adding all sub-tokens in the specified interval
         for (int i = 1; i < length; i++) {
             tokenStruct = parse.getTokenStructureByPosition(position + i);
             if (tokenStruct != null) {
@@ -506,13 +399,12 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                 if (pieces.length == 8) {
                     String index = pieces[0].trim();
                     if (result == null)
-                        result = new ArrayList<String>();
+                        result = new ArrayList<>();
                     if (!result.contains(index))
                         result.add(index);
                 }
             }
         }
-        return result;
     }
 
     private String getNextStruct(int position, List<String> indexMeasurementTokens, int sentenceLength, SentenceParse parse) {
