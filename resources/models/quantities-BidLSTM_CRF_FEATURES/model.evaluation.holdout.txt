@@ -1,0 +1,776 @@
+Loading data...
+1297 total sequences
+1167 train sequences
+130 validation sequences
+
+max train sequence length: 1933
+max validation sequence length: 799
+embedding_lmdb_path is not specified in the embeddings registry, so the embeddings will be loaded in memory...
+loading embeddings...
+path: /lustre/group/tdm/Luca/delft/delft/data/embeddings/glove.840B.300d.txt
+embeddings loaded for 2196017 words and 300 dimensions
+BidLSTM_CRF_FEATURES
+---
+max_epoch: 60
+early_stop: True
+patience: 5
+batch_size (training): 20
+max_sequence_length: 3000
+model_name: grobid-quantities_1-BidLSTM_CRF_FEATURES
+learning_rate:  0.001
+use_ELMo:  False
+---
+335 evaluation sequences
+max evaluation sequence length: 1585
+embedding_lmdb_path is not specified in the embeddings registry, so the embeddings will be loaded in memory...
+loading embeddings...
+path: /lustre/group/tdm/Luca/delft/delft/data/embeddings/glove.840B.300d.txt
+embeddings loaded for 2196017 words and 300 dimensions
+BidLSTM_CRF_FEATURES
+load weights from data/models/sequenceLabelling/grobid-quantities_1-BidLSTM_CRF_FEATURES/model_weights.hdf5
+loading model weights data/models/sequenceLabelling/grobid-quantities_1-BidLSTM_CRF_FEATURES/model_weights.hdf5
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+
+Evaluation:
+---
+max_epoch: 50
+early_stop: True
+patience: 5
+batch_size (training): 20
+max_sequence_length: 3000
+model_name: grobid-quantities_1-BidLSTM_CRF_FEATURES
+learning_rate:  0.001
+use_ELMo:  False
+---
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+	f1 (micro): 79.74
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8542    0.8836    0.8686       464
+     <unitRight>     0.2667    0.3077    0.2857        13
+   <valueAtomic>     0.7792    0.8503    0.8132       581
+     <valueBase>     0.8095    0.9714    0.8831        35
+    <valueLeast>     0.8193    0.5397    0.6507       126
+     <valueList>     0.6667    0.1132    0.1935        53
+     <valueMost>     0.6848    0.6495    0.6667        97
+    <valueRange>     1.0000    1.0000    1.0000        35
+
+all (micro avg.)     0.8014    0.7934    0.7974      1404
+
+Evaluation runtime: 186.788 seconds 
+Loading data...
+335 evaluation sequences
+max evaluation sequence length: 1585
+embedding_lmdb_path is not specified in the embeddings registry, so the embeddings will be loaded in memory...
+loading embeddings...
+path: /lustre/group/tdm/Luca/delft/delft/data/embeddings/glove.840B.300d.txt
+embeddings loaded for 2196017 words and 300 dimensions
+BidLSTM_CRF_FEATURES
+load weights from data/models/sequenceLabelling/grobid-quantities_2-BidLSTM_CRF_FEATURES/model_weights.hdf5
+loading model weights data/models/sequenceLabelling/grobid-quantities_2-BidLSTM_CRF_FEATURES/model_weights.hdf5
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+
+Evaluation:
+---
+max_epoch: 50
+early_stop: True
+patience: 5
+batch_size (training): 20
+max_sequence_length: 3000
+model_name: grobid-quantities_2-BidLSTM_CRF_FEATURES
+learning_rate:  0.001
+use_ELMo:  False
+---
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+	f1 (micro): 81.54
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8727    0.9009    0.8865       464
+     <unitRight>     0.2222    0.3077    0.2581        13
+   <valueAtomic>     0.7857    0.8709    0.8261       581
+     <valueBase>     0.8293    0.9714    0.8947        35
+    <valueLeast>     0.8696    0.6349    0.7339       126
+     <valueList>     0.6667    0.1132    0.1935        53
+     <valueMost>     0.7241    0.6495    0.6848        97
+    <valueRange>     0.9459    1.0000    0.9722        35
+
+all (micro avg.)     0.8145    0.8162    0.8154      1404
+
+Evaluation runtime: 182.475 seconds 
+Loading data...
+335 evaluation sequences
+max evaluation sequence length: 1585
+embedding_lmdb_path is not specified in the embeddings registry, so the embeddings will be loaded in memory...
+loading embeddings...
+path: /lustre/group/tdm/Luca/delft/delft/data/embeddings/glove.840B.300d.txt
+embeddings loaded for 2196017 words and 300 dimensions
+BidLSTM_CRF_FEATURES
+load weights from data/models/sequenceLabelling/grobid-quantities_3-BidLSTM_CRF_FEATURES/model_weights.hdf5
+loading model weights data/models/sequenceLabelling/grobid-quantities_3-BidLSTM_CRF_FEATURES/model_weights.hdf5
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+
+Evaluation:
+---
+max_epoch: 50
+early_stop: True
+patience: 5
+batch_size (training): 20
+max_sequence_length: 3000
+model_name: grobid-quantities_3-BidLSTM_CRF_FEATURES
+learning_rate:  0.001
+use_ELMo:  False
+---
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+	f1 (micro): 82.21
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8784    0.9030    0.8905       464
+     <unitRight>     0.2500    0.3077    0.2759        13
+   <valueAtomic>     0.7934    0.8657    0.8280       581
+     <valueBase>     0.7907    0.9714    0.8718        35
+    <valueLeast>     0.8283    0.6508    0.7289       126
+     <valueList>     0.6667    0.2264    0.3380        53
+     <valueMost>     0.7857    0.6804    0.7293        97
+    <valueRange>     1.0000    1.0000    1.0000        35
+
+all (micro avg.)     0.8215    0.8226    0.8221      1404
+
+Evaluation runtime: 180.443 seconds 
+Loading data...
+335 evaluation sequences
+max evaluation sequence length: 1585
+embedding_lmdb_path is not specified in the embeddings registry, so the embeddings will be loaded in memory...
+loading embeddings...
+path: /lustre/group/tdm/Luca/delft/delft/data/embeddings/glove.840B.300d.txt
+embeddings loaded for 2196017 words and 300 dimensions
+BidLSTM_CRF_FEATURES
+load weights from data/models/sequenceLabelling/grobid-quantities_4-BidLSTM_CRF_FEATURES/model_weights.hdf5
+loading model weights data/models/sequenceLabelling/grobid-quantities_4-BidLSTM_CRF_FEATURES/model_weights.hdf5
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+
+Evaluation:
+---
+max_epoch: 50
+early_stop: True
+patience: 5
+batch_size (training): 20
+max_sequence_length: 3000
+model_name: grobid-quantities_4-BidLSTM_CRF_FEATURES
+learning_rate:  0.001
+use_ELMo:  False
+---
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+	f1 (micro): 81.19
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8800    0.9009    0.8903       464
+     <unitRight>     0.2105    0.3077    0.2500        13
+   <valueAtomic>     0.7745    0.8692    0.8191       581
+     <valueBase>     0.7907    0.9714    0.8718        35
+    <valueLeast>     0.8588    0.5794    0.6919       126
+     <valueList>     0.7143    0.0943    0.1667        53
+     <valueMost>     0.7778    0.6495    0.7079        97
+    <valueRange>     1.0000    1.0000    1.0000        35
+
+all (micro avg.)     0.8139    0.8098    0.8119      1404
+
+Evaluation runtime: 183.11 seconds 
+Loading data...
+335 evaluation sequences
+max evaluation sequence length: 1585
+embedding_lmdb_path is not specified in the embeddings registry, so the embeddings will be loaded in memory...
+loading embeddings...
+path: /lustre/group/tdm/Luca/delft/delft/data/embeddings/glove.840B.300d.txt
+embeddings loaded for 2196017 words and 300 dimensions
+BidLSTM_CRF_FEATURES
+load weights from data/models/sequenceLabelling/grobid-quantities_5-BidLSTM_CRF_FEATURES/model_weights.hdf5
+loading model weights data/models/sequenceLabelling/grobid-quantities_5-BidLSTM_CRF_FEATURES/model_weights.hdf5
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+
+Evaluation:
+---
+max_epoch: 50
+early_stop: True
+patience: 5
+batch_size (training): 20
+max_sequence_length: 3000
+model_name: grobid-quantities_5-BidLSTM_CRF_FEATURES
+learning_rate:  0.001
+use_ELMo:  False
+---
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ features_input (InputLayer)    [(None, None, 6)]    0           []                               
+                                                                                                  
+ char_input (InputLayer)        [(None, None, 30)]   0           []                               
+                                                                                                  
+ features_embedding_td (TimeDis  (None, None, 6, 4)  292         ['features_input[0][0]']         
+ tributed)                                                                                        
+                                                                                                  
+ time_distributed (TimeDistribu  (None, None, 30, 25  5600       ['char_input[0][0]']             
+ ted)                           )                                                                 
+                                                                                                  
+ features_embedding_td_2 (TimeD  (None, None, 8)     288         ['features_embedding_td[0][0]']  
+ istributed)                                                                                      
+                                                                                                  
+ word_input (InputLayer)        [(None, None, 300)]  0           []                               
+                                                                                                  
+ time_distributed_1 (TimeDistri  (None, None, 50)    10200       ['time_distributed[0][0]']       
+ buted)                                                                                           
+                                                                                                  
+ dropout (Dropout)              (None, None, 8)      0           ['features_embedding_td_2[0][0]']
+                                                                                                  
+ concatenate (Concatenate)      (None, None, 358)    0           ['word_input[0][0]',             
+                                                                  'time_distributed_1[0][0]',     
+                                                                  'dropout[0][0]']                
+                                                                                                  
+ dropout_1 (Dropout)            (None, None, 358)    0           ['concatenate[0][0]']            
+                                                                                                  
+ bidirectional_2 (Bidirectional  (None, None, 200)   367200      ['dropout_1[0][0]']              
+ )                                                                                                
+                                                                                                  
+ dropout_2 (Dropout)            (None, None, 200)    0           ['bidirectional_2[0][0]']        
+                                                                                                  
+ length_input (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ dense (Dense)                  (None, None, 100)    20100       ['dropout_2[0][0]']              
+                                                                                                  
+==================================================================================================
+Total params: 403,680
+Trainable params: 403,680
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_default"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf (CRF)                   multiple                  2178      
+                                                                 
+ model (Functional)          (None, None, 100)         403680    
+                                                                 
+=================================================================
+Total params: 405,858
+Trainable params: 405,858
+Non-trainable params: 0
+_________________________________________________________________
+	f1 (micro): 81.69
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8835    0.8987    0.8910       464
+     <unitRight>     0.2000    0.3077    0.2424        13
+   <valueAtomic>     0.7915    0.8692    0.8285       581
+     <valueBase>     0.7907    0.9714    0.8718        35
+    <valueLeast>     0.8427    0.5952    0.6977       126
+     <valueList>     0.8889    0.1509    0.2581        53
+     <valueMost>     0.7529    0.6598    0.7033        97
+    <valueRange>     0.9722    1.0000    0.9859        35
+
+all (micro avg.)     0.8204    0.8134    0.8169      1404
+
+Evaluation runtime: 181.129 seconds 
