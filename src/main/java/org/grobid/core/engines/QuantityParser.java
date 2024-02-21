@@ -801,18 +801,18 @@ public class QuantityParser extends AbstractParser {
 
     private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition currentMeasureOffset, int firstTokenOffset) {
         List<OffsetPosition> sentencesCurrentMeasure = sentences.stream()
-            .filter(sop -> sop.start < currentMeasureOffset.start - firstTokenOffset
+            .filter(sop -> sop.start <= currentMeasureOffset.start - firstTokenOffset
                 && sop.end > currentMeasureOffset.end - firstTokenOffset)
             .collect(Collectors.toList());
 
         if (sentencesCurrentMeasure.size() == 1) {
             return sentencesCurrentMeasure.get(0);
-        } else if (sentencesCurrentMeasure.size() > 1) {
+        } /*else if (sentencesCurrentMeasure.size() > 1) {
             LOGGER.warn("The measurement is spread along multiple sentences. We return an expanded sentence: " + currentMeasureOffset.toString());
             OffsetPosition defaultValue = new OffsetPosition(0, 0);
             return new OffsetPosition(Iterables.getFirst(sentencesCurrentMeasure, defaultValue).start, Iterables.getLast(sentencesCurrentMeasure).end);
-        } else {
-            LOGGER.warn("Cannot find sentence. The entity might be outside the sentence: " + currentMeasureOffset.toString());
+        } */else {
+//            LOGGER.warn("Cannot find sentence. The entity might be outside the sentence: " + currentMeasureOffset.toString());
             OffsetPosition defaultValue = new OffsetPosition(0, 0);
             return new OffsetPosition(Iterables.getFirst(sentences, defaultValue).start, Iterables.getLast(sentences).end);
         }
