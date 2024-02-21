@@ -795,11 +795,11 @@ public class QuantityParser extends AbstractParser {
         m.setRawString(measurementRawOffsetsAndText.getRight().replace("\n", " "));
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition offsets) {
-        return findSentenceOffset(sentences, offsets);
+    protected OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition offsets) {
+        return findSentenceOffset(sentences, offsets, 0);
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition currentMeasureOffset, int firstTokenOffset) {
+    protected OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition currentMeasureOffset, int firstTokenOffset) {
         List<OffsetPosition> sentencesCurrentMeasure = sentences.stream()
             .filter(sop -> sop.start <= currentMeasureOffset.start - firstTokenOffset
                 && sop.end > currentMeasureOffset.end - firstTokenOffset)
@@ -818,11 +818,11 @@ public class QuantityParser extends AbstractParser {
         }
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
+    protected OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
         return findSentenceOffset(sentences, measurement, 0);
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement, int firstTokenOffset) {
+    protected OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement, int firstTokenOffset) {
         OffsetPosition currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
 
         return findSentenceOffset(sentences, currentMeasureOffset, firstTokenOffset);
