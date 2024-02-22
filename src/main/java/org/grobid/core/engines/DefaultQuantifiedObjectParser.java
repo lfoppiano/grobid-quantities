@@ -377,7 +377,7 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
         return result;
     }
 
-    private void addTokenIndex(int position, int length, SentenceParse parse, List<String> result) {
+    protected List<String> addTokenIndex(int position, int length, SentenceParse parse, List<String> result) {
         String tokenStruct = parse.getTokenStructureByPosition(position);
         if (tokenStruct != null) {
             String[] pieces = tokenStruct.split("\t");
@@ -405,6 +405,8 @@ public class DefaultQuantifiedObjectParser extends QuantifiedObjectParser {
                 }
             }
         }
+        
+        return result;
     }
 
     private String getNextStruct(int position, List<String> indexMeasurementTokens, int sentenceLength, SentenceParse parse) {
