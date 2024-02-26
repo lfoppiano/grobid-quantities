@@ -2,10 +2,12 @@ package org.grobid.core.engines;
 
 import io.mockk.every
 import io.mockk.mockkStatic
+import net.sf.saxon.functions.False
 import org.easymock.EasyMock
 import org.easymock.EasyMock.anyObject
 import org.grobid.core.analyzers.QuantityAnalyzer
 import org.grobid.core.data.*
+import org.grobid.core.features.FeatureFactory
 import org.grobid.core.utilities.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
@@ -18,14 +20,17 @@ class DefaultQuantifiedObjectParserTest {
 
     lateinit var target: DefaultQuantifiedObjectParser
     lateinit var mockTextParser: TextParser
+    lateinit var mockFeatureFactory: FeatureFactory
 
     @BeforeEach
     fun setUp() {
         target = DefaultQuantifiedObjectParser()
         mockTextParser = EasyMock.createMock(TextParser::class.java);
-//        PowerMock.mockStatic(TextParser::class.java)
+        mockFeatureFactory = EasyMock.createMock(FeatureFactory::class.java);
         mockkStatic(TextParser::class)
         every { TextParser.getInstance() } returns mockTextParser
+        mockkStatic(FeatureFactory::class)
+        every { FeatureFactory.getInstance() } returns mockFeatureFactory
     }
 
     @Test
@@ -96,26 +101,26 @@ class DefaultQuantifiedObjectParserTest {
         sentenceParse.parseRepresentation = tree
         sentenceParse.createMap(sentence)
 
-        var indexes = target?.addTokenIndex(0, 1, sentenceParse, ArrayList())
+        var indexes = target.addTokenIndex(0, 1, sentenceParse, ArrayList())
 
         assertThat(indexes, hasSize(1))
-        assertThat(indexes!!.get(0), `is`("1"))
+        assertThat(indexes!![0], `is`("1"))
         assertThat(sentenceParse.getTokenStructureByIndex(indexes.get(0)), startsWith("1\tHowever"))
 
-        indexes = target?.addTokenIndex(0, 7, sentenceParse, ArrayList())
+        indexes = target.addTokenIndex(0, 7, sentenceParse, ArrayList())
 
         assertThat(indexes, hasSize(1))
-        assertThat(indexes!!.get(0), `is`("1"))
+        assertThat(indexes!![0], `is`("1"))
         assertThat(sentenceParse.getTokenStructureByIndex(indexes.get(0)), startsWith("1\tHowever"))
 
-        indexes = target?.addTokenIndex(9, 4, sentenceParse, ArrayList())
+        indexes = target.addTokenIndex(9, 4, sentenceParse, ArrayList())
         assertThat(indexes, hasSize(1))
-        assertThat(indexes!!.get(0), `is`("3"))
+        assertThat(indexes!![0], `is`("3"))
 
-        indexes = target?.addTokenIndex(9, 6, sentenceParse, ArrayList())
+        indexes = target.addTokenIndex(9, 6, sentenceParse, ArrayList())
         assertThat(indexes, hasSize(2))
-        assertThat(indexes!!.get(0), `is`("3"))
-        assertThat(indexes.get(1), `is`("4"))
+        assertThat(indexes!![0], `is`("3"))
+        assertThat(indexes[1], `is`("4"))
     }
 
     @Test
@@ -156,7 +161,8 @@ class DefaultQuantifiedObjectParserTest {
         val sentences = Sentence(text, listOf(parse), sentence)
 
         EasyMock.expect(mockTextParser.parseText(anyObject(), anyObject())).andReturn(listOf(sentences)).anyTimes()
-        EasyMock.replay(mockTextParser)
+        EasyMock.expect(mockFeatureFactory.test_digit(anyObject())).andReturn(false).anyTimes()
+        EasyMock.replay(mockTextParser, mockFeatureFactory)
        
         val output = target.process(tokens, measurements);
 
