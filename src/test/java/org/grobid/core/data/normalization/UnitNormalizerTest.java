@@ -33,7 +33,7 @@ public class UnitNormalizerTest {
     public void testParseToProduct_simpleUnit_notation_meter_noPow() throws Exception {
         String unitSymbol = "m";
 
-        expect(mockQuantityLexicon.getNameByInflection("m")).andReturn(null);
+        expect(mockQuantityLexicon.getNameByInflection("m")).andReturn(null);   
         final UnitBlock block = new UnitBlock("m");
         expect(mockUnitParser.tagUnit("m", false)).andReturn(Arrays.asList(block));
 
