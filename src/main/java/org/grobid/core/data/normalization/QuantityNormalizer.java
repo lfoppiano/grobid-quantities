@@ -197,7 +197,8 @@ public class QuantityNormalizer {
                                 javax.measure.Unit<?> onlyUnitParsed = formatService.parse(onlyUnit);
                                 unitList.add(onlyUnitParsed.pow(-1));
                             } catch (Throwable e2) {
-                                LOGGER.warn("Trying excluding the negative power. Cannot parse " + onlyUnit + " with " + formatService.getClass().getName(), e2);
+                                LOGGER.warn("Trying excluding the negative power. Cannot parse " + onlyUnit + " with " + formatService.getClass().getName());
+                                LOGGER.debug("Exception", e2);
                             }
                             break;
                         }

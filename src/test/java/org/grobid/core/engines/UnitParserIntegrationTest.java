@@ -7,15 +7,20 @@ import org.grobid.core.data.UnitBlock;
 import org.grobid.core.data.normalization.UnitNormalizer;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.main.LibraryLoader;
+import org.grobid.core.utilities.GrobidConfig;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.powermock.reflect.Whitebox;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -34,13 +39,23 @@ public class UnitParserIntegrationTest {
         target = UnitParser.getInstance();
     }
 
-    public static void initEngineForTests() throws IOException {
+    public static void initEngineForTests() throws IOException, IllegalAccessException {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
         // https://stackoverflow.com/questions/14853324/can-not-find-deserialize-for-non-concrete-collection-type
         mapper.registerModule(new GuavaModule());
         GrobidQuantitiesConfiguration configuration = mapper.readValue(UnitNormalizer.class.getResourceAsStream("/config-test.yml"), GrobidQuantitiesConfiguration.class);
         configuration.getModels().stream().forEach(GrobidProperties::addModel);
+        GrobidProperties.getInstance();
+        Field modelMap = Whitebox.getField(GrobidProperties.class, "modelMap");
+
+        Map<String, GrobidConfig.ModelParameters> newModelMap = (Map<String, GrobidConfig.ModelParameters>) modelMap.get(new HashMap<>());
+        newModelMap.entrySet().stream()
+            .forEach(entry -> {
+                entry.getValue().engine = "wapiti";
+            });
+        Whitebox.setInternalState(GrobidProperties.class, "modelMap", newModelMap);
+//        GrobidProperties.getDistinctModels().stream().forEach(model -> model);
         LibraryLoader.load();
     }
 
@@ -285,11 +300,11 @@ public class UnitParserIntegrationTest {
     @Test
     public void resultExtraction_kgmm2_liters() throws Exception {
         String result = "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
-                "g\t0\t0\t0\t0\tNOPUNCT\t0\tI-<base>\n" +
-                "/\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>\n" +
-                "m\t1\t0\t0\t0\tSLASH\t0\tI-<prefix>\n" +
-                "m\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n"+
-                "2\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>";
+            "g\t0\t0\t0\t0\tNOPUNCT\t0\tI-<base>\n" +
+            "/\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>\n" +
+            "m\t1\t0\t0\t0\tSLASH\t0\tI-<prefix>\n" +
+            "m\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n" +
+            "2\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>";
 
         List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("kg/mm2"));
         assertThat(blocks.size(), is(2));
@@ -303,10 +318,10 @@ public class UnitParserIntegrationTest {
     @Test
     public void resultExtraction_mol_divided_liters() throws Exception {
         String result = "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "o\t0\t0\t0\t0\tNOPUNCT\t0\t<base>\n" +
-                "l\t0\t0\t1\t0\tNOPUNCT\t0\t<base>\n" +
-                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
-                "l\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>";
+            "o\t0\t0\t0\t0\tNOPUNCT\t0\t<base>\n" +
+            "l\t0\t0\t1\t0\tNOPUNCT\t0\t<base>\n" +
+            "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+            "l\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>";
 
         List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("mol/l"));
         assertThat(blocks.size(), is(2));
@@ -318,9 +333,9 @@ public class UnitParserIntegrationTest {
     @Test
     public void resultExtraction_C_divided_hours() throws Exception {
         String result = "°\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "C\t0\t0\t0\t0\tNOPUNCT\t0\t<base>\n" +
-                "/\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>\n" +
-                "h\t1\t0\t0\t0\tSLASH\t0\tI-<base>";
+            "C\t0\t0\t0\t0\tNOPUNCT\t0\t<base>\n" +
+            "/\t0\t0\t1\t0\tNOPUNCT\t0\tI-<pow>\n" +
+            "h\t1\t0\t0\t0\tSLASH\t0\tI-<base>";
 
         List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("°C /h"));
         assertThat(blocks.size(), is(2));
@@ -347,20 +362,21 @@ public class UnitParserIntegrationTest {
         assertThat(blocks.get(0).getRawTaggedValue(), is("<base>°C</base> <pow>/</pow><base>h</base><pow>2</pow>"));
         assertThat(blocks.get(1).getRawTaggedValue(), is("<base>°C</base> <pow>/</pow><base>h</base><pow>2</pow>"));
     }
+
     @Test
     public void resultExtraction_multiple_divisionMarks() throws Exception {
         String result = "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
-                "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
-                "h\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
-                "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
-                "l\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n" +
-                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
-                "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
-                "c\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "a\t0\t0\t1\t1\tNOPUNCT\t0\t<base>\n" +
-                "l\t0\t0\t1\t0\tNOPUNCT\t0\t<base>";
+            "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+            "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+            "h\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+            "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+            "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
+            "l\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n" +
+            "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+            "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
+            "c\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+            "a\t0\t0\t1\t1\tNOPUNCT\t0\t<base>\n" +
+            "l\t0\t0\t1\t0\tNOPUNCT\t0\t<base>";
 
 //        target.tagUnit("km/h/ml/kcal");
 
@@ -398,9 +414,9 @@ public class UnitParserIntegrationTest {
     @Test
     public void resultExtraction_speed() throws Exception {
         String result = "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
-                "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
-                "s\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>";
+            "m\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+            "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+            "s\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>";
 
         List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("km / s"));
         assertThat(blocks.size(), is(2));
@@ -416,10 +432,10 @@ public class UnitParserIntegrationTest {
     @Test
     public void resultExtraction_wrong() throws Exception {
         String result = "a\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "u\t0\t0\t0\t0\tNOPUNCT\t0\t<base>\n" +
-                "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
-                "d\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "2\t1\t1\t0\t0\tNOPUNCT\t0\tI-<pow>";
+            "u\t0\t0\t0\t0\tNOPUNCT\t0\t<base>\n" +
+            "/\t1\t0\t0\t0\tSLASH\t0\tI-<pow>\n" +
+            "d\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+            "2\t1\t1\t0\t0\tNOPUNCT\t0\tI-<pow>";
 
         List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("au/d 2"));
         assertThat(blocks.size(), is(2));
@@ -435,17 +451,17 @@ public class UnitParserIntegrationTest {
     @Test
     public void resultExtraction_wrong2() throws Exception {
         String result = "g\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n" +
-                "·\t1\t0\t0\t0\tDOT\t0\t<other>\n" +
-                "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
-                "g\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n" +
-                "−\t1\t0\t0\t0\tHYPHEN\t0\tI-<pow>\n" +
-                "1\t1\t1\t0\t0\tNOPUNCT\t0\t<pow>\n" +
-                "·\t1\t0\t0\t0\tDOT\t0\t<other>\n" +
-                "d\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
-                "a\t0\t0\t1\t1\tNOPUNCT\t0\t<base>\n" +
-                "y\t0\t0\t1\t1\tNOPUNCT\t0\t<base>\n" +
-                "−\t1\t0\t0\t0\tHYPHEN\t0\tI-<pow>\n" +
-                "1\t1\t1\t0\t0\tNOPUNCT\t0\t<pow>";
+            "·\t1\t0\t0\t0\tDOT\t0\t<other>\n" +
+            "k\t0\t0\t1\t1\tNOPUNCT\t0\tI-<prefix>\n" +
+            "g\t0\t0\t1\t0\tNOPUNCT\t0\tI-<base>\n" +
+            "−\t1\t0\t0\t0\tHYPHEN\t0\tI-<pow>\n" +
+            "1\t1\t1\t0\t0\tNOPUNCT\t0\t<pow>\n" +
+            "·\t1\t0\t0\t0\tDOT\t0\t<other>\n" +
+            "d\t0\t0\t1\t1\tNOPUNCT\t0\tI-<base>\n" +
+            "a\t0\t0\t1\t1\tNOPUNCT\t0\t<base>\n" +
+            "y\t0\t0\t1\t1\tNOPUNCT\t0\t<base>\n" +
+            "−\t1\t0\t0\t0\tHYPHEN\t0\tI-<pow>\n" +
+            "1\t1\t1\t0\t0\tNOPUNCT\t0\t<pow>";
 
         List<UnitBlock> blocks = target.resultExtraction(result, generateTokenisation("g · kg −1 · day −1"));
         assertThat(blocks.size(), is(3));
