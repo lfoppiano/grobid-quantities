@@ -789,7 +789,7 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
-    private static void populateRawOffsetsAndText(Measurement m, List<LayoutToken> tokens) {
+    protected static void populateRawOffsetsAndText(Measurement m, List<LayoutToken> tokens) {
         final Pair<OffsetPosition, String> measurementRawOffsetsAndText = QuantityOperations.getMeasurementRawOffsetsAndText(m, tokens);
         m.setRawOffsets(measurementRawOffsetsAndText.getLeft());
         m.setRawString(measurementRawOffsetsAndText.getRight().replace("\n", " "));
@@ -803,7 +803,7 @@ public class QuantityParser extends AbstractParser {
         List<OffsetPosition> sentencesCurrentMeasure = sentences.stream()
             .filter(sop -> sop.start <= currentMeasureOffset.start - firstTokenOffset
                 && sop.end > currentMeasureOffset.end - firstTokenOffset)
-            .collect(Collectors.toList());
+            .toList();
 
         if (sentencesCurrentMeasure.size() == 1) {
             return sentencesCurrentMeasure.get(0);

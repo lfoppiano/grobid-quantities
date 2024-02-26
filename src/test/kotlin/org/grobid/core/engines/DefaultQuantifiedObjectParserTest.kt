@@ -1,29 +1,35 @@
 package org.grobid.core.engines;
 
-import com.googlecode.clearnlp.engine.EngineGetter
-import com.googlecode.clearnlp.tokenization.AbstractTokenizer
-import org.grobid.core.data.SentenceParse
-import org.grobid.core.utilities.GrobidConfig
-import org.grobid.core.utilities.GrobidProperties
+import io.mockk.every
+import io.mockk.mockkStatic
+import org.easymock.EasyMock
+import org.easymock.EasyMock.anyObject
+import org.grobid.core.analyzers.QuantityAnalyzer
+import org.grobid.core.data.*
+import org.grobid.core.utilities.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import java.util.*
 import kotlin.test.Test
-
 
 class DefaultQuantifiedObjectParserTest {
 
-    private var target: DefaultQuantifiedObjectParser? = null
+    lateinit var target: DefaultQuantifiedObjectParser
+    lateinit var mockTextParser: TextParser
 
     @BeforeEach
     fun setUp() {
         target = DefaultQuantifiedObjectParser()
-//        val tokenizer: AbstractTokenizer? = EngineGetter.getTokenizer("en", );
+        mockTextParser = EasyMock.createMock(TextParser::class.java);
+//        PowerMock.mockStatic(TextParser::class.java)
+        mockkStatic(TextParser::class)
+        every { TextParser.getInstance() } returns mockTextParser
     }
 
     @Test
-    fun addTokenIndex() {
+    fun testAddTokenIndex() {
         val result: List<String> = ArrayList()
 
         val tree = """1	However	however	RB	_	12	advmod	12:AM-DIS
@@ -110,6 +116,56 @@ class DefaultQuantifiedObjectParserTest {
         assertThat(indexes, hasSize(2))
         assertThat(indexes!!.get(0), `is`("3"))
         assertThat(indexes.get(1), `is`("4"))
+    }
+
+    @Test
+    fun testProcess() {
+        val text = "A 20kg ingot is made in a high frequency induction melting furnace"
+        val tokens = QuantityAnalyzer.getInstance().tokenizeWithLayoutToken(text)
+
+        val measurement = Measurement(UnitUtilities.Measurement_Type.VALUE)
+        val unit = Unit("Kg", OffsetPosition(4, 6))
+        val atomicQuantity = Quantity("20", unit, OffsetPosition(2, 4))
+        atomicQuantity.layoutTokens = listOf(tokens[2])
+        unit.layoutTokens = listOf(tokens[3])
+        measurement.setAtomicQuantity(atomicQuantity)
+        QuantityParser.populateRawOffsetsAndText(measurement, tokens)
+        val measurements = listOf(measurement)
+        
+        
+
+        var parseRepresentation = """1	A	a	DT	_	4	det	_
+2	20	0	CD	_	3	num	_
+3	kg	kg	NN	_	4	nn	_
+4	ingot	ingot	NN	_	6	nsubjpass	6:AM-PRR
+5	is	be	VBZ	pb=be.03	6	auxpass	_
+6	made	make	VBN	pb=make.LV	0	root	_
+7	in	in	IN	_	6	prep	_
+8	a	a	DT	_	12	det	_
+9	high	high	JJ	_	10	amod	_
+10	frequency	frequency	NN	_	12	nn	_
+11	induction	induction	NN	_	12	nn	_
+12	melting	melting	NN	_	7	pobj	_
+13	furnace	furnace	JJ	_	12	amod	_"""
+
+        val parse = SentenceParse()
+        parse.setParseRepresentation(parseRepresentation)
+        parse.createMap(text)
+
+        val sentence = OffsetPosition(0, 66)
+        val sentences = Sentence(text, listOf(parse), sentence)
+
+        EasyMock.expect(mockTextParser.parseText(anyObject(), anyObject())).andReturn(listOf(sentences)).anyTimes()
+        EasyMock.replay(mockTextParser)
+       
+        val output = target.process(tokens, measurements);
+
+        assertThat(output, hasSize(1))
+        assertThat(output[0].quantifiedObject, notNullValue())
+        assertThat(output[0].quantifiedObject.rawName, `is`("ingot"))
+        assertThat(output[0].quantifiedObject.normalizedName, `is`("ingot"))
+        assertThat(output[0].quantifiedObject.offsetStart, `is`(7))
+        assertThat(output[0].quantifiedObject.offsetEnd, `is`(12))
     }
 
     companion object {
