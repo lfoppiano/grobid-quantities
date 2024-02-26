@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+import jakarta.ws.rs.core.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
@@ -19,36 +22,31 @@ import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
-import org.grobid.core.lexicon.QuantityLexicon;
 import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
+import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.service.exceptions.GrobidServiceException;
-import org.grobid.trainer.UnitLabeled;
-import org.grobid.trainer.sax.UnitAnnotationSaxHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
-import jakarta.ws.rs.core.Response;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.SortedSet;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 /**
@@ -124,7 +122,8 @@ public class QuantitiesEngine {
                 List<LayoutToken> tokenizationHeader = headerStruct.getRight();//doc.getTokenizationParts(documentParts, doc.getTokenizations());
                 String header = headerStruct.getLeft();
                 String labeledResult = null;
-                if (StringUtils.isNotBlank(header)) {
+
+                if (StringUtils.isNotBlank(StringUtils.trimToEmpty(header))) {
                     labeledResult = parsers.getHeaderParser().label(header);
 
                     BiblioItem resHeader = new BiblioItem();
@@ -134,19 +133,19 @@ public class QuantitiesEngine {
                     // title
                     List<LayoutToken> titleTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_TITLE);
                     if (titleTokens != null) {
-                        measurements.addAll(quantityParser.process(titleTokens));
+                        measurements.addAll(quantityParser.process(normaliseAndCleanup(titleTokens)));
                     }
 
                     // abstract
                     List<LayoutToken> abstractTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_ABSTRACT);
                     if (abstractTokens != null) {
-                        measurements.addAll(quantityParser.process(abstractTokens));
+                        measurements.addAll(quantityParser.process(normaliseAndCleanup(abstractTokens)));
                     }
 
                     // keywords
                     List<LayoutToken> keywordTokens = resHeader.getLayoutTokens(TaggingLabels.HEADER_KEYWORD);
                     if (keywordTokens != null) {
-                        measurements.addAll(quantityParser.process(keywordTokens));
+                        measurements.addAll(quantityParser.process(normaliseAndCleanup(keywordTokens)));
                     }
                 }
             }
@@ -179,11 +178,11 @@ public class QuantitiesEngine {
                             //apply the figure model to only get the caption
                             final Figure processedFigure = parsers.getFigureParser()
                                 .processing(cluster.concatTokens(), cluster.getFeatureBlock());
-                            measurements.addAll(quantityParser.process(processedFigure.getCaptionLayoutTokens()));
+                            measurements.addAll(quantityParser.process(normaliseAndCleanup(processedFigure.getCaptionLayoutTokens())));
                         } else if (cluster.getTaggingLabel().equals(TaggingLabels.TABLE)) {
                             //apply the table model to only get the caption/description
                             final List<Table> processedTable = parsers.getTableParser().processing(cluster.concatTokens(), cluster.getFeatureBlock());
-                            processedTable.stream().forEach(t -> measurements.addAll(quantityParser.process(t.getFullDescriptionTokens())));
+                            processedTable.stream().forEach(t -> measurements.addAll(quantityParser.process(normaliseAndCleanup(t.getFullDescriptionTokens()))));
 
                         } else {
                             final List<LabeledTokensContainer> labeledTokensContainers = cluster.getLabeledTokensContainers();
@@ -194,7 +193,7 @@ public class QuantitiesEngine {
                                 .flatMap(List::stream)
                                 .collect(Collectors.toList());
 
-                            measurements.addAll(quantityParser.process(tokens));
+                            measurements.addAll(quantityParser.process(normaliseAndCleanup(tokens)));
                         }
 
                     }
@@ -233,7 +232,7 @@ public class QuantitiesEngine {
         // List<LayoutToken> for the selected segment
         List<LayoutToken> layoutTokens
             = doc.getTokenizationParts(documentParts, doc.getTokenizations());
-        return quantityParser.process(layoutTokens);
+        return quantityParser.process(normaliseAndCleanup(layoutTokens));
     }
 
     public List<Measurement> parseMeasurement(String json) {
@@ -418,5 +417,55 @@ public class QuantitiesEngine {
                 IOUtils.closeQuietly(outputWriter);
             }
         }
+    }
+
+    /**
+     * Transform break lines in spaces and remove duplicated spaces
+     */
+    protected static List<LayoutToken> normaliseAndCleanup(List<LayoutToken> layoutTokens) {
+        if (isEmpty(layoutTokens)) {
+            return new ArrayList<>();
+        }
+
+        //De-hypenisation and converting break lines with spaces.
+        List<LayoutToken> bodyLayouts = layoutTokens
+            .stream()
+            .map(m -> {
+                m.setText(StringUtils.replace(m.getText(), "\r\n", " "));
+                m.setText(StringUtils.replace(m.getText(), "\n", " "));
+                m.setText(UnicodeUtil.normaliseText(m.getText()).replaceAll("\\p{C}", " "));
+                return m;
+            })
+            .collect(Collectors.toList());
+
+        //Removing duplicated spaces
+        List<LayoutToken> cleanedTokens = IntStream
+            .range(0, bodyLayouts.size())
+            .filter(i -> {
+                    if (i < bodyLayouts.size() - 1) {
+                        if (bodyLayouts.get(i).getText().equals("\n") || bodyLayouts.get(i).getText().equals(" ")) {
+                            return !StringUtils.equals(bodyLayouts.get(i).getText(), bodyLayouts.get(i + 1).getText());
+                        }
+                    }
+                    return true;
+                }
+            )
+            .mapToObj(bodyLayouts::get)
+            .collect(Collectors.toList());
+
+        // Correcting offsets after having removed certain tokens
+        IntStream
+            .range(1, cleanedTokens.size())
+            .forEach(i -> {
+                int expectedFollowingOffset = cleanedTokens.get(i - 1).getOffset()
+                    + StringUtils.length(cleanedTokens.get(i - 1).getText());
+
+                if (expectedFollowingOffset != cleanedTokens.get(i).getOffset()) {
+                    LOGGER.trace("Correcting offsets " + i + " from " + cleanedTokens.get(i).getOffset() + " to " + expectedFollowingOffset);
+                    cleanedTokens.get(i).setOffset(expectedFollowingOffset);
+                }
+            });
+
+        return cleanedTokens;
     }
 }

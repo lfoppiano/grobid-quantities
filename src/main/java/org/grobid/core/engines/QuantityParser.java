@@ -789,40 +789,40 @@ public class QuantityParser extends AbstractParser {
         return measurements;
     }
 
-    private static void populateRawOffsetsAndText(Measurement m, List<LayoutToken> tokens) {
+    protected static void populateRawOffsetsAndText(Measurement m, List<LayoutToken> tokens) {
         final Pair<OffsetPosition, String> measurementRawOffsetsAndText = QuantityOperations.getMeasurementRawOffsetsAndText(m, tokens);
         m.setRawOffsets(measurementRawOffsetsAndText.getLeft());
         m.setRawString(measurementRawOffsetsAndText.getRight().replace("\n", " "));
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition offsets) {
-        return findSentenceOffset(sentences, offsets);
+    protected OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition offsets) {
+        return findSentenceOffset(sentences, offsets, 0);
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition currentMeasureOffset, int firstTokenOffset) {
+    protected OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, OffsetPosition currentMeasureOffset, int firstTokenOffset) {
         List<OffsetPosition> sentencesCurrentMeasure = sentences.stream()
-            .filter(sop -> sop.start < currentMeasureOffset.start - firstTokenOffset
+            .filter(sop -> sop.start <= currentMeasureOffset.start - firstTokenOffset
                 && sop.end > currentMeasureOffset.end - firstTokenOffset)
-            .collect(Collectors.toList());
+            .toList();
 
         if (sentencesCurrentMeasure.size() == 1) {
             return sentencesCurrentMeasure.get(0);
-        } else if (sentencesCurrentMeasure.size() > 1) {
+        } /*else if (sentencesCurrentMeasure.size() > 1) {
             LOGGER.warn("The measurement is spread along multiple sentences. We return an expanded sentence: " + currentMeasureOffset.toString());
             OffsetPosition defaultValue = new OffsetPosition(0, 0);
             return new OffsetPosition(Iterables.getFirst(sentencesCurrentMeasure, defaultValue).start, Iterables.getLast(sentencesCurrentMeasure).end);
-        } else {
-            LOGGER.warn("Cannot find sentence. The entity might be inconsistent: " + currentMeasureOffset.toString());
+        } */else {
+//            LOGGER.warn("Cannot find sentence. The entity might be outside the sentence: " + currentMeasureOffset.toString());
             OffsetPosition defaultValue = new OffsetPosition(0, 0);
             return new OffsetPosition(Iterables.getFirst(sentences, defaultValue).start, Iterables.getLast(sentences).end);
         }
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
+    protected OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement) {
         return findSentenceOffset(sentences, measurement, 0);
     }
 
-    private OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement, int firstTokenOffset) {
+    protected OffsetPosition findSentenceOffset(List<OffsetPosition> sentences, Measurement measurement, int firstTokenOffset) {
         OffsetPosition currentMeasureOffset = measurementOperations.calculateExtremitiesOffsets(measurement);
 
         return findSentenceOffset(sentences, currentMeasureOffset, firstTokenOffset);
