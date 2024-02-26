@@ -374,7 +374,7 @@ task copyModels(type: Copy) {
 task downloadTransformers(dependsOn: copyModels) {
     doLast {
         download {
-            src "https://transformers-data.s3.eu-central-1.amazonaws.com/quantities-transformers.zip"
+            src "https://transformers-data.s3.eu-central-1.amazonaws.com/quantities-transformers-240226.zip"
             dest "${grobidHome}/models/quantities-transformers.zip"
             overwrite false
             print "Download bulky transformers files under grobid-home: ${grobidHome}"

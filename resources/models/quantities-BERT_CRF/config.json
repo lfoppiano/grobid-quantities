@@ -2,7 +2,7 @@
     "model_name": "quantities-BERT_CRF",
     "architecture": "BERT_CRF",
     "embeddings_name": null,
-    "char_vocab_size": 223,
+    "char_vocab_size": 242,
     "case_vocab_size": 8,
     "char_embedding_size": 25,
     "num_char_lstm_units": 25,
@@ -20,7 +20,7 @@
     "use_crf": true,
     "use_chain_crf": false,
     "fold_number": 1,
-    "batch_size": 10,
+    "batch_size": 6,
     "transformer_name": "allenai/scibert_scivocab_cased/dir",
     "use_ELMo": false,
     "labels": {

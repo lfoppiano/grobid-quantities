@@ -1,5 +1,5 @@
 {
-  "_name_or_path": "./data/models/sequenceLabelling/grobid-values-BERT_CRF/transformer-config.json",
+  "_name_or_path": "./data/models/sequenceLabelling/grobid-units-BERT_CRF/transformer-config.json",
   "attention_probs_dropout_prob": 0.1,
   "classifier_dropout": null,
   "hidden_act": "gelu",
