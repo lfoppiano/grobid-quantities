@@ -35,8 +35,6 @@ class DefaultQuantifiedObjectParserTest {
 
     @Test
     fun testAddTokenIndex() {
-        val result: List<String> = ArrayList()
-
         val tree = """1	However	however	RB	_	12	advmod	12:AM-DIS
 2	,	,	,	_	12	punct	_
 3	upon	upon	IN	_	12	prep	12:AM-TMP
