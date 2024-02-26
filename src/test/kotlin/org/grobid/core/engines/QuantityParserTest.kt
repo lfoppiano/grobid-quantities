@@ -51,7 +51,7 @@ class QuantityParserTest {
         currentMeasurement.type = UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX
         currentMeasurement.rawOffsets = OffsetPosition(8736, 8737)
         currentMeasurement.quantityLeast = Quantity("5", null, currentMeasurement.rawOffsets)
-        
+
         val offset = 7753
 
         val sentences: MutableList<OffsetPosition> = ArrayList()
@@ -513,6 +513,8 @@ tion Re x Lu (see table """
         assertThat(measurements[8].quantityMost.rawValue, `is`("10"))
         assertThat(measurements[8].quantityMost.rawUnit.rawName, `is`("min"))
 
+    }
+
     @Test
     fun testGetSentence_entityInsideSentence() {
 
@@ -524,7 +526,7 @@ tion Re x Lu (see table """
 
         val entityPosition = OffsetPosition(1, 2)
 
-        val foundSentence = target?.findSentenceOffset(sentences, entityPosition)
+        val foundSentence = target.findSentenceOffset(sentences, entityPosition)
 
         assertThat(foundSentence, `is`(sentences[0]))
     }
@@ -541,7 +543,7 @@ tion Re x Lu (see table """
 
         val entityPosition = OffsetPosition(2, 5)
 
-        val foundSentence = target?.findSentenceOffset(sentences, entityPosition)
+        val foundSentence = target.findSentenceOffset(sentences, entityPosition)
 
         assertThat(foundSentence, `is`(OffsetPosition(0, 10)))
     }
@@ -557,7 +559,7 @@ tion Re x Lu (see table """
 
         val entityPosition = OffsetPosition(2, 8)
 
-        val foundSentence = target?.findSentenceOffset(sentences, entityPosition)
+        val foundSentence = target.findSentenceOffset(sentences, entityPosition)
 
         assertThat(foundSentence, `is`(OffsetPosition(0, 10)))
     }
