@@ -42,6 +42,10 @@ RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt
 WORKDIR /opt/grobid-source
 RUN unzip -o /opt/grobid-source/grobid-quantities-source/build/distributions/grobid-quantities-*.zip -d grobid-quantities_distribution && mv grobid-quantities_distribution/grobid-quantities-* grobid-quantities
 
+# Cleanup 
+RUN rm -rf grobid-quantities-source/.git
+RUN rm -rf grobid-quantities-source/build
+
 WORKDIR /opt
 
 # -------------------
