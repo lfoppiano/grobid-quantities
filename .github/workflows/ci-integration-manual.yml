@@ -1,4 +1,4 @@
-name: Build unstable
+name: Run integration tests manually
 
 on:
    - workflow_dispatch
