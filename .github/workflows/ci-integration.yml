@@ -1,0 +1,44 @@
+name: Build unstable
+
+on: [push]
+
+concurrency: 
+  group: gradle
+#  cancel-in-progress: true
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout grobid home
+      uses: actions/checkout@v4
+      with:
+        repository: kermitt2/grobid
+        path: grobid-home
+        sparse-checkout: |
+          grobid-home/
+        sparse-checkout-cone-mode: false
+    - name: Checkout grobid-quantities
+      uses: actions/checkout@v4
+      with:
+        repository: kermitt2/grobid
+        path: grobid-quantities
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17.0.10+7'
+        distribution: 'temurin'
+        cache: 'gradle'
+    - name: Build with Gradle
+      run: ./gradlew build -x test
+
+    - name: Test with Gradle Jacoco and Coveralls
+      run: ./gradlew integration
+
+#    - name: Coveralls GitHub Action
+#      uses: coverallsapp/github-action@v2
+#      with:
+#        github-token: ${{ secrets.GITHUB_TOKEN }}
+#        format: jacoco
