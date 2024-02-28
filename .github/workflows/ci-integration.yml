@@ -1,6 +1,7 @@
 name: Build unstable
 
-on: [push]
+on:
+  workflow_dispatch:
 
 concurrency: 
   group: gradle
