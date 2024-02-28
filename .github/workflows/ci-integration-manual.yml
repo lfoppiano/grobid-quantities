@@ -30,9 +30,11 @@ jobs:
         distribution: 'temurin'
         cache: 'gradle'
     - name: Build with Gradle
-      run: ./grobid-quantities/gradlew build -x test
+      working-directory: ./grobid-quantities
+      run: ./gradlew build -x test
     - name: Run integration tests
-      run: ./grobid-quantities/gradlew integration
+      working-directory: ./grobid-quantities
+      run: ./gradlew integration
 
 #    - name: Coveralls GitHub Action
 #      uses: coverallsapp/github-action@v2
