@@ -15,13 +15,13 @@ MeasEval was annotated to allow approximated entities, which are not supported i
 +---------------------------+----------------+-----------+--------+---------+---------+
 | Type (Ref)                | Matching method| Precision | Recall | F1-score| Support |
 +===========================+================+===========+========+=========+=========+
-| Quantities (QUANT)        | strict         | 53.05     | 54.74  | 53.88   | 1165    |
+| Quantities (QUANT)        | strict         | 54.09     | 54.47  | 54.28   | 1137    |
 +---------------------------+----------------+-----------+--------+---------+---------+
-| Quantities (QUANT)        | soft           | 64.64     | 66.70  | 65.65   | 1165    |
+| Quantities (QUANT)        | soft           | 67.02     | 67.49  | 67.26   | 1137    |
 +---------------------------+----------------+-----------+--------+---------+---------+
-| Quantified substance (ME) | strict         | 14.03     | 9.78   | 11.53   | 613     |
+| Quantified substance (ME) | strict         | 13.82     | 9.67   | 11.38   | 615     |
 +---------------------------+----------------+-----------+--------+---------+---------+
-| Quantified substance (ME) | soft           | 21.53     | 15.02  | 17.69   | 613     |
+| Quantified substance (ME) | soft           | 21.63     | 15.13  | 17.80   | 615     |
 +---------------------------+----------------+-----------+--------+---------+---------+
 
 Note: the ME (Measured Entity) is still experimental in Grobid-quantities
