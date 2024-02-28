@@ -1,11 +1,8 @@
 name: Build unstable
 
 on:
-  workflow_dispatch:
-
-concurrency: 
-  group: gradle
-#  cancel-in-progress: true
+   - workflow_dispatch
+   - push
 
 
 jobs:
