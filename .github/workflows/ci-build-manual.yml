@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build and push
         id: docker_build
-        uses: mr-smithers-excellent/docker-build-push@v5
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
           dockerfile: Dockerfile.local
           username: ${{ secrets.DOCKERHUB_USERNAME }}
