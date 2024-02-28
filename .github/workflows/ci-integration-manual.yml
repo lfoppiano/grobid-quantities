@@ -29,10 +29,8 @@ jobs:
         java-version: '17.0.10+7'
         distribution: 'temurin'
         cache: 'gradle'
-    - name: Select directory
-      run: cd grobid-quantities
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: ./gradlew --project-dir grobid-quantities build -x test
     - name: Run integration tests
       run: ./gradlew integration
 
