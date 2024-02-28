@@ -34,14 +34,7 @@ jobs:
   docker-build:
     needs: [ build ]
     runs-on: ubuntu-latest
-
     steps:
-      # - name: Maximize build disk space
-      #   uses: easimon/maximize-build-space@v10
-      #   with:
-      #     root-reserve-mb: 512
-      #     swap-size-mb: 1024
-      #     remove-dotnet: 'true'
       - name: Create more disk space
         run: |
           sudo rm -rf /usr/share/dotnet 
@@ -49,6 +42,11 @@ jobs:
           sudo rm -rf "/usr/local/share/boost" 
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           sudo rm -rf /opt/hostedtoolcache
+      - name: Pull and squash Grobid image
+        run: |
+          docker pull grobid/grobid:0.8.0
+          pip install docker-squash
+          docker-squash -f 10 -t grobid/grobid:0.8.0 grobid/grobid:0.8.0
       - uses: actions/checkout@v4
       - name: Build and push
         id: docker_build
