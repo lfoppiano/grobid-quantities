@@ -14,12 +14,12 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: kermitt2/grobid
-        path: grobid
+        path: ./grobid
     - name: Checkout grobid-quantities
       uses: actions/checkout@v4
       with:
         repository: kermitt2/grobid
-        path: grobid/grobid-quantities
+        path: ./grobid/grobid-quantities
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
@@ -28,5 +28,5 @@ jobs:
         cache: 'gradle'
     - name: Build and run integration tests
       working-directory: ./grobid/grobid-quantities
-      run: ./gradlew integration
+      run: pwd && ./gradlew integration
    
