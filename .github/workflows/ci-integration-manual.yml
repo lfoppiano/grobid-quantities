@@ -29,10 +29,11 @@ jobs:
         java-version: '17.0.10+7'
         distribution: 'temurin'
         cache: 'gradle'
+    - name: Select directory
+      run: cd grobid-quantities
     - name: Build with Gradle
       run: ./gradlew build -x test
-
-    - name: Test with Gradle Jacoco and Coveralls
+    - name: Run integration tests
       run: ./gradlew integration
 
 #    - name: Coveralls GitHub Action
