@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.normalization.NormalizationException;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,10 +14,12 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Convert a number expressed with alphabetical characters into a normalized numerical value.
- * 
+ *
  * @author Patrice Lopez
  */
 public class WordsToNumber {
@@ -27,15 +30,17 @@ public class WordsToNumber {
 
     private final String VALUES_PATH = "lexicon/en/values.json";
 
-    private static List<String> bases = null; 
-    private static List<String> tens = null; 
-    private static List<String> scales = null; 
-    private static String decimalMark = null; 
+    private final Pattern NUMERIC_PATTERN = Pattern.compile("[0-9.,]+", Pattern.CASE_INSENSITIVE);
+
+    private static List<String> bases = null;
+    private static List<String> tens = null;
+    private static List<String> scales = null;
+    private static String decimalMark = null;
 
     private Set<String> numberTokens = null;
- 
+
     // the lexicon
-    private Map<String, ScaleIncrementPair> numWord = null; 
+    private Map<String, ScaleIncrementPair> numWord = null;
 
     public static WordsToNumber getInstance() {
         if (instance == null) {
@@ -90,7 +95,7 @@ public class WordsToNumber {
                 }
             }
             for (int i = 1; i < tens.size(); i++) {
-                numWord.put(tens.get(i), new ScaleIncrementPair(1, i * 10));                
+                numWord.put(tens.get(i), new ScaleIncrementPair(1, i * 10));
             }
 
             JsonNode scalesNode = rootNode.findPath("scales");
@@ -103,10 +108,14 @@ public class WordsToNumber {
                 }
             }
             for (int i = 0; i < scales.size(); i++) {
-                if(i == 0)
+                if (i == 0)
                     numWord.put(scales.get(i), new ScaleIncrementPair(100, 0));
-                else
-                    numWord.put(scales.get(i), new ScaleIncrementPair(Math.pow(10, (i*3)), 0));
+                else {
+                    numWord.put(scales.get(i), new ScaleIncrementPair(Math.pow(10, (i * 3)), 0));
+                    if (scales.get(i).endsWith("lion")) {
+                        numWord.put(scales.get(i) + "s", new ScaleIncrementPair(Math.pow(10, (i * 3)), 0));
+                    }
+                }
             }
 
             JsonNode decimalNode = rootNode.findPath("decimalMark");
@@ -119,7 +128,7 @@ public class WordsToNumber {
                 }
             }
             decimalMark = decimalMarks.get(0);
-        } catch(IOException e) {
+        } catch (IOException e) {
             logger.error("Error when reading the values.json file");
         }
 
@@ -130,64 +139,103 @@ public class WordsToNumber {
     }
 
     public BigDecimal normalize(String text, Locale local) throws NormalizationException {
-        double current = 0; 
-        double result = 0;
         text = StringUtils.lowerCase(text);
 
-        // split integer and possible decimal part
-        String[] pieces = text.split(decimalMark);
-        if(ArrayUtils.isEmpty(pieces)) {
+        String numericPart = "";
+        // Check if we have a number, e.g. 3.5 millions
+        Matcher matcher = NUMERIC_PATTERN.matcher(text);
+        if (matcher.find()) {
+            numericPart = matcher.group();
+        }
+
+        if (StringUtils.isNotBlank(numericPart) && text.contains(decimalMark)) {
             throw new NormalizationException("Cannot convert the alphabetic value '" + text + "' to digits");
-        }
-        String integerPart = pieces[0].trim();
-        String decimalPart = null;
-        if (pieces.length > 1)
-            decimalPart = pieces[1].trim();
+        } else if (StringUtils.isNotBlank(numericPart)) {
 
-        if ((integerPart != null) && (integerPart.length() > 0)) {
-            pieces = integerPart.split("\\W"); // or limit to split(" |-|—");
-            for(int i=0; i< pieces.length; i++) {
-                String word = pieces[i];
-                ScaleIncrementPair scaleIncrement = numWord.get(word);
-                if (scaleIncrement == null) {
-                    logger.warn("Invalid token to be converted into number: " + word);
-                    continue;
-                }
-                current = current * scaleIncrement.scale + scaleIncrement.increment;
-                if (scaleIncrement.scale > 100) {
-                    result += current;
-                    current = 0;
-                }
+            String[] split = text.split(numericPart);
+
+            // we assume the alphabetical is after the numeric 
+            String alphabeticPart = StringUtils.trim(split[1]);
+
+            return convertIntegerPart(alphabeticPart, new BigDecimal(numericPart).doubleValue());
+
+        } else if (text.contains(decimalMark)) {
+            // split integer and possible decimal part
+            String[] pieces = text.split(decimalMark);
+            if (ArrayUtils.isEmpty(pieces)) {
+                throw new NormalizationException("Cannot convert the alphabetic value '" + text + "' to digits");
             }
-            result += current;
-        }
+            String integerPart = pieces[0].trim();
+            String decimalPart = null;
+            if (pieces.length > 1)
+                decimalPart = pieces[1].trim();
 
-        // decimal part 
+            BigDecimal result = new BigDecimal("0");
+            if (StringUtils.isNotBlank(integerPart)) {
+                result = convertIntegerPart(integerPart);
+            }
+
+            // decimal part 
+            BigDecimal decimalResult = convertDecimalPart(decimalPart, local);
+
+            return result.add(decimalResult);
+        } else {
+            return convertIntegerPart(text);
+        }
+    }
+
+    protected BigDecimal convertIntegerPart(String integerPart) {
+        return convertIntegerPart(integerPart, 0);
+    }
+
+    protected BigDecimal convertIntegerPart(String integerPart, double current) {
+        double result = 0;
+
+        String[] pieces;
+        pieces = integerPart.split("\\W"); // or limit to split(" |-|—");
+        for (String word : pieces) {
+            ScaleIncrementPair scaleIncrement = numWord.get(word);
+            if (scaleIncrement == null) {
+                logger.warn("Invalid token to be converted into number: " + word);
+                continue;
+            }
+            current = current * scaleIncrement.scale + scaleIncrement.increment;
+            if (scaleIncrement.scale > 100) {
+                result += current;
+                current = 0;
+            }
+        }
+        result += current;
+        return new BigDecimal(String.valueOf(result)).stripTrailingZeros();
+    }
+
+    @NotNull
+    protected BigDecimal convertDecimalPart(String decimalPart, Locale locale) {
+        String[] pieces;
         BigDecimal decimalResult = new BigDecimal(0);
-        if ((decimalPart != null) && (decimalPart.length() > 0)) {
+        if (StringUtils.isNotBlank(decimalPart)) {
             pieces = decimalPart.split("\\W"); // or limit to split(" |-|—");
             StringBuilder res = new StringBuilder().append("0.");
-            for(int i=0; i< pieces.length; i++) {
-                String word = pieces[i].trim();
-                if (word.length() == 0) 
+            for (String piece : pieces) {
+                String word = piece.trim();
+                if (word.isEmpty())
                     continue;
                 ScaleIncrementPair scaleIncrement = numWord.get(word);
                 if (scaleIncrement == null) {
                     logger.warn("Invalid decimal token to be converted into number: " + word);
                     continue;
                 }
-                res.append(scaleIncrement.increment); 
+                res.append(scaleIncrement.increment);
             }
-            NumberFormat format = NumberFormat.getInstance(local);
+            NumberFormat format = NumberFormat.getInstance(locale);
             try {
                 Number number = format.parse(res.toString());
                 decimalResult = new BigDecimal(number.toString());
             } catch (ParseException pe) {
-                logger.error("Invalid value expression: " + res.toString() + " , for: " + decimalPart);
+                logger.error("Invalid value expression: " + res + " , for: " + decimalPart);
             }
         }
-
-        return new BigDecimal(result).add(decimalResult);
+        return decimalResult;
     }
 
     public class ScaleIncrementPair {

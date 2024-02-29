@@ -1,58 +1,102 @@
-package org.grobid.core.utilities;
+package org.grobid.core.utilities
 
-import org.grobid.core.data.normalization.NormalizationException;
-import org.junit.Before;
-import org.junit.Test;
+import org.grobid.core.data.normalization.NormalizationException
+import org.grobid.core.utilities.WordsToNumber
+import org.hamcrest.MatcherAssert
+import org.hamcrest.core.Is
+import org.junit.Before
+import org.junit.Test
+import java.math.BigDecimal
+import java.util.*
 
-import java.math.BigDecimal;
-import java.util.Locale;
-
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-public class WordsToNumberTest {
-
-    private WordsToNumber wordsToNumber;
+class WordsToNumberTest {
+    lateinit var target: WordsToNumber
 
     @Before
-    public void setUp() throws Exception {
-        wordsToNumber = WordsToNumber.getInstance();
+    @Throws(Exception::class)
+    fun setUp() {
+        target = WordsToNumber.getInstance()
     }
 
     @Test
-    public void testNonDecimal_1() throws Exception {
-        String input = "two hundred two million fifty three thousand and four";
-        BigDecimal number = wordsToNumber.normalize(input, Locale.ENGLISH);
-        assertThat(number, is(new BigDecimal("202053004")));
+    @Throws(Exception::class)
+    fun testNonDecimal_1() {
+        val input = "two hundred two million fifty three thousand and four"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number.toPlainString(), Is.`is`(BigDecimal("202053004").toPlainString()))
     }
 
     @Test
-    public void testNonDecimal_2() throws Exception {
-        String input = "fifteen";
-        BigDecimal number = wordsToNumber.normalize(input, Locale.ENGLISH);
-        assertThat(number, is(new BigDecimal("15")));
+    @Throws(Exception::class)
+    fun testNonDecimal_2() {
+        val input = "fifteen"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("15")))
     }
 
 
     @Test
-    public void testDecimal_1() throws Exception {
-        String input = "two hundred two million fifty three thousand point zero eight five eight zero two";
-        BigDecimal number = wordsToNumber.normalize(input, Locale.ENGLISH);
-        assertThat(number, is(new BigDecimal("202053000.085802")));
+    @Throws(Exception::class)
+    fun testDecimal_1() {
+        val input = "two hundred two million fifty three thousand point zero eight five eight zero two"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("202053000.085802")))
     }
 
     @Test
-    public void testDecimal_2() throws Exception {
-        String input = "point zero eight five eight zero two";
-        BigDecimal number = wordsToNumber.normalize(input, Locale.ENGLISH);
-        assertThat(number, is(new BigDecimal("0.085802")));
+    @Throws(Exception::class)
+    fun testDecimal_2() {
+        val input = "point zero eight five eight zero two"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.085802")))
     }
 
-    @Test(expected = NormalizationException.class)
-    public void testCornerCase() throws Exception {
+    @Test(expected = NormalizationException::class)
+    @Throws(Exception::class)
+    fun testCornerCase() {
         //Sometimes the word 'point' alone is recognised as value... this test was used to simulate the
         // exception
-        String input = "point";
-        wordsToNumber.normalize(input, Locale.ENGLISH);
+        val input = "point"
+        target.normalize(input, Locale.ENGLISH)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testThreeBillions() {
+        val input = "three billion"
+        var number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number.toPlainString(), Is.`is`(BigDecimal("3000000000").toPlainString()))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun test3Billions() {
+        val input = "3 billion"
+        var number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number.toPlainString(), Is.`is`(BigDecimal("3000000000").toPlainString()))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun test3_8Billions() {
+        val input = "3.8 billions"
+        var number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number.toPlainString(), Is.`is`(BigDecimal("3800000000").toPlainString()))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertIntegerPart() {
+        val input = "two hundred two million fifty three thousand"
+        val number = target.convertIntegerPart(input)
+        MatcherAssert.assertThat(number.toPlainString(), Is.`is`(BigDecimal("202053000").toPlainString()))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertDecimalPart() {
+        val input = "three four five"
+        val number = target.convertDecimalPart(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.345")))
     }
 }
