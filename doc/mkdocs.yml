@@ -1,0 +1,22 @@
+site_name: GROBID Quantities Documentation
+repo_url: https://github.com/kermitt2/grobid-quantities/
+repo_name: GitHub
+site_description: Documentation for GROBID Quantities
+docs_dir: .
+plugins:
+    - search
+theme:
+    name: readthedocs
+nav:
+  - Home: 'index.md'
+  - About:
+    - 'Introduction': 'introduction.md'
+    - 'References': 'references.md'
+  - User manual:
+    - 'Getting started': 'gettingStarted.md'
+    - 'REST API': 'restAPI.md'
+    - 'Training': 'training.md'
+  - Benchmarking:
+    - 'Evaluation scores': 'evaluation-scores.md'
+  - Annotation guidelines:
+    - 'Guidelines': 'guidelines.md'
