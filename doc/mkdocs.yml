@@ -6,7 +6,7 @@ docs_dir: .
 plugins:
     - search
 theme:
-    name: readthedocs
+    name: material
 nav:
   - Home: 'index.md'
   - About:
