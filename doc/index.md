@@ -1,4 +1,4 @@
-# Welcome to Grobid-quantities\'s documentation!
+# Welcome to Grobid-quantities's documentation!
 
 Grobid-quantities is a ML-based application for identification, parsing
 and normalisation of any expressions of measurements (e.g. pressure,

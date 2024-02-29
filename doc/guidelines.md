@@ -158,7 +158,7 @@ If the quantity is expressed only in terms of range (without base) it can be imp
 <measure type="interval">± <num type="range">10</num><measure type="TIME" unit="year">years</measure></measure>
 ```
 
-If the interval has a base without a range, it\'s annotated with only the base (issue [#64](https://github.com/kermitt2/grobid-quantities/issues/64)):
+If the interval has a base without a range, it's annotated with only the base (issue [#64](https://github.com/kermitt2/grobid-quantities/issues/64)):
 
 ``` xml
 a certain temperature interval1 around <measure type="interval"><num type="base">4 0</num> <measure type="TEMPERATURE" unit="°C">°C</measure></measure>
@@ -166,7 +166,7 @@ a certain temperature interval1 around <measure type="interval"><num type="base"
 
 #### Notes about intervals
 
-- Interval markers such as `more than`, `less than`, and so on, are left outside the annotation when it\'s possible (see issue [#35](https://github.com/kermitt2/grobid-quantities/issues/35)).
+- Interval markers such as `more than`, `less than`, and so on, are left outside the annotation when it's possible (see issue [#35](https://github.com/kermitt2/grobid-quantities/issues/35)).
   Example:
 
   ``` xml
@@ -224,7 +224,7 @@ for flexural samples the size is <measure type="list"><num>100</num> <measure ty
  </measure></measure>
 ```
 
-If there are no intermediary values, it\'s an argument for deciding to
+If there are no intermediary values, it's an argument for deciding to
 annotate an element as a list, for example this ranked list (issue [#65
 \<https://github.com/kermitt2/grobid-quantities/issues/65\>]{.title-ref}):
 
@@ -284,7 +284,7 @@ With UTC inside the annotation which is important to know exactly the
 "time" measure.
 
 - for a time expression not linked to a date, like the expression of
-  an \"hour\", it\'s appropriate to annotate with the tag `<time>`, to
+  an \"hour\", it's appropriate to annotate with the tag `<time>`, to
   distinguish from the `<date>` case (see issue
   [#48](https://github.com/kermitt2/grobid-quantities/issues/48)):
 
@@ -328,7 +328,7 @@ a recent study [...] showed that cycling efficiency was lower (<measure type="va
 
 #### Units without values
 
-**Case where it\'s not annotated**: When we refer to the units as such,
+**Case where it's not annotated**: When we refer to the units as such,
 to express something about the units, we are not using the units to
 quantify something with a value:
 
@@ -338,7 +338,7 @@ and r H are the geocentric and heliocentric distances in cm and AU, respectively
 
 Like here for the units: `cm` and `AU`.
 
-**Case where it\'s annotated**: We could have units expressed without
+**Case where it's annotated**: We could have units expressed without
 values, when the value is implicit:
 
 ``` xml
@@ -444,7 +444,7 @@ Reference markers:
 lower than those derived by Vaubaillon et al. (2014) and Moorhead et al. (2014) computing the corresponding impact probabilities (Milani et al. 2005)
 ```
 
-Figure/table titles, and other numbers who don\'t quantify anything:
+Figure/table titles, and other numbers who don't quantify anything:
 
 ``` xml
 Figure 1 shows the residuals of C/2013 A1's observations
@@ -571,7 +571,7 @@ Complex units are naturally supported: `m^3/kg*s` can be rewritten as `[(-, m, 3
 There are 3 labels for this model:
 -`<prefix>` represent the unit prefix, for example `k` for `kilo`, `G` for `giga` and so on and so forth. The definition of these prefix is in the prefix dictionary under `resources/lexicon/${lang}/prefix.txt`.
 - `<base>` carry out the unit base information. For NON-SI units the entire unit should be contained as `<base>`.
-- `<pow>` contains information about the exponents and divisions. It\'s used to correctly assign exponent values and to revert the sign to blocks in the denominator.
+- `<pow>` contains information about the exponents and divisions. It's used to correctly assign exponent values and to revert the sign to blocks in the denominator.
 
 The training data follows a simple structure, see an example on how `cm`
 is represented:
@@ -642,7 +642,7 @@ This labels are combined to recognise this type of values:
   For example: :: \<value\>\<number\>1\</number\> ×
   \<base\>10\</base\> \<pow\>−7\</pow\>\</value\>
 
-- Euler\'s number based expressions, discussed in [#8](https://github.com/kermitt2/grobid-quantities/issues/8).
+- Euler's number based expressions, discussed in [#8](https://github.com/kermitt2/grobid-quantities/issues/8).
   Example: 
   ``` xml
     <value><number>1.2</number>e^<exp>-5</exp></value>

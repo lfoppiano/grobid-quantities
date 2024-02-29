@@ -88,7 +88,7 @@ java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIR
 
 ### Quantified objects CRF model
 
-**This model is not yet enabled at the moment because it\'s still WIP**
+**This model is not yet enabled at the moment because it's still WIP**
 
 The trainer uses all the available training data from `resouces/dataset/quantifiedObject/corpus`. 
 The training instance is the paragraph itself (a `<p></p>` entry in the XML training file)

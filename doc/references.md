@@ -10,7 +10,7 @@ identifier: :: grobid-quantities (2015-2024)
 swh:1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7
 ```
 
-Here\'s a BibTeX entry using the [Software Heritage](https://www.softwareheritage.org/) project-level permanent
+Here's a BibTeX entry using the [Software Heritage](https://www.softwareheritage.org/) project-level permanent
 identifier: 
 ```bibtex
 @misc{grobid-quantities, 
@@ -27,7 +27,7 @@ identifier:
 
 > Luca Foppiano, Laurent Romary, Masashi Ishii, and Mikiko Tanifuji.
 > Automatic identification and normalisation of physical measurements in scientific literature.
-> September 2019, ACM, DocEng \'19, Berlin, Germany.
+> September 2019, ACM, DocEng '19, Berlin, Germany.
 > https://hal.inria.fr/hal-02294424
 
 > Kyle Hundman and Chris A. Mattmann.
