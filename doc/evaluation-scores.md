@@ -125,7 +125,7 @@ ref"}.
 The scores of this evaluation were obtained using n-fold
 cross-validation. The metrics are the micro average of n=10 folds.
 
-> :note: The paper \"Automatic Identification and Normalisation of Physical Measurements in Scientific Literature,\"
+> :information_source: The paper \"Automatic Identification and Normalisation of Physical Measurements in Scientific Literature,\"
 > published in September 2019, reported macro averaged evaluation scores.
 
 

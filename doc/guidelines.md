@@ -14,7 +14,7 @@ repository `resources/dataset/${model}/corpus/` for retraining, or under `resouc
 annotated data should be used for evaluation only. To see the different evaluation options, see GROBID documentation
 on [training and evaluating](training.md).
 
-> :note: the exact directory where the data is picked up could be also a `final` under `corpus`. Please check the
+> :information_source: the exact directory where the data is picked up could be also a `final` under `corpus`. Please check the
 > description under each model definition, below.
 
 In this document, after the general rules, we describe the annotation guidelines for the following models:
@@ -39,18 +39,18 @@ Currently, it supports three types of measurements:
 - continuous values in intervals (or range of values),
 - lists of discrete values.
 
-> :note: At the present time we do not distinguish between conjunctive and disjunctive lists.
+> :information_source: At the present time we do not distinguish between conjunctive and disjunctive lists.
 
 ### Unit type vocabulary
 
 The list of unit types (temperature, pressure, length, etc.) is controlled and based on SI definition. This controlled vocabulary contains currently around 50 types. The unit types are provided in the
 file `src/main/java/org/grobid/core/utilities/UnitUtilities.java` and they are used to get the right transformation.
 
-> :note: at the moment we do not support disambiguation of overlapping units.
+> :information_source: at the moment we do not support disambiguation of overlapping units.
 
 The given names of the unit types has to be used when annotating measurement.
 
-> :note: In the future, the list of units should however not be controlled and GROBID should support units never seen before. For now, it is admitted to annotate with `UNKNOWN` in case of doubt about the type.
+> :information_source: In the future, the list of units should however not be controlled and GROBID should support units never seen before. For now, it is admitted to annotate with `UNKNOWN` in case of doubt about the type.
 
 Examples:
 
@@ -682,7 +682,7 @@ Object\>.\</p\>
 The quantified object is identified by its ID and linked to the measure
 via the attribute [ptr=\"#ID\"]{.title-ref}.
 
-> :note: This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities
+> :information_source: This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities
 are not supported.
 
 ### How to annotate?

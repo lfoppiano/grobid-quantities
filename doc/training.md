@@ -109,7 +109,7 @@ java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIR
 
 Grobid-quantities can be evaluated using a random `80/20` ratio, an `holdout` set, or as `n-fold cross-validation`.
 
-> :note: Since 12/2022, the holdout evaluation is the default means of evaluation for all the models.
+> :information_source: Since 12/2022, the holdout evaluation is the default means of evaluation for all the models.
 
 The holdout datasets information and statistics (such as out of domain entities, overlapping rate, etc.) can be found in the Readme.md under each model directory:
 
