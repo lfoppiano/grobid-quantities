@@ -32,7 +32,7 @@
     <unit><prefix>m</prefix><base>m</base></unit>
     <unit><base>%</base></unit>
     <unit><prefix>m</prefix><base>m</base></unit>
-    <unit><base>Mpa</base></unit>
+    <unit><prefix>M</prefix><base>pa</base></unit>
     <unit><base>rpm</base></unit>
     <unit><base>%</base></unit>
     <unit><base>rpm</base></unit>

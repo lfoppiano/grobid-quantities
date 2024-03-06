@@ -4865,8 +4865,8 @@ m 0 0 1 1 NOPUNCT 0 I-<base>
 m 0 0 1 1 NOPUNCT 0 I-<prefix>
 m 0 0 1 1 NOPUNCT 0 I-<base>
 
-M 1 0 1 1 NOPUNCT 0 I-<base>
-p 0 0 0 1 NOPUNCT 0 <base>
+M 1 0 1 1 NOPUNCT 0 I-<prefix>
+p 0 0 0 1 NOPUNCT 0 I-<base>
 a 0 0 0 1 NOPUNCT 0 <base>
 
 r 0 0 0 0 NOPUNCT 0 I-<base>
