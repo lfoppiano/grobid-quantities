@@ -8,10 +8,7 @@ The machine learning engine architecture follows the cascade approach, where eac
 
 ![](img/cascade-schema.png)
 
-The models are trained using the Conditional Random Field (CRF) algorithm and Recurrent neural networks (RNN) using the bidirectional LSTM with CRF as activation layer (BidLSTM_CRF).
-
 **Quantities** are modelled using three different types:
-
 1. `atomic values` in case of single measurements (e.g., 10 grams),
 2. `interval` (e.g. `from 3 to 5 km`) and `range` (`100 +- 4` ) for continuous values, and,
 3. `lists` of discrete values where the measurement unit is shared.
@@ -23,6 +20,12 @@ The models are trained using the Conditional Random Field (CRF) algorithm and Re
 1. alphabetic (`tw`, `thousand`),
 1. power of 10 (`1.5 x 10^-5`)
 1. date/time expressions
+
+These three models are provided in multiple architectures. 
+The integration with Grobid-quantities (derived from Grobid) is described [here](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/).
+
+**TLDR** Grobid-quantities supports Conditional Random Field (CRF), Recurrent Neural Networks (RNN) using the bidirectional LSTM + CRF (as activation layer) (BidLSTM_CRF).
+
 
 The measurements that are identified are normalised toward the International System of Units (SI) using the java library [Units of measurement](http://unitsofmeasurement.github.io/).
 

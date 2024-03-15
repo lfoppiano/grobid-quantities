@@ -103,7 +103,7 @@ Grobid-quantities can be run with the following command: :
 
 ## Accessing the service
 
-Grobid-quantitiesa provides a graphical demo accessible at `http://localhost:8060`, and a REST API, reachable under `http://localhost:8060/service` and documented in the [REST API](restAPI.md).
+Grobid-quantities provides a graphical demo accessible at `http://localhost:8060`, and a REST API, reachable under `http://localhost:8060/service` and documented in the [REST API](restAPI.md).
 
 To test the API, is possible to run a simple text using `curl`:
 
