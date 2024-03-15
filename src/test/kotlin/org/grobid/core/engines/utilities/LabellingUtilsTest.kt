@@ -78,4 +78,23 @@ class LabellingUtilsTest {
         assertEquals(input, output)
     }
 
+    @Test
+    fun testCorrectLabelling_valueParser() {
+        val input = "3\t1\t1\tNOPUNCT\tI-<alpha>\n" +
+            ".\t1\t0\tDOT\t<alpha>\n" +
+            "6\t1\t1\tNOPUNCT\t<number>\n" +
+            "billion\t0\t0\tNOPUNCT\t<alpha>"
+
+        var output = LabellingUtils.correctLabelling(input)
+
+        val expected = "3\t1\t1\tNOPUNCT\tI-<alpha>\n" +
+            ".\t1\t0\tDOT\t<alpha>\n" +
+            "6\t1\t1\tNOPUNCT\t<alpha>\n" +
+            "billion\t0\t0\tNOPUNCT\t<alpha>"
+
+        assertEquals(expected, output)
+
+
+    }
+
 }

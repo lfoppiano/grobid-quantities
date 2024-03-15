@@ -8,7 +8,7 @@ class LabellingUtils {
 
         /**
          * Corrects the (rare) sequence of labels that are inconsistent (and for which I did not understand the cause)
-         * The sequence is recognised when a initial (I-<label>) sequence is followed by a non-initial sequence of a different label
+         * The sequence is recognised when an initial (I-<label>) sequence is followed by a non-initial sequence of a different label
          */
         @JvmStatic
         fun correctLabelling(resultLabelling: String): String? {
@@ -36,7 +36,7 @@ class LabellingUtils {
 
                 if (!fixNext
                     && previousLabel != null
-                    && previousLabel.startsWith("I-")
+//                    && previousLabel.startsWith("I-")
                     && currentLabel != "<other>"
                     && !currentLabel.startsWith("I-")
                     && !previousLabel.replace("I-", "").equals(currentLabel)

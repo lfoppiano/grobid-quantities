@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.grobid.core.engines.label.QuantitiesTaggingLabels.*;
+import static org.grobid.core.engines.utilities.LabellingUtils.correctLabelling;
 
 /**
  * Parser for the value part of a recognized quantity. The goal of the present parser is
@@ -156,7 +157,7 @@ public class ValueParser extends AbstractParser {
                 try {
                     return w2n.normalize(block.getAlphaAsString(), locale);
                 } catch (NormalizationException e) {
-                    LOGGER.error("Cannot parse " + block.toString() + " with Locale " + locale, e);
+                    LOGGER.error("Cannot parse " + block + " with Locale " + locale, e);
                 }
                 break;
 
@@ -204,7 +205,9 @@ public class ValueParser extends AbstractParser {
             } catch (Exception e) {
                 throw new GrobidException("CRF labeling for quantity parsing failed.", e);
             }
-            parsedValue = resultExtraction(res, layoutTokens);
+            String fixedRes = correctLabelling(res);
+
+            parsedValue = resultExtraction(fixedRes, layoutTokens);
         } catch (Exception e) {
             throw new GrobidException("An exception occurred while running Grobid.", e);
         }
