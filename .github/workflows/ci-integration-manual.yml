@@ -1,11 +1,10 @@
 name: Run integration tests manually
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - master
-
+  workflow_dispatch:
 
 jobs:
   build:
