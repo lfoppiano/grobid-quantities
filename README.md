@@ -7,6 +7,7 @@
 [![Demo grobid-quantities](https://img.shields.io/website-up-down-green-red/https/lfoppiano-grobid-quantities.hf.space.svg)](https://lfoppiano-grobid-quantities.hf.space)
 [![](https://jitpack.io/v/kermitt2/grobid-quantities.svg)](https://jitpack.io/#kermitt2/grobid-quantities)
 [![Docker Hub](https://img.shields.io/docker/pulls/lfoppiano/grobid-quantities.svg)](https://hub.docker.com/r/lfoppiano/grobid-quantities/ "Docker Pulls")
+[![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-hf-spaces-sm.svg)](https://lfoppiano-grobid-quantities.hf.space/)
 
 __Work in progress.__
 
@@ -32,12 +33,11 @@ library [Units of measurement](http://unitsofmeasurement.github.io/).
 
 ## Online demo
 
-Grobid-quantities can be tested with the online demo kindly offered by Huggingface
-Spaces: https://lfoppiano-grobid-quantities.hf.space/
+Grobid-quantities can be tested with the online demo running on GPU offered by Huggingface Spaces: https://lfoppiano-grobid-quantities.hf.space/
 
 ## Latest version
 
-The latest released version of grobid-quantities is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/v0.7.3). The current development version is 0.7.4-SNAPSHOT.
+The latest released version of grobid-quantities is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/v0.7.3). The current development version is 0.8.1-SNAPSHOT.
 **Important**: to upgrade please check [here](https://grobid-quantities.readthedocs.io/en/latest/gettingStarted/#upgrade).
 
 
@@ -69,7 +69,7 @@ identifier:
     title = {grobid-quantities},
     howpublished = {\url{https://github.com/kermitt2/grobid-quantities}},
     publisher = {GitHub},
-    year = {2015--2023},
+    year = {2015--2024},
     archivePrefix = {swh},
     eprint = {1:dir:dbf9ee55889563779a09b16f9c451165ba62b6d7}
 }
