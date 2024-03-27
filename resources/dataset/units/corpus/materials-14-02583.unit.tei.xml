@@ -1,0 +1,70 @@
+<units xmlns="http://www.tei-c.org/ns/1.0">
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><base>%</base></unit>
+    <unit><prefix>m</prefix><base>m</base> <pow>3</pow></unit>
+    <unit><prefix>m</prefix><base>m</base></unit>
+    <unit><prefix>m</prefix><base>m</base></unit>
+    <unit><base>m</base><pow>/</pow><base>s</base></unit>
+    <unit><base>• C</base></unit>
+    <unit><base>• C</base></unit>
+    <unit><base>Pa</base></unit>
+    <unit><base>Pa</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>G</base></unit>
+    <unit><prefix>k</prefix><base>G</base></unit>
+    <unit>. <prefix>k</prefix><base>G</base></unit>
+    <unit><prefix>k</prefix><base>G</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>G</base></unit>
+    <unit><prefix>k</prefix><base>G</base></unit>
+    <unit><prefix>k</prefix><base>G</base></unit>
+    <unit><prefix>k</prefix><base>G</base></unit>
+    <unit><base>%</base><pow>/</pow><base>K</base></unit>
+    <unit><base>%</base><pow>/</pow><base>K</base></unit>
+    <unit><base>K</base></unit>
+    <unit><base>K</base></unit>
+    <unit><base>%</base><pow>/</pow><base>K</base></unit>
+    <unit><base>%</base><pow>/</pow><base>K</base></unit>
+    <unit><base>%</base><pow>/</pow><base>K</base></unit>
+    <unit><base>K</base></unit>
+    <unit><base>%</base></unit>
+    <unit><base>%</base></unit>
+    <unit><base>%</base></unit>
+    <unit><base>%</base></unit>
+    <unit><base>l</base></unit>
+    <unit><base>l</base></unit>
+    <unit><prefix>n</prefix><base>m</base></unit>
+    <unit><prefix>n</prefix><base>m</base></unit>
+    <unit><prefix>n</prefix><base>m</base></unit>
+    <unit><prefix>n</prefix><base>m</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>n</prefix><base>m</base></unit>
+    <unit><prefix>n</prefix><base>m</base></unit>
+    <unit><prefix>μ</prefix><base>m</base></unit>
+    <unit><prefix>n</prefix><base>m</base></unit>
+    <unit><prefix>n</prefix><base>m</base></unit>
+    <unit><prefix>μ</prefix><base>m</base></unit>
+    <unit><base>°C</base></unit>
+    <unit><base>°C</base></unit>
+    <unit><prefix>c</prefix><base>m</base> <pow>2</pow> <pow>/</pow><base>s</base></unit>
+    <unit><prefix>c</prefix><base>m</base> <pow>2</pow> <pow>/</pow><base>s</base></unit>
+    <unit><prefix>c</prefix><base>m</base> <pow>2</pow> <pow>/</pow><base>s</base></unit>
+    <unit><prefix>c</prefix><base>m</base> <pow>2</pow> <pow>/</pow><base>s</base></unit>
+    <unit><prefix>μ</prefix><base>m</base></unit>
+    <unit><prefix>μ</prefix><base>m</base></unit>
+    <unit><base>square</base></unit>
+    <unit><base>• C</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><prefix>k</prefix><base>Oe</base></unit>
+    <unit><base>%</base><pow>/</pow><base>K</base></unit>
+</units>

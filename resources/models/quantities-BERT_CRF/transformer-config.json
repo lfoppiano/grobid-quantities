@@ -1,5 +1,5 @@
 {
-  "_name_or_path": "/home/a017873/development/embeddings/scibert_scivocab_cased_hf",
+  "_name_or_path": "./data/models/sequenceLabelling/grobid-quantities-BERT_CRF/transformer-config.json",
   "attention_probs_dropout_prob": 0.1,
   "classifier_dropout": null,
   "hidden_act": "gelu",

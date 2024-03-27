@@ -9,10 +9,10 @@ build:
 submodules:
   exclude: all
 
-#python:
-#  install:
-#    - requirements: doc/requirements.txt
+python:
+  install:
+    - requirements: doc/requirements.txt
 
-#mkdocs:
-#  configuration: mkdocs.yml
-#  fail_on_warning: false
+mkdocs:
+  configuration: doc/mkdocs.yml
+  fail_on_warning: false

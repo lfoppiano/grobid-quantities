@@ -1,0 +1,320 @@
+Loading data...
+1321 train sequences
+147 validation sequences
+164 evaluation sequences
+
+max train sequence length: 1933
+max validation sequence length: 854
+max evaluation sequence length: 767
+Running with multi-gpu. Number of devices: 4
+Output directory: data/models/sequenceLabelling/grobid-quantities-BERT_CRF
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via local_model_dir
+---
+max_epoch: 60
+early_stop: True
+patience: 5
+batch_size (training): 20
+max_sequence_length: 200
+model_name: grobid-quantities-BERT_CRF
+learning_rate:  2e-05
+use_ELMo:  False
+---
+Evaluation:
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights0.hdf5
+Model: "model_10"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ input_token (InputLayer)       [(None, None)]       0           []                               
+                                                                                                  
+ input_attention_mask (InputLay  [(None, None)]      0           []                               
+ er)                                                                                              
+                                                                                                  
+ input_token_type (InputLayer)  [(None, None)]       0           []                               
+                                                                                                  
+ tf_bert_model_10 (TFBertModel)  TFBaseModelOutputWi  109938432  ['input_token[0][0]',            
+                                thPoolingAndCrossAt               'input_attention_mask[0][0]',   
+                                tentions(last_hidde               'input_token_type[0][0]']       
+                                n_state=(None, None                                               
+                                , 768),                                                           
+                                 pooler_output=(Non                                               
+                                e, 768),                                                          
+                                 past_key_values=No                                               
+                                ne, hidden_states=N                                               
+                                one, attentions=Non                                               
+                                e, cross_attentions                                               
+                                =None)                                                            
+                                                                                                  
+ dropout_417 (Dropout)          (None, None, 768)    0           ['tf_bert_model_10[0][0]']       
+                                                                                                  
+==================================================================================================
+Total params: 109,938,432
+Trainable params: 109,938,432
+Non-trainable params: 0
+__________________________________________________________________________________________________
+Model: "crf_model_wrapper_for_bert_10"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ crf_10 (CRF)                multiple                  14202     
+                                                                 
+ model_10 (Functional)       (None, None, 768)         109938432 
+                                                                 
+=================================================================
+Total params: 109,952,634
+Trainable params: 109,952,634
+Non-trainable params: 0
+_________________________________________________________________
+---
+max_epoch: 60
+early_stop: True
+patience: 5
+batch_size (training): 20
+max_sequence_length: 200
+model_name: grobid-quantities-BERT_CRF
+learning_rate:  2e-05
+use_ELMo:  False
+---
+
+------------------------ fold 0 --------------------------------------
+	f1 (micro): 86.43
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8912    0.9383    0.9142       227
+     <unitRight>     1.0000    1.0000    1.0000         5
+   <valueAtomic>     0.8448    0.8845    0.8642       277
+     <valueBase>     0.5000    0.5000    0.5000         2
+    <valueLeast>     0.7297    0.8710    0.7941        62
+     <valueList>     0.6923    0.7500    0.7200        24
+     <valueMost>     0.8226    0.7969    0.8095        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8414    0.8884    0.8643       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights1.hdf5
+
+------------------------ fold 1 --------------------------------------
+	f1 (micro): 85.88
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9145    0.9427    0.9284       227
+     <unitRight>     0.5000    0.4000    0.4444         5
+   <valueAtomic>     0.8146    0.8881    0.8497       277
+     <valueBase>     0.3333    0.5000    0.4000         2
+    <valueLeast>     0.7571    0.8548    0.8030        62
+     <valueList>     0.7391    0.7083    0.7234        24
+     <valueMost>     0.7879    0.8125    0.8000        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8338    0.8854    0.8588       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights2.hdf5
+
+------------------------ fold 2 --------------------------------------
+	f1 (micro): 86.32
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9227    0.9471    0.9348       227
+     <unitRight>     0.8000    0.8000    0.8000         5
+   <valueAtomic>     0.8356    0.8809    0.8576       277
+     <valueBase>     0.5000    0.5000    0.5000         2
+    <valueLeast>     0.7571    0.8548    0.8030        62
+     <valueList>     0.6400    0.6667    0.6531        24
+     <valueMost>     0.7647    0.8125    0.7879        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8422    0.8854    0.8632       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights3.hdf5
+
+------------------------ fold 3 --------------------------------------
+	f1 (micro): 85.80
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9076    0.9515    0.9290       227
+     <unitRight>     0.6667    0.4000    0.5000         5
+   <valueAtomic>     0.8167    0.8845    0.8492       277
+     <valueBase>     0.5000    0.5000    0.5000         2
+    <valueLeast>     0.7162    0.8548    0.7794        62
+     <valueList>     0.7200    0.7500    0.7347        24
+     <valueMost>     0.8305    0.7656    0.7967        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8336    0.8839    0.8580       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights4.hdf5
+
+------------------------ fold 4 --------------------------------------
+	f1 (micro): 86.65
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9153    0.9515    0.9330       227
+     <unitRight>     0.8333    1.0000    0.9091         5
+   <valueAtomic>     0.8164    0.8989    0.8557       277
+     <valueBase>     0.5000    0.5000    0.5000         2
+    <valueLeast>     0.7647    0.8387    0.8000        62
+     <valueList>     0.6667    0.7500    0.7059        24
+     <valueMost>     0.8226    0.7969    0.8095        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8390    0.8959    0.8665       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights5.hdf5
+
+------------------------ fold 5 --------------------------------------
+	f1 (micro): 85.67
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9103    0.9383    0.9241       227
+     <unitRight>     0.6667    0.4000    0.5000         5
+   <valueAtomic>     0.8322    0.8773    0.8541       277
+     <valueBase>     0.3333    0.5000    0.4000         2
+    <valueLeast>     0.7647    0.8387    0.8000        62
+     <valueList>     0.6667    0.7500    0.7059        24
+     <valueMost>     0.7903    0.7656    0.7778        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8394    0.8748    0.8567       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights6.hdf5
+
+------------------------ fold 6 --------------------------------------
+	f1 (micro): 86.18
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9034    0.9471    0.9247       227
+     <unitRight>     0.6667    0.4000    0.5000         5
+   <valueAtomic>     0.8390    0.8845    0.8612       277
+     <valueBase>     0.5000    0.5000    0.5000         2
+    <valueLeast>     0.6892    0.8226    0.7500        62
+     <valueList>     0.8261    0.7917    0.8085        24
+     <valueMost>     0.8095    0.7969    0.8031        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8407    0.8839    0.8618       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights7.hdf5
+
+------------------------ fold 7 --------------------------------------
+	f1 (micro): 84.92
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8992    0.9427    0.9204       227
+     <unitRight>     0.6667    0.4000    0.5000         5
+   <valueAtomic>     0.8173    0.8881    0.8512       277
+     <valueBase>     0.3333    0.5000    0.4000         2
+    <valueLeast>     0.7727    0.8226    0.7969        62
+     <valueList>     0.6538    0.7083    0.6800        24
+     <valueMost>     0.7083    0.7969    0.7500        64
+    <valueRange>     1.0000    0.5000    0.6667         2
+
+all (micro avg.)     0.8211    0.8793    0.8492       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights8.hdf5
+
+------------------------ fold 8 --------------------------------------
+	f1 (micro): 85.34
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9149    0.9471    0.9307       227
+     <unitRight>     0.6667    0.4000    0.5000         5
+   <valueAtomic>     0.8121    0.8736    0.8417       277
+     <valueBase>     0.3333    0.5000    0.4000         2
+    <valueLeast>     0.7361    0.8548    0.7910        62
+     <valueList>     0.6154    0.6667    0.6400        24
+     <valueMost>     0.8226    0.7969    0.8095        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8302    0.8778    0.8534       663
+
+BERT_CRF
+allenai/scibert_scivocab_cased/dir will be used, loaded via delft_model
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights9.hdf5
+
+------------------------ fold 9 --------------------------------------
+	f1 (micro): 87.21
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8996    0.9471    0.9227       227
+     <unitRight>     0.8333    1.0000    0.9091         5
+   <valueAtomic>     0.8311    0.8881    0.8586       277
+     <valueBase>     0.5000    0.5000    0.5000         2
+    <valueLeast>     0.8030    0.8548    0.8281        62
+     <valueList>     0.7826    0.7500    0.7660        24
+     <valueMost>     0.8413    0.8281    0.8346        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8508    0.8944    0.8721       663
+
+----------------------------------------------------------------------
+
+** Worst ** model scores - run 7
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8992    0.9427    0.9204       227
+     <unitRight>     0.6667    0.4000    0.5000         5
+   <valueAtomic>     0.8173    0.8881    0.8512       277
+     <valueBase>     0.3333    0.5000    0.4000         2
+    <valueLeast>     0.7727    0.8226    0.7969        62
+     <valueList>     0.6538    0.7083    0.6800        24
+     <valueMost>     0.7083    0.7969    0.7500        64
+    <valueRange>     1.0000    0.5000    0.6667         2
+
+all (micro avg.)     0.8211    0.8793    0.8492       663
+
+
+** Best ** model scores - run 9
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.8996    0.9471    0.9227       227
+     <unitRight>     0.8333    1.0000    0.9091         5
+   <valueAtomic>     0.8311    0.8881    0.8586       277
+     <valueBase>     0.5000    0.5000    0.5000         2
+    <valueLeast>     0.8030    0.8548    0.8281        62
+     <valueList>     0.7826    0.7500    0.7660        24
+     <valueMost>     0.8413    0.8281    0.8346        64
+    <valueRange>     1.0000    1.0000    1.0000         2
+
+all (micro avg.)     0.8508    0.8944    0.8721       663
+
+loading model weights data/models/sequenceLabelling/grobid-quantities-BERT_CRF/model_weights9.hdf5
+----------------------------------------------------------------------
+
+Average over 10 folds
+                  precision    recall  f1-score   support
+
+      <unitLeft>     0.9079    0.9454    0.9262       227
+     <unitRight>     0.7300    0.6200    0.6563         5
+   <valueAtomic>     0.8260    0.8848    0.8543       277
+     <valueBase>     0.4333    0.5000    0.4600         2
+    <valueLeast>     0.7491    0.8468    0.7946        62
+     <valueList>     0.7003    0.7292    0.7137        24
+     <valueMost>     0.8000    0.7969    0.7979        64
+    <valueRange>     1.0000    0.9500    0.9667         2
+
+all (micro avg.)     0.8372    0.8849    0.8604          
+
+model config file saved
+preprocessor saved
+transformer config saved
+transformer tokenizer saved
+model saved

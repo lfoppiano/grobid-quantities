@@ -616,7 +616,7 @@
     <unit><prefix>m</prefix><base>eV</base><pow>∕</pow><base>T</base></unit>
     <unit><base>Ω</base><pow>∕</pow><prefix>m</prefix><base>m</base></unit>
     <unit><prefix>m</prefix><base>V</base></unit>
-    <unit><base>wt.%</base></unit>-->
+    <unit><base>wt.%</base></unit>
     <unit><prefix>p</prefix><base>J</base><pow>/</pow><base>m</base></unit>
     <unit><prefix>G</prefix><base>Byte</base><pow>∕</pow><base>platter</base></unit>
     <unit><prefix>μ</prefix><base>M</base></unit>
@@ -935,7 +935,7 @@
     <unit><base>K</base>^<pow>2</pow><pow>∕</pow><prefix>m</prefix><base>eV</base>^<pow>2</pow></unit>
     <unit><base>Å</base><pow>−3</pow></unit>
     <unit><prefix>T</prefix><base>eV</base></unit>
-    <unit><base>V</base>^<pow>2/</pow><base>K</base>^<pow>2</pow></unit>
+    <unit><base>V</base>^<pow>2</pow><pow>/</pow><base>K</base>^<pow>2</pow></unit>
     <unit><base>hole</base> <base>m</base><pow>−3</pow></unit>
     <unit><base>monolayers</base></unit>
     <unit><base>at.</base> <prefix>c</prefix><base>m</base><pow>−3</pow></unit>
@@ -1138,7 +1138,7 @@
     <unit><base>W</base><pow>∕</pow><prefix>m</prefix><base>m</base>^<pow>2</pow></unit>
     <unit><base>A</base><pow>−1</pow> <base>m</base></unit>
     <unit><prefix>μ</prefix><base>N</base><pow>∕</pow><base>m</base></unit>
-    <unit><prefix>k</prefix><base>g</base> <base>m</base>{<pow>−1</pow>} <base>s</base><pow>−2</pow></unit>-->
+    <unit><prefix>k</prefix><base>g</base> <base>m</base>{<pow>−1</pow>} <base>s</base><pow>−2</pow></unit>
     <unit><base>N</base> <base>m</base><pow>−1</pow> <base>s</base><pow>−1</pow></unit>
     <unit><prefix>n</prefix><base>m</base> <base>V</base><pow>−1</pow></unit>
     <unit><prefix>c</prefix><base>m</base>^<pow>2</pow><base>V</base> <base>s</base></unit>
@@ -1402,7 +1402,7 @@
     <unit><base>counts</base><pow>∕</pow><prefix>m</prefix><base>m</base><pow>∕</pow><base>s</base>^<pow>2</pow></unit>
     <unit><prefix>k</prefix><base>V∕dc</base></unit>
     <unit><prefix>n</prefix><base>m</base> <base>g</base><pow>∕</pow><prefix>c</prefix><base>m</base>^<pow>3</pow></unit>
-    <unit><base>ions</base><pow>∕</pow><prefix>c</prefix><base>m</base>^<pow>2/</pow><base>s</base></unit>
+    <unit><base>ions</base><pow>∕</pow><prefix>c</prefix><base>m</base>^<pow>2</pow><pow>/</pow><base>s</base></unit>
     <unit><prefix>m</prefix><base>eV</base><pow>∕</pow><base>cell</base></unit>
     <unit><base>J</base><pow>∕</pow><base>g</base><pow>∕</pow><base>°C</base></unit>
     <unit><base>gm</base><pow>∕</pow><base>h</base></unit>
@@ -1574,7 +1574,7 @@
     <unit><base>m</base>^<pow>3</pow> <base>mol</base><pow>−1</pow></unit>
     <unit><base>poise</base></unit>
     <unit><prefix>μ</prefix><base>m</base><pow>−3</pow></unit>
-    <unit><base>Ω</base> <base>□</base><pow>−1</pow></unit>-->
+    <unit><base>Ω</base> <base>□</base><pow>−1</pow></unit>
     <unit><prefix>m</prefix><base>V</base><pow>∕</pow><base>A</base></unit>
     <unit><base>m</base> <base>rad</base></unit>
     <unit><base>dB</base> <prefix>m</prefix><base>m</base><pow>−1</pow></unit>

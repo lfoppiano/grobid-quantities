@@ -1,5 +1,5 @@
 <values xmlns="http://www.tei-c.org/ns/1.0">
-    <value><time>October 19, 2014</time></value>
+<!--    <value><time>October 19, 2014</time></value>-->
 	<value><number>135,000</number></value>
 	<value><number>13</number></value>
 	<value><number>5000</number></value>
@@ -36,7 +36,7 @@
 	<value><alpha>three</alpha></value>
 	<value><alpha>three</alpha></value>
 	<value><number>130,000</number></value>
-    <value><time>March 15, 2014</time></value>
+<!--    <value><time>March 15, 2014</time></value>-->
 	<value><number>60</number></value>
 	<value><alpha>two</alpha></value>
 	<value><alpha>five</alpha></value>

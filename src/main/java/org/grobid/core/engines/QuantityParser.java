@@ -766,7 +766,7 @@ public class QuantityParser extends AbstractParser {
                 LOGGER.error("Warning: unexpected label in quantity parser: " + clusterLabel.getLabel() + " for " + clusterContent);
             }
 
-            pos = endPos;
+            pos = endPos - offset;
             while (pos > currentSentence.end) {
                 if (currentSentenceIndex < sentences.size() - 1) {
                     currentSentenceIndex++;
@@ -803,7 +803,7 @@ public class QuantityParser extends AbstractParser {
         List<OffsetPosition> sentencesCurrentMeasure = sentences.stream()
             .filter(sop -> sop.start <= currentMeasureOffset.start - firstTokenOffset
                 && sop.end > currentMeasureOffset.end - firstTokenOffset)
-            .toList();
+            .collect(Collectors.toList());
 
         if (sentencesCurrentMeasure.size() == 1) {
             return sentencesCurrentMeasure.get(0);
