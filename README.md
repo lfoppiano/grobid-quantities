@@ -26,7 +26,7 @@ powder_ in
 
 ![GROBID Quantity Demo](doc/img/Screenshot5.png)
 
-As the other GROBID models, the module relies only on machine learning and it uses linear CRF.
+As with the other GROBID models, the module relies only on machine learning and it uses linear CRF.
 The normalisation of quantities is handled by the java
 library [Units of measurement](http://unitsofmeasurement.github.io/).
 
@@ -38,7 +38,7 @@ Spaces: https://lfoppiano-grobid-quantities.hf.space/
 ## Latest version
 
 The latest released version of grobid-quantities is [0.7.3](https://github.com/kermitt2/grobid-quantities/releases/tag/v0.7.3). The current development version is 0.7.4-SNAPSHOT.
-**Important**: to upgrade please check [here](https://grobid-quantities.readthedocs.io/gettingStarted.html#upgrade).
+**Important**: to upgrade please check [here](https://grobid-quantities.readthedocs.io/en/latest/gettingStarted/#upgrade).
 
 
 ## Documentation
