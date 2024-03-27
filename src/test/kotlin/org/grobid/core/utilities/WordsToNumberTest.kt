@@ -107,4 +107,52 @@ class WordsToNumberTest {
         val number = target.convertDecimalPart(input, Locale.ENGLISH)
         MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.345")))
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertFractions1() {
+        val input = "one third"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number.toPlainString(), Is.`is`(BigDecimal("0.3333333333").toPlainString()))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertFractions2() {
+        val input = "one fifth"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.2")))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertFractions5() {
+        val input = "two fifth"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.4")))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertFractions2Mixed() {
+        val input = "a fifth"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.2")))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertFractions3() {
+        val input = "ten third"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("3.3333333330")))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertFractions4() {
+        val input = "three out of four"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.75")))
+    }
 }

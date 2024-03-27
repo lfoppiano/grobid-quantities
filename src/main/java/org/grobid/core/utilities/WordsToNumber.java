@@ -2,6 +2,7 @@ package org.grobid.core.utilities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.grobid.core.data.normalization.NormalizationException;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
@@ -38,6 +40,8 @@ public class WordsToNumber {
     private static String decimalMark = null;
 
     private Set<String> numberTokens = null;
+    private Map<String, Double> specials = new HashMap<>();
+    private Map<String, Double> fractions = new HashMap<>();
 
     // the lexicon
     private Map<String, ScaleIncrementPair> numWord = null;
@@ -128,10 +132,44 @@ public class WordsToNumber {
                 }
             }
             decimalMark = decimalMarks.get(0);
+
+            specials = fillAsMap(rootNode, "specials", numberTokens);
+            fractions = fillAsMap(rootNode, "fractions", numberTokens);
         } catch (IOException e) {
             logger.error("Error when reading the values.json file");
         }
 
+    }
+
+    private Map<String, Double> fillAsMap(JsonNode rootNode, String rootPath, Set<String> numberTokens) {
+        Map<String, Double> map = new HashMap<>();
+
+        JsonNode node = rootNode.findPath(rootPath);
+        if ((node != null) && (!node.isMissingNode())) {
+            Iterator<Map.Entry<String, JsonNode>> iter = node.fields();
+            while (iter.hasNext()) {
+                Map.Entry<String, JsonNode> text = iter.next();
+                map.put(text.getKey(), text.getValue().doubleValue());
+                numberTokens.add(text.getKey());
+            }
+        }
+
+        return map;
+    }
+
+    private List<String> fillAsList(JsonNode rootNode, String rootPath, Set<String> numberTokens) {
+        List<String> list = new ArrayList<>();
+        JsonNode node = rootNode.findPath(rootPath);
+        if ((node != null) && (!node.isMissingNode())) {
+            Iterator<JsonNode> iter = node.elements();
+            while (iter.hasNext()) {
+                String text = ((JsonNode) iter.next()).textValue();
+                list.add(text);
+                numberTokens.add(text);
+            }
+        }
+
+        return list;
     }
 
     public Set<String> getTokenSet() {
@@ -148,6 +186,7 @@ public class WordsToNumber {
             numericPart = matcher.group();
         }
 
+        // If we have a numeric part but the decimal mark is written in alphabetic characters, we abort the normalisation
         if (StringUtils.isNotBlank(numericPart) && text.contains(decimalMark)) {
             throw new NormalizationException("Cannot convert the alphabetic value '" + text + "' to digits");
         } else if (StringUtils.isNotBlank(numericPart)) {
@@ -179,6 +218,46 @@ public class WordsToNumber {
             BigDecimal decimalResult = convertDecimalPart(decimalPart, local);
 
             return result.add(decimalResult);
+        } else if (fractions.keySet().stream().filter(text::contains).findFirst().isPresent()) {
+            // one xyzty = 1/xyz
+            String matchingElement = fractions.keySet()
+                .stream()
+                .filter(text::contains)
+                .findFirst()
+                .get();
+
+            String[] pieces = text.split("\\W");
+
+            if (pieces.length > 2) {
+                throw new NormalizationException("Cannot convert the alphabetic value '" + text + "' to digits. Such type of fraction is not yet supported.");
+            }
+            if (pieces.length == 1) {
+                throw new NormalizationException("Cannot convert the alphabetic value '" + text + "' to digits. Invalid fraction.");
+            }
+            ScaleIncrementPair scaleIncrementPair = numWord.get(pieces[0]);
+            BigDecimal numeratorOfFraction = null;
+            if (scaleIncrementPair != null) {
+                numeratorOfFraction = new BigDecimal(scaleIncrementPair.increment);
+            } else {
+                numeratorOfFraction = new BigDecimal(specials.get(pieces[0]));
+            }
+
+            return numeratorOfFraction.multiply(BigDecimal.valueOf(fractions.get(matchingElement)));
+        } else if (text.contains("out of")) {
+            // One out of X
+            String[] pieces = text.split("out of");
+            String numerator = pieces[0];
+            String denominator = pieces[1];
+
+            return convertIntegerPart(numerator).divide(convertIntegerPart(denominator));
+        } else if(text.contains("of")) {
+            // One of X = 1/X
+
+            String[] pieces = text.split("of");
+            String numerator = pieces[0];
+            String denominator = pieces[1];
+
+            return convertIntegerPart(numerator).divide(convertIntegerPart(denominator));
         } else {
             return convertIntegerPart(text);
         }
@@ -191,8 +270,7 @@ public class WordsToNumber {
     protected BigDecimal convertIntegerPart(String integerPart, double current) {
         double result = 0;
 
-        String[] pieces;
-        pieces = integerPart.split("\\W"); // or limit to split(" |-|—");
+        String[] pieces = integerPart.split("\\W"); // or limit to split(" |-|—");
         for (String word : pieces) {
             ScaleIncrementPair scaleIncrement = numWord.get(word);
             if (scaleIncrement == null) {
