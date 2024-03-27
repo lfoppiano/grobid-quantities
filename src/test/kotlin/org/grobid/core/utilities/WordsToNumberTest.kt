@@ -70,6 +70,14 @@ class WordsToNumberTest {
 
     @Test
     @Throws(Exception::class)
+    fun test20Million() {
+        val input = "twenty millions five hundred twenty five"
+        var number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("20000525")))
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun test3Billions() {
         val input = "3 billion"
         var number = target.normalize(input, Locale.ENGLISH)

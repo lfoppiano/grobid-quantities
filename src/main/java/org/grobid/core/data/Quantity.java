@@ -351,7 +351,7 @@ public class Quantity implements Comparable<Quantity> {
                 if (!first) {
                     json.append(", ");
                 }
-                json.append("\"normalizedValue\":" + value.toString());
+                json.append("\"normalizedValue\":" + value.toPlainString());
             }
 
             json.append("}");
@@ -363,7 +363,7 @@ public class Quantity implements Comparable<Quantity> {
         public String toString() {
             final StringBuilder sb = new StringBuilder("Normalized{");
             sb.append("rawValue='").append(rawValue).append('\'');
-            sb.append(", value=").append(value);
+            sb.append(", value=").append(value.toPlainString());
             sb.append(", unit=").append(unit);
             sb.append('}');
             return sb.toString();
