@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+import static org.grobid.service.configuration.GrobidQuantitiesConfiguration.LOGGER;
 
 /**
  * Measurement operations and utilities class
@@ -316,7 +317,9 @@ public class MeasurementOperations {
 
     /**
      * Return the offset of the measurement - useful for matching into sentences or lexicons
+     * @Deprecated use QuantityOperations.getMeasurementRawOffsetsAndText
      */
+    @Deprecated
     public OffsetPosition calculateExtremitiesOffsets(Measurement measurement) {
         List<OffsetPosition> offsets = new ArrayList<>();
 
@@ -336,9 +339,18 @@ public class MeasurementOperations {
 
             case CONJUNCTION:
                 CollectionUtils.addAll(offsets, QuantityOperations.getOffsets(measurement.getQuantityList()));
-
                 break;
+                
         }
+
+        List<OffsetPosition> emptyPositions = offsets.stream()
+            .filter(o -> o.start == -1 && o.end == -1)
+            .toList();
+
+        if (CollectionUtils.isNotEmpty(emptyPositions)) {
+            LOGGER.debug("Cannot calculate the extremities of this measurement, because the tokens information are missing. ");
+        }
+        
         return QuantityOperations.getContainingOffset(offsets);
     }
 

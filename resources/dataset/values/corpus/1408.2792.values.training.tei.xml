@@ -1,5 +1,5 @@
 <values xmlns="http://www.tei-c.org/ns/1.0">
-    <value><time>October 2014</time></value>
+<!--    <value><time>October 2014</time></value>-->
 	<value><number>10</number></value>
 	<value><base>10</base> <pow>−7</pow></value>
 	<value><number>100</number></value>

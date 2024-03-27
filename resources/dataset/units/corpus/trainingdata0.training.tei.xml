@@ -28,7 +28,9 @@
     <unit><base>V</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>
     <unit><other>223455,6</other><base>V</base><pow>/</pow><prefix>c</prefix><base>m</base></unit>
     <unit><prefix>μ</prefix><base>g</base></unit>
+    <unit><base>m</base><base>s</base><pow>−2</pow></unit>
     <unit><prefix>μ</prefix><base>l</base></unit>
+    <unit><base>l</base><base>s</base><pow>−1</pow></unit>
     <unit rightAttachment="true"><base>pH</base></unit>
     <unit rightAttachment="true"><base>pH</base></unit>
     <unit rightAttachment="true"><base>pH</base></unit>

@@ -1218,7 +1218,7 @@
       "type": "MAGNETIC_FLUX_DENSITY",
       "system": "CGS",
       "supportsPrefixes": true,
-      "skipNormalisation": false, 
+      "skipNormalisation": false,
       "names": [
         {
           "lemma": "Gauss"
@@ -1348,6 +1348,9 @@
           "raw": "rpm"
         },
         {
+          "raw": "RPM"
+        },
+        {
           "raw": "round/min",
           "product": [
             {
@@ -1358,9 +1361,33 @@
               "pow": "-1"
             }
           ]
+        },
+        {
+          "raw": "rev/min",
+          "product": [
+            {
+              "base": "rev"
+            },
+            {
+              "base": "min",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "r/min",
+          "product": [
+            {
+              "base": "r"
+            },
+            {
+              "base": "min",
+              "pow": "-1"
+            }
+          ]
         }
       ],
-      "type": "FREQUENCY",
+      "type": "ROTATION",
       "system": "NON_SI",
       "names": [
         {
@@ -1368,6 +1395,9 @@
           "inflections": [
             "rounds per minute"
           ]
+        },
+        {
+          "lemma": "number of revolutions"
         }
       ]
     },
@@ -2000,7 +2030,7 @@
           ]
         },
         {
-          "lemma": "ångström", 
+          "lemma": "ångström",
           "inflections": [
             "ångströms"
           ]
@@ -2385,7 +2415,7 @@
           ]
         },
         {
-          "raw":  "g cm2/s2",
+          "raw": "g cm2/s2",
           "product": [
             {
               "base": "g"
@@ -2402,7 +2432,7 @@
           ]
         },
         {
-          "raw":  "g⋅cm2/s2",
+          "raw": "g⋅cm2/s2",
           "product": [
             {
               "base": "g"
@@ -2432,10 +2462,10 @@
     {
       "notations": [
         {
-          "raw":  "erg/G",
-          "product":  [
+          "raw": "erg/G",
+          "product": [
             {
-              "base":  "erg"
+              "base": "erg"
             },
             {
               "base": "G",
@@ -2444,7 +2474,7 @@
           ]
         },
         {
-          "raw":  "J/T",
+          "raw": "J/T",
           "product": [
             {
               "base": "J"
@@ -2779,7 +2809,8 @@
           "lemma": "atomic percentage"
         }
       ]
-    },{
+    },
+    {
       "notations": [
         {
           "raw": "wt. %"
@@ -2875,7 +2906,8 @@
               "pow": "-1"
             }
           ]
-        },{
+        },
+        {
           "raw": "kg/m2·yr"
         },
         {
@@ -2975,6 +3007,56 @@
         {
           "lemma": "sedimentation rate",
           "inflection": "sedimentation rates"
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "rad/sT",
+          "product": [
+            {
+              "base": "rad"
+            },
+            {
+              "base": "s",
+              "pow": "-1"
+            },
+            {
+              "base": "T",
+              "pow": "-1"
+            }
+          ]
+        },
+        {
+          "raw": "C/kg",
+          "product": [
+            {
+              "base": "C"
+            },
+            {
+              "prefix": "K",
+              "base": "g",
+              "pow": "-1"
+            }
+          ]
+        }
+      ],
+      "type": "MAGNETIC_FIELD_RATIO",
+      "system": "SI_BASE",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "gyromagnetic ratio",
+          "inflection": [
+            "gyromagnetic ratios"
+          ]
+        },
+        {
+          "lemma": "magnetogyric ratio",
+          "inflection": [
+            "magnetogyric ratios"
+          ]
         }
       ]
     }

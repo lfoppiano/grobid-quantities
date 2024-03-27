@@ -26,7 +26,7 @@ public class QuantityParserIntegrationTest {
     QuantityParser target;
 
     @BeforeClass
-    public static void init() throws Exception{
+    public static void init() throws Exception {
         initEngineForTests();
     }
 
@@ -97,7 +97,7 @@ public class QuantityParserIntegrationTest {
     public void testQuantityParser1() throws Exception {
 
         String text = IOUtils.toString(
-                this.getClass().getResourceAsStream("/test1.txt"), UTF_8);
+            this.getClass().getResourceAsStream("/test1.txt"), UTF_8);
         System.out.println("\ntest1.txt\n" + text + "\n");
 
         QuantityParser parser = QuantityParser.getInstance();
@@ -117,7 +117,7 @@ public class QuantityParserIntegrationTest {
     public void testQuantityParser2() throws Exception {
 
         String text = IOUtils.toString(
-                this.getClass().getResourceAsStream("/test2.txt"), UTF_8);
+            this.getClass().getResourceAsStream("/test2.txt"), UTF_8);
         System.out.println("\ntest2.txt\n" + text + "\n");
 
         QuantityParser parser = QuantityParser.getInstance();
@@ -137,7 +137,7 @@ public class QuantityParserIntegrationTest {
     public void testQuantityParser3() throws Exception {
 
         String text = IOUtils.toString(
-                this.getClass().getResourceAsStream("/test0.training.txt"), UTF_8);
+            this.getClass().getResourceAsStream("/test0.training.txt"), UTF_8);
 
         QuantityParser parser = QuantityParser.getInstance();
 
@@ -157,15 +157,15 @@ public class QuantityParserIntegrationTest {
     public void testQuantityParser4() throws Exception {
 //        String text = "\n\nFirst, it was heated to 840°C to form austenite structure and cooled at the speed of 100°C/hour to harden.";
         String text = "A 20kg ingot is made in a high frequency induction melting furnace and forged to 30mm in thickness and " +
-                "90mm in width at 850 to 1,150°C. Specimens No.2 to 4, 6 and 15 are materials embodying the invention. " +
-                "Others are for comparison. No.1 is a material equivalent to ASTM standard A469-88 class 8 for generator rotor " +
-                "shaft material. No. 5 is a material containing relatively high Al content. \n" +
-                "\n" +
-                "These specimens underwent heat treatment by simulating the conditions for the large size rotor shaft centre " +
-                "of a large capacity generator. " +
-                "First, it was heated to 840°C to form austenite structure and cooled at the speed of 100°C/hour to harden. " +
-                "Then, the specimen was heated and held at 575 to 590°C for 32 hours and cooled at a speed of 15°C/hour. Tempering " +
-                "was done at such a temperature to secure tensile strength in the range of 100 to 105kg/mm2 for each specimen.";
+            "90mm in width at 850 to 1,150°C. Specimens No.2 to 4, 6 and 15 are materials embodying the invention. " +
+            "Others are for comparison. No.1 is a material equivalent to ASTM standard A469-88 class 8 for generator rotor " +
+            "shaft material. No. 5 is a material containing relatively high Al content. \n" +
+            "\n" +
+            "These specimens underwent heat treatment by simulating the conditions for the large size rotor shaft centre " +
+            "of a large capacity generator. " +
+            "First, it was heated to 840°C to form austenite structure and cooled at the speed of 100°C/hour to harden. " +
+            "Then, the specimen was heated and held at 575 to 590°C for 32 hours and cooled at a speed of 15°C/hour. Tempering " +
+            "was done at such a temperature to secure tensile strength in the range of 100 to 105kg/mm2 for each specimen.";
         List<Measurement> measurements = target.process(text);
 
         assertThat(measurements, hasSize(10));

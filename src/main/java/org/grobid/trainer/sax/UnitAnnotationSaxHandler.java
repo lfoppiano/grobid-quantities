@@ -1,6 +1,7 @@
 package org.grobid.trainer.sax;
 
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.utilities.Pair;
@@ -77,7 +78,11 @@ public class UnitAnnotationSaxHandler extends DefaultHandler {
             writeData(qName);
         } else if ("unit".equals(qName)) {
             //currentUnit.addLabel(new Pair("\n", null));
-            labeled.add(currentUnit);
+            if (CollectionUtils.isNotEmpty(currentUnit.getLabels())) {
+                labeled.add(currentUnit);
+            } else {
+                accumulator.setLength(0);
+            }
         }
 
     }
