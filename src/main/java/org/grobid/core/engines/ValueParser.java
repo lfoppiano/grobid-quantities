@@ -162,7 +162,8 @@ public class ValueParser extends AbstractParser {
                 break;
 
             case TIME:
-                //we do not parse it for the moment
+                // We do not parse it for the moment.
+                // Time/Date should be parsed upstream as it requires some additional context.
                 break;
 
         }
