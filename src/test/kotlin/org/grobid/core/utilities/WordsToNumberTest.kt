@@ -166,6 +166,22 @@ class WordsToNumberTest {
 
     @Test
     @Throws(Exception::class)
+    fun testConvertFractions6_1() {
+        val input = "three out of these four"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.75")))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testConvertFractions6_2() {
+        val input = "three out of that four"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.75")))
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testConvertFractions4Numeric() {
         val input = "3 out of 4"
         val number = target.normalize(input, Locale.ENGLISH)
@@ -186,4 +202,14 @@ class WordsToNumberTest {
         val input = "a temperature of 20"
         target.normalize(input, Locale.ENGLISH)
     }
+
+
+    @Throws(Exception::class)
+    fun testErrorCase_1() {
+        val input = "six, 12"
+        val output = target.normalize(input, Locale.ENGLISH)
+
+
+    }
+
 }

@@ -11,5 +11,6 @@
     <value><base>10</base><pow>-1</pow></value>
 <!--    <value>e<exp>-1</exp></value>-->
     <value><number>10</number></value>
+    <value><alpha>Six</alpha>, <number>12</number></value>
 </values>
 
