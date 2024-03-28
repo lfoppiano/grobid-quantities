@@ -33,6 +33,8 @@ public class WordsToNumber {
     private final String VALUES_PATH = "lexicon/en/values.json";
 
     private final Pattern NUMERIC_PATTERN = Pattern.compile("[0-9.,]+", Pattern.CASE_INSENSITIVE);
+    private final Pattern OUT_OF_PATTERN_NUMBERS = Pattern.compile("([0-9.,]+)( out)? of (the )?([0-9.,]+)", Pattern.CASE_INSENSITIVE);
+    private final Pattern OUT_OF_PATTERN_ALPHABETIC = Pattern.compile("([A-Za-z ]+)(out)? of (the )?([A-Za-z]+)", Pattern.CASE_INSENSITIVE);
 
     private static List<String> bases = null;
     private static List<String> tens = null;
@@ -189,11 +191,36 @@ public class WordsToNumber {
         // If we have a numeric part but the decimal mark is written in alphabetic characters, we abort the normalisation
         if (StringUtils.isNotBlank(numericPart) && text.contains(decimalMark)) {
             throw new NormalizationException("Cannot convert the alphabetic value '" + text + "' to digits");
+        } else if (OUT_OF_PATTERN_NUMBERS.matcher(text).find()) {
+            Matcher m = OUT_OF_PATTERN_NUMBERS.matcher(text);
+            m.matches();
+            String numerator = m.group(1);
+            String denominator = m.group(m.groupCount());
+
+            BigDecimal division = null;
+            try {
+                division = new BigDecimal(numerator).divide(new BigDecimal(denominator));
+            } catch (ArithmeticException ae) {
+                division = new BigDecimal(numerator).divide(new BigDecimal(denominator), 10, BigDecimal.ROUND_HALF_UP);
+            }
+            return division;
+        } else if (OUT_OF_PATTERN_ALPHABETIC.matcher(text).find()) {
+            Matcher m = OUT_OF_PATTERN_ALPHABETIC.matcher(text);
+            m.matches();
+            String numerator = m.group(1);
+            String denominator = m.group(m.groupCount());
+            BigDecimal division = null;
+            try {
+                division = convertIntegerPart(numerator).divide(convertIntegerPart(denominator));
+            } catch (ArithmeticException ae) {
+                division = convertIntegerPart(numerator).divide(convertIntegerPart(denominator), 10, BigDecimal.ROUND_HALF_UP);
+            }
+            return division;
         } else if (StringUtils.isNotBlank(numericPart)) {
 
             String[] split = text.split(numericPart);
 
-            // we assume the alphabetical is after the numeric 
+            // we assume the alphabetical is after the numeric
             String alphabeticPart = StringUtils.trim(split[1]);
 
             return convertIntegerPart(alphabeticPart, new BigDecimal(numericPart).doubleValue());
@@ -214,7 +241,7 @@ public class WordsToNumber {
                 result = convertIntegerPart(integerPart);
             }
 
-            // decimal part 
+            // decimal part
             BigDecimal decimalResult = convertDecimalPart(decimalPart, local);
 
             return result.add(decimalResult);
@@ -239,25 +266,14 @@ public class WordsToNumber {
             if (scaleIncrementPair != null) {
                 numeratorOfFraction = new BigDecimal(scaleIncrementPair.increment);
             } else {
-                numeratorOfFraction = new BigDecimal(specials.get(pieces[0]));
+                if (specials.get(pieces[0]) != null) {
+                    numeratorOfFraction = new BigDecimal(specials.get(pieces[0]));
+                } else {
+                    throw new NormalizationException("Cannot convert the alphabetic value '" + text + "' to digits. Not a fraction.");
+                }
             }
 
             return numeratorOfFraction.multiply(BigDecimal.valueOf(fractions.get(matchingElement)));
-        } else if (text.contains("out of")) {
-            // One out of X
-            String[] pieces = text.split("out of");
-            String numerator = pieces[0];
-            String denominator = pieces[1];
-
-            return convertIntegerPart(numerator).divide(convertIntegerPart(denominator));
-        } else if(text.contains("of")) {
-            // One of X = 1/X
-
-            String[] pieces = text.split("of");
-            String numerator = pieces[0];
-            String denominator = pieces[1];
-
-            return convertIntegerPart(numerator).divide(convertIntegerPart(denominator));
         } else {
             return convertIntegerPart(text);
         }
@@ -274,7 +290,7 @@ public class WordsToNumber {
         for (String word : pieces) {
             ScaleIncrementPair scaleIncrement = numWord.get(word);
             if (scaleIncrement == null) {
-                logger.warn("Invalid token to be converted into number: " + word);
+                logger.debug("Invalid token to be converted into number: " + word);
                 continue;
             }
             current = current * scaleIncrement.scale + scaleIncrement.increment;

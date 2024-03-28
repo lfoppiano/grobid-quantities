@@ -157,7 +157,7 @@ public class ValueParser extends AbstractParser {
                 try {
                     return w2n.normalize(block.getAlphaAsString(), locale);
                 } catch (NormalizationException e) {
-                    LOGGER.error("Cannot parse " + block + " with Locale " + locale, e);
+                    LOGGER.error("Skipping parsing of a value. Cannot parse " + block + " with Locale " + locale, e);
                 }
                 break;
 
