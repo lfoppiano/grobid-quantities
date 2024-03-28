@@ -1,17 +1,69 @@
 {
-    "bases" : [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", 
-                "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" ],
-    "tens" : [ null, null, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" ],
-    "scales" : [ "hundred", "thousand", "million", "billion", "trillion", "quadrillon", "quintillion"],
-    "decimalMark" : [ "point"], 
-    "specials" : [ 
-        {
-            "oh" : 0,
-            "dozen" : 12,
-            "score" : 20,
-            "gross" : 144,
-            "quarter" : 0.25,
-            "half" : 0.5
-        }
-    ]
+  "bases": [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen"
+  ],
+  "tens": [
+    null,
+    null,
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety"
+  ],
+  "scales": [
+    "hundred",
+    "thousand",
+    "million",
+    "billion",
+    "trillion",
+    "quadrillon",
+    "quintillion"
+  ],
+  "decimalMark": [
+    "point"
+  ],
+  "specials": {
+    "a": 1,
+    "oh": 0,
+    "dozen": 12,
+    "score": 20,
+    "gross": 144,
+    "great gross": 1728,
+    "small gross": 120,
+    "half": 0.5
+  },
+  "fractions": {
+    "third": 0.3333333333,
+    "quarter": 0.25,
+    "fourth": 0.25,
+    "fifth": 0.2,
+    "sixth": 0.1666666667,
+    "seventh": 0.1428571429,
+    "eighth": 0.125,
+    "nineth": 0.1111111111,
+    "tenth": 0.1
+  }
 }

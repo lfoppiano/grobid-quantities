@@ -114,7 +114,7 @@ public class Value {
             } else {
                 json.append(", ");
             }
-            json.append("\"numeric\" : " + getNumeric());
+            json.append("\"numeric\" : " + getNumeric().toPlainString());
         }
 
         if (getStructure() != null) {
