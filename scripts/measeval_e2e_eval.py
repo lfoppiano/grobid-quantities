@@ -182,8 +182,8 @@ def parse_measurements_output(result):
         if quantity_type is not None or has_unit:
             measurement_output_object['type'] = quantity_type
 
-        if parsed_value_type is None or parsed_value_type not in ['ALPHABETIC', 'TIME']:
-            measurements_output.append(measurement_output_object)
+        # if parsed_value_type is None or parsed_value_type not in ['ALPHABETIC', 'TIME']:
+        measurements_output.append(measurement_output_object)
 
     return measurements_output
 

@@ -7,12 +7,12 @@ Task 8).
 The scores in the following table are the micro average. MeasEval was annotated to allow approximated entities, which
 are not supported in grobid-quantities.
 
-| Type (Ref)                | Matching  method | Precision | Recall | F1-score | Support |
-|---------------------------|------------------|-----------|--------|----------|---------|
-| Quantities (QUANT)        | strict           | 54.09     | 54.47  | 54.28    | 1137    |
-| Quantities (QUANT)        | soft             | 67.02     | 67.49  | 67.26    | 1137    |
-| Quantified substance (ME) | strict           | 13.82     | 9.67   | 11.38    | 615     |
-| Quantified substance (ME) | soft             | 21.63     | 15.13  | 17.80    | 615     |
+| Type (Ref)           | Matching  method | Precision | Recall | F1-score | Support |
+|----------------------|------------------|-----------|--------|----------|---------|
+| Quantities           | strict           | 54.62     | 59.17  | 56.80    | 1223    |
+| Quantities           | soft             | 66.72     | 72.28  | 69.39    | 1223    |
+| Quantified substance | strict           | 12.80     | 10.24  | 11.38    | 703     |
+| Quantified substance | soft             | 23.19     | 18.54  | 20.61    | 703     |
 
 Note: the ME (Measured Entity) is still experimental in Grobid-quantities.
 
