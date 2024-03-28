@@ -136,8 +136,8 @@ public class WordsToNumber {
             }
             decimalMark = decimalMarks.get(0);
 
-            specials = fillAsMap(rootNode, "specials", numberTokens);
-            fractions = fillAsMap(rootNode, "fractions", numberTokens);
+            specials = fillAsMap(rootNode, "specials", null);
+            fractions = fillAsMap(rootNode, "fractions", null);
         } catch (IOException e) {
             logger.error("Error when reading the values.json file");
         }
@@ -153,7 +153,9 @@ public class WordsToNumber {
             while (iter.hasNext()) {
                 Map.Entry<String, JsonNode> text = iter.next();
                 map.put(text.getKey(), text.getValue().doubleValue());
-                numberTokens.add(text.getKey());
+                if (numberTokens != null) {
+                    numberTokens.add(text.getKey());
+                }
             }
         }
 
@@ -306,7 +308,7 @@ public class WordsToNumber {
             }
         }
         result += current;
-        return new BigDecimal(String.valueOf(result)).stripTrailingZeros();
+        return new BigDecimal(String.valueOf(result));
     }
 
     @NotNull

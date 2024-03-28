@@ -69,7 +69,8 @@ public class QuantityParserIntegrationTest {
         Measurement measurement = measurements.get(0);
         assertThat(measurement.getType(), is(UnitUtilities.Measurement_Type.VALUE));
         assertThat(measurement.getQuantityAtomic().getRawValue(), is("ten"));
-        assertThat(measurement.getQuantityAtomic().getParsedValue().getNumeric(), is(new BigDecimal("10")));
+        assertThat(measurement.getQuantityAtomic().getParsedValue().getNumeric().toPlainString(), is(BigDecimal.valueOf(10.0).toPlainString()));
+
         ValueBlock value = new ValueBlock();
         value.setRawValue("ten");
         value.setAlpha("ten");

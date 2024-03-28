@@ -87,7 +87,7 @@ public class Value {
         final StringBuilder sb = new StringBuilder("Value{");
         sb.append("rawValue='").append(rawValue).append('\'');
         sb.append(", structure=").append(structure);
-        sb.append(", numeric=").append(numeric.toPlainString());
+        sb.append(", numeric=").append(numeric);
         sb.append('}');
         return sb.toString();
     }

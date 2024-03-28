@@ -31,7 +31,7 @@ class WordsToNumberTest {
     fun testNonDecimal_2() {
         val input = "fifteen"
         val number = target.normalize(input, Locale.ENGLISH)
-        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("15")))
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("15.0")))
     }
 
 
