@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.units.qual.N;
 import org.grobid.core.data.normalization.NormalizationException;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class WordsToNumber {
 
     private final Pattern NUMERIC_PATTERN = Pattern.compile("[0-9.,]+", Pattern.CASE_INSENSITIVE);
     private final Pattern OUT_OF_PATTERN_NUMBERS = Pattern.compile("([0-9.,]+)( out)? of (the )?([0-9.,]+)", Pattern.CASE_INSENSITIVE);
-    private final Pattern OUT_OF_PATTERN_ALPHABETIC = Pattern.compile("([A-Za-z ]+)(out)? of (the )?([A-Za-z]+)", Pattern.CASE_INSENSITIVE);
+    private final Pattern OUT_OF_PATTERN_ALPHABETIC = Pattern.compile("([A-Za-z ]+) out of (the )?([A-Za-z]+)", Pattern.CASE_INSENSITIVE);
 
     private static List<String> bases = null;
     private static List<String> tens = null;
@@ -220,8 +221,13 @@ public class WordsToNumber {
 
             String[] split = text.split(numericPart);
 
-            // we assume the alphabetical is after the numeric
-            String alphabeticPart = StringUtils.trim(split[1]);
+            String alphabeticPart = "";
+            if (split.length == 2) {
+                // we assume the alphabetical is after the numeric
+                alphabeticPart = StringUtils.trim(split[1]);
+            } else {
+                throw new NormalizationException("The alphabetical values cannot be properly parsed. ");
+            }
 
             return convertIntegerPart(alphabeticPart, new BigDecimal(numericPart).doubleValue());
 

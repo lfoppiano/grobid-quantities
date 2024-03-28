@@ -179,4 +179,11 @@ class WordsToNumberTest {
         val number = target.normalize(input, Locale.ENGLISH)
         MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.75")))
     }
+
+    @Test(expected = NormalizationException::class)
+    @Throws(Exception::class)
+    fun testConvertInvalidFractions1() {
+        val input = "a temperature of 20"
+        target.normalize(input, Locale.ENGLISH)
+    }
 }
