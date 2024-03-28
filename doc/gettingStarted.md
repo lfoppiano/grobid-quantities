@@ -6,12 +6,17 @@
 
 ## Upgrade
 
+### 0.7.3 to 0.8.0
+
+#### Grobid models 
+
+In version 0.8.0, we have updated all ML models which needs to be updated by running `./gradlew copyModels`.
+
 ### 0.7.2 to 0.7.3
 
 #### Grobid models
 
-In version 0.7.3, we have updated the DeLFT models. The DL models must
-be updated by running `./gradlew copyModels`.
+In version 0.7.3, we have updated the DeLFT models. The DL models must be updated by running `./gradlew copyModels`.
 
 #### JDK Update
 

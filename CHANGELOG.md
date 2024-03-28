@@ -10,11 +10,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 + Docker image snapshots are built and pushed on dockerhub at each commit
 + new Dockerfile.local that does not clone from github
++ End 2 end evaluation using MeasEVAL #164 
 
 ### Changed
 
 + Updated to Grobid version 0.8.0
 + Updated to Dropwizard version 4.x (from version 1.x)
++ Updated training data, removed some leftover callout references that were partially removed
++ Updated models and evaluations 
+
+### Fixed 
++ Fixed and improved the word2number that now supports also fractions and other constructs #176, #110, #91
++ Fixed the segmentation issue for the quantified object. Now the spurious characters from PDF documents are removed #158 
 
 
 
