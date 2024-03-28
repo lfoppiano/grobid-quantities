@@ -12,6 +12,50 @@
 
 In version 0.8.0, we have updated all ML models which needs to be updated by running `./gradlew copyModels`.
 
+#### Configuration file 
+
+The configuration file needs to be updated to follow the Dropwizard 4 format, which has changed slighly. 
+
+The section 
+```yaml
+views:
+    .mustache:
+        cache: false
+
+server:
+    type: custom
+    applicationConnectors:
+        - type: http
+          port: 8060
+          idleTimeout: 120 seconds
+    adminConnectors:
+        - type: http
+          port: 8061
+    registerDefaultExceptionMappers: false
+    maxThreads: 2048
+    maxQueuedRequests: 2048
+    acceptQueueSize: 2048
+```
+
+Should become: 
+
+```yaml
+server:
+  type: custom
+  applicationConnectors:
+    - type: http
+      port: 8060
+      idleTimeout: 120 seconds
+      acceptQueueSize: 2048
+      
+  adminConnectors:
+    - type: http
+      port: 8061
+  registerDefaultExceptionMappers: false
+  maxThreads: 2048
+  maxQueuedRequests: 2048
+```
+
 ### 0.7.2 to 0.7.3
 
 #### Grobid models
