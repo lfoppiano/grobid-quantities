@@ -7,6 +7,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.units.qual.N;
 import org.grobid.core.data.normalization.NormalizationException;
+import org.grobid.core.engines.ValueParser;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -181,7 +182,8 @@ public class WordsToNumber {
         return numberTokens;
     }
 
-    public BigDecimal normalize(String text, Locale local) throws NormalizationException {
+    public BigDecimal normalize(String text, Locale locale) throws NormalizationException {
+        NumberFormat formatter = NumberFormat.getInstance(locale);
         text = StringUtils.lowerCase(text);
 
         String numericPart = "";
@@ -201,11 +203,36 @@ public class WordsToNumber {
             String denominator = m.group(m.groupCount());
 
             BigDecimal division = null;
+            BigDecimal numeratorAsBigDecimal = null;
+            BigDecimal denominatorAsBigDecimal = null;
+
             try {
-                division = new BigDecimal(numerator).divide(new BigDecimal(denominator));
-            } catch (ArithmeticException ae) {
-                division = new BigDecimal(numerator).divide(new BigDecimal(denominator), 10, BigDecimal.ROUND_HALF_UP);
+                String numeratorAsString = ValueParser.removeTilde(ValueParser.removeSpacesTabsAndBl(numerator));
+                numeratorAsBigDecimal = new BigDecimal(formatter.parse(numeratorAsString).toString());
+                String denominatorAsString = ValueParser.removeTilde(ValueParser.removeSpacesTabsAndBl(denominator));
+                denominatorAsBigDecimal = new BigDecimal(formatter.parse(denominatorAsString).toString());
+                try {
+                    division = numeratorAsBigDecimal.divide(denominatorAsBigDecimal);
+                } catch (ArithmeticException ae) {
+                    division = numeratorAsBigDecimal.divide(denominatorAsBigDecimal, 10, BigDecimal.ROUND_HALF_UP);
+                }
+            } catch (Exception e) {
+                throw new NormalizationException("Cannot process the values '" + text + "'. The conversion is failing. Skipping them.");
             }
+
+//            catch (NumberFormatException nfe) {
+//
+//
+//                String cleanedNumerator = formatter.parse(numerator.);
+//                String cleanedDenominator = StringUtils.replaceChars(denominator, ",.", "");
+//                try {
+//                    division = new BigDecimal(cleanedNumerator).divide(new BigDecimal(cleanedDenominator));
+//                } catch (ArithmeticException ae) {
+//                    division = new BigDecimal(cleanedNumerator).divide(new BigDecimal(cleanedDenominator), 10, BigDecimal.ROUND_HALF_UP);
+//                } catch (Exception e) {
+//                    throw new NormalizationException("Cannot process the values '" + text + "'. The conversion is failing. Skipping them.");
+//                }
+//            }
             return division;
         } else if (OUT_OF_PATTERN_ALPHABETIC.matcher(text).find()) {
             Matcher m = OUT_OF_PATTERN_ALPHABETIC.matcher(text);
@@ -250,7 +277,7 @@ public class WordsToNumber {
             }
 
             // decimal part
-            BigDecimal decimalResult = convertDecimalPart(decimalPart, local);
+            BigDecimal decimalResult = convertDecimalPart(decimalPart, locale);
 
             return result.add(decimalResult);
         } else if (fractions.keySet().stream().filter(text::contains).findFirst().isPresent()) {
