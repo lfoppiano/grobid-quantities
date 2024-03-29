@@ -36,7 +36,7 @@ public class WordsToNumber {
 
     private final Pattern NUMERIC_PATTERN = Pattern.compile("\\b(?:\\d+(?:[.,]\\d+)*|\\d+[.,]?\\d*\\b)\\b", Pattern.CASE_INSENSITIVE);
     private final Pattern OUT_OF_PATTERN_NUMBERS = Pattern.compile("([0-9.,]+)( out)? of ([a-z]+ )?([0-9.,]+)", Pattern.CASE_INSENSITIVE);
-    private final Pattern OUT_OF_PATTERN_ALPHABETIC = Pattern.compile("([A-Za-z ]+) ( out)? of ([a-z]+ )?([A-Za-z]+)", Pattern.CASE_INSENSITIVE);
+    private final Pattern OUT_OF_PATTERN_ALPHABETIC = Pattern.compile("([A-Za-z ]+)( out)? of ([a-z]+ )?([A-Za-z]+)", Pattern.CASE_INSENSITIVE);
 
     private static List<String> bases = null;
     private static List<String> tens = null;
