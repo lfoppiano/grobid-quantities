@@ -4,9 +4,14 @@ import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.core.util.BufferRecyclers;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.utilities.OffsetPosition;
+import org.jetbrains.annotations.NotNull;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.grobid.core.utilities.TextParser.handleRawData;
 
 /**
  * Class for managing normalized Unit representation.
@@ -104,13 +109,12 @@ public class Unit {
     }*/
 
     public String toJson() {
-        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
         StringBuilder json = new StringBuilder();
         boolean started = false;
         json.append("{ ");
         if (rawName != null) {
-            byte[] encodedRawName = encoder.quoteAsUTF8(rawName);
-            String outputRawName = new String(encodedRawName);
+            String outputRawName = handleRawData(rawName);
+
             started = true;
             json.append("\"name\" : \"").append(outputRawName).append("\"");
         }

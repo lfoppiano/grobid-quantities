@@ -237,6 +237,7 @@ def extract_quantities(client, texts):
         status, result = client.process_text(example.strip())
 
         if status != 200:
+            print(f"Error {status}.")
             result = {}
 
         spans = []

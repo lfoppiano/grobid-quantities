@@ -7,6 +7,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.units.qual.N;
 import org.grobid.core.data.normalization.NormalizationException;
+import org.grobid.core.engines.ValueParser;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +34,9 @@ public class WordsToNumber {
 
     private final String VALUES_PATH = "lexicon/en/values.json";
 
-    private final Pattern NUMERIC_PATTERN = Pattern.compile("[0-9.,]+", Pattern.CASE_INSENSITIVE);
-    private final Pattern OUT_OF_PATTERN_NUMBERS = Pattern.compile("([0-9.,]+)( out)? of (the )?([0-9.,]+)", Pattern.CASE_INSENSITIVE);
-    private final Pattern OUT_OF_PATTERN_ALPHABETIC = Pattern.compile("([A-Za-z ]+) out of (the )?([A-Za-z]+)", Pattern.CASE_INSENSITIVE);
+    private final Pattern NUMERIC_PATTERN = Pattern.compile("\\b(?:\\d+(?:[.,]\\d+)*|\\d+[.,]?\\d*\\b)\\b", Pattern.CASE_INSENSITIVE);
+    private final Pattern OUT_OF_PATTERN_NUMBERS = Pattern.compile("([0-9.,]+)( out)? of ([a-z]+ )?([0-9.,]+)", Pattern.CASE_INSENSITIVE);
+    private final Pattern OUT_OF_PATTERN_ALPHABETIC = Pattern.compile("([A-Za-z ]+)( out)? of ([a-z]+ )?([A-Za-z]+)", Pattern.CASE_INSENSITIVE);
 
     private static List<String> bases = null;
     private static List<String> tens = null;
@@ -181,7 +182,8 @@ public class WordsToNumber {
         return numberTokens;
     }
 
-    public BigDecimal normalize(String text, Locale local) throws NormalizationException {
+    public BigDecimal normalize(String text, Locale locale) throws NormalizationException {
+        NumberFormat formatter = NumberFormat.getInstance(locale);
         text = StringUtils.lowerCase(text);
 
         String numericPart = "";
@@ -197,26 +199,47 @@ public class WordsToNumber {
         } else if (OUT_OF_PATTERN_NUMBERS.matcher(text).find()) {
             Matcher m = OUT_OF_PATTERN_NUMBERS.matcher(text);
             m.matches();
-            String numerator = m.group(1);
-            String denominator = m.group(m.groupCount());
+            String numerator = "";
+            String denominator = "";
+            try {
+                numerator = m.group(1);
+                denominator = m.group(m.groupCount());
+            } catch(Exception e){
+                throw new NormalizationException("Cannot process the expression '" + text + "'. Skipping.");
+            }
 
             BigDecimal division = null;
+            BigDecimal numeratorAsBigDecimal = null;
+            BigDecimal denominatorAsBigDecimal = null;
+
             try {
-                division = new BigDecimal(numerator).divide(new BigDecimal(denominator));
-            } catch (ArithmeticException ae) {
-                division = new BigDecimal(numerator).divide(new BigDecimal(denominator), 10, BigDecimal.ROUND_HALF_UP);
+                String numeratorAsString = ValueParser.removeTilde(ValueParser.removeSpacesTabsAndBl(numerator));
+                numeratorAsBigDecimal = new BigDecimal(formatter.parse(numeratorAsString).toString());
+                String denominatorAsString = ValueParser.removeTilde(ValueParser.removeSpacesTabsAndBl(denominator));
+                denominatorAsBigDecimal = new BigDecimal(formatter.parse(denominatorAsString).toString());
+                try {
+                    division = numeratorAsBigDecimal.divide(denominatorAsBigDecimal);
+                } catch (ArithmeticException ae) {
+                    division = numeratorAsBigDecimal.divide(denominatorAsBigDecimal, 10, BigDecimal.ROUND_HALF_UP);
+                }
+            } catch (Exception e) {
+                throw new NormalizationException("Cannot process the values '" + text + "'. The conversion is failing. Skipping them.");
             }
             return division;
         } else if (OUT_OF_PATTERN_ALPHABETIC.matcher(text).find()) {
             Matcher m = OUT_OF_PATTERN_ALPHABETIC.matcher(text);
             m.matches();
-            String numerator = m.group(1);
-            String denominator = m.group(m.groupCount());
             BigDecimal division = null;
             try {
-                division = convertIntegerPart(numerator).divide(convertIntegerPart(denominator));
-            } catch (ArithmeticException ae) {
-                division = convertIntegerPart(numerator).divide(convertIntegerPart(denominator), 10, BigDecimal.ROUND_HALF_UP);
+                String numerator = m.group(1);
+                String denominator = m.group(m.groupCount());
+                try {
+                    division = convertIntegerPart(numerator).divide(convertIntegerPart(denominator));
+                } catch (ArithmeticException ae) {
+                    division = convertIntegerPart(numerator).divide(convertIntegerPart(denominator), 10, BigDecimal.ROUND_HALF_UP);
+                }
+            } catch (Exception e) {
+                throw new NormalizationException("Cannot process the expression '" + text + "'. Skipping.");
             }
             return division;
         } else if (StringUtils.isNotBlank(numericPart)) {
@@ -250,7 +273,7 @@ public class WordsToNumber {
             }
 
             // decimal part
-            BigDecimal decimalResult = convertDecimalPart(decimalPart, local);
+            BigDecimal decimalResult = convertDecimalPart(decimalPart, locale);
 
             return result.add(decimalResult);
         } else if (fractions.keySet().stream().filter(text::contains).findFirst().isPresent()) {

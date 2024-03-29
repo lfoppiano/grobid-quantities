@@ -93,8 +93,64 @@ class LabellingUtilsTest {
             "billion\t0\t0\tNOPUNCT\t<alpha>"
 
         assertEquals(expected, output)
-
-
     }
+
+    @Test
+    fun testCorrectingRangeValues1() {
+        val input = "70\t70\t7\t70\t70\t70\t0\t70\t70\t70\tNOCAPS\tALLDIGIT\t0\tNOPUNCT\tdd\td\t0\t0\tI-<valueBase>\n" +
+            "±\t±\t±\t±\t±\t±\t±\t±\t±\t±\tALLCAPS\tNODIGIT\t1\tNOPUNCT\t±\t±\t0\t0\t<other>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "kg\tkg\tk\tkg\tkg\tkg\tg\tkg\tkg\tkg\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txx\tx\t1\t0\t<unitLeft>"
+
+        var output = LabellingUtils.correctLabelling(input)
+
+        assertEquals(output, input)
+    }
+
+    @Test
+    fun testCorrectingRangeValues2() {
+        val input = "70\t70\t7\t70\t70\t70\t0\t70\t70\t70\tNOCAPS\tALLDIGIT\t0\tNOPUNCT\tdd\td\t0\t0\tI-<valueBase>\n" +
+            "±\t±\t±\t±\t±\t±\t±\t±\t±\t±\tALLCAPS\tNODIGIT\t1\tNOPUNCT\t±\t±\t0\t0\t<other>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "kg\tkg\tk\tkg\tkg\tkg\tg\tkg\tkg\tkg\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txx\tx\t1\t0\t<unitLeft>\n" +
+            ",\t,\t,\t,\t,\t,\t,\t,\t,\t,\tALLCAPS\tNODIGIT\t1\tCOMMA\t,\t,\t0\t0\t<other>"
+
+        var output = LabellingUtils.correctLabelling(input)
+
+        assertEquals(output, input)
+    }
+
+    @Test
+    fun testCorrectingRangeValues3() {
+        val input = "70\t70\t7\t70\t70\t70\t0\t70\t70\t70\tNOCAPS\tALLDIGIT\t0\tNOPUNCT\tdd\td\t0\t0\tI-<valueBase>\n" +
+            "±\t±\t±\t±\t±\t±\t±\t±\t±\t±\tALLCAPS\tNODIGIT\t1\tNOPUNCT\t±\t±\t0\t0\t<other>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "kg\tkg\tk\tkg\tkg\tkg\tg\tkg\tkg\tkg\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txx\tx\t1\t0\t<unitLeft>\n" +
+            ",\t,\t,\t,\t,\t,\t,\t,\t,\t,\tALLCAPS\tNODIGIT\t1\tCOMMA\t,\t,\t0\t0\t<other>"
+
+        var output = LabellingUtils.correctLabelling(input)
+
+        assertEquals(output, input)
+    }
+
+    @Test
+    fun testCorrectingRangeValues4() {
+        val input = "70\t70\t7\t70\t70\t70\t0\t70\t70\t70\tNOCAPS\tALLDIGIT\t0\tNOPUNCT\tdd\td\t0\t0\tI-<valueBase>\n" +
+            "±\t±\t±\t±\t±\t±\t±\t±\t±\t±\tALLCAPS\tNODIGIT\t1\tNOPUNCT\t±\t±\t0\t0\t<other>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "9\t9\t9\t9\t9\t9\t9\t9\t9\t9\tNOCAPS\tALLDIGIT\t1\tNOPUNCT\td\td\t0\t0\t<valueRange>\n" +
+            "kg\tkg\tk\tkg\tkg\tkg\tg\tkg\tkg\tkg\tNOCAPS\tNODIGIT\t0\tNOPUNCT\txx\tx\t1\t0\tI-<unitLeft>\n" +
+            ",\t,\t,\t,\t,\t,\t,\t,\t,\t,\tALLCAPS\tNODIGIT\t1\tCOMMA\t,\t,\t0\t0\t<other>"
+
+        var output = LabellingUtils.correctLabelling(input)
+
+        assertEquals(output, input)
+    }
+
 
 }

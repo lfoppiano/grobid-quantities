@@ -171,14 +171,14 @@ public class ValueParser extends AbstractParser {
         return null;
     }
 
-    private String removeTilde(String text) {
+    public static String removeTilde(String text) {
         if (StringUtils.startsWithAny(text, "∼", "~")) {
             return RegExUtils.replaceAll(text, TILDE_PATTERNS, "");
         }
         return text;
     }
 
-    private String removeSpacesTabsAndBl(String block) {
+    public static String removeSpacesTabsAndBl(String block) {
         return UnicodeUtil.normaliseText(block)
             .replaceAll("\n", " ")
             .replaceAll("\t", " ")

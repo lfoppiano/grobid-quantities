@@ -1,5 +1,6 @@
 package org.grobid.core.utilities;
 
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.googlecode.clearnlp.component.srl.CRolesetClassifier;
 import com.googlecode.clearnlp.dependency.AbstractDEPParser;
 import com.googlecode.clearnlp.dependency.DEPTree;
@@ -22,12 +23,14 @@ import org.grobid.core.data.SentenceParse;
 import org.grobid.core.exceptions.GrobidException;
 import org.grobid.core.lang.SentenceDetector;
 import org.grobid.core.lang.impl.OpenNLPSentenceDetector;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.URLDecoder;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -245,5 +248,24 @@ public class TextParser {
      */
     public List<Sentence> parseFile(String inputFile) throws GrobidException {
         return parse(UTInput.createBufferedFileReader(inputFile));
+    }
+
+    @NotNull
+    public static String handleRawData(String rawValue) {
+        JsonStringEncoder encoder = JsonStringEncoder.getInstance();
+        String outputRawName = "";
+        try {
+            byte[] encodedRawName = encoder.quoteAsUTF8(rawValue);
+            outputRawName = new String(encodedRawName);
+        } catch (Exception e) {
+            String decode = URLDecoder.decode(rawValue);
+            String cleanedString = decode.chars()
+                .filter(c -> !Character.isSurrogate((char) c))
+                .mapToObj(c -> String.valueOf((char) c))
+                .collect(Collectors.joining());
+            byte[] encodedRawName = encoder.quoteAsUTF8(cleanedString);
+            outputRawName = new String(encodedRawName);
+        }
+        return outputRawName;
     }
 }

@@ -10,15 +10,15 @@ public class QuantitiesTaggingLabels extends TaggingLabels {
         super();
     }
 
-    private static final String QUANTITY_VALUE_ATOMIC_LABEL = "<valueAtomic>";
-    private static final String QUANTITY_VALUE_LEAST_LABEL = "<valueLeast>";
-    private static final String QUANTITY_VALUE_MOST_LABEL = "<valueMost>";
-    private static final String QUANTITY_VALUE_LIST_LABEL = "<valueList>";
-    private static final String QUANTITY_UNIT_LEFT_LABEL = "<unitLeft>";
-    private static final String QUANTITY_UNIT_RIGHT_LABEL = "<unitRight>";
-    private static final String QUANTITY_VALUE_BASE_LABEL = "<valueBase>";
-    private static final String QUANTITY_VALUE_RANGE_LABEL = "<valueRange>";
-    private static final String QUANTITY_OTHER_LABEL = "<other>";
+    public static final String QUANTITY_VALUE_ATOMIC_LABEL = "<valueAtomic>";
+    public static final String QUANTITY_VALUE_LEAST_LABEL = "<valueLeast>";
+    public static final String QUANTITY_VALUE_MOST_LABEL = "<valueMost>";
+    public static final String QUANTITY_VALUE_LIST_LABEL = "<valueList>";
+    public static final String QUANTITY_UNIT_LEFT_LABEL = "<unitLeft>";
+    public static final String QUANTITY_UNIT_RIGHT_LABEL = "<unitRight>";
+    public static final String QUANTITY_VALUE_BASE_LABEL = "<valueBase>";
+    public static final String QUANTITY_VALUE_RANGE_LABEL = "<valueRange>";
+    public static final String QUANTITY_OTHER_LABEL = "<other>";
 
     private static final String UNIT_VALUE_BASE_LABEL = "<base>";
     private static final String UNIT_VALUE_POW_LABEL = "<pow>";

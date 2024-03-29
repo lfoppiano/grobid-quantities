@@ -1,5 +1,7 @@
 package org.grobid.core.engines.utilities
 
+import org.grobid.core.engines.label.QuantitiesTaggingLabels
+import org.grobid.core.engines.label.TaggingLabels
 import java.util.*
 import java.util.stream.Collectors
 
@@ -14,7 +16,9 @@ class LabellingUtils {
         fun correctLabelling(resultLabelling: String): String? {
             val resultAsList: MutableList<MutableList<String>> = Arrays
                 .stream(resultLabelling.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())
-                .map { i: String -> Arrays.asList(*i.split("\t".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()) }
+                .map { i: String ->
+                    Arrays.asList(*i.split("\t".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())
+                }
                 .collect(Collectors.toList())
 
             var previousLabel: String? = null;
@@ -28,7 +32,8 @@ class LabellingUtils {
 
                 if (fixNext
                     && (currentLabel.startsWith("I-")
-                        || currentLabel.equals("<other>"))
+                        || currentLabel.equals(TaggingLabels.OTHER_LABEL)
+                        || currentLabel.equals(QuantitiesTaggingLabels.QUANTITY_VALUE_RANGE_LABEL))
                 ) {
                     fixNext = false
                     fixValue = null
@@ -37,7 +42,9 @@ class LabellingUtils {
                 if (!fixNext
                     && previousLabel != null
 //                    && previousLabel.startsWith("I-")
-                    && currentLabel != "<other>"
+                    && currentLabel != TaggingLabels.OTHER_LABEL
+                    && !(currentLabel == QuantitiesTaggingLabels.QUANTITY_VALUE_RANGE_LABEL
+                        || previousLabel == QuantitiesTaggingLabels.QUANTITY_VALUE_RANGE_LABEL)
                     && !currentLabel.startsWith("I-")
                     && !previousLabel.replace("I-", "").equals(currentLabel)
                 ) {
@@ -58,7 +65,7 @@ class LabellingUtils {
             val fixedListAsString = resultAsList
                 .map { i -> i.joinToString(separator = "\t") }
                 .toList().joinToString(separator = "\n")
-            
+
             return fixedListAsString
         }
     }

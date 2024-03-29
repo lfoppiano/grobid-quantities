@@ -9,10 +9,10 @@ are not supported in grobid-quantities.
 
 | Type (Ref)           | Matching  method | Precision | Recall | F1-score | Support |
 |----------------------|------------------|-----------|--------|----------|---------|
-| Quantities           | strict           | 54.62     | 59.17  | 56.80    | 1223    |
-| Quantities           | soft             | 66.72     | 72.28  | 69.39    | 1223    |
-| Quantified substance | strict           | 12.80     | 10.24  | 11.38    | 703     |
-| Quantified substance | soft             | 23.19     | 18.54  | 20.61    | 703     |
+| Quantities           | strict           | 54.82     | 60.50  | 57.52    | 1246    |
+| Quantities           | soft             | 66.93     | 73.87  | 70.23    | 1246    |
+| Quantified substance | strict           | 13.10     | 10.58  | 11.71    | 710     |
+| Quantified substance | soft             | 23.38     | 18.89  | 20.89    | 710     |
 
 Note: the ME (Measured Entity) is still experimental in Grobid-quantities.
 
