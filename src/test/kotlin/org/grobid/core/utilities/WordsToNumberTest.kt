@@ -219,4 +219,12 @@ class WordsToNumberTest {
         MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.0617928044")))
     }
 
+    @Test(expected = NormalizationException::class)
+    @Throws(Exception::class)
+    fun testErrorCase_3() {
+        val input = "one out of currently 62"
+        val number = target.normalize(input, Locale.ENGLISH)
+        MatcherAssert.assertThat(number, Is.`is`(BigDecimal("0.01612903226")))
+    }
+
 }
