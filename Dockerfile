@@ -23,24 +23,31 @@ USER root
 RUN apt-get update && \
     apt-get -y --no-install-recommends install apt-utils libxml2 git unzip
 
-WORKDIR /opt/grobid-source
+WORKDIR /opt/grobid
 
-RUN git clone --depth 1 --branch master https://github.com/kermitt2/grobid-quantities.git ./grobid-quantities-source 
-
-WORKDIR /opt/grobid-source/grobid-quantities-source
-COPY gradle.properties .
-
-# Adjust config
-RUN sed -i '/#Docker-ignore-log-start/,/#Docker-ignore-log-end/d'  ./resources/config/config.yml
+RUN mkdir -p grobid-quantities-source grobid-home/models
+COPY src grobid-quantities-source/src
+COPY settings.gradle grobid-quantities-source/
+COPY resources/config/config-docker.yml grobid-quantities-source/resources/config/config.yml
+COPY resources/models grobid-quantities-source/resources/models
+COPY resources/clearnlp/models/* grobid-quantities-source/resources/clearnlp/models/
+COPY build.gradle grobid-quantities-source/
+COPY gradle.properties grobid-quantities-source/
+COPY gradle grobid-quantities-source/gradle/
+COPY gradlew grobid-quantities-source/
+COPY .git grobid-quantities-source/.git
+COPY localLibs grobid-quantities-source/localLibs
 
 # Preparing models
-RUN rm -rf /opt/grobid-source/grobid-home/models/*
+WORKDIR /opt/grobid/grobid-quantities-source
+RUN rm -rf /opt/grobid/grobid-home/models/*
 RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
-RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid-source/grobid-home/models/*.zip
+#RUN ./gradlew copyModels --info  --no-daemon
+RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid/grobid-home/models/*.zip
 
 # Preparing distribution
-WORKDIR /opt/grobid-source
-RUN unzip -o /opt/grobid-source/grobid-quantities-source/build/distributions/grobid-quantities-*.zip -d grobid-quantities_distribution && mv grobid-quantities_distribution/grobid-quantities-* grobid-quantities
+WORKDIR /opt/grobid
+RUN unzip -o /opt/grobid/grobid-quantities-source/build/distributions/grobid-quantities-*.zip -d grobid-quantities_distribution && mv grobid-quantities_distribution/grobid-quantities-* grobid-quantities
 
 # Cleanup 
 RUN rm -rf grobid-quantities-source/.git
@@ -52,7 +59,7 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM grobid/grobid:0.8.0 as runtime
+FROM lfoppiano/grobid:0.8.0-full-slim as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
@@ -63,10 +70,10 @@ RUN apt-get update && \
 WORKDIR /opt/grobid
 
 RUN mkdir -p /opt/grobid/grobid-quantities/resources/clearnlp/models /opt/grobid/grobid-quantities/resources/clearnlp/config
-COPY --from=builder /opt/grobid-source/grobid-home/models ./grobid-home/models/
-COPY --from=builder /opt/grobid-source/grobid-quantities ./grobid-quantities/
-COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/config/config.yml ./grobid-quantities/resources/config/
-COPY --from=builder /opt/grobid-source/grobid-quantities-source/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models/
+COPY --from=builder /opt/grobid/grobid-home/models ./grobid-home/models
+COPY --from=builder /opt/grobid/grobid-quantities ./grobid-quantities/
+COPY --from=builder /opt/grobid/grobid-quantities-source/resources/config/config.yml ./grobid-quantities/resources/config/
+COPY --from=builder /opt/grobid/grobid-quantities-source/resources/clearnlp/models/* ./grobid-quantities/resources/clearnlp/models/
 
 VOLUME ["/opt/grobid/grobid-home/tmp"]
 
@@ -81,6 +88,10 @@ WORKDIR /opt/grobid
 ARG GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-latest}
 ENV GROBID_QUANTITIES_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.8/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED"
+
+# This code removes the fixed seeed in DeLFT to increase the uncertanty 
+#RUN sed -i '/seed(7)/d' /usr/local/lib/python3.8/dist-packages/delft/utilities/Utilities.py
+#RUN sed -i '/from numpy\.random import seed/d' /usr/local/lib/python3.8/dist-packages/delft/utilities/Utilities.py
 
 EXPOSE 8060 8061 5005
 
