@@ -42,16 +42,18 @@ COPY localLibs grobid-quantities-source/localLibs
 WORKDIR /opt/grobid/grobid-quantities-source
 RUN rm -rf /opt/grobid/grobid-home/models/*
 RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
-#RUN ./gradlew copyModels --info  --no-daemon
-RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace && rm -f /opt/grobid/grobid-home/models/*.zip
+RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace \
+    && rm -f /opt/grobid/grobid-home/models/*.zip
 
 # Preparing distribution
 WORKDIR /opt/grobid
-RUN unzip -o /opt/grobid/grobid-quantities-source/build/distributions/grobid-quantities-*.zip -d grobid-quantities_distribution && mv grobid-quantities_distribution/grobid-quantities-* grobid-quantities
+RUN unzip -o /opt/grobid/grobid-quantities-source/build/distributions/grobid-quantities-*.zip -d grobid-quantities_distribution \
+  && mv grobid-quantities_distribution/grobid-quantities-* grobid-quantities
 
 # Cleanup 
-RUN rm -rf grobid-quantities-source/.git
-RUN rm -rf grobid-quantities-source/build
+RUN rm -rf grobid-quantities-source/.git \
+    && rm -rf /opt/grobid/grobid-quantities-source/build/distributions/grobid-quantities-*.zip \
+    && rm -rf grobid-quantities-source/build
 
 WORKDIR /opt
 
