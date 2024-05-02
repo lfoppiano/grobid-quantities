@@ -13,7 +13,6 @@ Extracted measurements are normalised toward the base units from the Internation
 
 * [Getting started](gettingStarted.md)
 * [REST API](restAPI.md)
-* [Models](models.md)
 * [Training](training.md)
 
 ### Benchmarking
