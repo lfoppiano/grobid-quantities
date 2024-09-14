@@ -61,7 +61,7 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM lfoppiano/grobid:0.8.0-full-slim as runtime
+FROM lfoppiano/grobid:0.8.1-full as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
