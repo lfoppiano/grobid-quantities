@@ -110,6 +110,7 @@ dependencies {
     implementation 'commons-logging:commons-logging:1.2'
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'commons-pool:commons-pool:1.6'
+    implementation 'commons-codec:commons-codec:1.14'
 
     //Json
     implementation 'com.fasterxml.jackson.core:jackson-core:2.14.3'
