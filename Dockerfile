@@ -61,7 +61,7 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM lfoppiano/grobid:0.8.1-full as runtime
+FROM lfoppiano/grobid:0.8.2-full as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8
@@ -107,7 +107,7 @@ LABEL \
     authors="Luca Foppiano, Patrice Lopez" \
     org.label-schema.name="grobid-quantities" \
     org.label-schema.description="Docker image for grobid-quantities service" \
-    org.label-schema.url="https://github.com/kermitt2/grobid-quantities" \
+    org.label-schema.url="https://github.com/lfoppiano/grobid-quantities" \
     org.label-schema.version=${GROBID_VERSION}
 
 

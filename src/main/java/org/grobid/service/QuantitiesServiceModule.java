@@ -37,21 +37,6 @@ public class QuantitiesServiceModule extends DropwizardAwareModule<GrobidQuantit
         bind(WebApplicationExceptionMapper.class);
     }
 
-    /*@Provides
-    protected ObjectMapper getObjectMapper() {
-        return getEnvironment().getObjectMapper();
-    }
-
-    @Provides
-    protected MetricRegistry provideMetricRegistry() {
-        return getMetricRegistry();
-    }
-
-    //for unit tests
-    protected MetricRegistry getMetricRegistry() {
-        return getEnvironment().metrics();
-    }*/
-
     @Provides
     Client provideClient() {
         return ClientBuilder.newClient();
