@@ -37,8 +37,8 @@ Grobid-quantities can be tested with the online demo running on GPU offered by H
 
 ## Latest version
 
-The latest released version of grobid-quantities is [0.8.0](https://github.com/kermitt2/grobid-quantities/releases/tag/v0.8.0). 
-The current development version is 0.8.1-SNAPSHOT.
+The latest released version of grobid-quantities is [0.8.2](https://github.com/kermitt2/grobid-quantities/releases/tag/v0.8.2). 
+The current development version is 0.8.3-SNAPSHOT.
 **Important**: to upgrade please check [here](https://grobid-quantities.readthedocs.io/en/latest/gettingStarted/#upgrade).
 
 

@@ -2,19 +2,23 @@
 
 > :warning: Grobid and grobid-quantities are [not compatible with Windows](https://grobid.readthedocs.io/en/latest/Troubleshooting/#windows-related-issues) and limited on Apple M1. While Windows users can easily use Grobid and grobid-quantities through docker containers, the support for grobid on ARM is under development, see the [latest discussion](https://github.com/kermitt2/grobid/issues/1014).
 
-> :warning: Since grobid-quantities 0.7.3 (using grobid 0.7.3), we extended the support to JDK after version 11. This requires specifying the [java.library.path]{.title-ref} explicitly. Obviously, *all these issues are solved by using Docker containers*.
+> :warning: Since grobid-quantities 0.7.3 (using grobid 0.7.3), we've extended the support to JDK after version 11. This requires specifying the [java.library.path]{.title-ref} explicitly. *All these issues are solved by using Docker containers*.
 
 ## Upgrade
+
+### 0.8.0 to 0.8.2
+
+No breaking changes
 
 ### 0.7.3 to 0.8.0
 
 #### Grobid models 
 
-In version 0.8.0, we have updated all ML models which needs to be updated by running `./gradlew copyModels`.
+In version 0.8.0, we have updated all ML models that need to be updated by running `./gradlew copyModels`.
 
 #### Configuration file 
 
-The configuration file needs to be updated to follow the Dropwizard 4 format, which has changed slighly. 
+The configuration file needs to be updated to follow the Dropwizard 4 format, which has changed slightly. 
 
 The section 
 ```yaml
@@ -107,7 +111,7 @@ The container will respond on port <http://localhost:8060>, and 8061 for the adm
 
 #### Local installation
 
-Grobid-quantities requires *JDK 1.8 or greater*, and Grobid to be installed. Since version 0.7.3 we recommend to use *JDK 17 or greater*.
+Grobid-quantities require *JDK 1.8 or greater*, and Grobid to be installed. Since version 0.7.3 we recommend to use *JDK 17 or greater*.
 
 First install the latest version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 

@@ -4,11 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [0.8.1-SNAPSHOT]
+## [0.8.2]
 
 ### Changed
-
-+ Updated to Grobid version 0.8.1
++ Updated to Grobid version 0.8.2
++ Migrated models to Huggingface
 
 
 ## [0.8.0]
