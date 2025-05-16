@@ -21,7 +21,7 @@ FROM openjdk:17-jdk-slim as builder
 USER root
 
 RUN apt-get update && \
-    apt-get -y --no-install-recommends install apt-utils libxml2 git unzip
+    apt-get -y --no-install-recommends install apt-utils libxml2 git-lfs unzip
 
 WORKDIR /opt/grobid
 
@@ -42,8 +42,10 @@ COPY localLibs grobid-quantities-source/localLibs
 WORKDIR /opt/grobid/grobid-quantities-source
 RUN rm -rf /opt/grobid/grobid-home/models/*
 RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
-RUN ./gradlew downloadTransformers --no-daemon --info --stacktrace \
-    && rm -f /opt/grobid/grobid-home/models/*.zip
+RUN git lfs install
+RUN ./gradlew installModels --no-daemon --info --stacktrace \
+    && rm -f /opt/grobid/grobid-home/models/*.zip \
+    && rm -rf /opt/grobid/grobid-home/models/softcite
 
 # Preparing distribution
 WORKDIR /opt/grobid
