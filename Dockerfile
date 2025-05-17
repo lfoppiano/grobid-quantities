@@ -45,7 +45,7 @@ RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
 RUN git lfs install
 RUN ./gradlew installModels --no-daemon --info --stacktrace \
     && rm -f /opt/grobid/grobid-home/models/*.zip \
-    && rm -rf /opt/grobid/grobid-home/models/softcite
+    && rm -rf /opt/grobid/grobid-home/models/quantities_models
 
 # Preparing distribution
 WORKDIR /opt/grobid
