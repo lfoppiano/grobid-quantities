@@ -16,12 +16,23 @@
 # build builder image
 # -------------------
 
-FROM openjdk:17-jdk-slim as builder
+FROM eclipse-temurin:21-jdk-jammy as builder
 
 USER root
 
 RUN apt-get update && \
-    apt-get -y --no-install-recommends install apt-utils libxml2 git-lfs unzip
+    apt-get -y --no-install-recommends install \
+        apt-utils libxml2 unzip \
+        ca-certificates curl git git-lfs && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install git-xet so `git clone` can fetch large model files stored via Xet on
+# the HuggingFace Hub (https://hf.co/docs/hub/git-xet). The install script drops
+# the `git-xet` binary under /usr/local/bin and `git xet install` registers the
+# required git filter/smudge config globally.
+RUN curl --proto '=https' --tlsv1.2 -sSf \
+        https://raw.githubusercontent.com/huggingface/xet-core/refs/heads/main/git_xet/install.sh | sh \
+    && git xet install
 
 WORKDIR /opt/grobid
 
@@ -42,7 +53,6 @@ COPY localLibs grobid-quantities-source/localLibs
 WORKDIR /opt/grobid/grobid-quantities-source
 RUN rm -rf /opt/grobid/grobid-home/models/*
 RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
-RUN git lfs install
 RUN ./gradlew installModels --no-daemon --info --stacktrace \
     && rm -f /opt/grobid/grobid-home/models/*.zip \
     && rm -rf /opt/grobid/grobid-home/models/quantities_models
@@ -63,7 +73,7 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM lfoppiano/grobid:0.8.2-full as runtime
+FROM lfoppiano/grobid:0.9.0-full as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8

@@ -13,17 +13,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 17
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
-        java-version: '17.0.10+7'
+        java-version: '21'
         distribution: 'temurin'
         cache: 'gradle'
     - name: Build with Gradle
       run: ./gradlew build -x test
 
-    - name: Test with Gradle Jacoco and Coveralls
-      run: ./gradlew test jacocoTestReport coveralls --no-daemon
+    - name: Test with Gradle Jacoco
+      run: ./gradlew test jacocoTestReport --no-daemon
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2
@@ -61,5 +61,29 @@ jobs:
           registry: docker.io
           pushImage: ${{ github.event_name != 'pull_request' }}
           tags: latest-develop
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+      - name: Job summary
+        if: always()
+        env:
+          IMAGE_FULL_NAME: ${{ steps.docker_build.outputs.imageFullName }}
+          IMAGE_NAME: ${{ steps.docker_build.outputs.imageName }}
+          IMAGE_TAGS: ${{ steps.docker_build.outputs.tags }}
+          IMAGE_DIGEST: ${{ steps.docker_build.outputs.digest }}
+        run: |
+          {
+            if [ -z "$IMAGE_DIGEST" ]; then
+              echo "_Built but not pushed (pull request)_"
+              echo ""
+            fi
+            echo "## Docker image"
+            echo ""
+            echo "| Field    | Value |"
+            echo "|----------|-------|"
+            echo "| Image    | \`$IMAGE_FULL_NAME\` |"
+            echo "| Tags     | \`$IMAGE_TAGS\` |"
+            echo "| Digest   | \`$IMAGE_DIGEST\` |"
+            echo "| Registry | \`docker.io\` |"
+            echo ""
+            echo '```'
+            echo "docker pull $IMAGE_FULL_NAME"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -362,7 +362,7 @@ public class QuantityTrainingData {
                 try {
                     createTraining(file.getAbsolutePath(), outputDirectory, n);
                 } catch (final Exception exp) {
-                    LOGGER.error("An error occured while processing the following pdf: "
+                    LOGGER.error("An error occurred while processing the following pdf: "
                             + file.getPath(), exp);
                 }
                 if (ind != -1)
@@ -371,7 +371,7 @@ public class QuantityTrainingData {
 
             return refFiles.size();
         } catch (final Exception exp) {
-            throw new GrobidException("An exception occured while running Grobid batch.", exp);
+            throw new GrobidException("An exception occurred while running Grobid batch.", exp);
         }
     }
 }
