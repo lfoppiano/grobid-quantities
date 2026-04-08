@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 + Spelling fix in exception messages ("occured" → "occurred")
++ Worked around a Kotlin 2.0.21 K2 compiler `StackOverflowError` in `IrConstDeclarationAnnotationTransformer` that surfaced when compiling `LabellingUtilsTest.kt` on CI runners with small default JVM stacks (the test file has seven methods with nested string-concatenation chains that produce a deeply nested `IrCall` tree). Bumped the Kotlin compiler daemon stack via `kotlin.daemon.jvmargs=-Xmx2g -Xss4m` in `gradle.properties`. To be removed once upstream Kotlin fixes the recursive visitor bug.
 
 ### Notes
 
