@@ -27,7 +27,6 @@ plugins {
     id 'com.palantir.git-version' version '0.12.3'
     id 'net.researchgate.release' version '3.1.0'
     id "org.jetbrains.kotlin.jvm" version "2.0.21"
-    id 'org.ajoberstar.grgit' version '5.3.0' apply false
 }
 
 group = "org.grobid"
@@ -383,21 +382,20 @@ task copyModels(type: Copy) {
     }
 }
 
-import org.ajoberstar.grgit.Grgit
-
 task downloadModelsGit(dependsOn: copyModels) {
     doLast {
-        if (new File("${grobidHome}/models/quantities_models").exists()) {
-            def grgit = Grgit.open(
-                dir: "${grobidHome}/models/quantities_models",
-            )
-            grgit.pull()
+        def targetDir = file("${grobidHome}/models/quantities_models")
+        if (targetDir.exists()) {
+            exec {
+                workingDir targetDir
+                commandLine 'git', 'pull', '--depth=1'
+            }
         } else {
-            def grgit = Grgit.clone(
-                dir: "${grobidHome}/models/quantities_models",
-                uri: "https://huggingface.co/sciencialab/grobid-quantities-models",
-                depth: 1
-            )
+            exec {
+                commandLine 'git', 'clone', '--depth=1',
+                    'https://huggingface.co/sciencialab/grobid-quantities-models',
+                    targetDir.absolutePath
+            }
         }
     }
 }

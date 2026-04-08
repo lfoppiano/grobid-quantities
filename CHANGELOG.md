@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 + Spelling fix in exception messages ("occured" → "occurred")
 + Worked around a Kotlin 2.0.21 K2 compiler `StackOverflowError` in `IrConstDeclarationAnnotationTransformer` that surfaced when compiling `LabellingUtilsTest.kt` on CI runners with small default JVM stacks (the test file has seven methods with nested string-concatenation chains that produce a deeply nested `IrCall` tree). Bumped the Kotlin compiler daemon stack via `kotlin.daemon.jvmargs=-Xmx2g -Xss4m` in `gradle.properties`. To be removed once upstream Kotlin fixes the recursive visitor bug.
++ Fixed Docker build failure in the `installModels` step. The `downloadModelsGit` Gradle task was using `org.ajoberstar.grgit:5.3.0` (embedded jgit 6.10.x), whose Smart HTTP v2 protocol parser is incompatible with HuggingFace's git server and fails with `TransportException: Short read of block` during the initial `lsRefs` handshake — before any model data is transferred. Replaced `Grgit.clone(...)` with a native `git clone --depth=1` via a Gradle `Exec` task, using the system `git` binary already installed in the Docker builder image as a transitive dependency of `git-lfs`. Also removed the now-unused `org.ajoberstar.grgit` plugin from the `plugins { }` block.
 
 ### Notes
 
