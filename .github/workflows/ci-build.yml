@@ -61,5 +61,29 @@ jobs:
           registry: docker.io
           pushImage: ${{ github.event_name != 'pull_request' }}
           tags: latest-develop
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+      - name: Job summary
+        if: always()
+        env:
+          IMAGE_FULL_NAME: ${{ steps.docker_build.outputs.imageFullName }}
+          IMAGE_NAME: ${{ steps.docker_build.outputs.imageName }}
+          IMAGE_TAGS: ${{ steps.docker_build.outputs.tags }}
+          IMAGE_DIGEST: ${{ steps.docker_build.outputs.digest }}
+        run: |
+          {
+            if [ -z "$IMAGE_DIGEST" ]; then
+              echo "_Built but not pushed (pull request)_"
+              echo ""
+            fi
+            echo "## Docker image"
+            echo ""
+            echo "| Field    | Value |"
+            echo "|----------|-------|"
+            echo "| Image    | \`$IMAGE_FULL_NAME\` |"
+            echo "| Tags     | \`$IMAGE_TAGS\` |"
+            echo "| Digest   | \`$IMAGE_DIGEST\` |"
+            echo "| Registry | \`docker.io\` |"
+            echo ""
+            echo '```'
+            echo "docker pull $IMAGE_FULL_NAME"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
