@@ -16,7 +16,7 @@
 # build builder image
 # -------------------
 
-FROM openjdk:17-jdk-slim as builder
+FROM eclipse-temurin:21-jdk-jammy as builder
 
 USER root
 
@@ -63,7 +63,7 @@ WORKDIR /opt
 # build runtime image
 # -------------------
 
-FROM lfoppiano/grobid:0.8.2-full as runtime
+FROM lfoppiano/grobid:0.9.0-full as runtime
 
 # setting locale is likely useless but to be sure
 ENV LANG C.UTF-8

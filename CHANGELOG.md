@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.9.0]
+
+### Changed
+
++ Updated to Grobid version 0.9.0
++ Bumped Java toolchain from 17 to 21 (required by Grobid 0.9.0)
++ Bumped Gradle wrapper from 7.2 to 9.0.0
++ Bumped Kotlin from 1.8.21 to 2.0.21
++ Migrated Shadow plugin from `com.github.johnrengelman.shadow:7.1.0` to `com.gradleup.shadow:8.3.10` (new coordinates after the original repo was archived)
++ Bumped Dropwizard from 4.0.13 to 4.0.17, dropwizard-guicey from 7.0.0 to 7.3.1, dropwizard-metrics from 4.2.22 to 4.2.38
++ Bumped Jackson from 2.14.3 to 2.21.1
++ Bumped Guava from 31.0.1-jre to 33.5.0-jre, commons-io from 2.14.0 to 2.21.0, commons-lang3 from 3.12.0 to 3.20.0, commons-collections4 from 4.4 to 4.5.0, httpclient from 4.5.13 to 4.5.14
++ Bumped JEP from 4.0.2 to 4.3.1
++ Bumped JUnit BOM from 5.10.2 to 5.14.1, EasyMock from 5.2.0 to 5.6.0, MockK from 1.13.9 to 1.13.17
++ Migrated `application` block to use `mainClass` (Gradle 9 compatibility) and corrected the main class to `org.grobid.service.main.GrobidQuantitiesApplication`
++ Updated CI workflows and Dockerfile builder image to JDK 21
+
+### Fixed
+
++ Spelling fix in exception messages ("occured" → "occurred")
+
+### Notes
+
++ PowerMock 2.0.9 is intentionally retained for now: 5 test classes still depend on it. Java 21 compatibility is achieved via additional `--add-opens` JVM flags in the `test` and `integration` Gradle tasks. The Mockito migration of these tests is tracked as deferred work.
+
 ## [0.8.2]
 
 ### Changed
