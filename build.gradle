@@ -1,4 +1,6 @@
+import javax.inject.Inject
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.process.ExecOperations
 
 buildscript {
     repositories {
@@ -382,14 +384,30 @@ task copyModels(type: Copy) {
     }
 }
 
+// Gradle 9 removed the dynamic `exec {}` shortcut inside task actions, so we
+// inject ExecOperations via a helper interface and call it from doLast.
+interface InjectedExecOps {
+    @Inject ExecOperations getExecOps()
+}
+
 task downloadModelsGit(dependsOn: copyModels) {
+    def targetDir = file("${grobidHome}/models/quantities_models")
+    def injected = objects.newInstance(InjectedExecOps)
     doLast {
-        def targetDir = file("${grobidHome}/models/quantities_models")
         targetDir.parentFile.mkdirs()
-        exec {
-            commandLine 'hf', 'download',
-                'sciencialab/grobid-quantities-models',
-                '--local-dir', targetDir.absolutePath
+        // Requires git-xet to be installed beforehand (https://hf.co/docs/hub/git-xet),
+        // since the HuggingFace repository stores large model files via Xet storage.
+        if (targetDir.exists()) {
+            injected.execOps.exec {
+                workingDir = targetDir
+                commandLine 'git', 'pull'
+            }
+        } else {
+            injected.execOps.exec {
+                commandLine 'git', 'clone',
+                    'https://huggingface.co/sciencialab/grobid-quantities-models',
+                    targetDir.absolutePath
+            }
         }
     }
 }

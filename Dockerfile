@@ -23,24 +23,16 @@ USER root
 RUN apt-get update && \
     apt-get -y --no-install-recommends install \
         apt-utils libxml2 unzip \
-        software-properties-common curl && \
-    add-apt-repository -y ppa:deadsnakes/ppa && \
-    apt-get update && \
-    apt-get -y --no-install-recommends install \
-        python3.11 python3.11-venv python3.11-distutils && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 && \
+        ca-certificates curl git git-lfs && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Hugging Face CLI for downloading model weights from HF Hub.
-# The installer creates a Python venv at ~/.hf-cli/venv (via python3 -m venv,
-# where python3 now resolves to python3.11 via update-alternatives) and exposes
-# a wrapper at ~/.local/bin/hf. Python 3.11 matches the parent grobid image's
-# runtime Python version (lfoppiano/grobid:0.9.0-full, which also uses
-# deadsnakes ppa:deadsnakes/ppa for python3.11). This replaces the previous
-# grgit/jgit clone, which hit a jgit Smart HTTP v2 incompatibility with
-# HuggingFace's git server.
-RUN curl -LsSf https://hf.co/cli/install.sh | bash
-ENV PATH="/root/.local/bin:${PATH}"
+# Install git-xet so `git clone` can fetch large model files stored via Xet on
+# the HuggingFace Hub (https://hf.co/docs/hub/git-xet). The install script drops
+# the `git-xet` binary under /usr/local/bin and `git xet install` registers the
+# required git filter/smudge config globally.
+RUN curl --proto '=https' --tlsv1.2 -sSf \
+        https://raw.githubusercontent.com/huggingface/xet-core/refs/heads/main/git_xet/install.sh | sh \
+    && git xet install
 
 WORKDIR /opt/grobid
 
@@ -63,10 +55,7 @@ RUN rm -rf /opt/grobid/grobid-home/models/*
 RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
 RUN ./gradlew installModels --no-daemon --info --stacktrace \
     && rm -f /opt/grobid/grobid-home/models/*.zip \
-    && rm -rf /opt/grobid/grobid-home/models/quantities_models \
-    && rm -rf /root/.cache/huggingface /root/.cache/pip /root/.huggingface \
-    && rm -rf /root/.hf-cli \
-    && rm -f /root/.local/bin/hf /root/.local/bin/huggingface-cli
+    && rm -rf /opt/grobid/grobid-home/models/quantities_models
 
 # Preparing distribution
 WORKDIR /opt/grobid
