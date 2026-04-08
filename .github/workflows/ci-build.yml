@@ -67,20 +67,14 @@ jobs:
           IMAGE_FULL_NAME: ${{ steps.docker_build.outputs.imageFullName }}
           IMAGE_NAME: ${{ steps.docker_build.outputs.imageName }}
           IMAGE_TAGS: ${{ steps.docker_build.outputs.tags }}
-          IMAGE_DIGEST: ${{ steps.docker_build.outputs.digest }}
         run: |
           {
-            if [ -z "$IMAGE_DIGEST" ]; then
-              echo "_Built but not pushed (pull request)_"
-              echo ""
-            fi
             echo "## Docker image"
             echo ""
             echo "| Field    | Value |"
             echo "|----------|-------|"
             echo "| Image    | \`$IMAGE_FULL_NAME\` |"
             echo "| Tags     | \`$IMAGE_TAGS\` |"
-            echo "| Digest   | \`$IMAGE_DIGEST\` |"
             echo "| Registry | \`docker.io\` |"
             echo ""
             echo '```'
