@@ -385,17 +385,11 @@ task copyModels(type: Copy) {
 task downloadModelsGit(dependsOn: copyModels) {
     doLast {
         def targetDir = file("${grobidHome}/models/quantities_models")
-        if (targetDir.exists()) {
-            exec {
-                workingDir targetDir
-                commandLine 'git', 'pull', '--depth=1'
-            }
-        } else {
-            exec {
-                commandLine 'git', 'clone', '--depth=1',
-                    'https://huggingface.co/sciencialab/grobid-quantities-models',
-                    targetDir.absolutePath
-            }
+        targetDir.parentFile.mkdirs()
+        exec {
+            commandLine 'hf', 'download',
+                'sciencialab/grobid-quantities-models',
+                '--local-dir', targetDir.absolutePath
         }
     }
 }

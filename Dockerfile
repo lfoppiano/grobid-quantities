@@ -21,7 +21,26 @@ FROM eclipse-temurin:21-jdk-jammy as builder
 USER root
 
 RUN apt-get update && \
-    apt-get -y --no-install-recommends install apt-utils libxml2 git-lfs unzip
+    apt-get -y --no-install-recommends install \
+        apt-utils libxml2 unzip \
+        software-properties-common curl && \
+    add-apt-repository -y ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt-get -y --no-install-recommends install \
+        python3.11 python3.11-venv python3.11-distutils && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Hugging Face CLI for downloading model weights from HF Hub.
+# The installer creates a Python venv at ~/.hf-cli/venv (via python3 -m venv,
+# where python3 now resolves to python3.11 via update-alternatives) and exposes
+# a wrapper at ~/.local/bin/hf. Python 3.11 matches the parent grobid image's
+# runtime Python version (lfoppiano/grobid:0.9.0-full, which also uses
+# deadsnakes ppa:deadsnakes/ppa for python3.11). This replaces the previous
+# grgit/jgit clone, which hit a jgit Smart HTTP v2 incompatibility with
+# HuggingFace's git server.
+RUN curl -LsSf https://hf.co/cli/install.sh | bash
+ENV PATH="/root/.local/bin:${PATH}"
 
 WORKDIR /opt/grobid
 
@@ -42,10 +61,12 @@ COPY localLibs grobid-quantities-source/localLibs
 WORKDIR /opt/grobid/grobid-quantities-source
 RUN rm -rf /opt/grobid/grobid-home/models/*
 RUN ./gradlew clean assemble -x shadowJar --no-daemon  --stacktrace --info
-RUN git lfs install
 RUN ./gradlew installModels --no-daemon --info --stacktrace \
     && rm -f /opt/grobid/grobid-home/models/*.zip \
-    && rm -rf /opt/grobid/grobid-home/models/quantities_models
+    && rm -rf /opt/grobid/grobid-home/models/quantities_models \
+    && rm -rf /root/.cache/huggingface /root/.cache/pip /root/.huggingface \
+    && rm -rf /root/.hf-cli \
+    && rm -f /root/.local/bin/hf /root/.local/bin/huggingface-cli
 
 # Preparing distribution
 WORKDIR /opt/grobid
