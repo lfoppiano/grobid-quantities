@@ -101,11 +101,7 @@ RUN ln -s /opt/grobid/grobid-quantities/resources /opt/grobid/resources
 WORKDIR /opt/grobid
 ARG GROBID_VERSION
 ENV GROBID_VERSION=${GROBID_VERSION:-latest}
-ENV GROBID_QUANTITIES_OPTS "-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.8/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED"
-
-# This code removes the fixed seeed in DeLFT to increase the uncertanty 
-#RUN sed -i '/seed(7)/d' /usr/local/lib/python3.8/dist-packages/delft/utilities/Utilities.py
-#RUN sed -i '/from numpy\.random import seed/d' /usr/local/lib/python3.8/dist-packages/delft/utilities/Utilities.py
+ENV GROBID_QUANTITIES_OPTS="-Djava.library.path=/opt/grobid/grobid-home/lib/lin-64:/usr/local/lib/python3.11/dist-packages/jep --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED"
 
 EXPOSE 8060 8061 5005
 
