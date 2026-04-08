@@ -72,7 +72,7 @@ public class ValueTrainer extends AbstractTrainer {
                 posit++;
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
     }
 
@@ -158,7 +158,7 @@ public class ValueTrainer extends AbstractTrainer {
 
 
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         } finally {
             IOUtils.closeQuietly(evaluationOutputWriter, trainingOutputWriter);
         }

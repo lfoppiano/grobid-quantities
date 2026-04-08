@@ -102,7 +102,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 numEncountered = false;
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
     }
 
@@ -257,7 +257,7 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                 }
             }
         } catch (Exception e) {
-            throw new GrobidException("An exception occured while running Grobid.", e);
+            throw new GrobidException("An exception occurred while running Grobid.", e);
         }
     }
 
