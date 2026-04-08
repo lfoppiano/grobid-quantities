@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + Bumped JUnit BOM from 5.10.2 to 5.14.1, EasyMock from 5.2.0 to 5.6.0, MockK from 1.13.9 to 1.13.17
 + Migrated `application` block to use `mainClass` (Gradle 9 compatibility) and corrected the main class to `org.grobid.service.main.GrobidQuantitiesApplication`
 + Updated CI workflows and Dockerfile builder image to JDK 21
++ Removed the abandoned `com.github.kt3k.coveralls` Gradle plugin (unmaintained since 2020 and unable to detect GitHub Actions as a CI service). Coverage is already uploaded by the `coverallsapp/github-action@v2` step in the CI workflows, which reads the Jacoco XML report directly.
 
 ### Fixed
 

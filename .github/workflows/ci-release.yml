@@ -26,8 +26,8 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build -x test
 
-    - name: Test with Gradle Jacoco and Coveralls
-      run: ./gradlew test jacocoTestReport coveralls --no-daemon
+    - name: Test with Gradle Jacoco
+      run: ./gradlew test jacocoTestReport --no-daemon
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2
