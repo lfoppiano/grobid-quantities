@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Changed
+
++ Updated to Grobid version 0.9.1
++ Bumped Kotlin from 2.0.21 to 2.2.20 to match the `kotlin-stdlib` 2.2.20 that Grobid 0.9.1 now pulls transitively (the 2.0.21 compiler cannot read the newer stdlib metadata, which broke `compileKotlin`)
++ Bumped Dockerfile runtime base image from `lfoppiano/grobid:0.9.0-full` to `lfoppiano/grobid:0.9.1-full`
+
+### Known issues
+
++ `ValueParserTest.testTagValue_exponential_1/2` fail after the Grobid 0.9.1 upgrade: Grobid 0.9.1 changed where the English word-forms lexicon (`english.wf`) is loaded, so the tests' PowerMock `@SuppressStaticInitializationFor("...Lexicon")` mock no longer intercepts it and it loads against a null grobid-home. These should be migrated off PowerMock (already a standing TODO in `build.gradle`) or reworked to run against a real grobid-home. The other 152 unit tests pass.
+
 ## [0.9.0]
 
 ### Changed
