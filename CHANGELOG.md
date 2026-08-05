@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + Updated to Grobid version 0.9.1
 + Bumped Kotlin from 2.0.21 to 2.2.20 to match the `kotlin-stdlib` 2.2.20 that Grobid 0.9.1 now pulls transitively (the 2.0.21 compiler cannot read the newer stdlib metadata, which broke `compileKotlin`)
 + Bumped Dockerfile runtime base image from `lfoppiano/grobid:0.9.0-full` to `lfoppiano/grobid:0.9.1-full`
++ The git revision baked into `revision.txt`, and served by `GET /service/version`, is derived by a local `getGitRevision()` calling `git describe --tags --always` instead of by the `com.palantir.git-version` plugin, which is dropped. The plugin was unmaintained and pulled its own JGit stack; `git describe` is what it was calling for anyway. `--first-parent` is deliberately not passed: a release made on a branch and merged back with a merge commit leaves its tag on the second parent, where `--first-parent` cannot see it, and the revision would report the *previous* release
++ `processResources` declares the project version and the git revision as task inputs. They are injected rather than read from the source files, so Gradle could not see them change and kept the task `UP-TO-DATE`: building the release tag in a tree already built on `master` baked the `master` revision into `revision.txt`
 
 ### Known issues
 
