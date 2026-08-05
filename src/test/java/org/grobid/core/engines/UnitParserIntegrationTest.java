@@ -13,7 +13,6 @@ import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.powermock.reflect.Whitebox;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -39,7 +38,7 @@ public class UnitParserIntegrationTest {
         target = UnitParser.getInstance();
     }
 
-    public static void initEngineForTests() throws IOException, IllegalAccessException {
+    public static void initEngineForTests() throws IOException, IllegalAccessException, NoSuchFieldException {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
         // https://stackoverflow.com/questions/14853324/can-not-find-deserialize-for-non-concrete-collection-type
@@ -47,14 +46,15 @@ public class UnitParserIntegrationTest {
         GrobidQuantitiesConfiguration configuration = mapper.readValue(UnitNormalizer.class.getResourceAsStream("/config-test.yml"), GrobidQuantitiesConfiguration.class);
         configuration.getModels().stream().forEach(GrobidProperties::addModel);
         GrobidProperties.getInstance();
-        Field modelMap = Whitebox.getField(GrobidProperties.class, "modelMap");
+        Field modelMap = GrobidProperties.class.getDeclaredField("modelMap");
+        modelMap.setAccessible(true);
 
-        Map<String, GrobidConfig.ModelParameters> newModelMap = (Map<String, GrobidConfig.ModelParameters>) modelMap.get(new HashMap<>());
+        Map<String, GrobidConfig.ModelParameters> newModelMap = (Map<String, GrobidConfig.ModelParameters>) modelMap.get(null);
         newModelMap.entrySet().stream()
             .forEach(entry -> {
                 entry.getValue().engine = "wapiti";
             });
-        Whitebox.setInternalState(GrobidProperties.class, "modelMap", newModelMap);
+        modelMap.set(null, newModelMap);
 //        GrobidProperties.getDistinctModels().stream().forEach(model -> model);
         LibraryLoader.load();
     }

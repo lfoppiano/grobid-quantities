@@ -2,27 +2,23 @@ package org.grobid.core.features;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
 
 import java.util.regex.Pattern;
 
-import static org.easymock.EasyMock.expect;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.powermock.api.easymock.PowerMock.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(FeatureFactory.class)
 public class FeaturesVectorQuantitiesTest {
 
     FeatureFactory featureFactoryMock;
 
     @Before
     public void setUp() throws Exception {
-        featureFactoryMock = PowerMock.createMock(FeatureFactory.class);
+        featureFactoryMock = mock(FeatureFactory.class);
         featureFactoryMock.isPunct = Pattern.compile("^[\\,\\:;\\?\\.]+$");
     }
 
@@ -31,18 +27,17 @@ public class FeaturesVectorQuantitiesTest {
         String word = "Colorado";
         String label = "CITY";
 
-        mockStatic(FeatureFactory.class);
-        expect(FeatureFactory.getInstance()).andReturn(featureFactoryMock);
-        expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
-        expect(featureFactoryMock.test_first_capital(word)).andReturn(true);
-        expect(featureFactoryMock.test_number(word)).andReturn(false);
-        expect(featureFactoryMock.test_digit(word)).andReturn(false);
-        replay(FeatureFactory.class, featureFactoryMock);
+        try (MockedStatic<FeatureFactory> ff = mockStatic(FeatureFactory.class)) {
+            ff.when(FeatureFactory::getInstance).thenReturn(featureFactoryMock);
+            when(featureFactoryMock.test_all_capital(word)).thenReturn(false);
+            when(featureFactoryMock.test_first_capital(word)).thenReturn(true);
+            when(featureFactoryMock.test_number(word)).thenReturn(false);
+            when(featureFactoryMock.test_digit(word)).thenReturn(false);
 
-        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
+            FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
-        verify(FeatureFactory.class, featureFactoryMock);
-        assertThat(target.printVector(), is("Colorado colorado C Co Col Colo o do ado rado INITCAP NODIGIT 0 NOPUNCT Xxxx Xx 1 0 CITY"));
+            assertThat(target.printVector(), is("Colorado colorado C Co Col Colo o do ado rado INITCAP NODIGIT 0 NOPUNCT Xxxx Xx 1 0 CITY"));
+        }
     }
 
     @Test
@@ -50,18 +45,17 @@ public class FeaturesVectorQuantitiesTest {
         String word = "The";
         String label = "OTHER";
 
-        mockStatic(FeatureFactory.class);
-        expect(FeatureFactory.getInstance()).andReturn(featureFactoryMock);
-        expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
-        expect(featureFactoryMock.test_first_capital(word)).andReturn(true);
-        expect(featureFactoryMock.test_number(word)).andReturn(false);
-        expect(featureFactoryMock.test_digit(word)).andReturn(false);
-        replay(FeatureFactory.class, featureFactoryMock);
+        try (MockedStatic<FeatureFactory> ff = mockStatic(FeatureFactory.class)) {
+            ff.when(FeatureFactory::getInstance).thenReturn(featureFactoryMock);
+            when(featureFactoryMock.test_all_capital(word)).thenReturn(false);
+            when(featureFactoryMock.test_first_capital(word)).thenReturn(true);
+            when(featureFactoryMock.test_number(word)).thenReturn(false);
+            when(featureFactoryMock.test_digit(word)).thenReturn(false);
 
-        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
+            FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
-        verify(FeatureFactory.class, featureFactoryMock);
-        assertThat(target.printVector(), is("The the T Th The The e he The The INITCAP NODIGIT 0 NOPUNCT Xxx Xx 1 0 OTHER"));
+            assertThat(target.printVector(), is("The the T Th The The e he The The INITCAP NODIGIT 0 NOPUNCT Xxx Xx 1 0 OTHER"));
+        }
     }
 
     @Test
@@ -69,17 +63,16 @@ public class FeaturesVectorQuantitiesTest {
         String word = "a";
         String label = "OTHER";
 
-        mockStatic(FeatureFactory.class);
-        expect(FeatureFactory.getInstance()).andReturn(featureFactoryMock);
-        expect(featureFactoryMock.test_all_capital(word)).andReturn(false);
-        expect(featureFactoryMock.test_first_capital(word)).andReturn(false);
-        expect(featureFactoryMock.test_number(word)).andReturn(false);
-        expect(featureFactoryMock.test_digit(word)).andReturn(false);
-        replay(FeatureFactory.class, featureFactoryMock);
+        try (MockedStatic<FeatureFactory> ff = mockStatic(FeatureFactory.class)) {
+            ff.when(FeatureFactory::getInstance).thenReturn(featureFactoryMock);
+            when(featureFactoryMock.test_all_capital(word)).thenReturn(false);
+            when(featureFactoryMock.test_first_capital(word)).thenReturn(false);
+            when(featureFactoryMock.test_number(word)).thenReturn(false);
+            when(featureFactoryMock.test_digit(word)).thenReturn(false);
 
-        FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
+            FeaturesVectorQuantities target = FeaturesVectorQuantities.addFeaturesQuantities(word, label, true, true, false);
 
-        verify(FeatureFactory.class, featureFactoryMock);
-        assertThat(target.printVector(), is("a a a a a a a a a a NOCAPS NODIGIT 1 NOPUNCT x x 1 0 OTHER"));
+            assertThat(target.printVector(), is("a a a a a a a a a a NOCAPS NODIGIT 1 NOPUNCT x x 1 0 OTHER"));
+        }
     }
 }

@@ -9,22 +9,17 @@ import org.grobid.core.utilities.OffsetPosition;
 import org.grobid.core.utilities.UnitUtilities;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import static org.easymock.EasyMock.expect;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.powermock.api.easymock.PowerMock.*;
+import static org.mockito.Mockito.mockStatic;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(QuantifiedObjectTrainingFormatter.class)
 public class QuantifiedObjectTrainingFormatterTest {
     QuantifiedObjectTrainingFormatter target;
 
@@ -52,18 +47,16 @@ public class QuantifiedObjectTrainingFormatterTest {
         potatoes.setOffsetEnd(28);
         measurement.setQuantifiedObject(potatoes);
 
-        UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
-
         String text = "We need 10 grams of potatoes";
 
         measurementList.add(measurement);
 
-        Element out = target.trainingExtraction(measurementList, text);
-
-        verify(UUID.class);
+        UUID expectedID = UUID.randomUUID();
+        Element out;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            out = target.trainingExtraction(measurementList, text);
+        }
 
         assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"value\" ptr=\"#" + expectedID.toString() + "\">10 grams</measure> of <quantifiedObject id=\"" + expectedID.toString() + "\">potatoes</quantifiedObject></p>"));
     }
@@ -93,13 +86,12 @@ public class QuantifiedObjectTrainingFormatterTest {
         measurementList.add(measurement);
 
         UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
+        Element out;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            out = target.trainingExtraction(measurementList, text);
+        }
 
-        Element out = target.trainingExtraction(measurementList, text);
-
-        verify(UUID.class);
         assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">10 to 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
@@ -127,13 +119,11 @@ public class QuantifiedObjectTrainingFormatterTest {
         measurementList.add(measurement);
 
         UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
-
-        Element out = target.trainingExtraction(measurementList, text);
-
-        verify(UUID.class);
+        Element out;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            out = target.trainingExtraction(measurementList, text);
+        }
 
         assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">&lt; 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
@@ -162,13 +152,12 @@ public class QuantifiedObjectTrainingFormatterTest {
         measurementList.add(measurement);
 
         UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
+        Element out;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            out = target.trainingExtraction(measurementList, text);
+        }
 
-        Element out = target.trainingExtraction(measurementList, text);
-
-        verify(UUID.class);
         assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">&gt; 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
@@ -201,13 +190,12 @@ public class QuantifiedObjectTrainingFormatterTest {
         measurementList.add(measurement);
 
         UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
+        Element out;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            out = target.trainingExtraction(measurementList, text);
+        }
 
-        Element out = target.trainingExtraction(measurementList, text);
-
-        verify(UUID.class);
         assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">10 +- 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
@@ -235,13 +223,12 @@ public class QuantifiedObjectTrainingFormatterTest {
         measurementList.add(measurement);
 
         UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
+        Element out;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            out = target.trainingExtraction(measurementList, text);
+        }
 
-        Element out = target.trainingExtraction(measurementList, text);
-
-        verify(UUID.class);
         assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"interval\" ptr=\"#" + expectedID + "\">+- 2 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
@@ -273,13 +260,12 @@ public class QuantifiedObjectTrainingFormatterTest {
         measurementList.add(measurement);
 
         UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
+        Element out;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            out = target.trainingExtraction(measurementList, text);
+        }
 
-        Element out = target.trainingExtraction(measurementList, text);
-
-        verify(UUID.class);
         assertThat(out.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">We need <measure type=\"list\" ptr=\"#" + expectedID + "\">1, 5 and 12 grams</measure> of <quantifiedObject id=\"" + expectedID + "\">potatoes</quantifiedObject></p>"));
     }
 
@@ -345,13 +331,12 @@ public class QuantifiedObjectTrainingFormatterTest {
         measurement3.setAtomicQuantity(quantityOfMeasurement3);
 
         UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
+        Element element;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            element = target.trainingExtraction(Arrays.asList(measurement1, measurement2, measurement3), text);
+        }
 
-        final Element element = target.trainingExtraction(Arrays.asList(measurement1, measurement2, measurement3), text);
-
-        verify(UUID.class);
         assertThat(element.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">In this letter we present the discovery of a very light planetary companion to the star µ Ara (HD 160691). " +
                 "The planet orbits its host once every <measure type=\"value\">9.5 days</measure>, and induces a sinusoidal radial velocity signal " +
                 "with <quantifiedObject id=\"" + expectedID + "\">a semi-amplitude of</quantifiedObject> <measure type=\"value\" ptr=\"#" + expectedID + "\">4.1 m s −1</measure> , " +
@@ -377,13 +362,12 @@ public class QuantifiedObjectTrainingFormatterTest {
         measurements.add(measurement2);
 
         UUID expectedID = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID);
-        replay(UUID.class);
+        Element element;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID);
+            element = target.trainingExtraction(measurements, text);
+        }
 
-        final Element element = target.trainingExtraction(measurements, text);
-
-        verify(UUID.class);
         assertThat(element.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">Before the <measure type=\"interval\">1920s</measure> " +
                 "the number of stages was usually <measure type=\"interval\" ptr=\"#" + expectedID + "\">15 at most and the riders " +
                 "enjoyed at least one day</measure> of <quantifiedObject id=\"" + expectedID + "\">rest</quantifiedObject> " +
@@ -408,12 +392,11 @@ public class QuantifiedObjectTrainingFormatterTest {
 
         UUID expectedID1 = UUID.randomUUID();
         UUID expectedID2 = UUID.randomUUID();
-        mockStatic(UUID.class);
-        expect(UUID.randomUUID()).andReturn(expectedID1);
-        expect(UUID.randomUUID()).andReturn(expectedID2);
-        replay(UUID.class);
-
-        final Element element = target.trainingExtraction(measurements, text);
+        Element element;
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(expectedID1, expectedID2);
+            element = target.trainingExtraction(measurements, text);
+        }
 
         assertThat(element.toXML(), is("<p xmlns=\"http://www.tei-c.org/ns/1.0\">In recent years, there has been an increased interest in investigating the effect of aging on endurance running performances [1][2][3][4][5][6]. Over the last <measure type=\"interval\" ptr=\"#" + expectedID1 + "\">decades, the participation of master athletes (&gt;40 years</measure> old) has increased, especially in the longer run distances such as <measure type=\"value\" ptr=\"#" + expectedID2 + "\">half</measure> <quantifiedObject id=\"" + expectedID2 + "\">marathons</quantifiedObject> [2,3], marathons [1][2][3] and ultra-marathons [7][8][9][10]. </p>"));
 
