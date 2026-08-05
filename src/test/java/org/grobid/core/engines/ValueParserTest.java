@@ -4,18 +4,11 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.grobid.core.GrobidModels;
 import org.grobid.core.analyzers.QuantityAnalyzer;
 import org.grobid.core.data.ValueBlock;
-import org.grobid.core.features.FeaturesVectorValues;
 import org.grobid.core.layout.LayoutToken;
-import org.grobid.core.lexicon.Lexicon;
 import org.grobid.core.utilities.GrobidConfig;
 import org.grobid.core.utilities.GrobidProperties;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,19 +17,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import static org.easymock.EasyMock.createMock;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@RunWith(PowerMockRunner.class)
-@SuppressStaticInitializationFor("org.grobid.core.lexicon.Lexicon")
-@PrepareForTest({ValueParser.class})
 public class ValueParserTest {
     ValueParser target;
-    Lexicon mockedLexicon;
 
     @Before
     public void setUp() throws Exception {
@@ -44,9 +32,6 @@ public class ValueParserTest {
         modelParameters.name = "bao";
         GrobidProperties.addModel(modelParameters);
         target = new ValueParser(GrobidModels.DUMMY);
-
-        mockedLexicon = createMock(Lexicon.class);
-        Whitebox.setInternalState(Lexicon.class, mockedLexicon);
     }
 
     @Test
@@ -116,8 +101,16 @@ public class ValueParserTest {
      */
     public static String getWapitiResult(List<LayoutToken> layoutTokens, List<Triple<String, Integer, Integer>> labels) {
 
+        // Build placeholder feature rows directly instead of going through
+        // FeaturesVectorValues.addFeatures(): since Grobid 0.9.1, constructing a
+        // FeatureFactory eagerly builds the real Lexicon (loads english.wf from
+        // grobid-home), which is not available in unit tests. resultExtraction only
+        // consumes the token (first column) and the label (last column), so the
+        // intermediate feature columns are irrelevant here — same approach as the
+        // hand-written result strings in UnitParserTest. Rows whose token is a space
+        // start with " " and are filtered out below, preserving the previous behaviour.
         List<String> features = layoutTokens.stream()
-                .map(token -> FeaturesVectorValues.addFeatures(token.getText(), null).printVector())
+                .map(token -> token.getText() + " 0 0 NOPUNCT")
                 .collect(Collectors.toList());
 
         List<String> labeled = new ArrayList<>();
