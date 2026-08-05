@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.N;
 import org.grobid.core.data.normalization.NormalizationException;
 import org.grobid.core.engines.ValueParser;
 import org.jetbrains.annotations.NotNull;
