@@ -464,6 +464,21 @@ The `per pixel` part belongs to the quantified object.
 
 See issue [#43](https://github.com/lfoppiano/grobid-quantities/issues/43)
 
+#### Currencies
+
+Amounts of money (`150$`, `3 €`) are quantities and are annotated as such. There is no unit type
+for currencies yet, so they use `UNKNOWN` for the time being, as allowed by the
+[unit type vocabulary](#unit-type-vocabulary) section:
+
+``` xml
+<measure type="value"><num>150</num> <measure type="UNKNOWN" unit="$">$</measure></measure>
+```
+
+Annotating them now means the model learns to spot them; giving them a proper type is a
+vocabulary and lexicon change.
+
+See issue [#59](https://github.com/lfoppiano/grobid-quantities/issues/59)
+
 ### Out of scope
 
 Only **expressions of quantities** are annotated, which can use numbers
