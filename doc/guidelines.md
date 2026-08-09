@@ -798,6 +798,18 @@ when the comet was at <measure type="value" ptr="#1"><num>3.82</num> <measure ty
 
 See issue [#81](https://github.com/lfoppiano/grobid-quantities/issues/81)
 
+### An event is not the quantified object of its date
+
+In `Comet C/2013 A1 will have a close encounter with Mars on October 19, 2014` the date is
+annotated as a measure but carries no quantified object: a quantified object is an entity *being
+measured*, and `close encounter` is not measured by the date on which it happens.
+
+``` xml
+Comet C/2013 A1 (Siding Spring) will have a close encounter with Mars on <measure type="value"><date when="2014-10-19">October 19, 2014</date></measure>.
+```
+
+See issue [#79](https://github.com/lfoppiano/grobid-quantities/issues/79)
+
 ### How to annotate?
 
 Annotating the quantifiedObject is a complicated task, because it
