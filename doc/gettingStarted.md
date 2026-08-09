@@ -94,6 +94,32 @@ In version 0.7.0, the models have been updated, therefore it is required
 to run a `./gradlew copyModels` to have properly results, especially for
 what concerns the unit normalization.
 
+## Requirements
+
+Grobid-quantities loads the models it needs on the first request and keeps them in memory, so
+the memory footprint is roughly constant once the service is warm and does not grow with the
+number of requests.
+
+| Usage                                                | Heap (`-Xmx`) | Notes                                                            |
+|------------------------------------------------------|---------------|------------------------------------------------------------------|
+| Text only (`processQuantityText`, `processUnitsText`) | 2 GB          | ~1.5 GB is used once the CRF models are loaded                    |
+| PDF (`annotateQuantityPDF`)                           | 4 GB          | the Grobid full-text models and the PDF parsing add to the above  |
+| Deep learning models (DeLFT/BERT instead of CRF)      | 8 GB          | plus a GPU if you want a reasonable throughput                    |
+
+These are the figures for a single request at a time. Concurrency is bounded by
+`maxParallelRequests` in `config.yml`; count roughly one additional core per parallel request.
+
+The text-only figure was measured on the CRF models (see
+[#108](https://github.com/lfoppiano/grobid-quantities/issues/108)); the other two are indicative
+and depend on the documents and on the models you enable.
+
+A machine with less memory than the above will typically fail with
+`java.lang.OutOfMemoryError: Java heap space` **while answering the first request**, not at
+startup, because the models are loaded lazily.
+
+Grobid-quantities also requires *JDK 21* (since version 0.9.0) and a Grobid installation - see
+below.
+
 ## Install and build
 
 #### Docker containers
@@ -111,7 +137,7 @@ The container will respond on port <http://localhost:8060>, and 8061 for the adm
 
 #### Local installation
 
-Grobid-quantities require *JDK 1.8 or greater*, and Grobid to be installed. Since version 0.7.3 we recommend to use *JDK 17 or greater*.
+Grobid-quantities requires *JDK 21* (since version 0.9.0, which follows Grobid 0.9.0) and Grobid to be installed.
 
 First install the latest version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 
