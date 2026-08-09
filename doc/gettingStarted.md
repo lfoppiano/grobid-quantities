@@ -172,3 +172,29 @@ curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuan
 The easiest way to interact with the server is to use the Python Client. 
 It removes the complexity of dealing with the output data, and managing single or multi-thread processing. 
 More information can be found at the [Python client GitHub page](https://github.com/lfoppiano/grobid-quantities-python-client).
+
+## Timeouts and parallel requests
+
+Two settings of `config.yml` are often mistaken for each other:
+
+- `server.applicationConnectors[].idleTimeout` is a **connection** timeout: it bounds how long a
+  connection may stay idle in terms of I/O. Since the migration to Jetty 12 it does *not* bound
+  how long the service may take to compute a response - a request that takes minutes completes
+  normally even with a short `idleTimeout`.
+- `maxParallelRequests` bounds how many requests are processed at the same time. Requests over
+  that limit are queued, and rejected with **503** when they cannot be served. This, and not the
+  idle timeout, is what a load test hits first. The queue itself is bounded by
+  `maxQueuedRequests` and `maxQueuedRequestTimeout`, documented in the
+  [REST API page](restAPI.md#maximum-parallel-requests-limit).
+
+Both halves of issue [#159](https://github.com/lfoppiano/grobid-quantities/issues/159) came from
+that second setting, not from `idleTimeout`. The reporter raised `idleTimeout` to 120 seconds and
+still saw requests fail with **503** after almost exactly 30 seconds: the limit was then enforced
+by Jetty 9's `QoSFilter`, which suspended over-limit requests using the servlet *default* async
+timeout of 30 seconds before rejecting them. That number appeared nowhere in the configuration,
+and `idleTimeout` had no bearing on it.
+
+Verified on the current version: a single request taking ~70 seconds returns 200 with the
+complete response, with `idleTimeout` set to 120 seconds and also with it set to 5 seconds. The
+queue bounds are now set explicitly rather than inherited from the Jetty defaults, so a 503 can
+be traced back to a value written in `config.yml`.
