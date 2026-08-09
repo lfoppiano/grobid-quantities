@@ -479,6 +479,18 @@ vocabulary and lexicon change.
 
 See issue [#59](https://github.com/lfoppiano/grobid-quantities/issues/59)
 
+#### Amounts of data
+
+Amounts of data (`2.0 Gb RAM`, `500 MB`) are quantities and are annotated as such. There is no
+unit type for them yet, so they use `UNKNOWN` for the time being, as allowed by the
+[unit type vocabulary](#unit-type-vocabulary) section:
+
+``` xml
+<measure type="value"><num>2.0</num> <measure type="UNKNOWN" unit="Gb">Gb</measure></measure> RAM
+```
+
+See issue [#62](https://github.com/lfoppiano/grobid-quantities/issues/62)
+
 ### Out of scope
 
 Only **expressions of quantities** are annotated, which can use numbers
