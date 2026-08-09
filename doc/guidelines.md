@@ -786,6 +786,18 @@ via the attribute [ptr=\"#ID\"]{.title-ref}.
 > :information_source: This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities
 are not supported.
 
+### A reference point is not a quantified object
+
+In `the comet was at 3.82 AU from the Sun` the measure is annotated normally, and `from the Sun`
+is the reference of the distance: it is part of the quantified object (`distance ... from the
+Sun`), never a separate measure.
+
+``` xml
+when the comet was at <measure type="value" ptr="#1"><num>3.82</num> <measure type="LENGTH" unit="AU">AU</measure></measure> from the Sun
+```
+
+See issue [#81](https://github.com/lfoppiano/grobid-quantities/issues/81)
+
 ### How to annotate?
 
 Annotating the quantifiedObject is a complicated task, because it
