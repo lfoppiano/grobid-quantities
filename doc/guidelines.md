@@ -509,6 +509,17 @@ Over the past <measure type="interval"><num atLeast="3">three</num> <measure typ
 
 See issue [#63](https://github.com/lfoppiano/grobid-quantities/issues/63)
 
+#### Possessive and deictic time expressions
+
+Expressions like `this year's minimum extent is lower than last year's` refer to a period without
+expressing a quantity of it: they have neither a value nor a unit to attach one to, and resolving
+them requires the document date. They are not annotated.
+
+The same holds for vague time expressions such as `late July` or `end of the month`, tracked
+separately in issue [#27](https://github.com/lfoppiano/grobid-quantities/issues/27).
+
+See issue [#28](https://github.com/lfoppiano/grobid-quantities/issues/28)
+
 ### Out of scope
 
 Only **expressions of quantities** are annotated, which can use numbers
