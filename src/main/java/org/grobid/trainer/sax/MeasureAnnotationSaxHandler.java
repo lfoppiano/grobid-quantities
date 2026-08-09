@@ -33,8 +33,6 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
     private boolean numEncountered = false;
     private boolean openUnit = false;
     private boolean openAtomicValueWithinList = false;
-    private boolean rangeBaseEncountered = false;
-    private boolean beginRangeBaseEncountered = false;
 
     private String currentTag = null;
 
@@ -81,8 +79,6 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     openList = false;
                     openInterval = false;
                     numEncountered = false;
-                    rangeBaseEncountered = false;
-                    beginRangeBaseEncountered = false;
                 }
             } else if (qName.equals("figure")) {
                 // figures (which include tables) were ignored !
@@ -213,10 +209,8 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                                     currentTag = "<valueMost>";
                                 } else if (value.equals("base")) {
                                     currentTag = "<valueBase>";
-                                    rangeBaseEncountered= true;
                                 } else if (value.equals("range")) {
                                     currentTag = "<valueRange>";
-                                    rangeBaseEncountered= true;
                                 }
                             }
                         }
@@ -301,11 +295,8 @@ public class MeasureAnnotationSaxHandler extends DefaultHandler {
                     // page break should be a distinct feature
                     labeled.add(new Pair<>("@newpage", null));
                 } else {
-                    int i = 0;
-                    if (begin && (!currentTag.equals("<other>")) && (!rangeBaseEncountered || !beginRangeBaseEncountered) ) {
+                    if (begin && (!currentTag.equals("<other>"))) {
                         labeled.add(new Pair<>(tok, "I-" + currentTag));
-                        if (rangeBaseEncountered)
-                            beginRangeBaseEncountered = true;
                         begin = false;
                     } else {
                         labeled.add(new Pair<>(tok, currentTag));
