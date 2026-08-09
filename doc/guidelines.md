@@ -491,6 +491,24 @@ unit type for them yet, so they use `UNKNOWN` for the time being, as allowed by 
 
 See issue [#62](https://github.com/lfoppiano/grobid-quantities/issues/62)
 
+#### Durations counted from an implicit origin
+
+`since about two decades`, `over the past three decades` and the like express a duration counted
+from an origin that the sentence does not give. The origin is not annotated and not reconstructed
+- it would mean guessing the publication date.
+
+The duration itself is a **value**, and becomes an **interval** only when the text carries a
+bounding marker (`over`, `more than`, `at least`, `up to`, `less than`), which also decides
+between `atLeast` and `atMost`:
+
+``` xml
+the mechanical oscillator method is well established since about <measure type="value"><num>2</num> <measure type="TIME" unit="decade">decades</measure></measure>
+
+Over the past <measure type="interval"><num atLeast="3">three</num> <measure type="TIME" unit="decade">decades</measure></measure>
+```
+
+See issue [#63](https://github.com/lfoppiano/grobid-quantities/issues/63)
+
 ### Out of scope
 
 Only **expressions of quantities** are annotated, which can use numbers
