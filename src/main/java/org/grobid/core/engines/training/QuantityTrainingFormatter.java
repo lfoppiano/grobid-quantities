@@ -13,7 +13,11 @@ import static org.grobid.core.document.xml.XmlBuilderUtils.teiElement;
 
 public class QuantityTrainingFormatter {
 
-    protected Element trainingExtraction(List<Measurement> measurements, String text) {
+    /**
+     * Builds a TEI paragraph with the measurements annotated inline, in the notation used by the
+     * annotated corpus and by the annotation guidelines. Also used for the TEI service output.
+     */
+    public Element trainingExtraction(List<Measurement> measurements, String text) {
         Element p = teiElement("p");
 
         int pos = 0;

@@ -27,6 +27,7 @@ import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
 import org.grobid.core.utilities.GrobidProperties;
 import org.grobid.core.utilities.IOUtilities;
+import org.grobid.core.utilities.TeiUtils;
 import org.grobid.core.utilities.UnicodeUtil;
 import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.service.exceptions.GrobidServiceException;
@@ -340,6 +341,21 @@ public class QuantitiesEngine {
             response.setRuntime(end - start);
 
             return response;
+        } catch (NoSuchElementException e) {
+            throw new GrobidServiceException("Could not get an engine from the pool within configured time. Sending service unavailable.", e, Response.Status.SERVICE_UNAVAILABLE);
+        } catch (Exception e) {
+            throw new GrobidServiceException("An unexpected exception occurs. ", e, Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Same extraction as {@link #processText(String)}, serialised as a TEI document with the
+     * measures annotated inline. See https://github.com/lfoppiano/grobid-quantities/issues/20
+     */
+    public String processTextTei(String text) {
+        try {
+            String preprocessed = QuantityParser.preprocess(text);
+            return TeiUtils.toTei(quantityParser.process(preprocessed), preprocessed);
         } catch (NoSuchElementException e) {
             throw new GrobidServiceException("Could not get an engine from the pool within configured time. Sending service unavailable.", e, Response.Status.SERVICE_UNAVAILABLE);
         } catch (Exception e) {

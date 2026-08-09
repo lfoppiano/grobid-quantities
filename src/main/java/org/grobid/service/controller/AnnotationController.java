@@ -25,6 +25,7 @@ public class AnnotationController {
     private static final String PATH_IS_ALIVE = "isalive";
 
     private static final String PATH_QUANTITY_TEXT = "processQuantityText";
+    private static final String PATH_QUANTITY_TEXT_TEI = "processQuantityTextTEI";
     private static final String PATH_UNITS_TEXT = "processUnitsText";
     private static final String PATH_QUANTITY_XML = "processQuantityXML";
     private static final String PATH_ANNOTATE_QUANTITY_PDF = "annotateQuantityPDF";
@@ -90,6 +91,15 @@ public class AnnotationController {
         MeasurementsResponse response = engine.processText(text);
 
         return response.toJson();
+    }
+
+    @Path(PATH_QUANTITY_TEXT_TEI)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_XML + ";charset=utf-8")
+    @POST
+    public String processTextTEI(@FormDataParam("text") String text) {
+
+        return engine.processTextTei(text);
     }
 
     @Path(PATH_PARSE_MEASURE)
