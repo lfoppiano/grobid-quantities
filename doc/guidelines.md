@@ -435,6 +435,20 @@ Composed units follow the notation of the units model, e.g. `unit="km.s^-1"`, `u
 
 See issue [#39](https://github.com/lfoppiano/grobid-quantities/issues/39)
 
+#### Rates of counted objects
+
+`600 h −1` in a zenithal hourly rate means 600 meteors per hour. The unit is the reciprocal
+time, and the counted object - meteors - is not part of it: no `meteor/h` unit is created, and
+the type of the measure is the type of the unit that is actually there.
+
+``` xml
+an Earth-equivalent zenith hourly rate <measure type="value"><num>600</num> <measure type="FREQUENCY" unit="h^-1">h −1</measure></measure>
+```
+
+The counted object belongs to the quantified object, not to the unit.
+
+See issue [#46](https://github.com/lfoppiano/grobid-quantities/issues/46)
+
 ### Out of scope
 
 Only **expressions of quantities** are annotated, which can use numbers
