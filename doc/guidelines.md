@@ -419,6 +419,22 @@ they are realistic noise. For example:
 2.5 • -> <measure type="value"><num>2.5</num><measure type="ANGLE" unit="°">°</measure></measure>
 ```
 
+#### Value of the `@unit` attribute
+
+The `@unit` attribute records the unit as it is *known to the lexicon*, not as it is written in
+the text. Use the first notation of the lexicon entry
+(`src/main/resources/lexicon/en/units.json`) when the unit has one, e.g. `min` and not `minute`,
+`km` and not `kilometre`. When a unit has no notation, use the singular lemma, e.g.
+`unit="week"`.
+
+This settles the ambiguity of units with several accepted symbols (`a` and `yr` for the year):
+the lexicon entry decides, and annotators do not have to. When the unit is missing from the
+lexicon, add it there rather than inventing a notation in the annotation.
+
+Composed units follow the notation of the units model, e.g. `unit="km.s^-1"`, `unit="h^-1"`.
+
+See issue [#39](https://github.com/lfoppiano/grobid-quantities/issues/39)
+
 ### Out of scope
 
 Only **expressions of quantities** are annotated, which can use numbers
