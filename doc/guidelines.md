@@ -449,6 +449,21 @@ The counted object belongs to the quantified object, not to the unit.
 
 See issue [#46](https://github.com/lfoppiano/grobid-quantities/issues/46)
 
+#### Resolutions expressed per pixel
+
+`40 mas per pixel` and `100 km per pixel` are resolutions. The pixel is a counted object, not a
+unit, so `mas/pixel` and `km/pixel` are not annotated as units and no RESOLUTION type is needed:
+only the unit that is actually there is annotated, with its own type.
+
+``` xml
+The high spatial resolution of the images (<measure type="value"><num>40</num> <measure type="ANGLE" unit="mas">mas</measure></measure> per pixel,
+corresponding to ≥ <measure type="interval"><num atLeast="100">100</num> <measure type="LENGTH" unit="km">km</measure></measure> per pixel)
+```
+
+The `per pixel` part belongs to the quantified object.
+
+See issue [#43](https://github.com/lfoppiano/grobid-quantities/issues/43)
+
 ### Out of scope
 
 Only **expressions of quantities** are annotated, which can use numbers
