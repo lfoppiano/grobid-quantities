@@ -181,6 +181,31 @@ Another example of a quantity of type interval looks as below: :
     }
 ```
 
+## Process Quantities from Text, TEI output
+
+Same extraction as `processQuantityText`, serialised as a TEI document with the measures
+annotated inline in the text. The notation is the one used by the annotated corpus and by the
+[annotation guidelines](guidelines.md), which makes the output directly comparable with the
+training data.
+
+>    POST    /service/processQuantityTextTEI
+
+```shell
+    curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuantityTextTEI
+```
+
+``` xml
+    <tei xmlns="http://www.tei-c.org/ns/1.0">
+      <teiHeader>...</teiHeader>
+      <text xml:lang="en">
+        <p>I've lost <measure type="value"><num>two</num> <measure type="time" unit="minutes">minutes</measure></measure>.</p>
+      </text>
+    </tei>
+```
+
+Note that, unlike the JSON output, the TEI output carries the raw annotations only: parsed and
+normalised values are not represented.
+
 ## Process Quantities from PDF
 
 Process PDF and generate annotations of measurements. The results are annotations which, by containing coordinate information, can be used to annotate directly a PDF. 
