@@ -198,7 +198,7 @@ training data.
     <tei xmlns="http://www.tei-c.org/ns/1.0">
       <teiHeader>...</teiHeader>
       <text xml:lang="en">
-        <p>I've lost <measure type="value"><num>two</num> <measure type="time" unit="minutes">minutes</measure></measure>.</p>
+        <p>I've lost <measure type="value"><num>two</num> <measure type="TIME" unit="minutes">minutes</measure></measure>.</p>
       </text>
     </tei>
 ```
