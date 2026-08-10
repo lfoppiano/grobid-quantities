@@ -206,6 +206,10 @@ training data.
 Note that, unlike the JSON output, the TEI output carries the raw annotations only: parsed and
 normalised values are not represented.
 
+The unit type is serialised with the uppercase enum name (`type="TIME"`), as in the corpus and
+guidelines, whereas the JSON output uses the lowercase label (`"type": "time"`): the two notations
+are intentionally different.
+
 ## Process Quantities from PDF
 
 Process PDF and generate annotations of measurements. The results are annotations which, by containing coordinate information, can be used to annotate directly a PDF. 
