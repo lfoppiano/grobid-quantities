@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
@@ -58,7 +58,7 @@ jobs:
           fi
           echo "TAGS=${TAGS}"
           echo ::set-output name=tags::${TAGS}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build and push
         id: docker_build
         uses: mr-smithers-excellent/docker-build-push@v7

@@ -12,12 +12,12 @@ jobs:
 
     steps:
     - name: Checkout grobid home
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: kermitt2/grobid
         path: ./grobid
     - name: Checkout grobid-quantities
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         path: ./grobid/grobid-quantities
     - name: Set up JDK 21
