@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 
 + TEI output for text processing, on `POST /service/processQuantityTextTEI`. The measures are annotated inline in the text, in the same notation as the annotated corpus and the annotation guidelines (#20)
++ Regression test asserting that `processQuantityTextTEI` answers blank or empty input the same way as `processQuantityText`: `200` with an empty TEI document, instead of a `500` (#20)
 
 ### Fixed
 
