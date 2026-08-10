@@ -197,6 +197,9 @@ public class QuantityParser extends AbstractParser {
      * TEI serialisation, for instance - has to apply it too.
      */
     public static String preprocess(String text) {
+        if (text == null) {
+            return "";
+        }
         return text.replace("\r\n", " ");
     }
 
