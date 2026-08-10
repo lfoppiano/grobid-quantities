@@ -73,6 +73,16 @@ public class QuantitiesEngine {
         instance = this;
     }
 
+    /**
+     * Visible for testing: wires already-built parsers directly instead of resolving them
+     * from the singleton pool, so blank-input behaviour can be exercised without models.
+     */
+    QuantitiesEngine(QuantityParser quantityParser, UnitParser unitParser, EngineParsers parsers) {
+        this.quantityParser = quantityParser;
+        this.unitParser = unitParser;
+        this.parsers = parsers;
+    }
+
     public static QuantitiesEngine getInstance() {
         if (instance == null) {
             instance = getNewInstance();

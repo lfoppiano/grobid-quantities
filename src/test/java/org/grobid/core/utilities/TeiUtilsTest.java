@@ -88,7 +88,7 @@ public class TeiUtilsTest {
         String tei = TeiUtils.toTei(measurements, preprocessed);
 
         assertThat(tei, containsString("<teiHeader>"));
-        assertThat(tei, containsString("<p></p>"));
+        assertThat(tei, containsString("<text xml:lang=\"en\"><p"));
     }
 
     @Test
@@ -100,6 +100,6 @@ public class TeiUtilsTest {
         String tei = TeiUtils.toTei(null, preprocessed);
 
         assertThat(tei, containsString("<teiHeader>"));
-        assertThat(tei, containsString("<p></p>"));
+        assertThat(tei, containsString("<text xml:lang=\"en\"><p"));
     }
 }
