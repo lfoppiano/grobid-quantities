@@ -16,6 +16,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 + TEI output for text processing, on `POST /service/processQuantityTextTEI`. The measures are annotated inline in the text, in the same notation as the annotated corpus and the annotation guidelines (#20)
 
+### Fixed
+
++ `POST /service/processQuantityTextTEI` now answers blank or empty input the same way as the JSON endpoint `processQuantityText`: `200` with an empty TEI document, instead of a `500` (#20)
++ Corrected the `processQuantityTextTEI` example in the REST API documentation to use the uppercase unit type notation (`type="TIME"`) emitted by the code, consistent with the annotated corpus and the annotation guidelines (#20)
+
 ### Known issues
 
 + `ValueParserTest.testTagValue_exponential_1/2` fail after the Grobid 0.9.1 upgrade: Grobid 0.9.1 changed where the English word-forms lexicon (`english.wf`) is loaded, so the tests' PowerMock `@SuppressStaticInitializationFor("...Lexicon")` mock no longer intercepts it and it loads against a null grobid-home. These should be migrated off PowerMock (already a standing TODO in `build.gradle`) or reworked to run against a real grobid-home. The other 152 unit tests pass.

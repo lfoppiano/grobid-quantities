@@ -8,6 +8,7 @@ import org.grobid.core.engines.training.QuantityTrainingFormatter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -34,6 +35,9 @@ public class TeiUtils {
         Element textNode = teiElement("text");
         // for the moment we support english only
         textNode.addAttribute(new Attribute("xml:lang", XML_NAMESPACE, "en"));
+        if (measurements == null) {
+            measurements = Collections.emptyList();
+        }
         textNode.appendChild(FORMATTER.trainingExtraction(measurements, text));
 
         root.appendChild(textNode);

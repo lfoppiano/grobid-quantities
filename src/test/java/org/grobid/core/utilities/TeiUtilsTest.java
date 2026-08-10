@@ -4,13 +4,16 @@ import org.grobid.core.data.Measurement;
 import org.grobid.core.data.Quantity;
 import org.grobid.core.data.Unit;
 import org.grobid.core.data.UnitDefinition;
+import org.grobid.core.engines.QuantityParser;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 
 /**
  * See https://github.com/lfoppiano/grobid-quantities/issues/20
@@ -75,5 +78,28 @@ public class TeiUtilsTest {
 
         assertThat(tei, containsString("<p>I've lost <measure"));
         assertThat(tei, containsString("</measure>.</p>"));
+    }
+
+    @Test
+    public void testToTei_blankText_shouldReturnEmptyTeiDocument() {
+        String preprocessed = QuantityParser.preprocess("");
+        List<Measurement> measurements = null;
+
+        String tei = TeiUtils.toTei(measurements, preprocessed);
+
+        assertThat(tei, containsString("<teiHeader>"));
+        assertThat(tei, containsString("<p></p>"));
+    }
+
+    @Test
+    public void testToTei_nullText_shouldReturnEmptyTeiDocument() {
+        String preprocessed = QuantityParser.preprocess(null);
+
+        assertThat(preprocessed, is(""));
+
+        String tei = TeiUtils.toTei(null, preprocessed);
+
+        assertThat(tei, containsString("<teiHeader>"));
+        assertThat(tei, containsString("<p></p>"));
     }
 }
