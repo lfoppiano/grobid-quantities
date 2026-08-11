@@ -2,7 +2,9 @@ package org.grobid.service.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.core.Configuration;
+import io.dropwizard.util.Duration;
 import org.apache.commons.io.IOUtils;
+import org.eclipse.jetty.http.HttpStatus;
 import org.grobid.core.utilities.GrobidConfig;
 import org.grobid.core.utilities.GrobidProperties;
 import org.slf4j.Logger;
@@ -38,6 +40,31 @@ public class GrobidQuantitiesConfiguration extends Configuration {
 
     private List<GrobidConfig.ModelParameters> models = new ArrayList<>();
     private int maxParallelRequests;
+
+    /**
+     * How many requests may wait for a free slot once {@code maxParallelRequests} is reached.
+     * Requests beyond that are rejected immediately with {@code maxQueuedRequestsRejectStatus}.
+     * A negative value means an unbounded queue. The default is Jetty's own default.
+     */
+    @JsonProperty
+    private int maxQueuedRequests = 1024;
+
+    /**
+     * How long a request may wait for a free slot before being rejected with
+     * {@code maxQueuedRequestsRejectStatus}. Zero - the default - means it waits indefinitely.
+     * <p>
+     * This is *not* a limit on how long a request may take to be answered once it holds a slot,
+     * and neither is the connector's {@code idleTimeout}: see
+     * https://github.com/lfoppiano/grobid-quantities/issues/159
+     */
+    @JsonProperty
+    private Duration maxQueuedRequestTimeout = Duration.seconds(0);
+
+    /**
+     * The status returned to requests rejected by the two limits above.
+     */
+    @JsonProperty
+    private int maxQueuedRequestsRejectStatus = HttpStatus.SERVICE_UNAVAILABLE_503;
 
     private String cleanlpModelPath = "resources/cleanlp/models";
 
@@ -86,6 +113,44 @@ public class GrobidQuantitiesConfiguration extends Configuration {
             this.maxParallelRequests = Runtime.getRuntime().availableProcessors();
         }
         return this.maxParallelRequests;
+    }
+
+    public void setMaxParallelRequests(int maxParallelRequests) {
+        this.maxParallelRequests = maxParallelRequests;
+    }
+
+    public int getMaxQueuedRequests() {
+        return this.maxQueuedRequests;
+    }
+
+    public void setMaxQueuedRequests(int maxQueuedRequests) {
+        this.maxQueuedRequests = maxQueuedRequests;
+    }
+
+    public Duration getMaxQueuedRequestTimeout() {
+        return this.maxQueuedRequestTimeout;
+    }
+
+    public void setMaxQueuedRequestTimeout(Duration maxQueuedRequestTimeout) {
+        this.maxQueuedRequestTimeout = maxQueuedRequestTimeout;
+    }
+
+    /**
+     * {@link #getMaxQueuedRequestTimeout()} as the {@link java.time.Duration} Jetty expects.
+     */
+    public java.time.Duration getMaxQueuedRequestTimeoutAsJavaDuration() {
+        if (this.maxQueuedRequestTimeout == null) {
+            return java.time.Duration.ZERO;
+        }
+        return java.time.Duration.ofMillis(this.maxQueuedRequestTimeout.toMilliseconds());
+    }
+
+    public int getMaxQueuedRequestsRejectStatus() {
+        return this.maxQueuedRequestsRejectStatus;
+    }
+
+    public void setMaxQueuedRequestsRejectStatus(int maxQueuedRequestsRejectStatus) {
+        this.maxQueuedRequestsRejectStatus = maxQueuedRequestsRejectStatus;
     }
 
     public static String getVersion() {

@@ -75,13 +75,44 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
         environment.getApplicationContext().insertHandler(cors);
 
         // Limit concurrent requests via Jetty 12's QoSHandler (replaces the removed
-        // org.eclipse.jetty.servlets.QoSFilter). A non-positive value means unlimited.
+        // org.eclipse.jetty.servlets.QoSFilter). A negative value disables the limit;
+        // 0 means one slot per available processor, see getMaxParallelRequests().
         int maxParallelRequests = configuration.getMaxParallelRequests();
         if (maxParallelRequests > 0) {
-            QoSHandler qos = new QoSHandler();
-            qos.setMaxRequestCount(maxParallelRequests);
-            environment.getApplicationContext().insertHandler(qos);
+            environment.getApplicationContext().insertHandler(buildQoSHandler(configuration));
+        } else {
+            LOGGER.info("Parallel requests are not limited (maxParallelRequests={})", maxParallelRequests);
         }
+    }
+
+    /**
+     * Builds the handler enforcing {@code maxParallelRequests}. Requests over the limit are not
+     * rejected straight away, they are queued ("suspended") until a slot frees up; the queue has
+     * a bounded length and, optionally, a bounded waiting time, and a request that exceeds either
+     * is rejected with {@code maxQueuedRequestsRejectStatus} (503 by default).
+     * <p>
+     * All three bounds used to be implicit, which is what made the 503s of
+     * https://github.com/lfoppiano/grobid-quantities/issues/159 so hard to read: the Jetty 9
+     * {@code QoSFilter} this replaced suspended over-limit requests with the servlet default
+     * async timeout of 30 seconds, so requests were rejected after ~30s no matter what the
+     * connector's {@code idleTimeout} said. Jetty 12's defaults are different again (a 1024-long
+     * queue and no waiting time limit), so we set them explicitly and log them.
+     */
+    static QoSHandler buildQoSHandler(GrobidQuantitiesConfiguration configuration) {
+        QoSHandler qos = new QoSHandler();
+        qos.setMaxRequestCount(configuration.getMaxParallelRequests());
+        qos.setMaxSuspendedRequestCount(configuration.getMaxQueuedRequests());
+        qos.setMaxSuspend(configuration.getMaxQueuedRequestTimeoutAsJavaDuration());
+        qos.setRejectStatusCode(configuration.getMaxQueuedRequestsRejectStatus());
+
+        LOGGER.info("Limiting parallel requests: maxParallelRequests={}, maxQueuedRequests={}, "
+                + "maxQueuedRequestTimeout={}, rejecting with {}",
+            qos.getMaxRequestCount(),
+            qos.getMaxSuspendedRequestCount() < 0 ? "unbounded" : qos.getMaxSuspendedRequestCount(),
+            qos.getMaxSuspend().isZero() ? "unbounded" : qos.getMaxSuspend(),
+            qos.getRejectStatusCode());
+
+        return qos;
     }
 
     /**

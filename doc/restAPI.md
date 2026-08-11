@@ -383,3 +383,41 @@ The version is 0.7.2-SNAPSHOT and the revision `g26a151b` allow to know what is 
 This parameter allow to limit the number of parallel requests that can be sent to the service. 
 It can be modified in the configuration file the item `maxParallelRequests`. 
 By default, the number is set to 0, which indicate to allow a number of parallel requests not higher than the number of available CPUs.
+A negative value removes the limit altogether.
+
+Requests arriving while all the slots are taken are **not** rejected straight away: they are
+queued until a slot frees up. Three further settings bound that queue:
+
+| Setting                          | Default     | Meaning                                                                       |
+|----------------------------------|-------------|-------------------------------------------------------------------------------|
+| `maxQueuedRequests`              | `1024`      | how many requests may wait at once; a negative value means an unbounded queue  |
+| `maxQueuedRequestTimeout`        | `0 seconds` | how long one may wait; `0` means it waits until a slot frees up, however long  |
+| `maxQueuedRequestsRejectStatus`  | `503`       | the status returned to a request that exceeds either bound                     |
+
+The effective values are logged at startup:
+
+```
+Limiting parallel requests: maxParallelRequests=8, maxQueuedRequests=1024, maxQueuedRequestTimeout=unbounded, rejecting with 503
+```
+
+### These are not response-time limits
+
+Neither the settings above nor the connector's `idleTimeout` bound how long the service may take
+to compute a response once the request holds a slot. This is a recurring source of confusion, and
+it is what issue [#159](https://github.com/lfoppiano/grobid-quantities/issues/159) reported: a
+service raising `idleTimeout` to 120 seconds still saw requests fail with `503` after almost
+exactly 30 seconds.
+
+The 30 seconds came from the queue, not from the connector. The limit was then implemented with
+Jetty 9's `QoSFilter`, which suspended over-limit requests using the servlet *default* async
+timeout — 30 seconds — and rejected them with `503` when it expired. Nothing in the configuration
+file mentioned that number, and `idleTimeout` had no influence on it.
+
+The limit is now implemented with Jetty 12's `QoSHandler`, whose own defaults are different again
+(a 1024-long queue, no waiting time limit). Rather than inherit either set of implicit defaults,
+grobid-quantities now sets all three bounds explicitly from the configuration file, so a `503`
+can always be traced back to a value that is written down somewhere.
+
+If you are seeing `503`s under load, raise `maxParallelRequests` (and give the service the memory
+and cores to match — see [Getting started](gettingStarted.md)); changing `idleTimeout` will not
+help.
