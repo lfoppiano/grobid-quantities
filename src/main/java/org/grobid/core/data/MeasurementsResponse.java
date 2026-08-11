@@ -1,13 +1,16 @@
 package org.grobid.core.data;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import org.grobid.core.layout.Page;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @JsonInclude(Include.NON_EMPTY)
 public class MeasurementsResponse {
@@ -35,6 +38,24 @@ public class MeasurementsResponse {
     }
 
     private List<Page> pages;
+
+    /**
+     * The text the measurement offsets refer to, when the caller does not already have it.
+     * Set by the XML endpoint, which extracts the text from the markup before processing it -
+     * without it the offsets in the response cannot be resolved to anything. Left null by the
+     * text endpoint, where the caller supplied the text in the first place.
+     * <p>
+     * See https://github.com/lfoppiano/grobid-quantities/issues/3
+     */
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public List<Measurement> getMeasurements() {
         return measurements;
@@ -65,6 +86,10 @@ public class MeasurementsResponse {
 
         jsonBuilder.append("{ ");
         jsonBuilder.append("\"runtime\" : " + runtime);
+        if (isNotBlank(getText())) {
+            byte[] encodedText = JsonStringEncoder.getInstance().quoteAsUTF8(getText());
+            jsonBuilder.append(", \"text\" : \"" + new String(encodedText, UTF_8) + "\"");
+        }
         boolean first = true;
         if (isNotEmpty(getPages())) {
             // page height and width
