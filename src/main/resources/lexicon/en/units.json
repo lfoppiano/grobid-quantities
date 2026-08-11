@@ -3059,6 +3059,1105 @@
           ]
         }
       ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "nmi"
+        }
+      ],
+      "type": "LENGTH",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "nautical mile",
+          "inflections": [
+            "nautical miles"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "ly"
+        }
+      ],
+      "type": "LENGTH",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "light-year",
+          "inflections": [
+            "light-years"
+          ]
+        },
+        {
+          "lemma": "light year",
+          "inflections": [
+            "light years"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [],
+      "type": "LENGTH",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "parsec",
+          "inflections": [
+            "parsecs"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "m2"
+        },
+        {
+          "raw": "m^2"
+        },
+        {
+          "raw": "m²"
+        }
+      ],
+      "type": "AREA",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "square metre",
+          "inflections": [
+            "square metres"
+          ]
+        },
+        {
+          "lemma": "square meter",
+          "inflections": [
+            "square meters"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [],
+      "type": "AREA",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "hectare",
+          "inflections": [
+            "hectares"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "acre"
+        }
+      ],
+      "type": "AREA",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "acre",
+          "inflections": [
+            "acres"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "in2"
+        },
+        {
+          "raw": "in^2"
+        },
+        {
+          "raw": "sq in"
+        }
+      ],
+      "type": "AREA",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "square inch",
+          "inflections": [
+            "square inches"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "ft2"
+        },
+        {
+          "raw": "ft^2"
+        },
+        {
+          "raw": "sq ft"
+        }
+      ],
+      "type": "AREA",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "square foot",
+          "inflections": [
+            "square feet"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "yd2"
+        },
+        {
+          "raw": "yd^2"
+        },
+        {
+          "raw": "sq yd"
+        }
+      ],
+      "type": "AREA",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "square yard",
+          "inflections": [
+            "square yards"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "mi2"
+        },
+        {
+          "raw": "mi^2"
+        },
+        {
+          "raw": "sq mi"
+        }
+      ],
+      "type": "AREA",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "square mile",
+          "inflections": [
+            "square miles"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "b"
+        }
+      ],
+      "type": "AREA",
+      "system": "NON_SI",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "barn",
+          "inflections": [
+            "barns"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "cm3"
+        }
+      ],
+      "type": "VOLUME",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "cubic centimetre",
+          "inflections": [
+            "cubic centimetres"
+          ]
+        },
+        {
+          "lemma": "cubic centimeter",
+          "inflections": [
+            "cubic centimeters"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "ft3"
+        },
+        {
+          "raw": "ft^3"
+        },
+        {
+          "raw": "cu ft"
+        }
+      ],
+      "type": "VOLUME",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "cubic foot",
+          "inflections": [
+            "cubic feet"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "yd3"
+        },
+        {
+          "raw": "yd^3"
+        },
+        {
+          "raw": "cu yd"
+        }
+      ],
+      "type": "VOLUME",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "cubic yard",
+          "inflections": [
+            "cubic yards"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "bbl"
+        }
+      ],
+      "type": "VOLUME",
+      "system": "US",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "barrel",
+          "inflections": [
+            "barrels"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "bu"
+        }
+      ],
+      "type": "VOLUME",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "bushel",
+          "inflections": [
+            "bushels"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "tsp"
+        }
+      ],
+      "type": "VOLUME",
+      "system": "US",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "teaspoon",
+          "inflections": [
+            "teaspoons"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "tbsp"
+        }
+      ],
+      "type": "VOLUME",
+      "system": "US",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "tablespoon",
+          "inflections": [
+            "tablespoons"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [],
+      "type": "MASS",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "carat",
+          "inflections": [
+            "carats"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "ozt"
+        },
+        {
+          "raw": "oz t"
+        }
+      ],
+      "type": "MASS",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "troy ounce",
+          "inflections": [
+            "troy ounces"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "dwt"
+        }
+      ],
+      "type": "MASS",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "pennyweight",
+          "inflections": [
+            "pennyweights"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "cal"
+        }
+      ],
+      "type": "ENERGY",
+      "system": "NON_SI",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "calorie",
+          "inflections": [
+            "calories"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Wh"
+        },
+        {
+          "raw": "W h"
+        },
+        {
+          "raw": "W·h"
+        }
+      ],
+      "type": "ENERGY",
+      "system": "NON_SI",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "watt hour",
+          "inflections": [
+            "watt hours"
+          ]
+        },
+        {
+          "lemma": "watt-hour",
+          "inflections": [
+            "watt-hours"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "BTU"
+        },
+        {
+          "raw": "Btu"
+        }
+      ],
+      "type": "ENERGY",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "British thermal unit",
+          "inflections": [
+            "British thermal units"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "ft lb"
+        },
+        {
+          "raw": "ft-lb"
+        },
+        {
+          "raw": "ft·lb"
+        }
+      ],
+      "type": "ENERGY",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "foot-pound",
+          "inflections": [
+            "foot-pounds"
+          ]
+        },
+        {
+          "lemma": "foot pound",
+          "inflections": [
+            "foot pounds"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Ry"
+        }
+      ],
+      "type": "ENERGY",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "rydberg",
+          "inflections": [
+            "rydbergs"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "hp"
+        }
+      ],
+      "type": "POWER",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "horsepower",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "lbf"
+        }
+      ],
+      "type": "FORCE",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "pound-force",
+          "inflections": [
+            "pound-forces"
+          ]
+        },
+        {
+          "lemma": "pound force",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "kgf"
+        },
+        {
+          "raw": "kp"
+        }
+      ],
+      "type": "FORCE",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "kilogram-force",
+          "inflections": []
+        },
+        {
+          "lemma": "kilopond",
+          "inflections": [
+            "kiloponds"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "inHg"
+        },
+        {
+          "raw": "in Hg"
+        }
+      ],
+      "type": "PRESSURE",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "inch of mercury",
+          "inflections": [
+            "inches of mercury"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Ba"
+        }
+      ],
+      "type": "PRESSURE",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "barye",
+          "inflections": [
+            "baryes"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "kgf/cm2"
+        },
+        {
+          "raw": "kgf/cm^2"
+        }
+      ],
+      "type": "PRESSURE",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "kilogram-force per square centimetre",
+          "inflections": []
+        },
+        {
+          "lemma": "kilogram-force per square centimeter",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "km/h"
+        },
+        {
+          "raw": "kph"
+        },
+        {
+          "raw": "kmh"
+        }
+      ],
+      "type": "VELOCITY",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "kilometre per hour",
+          "inflections": [
+            "kilometres per hour"
+          ]
+        },
+        {
+          "lemma": "kilometer per hour",
+          "inflections": [
+            "kilometers per hour"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "ft/s"
+        },
+        {
+          "raw": "fps"
+        }
+      ],
+      "type": "VELOCITY",
+      "system": "IMPERIAL",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "foot per second",
+          "inflections": [
+            "feet per second"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "m/s2"
+        },
+        {
+          "raw": "m/s^2"
+        },
+        {
+          "raw": "m s^-2"
+        }
+      ],
+      "type": "ACCELERATION",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "metre per second squared",
+          "inflections": [
+            "metres per second squared"
+          ]
+        },
+        {
+          "lemma": "meter per second squared",
+          "inflections": [
+            "meters per second squared"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "lm"
+        }
+      ],
+      "type": "LUMINOUS_FLUX",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "lumen",
+          "inflections": [
+            "lumens"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "lx"
+        }
+      ],
+      "type": "ILLUMINANCE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "lux",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [],
+      "type": "ILLUMINANCE",
+      "system": "US",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "foot-candle",
+          "inflections": [
+            "foot-candles"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "cd/m2"
+        },
+        {
+          "raw": "cd/m^2"
+        },
+        {
+          "raw": "nit"
+        }
+      ],
+      "type": "LUMINANCE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "candela per square metre",
+          "inflections": []
+        },
+        {
+          "lemma": "candela per square meter",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [],
+      "type": "CATALYTIC_ACTIVITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "katal",
+          "inflections": [
+            "katals"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "W/(m K)"
+        },
+        {
+          "raw": "W/mK"
+        },
+        {
+          "raw": "W m^-1 K^-1"
+        }
+      ],
+      "type": "THERMAL_CONDUCTIVITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "watt per metre kelvin",
+          "inflections": []
+        },
+        {
+          "lemma": "watt per meter kelvin",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "J/(kg K)"
+        },
+        {
+          "raw": "J/kgK"
+        },
+        {
+          "raw": "J kg^-1 K^-1"
+        }
+      ],
+      "type": "HEAT_CAPACITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "joule per kilogram kelvin",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "W/m2"
+        },
+        {
+          "raw": "W/m^2"
+        },
+        {
+          "raw": "W m^-2"
+        }
+      ],
+      "type": "IRRADIANCE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "watt per square metre",
+          "inflections": []
+        },
+        {
+          "lemma": "watt per square meter",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "W/(m2 sr)"
+        },
+        {
+          "raw": "W m^-2 sr^-1"
+        }
+      ],
+      "type": "RADIANCE",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "watt per square metre per steradian",
+          "inflections": []
+        },
+        {
+          "lemma": "watt per square meter per steradian",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [],
+      "type": "KINEMATIC_VISCOSITY",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "stokes",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "m2/s"
+        },
+        {
+          "raw": "m^2/s"
+        }
+      ],
+      "type": "KINEMATIC_VISCOSITY",
+      "system": "SI_DERIVED",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "square metre per second",
+          "inflections": []
+        },
+        {
+          "lemma": "square meter per second",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "A h"
+        }
+      ],
+      "type": "ELECTRIC_CHARGE",
+      "system": "NON_SI",
+      "supportsPrefixes": true,
+      "names": [
+        {
+          "lemma": "ampere hour",
+          "inflections": [
+            "ampere hours"
+          ]
+        },
+        {
+          "lemma": "ampere-hour",
+          "inflections": [
+            "ampere-hours"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "ppt"
+        }
+      ],
+      "type": "CONCENTRATION",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "part per trillion",
+          "inflections": [
+            "parts per trillion"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "mol/kg"
+        }
+      ],
+      "type": "CONCENTRATION",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "molality",
+          "inflections": []
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "g/L"
+        },
+        {
+          "raw": "g/l"
+        }
+      ],
+      "type": "CONCENTRATION",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "gram per litre",
+          "inflections": [
+            "grams per litre"
+          ]
+        },
+        {
+          "lemma": "gram per liter",
+          "inflections": [
+            "grams per liter"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "gon"
+        }
+      ],
+      "type": "ANGLE",
+      "system": "NON_SI",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "gradian",
+          "inflections": [
+            "gradians"
+          ]
+        },
+        {
+          "lemma": "gon",
+          "inflections": [
+            "gons"
+          ]
+        }
+      ]
+    },
+    {
+      "notations": [
+        {
+          "raw": "Mx"
+        }
+      ],
+      "type": "MAGNETIC_FLUX",
+      "system": "CGS",
+      "supportsPrefixes": false,
+      "names": [
+        {
+          "lemma": "maxwell",
+          "inflections": [
+            "maxwells"
+          ]
+        }
+      ]
     }
   ]
 }
