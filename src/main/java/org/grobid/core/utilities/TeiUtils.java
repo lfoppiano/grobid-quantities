@@ -27,7 +27,13 @@ public class TeiUtils {
      * unit="kg"&gt;kg&lt;/measure&gt;&lt;/measure&gt;</pre>
      * <p>
      * The text must be the one the measurements were extracted from, offsets included: see
-     * {@link org.grobid.core.engines.QuantityParser#preprocess(String)}.
+     * {@link org.grobid.core.engines.QuantityParser#preprocess(String)}. The serialisation walks
+     * the text once, from left to right, so it also expects the measurements to be ordered by
+     * offset, to not overlap, and to stay within the text. Those hold for what
+     * {@link org.grobid.core.engines.QuantityParser#process(String)} returns, since the offsets
+     * are those of the layout tokens of that same string; a caller that builds the list by hand
+     * and breaks them gets, respectively, dropped annotations and a
+     * {@link StringIndexOutOfBoundsException}.
      */
     public static String toTei(List<Measurement> measurements, String text) {
         Element root = getQuantitiesTEIHeader(-1);
