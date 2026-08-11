@@ -418,6 +418,22 @@ The limit is now implemented with Jetty 12's `QoSHandler`, whose own defaults ar
 grobid-quantities now sets all three bounds explicitly from the configuration file, so a `503`
 can always be traced back to a value that is written down somewhere.
 
+The distinction is easy to check for yourself. With `maxParallelRequests: 1`,
+`requestQueueMaxWait: 2 seconds` and `requestQueueRejectStatus: 429`, four concurrent requests
+give:
+
+```
+req2: HTTP 200 after 28.3s     <- holds the only slot, runs to completion
+req1: HTTP 429 after 2.14s     <- queued, gave up after requestQueueMaxWait
+req3: HTTP 429 after 2.14s
+req4: HTTP 429 after 2.14s
+```
+
+which is the shape of the report — some requests succeeding, others failing at a suspiciously
+constant delay — with the delay and the status now being the ones configured. Conversely a single
+request of 274,430 characters returns `200` with the complete 837 KB response after 42 seconds,
+identically with `idleTimeout: 120 seconds` and with `idleTimeout: 5 seconds`.
+
 If you are seeing `503`s under load, raise `maxParallelRequests` (and give the service the memory
 and cores to match — see [Getting started](gettingStarted.md)); changing `idleTimeout` will not
 help.
