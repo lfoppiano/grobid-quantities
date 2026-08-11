@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 + TEI output for text processing, on `POST /service/processQuantityTextTEI`. The measures are annotated inline in the text, in the same notation as the annotated corpus and the annotation guidelines (#20)
 + Regression test asserting that `processQuantityTextTEI` answers blank or empty input the same way as `processQuantityText`: `200` with an empty TEI document, instead of a `500` (#20)
++ `POST /service/processQuantityXML`, extracting measurements from the text carried by an XML document (TEI, ST.36, …). The path was declared in `AnnotationController` but had never been implemented. The markup is discarded and the textual chunks are processed as text; since the resulting offsets refer to the extracted text, that text is returned in a new `text` field of the response. The field is omitted when empty, so the other endpoints' responses are unchanged (#3)
++ The XML parser used by that endpoint rejects `DOCTYPE` declarations and external entities, so a submitted document cannot read local files (XXE) or expand nested entities; malformed input is answered with `400` rather than `500` (#3)
 
 ### Fixed
 

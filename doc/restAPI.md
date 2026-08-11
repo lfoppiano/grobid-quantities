@@ -210,6 +210,42 @@ The unit type is serialised with the uppercase enum name (`type="TIME"`), as in 
 guidelines, whereas the JSON output uses the lowercase label (`"type": "time"`): the two notations
 are intentionally different.
 
+## Process Quantities from XML
+
+Same extraction as `processQuantityText`, over the text carried by an XML document rather than
+over raw text.
+
+>    POST    /service/processQuantityXML
+
+The file is supplied using the `input` FormData parameter:
+
+``` shell
+    curl --form input=@./myFile.xml localhost:8060/service/processQuantityXML
+```
+
+The markup is discarded first: the textual chunks — `p` elements, or `paragraph` for ST.36
+patents — are extracted and joined with newlines, and the result is processed as text. No schema
+is assumed beyond that, so TEI, ST.36 and most other flavours work.
+
+Because the offsets in the response refer to the *extracted* text, not to the original XML, that
+text is returned alongside the measurements in a `text` field:
+
+``` json
+    {
+      "runtime": 42,
+      "text": "I've lost two minutes.\nAnd 3 kg.",
+      "measurements": [ ... ]
+    }
+```
+
+The `text` field appears only in this endpoint's response; `processQuantityText` is unchanged,
+since there the caller already has the text. Mapping a measurement back to a position in the
+original markup is not supported — use the extracted text.
+
+A document that is not well-formed XML is answered with **400**. Note that `DOCTYPE` declarations
+are rejected outright, so documents relying on a DTD for entity definitions have to be resolved
+before being submitted.
+
 ## Process Quantities from PDF
 
 Process PDF and generate annotations of measurements. The results are annotations which, by containing coordinate information, can be used to annotate directly a PDF. 

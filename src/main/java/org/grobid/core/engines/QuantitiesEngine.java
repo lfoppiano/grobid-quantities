@@ -22,6 +22,7 @@ import org.grobid.core.engines.label.SegmentationLabels;
 import org.grobid.core.engines.label.TaggingLabels;
 import org.grobid.core.layout.LayoutToken;
 import org.grobid.core.layout.LayoutTokenization;
+import org.grobid.core.sax.TextChunkSaxHandler;
 import org.grobid.core.tokenization.LabeledTokensContainer;
 import org.grobid.core.tokenization.TaggingTokenCluster;
 import org.grobid.core.tokenization.TaggingTokenClusteror;
@@ -33,7 +34,9 @@ import org.grobid.core.utilities.UnitUtilities;
 import org.grobid.service.exceptions.GrobidServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -356,6 +359,64 @@ public class QuantitiesEngine {
         } catch (Exception e) {
             throw new GrobidServiceException("An unexpected exception occurs. ", e, Response.Status.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    /**
+     * Same extraction as {@link #processText(String)}, over the text carried by an XML document
+     * rather than over raw text. The markup is discarded: the textual chunks (`p`/`paragraph`
+     * elements, as recognised by {@link TextChunkSaxHandler}, which copes with TEI and ST.36
+     * alike) are extracted and joined with newlines, and that text is processed.
+     * <p>
+     * The offsets of the response therefore refer to the extracted text, not to the XML, so the
+     * extracted text is returned along with the measurements - see
+     * {@link MeasurementsResponse#getText()}. Mapping a measurement back to a position in the
+     * original markup is not supported.
+     * <p>
+     * See https://github.com/lfoppiano/grobid-quantities/issues/3
+     */
+    public MeasurementsResponse processXml(InputStream xml) {
+        try {
+            long start = System.currentTimeMillis();
+
+            String text = extractText(xml);
+            MeasurementsResponse response = new MeasurementsResponse(quantityParser.process(text));
+            response.setText(text);
+            response.setRuntime(System.currentTimeMillis() - start);
+
+            return response;
+        } catch (GrobidServiceException e) {
+            throw e;
+        } catch (NoSuchElementException e) {
+            throw new GrobidServiceException("Could not get an engine from the pool within configured time. Sending service unavailable.", e, Response.Status.SERVICE_UNAVAILABLE);
+        } catch (Exception e) {
+            throw new GrobidServiceException("An unexpected exception occurs. ", e, Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Concatenates the textual chunks of an XML document. Malformed input is reported as a 400:
+     * it is the caller's document that is wrong, not the service.
+     * <p>
+     * The parser is configured to reject DOCTYPE declarations, which disables entity expansion
+     * altogether - external entities (XXE) as well as the internal ones that make up a billion
+     * laughs attack. The input comes from the network, so this is not optional.
+     */
+    static String extractText(InputStream xml) {
+        TextChunkSaxHandler handler = new TextChunkSaxHandler();
+        try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            factory.setXIncludeAware(false);
+            factory.newSAXParser().parse(xml, handler);
+        } catch (SAXException e) {
+            throw new GrobidServiceException("The input could not be parsed as XML. " + e.getMessage(), e, Response.Status.BAD_REQUEST);
+        } catch (Exception e) {
+            throw new GrobidServiceException("An unexpected exception occurs while reading the XML input. ", e, Response.Status.INTERNAL_SERVER_ERROR);
+        }
+
+        return String.join("\n", handler.getChunks());
     }
 
     /**
