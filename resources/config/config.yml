@@ -9,13 +9,13 @@ corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
 maxParallelRequests: 0
 
 # Requests over the limit above are queued until a slot frees up. These three settings bound the
-# queue; a request exceeding either bound is rejected with maxQueuedRequestsRejectStatus.
+# queue; a request exceeding either bound is rejected with requestQueueRejectStatus.
 # Note that none of them bounds how long a request may take once it holds a slot - and neither
 # does the connector's idleTimeout below. See issue #159.
-maxQueuedRequests: 1024
+requestQueueMaxSize: 1024
 # 0 means a queued request waits indefinitely for its slot
-maxQueuedRequestTimeout: 0 seconds
-maxQueuedRequestsRejectStatus: 503
+requestQueueMaxWait: 0 seconds
+requestQueueRejectStatus: 503
 
 cleanlpModelPath: "resources/cleanlp/models"
 

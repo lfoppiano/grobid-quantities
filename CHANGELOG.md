@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-+ `maxQueuedRequests`, `maxQueuedRequestTimeout` and `maxQueuedRequestsRejectStatus` configuration settings, bounding the queue of requests waiting for a `maxParallelRequests` slot. The effective values are logged at startup (#159)
++ `requestQueueMaxSize`, `requestQueueMaxWait` and `requestQueueRejectStatus` configuration settings, bounding the queue of requests waiting for a `maxParallelRequests` slot. The effective values are logged at startup (#159)
 
 ### Fixed
 

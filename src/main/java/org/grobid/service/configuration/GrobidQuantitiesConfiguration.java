@@ -43,28 +43,32 @@ public class GrobidQuantitiesConfiguration extends Configuration {
 
     /**
      * How many requests may wait for a free slot once {@code maxParallelRequests} is reached.
-     * Requests beyond that are rejected immediately with {@code maxQueuedRequestsRejectStatus}.
+     * Requests beyond that are rejected immediately with {@code requestQueueRejectStatus}.
+     * <p>
+     * Named {@code requestQueue*} rather than {@code maxQueuedRequests*} on purpose: Dropwizard
+     * already has a {@code server.maxQueuedRequests}, bounding the Jetty thread pool's queue,
+     * and issue #159 is precisely about two similarly named settings being conflated.
      * A negative value means an unbounded queue. The default is Jetty's own default.
      */
     @JsonProperty
-    private int maxQueuedRequests = 1024;
+    private int requestQueueMaxSize = 1024;
 
     /**
      * How long a request may wait for a free slot before being rejected with
-     * {@code maxQueuedRequestsRejectStatus}. Zero - the default - means it waits indefinitely.
+     * {@code requestQueueRejectStatus}. Zero - the default - means it waits indefinitely.
      * <p>
      * This is *not* a limit on how long a request may take to be answered once it holds a slot,
      * and neither is the connector's {@code idleTimeout}: see
      * https://github.com/lfoppiano/grobid-quantities/issues/159
      */
     @JsonProperty
-    private Duration maxQueuedRequestTimeout = Duration.seconds(0);
+    private Duration requestQueueMaxWait = Duration.seconds(0);
 
     /**
      * The status returned to requests rejected by the two limits above.
      */
     @JsonProperty
-    private int maxQueuedRequestsRejectStatus = HttpStatus.SERVICE_UNAVAILABLE_503;
+    private int requestQueueRejectStatus = HttpStatus.SERVICE_UNAVAILABLE_503;
 
     private String cleanlpModelPath = "resources/cleanlp/models";
 
@@ -119,38 +123,38 @@ public class GrobidQuantitiesConfiguration extends Configuration {
         this.maxParallelRequests = maxParallelRequests;
     }
 
-    public int getMaxQueuedRequests() {
-        return this.maxQueuedRequests;
+    public int getRequestQueueMaxSize() {
+        return this.requestQueueMaxSize;
     }
 
-    public void setMaxQueuedRequests(int maxQueuedRequests) {
-        this.maxQueuedRequests = maxQueuedRequests;
+    public void setRequestQueueMaxSize(int requestQueueMaxSize) {
+        this.requestQueueMaxSize = requestQueueMaxSize;
     }
 
-    public Duration getMaxQueuedRequestTimeout() {
-        return this.maxQueuedRequestTimeout;
+    public Duration getRequestQueueMaxWait() {
+        return this.requestQueueMaxWait;
     }
 
-    public void setMaxQueuedRequestTimeout(Duration maxQueuedRequestTimeout) {
-        this.maxQueuedRequestTimeout = maxQueuedRequestTimeout;
+    public void setRequestQueueMaxWait(Duration requestQueueMaxWait) {
+        this.requestQueueMaxWait = requestQueueMaxWait;
     }
 
     /**
-     * {@link #getMaxQueuedRequestTimeout()} as the {@link java.time.Duration} Jetty expects.
+     * {@link #getRequestQueueMaxWait()} as the {@link java.time.Duration} Jetty expects.
      */
-    public java.time.Duration getMaxQueuedRequestTimeoutAsJavaDuration() {
-        if (this.maxQueuedRequestTimeout == null) {
+    public java.time.Duration getRequestQueueMaxWaitAsJavaDuration() {
+        if (this.requestQueueMaxWait == null) {
             return java.time.Duration.ZERO;
         }
-        return java.time.Duration.ofMillis(this.maxQueuedRequestTimeout.toMilliseconds());
+        return java.time.Duration.ofMillis(this.requestQueueMaxWait.toMilliseconds());
     }
 
-    public int getMaxQueuedRequestsRejectStatus() {
-        return this.maxQueuedRequestsRejectStatus;
+    public int getRequestQueueRejectStatus() {
+        return this.requestQueueRejectStatus;
     }
 
-    public void setMaxQueuedRequestsRejectStatus(int maxQueuedRequestsRejectStatus) {
-        this.maxQueuedRequestsRejectStatus = maxQueuedRequestsRejectStatus;
+    public void setRequestQueueRejectStatus(int requestQueueRejectStatus) {
+        this.requestQueueRejectStatus = requestQueueRejectStatus;
     }
 
     public static String getVersion() {

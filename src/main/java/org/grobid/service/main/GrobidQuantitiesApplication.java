@@ -89,7 +89,7 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
      * Builds the handler enforcing {@code maxParallelRequests}. Requests over the limit are not
      * rejected straight away, they are queued ("suspended") until a slot frees up; the queue has
      * a bounded length and, optionally, a bounded waiting time, and a request that exceeds either
-     * is rejected with {@code maxQueuedRequestsRejectStatus} (503 by default).
+     * is rejected with {@code requestQueueRejectStatus} (503 by default).
      * <p>
      * All three bounds used to be implicit, which is what made the 503s of
      * https://github.com/lfoppiano/grobid-quantities/issues/159 so hard to read: the Jetty 9
@@ -101,12 +101,12 @@ public class GrobidQuantitiesApplication extends Application<GrobidQuantitiesCon
     static QoSHandler buildQoSHandler(GrobidQuantitiesConfiguration configuration) {
         QoSHandler qos = new QoSHandler();
         qos.setMaxRequestCount(configuration.getMaxParallelRequests());
-        qos.setMaxSuspendedRequestCount(configuration.getMaxQueuedRequests());
-        qos.setMaxSuspend(configuration.getMaxQueuedRequestTimeoutAsJavaDuration());
-        qos.setRejectStatusCode(configuration.getMaxQueuedRequestsRejectStatus());
+        qos.setMaxSuspendedRequestCount(configuration.getRequestQueueMaxSize());
+        qos.setMaxSuspend(configuration.getRequestQueueMaxWaitAsJavaDuration());
+        qos.setRejectStatusCode(configuration.getRequestQueueRejectStatus());
 
-        LOGGER.info("Limiting parallel requests: maxParallelRequests={}, maxQueuedRequests={}, "
-                + "maxQueuedRequestTimeout={}, rejecting with {}",
+        LOGGER.info("Limiting parallel requests: maxParallelRequests={}, requestQueueMaxSize={}, "
+                + "requestQueueMaxWait={}, rejecting with {}",
             qos.getMaxRequestCount(),
             qos.getMaxSuspendedRequestCount() < 0 ? "unbounded" : qos.getMaxSuspendedRequestCount(),
             qos.getMaxSuspend().isZero() ? "unbounded" : qos.getMaxSuspend(),

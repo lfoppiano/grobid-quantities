@@ -35,9 +35,9 @@ class GrobidQuantitiesApplicationQoSTest {
     void configuredValues_shouldReachTheHandler() {
         GrobidQuantitiesConfiguration configuration = new GrobidQuantitiesConfiguration();
         configuration.setMaxParallelRequests(4);
-        configuration.setMaxQueuedRequests(32);
-        configuration.setMaxQueuedRequestTimeout(Duration.seconds(120));
-        configuration.setMaxQueuedRequestsRejectStatus(429);
+        configuration.setRequestQueueMaxSize(32);
+        configuration.setRequestQueueMaxWait(Duration.seconds(120));
+        configuration.setRequestQueueRejectStatus(429);
 
         QoSHandler qos = GrobidQuantitiesApplication.buildQoSHandler(configuration);
 
@@ -50,7 +50,7 @@ class GrobidQuantitiesApplicationQoSTest {
     @Test
     void negativeQueueLength_shouldMeanUnbounded() {
         GrobidQuantitiesConfiguration configuration = new GrobidQuantitiesConfiguration();
-        configuration.setMaxQueuedRequests(-1);
+        configuration.setRequestQueueMaxSize(-1);
 
         QoSHandler qos = GrobidQuantitiesApplication.buildQoSHandler(configuration);
 
@@ -60,7 +60,7 @@ class GrobidQuantitiesApplicationQoSTest {
     @Test
     void aNullTimeout_shouldMeanUnbounded() {
         GrobidQuantitiesConfiguration configuration = new GrobidQuantitiesConfiguration();
-        configuration.setMaxQueuedRequestTimeout(null);
+        configuration.setRequestQueueMaxWait(null);
 
         QoSHandler qos = GrobidQuantitiesApplication.buildQoSHandler(configuration);
 

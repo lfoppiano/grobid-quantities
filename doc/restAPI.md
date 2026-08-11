@@ -390,14 +390,14 @@ queued until a slot frees up. Three further settings bound that queue:
 
 | Setting                          | Default     | Meaning                                                                       |
 |----------------------------------|-------------|-------------------------------------------------------------------------------|
-| `maxQueuedRequests`              | `1024`      | how many requests may wait at once; a negative value means an unbounded queue  |
-| `maxQueuedRequestTimeout`        | `0 seconds` | how long one may wait; `0` means it waits until a slot frees up, however long  |
-| `maxQueuedRequestsRejectStatus`  | `503`       | the status returned to a request that exceeds either bound                     |
+| `requestQueueMaxSize`              | `1024`      | how many requests may wait at once; a negative value means an unbounded queue  |
+| `requestQueueMaxWait`        | `0 seconds` | how long one may wait; `0` means it waits until a slot frees up, however long  |
+| `requestQueueRejectStatus`  | `503`       | the status returned to a request that exceeds either bound                     |
 
 The effective values are logged at startup:
 
 ```
-Limiting parallel requests: maxParallelRequests=8, maxQueuedRequests=1024, maxQueuedRequestTimeout=unbounded, rejecting with 503
+Limiting parallel requests: maxParallelRequests=8, requestQueueMaxSize=1024, requestQueueMaxWait=unbounded, rejecting with 503
 ```
 
 ### These are not response-time limits

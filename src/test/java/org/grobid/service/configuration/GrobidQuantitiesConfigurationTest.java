@@ -40,8 +40,8 @@ class GrobidQuantitiesConfigurationTest {
 
         // 0 in the file, resolved to one slot per processor
         assertEquals(Runtime.getRuntime().availableProcessors(), configuration.getMaxParallelRequests());
-        assertEquals(1024, configuration.getMaxQueuedRequests());
-        assertEquals(503, configuration.getMaxQueuedRequestsRejectStatus());
+        assertEquals(1024, configuration.getRequestQueueMaxSize());
+        assertEquals(503, configuration.getRequestQueueRejectStatus());
     }
 
     /**
@@ -53,15 +53,15 @@ class GrobidQuantitiesConfigurationTest {
     void shippedConfiguration_shouldNotBoundTheQueueingTime(String path) throws Exception {
         GrobidQuantitiesConfiguration configuration = parse(path);
 
-        assertEquals(0, configuration.getMaxQueuedRequestTimeout().toMilliseconds());
-        assertTrue(configuration.getMaxQueuedRequestTimeoutAsJavaDuration().isZero());
+        assertEquals(0, configuration.getRequestQueueMaxWait().toMilliseconds());
+        assertTrue(configuration.getRequestQueueMaxWaitAsJavaDuration().isZero());
     }
 
     @Test
     void aQueueingTimeout_shouldBeReadInAnyTimeUnit() throws Exception {
         GrobidQuantitiesConfiguration configuration = new GrobidQuantitiesConfiguration();
-        configuration.setMaxQueuedRequestTimeout(io.dropwizard.util.Duration.parse("2 minutes"));
+        configuration.setRequestQueueMaxWait(io.dropwizard.util.Duration.parse("2 minutes"));
 
-        assertEquals(java.time.Duration.ofMinutes(2), configuration.getMaxQueuedRequestTimeoutAsJavaDuration());
+        assertEquals(java.time.Duration.ofMinutes(2), configuration.getRequestQueueMaxWaitAsJavaDuration());
     }
 }

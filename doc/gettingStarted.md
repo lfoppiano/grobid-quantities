@@ -37,7 +37,7 @@ server:
           port: 8061
     registerDefaultExceptionMappers: false
     maxThreads: 2048
-    maxQueuedRequests: 2048
+    requestQueueMaxSize: 2048
     acceptQueueSize: 2048
 ```
 
@@ -57,7 +57,7 @@ server:
       port: 8061
   registerDefaultExceptionMappers: false
   maxThreads: 2048
-  maxQueuedRequests: 2048
+  requestQueueMaxSize: 2048
 ```
 
 ### 0.7.2 to 0.7.3
@@ -184,7 +184,7 @@ Two settings of `config.yml` are often mistaken for each other:
 - `maxParallelRequests` bounds how many requests are processed at the same time. Requests over
   that limit are queued, and rejected with **503** when they cannot be served. This, and not the
   idle timeout, is what a load test hits first. The queue itself is bounded by
-  `maxQueuedRequests` and `maxQueuedRequestTimeout`, documented in the
+  `requestQueueMaxSize` and `requestQueueMaxWait`, documented in the
   [REST API page](restAPI.md#maximum-parallel-requests-limit).
 
 Both halves of issue [#159](https://github.com/lfoppiano/grobid-quantities/issues/159) came from
