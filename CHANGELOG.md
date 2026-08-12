@@ -12,6 +12,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + Bumped Kotlin from 2.0.21 to 2.2.20 to match the `kotlin-stdlib` 2.2.20 that Grobid 0.9.1 now pulls transitively (the 2.0.21 compiler cannot read the newer stdlib metadata, which broke `compileKotlin`)
 + Bumped Dockerfile runtime base image from `lfoppiano/grobid:0.9.0-full` to `lfoppiano/grobid:0.9.1-full`
 
+### Added
+
++ `requestQueueMaxSize`, `requestQueueMaxWait` and `requestQueueRejectStatus` configuration settings, bounding the queue of requests waiting for a `maxParallelRequests` slot. The effective values are logged at startup (#159)
+
+### Fixed
+
++ Long requests are no longer cut short. Before the migration to Jetty 12, a request taking more than Jetty's default of 30 seconds was rejected with a 503 whatever `idleTimeout` was set to. Verified on the current version: a request taking ~70 seconds returns 200 with the complete response, both with `idleTimeout: 120 seconds` and with `idleTimeout: 5 seconds` - the connection idle timeout no longer bounds the response computation. The 503 seen under load comes from `maxParallelRequests` instead (#159). Reproduced again on a 274,430-character request: `200` with the complete 837 KB response after 42s, byte-identical under both `idleTimeout` settings; and with `maxParallelRequests: 1`, `requestQueueMaxWait: 2 seconds`, `requestQueueRejectStatus: 429`, four concurrent requests give one `200` after 28.3s and three `429`s after exactly 2.14s - the report's pattern, with the delay and status now taken from the configuration
++ The bounds on the request queue are no longer implicit (#159). Requests over `maxParallelRequests` are queued, and the queue used to be bounded by whatever the underlying Jetty version happened to default to. With Jetty 9's `QoSFilter` that was the servlet default async timeout of 30 seconds, which is why raising the connector's `idleTimeout` to 120 seconds did not stop requests from failing with `503` after ~30 seconds. Jetty 12's `QoSHandler` defaults differently again (1024-long queue, no waiting limit); all three bounds are now set explicitly from the configuration instead of inherited. Note that neither these settings nor `idleTimeout` bound how long a request may take to be answered once it holds a slot
++ `config-docker.yml` no longer carries a `views` key, which the configuration class does not declare. Since the application enables `FAIL_ON_UNKNOWN_PROPERTIES`, this aborted startup inside the Docker image with `Unrecognized field at: views`. Both shipped configuration files are now covered by a test that parses them the way the application does
+
 ### Known issues
 
 + `ValueParserTest.testTagValue_exponential_1/2` fail after the Grobid 0.9.1 upgrade: Grobid 0.9.1 changed where the English word-forms lexicon (`english.wf`) is loaded, so the tests' PowerMock `@SuppressStaticInitializationFor("...Lexicon")` mock no longer intercepts it and it loads against a null grobid-home. These should be migrated off PowerMock (already a standing TODO in `build.gradle`) or reworked to run against a real grobid-home. The other 152 unit tests pass.
