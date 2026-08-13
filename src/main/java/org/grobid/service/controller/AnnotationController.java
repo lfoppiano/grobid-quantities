@@ -102,6 +102,22 @@ public class AnnotationController {
         return engine.processTextTei(text);
     }
 
+    /**
+     * Extracts the measurements from the text carried by an XML document. The markup is
+     * discarded, so the offsets of the response refer to the extracted text, which is returned
+     * along with them. See https://github.com/lfoppiano/grobid-quantities/issues/3
+     */
+    @Path(PATH_QUANTITY_XML)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    public String processXML(@FormDataParam("input") InputStream uploadedInputStream,
+                             @FormDataParam("input") FormDataContentDisposition fileDetail) {
+        MeasurementsResponse response = engine.processXml(uploadedInputStream);
+
+        return response.toJson();
+    }
+
     @Path(PATH_PARSE_MEASURE)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @POST
