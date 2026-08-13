@@ -290,7 +290,14 @@ run {
 }
 
 task integration(type: Test) {
+    // a Test task created by hand inherits nothing from the java plugin's `test`: without these
+    // two it has no classes to run and reports success on 0 tests
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+
     include '**'
+
+    useJUnitPlatform()
 
     maxHeapSize = "1024m"
 
