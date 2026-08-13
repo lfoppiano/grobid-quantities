@@ -756,7 +756,7 @@ This labels are combined to recognise this type of values:
   <value><time>2001 August</time></value\>
   ```
 
-## Quantified objects CRF model {#Quantified objects CRF model}
+## Quantified objects CRF model {#quantified-object-model}
 
 **Currently work in progress** The quantified object (or substance) is the object for which the measurement is expressed. For example *A mixture of 10kg of silicon nitride powder*. The object is the `silicon nitride powder` which is attached to the measurement of `10`
 with unit `Kg`.
