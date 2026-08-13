@@ -32,6 +32,96 @@ var grobid = (function ($) {
         $('#gbdForm').attr('action', baseUrl);
     }
 
+    var REPOSITORY_URL = 'https://github.com/lfoppiano/grobid-quantities';
+
+    /**
+     * Shows the running version in the footer, with the git revision linking to the commit it
+     * was built from. Both come from /service/version; the revision is 'unknown' when the build
+     * could not reach git, in which case only the version is shown.
+     */
+    function fetchVersion() {
+        $.ajax({
+            type: 'GET',
+            url: defineBaseURL('service/version'),
+            dataType: 'json',
+            success: function (data) {
+                if (!data || !data.version) {
+                    return;
+                }
+                var versionHtml = '- version: ' + data.version;
+                if (data.revision && data.revision !== 'unknown') {
+                    // 'v0.8.2-25-gdb32ca3' -> link on the commit sha, label keeps the full describe
+                    var commitHash = data.revision;
+                    var match = data.revision.match(/-\d+-g([0-9a-f]+)$/);
+                    if (match) {
+                        commitHash = match[1];
+                    }
+                    versionHtml += ' (<a href="' + REPOSITORY_URL + '/commit/' + encodeURIComponent(commitHash) +
+                        '" target="_blank" style="color:#848484;">' + data.revision + '</a>)';
+                }
+                $('#grobid-version').html(versionHtml);
+            }
+        });
+    }
+
+    /**
+     * Polls /service/health and reflects the result on the coloured dot in the header. The
+     * endpoint answers 503 when the service is not ready, so the error branch has to read the
+     * body too - it carries the reason.
+     */
+    function fetchHealth() {
+        $.ajax({
+            type: 'GET',
+            url: defineBaseURL('service/health'),
+            dataType: 'json',
+            success: function (data) {
+                updateHealthIndicator(data);
+            },
+            error: function (jqXHR) {
+                var data = null;
+                try {
+                    data = JSON.parse(jqXHR.responseText);
+                } catch (e) {
+                    data = null;
+                }
+                if (data) {
+                    updateHealthIndicator(data);
+                } else {
+                    setIndicator(false, 'Service unreachable');
+                }
+            }
+        });
+    }
+
+    function updateHealthIndicator(data) {
+        var failed = (data.models && data.models.totalFailed) || 0;
+        var loaded = (data.models && data.models.totalLoaded) || 0;
+        var healthy = data.ready && (failed === 0);
+
+        if (healthy) {
+            // models are loaded on the first request that needs them, so 0 loaded is normal here
+            setIndicator(true, 'Service is ready (' + loaded + ' model(s) loaded)');
+            return;
+        }
+
+        var reasons = [];
+        if (data.grobidHomeConfigured === false) {
+            reasons.push('grobid-home is not configured');
+        }
+        if (failed > 0) {
+            reasons.push(failed + ' model(s) failed to load: ' +
+                Object.keys(data.models.failed || {}).join(', '));
+        }
+        setIndicator(false, 'Service is not ready' + (reasons.length ? ': ' + reasons.join(', ') : ''));
+    }
+
+    function setIndicator(healthy, title) {
+        var indicator = $('#health-indicator');
+        indicator.removeClass('healthy unhealthy');
+        indicator.addClass(healthy ? 'healthy' : 'unhealthy');
+        indicator.attr('title', title);
+    }
+
     $(document).ready(function () {
 
         $("#subTitle").html("About");
@@ -39,6 +129,10 @@ var grobid = (function ($) {
         $("#divRestI").hide();
         $("#divDoc").hide();
         $('#consolidateBlock').show();
+
+        fetchVersion();
+        fetchHealth();
+        setInterval(fetchHealth, 30000);
 
         createInputTextArea('text');
         setBaseUrl('processQuantityText');
