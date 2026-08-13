@@ -2,7 +2,9 @@ package org.grobid.service.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.core.Configuration;
+import io.dropwizard.util.Duration;
 import org.apache.commons.io.IOUtils;
+import org.eclipse.jetty.http.HttpStatus;
 import org.grobid.core.utilities.GrobidConfig;
 import org.grobid.core.utilities.GrobidProperties;
 import org.slf4j.Logger;
@@ -38,6 +40,35 @@ public class GrobidQuantitiesConfiguration extends Configuration {
 
     private List<GrobidConfig.ModelParameters> models = new ArrayList<>();
     private int maxParallelRequests;
+
+    /**
+     * How many requests may wait for a free slot once {@code maxParallelRequests} is reached.
+     * Requests beyond that are rejected immediately with {@code requestQueueRejectStatus}.
+     * <p>
+     * Named {@code requestQueue*} rather than {@code maxQueuedRequests*} on purpose: Dropwizard
+     * already has a {@code server.maxQueuedRequests}, bounding the Jetty thread pool's queue,
+     * and issue #159 is precisely about two similarly named settings being conflated.
+     * A negative value means an unbounded queue. The default is Jetty's own default.
+     */
+    @JsonProperty
+    private int requestQueueMaxSize = 1024;
+
+    /**
+     * How long a request may wait for a free slot before being rejected with
+     * {@code requestQueueRejectStatus}. Zero - the default - means it waits indefinitely.
+     * <p>
+     * This is *not* a limit on how long a request may take to be answered once it holds a slot,
+     * and neither is the connector's {@code idleTimeout}: see
+     * https://github.com/lfoppiano/grobid-quantities/issues/159
+     */
+    @JsonProperty
+    private Duration requestQueueMaxWait = Duration.seconds(0);
+
+    /**
+     * The status returned to requests rejected by the two limits above.
+     */
+    @JsonProperty
+    private int requestQueueRejectStatus = HttpStatus.SERVICE_UNAVAILABLE_503;
 
     private String cleanlpModelPath = "resources/cleanlp/models";
 
@@ -86,6 +117,44 @@ public class GrobidQuantitiesConfiguration extends Configuration {
             this.maxParallelRequests = Runtime.getRuntime().availableProcessors();
         }
         return this.maxParallelRequests;
+    }
+
+    public void setMaxParallelRequests(int maxParallelRequests) {
+        this.maxParallelRequests = maxParallelRequests;
+    }
+
+    public int getRequestQueueMaxSize() {
+        return this.requestQueueMaxSize;
+    }
+
+    public void setRequestQueueMaxSize(int requestQueueMaxSize) {
+        this.requestQueueMaxSize = requestQueueMaxSize;
+    }
+
+    public Duration getRequestQueueMaxWait() {
+        return this.requestQueueMaxWait;
+    }
+
+    public void setRequestQueueMaxWait(Duration requestQueueMaxWait) {
+        this.requestQueueMaxWait = requestQueueMaxWait;
+    }
+
+    /**
+     * {@link #getRequestQueueMaxWait()} as the {@link java.time.Duration} Jetty expects.
+     */
+    public java.time.Duration getRequestQueueMaxWaitAsJavaDuration() {
+        if (this.requestQueueMaxWait == null) {
+            return java.time.Duration.ZERO;
+        }
+        return java.time.Duration.ofMillis(this.requestQueueMaxWait.toMilliseconds());
+    }
+
+    public int getRequestQueueRejectStatus() {
+        return this.requestQueueRejectStatus;
+    }
+
+    public void setRequestQueueRejectStatus(int requestQueueRejectStatus) {
+        this.requestQueueRejectStatus = requestQueueRejectStatus;
     }
 
     public static String getVersion() {

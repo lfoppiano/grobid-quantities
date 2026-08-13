@@ -4,8 +4,18 @@ corsAllowedOrigins: "*"
 corsAllowedMethods: "OPTIONS,GET,PUT,POST,DELETE,HEAD"
 corsAllowedHeaders: "X-Requested-With,Content-Type,Accept,Origin"
 
-# Limit the maximum number of requests
+# Limit the maximum number of requests processed at the same time.
+# 0 means one slot per available processor, a negative value removes the limit.
 maxParallelRequests: 0
+
+# Requests over the limit above are queued until a slot frees up. These three settings bound the
+# queue; a request exceeding either bound is rejected with requestQueueRejectStatus.
+# Note that none of them bounds how long a request may take once it holds a slot - and neither
+# does the connector's idleTimeout. See issue #159.
+requestQueueMaxSize: 1024
+# 0 means a queued request waits indefinitely for its slot
+requestQueueMaxWait: 0 seconds
+requestQueueRejectStatus: 503
 
 cleanlpModelPath: "/opt/grobid/grobid-quantities/resources/cleanlp/models"
 
@@ -55,10 +65,6 @@ models:
       useELMo: false
       embeddings_name: "glove-840B"
 
-
-views:
-  .mustache:
-    cache: false
 
 server:
   type: custom
