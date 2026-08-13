@@ -26,7 +26,6 @@ plugins {
     id 'jacoco'
     id 'com.gradleup.shadow' version '8.3.10'
     id "de.undercouch.download" version "4.1.1"
-    id 'com.palantir.git-version' version '0.12.3'
     id 'net.researchgate.release' version '3.1.0'
     id "org.jetbrains.kotlin.jvm" version "2.2.20"
 }
@@ -37,6 +36,35 @@ description = """The goal of this GROBID module is to recognize in textual docum
 measurements (e.g. pressure, temperature, etc.), to parse and normalization them, and finally to convert 
 these measurements into SI units. We focus our work on technical and scientific articles (text, XML and PDF input) 
 and patents (text and XML input)."""
+
+// Deliberately *not* --first-parent: a release made on a branch and merged back with a merge
+// commit leaves its tag on the second parent, so --first-parent walks straight past it and
+// reports the previous release. After releasing v0.9.0 on a branch and merging, master would
+// describe as v0.8.2-2-g<sha> instead of v0.9.0-4-g<sha>.
+// --always keeps a bare commit sha as the fallback when no tag is reachable, e.g. in the
+// shallow clones CI checks out.
+def getGitRevision() {
+    def gitRevision = "unknown"
+    try {
+        def result = providers.exec {
+            workingDir = rootProject.rootDir
+            commandLine 'git', 'describe', '--tags', '--always'
+        }
+        gitRevision = result.standardOutput.asText.get().trim()
+    } catch (Exception e) {
+        println "Could not get Git revision: ${e}"
+    }
+    return gitRevision
+}
+
+project.ext.gitRevision = getGitRevision()
+
+tasks.register('collectGitRevision') {
+    project.ext.gitRevision = getGitRevision()
+    doLast {
+        println "Git revision: ${project.ext.gitRevision}"
+    }
+}
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
@@ -314,23 +342,25 @@ trainerTasks.each { taskName, trainerMainClass ->
     }
 }
 
-processResources {
-    filesMatching('version.txt') {
-        filter {
-            it.replace('project.version', project.property('version'))
-        }
-    }
-}
-
 // return the default value if the property has not been specified in command line
 ext.getArg = { propName, defaultVal ->
     return project.hasProperty(propName) ? project.getProperty(propName) : defaultVal;
 }
 
 processResources {
+    // The version and the revision are injected here rather than read from the source files, so
+    // Gradle cannot see them change and keeps the task UP-TO-DATE: revision.txt would otherwise
+    // hold whatever value it was first generated with. Building the release tag in a tree that
+    // had already been built on master would then bake the master revision into the artifact.
+    // Declaring them as inputs makes the task re-run whenever either changes.
+    inputs.property('projectVersion', project.property('version').toString())
+    inputs.property('gitRevision', rootProject.ext.gitRevision)
+
     filesMatching(["version.txt", "revision.txt"]) {
-        expand(project_version: project.property('version'),
-            project_revision: gitVersion())
+        expand(
+            project_version: project.property('version') ?: "unknown",
+            project_revision: rootProject.ext.gitRevision
+        )
     }
 }
 
@@ -477,6 +507,15 @@ release {
     failOnCommitNeeded = false
     tagTemplate = 'v${version}'
     git {
-        requireBranch.set('master')
+        // Releases must be cut from a branch whose name contains "release"
+        // (e.g. `release/0.9.0`, `feature/release-0.9.0`, `prepare-release-0.9.0`).
+        // Direct release from `master` is intentionally blocked: master is
+        // protected and the gradle-release plugin cannot push there. Cut the
+        // release on a release-named branch, then bring it back to master via
+        // a PR merged with a merge commit (NOT squash) so the tagged commit
+        // remains reachable from master history - which is also what lets
+        // getGitRevision() above report the new release rather than the previous one.
+        // The string is treated as a regex by net.researchgate.release.
+        requireBranch.set('.*release.*')
     }
 }
