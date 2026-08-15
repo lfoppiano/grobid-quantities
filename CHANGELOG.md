@@ -38,6 +38,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.9.0]
 
+> :information_source: 0.9.0 was never released - no `v0.9.0` tag was ever cut, `v0.8.2` being the
+> last release. The entries below are kept grouped because they are the work of following Grobid
+> 0.9.0, but they ship together with the `[Unreleased]` section above as part of **0.9.1**.
+
 ### Changed
 
 + Updated to Grobid version 0.9.0
