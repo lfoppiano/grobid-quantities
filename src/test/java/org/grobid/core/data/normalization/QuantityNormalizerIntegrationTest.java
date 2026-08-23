@@ -65,7 +65,7 @@ public class QuantityNormalizerIntegrationTest {
 
     private UnitDefinition generateLenghtUnitDefinition() {
         final UnitDefinition parsedUnitDefinition = new UnitDefinition();
-        parsedUnitDefinition.setType(UnitUtilities.Unit_Type.LENGTH);
+        parsedUnitDefinition.setType(UnitUtilities.Unit_Type.valueOf("LENGTH"));
         parsedUnitDefinition.setSystem(UnitUtilities.System_Type.SI_BASE);
         parsedUnitDefinition.setNotations(Arrays.asList(new String[]{"km"}));
         parsedUnitDefinition.setNames(Arrays.asList(new String[]{"kilometer", "kilometers", "kilometres"}));
@@ -118,7 +118,7 @@ public class QuantityNormalizerIntegrationTest {
 
     private UnitDefinition generateTemperatureUnitDefinition() {
         final UnitDefinition parsedUnitDefinition = new UnitDefinition();
-        parsedUnitDefinition.setType(UnitUtilities.Unit_Type.TEMPERATURE);
+        parsedUnitDefinition.setType(UnitUtilities.Unit_Type.valueOf("TEMPERATURE"));
         parsedUnitDefinition.setSystem(UnitUtilities.System_Type.SI_DERIVED);
         parsedUnitDefinition.setNotations(Arrays.asList("°C"));
         parsedUnitDefinition.setNames(Arrays.asList("celsius", "celcius"));
@@ -137,7 +137,7 @@ public class QuantityNormalizerIntegrationTest {
         final Unit parsedUnit = new Unit("km/h");
         UnitDefinition unitDefinition = new UnitDefinition();
         unitDefinition.setSystem(UnitUtilities.System_Type.SI_DERIVED);
-        unitDefinition.setType(UnitUtilities.Unit_Type.VELOCITY);
+        unitDefinition.setType(UnitUtilities.Unit_Type.valueOf("VELOCITY"));
         parsedUnit.setUnitDefinition(unitDefinition);
 
         expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
@@ -162,7 +162,7 @@ public class QuantityNormalizerIntegrationTest {
         final Unit parsedUnit = new Unit("km·kg/h");
 //        UnitDefinition unitDefinition = new UnitDefinition();
 //        unitDefinition.setSystem(UnitUtilities.System_Type.SI_DERIVED);
-//        unitDefinition.setType(UnitUtilities.Unit_Type.VELOCITY);
+//        unitDefinition.setType(UnitUtilities.Unit_Type.valueOf("VELOCITY"));
 //        parsedUnit.setUnitDefinition(unitDefinition);
         expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);
         expect(mockUnitNormalizer.findDefinition(anyObject())).andReturn(null);
@@ -188,7 +188,7 @@ public class QuantityNormalizerIntegrationTest {
         final Unit parsedUnit = new Unit("km·kg/h");
 //        UnitDefinition unitDefinition = new UnitDefinition();
 //        unitDefinition.setSystem(UnitUtilities.System_Type.SI_DERIVED);
-//        unitDefinition.setType(UnitUtilities.Unit_Type.VELOCITY);
+//        unitDefinition.setType(UnitUtilities.Unit_Type.valueOf("VELOCITY"));
 //        parsedUnit.setUnitDefinition(unitDefinition);
 
         expect(mockUnitNormalizer.parseUnit(raw)).andReturn(parsedUnit);

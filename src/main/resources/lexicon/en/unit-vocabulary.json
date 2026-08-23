@@ -1,0 +1,366 @@
+{
+  "types": [
+    {
+      "id": "UNKNOWN",
+      "name": "unknown"
+    },
+    {
+      "id": "LENGTH",
+      "name": "length"
+    },
+    {
+      "id": "TIME",
+      "name": "time"
+    },
+    {
+      "id": "TEMPERATURE",
+      "name": "temperature"
+    },
+    {
+      "id": "MASS",
+      "name": "mass"
+    },
+    {
+      "id": "LUMINOUS_INTENSITY",
+      "name": "luminous intensity"
+    },
+    {
+      "id": "AMOUNT_OF_SUBSTANCE",
+      "name": "amount of substance"
+    },
+    {
+      "id": "ELECTRIC_CURRENT",
+      "name": "electric current"
+    },
+    {
+      "id": "ANGLE",
+      "name": "angle"
+    },
+    {
+      "id": "SOLID_ANGLE",
+      "name": "solid angle"
+    },
+    {
+      "id": "FREQUENCY",
+      "name": "frequency"
+    },
+    {
+      "id": "FORCE",
+      "name": "force"
+    },
+    {
+      "id": "PRESSURE",
+      "name": "pressure"
+    },
+    {
+      "id": "ENERGY",
+      "name": "energy"
+    },
+    {
+      "id": "POWER",
+      "name": "power"
+    },
+    {
+      "id": "ELECTRIC_CHARGE",
+      "name": "electric charge"
+    },
+    {
+      "id": "VOLTAGE",
+      "name": "voltage"
+    },
+    {
+      "id": "ELECTRIC_CAPACITANCE",
+      "name": "electric capacitance"
+    },
+    {
+      "id": "ELECTRIC_RESISTANCE",
+      "name": "electric resistance"
+    },
+    {
+      "id": "ELECTRIC_CONDUCTANCE",
+      "name": "electric conductance"
+    },
+    {
+      "id": "ELECTRIC_FIELD",
+      "name": "electric field"
+    },
+    {
+      "id": "MAGNETIC_FLUX",
+      "name": "magnetic flux"
+    },
+    {
+      "id": "MAGNETIZATION",
+      "name": "magnetization"
+    },
+    {
+      "id": "MASS_MAGNETIZATION",
+      "name": "mass magnetization"
+    },
+    {
+      "id": "MAGNETIC_FLUX_DENSITY",
+      "name": "magnetic flux density"
+    },
+    {
+      "id": "MAGNETIC_INDUCTION",
+      "name": "magnetic induction"
+    },
+    {
+      "id": "MAGNETIC_FIELD_STRENGTH",
+      "name": "magnetic field strength"
+    },
+    {
+      "id": "MAGNETIC_FIELD_RATIO",
+      "name": "magnetic field ratio"
+    },
+    {
+      "id": "INDUCTANCE",
+      "name": "inductance"
+    },
+    {
+      "id": "LUMINOUS_FLUX",
+      "name": "luminous flux"
+    },
+    {
+      "id": "ILLUMINANCE",
+      "name": "illuminance"
+    },
+    {
+      "id": "LUMINANCE",
+      "name": "luminance"
+    },
+    {
+      "id": "RADIOACTIVITY",
+      "name": "radioactivity"
+    },
+    {
+      "id": "ABSORBED_DOSE",
+      "name": "absorbed dose"
+    },
+    {
+      "id": "EQUIVALENT_DOSE",
+      "name": "equivalent dose"
+    },
+    {
+      "id": "ATTENUATION",
+      "name": "attenuation"
+    },
+    {
+      "id": "TORQUE",
+      "name": "torque"
+    },
+    {
+      "id": "DYNAMIC_VISCOSITY",
+      "name": "dynamic viscosity"
+    },
+    {
+      "id": "KINEMATIC_VISCOSITY",
+      "name": "kinematic viscosity"
+    },
+    {
+      "id": "ACOUSTIC_PRESSURE",
+      "name": "acoustic pressure"
+    },
+    {
+      "id": "MASS_FLOW_RATE",
+      "name": "mass flow-rate"
+    },
+    {
+      "id": "VOLUME_FLOW_RATE",
+      "name": "volume flow-rate"
+    },
+    {
+      "id": "AIR_FLOW_RATE",
+      "name": "air flow-rate"
+    },
+    {
+      "id": "SPECTRAL_RESPONSITIVY",
+      "name": "spectral responsivity"
+    },
+    {
+      "id": "SPECTRAL_TRANSMITTANCE",
+      "name": "regular spectral transmittance"
+    },
+    {
+      "id": "SPECTRAL_REFLECTANCE",
+      "name": "diffuse spectral reflectance"
+    },
+    {
+      "id": "SPECTRAL_FLUX_DENSITY",
+      "name": "spectral flux density"
+    },
+    {
+      "id": "REFLECTANCE",
+      "name": "reflectance"
+    },
+    {
+      "id": "DETECTOR_PASSBAND",
+      "name": "detector passband"
+    },
+    {
+      "id": "THERMAL_CONDUCTIVITY",
+      "name": "thermal conductivity"
+    },
+    {
+      "id": "THERMAL_DIFFUSIVITY",
+      "name": "thermal diffusivity"
+    },
+    {
+      "id": "HEAT_CAPACITY",
+      "name": "specific heat capacity"
+    },
+    {
+      "id": "VOLUMETRIC_HEAT_CAPACITY",
+      "name": "volumetric heat capacity"
+    },
+    {
+      "id": "EMISSION_RATE",
+      "name": "emission rate"
+    },
+    {
+      "id": "CATALYTIC_ACTIVITY",
+      "name": "catalytic activity"
+    },
+    {
+      "id": "RADIANCE",
+      "name": "radiance"
+    },
+    {
+      "id": "IRRADIANCE",
+      "name": "irradiance"
+    },
+    {
+      "id": "EMISSIVITY",
+      "name": "emissivity"
+    },
+    {
+      "id": "HUMIDITY",
+      "name": "humidity"
+    },
+    {
+      "id": "VOLUME",
+      "name": "volume"
+    },
+    {
+      "id": "VELOCITY",
+      "name": "velocity"
+    },
+    {
+      "id": "AREA",
+      "name": "area"
+    },
+    {
+      "id": "CONCENTRATION",
+      "name": "concentration"
+    },
+    {
+      "id": "DENSITY",
+      "name": "density"
+    },
+    {
+      "id": "ACIDITY",
+      "name": "acidity"
+    },
+    {
+      "id": "FRACTION",
+      "name": "fraction"
+    },
+    {
+      "id": "VO2_MAX",
+      "name": "VO2 max"
+    },
+    {
+      "id": "COUNT",
+      "name": "count"
+    },
+    {
+      "id": "ACCELERATION",
+      "name": "acceleration"
+    },
+    {
+      "id": "DEGREE",
+      "name": "angle"
+    },
+    {
+      "id": "DIFFUSION_FLUX",
+      "name": "diffusion flux"
+    },
+    {
+      "id": "MAGNETIC_MOMENT",
+      "name": "magnetic moment"
+    },
+    {
+      "id": "ATOM_MASS_UNIT",
+      "name": "atom mass unit"
+    },
+    {
+      "id": "PACE",
+      "name": "pace"
+    },
+    {
+      "id": "MAXIMUM_ENERGY_PRODUCT",
+      "name": "maximum energy product"
+    },
+    {
+      "id": "ENERGY_DENSITY",
+      "name": "energy density"
+    },
+    {
+      "id": "ATOMIC_RATIO",
+      "name": "atomic ratio"
+    },
+    {
+      "id": "WEIGHT_RATIO",
+      "name": "weight ratio"
+    },
+    {
+      "id": "MASS_ACCUMULATION_RATE",
+      "name": "mass accumulation rate"
+    },
+    {
+      "id": "SEDIMENTATION_RATE",
+      "name": "sedimentation rate"
+    },
+    {
+      "id": "ROTATION",
+      "name": "rotation"
+    }
+  ],
+  "systems": [
+    {
+      "id": "UNKNOWN",
+      "name": "unknown"
+    },
+    {
+      "id": "SI_BASE",
+      "name": "SI base"
+    },
+    {
+      "id": "SI_DERIVED",
+      "name": "SI derived"
+    },
+    {
+      "id": "IMPERIAL",
+      "name": "imperial"
+    },
+    {
+      "id": "US",
+      "name": "us"
+    },
+    {
+      "id": "CGS",
+      "name": "centimetre–gram–second"
+    },
+    {
+      "id": "MKS",
+      "name": "metre-kilogram-second"
+    },
+    {
+      "id": "GAUSSIAN",
+      "name": "gaussian"
+    },
+    {
+      "id": "NON_SI",
+      "name": "non SI"
+    }
+  ]
+}

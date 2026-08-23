@@ -346,7 +346,15 @@ public class QuantityLexicon {
         List<String> results = new ArrayList<>();
         results.add(unitTerm);
 
-        if (!isComposedUnit(unitTerm)) {
+        // a unit is "composed" as soon as it carries a separator, but decomposeComplexUnit only
+        // splits on '/' and '*': a notation whose only separator is '·' - the SI multiplication
+        // sign, e.g. "W·h" - is therefore composed yet yields a single element. Prefixing it as
+        // a simple unit is the right answer anyway ("kW·h"), so fall back to that rather than
+        // reaching for a second element that is not there.
+        List<RegexValueHolder> decomposition =
+            isComposedUnit(unitTerm) ? decomposeComplexUnit(unitTerm) : Collections.emptyList();
+
+        if (decomposition.size() < 2) {
             // we expand based on the prefix list
             for (Map.Entry<String, String> prefix : prefixes.entrySet()) {
                 String prefixString = selectPrefix(isNotation, prefix);
@@ -357,7 +365,6 @@ public class QuantityLexicon {
             //we have a more sophisticated - though useless way, that might be used if the expansion became more
             // complex.
 
-            List<RegexValueHolder> decomposition = decomposeComplexUnit(unitTerm);
             RegexValueHolder firstElement = decomposition.get(0);
             RegexValueHolder secondElement = decomposition.get(1);
 

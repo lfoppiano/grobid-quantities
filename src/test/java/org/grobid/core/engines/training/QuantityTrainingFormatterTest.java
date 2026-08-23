@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.grobid.core.utilities.UnitUtilities.Unit_Type.FRACTION;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -207,23 +206,23 @@ public class QuantityTrainingFormatterTest {
         measurementList.add(measurementValue6);
 
         Measurement measurementValue7 = new Measurement(UnitUtilities.Measurement_Type.VALUE);
-        measurementValue7.setAtomicQuantity(new Quantity("53", new Unit("%", 623, 624, new UnitDefinition(FRACTION, null)), 621, 623));
+        measurementValue7.setAtomicQuantity(new Quantity("53", new Unit("%", 623, 624, new UnitDefinition(UnitUtilities.Unit_Type.valueOf("FRACTION"), null)), 621, 623));
         measurementList.add(measurementValue7);
 
         Measurement measurementList8 = new Measurement(UnitUtilities.Measurement_Type.CONJUNCTION);
         measurementList8.setQuantityList(Arrays.asList(
-                new Quantity("58", new Unit("%", 628, 629, new UnitDefinition(FRACTION, null)), 626, 628),
+                new Quantity("58", new Unit("%", 628, 629, new UnitDefinition(UnitUtilities.Unit_Type.valueOf("FRACTION"), null)), 626, 628),
                 new Quantity("62.5", null, 634, 638))
         );
         measurementList.add(measurementList8);
 
         Measurement measurementInterval9 = new Measurement(UnitUtilities.Measurement_Type.INTERVAL_MIN_MAX);
-        measurementInterval9.setQuantityMost(new Quantity("12", new Unit("%", 671, 672, new UnitDefinition(FRACTION, null)), 669, 671));
+        measurementInterval9.setQuantityMost(new Quantity("12", new Unit("%", 671, 672, new UnitDefinition(UnitUtilities.Unit_Type.valueOf("FRACTION"), null)), 669, 671));
         measurementList.add(measurementInterval9);
 
         Measurement measurementList10 = new Measurement(UnitUtilities.Measurement_Type.CONJUNCTION);
         measurementList10.setQuantityList(Arrays.asList(
-                new Quantity("3", new Unit("%", 675, 676, new UnitDefinition(FRACTION, null)), 674, 675),
+                new Quantity("3", new Unit("%", 675, 676, new UnitDefinition(UnitUtilities.Unit_Type.valueOf("FRACTION"), null)), 674, 675),
                 new Quantity("16", null, 682, 684))
         );
         measurementList.add(measurementList10);

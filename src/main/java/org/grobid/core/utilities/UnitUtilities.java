@@ -1,131 +1,205 @@
 package org.grobid.core.utilities;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
+
 /**
  * Utilities for managing SI and non-SI units.
+ * <p>
+ * The measurement type and measurement system vocabularies used to be Java enumerations declared
+ * here, which meant a unit could not be added to the lexicon with a new type without also editing
+ * this file - and an unknown type was only reported as a runtime warning, the unit ending up
+ * untyped. Both vocabularies are now read from {@code /lexicon/en/unit-vocabulary.json}, so the
+ * lexicon and its vocabularies are maintained in one place.
+ * <p>
+ * See https://github.com/lfoppiano/grobid-quantities/issues/92 and doc/lexicon.md.
  *
  * @author Patrice Lopez
  */
 public class UnitUtilities {
 
-    // measurement systems
-    public enum System_Type {
-        UNKNOWN("unknown"),
-        SI_BASE("SI base"),
-        SI_DERIVED("SI derived"),
-        IMPERIAL("imperial"),
-        US("us"),
-        CGS("centimetre–gram–second"),
-        MKS("metre-kilogram-second"),
-        GAUSSIAN("gaussian"), //We add as it seems that the CGS is not the proper term 
-        NON_SI("non SI");
+    private static final String VOCABULARY_PATH = "/lexicon/en/unit-vocabulary.json";
 
-        private String name;
+    /**
+     * A term of a controlled vocabulary read from the vocabulary file. Terms are interned, so
+     * the identity comparisons that were valid on the enumerations these replaced still hold.
+     */
+    public abstract static class VocabularyTerm {
 
-        private System_Type(String name) {
+        private final String id;
+        private final String name;
+
+        VocabularyTerm(String id, String name) {
+            this.id = id;
             this.name = name;
         }
 
+        /**
+         * The identifier, e.g. {@code MAGNETIC_FLUX_DENSITY}. This is what the lexicon and the
+         * annotated corpus use, and what {@link #toString()} returns - the enumerations these
+         * classes replaced behaved the same way.
+         */
+        public String name() {
+            return id;
+        }
+
+        /**
+         * The human-readable label, e.g. {@code magnetic flux density}. This is what the JSON
+         * output of the service carries.
+         */
         public String getName() {
             return name;
+        }
+
+        @Override
+        public String toString() {
+            return id;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) {
+                return true;
+            }
+            if ((other == null) || (getClass() != other.getClass())) {
+                return false;
+            }
+            return id.equals(((VocabularyTerm) other).id);
+        }
+
+        @Override
+        public int hashCode() {
+            return id.hashCode();
+        }
+    }
+
+    /**
+     * The terms of one vocabulary, in the order they are declared in the file.
+     */
+    static class Vocabulary<T extends VocabularyTerm> {
+
+        private final String field;
+        private final Map<String, T> byId;
+
+        private Vocabulary(String field, Map<String, T> byId) {
+            this.field = field;
+            this.byId = byId;
+        }
+
+        static <T extends VocabularyTerm> Vocabulary<T> load(String field, BiFunction<String, String, T> factory) {
+            Map<String, T> byId = new LinkedHashMap<>();
+
+            try (InputStream is = UnitUtilities.class.getResourceAsStream(VOCABULARY_PATH)) {
+                if (is == null) {
+                    throw new IllegalStateException("Cannot find the unit vocabulary at " + VOCABULARY_PATH);
+                }
+                JsonNode terms = new ObjectMapper().readTree(is).get(field);
+                if ((terms == null) || !terms.isArray()) {
+                    throw new IllegalStateException("The unit vocabulary at " + VOCABULARY_PATH
+                        + " has no '" + field + "' array");
+                }
+                Iterator<JsonNode> iterator = terms.elements();
+                while (iterator.hasNext()) {
+                    JsonNode term = iterator.next();
+                    String id = term.path("id").asText(null);
+                    if (id == null) {
+                        throw new IllegalStateException("A '" + field + "' term of " + VOCABULARY_PATH
+                            + " has no 'id'");
+                    }
+                    if (byId.containsKey(id)) {
+                        throw new IllegalStateException("The '" + field + "' term " + id
+                            + " is declared twice in " + VOCABULARY_PATH);
+                    }
+                    byId.put(id, factory.apply(id, term.path("name").asText(id)));
+                }
+            } catch (IOException e) {
+                throw new IllegalStateException("Cannot read the unit vocabulary at " + VOCABULARY_PATH, e);
+            }
+
+            return new Vocabulary<>(field, byId);
+        }
+
+        /**
+         * Mirrors {@code Enum.valueOf}, exception included, so the call sites that catch an
+         * unknown term keep working.
+         */
+        T valueOf(String id) {
+            T term = byId.get(id);
+            if (term == null) {
+                throw new IllegalArgumentException("No " + field + " term named " + id
+                    + ". Declare it in " + VOCABULARY_PATH + " if it is a new one.");
+            }
+            return term;
+        }
+
+        List<T> values() {
+            return Collections.unmodifiableList(new java.util.ArrayList<>(byId.values()));
+        }
+    }
+
+    // measurement systems
+    public static final class System_Type extends VocabularyTerm {
+
+        private static final Vocabulary<System_Type> VOCABULARY =
+            Vocabulary.load("systems", System_Type::new);
+
+        /**
+         * The two systems the normalisation branches on: an SI unit is resolved against a
+         * different set of unit formats than the rest, see
+         * {@code QuantityNormalizer#getUnitFormats}. Declared here, rather than looked up at
+         * each call site, because they carry behaviour rather than being simple labels - and
+         * because it makes their removal from the vocabulary file fail the build instead of
+         * silently changing how units are normalised.
+         */
+        public static final System_Type SI_BASE = valueOf("SI_BASE");
+        public static final System_Type SI_DERIVED = valueOf("SI_DERIVED");
+
+        private System_Type(String id, String name) {
+            super(id, name);
+        }
+
+        public static System_Type valueOf(String id) {
+            return VOCABULARY.valueOf(id);
+        }
+
+        public static List<System_Type> values() {
+            return VOCABULARY.values();
         }
     }
 
     // measurement types
-    public enum Unit_Type {
-        UNKNOWN("unknown"),
-        LENGTH("length"),
-        TIME("time"),
-        TEMPERATURE("temperature"),
-        MASS("mass"),
-        LUMINOUS_INTENSITY("luminous intensity"),
-        AMOUNT_OF_SUBSTANCE("amount of substance"),
-        ELECTRIC_CURRENT("electric current"),
-        ANGLE("angle"),
-        SOLID_ANGLE("solid angle"),
-        FREQUENCY("frequency"),
-        FORCE("force"),
-        PRESSURE("pressure"),
-        ENERGY("energy"),
-        POWER("power"),
-        ELECTRIC_CHARGE("electric charge"),
-        VOLTAGE("voltage"),
-        ELECTRIC_CAPACITANCE("electric capacitance"),
-        ELECTRIC_RESISTANCE("electric resistance"),
-        ELECTRIC_CONDUCTANCE("electric conductance"),
-        ELECTRIC_FIELD("electric field"),
-        MAGNETIC_FLUX("magnetic flux"),
-        MAGNETIZATION("magnetization"),
-        MASS_MAGNETIZATION("mass magnetization"),
-        MAGNETIC_FLUX_DENSITY("magnetic flux density"),
-        MAGNETIC_INDUCTION("magnetic induction"),
-        MAGNETIC_FIELD_STRENGTH("magnetic field strength"),
-        MAGNETIC_FIELD_RATIO("magnetic field ratio"),
-        INDUCTANCE("inductance"),
-        LUMINOUS_FLUX("luminous flux"),
-        ILLUMINANCE("illuminance"),
-        LUMINANCE("luminance"),
-        RADIOACTIVITY("radioactivity"),
-        ABSORBED_DOSE("absorbed dose"),
-        EQUIVALENT_DOSE("equivalent dose"),
-        ATTENUATION("attenuation"),
-        TORQUE("torque"),
-        DYNAMIC_VISCOSITY("dynamic viscosity"),
-        KINEMATIC_VISCOSITY("kinematic viscosity"),
-        ACOUSTIC_PRESSURE("acoustic pressure"),
-        MASS_FLOW_RATE("mass flow-rate"),
-        VOLUME_FLOW_RATE("volume flow-rate"),
-        AIR_FLOW_RATE("air flow-rate"),
-        SPECTRAL_RESPONSITIVY("spectral responsivity"),
-        SPECTRAL_TRANSMITTANCE("regular spectral transmittance"),
-        SPECTRAL_REFLECTANCE("diffuse spectral reflectance"),
-        SPECTRAL_FLUX_DENSITY("spectral flux density"),
-        REFLECTANCE("reflectance"),
-        DETECTOR_PASSBAND("detector passband"),
-        THERMAL_CONDUCTIVITY("thermal conductivity"),
-        THERMAL_DIFFUSIVITY("thermal diffusivity"),
-        HEAT_CAPACITY("specific heat capacity"),
-        VOLUMETRIC_HEAT_CAPACITY("volumetric heat capacity"),
-        EMISSION_RATE("emission rate"),
-        CATALYTIC_ACTIVITY("catalytic activity"),
-        RADIANCE("radiance"),
-        IRRADIANCE("irradiance"),
-        EMISSIVITY("emissivity"),
-        HUMIDITY("humidity"),
-        VOLUME("volume"),
-        VELOCITY("velocity"),
-        AREA("area"),
-        CONCENTRATION("concentration"),
-        DENSITY("density"),
-        ACIDITY("acidity"),
-        FRACTION("fraction"),
-        VO2_MAX("VO2 max"),
-        COUNT("count"),
-        ACCELERATION("acceleration"),
-        DEGREE("angle"),
-        DIFFUSION_FLUX("diffusion flux"),
-        MAGNETIC_MOMENT("magnetic moment"),
-        ATOM_MASS_UNIT("atom mass unit"),
-        PACE("pace"),
-        MAXIMUM_ENERGY_PRODUCT("maximum energy product"),
-        ENERGY_DENSITY("energy density"),
-        ATOMIC_RATIO("atomic ratio"),
-        WEIGHT_RATIO("weight ratio"),
-        MASS_ACCUMULATION_RATE("mass accumulation rate"),
-        SEDIMENTATION_RATE("sedimentation rate"),
-        ROTATION("rotation");
+    public static final class Unit_Type extends VocabularyTerm {
 
-        private String name;
+        private static final Vocabulary<Unit_Type> VOCABULARY =
+            Vocabulary.load("types", Unit_Type::new);
 
-        private Unit_Type(String name) {
-            this.name = name;
+        /**
+         * The fallback for a measurement whose type could not be established. Every other type
+         * is a plain label and is reached through {@link #valueOf(String)}.
+         */
+        public static final Unit_Type UNKNOWN = valueOf("UNKNOWN");
+
+        private Unit_Type(String id, String name) {
+            super(id, name);
         }
 
-        public String getName() {
-            return name;
+        public static Unit_Type valueOf(String id) {
+            return VOCABULARY.valueOf(id);
+        }
+
+        public static List<Unit_Type> values() {
+            return VOCABULARY.values();
         }
     }
-
-    ;
 
     // measurement type (atomic value, interval of conjuctive/disjunctive list of values/intervals)
     public enum Measurement_Type {
