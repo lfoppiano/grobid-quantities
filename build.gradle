@@ -290,10 +290,23 @@ run {
 }
 
 task integration(type: Test) {
+    // One JVM per test class. Grobid keeps its state in statics - GrobidProperties, the loaded
+    // grobid-home, the wapiti model registry - so whichever class initialises first decides for
+    // all the others, and classes that pass on their own fail when the suite runs together.
+    // Sharing a JVM cost 18 failures out of 252; forking per class costs about two minutes.
+    forkEvery = 1
+
     // a Test task created by hand inherits nothing from the java plugin's `test`: without these
     // two it has no classes to run and reports success on 0 tests
     testClassesDirs = sourceSets.test.output.classesDirs
     classpath = sourceSets.test.runtimeClasspath
+
+    // Let `./gradlew integration -Dorg.grobid.home=...` reach the forked test JVM: a -D on the
+    // command line sets the property on the Gradle daemon only, not on the process running the
+    // tests, so without this the override is silently ignored.
+    if (System.getProperty('org.grobid.home') != null) {
+        systemProperty 'org.grobid.home', System.getProperty('org.grobid.home')
+    }
 
     include '**'
 

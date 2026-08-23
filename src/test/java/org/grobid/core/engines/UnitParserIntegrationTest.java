@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.data.normalization.UnitNormalizer;
 import org.grobid.core.layout.LayoutToken;
+import org.grobid.core.main.GrobidHomeFinder;
 import org.grobid.core.main.LibraryLoader;
 import org.grobid.core.utilities.GrobidConfig;
 import org.grobid.core.utilities.GrobidProperties;
@@ -14,13 +15,16 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Collections;
 import java.util.Map;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -38,6 +42,45 @@ public class UnitParserIntegrationTest {
         target = UnitParser.getInstance();
     }
 
+    /**
+     * Locates a usable grobid-home for the integration tests.
+     * <p>
+     * The path configured in {@code config-test.yml} used to be read and then thrown away:
+     * {@code GrobidProperties.getInstance()} was called with no {@link GrobidHomeFinder}, so
+     * Grobid fell back to its own default and the setting had no effect.
+     * <p>
+     * Candidates are tried in order and the first *usable* one wins - usable meaning it contains
+     * {@code config/grobid.yaml}, not merely that the directory exists. That distinction matters:
+     * a partially populated {@code ../grobid-home} (models only, no config) is enough to satisfy
+     * {@code GrobidHomeFinder}'s own existence check and would shadow a complete installation
+     * next to it. Override everything with {@code -Dorg.grobid.home=/path/to/grobid-home}.
+     */
+    static String findGrobidHome(GrobidQuantitiesConfiguration configuration) {
+        String explicit = System.getProperty("org.grobid.home");
+        List<String> candidates = new ArrayList<>();
+        if (isNotBlank(explicit)) {
+            candidates.add(explicit);
+        }
+        if (isNotBlank(configuration.getGrobidHome())) {
+            candidates.add(configuration.getGrobidHome());
+        }
+        // the two layouts in use: grobid-home inside a Grobid clone, and beside this repository
+        candidates.add("../grobid/grobid-home");
+        candidates.add("../grobid-home");
+
+        for (String candidate : candidates) {
+            if (new File(candidate, "config/grobid.yaml").exists()) {
+                return candidate;
+            }
+        }
+
+        throw new IllegalStateException(
+            "The integration tests need a complete grobid-home, and none of " + candidates
+                + " contains config/grobid.yaml. Install Grobid, run './gradlew installModels' so "
+                + "the quantities models are in place, then either set grobidHome in "
+                + "src/test/resources/config-test.yml or pass -Dorg.grobid.home=/path/to/grobid-home.");
+    }
+
     public static void initEngineForTests() throws IOException, IllegalAccessException, NoSuchFieldException {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
@@ -45,7 +88,7 @@ public class UnitParserIntegrationTest {
         mapper.registerModule(new GuavaModule());
         GrobidQuantitiesConfiguration configuration = mapper.readValue(UnitNormalizer.class.getResourceAsStream("/config-test.yml"), GrobidQuantitiesConfiguration.class);
         configuration.getModels().stream().forEach(GrobidProperties::addModel);
-        GrobidProperties.getInstance();
+        GrobidProperties.getInstance(new GrobidHomeFinder(Collections.singletonList(findGrobidHome(configuration))));
         Field modelMap = GrobidProperties.class.getDeclaredField("modelMap");
         modelMap.setAccessible(true);
 

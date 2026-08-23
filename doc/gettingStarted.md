@@ -283,6 +283,26 @@ cd PATH-TO-GROBID/grobid-quantities
 ./gradlew test
 ```
 
+`./gradlew test` runs the unit tests only; they need nothing installed. The tests that load
+Grobid and the CRF models are named `*IntegrationTest`, are excluded from `test`, and are run
+separately:
+
+```shell
+./gradlew integration
+```
+
+These need a **complete grobid-home** - one containing `config/grobid.yaml` - with the
+quantities models installed into it by `./gradlew installModels`. The location is looked up in
+this order, and the first directory that actually contains `config/grobid.yaml` wins:
+
+1. `-Dorg.grobid.home=/path/to/grobid-home` on the command line,
+2. `grobidHome` in `src/test/resources/config-test.yml`,
+3. `../grobid/grobid-home`, then `../grobid-home`.
+
+The "actually contains `config/grobid.yaml`" part matters: a directory holding only `models/` is
+enough to satisfy Grobid's own lookup and will shadow a complete installation sitting next to it.
+If none of the candidates is usable the tests fail with a message listing what was tried.
+
 ##### Start and use the service
 
 Grobid-quantities can be run with the following command: :
