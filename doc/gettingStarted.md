@@ -1,8 +1,6 @@
 # Getting started
 
-> :warning: Grobid, and therefore grobid-quantities, [is not supported running natively on Windows](https://grobid.readthedocs.io/en/latest/Frequently-asked-questions/#windows-related-issues). Windows users should use the Docker image and call the service over the REST API. Note that Grobid also reports issues with the Windows Subsystem for Linux, so WSL is not a reliable alternative.
-
-> :information_source: Apple Silicon (M1 and later) is supported: Grobid ships the native Wapiti library for `mac_arm-64` and `lin_arm-64`, so the CRF models run natively on ARM. Earlier versions of this page described ARM support as "under development" - that is no longer the case. Running the *deep learning* models on ARM depends on your TensorFlow install rather than on Grobid; see [Deep Learning models](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/).
+> :information_source: Platform support follows Grobid - Linux and macOS, on x86-64 and ARM alike, and Windows through Docker only - see the [Grobid installation guide](https://grobid.readthedocs.io/en/latest/Install-Grobid/).
 
 > :warning: Since grobid-quantities 0.7.3 (using grobid 0.7.3), we've extended the support to JDK after version 11. This requires specifying the [java.library.path]{.title-ref} explicitly. *All these issues are solved by using Docker containers*.
 
