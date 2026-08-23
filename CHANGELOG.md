@@ -32,6 +32,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 + `ValueParserTest.testTagValue_exponential_1/2` no longer fail under Grobid 0.9.1: the feature rows are built directly instead of through `FeatureFactory`, which now eagerly loads the real `Lexicon` (fef085d)
++ `./gradlew integration` is green again: the integration tests shared one JVM, so Grobid's static state leaked between classes and 18 of 252 failed depending on the order; the task now forks one JVM per test class (#202)
++ The integration tests honour the configured grobid-home: `config-test.yml` was read and then discarded, and a directory holding only `models/` could shadow a complete installation beside it (#202)
 
 ### Known issues
 
