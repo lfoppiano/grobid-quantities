@@ -30,15 +30,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-+ TEI output for text processing, on `POST /service/processQuantityTextTEI`. The measures are annotated inline in the text, in the same notation as the annotated corpus and the annotation guidelines (#20)
-+ Regression test asserting that `processQuantityTextTEI` answers blank or empty input the same way as `processQuantityText`: `200` with an empty TEI document, instead of a `500` (#20)
-+ `POST /service/processQuantityXML`, extracting measurements from the text carried by an XML document (TEI, ST.36, …). The path was declared in `AnnotationController` but had never been implemented. The markup is discarded and the textual chunks are processed as text; since the resulting offsets refer to the extracted text, that text is returned in a new `text` field of the response. The field is omitted when empty, so the other endpoints' responses are unchanged (#3)
-+ The XML parser used by that endpoint rejects `DOCTYPE` declarations and external entities, so a submitted document cannot read local files (XXE) or expand nested entities; malformed input is answered with `400` rather than `500` (#3)
++ TEI output for text processing on `POST /service/processQuantityTextTEI`, annotating the measures inline in the notation of the annotated corpus (#20)
++ `POST /service/processQuantityXML`, extracting measurements from the text of an XML document (TEI, ST.36, ...); the extracted text is returned in a new `text` field, since the offsets refer to it (#3)
++ The XML endpoint rejects `DOCTYPE` declarations and external entities (XXE), and answers malformed input with `400` rather than `500` (#3)
 
 ### Fixed
 
-+ `POST /service/processQuantityTextTEI` now answers blank or empty input the same way as the JSON endpoint `processQuantityText`: `200` with an empty TEI document, instead of a `500` (#20)
-+ Corrected the `processQuantityTextTEI` example in the REST API documentation to use the uppercase unit type notation (`type="TIME"`) emitted by the code, consistent with the annotated corpus and the annotation guidelines (#20)
++ `processQuantityTextTEI` answers blank or empty input with `200` and an empty TEI document, as `processQuantityText` does, instead of `500` (#20)
++ Corrected the `processQuantityTextTEI` example in the REST API documentation to the uppercase unit type the code actually emits (#20)
 
 ### Known issues
 
