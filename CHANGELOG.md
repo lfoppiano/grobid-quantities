@@ -30,7 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
-+ `ValueParserTest.testTagValue_exponential_1/2` no longer fail under Grobid 0.9.1. Grobid 0.9.1 makes the `FeatureFactory` constructor eagerly build the real `Lexicon`, which loads `english.wf` from grobid-home, so the tests' PowerMock `@SuppressStaticInitializationFor("...Lexicon")` mock and `Whitebox`-injected `Lexicon` no longer intercepted it and the tests failed against a null grobid-home. `getWapitiResult` only needs each token and its label, so the feature rows are now built directly (as `UnitParserTest` already did) instead of via `FeaturesVectorValues`/`FeatureFactory`, and PowerMock is dropped from this test (fef085d)
++ `ValueParserTest.testTagValue_exponential_1/2` no longer fail under Grobid 0.9.1: the feature rows are built directly instead of through `FeatureFactory`, which now eagerly loads the real `Lexicon` (fef085d)
 
 ### Known issues
 
@@ -38,9 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.9.0]
 
-> :information_source: 0.9.0 was never released - no `v0.9.0` tag was ever cut, `v0.8.2` being the
-> last release. The entries below are kept grouped because they are the work of following Grobid
-> 0.9.0, but they ship together with the `[Unreleased]` section above as part of **0.9.1**.
+> :information_source: 0.9.0 was never released - no `v0.9.0` tag was ever cut. These entries ship with the `[Unreleased]` section above, as part of 0.9.1.
 
 ### Changed
 
