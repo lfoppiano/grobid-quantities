@@ -2,9 +2,22 @@
 
 > :information_source: Platform support follows Grobid - Linux and macOS, on x86-64 and ARM alike, and Windows through Docker only - see the [Grobid installation guide](https://grobid.readthedocs.io/en/latest/Install-Grobid/).
 
-> :warning: Since grobid-quantities 0.7.3 (using grobid 0.7.3), we've extended the support to JDK after version 11. This requires specifying the [java.library.path]{.title-ref} explicitly. *All these issues are solved by using Docker containers*.
+> :information_source: Running the JAR directly requires `-Djava.library.path` to be set, so that the
+> JVM finds Grobid's native libraries (and JEP, if you use the deep learning models). The exact
+> value depends on your platform and Python environment - see
+> [Start and use the service](#start-and-use-the-service). Running through `./gradlew run`, or
+> through the Docker image, sets it for you.
 
 ## Upgrade
+
+**Versioning follows Grobid.** A grobid-quantities release carries the version of the Grobid
+release it is built against, so upgrading grobid-quantities generally means taking on Grobid's
+own upgrade notes for that version - each section below links to them where relevant.
+
+Releases are infrequent, and are likely to become more so: the project is maintained on limited
+time. If you need something that is already on `master` but not yet released, build from source
+(see [Install and build](#install-and-build)) or use the `lfoppiano/grobid-quantities:latest-develop`
+Docker image, which CI builds and pushes on every commit.
 
 ### 0.8.2 to 0.9.1
 
@@ -59,9 +72,9 @@ against DeLFT >= 0.4.1 / TensorFlow 2.17.
 Only relevant if you run the DL models locally rather than through Docker. The stack moved to
 Python 3.10–3.11, TensorFlow 2.17, DeLFT >= 0.4.1 and JEP 4.3.1, which needs a **fresh Python
 environment** — see Grobid's [Deep Learning models](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/)
-page. Note that the `java.library.path` used to start the service points into that environment,
-so the `python3.9` in the command lines further down this page becomes `python3.11` (or whichever
-version your environment uses).
+page. Note that the `java.library.path` used to start the service points into that environment, so
+it has to be updated to the new Python version - the examples in
+[Start and use the service](#start-and-use-the-service) use `python3.11`.
 
 #### Configuration file
 
@@ -164,6 +177,10 @@ server:
 In version 0.7.3, we have updated the DeLFT models. The DL models must be updated by running `./gradlew copyModels`.
 
 #### JDK Update
+
+> :information_source: The values below are the ones that were current at 0.7.3. For a current
+> installation see [Start and use the service](#start-and-use-the-service); grobid-quantities
+> requires JDK 21 since 0.9.0, and the Python version in these paths depends on your environment.
 
 The version 0.7.3 enables the support for running with JDK > 11. 
 We recommend running it with JDK 17. Running grobid-quantities with gradle (`./gradlew clean run`) is already supported in the `build.gradle`. 
@@ -271,10 +288,10 @@ cd PATH-TO-GROBID/grobid-quantities
 Grobid-quantities can be run with the following command: :
 
 ```shell
-    java -Djava.library.path=../grobid-home/lib/{arch}/:{virtual_env_path}/lib:{virtual_env_path}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
+    java -Djava.library.path=../grobid-home/lib/{arch}/:{virtual_env_path}/lib:{virtual_env_path}/lib/python3.11/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
 ```
 
-> :warning: The command requires the following parameters: `{arch}` is the subdirectory under `grobid-home/lib` that support the following architectures: `lin-64`, `mac-64`, `mac_arm-64`. `{virtual_env_path}` is the path to the virtualenv (e.g. in my case is something like `/Users/lfoppiano/anaconda3/envs/jep/`)
+> :warning: The command requires the following parameters: `{arch}` is the subdirectory under `grobid-home/lib` for your platform - `lin-64`, `lin_arm-64`, `mac-64` or `mac_arm-64`. `{virtual_env_path}` is the path to the virtualenv (e.g. in my case is something like `/Users/lfoppiano/anaconda3/envs/jep/`), and `python3.11` should match the Python version of that environment. The `{virtual_env_path}` segments are only needed when running the deep learning models; the CRF models need the `grobid-home/lib` entry alone.
 
 
 ## Accessing the service
