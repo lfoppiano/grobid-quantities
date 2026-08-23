@@ -42,7 +42,7 @@ The models are organised as follows:
 
 The evaluation was performed on the holdout dataset from the grobid-quantities dataset.
 Average values are computed as Micro average.
-To reproduce it, see `evaluation_doc`{.interpreted-text role="ref"}.
+To reproduce it, see [Evaluation](training.md#evaluation).
 
 #### Quantities
 
@@ -121,5 +121,5 @@ Units were evaluated using UNISCOR dataset. For more information check the secti
 
 ### Other published results
 
-> :information_source: The paper \"Automatic Identification and Normalisation of Physical Measurements in Scientific
-> Literature,\" published in September 2019, reported macro averaged evaluation scores.
+> :information_source: The paper "Automatic Identification and Normalisation of Physical Measurements in Scientific
+> Literature," published in September 2019, reported macro averaged evaluation scores.

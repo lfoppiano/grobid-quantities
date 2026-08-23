@@ -1,10 +1,120 @@
 # Getting started
 
-> :warning: Grobid and grobid-quantities are [not compatible with Windows](https://grobid.readthedocs.io/en/latest/Troubleshooting/#windows-related-issues) and limited on Apple M1. While Windows users can easily use Grobid and grobid-quantities through docker containers, the support for grobid on ARM is under development, see the [latest discussion](https://github.com/kermitt2/grobid/issues/1014).
+> :information_source: Platform support follows Grobid - Linux and macOS, on x86-64 and ARM alike, and Windows through Docker only - see the [Grobid installation guide](https://grobid.readthedocs.io/en/latest/Install-Grobid/).
 
-> :warning: Since grobid-quantities 0.7.3 (using grobid 0.7.3), we've extended the support to JDK after version 11. This requires specifying the [java.library.path]{.title-ref} explicitly. *All these issues are solved by using Docker containers*.
+> :information_source: Running the JAR directly requires `-Djava.library.path` to be set, so that the
+> JVM finds Grobid's native libraries (and JEP, if you use the deep learning models). The exact
+> value depends on your platform and Python environment - see
+> [Start and use the service](#start-and-use-the-service). Running through `./gradlew run`, or
+> through the Docker image, sets it for you.
 
 ## Upgrade
+
+**Versioning follows Grobid.** A grobid-quantities release carries the version of the Grobid
+release it is built against, so upgrading grobid-quantities generally means taking on Grobid's
+own upgrade notes for that version - each section below links to them where relevant.
+
+Releases are infrequent, and are likely to become more so: the project is maintained on limited
+time. If you need something that is already on `master` but not yet released, build from source
+(see [Install and build](#install-and-build)) or use the `lfoppiano/grobid-quantities:latest-develop`
+Docker image, which CI builds and pushes on every commit.
+
+### 0.8.2 to 0.9.1
+
+This is the largest upgrade since 0.7.x. grobid-quantities follows Grobid, so most of the work is
+Grobid's [0.9.0](https://grobid.readthedocs.io/en/latest/Upgrading/#upgrading-to-090) and
+[0.9.1](https://grobid.readthedocs.io/en/latest/Upgrading/#upgrading-to-091) upgrades; the notes
+below are what that means for grobid-quantities specifically. **An existing 0.8.2 installation
+will not work as-is** — the build environment, the deep learning runtime and the models all
+change.
+
+#### At a glance
+
+| | 0.8.2 | 0.9.1 |
+|---|---|---|
+| Grobid | 0.8.2 | 0.9.1 |
+| JDK | 17 | **21** |
+| Gradle | 7.2 | **9.0** (wrapper bundled) |
+| Web framework | Dropwizard 4 / Jetty 11 | **Dropwizard 5 / Jetty 12** (Jakarta EE 10) |
+| Python (DL only) | 3.7–3.8 | **3.10–3.11** |
+| TensorFlow (DL only) | 2.9.x | **2.17** |
+| DeLFT (DL only) | 0.3.4 | **>= 0.4.1** |
+| JEP (DL only) | 4.0.1 | **4.3.1** |
+
+#### JDK 21 and Gradle 9
+
+Grobid 0.9.0 requires **OpenJDK 21**; 17 is no longer enough. The Gradle wrapper is committed, so
+`./gradlew` picks up Gradle 9 by itself — just make sure it runs on a JDK 21.
+
+#### Models must be updated
+
+The quantities, units and values models have to be reinstalled — the ones from 0.8.2 will not
+give correct results, and the deep learning ones will not load at all under DeLFT 0.4.x /
+TensorFlow 2.17:
+
+```shell
+cd PATH-TO-GROBID/grobid-quantities
+./gradlew installModels
+```
+
+`installModels` copies the CRF models shipped in the repository and clones the deep learning ones
+from [`sciencialab/grobid-quantities-models`](https://huggingface.co/sciencialab/grobid-quantities-models)
+on the HuggingFace Hub. That repository stores the large files with Xet, so
+[git-xet](https://hf.co/docs/hub/git-xet) has to be installed first, otherwise the clone leaves
+pointer stubs instead of model weights.
+
+Grobid's own models under `grobid-home/models/` were retrained in 0.9.0 as well, so pull them
+along with the Grobid code. If you maintain **custom-trained** models, they must be retrained
+against DeLFT >= 0.4.1 / TensorFlow 2.17.
+
+#### Deep learning environment
+
+Only relevant if you run the DL models locally rather than through Docker. The stack moved to
+Python 3.10–3.11, TensorFlow 2.17, DeLFT >= 0.4.1 and JEP 4.3.1, which needs a **fresh Python
+environment** — see Grobid's [Deep Learning models](https://grobid.readthedocs.io/en/latest/Deep-Learning-models/)
+page. Note that the `java.library.path` used to start the service points into that environment, so
+it has to be updated to the new Python version - the examples in
+[Start and use the service](#start-and-use-the-service) use `python3.11`.
+
+#### Configuration file
+
+Dropwizard 5 validates the `server:` block more strictly than Dropwizard 4 and **aborts at
+startup** on options it does not recognise. If you kept the shipped `config.yml` there is nothing
+to do; if you maintain a customised one:
+
+- Remove `server.maxQueuedRequests`. This is the line the [0.7.3 to 0.8.0](#073-to-080) step below
+  told you to add - it is no longer accepted:
+
+    ```diff
+     server:
+       type: custom
+       ...
+       maxThreads: 2048
+    -  maxQueuedRequests: 2048
+    ```
+
+- Remove any `views:` block. It was never wired to anything here, and since the application
+  enables `FAIL_ON_UNKNOWN_PROPERTIES` it now stops the service with
+  `Unrecognized field at: views`:
+
+    ```diff
+    -views:
+    -  .mustache:
+    -    cache: false
+    ```
+
+- Keep `idleTimeout` and `acceptQueueSize` on the connector, not at the `server:` level.
+
+You can check a configuration file without starting the service:
+
+```shell
+java -jar build/libs/grobid-quantities-{version}-onejar.jar check resources/config/config.yml
+```
+
+#### Docker
+
+The image now builds on `lfoppiano/grobid:0.9.1-full`. If you derive your own image from it,
+the JEP path in `GROBID_QUANTITIES_OPTS` moved from `python3.8` to `python3.11`.
 
 ### 0.8.0 to 0.8.2
 
@@ -68,6 +178,10 @@ In version 0.7.3, we have updated the DeLFT models. The DL models must be update
 
 #### JDK Update
 
+> :information_source: The values below are the ones that were current at 0.7.3. For a current
+> installation see [Start and use the service](#start-and-use-the-service); grobid-quantities
+> requires JDK 21 since 0.9.0, and the Python version in these paths depends on your environment.
+
 The version 0.7.3 enables the support for running with JDK > 11. 
 We recommend running it with JDK 17. Running grobid-quantities with gradle (`./gradlew clean run`) is already supported in the `build.gradle`. 
 Running grobid-quantities via the JAR file requires an additional parameter to set the `java.path`:
@@ -94,6 +208,32 @@ In version 0.7.0, the models have been updated, therefore it is required
 to run a `./gradlew copyModels` to have properly results, especially for
 what concerns the unit normalization.
 
+## Requirements
+
+Grobid-quantities loads the models it needs on the first request and keeps them in memory, so
+the memory footprint is roughly constant once the service is warm and does not grow with the
+number of requests.
+
+| Usage                                                | Heap (`-Xmx`) | Notes                                                            |
+|------------------------------------------------------|---------------|------------------------------------------------------------------|
+| Text only (`processQuantityText`, `processUnitsText`) | 2 GB          | ~1.5 GB is used once the CRF models are loaded                    |
+| PDF (`annotateQuantityPDF`)                           | 4 GB          | the Grobid full-text models and the PDF parsing add to the above  |
+| Deep learning models (DeLFT/BERT instead of CRF)      | 8 GB          | plus a GPU if you want a reasonable throughput                    |
+
+These are the figures for a single request at a time. Concurrency is bounded by
+`maxParallelRequests` in `config.yml`; count roughly one additional core per parallel request.
+
+The text-only figure was measured on the CRF models (see
+[#108](https://github.com/lfoppiano/grobid-quantities/issues/108)); the other two are indicative
+and depend on the documents and on the models you enable.
+
+A machine with less memory than the above will typically fail with
+`java.lang.OutOfMemoryError: Java heap space` **while answering the first request**, not at
+startup, because the models are loaded lazily.
+
+Grobid-quantities also requires *JDK 21* (since version 0.9.0) and a Grobid installation - see
+below.
+
 ## Install and build
 
 #### Docker containers
@@ -111,7 +251,7 @@ The container will respond on port <http://localhost:8060>, and 8061 for the adm
 
 #### Local installation
 
-Grobid-quantities require *JDK 1.8 or greater*, and Grobid to be installed. Since version 0.7.3 we recommend to use *JDK 17 or greater*.
+Grobid-quantities requires *JDK 21* (since version 0.9.0, which follows Grobid 0.9.0) and Grobid to be installed.
 
 First install the latest version of GROBID as explained by the [documentation](http://grobid.readthedocs.org).
 
@@ -148,10 +288,10 @@ cd PATH-TO-GROBID/grobid-quantities
 Grobid-quantities can be run with the following command: :
 
 ```shell
-    java -Djava.library.path=../grobid-home/lib/{arch}/:{virtual_env_path}/lib:{virtual_env_path}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
+    java -Djava.library.path=../grobid-home/lib/{arch}/:{virtual_env_path}/lib:{virtual_env_path}/lib/python3.11/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar server resources/config/config.yml
 ```
 
-> :warning: The command requires the following parameters: `{arch}` is the subdirectory under `grobid-home/lib` that support the following architectures: `lin-64`, `mac-64`, `mac_arm-64`. `{virtual_env_path}` is the path to the virtualenv (e.g. in my case is something like `/Users/lfoppiano/anaconda3/envs/jep/`)
+> :warning: The command requires the following parameters: `{arch}` is the subdirectory under `grobid-home/lib` for your platform - `lin-64`, `lin_arm-64`, `mac-64` or `mac_arm-64`. `{virtual_env_path}` is the path to the virtualenv (e.g. in my case is something like `/Users/lfoppiano/anaconda3/envs/jep/`), and `python3.11` should match the Python version of that environment. The `{virtual_env_path}` segments are only needed when running the deep learning models; the CRF models need the `grobid-home/lib` entry alone.
 
 
 ## Accessing the service

@@ -5,8 +5,7 @@ See [guidelines](guidelines.md) for detailed explanations and examples.
 
 ## Generation of training data
 
-Training data generation works the same as in GROBID, with executable name `createTrainingQuantities`, for example::
-
+Training data generation works the same as in GROBID, with executable name `createTrainingQuantities`, for example:
 ```shell
  java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar trainingGeneration -dIn ~/grobid/grobid-quantities/src/test/resources/ -dOut ~/test/ resources/config/config.yml
 ```
@@ -37,7 +36,7 @@ The training can be invoked using gradle or via the command using the dropwizard
 
 The trainer uses all the available training data from `resouces/dataset/quantities/corpus`.
 
-> :warning: We provide already both training and evaluation corpora, which should be used to evaluate. Given the small size of the corpus, we recommend to combine [corpus]{.title-ref} and [evaluation]{.title-ref} only for training the final model.
+> :warning: We provide already both training and evaluation corpora, which should be used to evaluate. Given the small size of the corpus, we recommend to combine `corpus` and `evaluation` only for training the final model.
 
 
 Via Gradle: 
@@ -123,8 +122,7 @@ The holdout evaluation train the model and run the evaluation against a fixed se
 
 The training data is taken from `resouces/dataset/MODEL_NAME/corpus` and  the evaluation data is taken from `resouces/dataset/MODEL_NAME/evaluation`.
 
-The command to run the holdout evauation is:::
-
+The command to run the holdout evaluation is:
 ```shell
 java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a holdout resources/config/config.yml
 ```
@@ -144,8 +142,7 @@ java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIR
 The N-fold cross-validation perform the training and evaluation N times, partition the training data in N sets and using each set for evaluation while training with the rest. More detailed explanation [here](https://en.wikipedia.org/wiki/Cross-validation_(statistics)). 
 The evaluation will then give the average scores over these n models (against test set) and for the best model which will be saved.
 
-The command to run the n-fold cross-validation with N folds is the following:::
-
+The command to run the n-fold cross-validation with N folds is the following:
 ```shell
 java -Djava.library.path=../grobid-home/lib/{arch}/:{MY_VIRTUAL_ENV}/lib:{MY_VIRTUAL_ENV}/lib/python3.9/site-packages/jep -jar build/libs/grobid-quantities-{version}-onejar.jar training -m model_name -a nfold \--fold-count N resources/config/config.yml
 ```

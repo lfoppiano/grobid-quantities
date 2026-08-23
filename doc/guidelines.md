@@ -2,7 +2,7 @@
 
 The first step of the annotation process is to generate training data from unlabeled documents based on the current
 models.
-The procedure is explained in details in `training_data`{.interpreted-text role="ref"}.
+The procedure is explained in details in [Train and evaluation](training.md#generation-of-training-data).
 GROBID will create the training data corresponding to these documents in the right TEI format and with pre-annotations.
 The annotation work then consists of manually checking the produced annotations and adding the missing ones.
 
@@ -25,7 +25,7 @@ In this document, after the general rules, we describe the annotation guidelines
 - [Quantified objects model substance model](#quantified-object-model) - **Work in progress**
 
 > :warning: References markers in the text such as `[...] previous work, 10 showed that we are right [...]`, 10 refers to the references number 10 and should be ignored. The reference marker
-should be commented out: `[...] previous work, <!--10--> showed that we are right [...]`. This is valid for any numerical reference number: \[1\], 1 and with other styles: (Foppiano et al, 2021), Foppiano et al. (2021), etc.
+should be commented out: `[...] previous work, <!--10--> showed that we are right [...]`. This is valid for any numerical reference number: [1], 1 and with other styles: (Foppiano et al, 2021), Foppiano et al. (2021), etc.
 
 > :warning: If the year is not present, and the reference just refers to some author, they should be left in the file. For example `Drodzov et al demonstrate that we are right[...]`.
 
@@ -225,8 +225,8 @@ for flexural samples the size is <measure type="list"><num>100</num> <measure ty
 ```
 
 If there are no intermediary values, it's an argument for deciding to
-annotate an element as a list, for example this ranked list (issue [#65
-\<https://github.com/kermitt2/grobid-quantities/issues/65\>]{.title-ref}):
+annotate an element as a list, for example this ranked list (issue
+[#65](https://github.com/kermitt2/grobid-quantities/issues/65)):
 
 ``` xml
 for every lower position in the general classification the prize money was more or less halved between
@@ -242,7 +242,7 @@ for every lower position in the general classification the prize money was more 
 #### Dates
 
 Dates are time measurements, they are thus also encoded in the training
-data as a complement to the other \_[TIME]() expressions involving time
+data as a complement to the other `TIME` expressions involving time
 units. In TEI P5, the dates are marked with a specific element `<date>`
 which can be contained in an element `<measure>`. The encoding is then
 straightforward for atomic values (with attribute `@when`), intervals
@@ -284,7 +284,7 @@ With UTC inside the annotation which is important to know exactly the
 "time" measure.
 
 - for a time expression not linked to a date, like the expression of
-  an \"hour\", it's appropriate to annotate with the tag `<time>`, to
+  an "hour", it's appropriate to annotate with the tag `<time>`, to
   distinguish from the `<date>` case (see issue
   [#48](https://github.com/kermitt2/grobid-quantities/issues/48)):
 
@@ -360,16 +360,20 @@ imprecisely :
 the reference solution becomes distinct from the ballistic solution only a <measure type="value"><num>couple</num> of <measure type="TIME" unit="week">weeks</measure></measure> before the encounter. 
 ```
 
-Determiners are left outside ([a \<measure
-type=\"value\"\>\<num\>couple\</num\> of \<measure type=\"TIME\"
-unit=\"week\"\>weeks\</measure\>\</measure\>]{.title-ref}). See issue
+Determiners are left outside of the measure:
+
+``` xml
+a <measure type="value"><num>couple</num> of <measure type="TIME" unit="week">weeks</measure></measure>
+```
+
+See issue
 [#34](https://github.com/kermitt2/grobid-quantities/issues/34)
 
 #### X-fold
 
-Quantifiers like `two-fold`, `sevenfold` meaning \"two times/part\",
-\"seven times/part\" are annotated, to capture the full expression of
-quantity including this notion of \"part\":
+Quantifiers like `two-fold`, `sevenfold` meaning "two times/part",
+"seven times/part" are annotated, to capture the full expression of
+quantity including this notion of "part":
 
 ``` xml
 allowing a <measure type="value"><num>sevenfold</num></measure> compaction of the length
@@ -405,8 +409,8 @@ See issue [#38](https://github.com/kermitt2/grobid-quantities/issues/38)
 
 #### Numbers which seems to be only tags but are in fact quantifying
 
-For example expressions like [at day 21]{.title-ref} or [between day 56
-and day 91]{.title-ref}, which are really quantifying and for which
+For example expressions like `at day 21` or `between day 56 and day 91`,
+which are really quantifying and for which
 range queries can be expressed.
 
 #### OCR errors
@@ -418,6 +422,107 @@ they are realistic noise. For example:
 20 aC -> <measure type="value"><num>20</num> <measure type="TEMPERATURE" unit="°C">°C</measure></measure>
 2.5 • -> <measure type="value"><num>2.5</num><measure type="ANGLE" unit="°">°</measure></measure>
 ```
+
+#### Value of the `@unit` attribute
+
+The `@unit` attribute records the unit as it is *known to the lexicon*, not as it is written in
+the text. Use the first notation of the lexicon entry
+(`src/main/resources/lexicon/en/units.json`) when the unit has one, e.g. `min` and not `minute`,
+`km` and not `kilometre`. When a unit has no notation, use the singular lemma, e.g.
+`unit="week"`.
+
+This settles the ambiguity of units with several accepted symbols (`a` and `yr` for the year):
+the lexicon entry decides, and annotators do not have to. When the unit is missing from the
+lexicon, add it there rather than inventing a notation in the annotation.
+
+Composed units follow the notation of the units model, e.g. `unit="km.s^-1"`, `unit="h^-1"`.
+
+See issue [#39](https://github.com/lfoppiano/grobid-quantities/issues/39)
+
+#### Rates of counted objects
+
+`600 h −1` in a zenithal hourly rate means 600 meteors per hour. The unit is the reciprocal
+time, and the counted object - meteors - is not part of it: no `meteor/h` unit is created, and
+the type of the measure is the type of the unit that is actually there.
+
+``` xml
+an Earth-equivalent zenith hourly rate <measure type="value"><num>600</num> <measure type="FREQUENCY" unit="h^-1">h −1</measure></measure>
+```
+
+The counted object belongs to the quantified object, not to the unit.
+
+See issue [#46](https://github.com/lfoppiano/grobid-quantities/issues/46)
+
+#### Resolutions expressed per pixel
+
+`40 mas per pixel` and `100 km per pixel` are resolutions. The pixel is a counted object, not a
+unit, so `mas/pixel` and `km/pixel` are not annotated as units and no RESOLUTION type is needed:
+only the unit that is actually there is annotated, with its own type.
+
+``` xml
+The high spatial resolution of the images (<measure type="value"><num>40</num> <measure type="ANGLE" unit="mas">mas</measure></measure> per pixel,
+corresponding to ≥ <measure type="interval"><num atLeast="100">100</num> <measure type="LENGTH" unit="km">km</measure></measure> per pixel)
+```
+
+The `per pixel` part belongs to the quantified object.
+
+See issue [#43](https://github.com/lfoppiano/grobid-quantities/issues/43)
+
+#### Currencies
+
+Amounts of money (`150$`, `3 €`) are quantities and are annotated as such. There is no unit type
+for currencies yet, so they use `UNKNOWN` for the time being, as allowed by the
+[unit type vocabulary](#unit-type-vocabulary) section:
+
+``` xml
+<measure type="value"><num>150</num> <measure type="UNKNOWN" unit="$">$</measure></measure>
+```
+
+Annotating them now means the model learns to spot them; giving them a proper type is a
+vocabulary and lexicon change.
+
+See issue [#59](https://github.com/lfoppiano/grobid-quantities/issues/59)
+
+#### Amounts of data
+
+Amounts of data (`2.0 Gb RAM`, `500 MB`) are quantities and are annotated as such. There is no
+unit type for them yet, so they use `UNKNOWN` for the time being, as allowed by the
+[unit type vocabulary](#unit-type-vocabulary) section:
+
+``` xml
+<measure type="value"><num>2.0</num> <measure type="UNKNOWN" unit="Gb">Gb</measure></measure> RAM
+```
+
+See issue [#62](https://github.com/lfoppiano/grobid-quantities/issues/62)
+
+#### Durations counted from an implicit origin
+
+`since about two decades`, `over the past three decades` and the like express a duration counted
+from an origin that the sentence does not give. The origin is not annotated and not reconstructed
+- it would mean guessing the publication date.
+
+The duration itself is a **value**, and becomes an **interval** only when the text carries a
+bounding marker (`over`, `more than`, `at least`, `up to`, `less than`), which also decides
+between `atLeast` and `atMost`:
+
+``` xml
+the mechanical oscillator method is well established since about <measure type="value"><num>2</num> <measure type="TIME" unit="decade">decades</measure></measure>
+
+Over the past <measure type="interval"><num atLeast="3">three</num> <measure type="TIME" unit="decade">decades</measure></measure>
+```
+
+See issue [#63](https://github.com/lfoppiano/grobid-quantities/issues/63)
+
+#### Possessive and deictic time expressions
+
+Expressions like `this year's minimum extent is lower than last year's` refer to a period without
+expressing a quantity of it: they have neither a value nor a unit to attach one to, and resolving
+them requires the document date. They are not annotated.
+
+The same holds for vague time expressions such as `late July` or `end of the month`, tracked
+separately in issue [#27](https://github.com/lfoppiano/grobid-quantities/issues/27).
+
+See issue [#28](https://github.com/lfoppiano/grobid-quantities/issues/28)
 
 ### Out of scope
 
@@ -432,9 +537,8 @@ scope. See issue
 
 #### Some sequences not annotated (not commented)
 
-[Markers, call-out, section number, numerical bullet points,
-identifiers, index, reference expressions, formula
-parameters]{.title-ref}
+Markers, call-out, section number, numerical bullet points, identifiers,
+index, reference expressions and formula parameters.
 
 Examples:
 
@@ -636,11 +740,14 @@ This labels are combined to recognise this type of values:
 
   The `<base>` and `<pow>` should contains only values. Additional
   markers (like `x`, `^`, `x`) should be left out. The `<base>` label
-  should contains expression of the \"base\", usually `10` but could
+  should contains expression of the "base", usually `10` but could
   be set to different values.
 
-  For example: :: \<value\>\<number\>1\</number\> ×
-  \<base\>10\</base\> \<pow\>−7\</pow\>\</value\>
+  For example:
+
+  ``` xml
+  <value><number>1</number> × <base>10</base> <pow>−7</pow></value>
+  ```
 
 - Euler's number based expressions, discussed in [#8](https://github.com/kermitt2/grobid-quantities/issues/8).
   Example: 
@@ -652,10 +759,10 @@ This labels are combined to recognise this type of values:
 
 - time and date expressions, discussed in [#12](https://github.com/kermitt2/grobid-quantities/issues/12)
   ``` xml
-  <value><time>2001 August</time></value\>
+  <value><time>2001 August</time></value>
   ```
 
-## Quantified objects CRF model {#Quantified objects CRF model}
+## Quantified objects CRF model {#quantified-object-model}
 
 **Currently work in progress** The quantified object (or substance) is the object for which the measurement is expressed. For example *A mixture of 10kg of silicon nitride powder*. The object is the `silicon nitride powder` which is attached to the measurement of `10`
 with unit `Kg`.
@@ -672,21 +779,50 @@ used for a CRF model to replace the current implementation.
 In the training data are identified the measurement (and their type) and
 the quantified object.
 
-For example: :: \<p\>A mixture of 10kg of silicon nitride powder.\</p\>
+For example:
 
-can be annotated as: :: \<p\>A mixtured of \<measure type=\"value\"
-ptr=\"#1235324324321\"\>10kg\</measure\> of \<quantifiedObject
-id=\"1235324324321\"\>silicon nitride powder\</quantified
-Object\>.\</p\>
+``` xml
+<p>A mixture of 10kg of silicon nitride powder.</p>
+```
+
+can be annotated as:
+
+``` xml
+<p>A mixture of <measure type="value" ptr="#1235324324321">10kg</measure> of <quantifiedObject id="1235324324321">silicon nitride powder</quantifiedObject>.</p>
+```
 
 The quantified object is identified by its ID and linked to the measure
-via the attribute [ptr=\"#ID\"]{.title-ref}.
+via the attribute `ptr="#ID"`.
 
 > :information_source: This implementation allows the linking of objects directly attached on the left or right of the measurement, for the time being far entities
 are not supported.
+
+### A reference point is not a quantified object
+
+In `the comet was at 3.82 AU from the Sun` the measure is annotated normally, and `from the Sun`
+is the reference of the distance: it is part of the quantified object (`distance ... from the
+Sun`), never a separate measure.
+
+``` xml
+when the comet was at <measure type="value" ptr="#1"><num>3.82</num> <measure type="LENGTH" unit="AU">AU</measure></measure> from the Sun
+```
+
+See issue [#81](https://github.com/lfoppiano/grobid-quantities/issues/81)
+
+### An event is not the quantified object of its date
+
+In `Comet C/2013 A1 will have a close encounter with Mars on October 19, 2014` the date is
+annotated as a measure but carries no quantified object: a quantified object is an entity *being
+measured*, and `close encounter` is not measured by the date on which it happens.
+
+``` xml
+Comet C/2013 A1 (Siding Spring) will have a close encounter with Mars on <measure type="value"><date when="2014-10-19">October 19, 2014</date></measure>.
+```
+
+See issue [#79](https://github.com/lfoppiano/grobid-quantities/issues/79)
 
 ### How to annotate?
 
 Annotating the quantifiedObject is a complicated task, because it
 requires a clear definition to avoid misunderstanding. Firstly the
-question each annotator should ask is \"What is being measured?\".
+question each annotator should ask is "What is being measured?".
