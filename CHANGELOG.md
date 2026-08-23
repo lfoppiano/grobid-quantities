@@ -38,7 +38,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.9.0]
 
-> :information_source: 0.9.0 was never released - no `v0.9.0` tag was ever cut. These entries ship with the `[Unreleased]` section above, as part of 0.9.1.
 
 ### Changed
 
