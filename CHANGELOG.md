@@ -11,9 +11,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + Updated to Grobid version 0.9.1
 + Migrated from Dropwizard 4 / Jetty 11 to Dropwizard 5.0.1 / Jetty 12.1.9 (Jakarta EE 10), following Grobid 0.9.1
 + Bumped Java toolchain from 17 to 21, required by Grobid 0.9.0
-+ Bumped Gradle wrapper from 7.2 to 9.0.0
 + Bumped Kotlin from 1.8.21 to 2.2.20, to match the `kotlin-stdlib` Grobid 0.9.1 pulls transitively
 + Bumped Dockerfile runtime base image to `lfoppiano/grobid:0.9.1-full` and the builder image to JDK 21
++ Bumped the Gradle wrapper from 7.2 to 9.6.1, matching Grobid, and regenerated the wrapper jar and scripts, which had been left behind at 7.2 (#199)
 + Migrated the Shadow plugin from `com.github.johnrengelman.shadow` to `com.gradleup.shadow:8.3.10`, after the original repository was archived
 + Bumped dropwizard-guicey to 8.0.2, Jackson to 2.21.1, Guava to 33.5.0-jre, commons-io to 2.21.0, commons-lang3 to 3.20.0, commons-collections4 to 4.5.0, httpclient to 4.5.14 and JEP to 4.3.1
 + Bumped JUnit BOM to 5.14.1, EasyMock to 5.6.0 and MockK to 1.13.17
@@ -36,9 +36,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + The request queue bounds are set explicitly from the configuration instead of inherited from the Jetty defaults (#159, #196)
 + `processResources` declares the version and the git revision as task inputs, so `revision.txt` is regenerated when either changes instead of staying `UP-TO-DATE` (#197)
 + `config-docker.yml` no longer carries an unknown `views` key, which aborted startup inside the Docker image (#196)
++ `ValueParserTest.testTagValue_exponential_1/2` no longer fail under Grobid 0.9.1: the feature rows are built directly instead of through `FeatureFactory`, which now eagerly loads the real `Lexicon` (#195)
++ `./gradlew integration` runs the integration tests again: a hand-made `Test` task inherits no `testClassesDirs`, so it reported success on 0 tests (#201)
 + Docker build failure in `installModels`: the HuggingFace model repository is cloned with the official `hf` CLI instead of grgit, which also avoids leaving Xet/LFS pointer stubs
 + Worked around a Kotlin K2 `StackOverflowError` when compiling `LabellingUtilsTest.kt`, by raising the Kotlin daemon stack in `gradle.properties`
 + Spelling fix in exception messages ("occured" -> "occurred")
+
+### Fixed
+
++ `ValueParserTest.testTagValue_exponential_1/2` no longer fail under Grobid 0.9.1: the feature rows are built directly instead of through `FeatureFactory`, which now eagerly loads the real `Lexicon` (fef085d)
 
 ### Known issues
 
