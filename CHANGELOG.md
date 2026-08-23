@@ -9,28 +9,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 + Updated to Grobid version 0.9.1
-+ Bumped Kotlin from 2.0.21 to 2.2.20 to match the `kotlin-stdlib` 2.2.20 that Grobid 0.9.1 now pulls transitively (the 2.0.21 compiler cannot read the newer stdlib metadata, which broke `compileKotlin`)
++ Bumped Kotlin from 2.0.21 to 2.2.20, to match the `kotlin-stdlib` Grobid 0.9.1 pulls transitively
 + Bumped Dockerfile runtime base image from `lfoppiano/grobid:0.9.0-full` to `lfoppiano/grobid:0.9.1-full`
-+ The git revision baked into `revision.txt`, and served by `GET /service/version`, is derived by a local `getGitRevision()` calling `git describe --tags --always` instead of by the `com.palantir.git-version` plugin, which is dropped. The plugin was unmaintained and pulled its own JGit stack; `git describe` is what it was calling for anyway. `--first-parent` is deliberately not passed: a release made on a branch and merged back with a merge commit leaves its tag on the second parent, where `--first-parent` cannot see it, and the revision would report the *previous* release
-+ The release plugin now requires a branch whose name contains `release` (`requireBranch` regex `.*release.*`) instead of exactly `master`, matching Grobid. Releasing straight from `master` is blocked because the branch is protected and the plugin cannot push to it; cut the release on a release-named branch and bring it back with a **merge commit** (not a squash), so the tagged commit stays reachable from `master` and the revision above resolves to it
-+ `processResources` declares the project version and the git revision as task inputs. They are injected rather than read from the source files, so Gradle could not see them change and kept the task `UP-TO-DATE`: building the release tag in a tree already built on `master` baked the `master` revision into `revision.txt`
-+ `GET /service/health` returns a JSON document instead of an empty `200`, following Grobid's `HealthResource`: `status`, `ready`, `grobidHomeConfigured` and a per-model `loaded`/`failed` breakdown with counts. The status code is `200` when the service is ready and `503` when it is not, so an orchestrator can take the instance out of rotation. Readiness deliberately does **not** require any model to be loaded — grobid-quantities loads its CRF models on the first request that needs them, so a freshly started service legitimately reports `totalLoaded: 0` and is still ready; what makes it unready is a model that *failed*
++ Derive the git revision with a local `getGitRevision()` instead of the `com.palantir.git-version` plugin, which is dropped (#197)
++ Releases are cut from a `release`-named branch rather than from `master`, following Grobid (#197)
++ `GET /service/health` returns a JSON status document with the per-model loaded/failed breakdown, `200` when ready and `503` when not (#198)
 
 ### Added
 
-+ A service status indicator in the web interface: a coloured dot in the page header, green when `/service/health` reports the service ready and red otherwise, with the reason (missing grobid-home, failed models, service unreachable) in its tooltip. Refreshed every 30 seconds
-+ The running version and git revision in the footer of the web interface, read from `/service/version`, with the revision linking to the GitHub commit the service was built from
-+ `requestQueueMaxSize`, `requestQueueMaxWait` and `requestQueueRejectStatus` configuration settings, bounding the queue of requests waiting for a `maxParallelRequests` slot. The effective values are logged at startup (#159)
++ Service status indicator in the web interface, green when `/service/health` reports the service ready and red otherwise (#198)
++ Version and git revision in the footer of the web interface, linking to the commit the service was built from (#198)
++ `requestQueueMaxSize`, `requestQueueMaxWait` and `requestQueueRejectStatus` settings, bounding the queue of requests waiting for a `maxParallelRequests` slot (#159, #196)
 
 ### Fixed
 
-+ Long requests are no longer cut short. Before the migration to Jetty 12, a request taking more than Jetty's default of 30 seconds was rejected with a 503 whatever `idleTimeout` was set to. Verified on the current version: a request taking ~70 seconds returns 200 with the complete response, both with `idleTimeout: 120 seconds` and with `idleTimeout: 5 seconds` - the connection idle timeout no longer bounds the response computation. The 503 seen under load comes from `maxParallelRequests` instead (#159). Reproduced again on a 274,430-character request: `200` with the complete 837 KB response after 42s, byte-identical under both `idleTimeout` settings; and with `maxParallelRequests: 1`, `requestQueueMaxWait: 2 seconds`, `requestQueueRejectStatus: 429`, four concurrent requests give one `200` after 28.3s and three `429`s after exactly 2.14s - the report's pattern, with the delay and status now taken from the configuration
-+ The bounds on the request queue are no longer implicit (#159). Requests over `maxParallelRequests` are queued, and the queue used to be bounded by whatever the underlying Jetty version happened to default to. With Jetty 9's `QoSFilter` that was the servlet default async timeout of 30 seconds, which is why raising the connector's `idleTimeout` to 120 seconds did not stop requests from failing with `503` after ~30 seconds. Jetty 12's `QoSHandler` defaults differently again (1024-long queue, no waiting limit); all three bounds are now set explicitly from the configuration instead of inherited. Note that neither these settings nor `idleTimeout` bound how long a request may take to be answered once it holds a slot
-+ `config-docker.yml` no longer carries a `views` key, which the configuration class does not declare. Since the application enables `FAIL_ON_UNKNOWN_PROPERTIES`, this aborted startup inside the Docker image with `Unrecognized field at: views`. Both shipped configuration files are now covered by a test that parses them the way the application does
++ Long requests are no longer cut at 30 seconds: since Jetty 12 the connector's `idleTimeout` does not bound the response computation (#159, #196)
++ The request queue bounds are set explicitly from the configuration instead of inherited from the Jetty defaults (#159, #196)
++ `processResources` declares the version and the git revision as task inputs, so `revision.txt` is regenerated when either changes instead of staying `UP-TO-DATE` (#197)
++ `config-docker.yml` no longer carries an unknown `views` key, which aborted startup inside the Docker image (#196)
 
 ### Known issues
 
-+ `ValueParserTest.testTagValue_exponential_1/2` fail after the Grobid 0.9.1 upgrade: Grobid 0.9.1 changed where the English word-forms lexicon (`english.wf`) is loaded, so the tests' PowerMock `@SuppressStaticInitializationFor("...Lexicon")` mock no longer intercepts it and it loads against a null grobid-home. These should be migrated off PowerMock (already a standing TODO in `build.gradle`) or reworked to run against a real grobid-home. The other 152 unit tests pass.
++ None currently.
 
 ## [0.9.0]
 
