@@ -240,7 +240,7 @@ var grobid = (function ($) {
                         message = split[split.length - 1]
                         if (message.startsWith(":")) {
                             message = message.substring(1);
-                        } 
+                        }
                     } else {
                         message = message['message']
                     }
@@ -270,6 +270,19 @@ var grobid = (function ($) {
         if (selected === 'processQuantityText') {
             var formData = new FormData();
             formData.append("text", $('#inputTextArea').val());
+
+            $.ajax({
+                type: 'POST',
+                url: urlLocal,
+                data: formData,
+                success: SubmitSuccesful,
+                error: onError,
+                contentType: false,
+                processData: false
+            });
+        } else if (selected === 'processQuantityXML') {
+            var form = document.getElementById('gbdForm');
+            var formData = new FormData(form);
 
             $.ajax({
                 type: 'POST',
@@ -456,7 +469,10 @@ var grobid = (function ($) {
 
         display += '<pre style="background-color:#FFF;width:95%;" id="displayAnnotatedText">';
 
-        var string = $('#inputTextArea').val();
+        var string = responseJson.text;
+        if (!string) {
+            string = $('#inputTextArea').val();
+        }
         var newString = "";
         var lastMaxIndex = string.length;
 
@@ -827,7 +843,7 @@ var grobid = (function ($) {
             measurementType = "List";
             string = toHtml(quantityMap, measurementType, $(this).position().top);
         }
-//console.log(string); 
+        //console.log(string); 
         $('#detailed_annot-' + pageIndex).html(string);
         $('#detailed_annot-' + pageIndex).show();
     }
@@ -1035,7 +1051,7 @@ var grobid = (function ($) {
     }
 
     function SubmitSuccessfulXML(responseText, statusText) {
-        $('#requestResult').html("<p>Not implemented yet ;)</p>");
+        SubmitSuccesfulText(responseText, statusText);
     }
 
     function processChange() {
