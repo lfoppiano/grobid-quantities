@@ -48,6 +48,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 + `./gradlew integration` is green again: the integration tests shared one JVM, so Grobid's static state leaked between classes and 18 of 252 failed depending on the order; the task now forks one JVM per test class (#202)
 + The integration tests honour the configured grobid-home: `config-test.yml` was read and then discarded, and a directory holding only `models/` could shadow a complete installation beside it (#202)
 
+### Fixed
+
++ `MeasureAnnotationSaxHandler` marks the beginning of every entity: `<valueRange>` and the `<unitLeft>`/`<unitRight>` following a base/range value had no `I-` prefix, so those entities had no start token in the generated training data. The models must be retrained for the fix to take effect at prediction time (#177)
+
 ### Known issues
 
 + None currently.
