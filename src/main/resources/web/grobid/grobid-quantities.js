@@ -469,7 +469,10 @@ var grobid = (function ($) {
 
         display += '<pre style="background-color:#FFF;width:95%;" id="displayAnnotatedText">';
 
-
+        var string = responseJson.text;
+        if (!string) {
+            string = $('#inputTextArea').val();
+        }
         var newString = "";
         var lastMaxIndex = string.length;
 
