@@ -554,17 +554,17 @@ var grobid = (function ($) {
                             console.log("Sorting of quantities as present in the server's response not valid for this client.");
                             // note: this should never happen?
                         } else {
-                            newString += string.substring(pos, start)
+                            newString += htmll(string.substring(pos, start))
                                 + ' <span id="annot-' + currentMeasurementIndex + '-' + currentQuantityIndex + '" rel="popover" data-color="' + quantityType + '">'
                                 + '<span class="label ' + quantityType + '" style="cursor:hand;cursor:pointer;" >'
-                                + string.substring(start, end) + '</span></span>';
+                                + htmll(string.substring(start, end)) + '</span></span>';
                             pos = end;
                         }
                     }
                     measurementMap[currentMeasurementIndex] = quantityMap;
                 }
             }
-            newString += string.substring(pos, string.length);
+            newString += htmll(string.substring(pos, string.length));
         }
 
         newString = "<p>" + newString.replace(/(\r\n|\n|\r)/gm, "</p><p>") + "</p>";
