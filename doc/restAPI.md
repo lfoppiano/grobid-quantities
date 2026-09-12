@@ -181,34 +181,44 @@ Another example of a quantity of type interval looks as below: :
     }
 ```
 
-## Process Quantities from Text, TEI output
+## TEI XML Output Format
 
-Same extraction as `processQuantityText`, serialised as a TEI document with the measures
-annotated inline in the text. The notation is the one used by the annotated corpus and by the
-[annotation guidelines](guidelines.md), which makes the output directly comparable with the
-training data.
+The `format` parameter (`json` or `tei`, default `json`) can be passed to `/service/processQuantityText` or `/service/annotateQuantityPDF` to select the desired output format.
 
->    POST    /service/processQuantityTextTEI
+When `format=tei`, the response is serialised as a valid TEI P5 document with inline markup (`<measure>`, `<num>`, `<unit>`) in `<text><body><p>` and rich structured data in a `<standOff>` section using TEI feature structures (`<fs>`, `<f>`).
 
 ```shell
-    curl -X POST -F "text=I've lost two minutes." localhost:8060/service/processQuantityTextTEI
+    curl -X POST -F "text=I've lost two minutes." -F "format=tei" localhost:8060/service/processQuantityText
 ```
 
-``` xml
-    <tei xmlns="http://www.tei-c.org/ns/1.0">
-      <teiHeader>...</teiHeader>
-      <text xml:lang="en">
-        <p>I've lost <measure type="value"><num>two</num> <measure type="TIME" unit="minutes">minutes</measure></measure>.</p>
-      </text>
-    </tei>
+```xml
+<tei xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <encodingDesc>
+      <appInfo>
+        <application version="0.9.1" ident="grobid-quantities" when="...">
+          <ref target="https://github.com/kermitt2/grobid-quantities">...</ref>
+        </application>
+      </appInfo>
+    </encodingDesc>
+  </teiHeader>
+  <text xml:lang="en">
+    <body>
+      <p>I've lost <measure xml:id="m0" type="value" corresp="#ann-m0"><num xml:id="m0-num">two</num> <unit xml:id="m0-unit" type="time">minutes</unit></measure>.</p>
+    </body>
+  </text>
+  <standOff>
+    <listAnnotation type="measurements">
+      <annotation xml:id="ann-m0" corresp="#m0">
+        <fs type="measurement">
+          <f name="type"><symbol value="value"/></f>
+          ...
+        </fs>
+      </annotation>
+    </listAnnotation>
+  </standOff>
+</tei>
 ```
-
-Note that, unlike the JSON output, the TEI output carries the raw annotations only: parsed and
-normalised values are not represented.
-
-The unit type is serialised with the uppercase enum name (`type="TIME"`), as in the corpus and
-guidelines, whereas the JSON output uses the lowercase label (`"type": "time"`): the two notations
-are intentionally different.
 
 ## Process Quantities from PDF
 
