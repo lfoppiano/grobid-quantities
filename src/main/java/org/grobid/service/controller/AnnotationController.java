@@ -11,6 +11,7 @@ import org.grobid.core.data.ServiceInfo;
 import org.grobid.core.data.UnitBlock;
 import org.grobid.core.engines.QuantitiesEngine;
 import org.grobid.core.engines.QuantityParser;
+import org.grobid.core.utilities.TeiUtils;
 import org.grobid.service.configuration.GrobidQuantitiesConfiguration;
 
 import jakarta.inject.Inject;
@@ -25,7 +26,6 @@ public class AnnotationController {
     private static final String PATH_IS_ALIVE = "isalive";
 
     private static final String PATH_QUANTITY_TEXT = "processQuantityText";
-    private static final String PATH_QUANTITY_TEXT_TEI = "processQuantityTextTEI";
     private static final String PATH_UNITS_TEXT = "processUnitsText";
     private static final String PATH_QUANTITY_XML = "processQuantityXML";
     private static final String PATH_ANNOTATE_QUANTITY_PDF = "annotateQuantityPDF";
@@ -74,32 +74,62 @@ public class AnnotationController {
 
     @Path(PATH_ANNOTATE_QUANTITY_PDF)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + ";charset=utf-8"})
     @POST
-    public String processPDF(@FormDataParam("input") InputStream uploadedInputStream,
-                             @FormDataParam("input") FormDataContentDisposition fileDetail) {
+    public Response processPDF(@FormDataParam("input") InputStream uploadedInputStream,
+                             @FormDataParam("input") FormDataContentDisposition fileDetail,
+                             @QueryParam("format") String queryFormat,
+                             @DefaultValue("json") @FormDataParam("format") String formFormat) {
+        String format = (queryFormat != null && !queryFormat.trim().isEmpty()) ? queryFormat.trim() : formFormat;
         MeasurementsResponse response = engine.processPdf(uploadedInputStream);
-        return response.toJson();
+
+        if ("tei".equalsIgnoreCase(format) || "xml".equalsIgnoreCase(format)) {
+            return Response.ok(TeiUtils.toTei(response, null), MediaType.APPLICATION_XML + ";charset=utf-8").build();
+        } else if (format == null || format.isEmpty() || "json".equalsIgnoreCase(format)) {
+            return Response.ok(response.toJson(), MediaType.APPLICATION_JSON).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("{\"message\": \"Invalid format: " + format + ". Allowed formats are 'json' and 'tei'.\"}")
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    public Response processPDF(InputStream uploadedInputStream,
+                              FormDataContentDisposition fileDetail,
+                              String format) {
+        return processPDF(uploadedInputStream, fileDetail, null, format);
     }
 
     @Path(PATH_QUANTITY_TEXT)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + ";charset=utf-8"})
     @POST
-    public String processText(@FormDataParam("text") String text) {
-
+    public Response processText(@FormDataParam("text") String text,
+                                @QueryParam("format") String queryFormat,
+                                @DefaultValue("json") @FormDataParam("format") String formFormat) {
+        String format = (queryFormat != null && !queryFormat.trim().isEmpty()) ? queryFormat.trim() : formFormat;
         MeasurementsResponse response = engine.processText(text);
 
-        return response.toJson();
+        if ("tei".equalsIgnoreCase(format) || "xml".equalsIgnoreCase(format)) {
+            String preprocessed = QuantityParser.preprocess(text);
+            return Response.ok(TeiUtils.toTei(response, preprocessed), MediaType.APPLICATION_XML + ";charset=utf-8").build();
+        } else if (format == null || format.isEmpty() || "json".equalsIgnoreCase(format)) {
+            return Response.ok(response.toJson(), MediaType.APPLICATION_JSON).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("{\"message\": \"Invalid format: " + format + ". Allowed formats are 'json' and 'tei'.\"}")
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
     }
 
-    @Path(PATH_QUANTITY_TEXT_TEI)
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_XML + ";charset=utf-8")
-    @POST
-    public String processTextTEI(@FormDataParam("text") String text) {
+    public Response processText(String text, String format) {
+        return processText(text, null, format);
+    }
 
-        return engine.processTextTei(text);
+    public Response processText(String text) {
+        return processText(text, null, "json");
     }
 
     @Path(PATH_PARSE_MEASURE)

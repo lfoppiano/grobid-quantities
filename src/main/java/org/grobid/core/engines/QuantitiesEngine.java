@@ -364,8 +364,13 @@ public class QuantitiesEngine {
      */
     public String processTextTei(String text) {
         try {
+            long start = System.currentTimeMillis();
             String preprocessed = QuantityParser.preprocess(text);
-            return TeiUtils.toTei(quantityParser.process(preprocessed), preprocessed);
+            List<Measurement> measurements = quantityParser.process(preprocessed);
+            long end = System.currentTimeMillis();
+            MeasurementsResponse response = new MeasurementsResponse(measurements);
+            response.setRuntime(end - start);
+            return TeiUtils.toTei(response, preprocessed);
         } catch (NoSuchElementException e) {
             throw new GrobidServiceException("Could not get an engine from the pool within configured time. Sending service unavailable.", e, Response.Status.SERVICE_UNAVAILABLE);
         } catch (Exception e) {

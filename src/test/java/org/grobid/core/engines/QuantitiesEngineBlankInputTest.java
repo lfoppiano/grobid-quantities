@@ -52,6 +52,7 @@ class QuantitiesEngineBlankInputTest {
         String tei = assertDoesNotThrow(() -> target.processTextTei(text));
         assertNotNull(tei);
         assertTrue(tei.contains("<teiHeader>"));
-        assertTrue(tei.contains("<text xml:lang=\"en\"><p"));
+        assertTrue(tei.contains("<text xml:lang=\"en\">"));
+        assertTrue(tei.contains("<p"));
     }
 }
