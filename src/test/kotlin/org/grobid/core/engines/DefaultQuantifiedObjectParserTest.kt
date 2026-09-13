@@ -12,7 +12,9 @@ import org.grobid.core.utilities.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import io.mockk.unmockkStatic
 import java.util.*
 import kotlin.test.Test
 
@@ -31,6 +33,12 @@ class DefaultQuantifiedObjectParserTest {
         every { TextParser.getInstance() } returns mockTextParser
         mockkStatic(FeatureFactory::class)
         every { FeatureFactory.getInstance() } returns mockFeatureFactory
+    }
+
+    @AfterEach
+    fun tearDown() {
+        unmockkStatic(TextParser::class)
+        unmockkStatic(FeatureFactory::class)
     }
 
     @Test
