@@ -181,6 +181,45 @@ Another example of a quantity of type interval looks as below: :
     }
 ```
 
+## TEI XML Output Format
+
+The `format` parameter (`json` or `tei`, default `json`) can be passed to `/service/processQuantityText` or `/service/annotateQuantityPDF` to select the desired output format.
+
+When `format=tei`, the response is serialised as a valid TEI P5 document with inline markup (`<measure>`, `<num>`, `<unit>`) in `<text><body><p>` and rich structured data in a `<standOff>` section using TEI feature structures (`<fs>`, `<f>`).
+
+```shell
+    curl -X POST -F "text=I've lost two minutes." -F "format=tei" localhost:8060/service/processQuantityText
+```
+
+```xml
+<tei xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <encodingDesc>
+      <appInfo>
+        <application version="0.9.1" ident="grobid-quantities" when="...">
+          <ref target="https://github.com/kermitt2/grobid-quantities">...</ref>
+        </application>
+      </appInfo>
+    </encodingDesc>
+  </teiHeader>
+  <text xml:lang="en">
+    <body>
+      <p>I've lost <measure xml:id="m0" type="value" corresp="#ann-m0"><num xml:id="m0-num">two</num> <unit xml:id="m0-unit" type="time">minutes</unit></measure>.</p>
+    </body>
+  </text>
+  <standOff>
+    <listAnnotation type="measurements">
+      <annotation xml:id="ann-m0" corresp="#m0">
+        <fs type="measurement">
+          <f name="type"><symbol value="value"/></f>
+          ...
+        </fs>
+      </annotation>
+    </listAnnotation>
+  </standOff>
+</tei>
+```
+
 ## Process Quantities from PDF
 
 Process PDF and generate annotations of measurements. The results are annotations which, by containing coordinate information, can be used to annotate directly a PDF. 

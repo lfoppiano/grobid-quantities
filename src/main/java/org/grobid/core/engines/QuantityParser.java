@@ -192,6 +192,21 @@ public class QuantityParser extends AbstractParser {
     }
 
     /**
+     * The transformation applied to a raw text before it is tokenised. Offsets of the extracted
+     * measurements refer to the preprocessed text, so anything slicing the text with them - the
+     * TEI serialisation, for instance - has to apply it too.
+     * <p>
+     * A null text is treated as an empty one, so that blank input yields an empty result instead
+     * of failing.
+     */
+    public static String preprocess(String text) {
+        if (text == null) {
+            return "";
+        }
+        return text.replace("\r\n", " ");
+    }
+
+    /**
      * Extract all occurrences of measurement/quantities from a simple piece of text.
      */
     public List<Measurement> process(String text) {
@@ -199,9 +214,7 @@ public class QuantityParser extends AbstractParser {
             return null;
         }
 
-        String textPreprocessed = text.replace("\r\n", " ");
-//        textReplaced = textReplaced.replace("\n", " ");
-//        textReplaced = textReplaced.replace("\t", " ");
+        String textPreprocessed = preprocess(text);
 
         List<LayoutToken> tokens = null;
         try {
