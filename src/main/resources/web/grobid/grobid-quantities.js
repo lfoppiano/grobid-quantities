@@ -51,11 +51,7 @@ var grobid = (function ($) {
     }
 
     function setBaseUrl(ext) {
-        var format = $('#selectedFormat').val() || 'json';
         var baseUrl = defineBaseURL('service' + '/' + ext);
-        if (format) {
-            baseUrl += (baseUrl.indexOf('?') === -1 ? '?' : '&') + 'format=' + encodeURIComponent(format);
-        }
         $('#gbdForm').attr('action', baseUrl);
     }
 
@@ -174,17 +170,22 @@ var grobid = (function ($) {
         }
 
         var initialService = getQueryParam('service');
-        if (initialService && $('#selectedService option[value="' + initialService + '"]').length > 0) {
-            $('#selectedService').val(initialService);
+        if (initialService) {
+            var matchingOption = $('#selectedService option').filter(function () {
+                return $(this).val() === initialService;
+            });
+            if (matchingOption.length > 0) {
+                $('#selectedService').val(initialService);
+            } else {
+                $("#selectedService").val('processQuantityText');
+            }
         } else {
             $("#selectedService").val('processQuantityText');
         }
 
         $('#selectedFormat').change(function () {
-            var format = $(this).val();
+            var format = ($(this).val() === 'tei' || $(this).val() === 'xml') ? 'tei' : 'json';
             updateUrlParam('format', format);
-            var currentService = $('#selectedService option:selected').val();
-            setBaseUrl(currentService);
             return true;
         });
 
@@ -313,7 +314,8 @@ var grobid = (function ($) {
 
     function submitQuery() {
         var selected = $('#selectedService option:selected').attr('value');
-        var selectedFormat = $('#selectedFormat option:selected').val() || 'json';
+        var rawFormat = $('#selectedFormat option:selected').val();
+        var selectedFormat = (rawFormat === 'tei' || rawFormat === 'xml') ? 'tei' : 'json';
         var urlLocal = $('#gbdForm').attr('action');
 
         if (urlLocal.indexOf('format=') === -1) {
